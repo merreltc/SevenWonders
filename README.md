@@ -23,7 +23,7 @@ Contents
 - 17 value 6 coins
 
 Test Amount of Players:
-Can play with 3 players (TODO: ask about 2 player variant).
+Can play with 3 players.
 Can play with 7 players.
 Can't play with null, 0, invalid input, 8 players.
 
