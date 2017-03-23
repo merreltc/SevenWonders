@@ -32,5 +32,7 @@ public class SetupBackendTest {
 		setup.setPlayerNum(8);
 		fail();
 	}
+	
+	
 
 }
