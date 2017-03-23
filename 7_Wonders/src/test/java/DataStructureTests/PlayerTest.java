@@ -51,36 +51,51 @@ public class PlayerTest {
 		assertEquals(4, player.getNumValue3Coins());
 	}
 
-	@Test(expected=IllegalArgumentException.class)
+	@Test(expected = IllegalArgumentException.class)
 	public void testAddInvalidNumValue1CoinsNeg1() {
 		Player player = new Player();
-		
+
 		player.addValue1(-1);
 		fail();
 	}
-	
-	@Test(expected=IllegalArgumentException.class)
+
+	@Test(expected = IllegalArgumentException.class)
 	public void testAddInvalidNumValue1Coins47() {
 		Player player = new Player();
-		
+
 		player.addValue1(47);
 		fail();
 	}
-	
-	@Test(expected=IllegalArgumentException.class)
+
+	@Test(expected = IllegalArgumentException.class)
 	public void testAddInvalidNumValue3CoinsNeg1() {
 		Player player = new Player();
-		
+
 		player.addValue3(-1);
 		fail();
 	}
-	
-	@Test(expected=IllegalArgumentException.class)
+
+	@Test(expected = IllegalArgumentException.class)
 	public void testAddInvalidNumValue3Coins25() {
 		Player player = new Player();
-		
+
 		player.addValue3(25);
 		fail();
+	}
+
+	@Test
+	public void testSingleTrade() {
+		Player player1 = new Player();
+		Player player2 = new Player();
+		
+		TradeHandler tradeHandler = new TradeHandler();
+		tradeHandler.tradeFromTo(player1, player2, 2);
+		
+		assertEquals(5, player2.getCoinTotal());
+		assertEquals(5, player2.getNumValue1Coins());
+		assertEquals(1, player1.getCoinTotal());
+		assertEquals(1, player1.getNumValue1Coins());
+		
 	}
 
 }
