@@ -6,6 +6,7 @@ import org.junit.Test;
 
 import dataStructures.Chip;
 import dataStructures.Coin;
+import dataStructures.ConflictToken;
 
 public class ChipTest {
 
