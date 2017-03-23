@@ -52,6 +52,12 @@ public class ButtonTests {
 	@Test
 	public void testButtonCollision1(){
 		Button button = new Button(new Point(20, 20), new Point(100, 100), "4");
-		Assert.assertTrue(button.checkCollision(new Point(20,20)));
+		Assert.assertTrue(button.checkCollision(new Point(40,20)));
+	}
+	
+	@Test
+	public void testButtonCollision2(){
+		Button button = new Button(new Point(20, 20), new Point(100, 100), "4");
+		Assert.assertFalse(button.checkCollision(new Point(40,19)));
 	}
 }
