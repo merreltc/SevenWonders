@@ -14,4 +14,8 @@ public class Button {
 		return point;
 	}
 	
+	public Point2D getPosition() {
+		return new Point(250, 250);
+	}
+	
 }
