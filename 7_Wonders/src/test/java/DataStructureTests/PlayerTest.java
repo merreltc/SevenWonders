@@ -147,6 +147,14 @@ public class PlayerTest {
 		fail();
 	}
 	
+	@Test(expected = InsufficientFundsException.class)
+	public void testInsufficientFundsForRemoveValue3Coins() {
+		Player player = new Player();
+		
+		player.removeValue3(1);
+		fail();
+	}
+	
 
 	@Test
 	public void testSingleTrade() {
