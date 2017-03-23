@@ -1,5 +1,7 @@
 package guiMain;
 
+import java.awt.Color;
+import java.awt.Graphics;
 import java.awt.Point;
 import java.awt.geom.Point2D;
 
@@ -33,5 +35,10 @@ public class Button {
 			}
 		}
 		return false;
+	}
+	
+	public void draw(Graphics graphics){
+		graphics.setColor(Color.green);
+		graphics.fillRect(this.positionPoint.x, this.positionPoint.y, this.boundPoint.x, this.boundPoint.y);
 	}
 }
