@@ -16,5 +16,13 @@ public class PlayerTest {
 		assertEquals(0, player.getConflictTotal());
 		assertEquals("Jane Doe", player.getName());
 	}
+	
+	@Test
+	public void testPlayerCoins(){
+		Player player = new Player();
+		
+		assertEquals(3, player.getNumValue1Coins());
+		assertEquals(0, player.getNumValue3Coins());
+	}
 
 }
