@@ -4,13 +4,13 @@ import dataStructures.Player;
 
 public class TradeHandler {
 
-	public void tradeFromToValue1(Player from, Player to, int valueToTrade) {
-		from.removeValue1(valueToTrade);
-		to.addValue1(valueToTrade);
+	public void tradeFromToValue1(Player from, Player to, int numCoinsToTrade) {
+		from.removeValue1(numCoinsToTrade);
+		to.addValue1(numCoinsToTrade);
 	}
 
-	public void tradeFromToValue3(Player from, Player to, int valueToTrade) {
-		from.removeValue3(valueToTrade);
-		to.addValue3(valueToTrade);
+	public void tradeFromToValue3(Player from, Player to, int numCoinsToTrade) {
+		from.removeValue3(numCoinsToTrade);
+		to.addValue3(numCoinsToTrade);
 	}	
 }
