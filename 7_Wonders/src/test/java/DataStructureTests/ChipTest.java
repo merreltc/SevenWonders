@@ -33,7 +33,7 @@ public class ChipTest {
 
 	@Test(expected = IllegalArgumentException.class)
 	public void testInvalidCoin0() {
-		Chip coinValueNeg1 = new Coin(0);
+		Chip coinValue0 = new Coin(0);
 		fail();
 	}
 }
