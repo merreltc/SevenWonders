@@ -4,6 +4,7 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
+import backend.TradeHandler;
 import dataStructures.Player;
 
 public class PlayerTest {
