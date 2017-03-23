@@ -160,8 +160,7 @@ public class PlayerTest {
 		Player player1 = new Player();
 		Player player2 = new Player();
 
-		TradeHandler tradeHandler = new TradeHandler();
-		tradeHandler.tradeFromToValue1(player1, player2, 1);
+		TradeHandler.tradeFromToValue1(player1, player2, 1);
 
 		assertEquals(4, player2.getCoinTotal());
 		assertEquals(4, player2.getNumValue1Coins());
@@ -175,9 +174,8 @@ public class PlayerTest {
 		Player player1 = new Player();
 		Player player2 = new Player();
 
-		TradeHandler tradeHandler = new TradeHandler();
-		tradeHandler.tradeFromToValue1(player1, player2, 2);
-		tradeHandler.tradeFromToValue1(player1, player2, 1);
+		TradeHandler.tradeFromToValue1(player1, player2, 2);
+		TradeHandler.tradeFromToValue1(player1, player2, 1);
 
 		assertEquals(6, player2.getCoinTotal());
 		assertEquals(6, player2.getNumValue1Coins());
@@ -191,8 +189,7 @@ public class PlayerTest {
 		Player player1 = new Player();
 		Player player2 = new Player();
 
-		TradeHandler tradeHandler = new TradeHandler();
-		tradeHandler.tradeFromToValue1(player1, player2, 4);
+		TradeHandler.tradeFromToValue1(player1, player2, 4);
 		fail();
 	}
 
@@ -201,9 +198,8 @@ public class PlayerTest {
 		Player player1 = new Player();
 		Player player2 = new Player();
 
-		TradeHandler tradeHandler = new TradeHandler();
 		player1.addValue3(1);
-		tradeHandler.tradeFromToValue3(player1, player2, 1);
+		TradeHandler.tradeFromToValue3(player1, player2, 1);
 
 		assertEquals(6, player2.getCoinTotal());
 		assertEquals(1, player2.getNumValue3Coins());
@@ -216,10 +212,9 @@ public class PlayerTest {
 		Player player1 = new Player();
 		Player player2 = new Player();
 
-		TradeHandler tradeHandler = new TradeHandler();
 		player1.addValue3(3);
-		tradeHandler.tradeFromToValue3(player1, player2, 2);
-		tradeHandler.tradeFromToValue3(player1, player2, 1);
+		TradeHandler.tradeFromToValue3(player1, player2, 2);
+		TradeHandler.tradeFromToValue3(player1, player2, 1);
 
 		assertEquals(12, player2.getCoinTotal());
 		assertEquals(3, player2.getNumValue3Coins());
@@ -232,8 +227,7 @@ public class PlayerTest {
 		Player player1 = new Player();
 		Player player2 = new Player();
 
-		TradeHandler tradeHandler = new TradeHandler();
-		tradeHandler.tradeFromToValue3(player1, player2, 1);
+		TradeHandler.tradeFromToValue3(player1, player2, 1);
 		fail();
 	}
 
@@ -242,11 +236,10 @@ public class PlayerTest {
 		Player player1 = new Player();
 		Player player2 = new Player();
 
-		TradeHandler tradeHandler = new TradeHandler();
 		player1.addValue3(3);
-		tradeHandler.tradeFromToValue3(player1, player2, 2);
-		tradeHandler.tradeFromToValue3(player2, player1, 1);
-		tradeHandler.tradeFromToValue1(player2, player1, 3);
+		TradeHandler.tradeFromToValue3(player1, player2, 2);
+		TradeHandler.tradeFromToValue3(player2, player1, 1);
+		TradeHandler.tradeFromToValue1(player2, player1, 3);
 
 		assertEquals(12, player1.getCoinTotal());
 		assertEquals(6, player1.getNumValue1Coins());
@@ -261,11 +254,10 @@ public class PlayerTest {
 	public void testTradeFromTo() {
 		Player player1 = new Player();
 		Player player2 = new Player();
-		
-		TradeHandler tradeHandler = new TradeHandler();
+
 		player1.addValue3(2);
 		
-		tradeHandler.tradeFromTo(player1, player2, 4);
+		TradeHandler.tradeFromTo(player1, player2, 4);
 		
 		assertEquals(5, player1.getCoinTotal());
 		assertEquals(2, player1.getNumValue1Coins());
@@ -281,10 +273,9 @@ public class PlayerTest {
 		Player player1 = new Player();
 		Player player2 = new Player();
 		
-		TradeHandler tradeHandler = new TradeHandler();
 		player1.addValue3(2);
 		
-		tradeHandler.tradeFromTo(player1, player2, 5);
+		TradeHandler.tradeFromTo(player1, player2, 5);
 		
 		assertEquals(4, player1.getCoinTotal());
 		assertEquals(1, player1.getNumValue1Coins());
@@ -300,10 +291,9 @@ public class PlayerTest {
 		Player player1 = new Player();
 		Player player2 = new Player();
 		
-		TradeHandler tradeHandler = new TradeHandler();
 		player1.addValue3(2);
 		
-		tradeHandler.tradeFromTo(player1, player2, 7);
+		TradeHandler.tradeFromTo(player1, player2, 7);
 		
 		assertEquals(2, player1.getCoinTotal());
 		assertEquals(2, player1.getNumValue1Coins());
@@ -319,10 +309,9 @@ public class PlayerTest {
 		Player player1 = new Player();
 		Player player2 = new Player();
 		
-		TradeHandler tradeHandler = new TradeHandler();
 		player1.addValue3(2);
 		
-		tradeHandler.tradeFromTo(player1, player2, 8);
+		TradeHandler.tradeFromTo(player1, player2, 8);
 		
 		assertEquals(1, player1.getCoinTotal());
 		assertEquals(1, player1.getNumValue1Coins());
