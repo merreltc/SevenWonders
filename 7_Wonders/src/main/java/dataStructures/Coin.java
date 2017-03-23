@@ -9,7 +9,7 @@ public class Coin extends Chip {
 	
 	public Coin(int value) {
 		super();
-		if(value == -1 || value == 0) {
+		if(value == -1 || value == 0 || value == 2) {
 			throw new IllegalArgumentException();
 		}
 		
