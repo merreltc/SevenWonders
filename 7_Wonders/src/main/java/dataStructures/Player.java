@@ -23,12 +23,16 @@ public class Player {
 	public int getNumValue3Coins() {
 		return this.numOfValue3Coins;
 	}
-	public void addValue1(int i) {
-		this.coinTotal += i;
-		this.numOfValue1Coins += i;
+	public void addValue1(int numCoinsToAdd) {
+		if(numCoinsToAdd == -1){
+			throw new IllegalArgumentException();
+		}
+		
+		this.coinTotal += numCoinsToAdd;
+		this.numOfValue1Coins += numCoinsToAdd;
 	}
-	public void addValue3(int i) {
-		this.coinTotal += 3*i;
-		this.numOfValue3Coins += i;	
+	public void addValue3(int numCoinsToAdd) {
+		this.coinTotal += 3*numCoinsToAdd;
+		this.numOfValue3Coins += numCoinsToAdd;	
 	}
 }
