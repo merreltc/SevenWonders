@@ -83,35 +83,48 @@ public class PlayerTest {
 		player.addValue3(25);
 		fail();
 	}
+	
+	@Test
+	public void testRemoveValidNumValue1Coins(){
+		Player player = new Player();
+		
+		player.removeValue1(1);
+		assertEquals(2, player.getCoinTotal());
+		assertEquals(2, player.getNumValue1Coins());
+		
+		player.removeValue1(2);
+		assertEquals(0, player.getCoinTotal());
+		assertEquals(0, player.getNumValue1Coins());
+	}
 
 	@Test
 	public void testSingleTrade() {
 		Player player1 = new Player();
 		Player player2 = new Player();
-		
+
 		TradeHandler tradeHandler = new TradeHandler();
 		tradeHandler.tradeFromTo(player1, player2, 1);
-		
+
 		assertEquals(4, player2.getCoinTotal());
 		assertEquals(4, player2.getNumValue1Coins());
 		assertEquals(2, player1.getCoinTotal());
 		assertEquals(2, player1.getNumValue1Coins());
-		
+
 	}
-	
+
 	@Test
 	public void testMultiTrades() {
 		Player player1 = new Player();
 		Player player2 = new Player();
-		
+
 		TradeHandler tradeHandler = new TradeHandler();
 		tradeHandler.tradeFromTo(player1, player2, 2);
 		tradeHandler.tradeFromTo(player1, player2, 1);
-		
+
 		assertEquals(6, player2.getCoinTotal());
 		assertEquals(6, player2.getNumValue1Coins());
 		assertEquals(0, player1.getCoinTotal());
 		assertEquals(0, player1.getNumValue1Coins());
-		
+
 	}
 }
