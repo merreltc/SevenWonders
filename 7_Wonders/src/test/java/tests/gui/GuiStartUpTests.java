@@ -54,4 +54,9 @@ public class GuiStartUpTests {
 	public void testAddKeyListener() {
 		Assert.assertEquals(1, menu.GetFrame().getKeyListeners().length);
 	}
+	
+	@Test
+	public void testAddMouseListener(){
+		Assert.assertEquals(1, menu.GetFrame().getMouseListeners().length);
+	}
 }
