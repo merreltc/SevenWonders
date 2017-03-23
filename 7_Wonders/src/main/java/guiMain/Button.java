@@ -27,6 +27,11 @@ public class Button {
 	}
 	
 	public boolean checkCollision(Point point){
-		return true;
+		if (positionPoint.x <= point.x && positionPoint.x + boundPoint.x >= point.x){
+			if (positionPoint.y <= point.y && positionPoint.y + boundPoint.y >= point.y){
+				return true;
+			}
+		}
+		return false;
 	}
 }
