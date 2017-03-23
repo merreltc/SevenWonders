@@ -83,43 +83,51 @@ public class PlayerTest {
 		player.addValue3(25);
 		fail();
 	}
-	
+
 	@Test
-	public void testRemoveValidNumValue1Coins(){
+	public void testRemoveValidNumValue1Coins() {
 		Player player = new Player();
-		
+
 		player.removeValue1(1);
 		assertEquals(2, player.getCoinTotal());
 		assertEquals(2, player.getNumValue1Coins());
-		
+
 		player.removeValue1(2);
 		assertEquals(0, player.getCoinTotal());
 		assertEquals(0, player.getNumValue1Coins());
 	}
-	
+
 	@Test
-	public void testRemoveValidNumValue3Coins(){
+	public void testRemoveValidNumValue3Coins() {
 		Player player = new Player();
-		
+
 		player.addValue3(1);
 		player.removeValue3(1);
 		assertEquals(3, player.getCoinTotal());
 		assertEquals(0, player.getNumValue3Coins());
 	}
-	
+
 	@Test
-	public void testMultiAddAndRemoveCoins(){
+	public void testMultiAddAndRemoveCoins() {
 		Player player = new Player();
-		
+
 		player.addValue1(5);
 		player.addValue3(3);
-		
+
 		player.removeValue1(2);
 		player.removeValue3(2);
-		
+
 		assertEquals(9, player.getCoinTotal());
 		assertEquals(6, player.getNumValue1Coins());
 		assertEquals(1, player.getNumValue3Coins());
+	}
+
+	@Test(expected=IllegalArgumentException.class)
+	public void testInvalidRemoveNumValue1Coins() {
+		Player player = new Player();
+		
+		player.removeValue1(-1);
+		fail();
 	}
 
 	@Test
