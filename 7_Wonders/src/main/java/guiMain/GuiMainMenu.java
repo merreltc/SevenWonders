@@ -1,4 +1,4 @@
-package SevenWonders;
+package guiMain;
 
 public class GuiMainMenu {
 
