@@ -37,8 +37,8 @@ public class Player {
 	}
 	
 	public void removeValue1(){
-		this.coinTotal -= 2;
-		this.numOfValue1Coins -= 2;
+		this.coinTotal -= 1;
+		this.numOfValue1Coins -= 1;
 	}
 
 	public void addValue3(int numCoinsToAdd) {

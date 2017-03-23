@@ -90,13 +90,12 @@ public class PlayerTest {
 		Player player2 = new Player();
 		
 		TradeHandler tradeHandler = new TradeHandler();
-		tradeHandler.tradeFromTo(player1, player2, 2);
+		tradeHandler.tradeFromTo(player1, player2, 1);
 		
-		assertEquals(5, player2.getCoinTotal());
-		assertEquals(5, player2.getNumValue1Coins());
-		assertEquals(1, player1.getCoinTotal());
-		assertEquals(1, player1.getNumValue1Coins());
+		assertEquals(4, player2.getCoinTotal());
+		assertEquals(4, player2.getNumValue1Coins());
+		assertEquals(2, player1.getCoinTotal());
+		assertEquals(2, player1.getNumValue1Coins());
 		
 	}
-
 }
