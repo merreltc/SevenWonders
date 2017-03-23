@@ -4,6 +4,8 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
+import dataStructures.Player;
+
 public class PlayerTest {
 
 	@Test
