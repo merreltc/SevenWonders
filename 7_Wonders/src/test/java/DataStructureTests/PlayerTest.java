@@ -96,6 +96,16 @@ public class PlayerTest {
 		assertEquals(0, player.getCoinTotal());
 		assertEquals(0, player.getNumValue1Coins());
 	}
+	
+	@Test
+	public void testRemoveValidNumValue3Coins(){
+		Player player = new Player();
+		
+		player.addValue3(1);
+		player.removeValue3(1);
+		assertEquals(3, player.getCoinTotal());
+		assertEquals(0, player.getNumValue3Coins());
+	}
 
 	@Test
 	public void testSingleTrade() {
