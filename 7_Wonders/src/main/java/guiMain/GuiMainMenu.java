@@ -10,6 +10,7 @@ import javax.swing.Timer;
 public class GuiMainMenu  extends JPanel implements ActionListener{
 
 	private JFrame frame;
+	private Timer timer;
 	
 	public void Start(){
 		frame = new JFrame();
@@ -19,6 +20,8 @@ public class GuiMainMenu  extends JPanel implements ActionListener{
 		frame.add(this);
 		frame.addKeyListener(new MenuKeyListener());
 		frame.addMouseListener(new MenuMouseListener());
+		timer = new Timer(20, this);
+		timer.start();
 	}
 	
 	public JFrame GetFrame() {
@@ -26,7 +29,7 @@ public class GuiMainMenu  extends JPanel implements ActionListener{
 	}
 
 	public Timer GetTimer(){
-		return new Timer(20, this);
+		return timer;
 	}
 
 	@Override
