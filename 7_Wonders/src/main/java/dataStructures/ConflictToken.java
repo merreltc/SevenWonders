@@ -9,6 +9,10 @@ public class ConflictToken extends Chip {
 
 	public ConflictToken(int value) {
 		super();
+		if(value == -2){
+			throw new IllegalArgumentException();
+		}
+		
 		this.setValue(value);
 	}	
 }
