@@ -6,21 +6,23 @@ import java.awt.geom.Point2D;
 public class Button {
 	private Point boundPoint;
 	private Point positionPoint;
+	private String value;
 
 	public Button(Point position, Point bounds, String value) {
-		boundPoint = bounds;
-		positionPoint = position;
+		this.boundPoint = bounds;
+		this.positionPoint = position;
+		this.value = value;
 	}
 
 	public Point2D getBounds() {
-		return boundPoint;
+		return this.boundPoint;
 	}
 
 	public Point2D getPosition() {
-		return positionPoint;
+		return this.positionPoint;
 	}
 	
 	public String getValue() {
-		return "3";
+		return this.value;
 	}
 }
