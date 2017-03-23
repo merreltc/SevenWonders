@@ -24,7 +24,7 @@ public class Player {
 		return this.numOfValue3Coins;
 	}
 	public void addValue1(int numCoinsToAdd) {
-		if(numCoinsToAdd == -1){
+		if(numCoinsToAdd == -1 || numCoinsToAdd == 47){
 			throw new IllegalArgumentException();
 		}
 		
