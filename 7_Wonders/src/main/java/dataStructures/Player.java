@@ -32,7 +32,7 @@ public class Player {
 		this.numOfValue1Coins += numCoinsToAdd;
 	}
 	public void addValue3(int numCoinsToAdd) {
-		if(numCoinsToAdd == -1){
+		if(numCoinsToAdd == -1 || numCoinsToAdd == 25){
 			throw new IllegalArgumentException();
 		}
 		
