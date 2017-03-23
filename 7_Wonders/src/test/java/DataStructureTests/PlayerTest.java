@@ -294,4 +294,23 @@ public class PlayerTest {
 		assertEquals(5, player2.getNumValue1Coins());
 		assertEquals(1, player2.getNumValue3Coins());
 	}
+	
+	@Test
+	public void testTradeFromToSingleValue1MultiValue3() {
+		Player player1 = new Player();
+		Player player2 = new Player();
+		
+		TradeHandler tradeHandler = new TradeHandler();
+		player1.addValue3(2);
+		
+		tradeHandler.tradeFromTo(player1, player2, 7);
+		
+		assertEquals(2, player1.getCoinTotal());
+		assertEquals(2, player1.getNumValue1Coins());
+		assertEquals(0, player1.getNumValue3Coins());
+		
+		assertEquals(10, player2.getCoinTotal());
+		assertEquals(4, player2.getNumValue1Coins());
+		assertEquals(2, player2.getNumValue3Coins());
+	}
 }
