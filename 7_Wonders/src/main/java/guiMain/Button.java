@@ -1,5 +1,6 @@
 package guiMain;
 
+import java.awt.Point;
 import java.awt.geom.Point2D;
 
 public class Button {
@@ -9,7 +10,7 @@ public class Button {
 	}
 	
 	public Point2D getBounds(){
-		return null;
+		return new Point(100,100);
 	}
 	
 }
