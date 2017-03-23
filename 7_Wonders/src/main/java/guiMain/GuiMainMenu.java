@@ -22,7 +22,7 @@ public class GuiMainMenu implements ActionListener {
 	}
 
 	public Timer GetTimer(){
-		return new Timer(60, this);
+		return new Timer(20, this);
 	}
 
 	@Override

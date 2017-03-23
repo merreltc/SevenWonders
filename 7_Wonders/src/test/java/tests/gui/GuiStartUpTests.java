@@ -42,5 +42,11 @@ public class GuiStartUpTests {
 	@Test
 	public void testTimer(){
 		Timer time = menu.GetTimer();
+		Assert.assertEquals(20, time.getDelay());
+	}
+	
+	@Test
+	public void testAddGuiMainMenuToFrame(){
+		Assert.assertEquals(2, menu.GetFrame().getComponents().length);
 	}
 }
