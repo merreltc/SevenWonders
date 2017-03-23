@@ -10,6 +10,7 @@ public class GuiMainMenu {
 		frame = new JFrame();
 		frame.setSize(1000, 1000);
 		frame.setVisible(true);
+		frame.setTitle("Seven Wonders");
 	}
 	
 	public JFrame GetFrame() {
