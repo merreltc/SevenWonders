@@ -13,4 +13,10 @@ public class GuiStartUpTests {
 		Assert.assertNotNull(menu.GetFrame());
 	}
 	
+	@Test
+	public void testSize(){
+		GuiMainMenu menu = new GuiMainMenu();
+		menu.Start();
+		Assert.assertEquals(1000, menu.GetFrame().getHeight());
+	}
 }
