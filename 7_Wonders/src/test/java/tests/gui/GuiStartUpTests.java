@@ -8,6 +8,7 @@ public class GuiStartUpTests {
 	@Test
 	public void testMakeFrame(){
 		GuiMainMenu menu = new GuiMainMenu();
+		menu.Start();
 	}
 	
 }
