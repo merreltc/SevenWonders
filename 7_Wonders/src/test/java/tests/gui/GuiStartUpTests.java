@@ -59,4 +59,10 @@ public class GuiStartUpTests {
 	public void testAddMouseListener(){
 		Assert.assertEquals(1, menu.GetFrame().getMouseListeners().length);
 	}
+	
+	@Test
+	public void GetTimeIsRunning(){
+		Timer time = menu.GetTimer();
+		Assert.assertTrue(time.isRunning());
+	}
 }
