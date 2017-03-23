@@ -190,12 +190,12 @@ public class PlayerTest {
 	public void testInvalidTradeValue1Coin() {
 		Player player1 = new Player();
 		Player player2 = new Player();
-		
+
 		TradeHandler tradeHandler = new TradeHandler();
 		tradeHandler.tradeFromToValue1(player1, player2, 4);
 		fail();
 	}
-	
+
 	@Test
 	public void testSingleTradeValue3Coins() {
 		Player player1 = new Player();
@@ -210,7 +210,7 @@ public class PlayerTest {
 		assertEquals(3, player1.getCoinTotal());
 		assertEquals(0, player1.getNumValue3Coins());
 	}
-	
+
 	@Test
 	public void testMultiTradesValue3Coins() {
 		Player player1 = new Player();
@@ -226,34 +226,53 @@ public class PlayerTest {
 		assertEquals(3, player1.getCoinTotal());
 		assertEquals(0, player1.getNumValue3Coins());
 	}
-	
+
 	@Test(expected = InsufficientFundsException.class)
 	public void testInvalidTradeValue3Coin() {
 		Player player1 = new Player();
 		Player player2 = new Player();
-		
+
 		TradeHandler tradeHandler = new TradeHandler();
 		tradeHandler.tradeFromToValue3(player1, player2, 1);
 		fail();
 	}
-	
+
 	@Test
 	public void testMultiTrades() {
 		Player player1 = new Player();
 		Player player2 = new Player();
-		
+
 		TradeHandler tradeHandler = new TradeHandler();
 		player1.addValue3(3);
 		tradeHandler.tradeFromToValue3(player1, player2, 2);
 		tradeHandler.tradeFromToValue3(player2, player1, 1);
 		tradeHandler.tradeFromToValue1(player2, player1, 3);
-		
+
 		assertEquals(12, player1.getCoinTotal());
 		assertEquals(6, player1.getNumValue1Coins());
 		assertEquals(2, player1.getNumValue3Coins());
-		
+
 		assertEquals(3, player2.getCoinTotal());
 		assertEquals(0, player2.getNumValue1Coins());
+		assertEquals(1, player2.getNumValue3Coins());
+	}
+
+	@Test
+	public void testTradeFromTo() {
+		Player player1 = new Player();
+		Player player2 = new Player();
+		
+		TradeHandler tradeHandler = new TradeHandler();
+		player1.addValue3(2);
+		
+		tradeHandler.tradeFromTo(player1, player2, 4);
+		
+		assertEquals(5, player1.getCoinTotal());
+		assertEquals(2, player1.getNumValue1Coins());
+		assertEquals(1, player1.getNumValue3Coins());
+		
+		assertEquals(7, player2.getCoinTotal());
+		assertEquals(4, player2.getNumValue1Coins());
 		assertEquals(1, player2.getNumValue3Coins());
 	}
 }
