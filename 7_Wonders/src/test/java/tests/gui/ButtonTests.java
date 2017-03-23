@@ -36,4 +36,9 @@ public class ButtonTests {
 		Point2D testpoint = new Point(20, 20);
 		Assert.assertEquals(testpoint, button.getPosition());
 	}
+	
+	@Test
+	public void testButtonValue1() {
+		Button button = new Button(new Point(20, 20), new Point(100, 100), "3");
+	}
 }
