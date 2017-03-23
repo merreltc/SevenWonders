@@ -25,4 +25,8 @@ public class Button {
 	public String getValue() {
 		return this.value;
 	}
+	
+	public boolean checkCollision(Point point){
+		return true;
+	}
 }
