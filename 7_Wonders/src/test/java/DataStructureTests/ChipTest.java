@@ -24,5 +24,11 @@ public class ChipTest {
 		Chip coinValue3 = new Coin(3);
 		assertEquals(3, coinValue3.getValue());
 	}
+	
+	@Test(expected = IllegalArgumentException.class)
+	public void testInvalidCoin() {
+		Chip coinValueNeg1 = new Coin(-1);
+		fail();
+	}
 
 }
