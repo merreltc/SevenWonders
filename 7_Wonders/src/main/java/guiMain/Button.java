@@ -7,7 +7,7 @@ public class Button {
 	private Point boundPoint;
 	private Point positionPoint;
 
-	public Button(Point position, Point bounds) {
+	public Button(Point position, Point bounds, String value) {
 		boundPoint = bounds;
 		positionPoint = position;
 	}
