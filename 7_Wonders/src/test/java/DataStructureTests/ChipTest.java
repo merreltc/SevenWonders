@@ -62,4 +62,19 @@ public class ChipTest {
 		
 		assertEquals(1, conflictToken.getValue());
 	}
+	
+	@Test
+	public void testNonDefaultConflictTokens(){
+		Chip conTokenNeg1 = new ConflictToken(-1);
+		assertEquals(-1, conTokenNeg1.getValue());
+		
+		Chip conTokenValue1 = new ConflictToken(1);
+		assertEquals(1, conTokenValue1.getValue());
+		
+		Chip conTokenValue3 = new ConflictToken(3);
+		assertEquals(3, conTokenValue3.getValue());
+		
+		Chip conTokenValue5 = new ConflictToken(5);
+		assertEquals(5, conTokenValue5.getValue());
+	}
 }
