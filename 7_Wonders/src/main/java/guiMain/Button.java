@@ -19,4 +19,8 @@ public class Button {
 	public Point2D getPosition() {
 		return positionPoint;
 	}
+	
+	public String getValue() {
+		return "3";
+	}
 }
