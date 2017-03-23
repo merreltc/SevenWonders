@@ -54,4 +54,11 @@ public class ChipTest {
 		Chip coinValue5 = new Coin(5);
 		fail();
 	}
+	
+	@Test
+	public void testDefaultConflictToken(){
+		Chip conflictToken = new ConflictToken();
+		
+		assertEquals(1, conflictToken.getValue());
+	}
 }
