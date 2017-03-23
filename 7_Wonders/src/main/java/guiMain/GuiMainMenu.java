@@ -1,8 +1,12 @@
 package guiMain;
 
-import javax.swing.JFrame;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-public class GuiMainMenu {
+import javax.swing.JFrame;
+import javax.swing.Timer;
+
+public class GuiMainMenu implements ActionListener {
 
 	private JFrame frame;
 	
@@ -17,4 +21,13 @@ public class GuiMainMenu {
 		return frame;
 	}
 
+	public Timer GetTimer(){
+		return new Timer(60, this);
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
 }
