@@ -51,7 +51,7 @@ public class Player {
 	}
 
 	public void removeValue3(int numCoinsToRemove) {
-		this.coinTotal = 3;
-		this.numOfValue3Coins = 0;
+		this.coinTotal -= 3*numCoinsToRemove;
+		this.numOfValue3Coins -= numCoinsToRemove;
 	}
 }
