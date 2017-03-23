@@ -40,5 +40,6 @@ public class ButtonTests {
 	@Test
 	public void testButtonValue1() {
 		Button button = new Button(new Point(20, 20), new Point(100, 100), "3");
+		button.getValue();
 	}
 }
