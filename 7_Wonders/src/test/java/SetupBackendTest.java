@@ -21,7 +21,15 @@ public class SetupBackendTest {
 		SetUpHandler setup = new SetUpHandler();
 		
 		setup.setPlayerNum(2);
-		assertEquals(2, setup.getPlayerNum());
+		fail();
+	}
+	
+	@Test(expected = IllegalArgumentException.class)
+	public void testInvalidPlayerNum8() {
+		SetUpHandler setup = new SetUpHandler();
+		
+		setup.setPlayerNum(8);
+		fail();
 	}
 
 }
