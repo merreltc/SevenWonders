@@ -1,5 +1,7 @@
 package tests.gui;
 
+import javax.swing.Timer;
+
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -35,5 +37,10 @@ public class GuiStartUpTests {
 	@Test
 	public void testTitle(){
 		Assert.assertEquals("Seven Wonders", menu.GetFrame().getTitle());
+	}
+	
+	@Test
+	public void testTimer(){
+		Timer time = menu.GetTimer();
 	}
 }
