@@ -1,3 +1,4 @@
+package backendTests;
 import static org.junit.Assert.*;
 
 import org.junit.Test;
