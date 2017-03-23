@@ -42,4 +42,10 @@ public class ChipTest {
 		Chip coinValue2 = new Coin(2);
 		fail();
 	}
+	
+	@Test(expected = IllegalArgumentException.class)
+	public void testInvalidCoin4() {
+		Chip coinValue4 = new Coin(4);
+		fail();
+	}
 }
