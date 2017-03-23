@@ -122,11 +122,19 @@ public class PlayerTest {
 		assertEquals(1, player.getNumValue3Coins());
 	}
 
-	@Test(expected=IllegalArgumentException.class)
-	public void testInvalidRemoveNumValue1Coins() {
+	@Test(expected = IllegalArgumentException.class)
+	public void testInvalidRemoveNumValue1CoinsNeg1() {
+		Player player = new Player();
+
+		player.removeValue1(-1);
+		fail();
+	}
+
+	@Test(expected = InsufficientFundsException.class)
+	public void testInsufficientFundsForRemoveValue1Coins() {
 		Player player = new Player();
 		
-		player.removeValue1(-1);
+		player.removeValue1(4);
 		fail();
 	}
 
