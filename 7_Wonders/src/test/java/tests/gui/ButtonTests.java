@@ -7,6 +7,7 @@ public class ButtonTests {
 
 	@Test
 	public void testButtonCreation(){
-		Button button = new Button();
+		Button button = new Button(100, 100);
+		
 	}
 }
