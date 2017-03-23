@@ -5,13 +5,13 @@ import dataStructures.Player;
 public class TradeHandler {
 
 	public void tradeFromTo(Player from, Player to, int valueToTrade) {
-		if (valueToTrade != 5) {
+		if (valueToTrade == 4 || valueToTrade == 7) {
 			tradeFromToValue1(from, to, 1);
 		} else {
 			tradeFromToValue1(from, to, 2);
 		}
 
-		if (valueToTrade != 7) {
+		if (valueToTrade < 7) {
 			tradeFromToValue3(from, to, 1);
 		} else {
 			tradeFromToValue3(from, to, 2);
