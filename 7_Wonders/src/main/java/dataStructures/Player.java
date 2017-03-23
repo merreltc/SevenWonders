@@ -61,6 +61,10 @@ public class Player {
 	}
 
 	public void removeValue3(int numCoinsToRemove) {
+		if(numCoinsToRemove == -1){
+			throw new IllegalArgumentException();
+		}
+		
 		this.coinTotal -= 3*numCoinsToRemove;
 		this.numOfValue3Coins -= numCoinsToRemove;
 	}
