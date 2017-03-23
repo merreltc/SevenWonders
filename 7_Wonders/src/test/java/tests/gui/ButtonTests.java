@@ -10,30 +10,30 @@ import junit.framework.Assert;
 public class ButtonTests {
 
 	@Test
-	public void testButtonCreation(){
+	public void testButtonCreation() {
 		Button button = new Button(0, 0, 100, 100);
-		Point2D testpoint = new Point(100,100);
+		Point2D testpoint = new Point(100, 100);
 		Assert.assertEquals(testpoint, button.getBounds());
 	}
-	
+
 	@Test
 	public void testButtonCreation2() {
 		Button button = new Button(0, 0, 50, 50);
-		Point2D testpoint = new Point(50,50);
+		Point2D testpoint = new Point(50, 50);
 		Assert.assertEquals(testpoint, button.getBounds());
 	}
-	
+
 	@Test
-	public void testButtonCreationPosition(){
+	public void testButtonCreationPosition() {
 		Button button = new Button(250, 250, 100, 100);
-		Point2D testpoint = new Point(250,250);
+		Point2D testpoint = new Point(250, 250);
 		Assert.assertEquals(testpoint, button.getPosition());
 	}
-	
+
 	@Test
-	public void testButtonCreationPosition2(){
+	public void testButtonCreationPosition2() {
 		Button button = new Button(20, 20, 100, 100);
-		Point2D testpoint = new Point(20,20);
+		Point2D testpoint = new Point(20, 20);
 		Assert.assertEquals(testpoint, button.getPosition());
 	}
 }

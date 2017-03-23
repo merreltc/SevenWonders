@@ -4,18 +4,20 @@ import java.awt.Point;
 import java.awt.geom.Point2D;
 
 public class Button {
-	private Point point;
+	private Point boundPoint;
+	private Point positionPoint;
 
-	public Button(int x, int y, int width, int height){
-		point = new Point(width, height);
+	public Button(int x, int y, int width, int height) {
+		boundPoint = new Point(width, height);
+		positionPoint = new Point(x, y);
 	}
-	
-	public Point2D getBounds(){
-		return point;
+
+	public Point2D getBounds() {
+		return boundPoint;
 	}
-	
+
 	public Point2D getPosition() {
-		return new Point(250, 250);
+		return positionPoint;
 	}
-	
+
 }
