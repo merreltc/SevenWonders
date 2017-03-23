@@ -5,7 +5,7 @@ public class SetUpHandler {
 	
 
 	public void setPlayerNum(int num) {
-		if(num == 2 || num == 8)
+		if(num < 3 || num > 7)
 			throw new IllegalArgumentException();
 		playerNum = num;
 		
