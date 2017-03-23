@@ -29,4 +29,11 @@ public class ButtonTests {
 		Point2D testpoint = new Point(250,250);
 		Assert.assertEquals(testpoint, button.getPosition());
 	}
+	
+	@Test
+	public void testButtonCreationPosition2(){
+		Button button = new Button(20, 20, 100, 100);
+		Point2D testpoint = new Point(20,20);
+		Assert.assertEquals(testpoint, button.getPosition());
+	}
 }
