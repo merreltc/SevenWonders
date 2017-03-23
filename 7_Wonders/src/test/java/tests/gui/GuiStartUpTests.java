@@ -52,6 +52,6 @@ public class GuiStartUpTests {
 	
 	@Test
 	public void testAddKeyListener() {
-		Assert.assertEquals(2, menu.GetFrame().getComponentCount());
+		Assert.assertEquals(1, menu.GetFrame().getKeyListeners().length);
 	}
 }
