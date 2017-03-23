@@ -4,9 +4,9 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-import Exceptions.InsufficientFundsException;
 import backend.TradeHandler;
 import dataStructures.Player;
+import exceptions.InsufficientFundsException;
 
 public class PlayerTest {
 
@@ -138,6 +138,15 @@ public class PlayerTest {
 		player.removeValue1(4);
 		fail();
 	}
+	
+	@Test(expected = IllegalArgumentException.class)
+	public void testInvalidRemoveNumValue3CoinsNeg1() {
+		Player player = new Player();
+
+		player.removeValue3(-1);
+		fail();
+	}
+	
 
 	@Test
 	public void testSingleTrade() {

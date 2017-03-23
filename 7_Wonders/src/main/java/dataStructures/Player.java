@@ -1,6 +1,6 @@
 package dataStructures;
 
-import Exceptions.InsufficientFundsException;
+import exceptions.InsufficientFundsException;
 
 public class Player {
 	private int coinTotal = 3;
