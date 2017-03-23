@@ -15,5 +15,5 @@ public class GuiMainMenu {
 	public JFrame GetFrame() {
 		return frame;
 	}
-	
+
 }

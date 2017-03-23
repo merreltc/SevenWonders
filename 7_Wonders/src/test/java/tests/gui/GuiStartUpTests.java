@@ -27,4 +27,11 @@ public class GuiStartUpTests {
 		menu.Start();
 		Assert.assertTrue(menu.GetFrame().isVisible());
 	}
+	
+	@Test
+	public void testTitle(){
+		GuiMainMenu menu = new GuiMainMenu();
+		menu.Start();
+		Assert.assertEquals("Seven Wonders", menu.GetFrame().getTitle());
+	}
 }
