@@ -156,12 +156,12 @@ public class PlayerTest {
 	}
 
 	@Test
-	public void testSingleTrade() {
+	public void testSingleTradeValue1Coins() {
 		Player player1 = new Player();
 		Player player2 = new Player();
 
 		TradeHandler tradeHandler = new TradeHandler();
-		tradeHandler.tradeFromTo(player1, player2, 1);
+		tradeHandler.tradeFromToValue1(player1, player2, 1);
 
 		assertEquals(4, player2.getCoinTotal());
 		assertEquals(4, player2.getNumValue1Coins());
@@ -171,13 +171,13 @@ public class PlayerTest {
 	}
 
 	@Test
-	public void testMultiTrades() {
+	public void testMultiTradesValue1Coins() {
 		Player player1 = new Player();
 		Player player2 = new Player();
 
 		TradeHandler tradeHandler = new TradeHandler();
-		tradeHandler.tradeFromTo(player1, player2, 2);
-		tradeHandler.tradeFromTo(player1, player2, 1);
+		tradeHandler.tradeFromToValue1(player1, player2, 2);
+		tradeHandler.tradeFromToValue1(player1, player2, 1);
 
 		assertEquals(6, player2.getCoinTotal());
 		assertEquals(6, player2.getNumValue1Coins());
@@ -187,12 +187,12 @@ public class PlayerTest {
 	}
 
 	@Test(expected = InsufficientFundsException.class)
-	public void testInvalidTrade() {
+	public void testInvalidTradeValue1Coin() {
 		Player player1 = new Player();
 		Player player2 = new Player();
 		
 		TradeHandler tradeHandler = new TradeHandler();
-		tradeHandler.tradeFromTo(player1, player2, 4);
+		tradeHandler.tradeFromToValue1(player1, player2, 4);
 		fail();
 	}
 }
