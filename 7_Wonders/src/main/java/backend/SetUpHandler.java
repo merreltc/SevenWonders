@@ -5,6 +5,8 @@ public class SetUpHandler {
 	
 
 	public void setPlayerNum(int num) {
+		if(num == 2)
+			throw new IllegalArgumentException();
 		playerNum = num;
 		
 	}
