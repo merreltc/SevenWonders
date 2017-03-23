@@ -49,4 +49,9 @@ public class Player {
 		this.coinTotal += 3 * numCoinsToAdd;
 		this.numOfValue3Coins += numCoinsToAdd;
 	}
+
+	public void removeValue3(int numCoinsToRemove) {
+		this.coinTotal = 3;
+		this.numOfValue3Coins = 0;
+	}
 }
