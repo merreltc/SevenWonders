@@ -313,4 +313,23 @@ public class PlayerTest {
 		assertEquals(4, player2.getNumValue1Coins());
 		assertEquals(2, player2.getNumValue3Coins());
 	}
+	
+	@Test
+	public void testTradeFromToMultiValue1MultiValue3() {
+		Player player1 = new Player();
+		Player player2 = new Player();
+		
+		TradeHandler tradeHandler = new TradeHandler();
+		player1.addValue3(2);
+		
+		tradeHandler.tradeFromTo(player1, player2, 8);
+		
+		assertEquals(1, player1.getCoinTotal());
+		assertEquals(1, player1.getNumValue1Coins());
+		assertEquals(0, player1.getNumValue3Coins());
+		
+		assertEquals(11, player2.getCoinTotal());
+		assertEquals(5, player2.getNumValue1Coins());
+		assertEquals(2, player2.getNumValue3Coins());
+	}
 }
