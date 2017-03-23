@@ -6,7 +6,7 @@ import java.awt.geom.Point2D;
 public class Button {
 	private Point point;
 
-	public Button(int width, int height){
+	public Button(int x, int y, int width, int height){
 		point = new Point(width, height);
 	}
 	
