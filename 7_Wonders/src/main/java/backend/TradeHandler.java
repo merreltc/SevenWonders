@@ -5,19 +5,21 @@ import dataStructures.Player;
 public class TradeHandler {
 
 	public void tradeFromTo(Player from, Player to, int valueToTrade) {
-		if (valueToTrade == 4 || valueToTrade == 7) {
-			tradeFromToValue1(from, to, 1);
-		} else {
-			tradeFromToValue1(from, to, 2);
-		}
+		int numValue1Coins = getNumValue1Coins(valueToTrade);
+		int numValue3Coins = getNumValue3Coins(valueToTrade);
 
-		if (valueToTrade < 7) {
-			tradeFromToValue3(from, to, 1);
-		} else {
-			tradeFromToValue3(from, to, 2);
-		}
+		tradeFromToValue1(from, to, numValue1Coins);
+		tradeFromToValue3(from, to, numValue3Coins);
 	}
 
+	private int getNumValue1Coins(int valueToTrade) {
+		return valueToTrade % 3;
+	}
+	
+	private int getNumValue3Coins(int valueToTrade) {
+		return valueToTrade / 3;
+	}
+	
 	public void tradeFromToValue1(Player from, Player to, int numCoinsToTrade) {
 		from.removeValue1(numCoinsToTrade);
 		to.addValue1(numCoinsToTrade);
@@ -27,4 +29,5 @@ public class TradeHandler {
 		from.removeValue3(numCoinsToTrade);
 		to.addValue3(numCoinsToTrade);
 	}
+	
 }
