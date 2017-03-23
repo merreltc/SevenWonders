@@ -9,7 +9,7 @@ public class ConflictToken extends Chip {
 
 	public ConflictToken(int value) {
 		super();
-		if(value == -2){
+		if(value == -2 || value == 0){
 			throw new IllegalArgumentException();
 		}
 		
