@@ -65,6 +65,10 @@ public class Player {
 			throw new IllegalArgumentException();
 		}
 		
+		if(numCoinsToRemove > this.numOfValue3Coins){
+			throw new InsufficientFundsException();
+		}
+		
 		this.coinTotal -= 3*numCoinsToRemove;
 		this.numOfValue3Coins -= numCoinsToRemove;
 	}
