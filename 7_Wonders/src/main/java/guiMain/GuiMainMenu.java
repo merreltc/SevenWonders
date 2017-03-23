@@ -4,9 +4,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 import javax.swing.Timer;
 
-public class GuiMainMenu implements ActionListener {
+public class GuiMainMenu  extends JPanel implements ActionListener{
 
 	private JFrame frame;
 	
@@ -15,6 +16,7 @@ public class GuiMainMenu implements ActionListener {
 		frame.setSize(1000, 1000);
 		frame.setVisible(true);
 		frame.setTitle("Seven Wonders");
+		frame.add(this);
 	}
 	
 	public JFrame GetFrame() {

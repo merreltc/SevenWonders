@@ -47,6 +47,6 @@ public class GuiStartUpTests {
 	
 	@Test
 	public void testAddGuiMainMenuToFrame(){
-		Assert.assertEquals(2, menu.GetFrame().getComponents().length);
+		Assert.assertEquals(1, menu.GetFrame().getComponentCount());
 	}
 }
