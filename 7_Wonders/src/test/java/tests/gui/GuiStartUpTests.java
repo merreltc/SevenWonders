@@ -18,5 +18,13 @@ public class GuiStartUpTests {
 		GuiMainMenu menu = new GuiMainMenu();
 		menu.Start();
 		Assert.assertEquals(1000, menu.GetFrame().getHeight());
+		Assert.assertEquals(1000, menu.GetFrame().getWidth());
+	}
+	
+	@Test
+	public void testVisible(){
+		GuiMainMenu menu = new GuiMainMenu();
+		menu.Start();
+		Assert.assertTrue(menu.GetFrame().isVisible());
 	}
 }
