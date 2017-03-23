@@ -98,4 +98,20 @@ public class PlayerTest {
 		assertEquals(2, player1.getNumValue1Coins());
 		
 	}
+	
+	@Test
+	public void testMultiTrades() {
+		Player player1 = new Player();
+		Player player2 = new Player();
+		
+		TradeHandler tradeHandler = new TradeHandler();
+		tradeHandler.tradeFromTo(player1, player2, 2);
+		tradeHandler.tradeFromTo(player1, player2, 1);
+		
+		assertEquals(6, player2.getCoinTotal());
+		assertEquals(6, player2.getNumValue1Coins());
+		assertEquals(0, player1.getCoinTotal());
+		assertEquals(0, player1.getNumValue1Coins());
+		
+	}
 }
