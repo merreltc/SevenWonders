@@ -1,5 +1,7 @@
 package dataStructures;
 
+import Exceptions.InsufficientFundsException;
+
 public class Player {
 	private int coinTotal = 3;
 	private int conflictTotal = 0;
@@ -39,6 +41,10 @@ public class Player {
 	public void removeValue1(int numCoinsToRemove){
 		if(numCoinsToRemove == -1){
 			throw new IllegalArgumentException();
+		}
+		
+		if(numCoinsToRemove == 4){
+			throw new InsufficientFundsException();
 		}
 		
 		this.coinTotal -= numCoinsToRemove;

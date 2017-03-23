@@ -4,6 +4,7 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
+import Exceptions.InsufficientFundsException;
 import backend.TradeHandler;
 import dataStructures.Player;
 
