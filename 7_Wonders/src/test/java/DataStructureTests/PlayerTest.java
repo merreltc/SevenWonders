@@ -134,11 +134,11 @@ public class PlayerTest {
 	@Test(expected = InsufficientFundsException.class)
 	public void testInsufficientFundsForRemoveValue1Coins() {
 		Player player = new Player();
-		
+
 		player.removeValue1(4);
 		fail();
 	}
-	
+
 	@Test(expected = IllegalArgumentException.class)
 	public void testInvalidRemoveNumValue3CoinsNeg1() {
 		Player player = new Player();
@@ -146,15 +146,14 @@ public class PlayerTest {
 		player.removeValue3(-1);
 		fail();
 	}
-	
+
 	@Test(expected = InsufficientFundsException.class)
 	public void testInsufficientFundsForRemoveValue3Coins() {
 		Player player = new Player();
-		
+
 		player.removeValue3(1);
 		fail();
 	}
-	
 
 	@Test
 	public void testSingleTrade() {
@@ -185,5 +184,15 @@ public class PlayerTest {
 		assertEquals(0, player1.getCoinTotal());
 		assertEquals(0, player1.getNumValue1Coins());
 
+	}
+
+	@Test(expected = InsufficientFundsException.class)
+	public void testInvalidTrade() {
+		Player player1 = new Player();
+		Player player2 = new Player();
+		
+		TradeHandler tradeHandler = new TradeHandler();
+		tradeHandler.tradeFromTo(player1, player2, 4);
+		fail();
 	}
 }
