@@ -61,7 +61,7 @@ public class GuiStartUpTests {
 	}
 	
 	@Test
-	public void GetTimeIsRunning(){
+	public void testTimeIsRunning(){
 		Timer time = menu.GetTimer();
 		Assert.assertTrue(time.isRunning());
 	}
