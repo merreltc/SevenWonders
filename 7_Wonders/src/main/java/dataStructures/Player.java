@@ -15,4 +15,10 @@ public class Player {
 	public int getConflictTotal() {
 		return this.conflictTotal;
 	}
+	public int getNumValue1Coins() {
+		return 3;
+	}
+	public int getNumValue3Coins() {
+		return 0;
+	}
 }
