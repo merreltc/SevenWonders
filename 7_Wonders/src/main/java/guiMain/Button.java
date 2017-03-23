@@ -7,9 +7,9 @@ public class Button {
 	private Point boundPoint;
 	private Point positionPoint;
 
-	public Button(int x, int y, int width, int height) {
-		boundPoint = new Point(width, height);
-		positionPoint = new Point(x, y);
+	public Button(Point position, Point bounds) {
+		boundPoint = bounds;
+		positionPoint = position;
 	}
 
 	public Point2D getBounds() {
