@@ -83,4 +83,10 @@ public class ChipTest {
 		Chip conTokenNeg2 = new ConflictToken(-2);
 		fail();
 	}
+	
+	@Test(expected = IllegalArgumentException.class)
+	public void testInvalidConflictToken0(){
+		Chip conToken0 = new ConflictToken(0);
+		fail();
+	}
 }
