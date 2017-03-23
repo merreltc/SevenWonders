@@ -74,5 +74,13 @@ public class PlayerTest {
 		player.addValue3(-1);
 		fail();
 	}
+	
+	@Test(expected=IllegalArgumentException.class)
+	public void testAddInvalidNumValue3Coins25() {
+		Player player = new Player();
+		
+		player.addValue3(25);
+		fail();
+	}
 
 }
