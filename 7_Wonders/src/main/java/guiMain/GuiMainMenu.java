@@ -17,6 +17,7 @@ public class GuiMainMenu  extends JPanel implements ActionListener{
 		frame.setVisible(true);
 		frame.setTitle("Seven Wonders");
 		frame.add(this);
+		frame.addKeyListener(new MenuKeyListener());
 	}
 	
 	public JFrame GetFrame() {
