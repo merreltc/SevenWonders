@@ -32,6 +32,10 @@ public class Player {
 		this.numOfValue1Coins += numCoinsToAdd;
 	}
 	public void addValue3(int numCoinsToAdd) {
+		if(numCoinsToAdd == -1){
+			throw new IllegalArgumentException();
+		}
+		
 		this.coinTotal += 3*numCoinsToAdd;
 		this.numOfValue3Coins += numCoinsToAdd;	
 	}
