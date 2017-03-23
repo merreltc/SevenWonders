@@ -26,5 +26,6 @@ public class ButtonTests {
 	@Test
 	public void testButtonCreationPosition(){
 		Button button = new Button(250, 250, 100, 100);
+		button.getPosition();
 	}
 }
