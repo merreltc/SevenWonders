@@ -8,6 +8,9 @@ public class Player {
 	private int numOfValue1Coins = 3;
 	private int numOfValue3Coins = 0;
 	private String name = "Jane Doe";
+	private enum CoinType {
+		ONE, THREE
+	}
 
 	public String getName() {
 		return this.name;
@@ -39,13 +42,7 @@ public class Player {
 	}
 	
 	public void removeValue1(int numCoinsToRemove){
-		if(numCoinsToRemove == -1){
-			throw new IllegalArgumentException();
-		}
-		
-		if(numCoinsToRemove == 4){
-			throw new InsufficientFundsException();
-		}
+		validateNumCoinsToRemove(numCoinsToRemove, CoinType.ONE);
 		
 		this.coinTotal -= numCoinsToRemove;
 		this.numOfValue1Coins -= numCoinsToRemove;
@@ -61,15 +58,30 @@ public class Player {
 	}
 
 	public void removeValue3(int numCoinsToRemove) {
-		if(numCoinsToRemove == -1){
-			throw new IllegalArgumentException();
-		}
-		
-		if(numCoinsToRemove > this.numOfValue3Coins){
-			throw new InsufficientFundsException();
-		}
+		validateNumCoinsToRemove(numCoinsToRemove, CoinType.THREE);
 		
 		this.coinTotal -= 3*numCoinsToRemove;
 		this.numOfValue3Coins -= numCoinsToRemove;
+	}
+
+	private void validateNumCoinsToRemove(int numCoins, CoinType type) {
+		if(numCoins <= -1){
+			throw new IllegalArgumentException();
+		}
+		
+		int numCoinsToCheck = getNumOfCoinType(type);
+		
+		if(numCoins > numCoinsToCheck){
+			throw new InsufficientFundsException();
+		}
+		
+	}
+
+	private int getNumOfCoinType(CoinType type) {
+		if(type == CoinType.ONE){
+			return this.numOfValue1Coins;
+		}  
+		
+		return this.numOfValue3Coins;
 	}
 }
