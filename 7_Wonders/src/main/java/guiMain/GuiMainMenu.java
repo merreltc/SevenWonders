@@ -20,6 +20,7 @@ public class GuiMainMenu extends JPanel implements ActionListener {
 	private MenuMouseListener menuMouse;
 	private boolean initialized = false;
 	private ArrayList<Button> buttons = new ArrayList<Button>();
+	//private ArrayList<Player> players = new ArrayList<Player>();
 	private Integer numOfPlayers;
 
 	public enum Menu {
@@ -35,6 +36,7 @@ public class GuiMainMenu extends JPanel implements ActionListener {
 		frame.setSize(1000, 1000);
 		frame.setVisible(true);
 		frame.setTitle("Seven Wonders");
+		frame.setResizable(false);
 		frame.add(this);
 		frame.addKeyListener(new MenuKeyListener());
 		menuMouse = new MenuMouseListener(this);
@@ -93,7 +95,8 @@ public class GuiMainMenu extends JPanel implements ActionListener {
 			graphics.drawString("Choose number of players", 120, 300);
 			break;
 		case Game:
-
+			PlayerBoard board = new PlayerBoard(new Point(400,400));
+			board.draw(graphics);
 			break;
 		}
 	}
@@ -106,6 +109,7 @@ public class GuiMainMenu extends JPanel implements ActionListener {
 			break;
 		case PlayerSelect:
 			numOfPlayers = Integer.parseInt(text);
+			//players = (Method to get/set players)
 			SwitchMenu(Menu.Game);
 			break;
 		}
