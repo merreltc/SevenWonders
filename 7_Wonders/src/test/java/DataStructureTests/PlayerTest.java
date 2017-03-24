@@ -321,4 +321,20 @@ public class PlayerTest {
 		assertEquals(5, player2.getNumValue1Coins());
 		assertEquals(2, player2.getNumValue3Coins());
 	}
+	
+	@Test
+	public void testTradeFromToSufficientValue1NoValue3() {
+		Player player1 = new Player();
+		Player player2 = new Player();
+		
+		TradeHandler.tradeFromTo(player1, player2, 3);
+		
+		assertEquals(0, player1.getCoinTotal());
+		assertEquals(0, player1.getNumValue1Coins());
+		assertEquals(0, player1.getNumValue3Coins());
+		
+		assertEquals(6, player2.getCoinTotal());
+		assertEquals(6, player2.getNumValue1Coins());
+		assertEquals(0, player2.getNumValue3Coins());
+	}
 }
