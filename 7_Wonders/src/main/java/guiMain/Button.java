@@ -1,6 +1,7 @@
 package guiMain;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Point;
 import java.awt.geom.Point2D;
@@ -40,5 +41,8 @@ public class Button {
 	public void draw(Graphics graphics){
 		graphics.setColor(Color.green);
 		graphics.fillRect(this.positionPoint.x, this.positionPoint.y, this.boundPoint.x, this.boundPoint.y);
+		graphics.setColor(Color.RED);
+		graphics.setFont(new Font("Courier New", Font.BOLD, 50));
+		graphics.drawString(value, positionPoint.x + 10, positionPoint.y + this.boundPoint.y - 10);
 	}
 }
