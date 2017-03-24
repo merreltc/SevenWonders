@@ -14,13 +14,18 @@ import javax.swing.Timer;
 
 public class GuiMainMenu extends JPanel implements ActionListener {
 
+	private static final int MessageTimeLength = 60;
+	
 	private JFrame frame;
 	private Timer timer;
 	private Menu currentMenu;
 	private MenuMouseListener menuMouse;
 	private boolean initialized = false;
 	private ArrayList<Button> buttons = new ArrayList<Button>();
+	private ArrayList<PlayerBoard> boards = new ArrayList<>();
 	//private ArrayList<Player> players = new ArrayList<Player>();
+	private String message = "Error";
+	private int messageTimeCounter = 0;
 	private Integer numOfPlayers;
 
 	public enum Menu {
@@ -33,7 +38,7 @@ public class GuiMainMenu extends JPanel implements ActionListener {
 
 	public void Start() {
 		frame = new JFrame();
-		frame.setSize(1000, 1000);
+		frame.setSize(1900, 1000);
 		frame.setVisible(true);
 		frame.setTitle("Seven Wonders");
 		frame.setResizable(false);
@@ -61,18 +66,18 @@ public class GuiMainMenu extends JPanel implements ActionListener {
 	@Override
 	public void paintComponent(Graphics graphics) {
 		graphics.setColor(Color.RED);
-		graphics.fillRect(0, 0, 1000, 1000);
+		graphics.fillRect(0, 0, 1900, 1000);
 		switch (this.currentMenu) {
 		case MainMenu:
 			if (!initialized) {
 				this.buttons.clear();
-				Button startGame = new Button(new Point(400, 400), new Point(200, 100), "Start");
+				Button startGame = new Button(new Point(850, 400), new Point(200, 100), "Start");
 				buttons.add(startGame);
 				initialized = true;
 			}
 			graphics.setFont(new Font("Courier New", Font.BOLD, 70));
 			graphics.setColor(Color.cyan);
-			graphics.drawString("7 Wonders", 290, 100);
+			graphics.drawString("7 Wonders", 740, 100);
 
 			for (Button button : buttons) {
 				button.draw(graphics);
@@ -82,7 +87,7 @@ public class GuiMainMenu extends JPanel implements ActionListener {
 			if (!initialized) {
 				this.buttons.clear();
 				for (int i = 3; i <= 7; i++) {
-					Button startGame = new Button(new Point(130 + 160 * (i - 3), 400), new Point(100, 100), i + "");
+					Button startGame = new Button(new Point(400 + 250 * (i - 3), 400), new Point(150, 100), i + "");
 					buttons.add(startGame);
 				}
 				initialized = true;
@@ -92,11 +97,25 @@ public class GuiMainMenu extends JPanel implements ActionListener {
 			}
 			graphics.setFont(new Font("Courier New", Font.BOLD, 50));
 			graphics.setColor(Color.cyan);
-			graphics.drawString("Choose number of players", 120, 300);
+			graphics.drawString("Choose number of players", 570, 300);
 			break;
 		case Game:
-			PlayerBoard board = new PlayerBoard(new Point(400,400));
-			board.draw(graphics);
+			
+			if (!initialized) {
+				for (int i = -1; i < this.numOfPlayers-1; i++){
+					PlayerBoard board = new PlayerBoard(i, 5);
+					boards.add(board);
+				}
+				initialized = true;
+			}
+			for (int i = 0; i < boards.size(); i++){
+				
+				boards.get(i).draw(graphics);
+			}
+			if (this.messageTimeCounter > 0){
+				this.DrawMessageOnScreen(graphics);
+				this.messageTimeCounter--;
+			}
 			break;
 		}
 	}
@@ -122,6 +141,18 @@ public class GuiMainMenu extends JPanel implements ActionListener {
 
 	public ArrayList<Button> GetActiveButtons() {
 		return buttons;
+	}
+	
+	public void DrawMessageOnScreen(Graphics graphics){
+		graphics.setFont(new Font("Courier New", Font.BOLD, 100));
+		graphics.setColor(Color.cyan);
+		graphics.drawString(this.message, 500, 400);
+		
+	}
+	
+	public void SetMessage(String message){
+		this.message = message;
+		this.messageTimeCounter = this.MessageTimeLength;
 	}
 
 	public static void main(String[] args) {
