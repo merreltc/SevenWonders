@@ -5,32 +5,40 @@ import dataStructures.Player;
 public class TradeHandler {
 
 	public static void tradeFromTo(Player from, Player to, int valueToTrade) {
-		// player's number of value 3 coins has precedence over number of value
-		// 1 coins
-		int numValue1Coins;
-		int numValue3Coins;
-		if (from.getNumValue3Coins() == 0) {
-			numValue1Coins = valueToTrade;
-			numValue3Coins = 0;
-		} else if (from.getNumValue3Coins() == 1) {
-			numValue1Coins = valueToTrade - 3;
-			numValue3Coins = 1;
-		} else {
-			numValue1Coins = getNumValue1Coins(valueToTrade);
-			numValue3Coins = getNumValue3Coins(valueToTrade);
+		int fromPlayerNumvalue3Coins = from.getNumValue3Coins();
 
-		}
+		// player's number of value 3 coins is calculated first because
+		// they have precedence over number of value 1 coins
+
+		int numValue3Coins = getNumValue3Coins(from, valueToTrade);
+		int valueRemaining = valueToTrade - (numValue3Coins * 3);
+		int numValue1Coins = getNumValue1Coins(valueRemaining);
 
 		tradeFromToValue1(from, to, numValue1Coins);
 		tradeFromToValue3(from, to, numValue3Coins);
 	}
 
-	private static int getNumValue1Coins(int valueToTrade) {
-		return valueToTrade % 3;
+	private static int getNumValue3Coins(Player from, int valueToTrade) {
+		int fromPlayerNumValueValue3Coins = from.getNumValue3Coins();
+		int fromPlayerValueOfValue3Coins = 3 * fromPlayerNumValueValue3Coins;
+
+		int valueofValue3Removed = getValueOfValue3CoinsRemoved(valueToTrade, fromPlayerValueOfValue3Coins);
+
+		int numOfRemovedValue3 = valueofValue3Removed / 3;
+
+		return numOfRemovedValue3;
 	}
 
-	private static int getNumValue3Coins(int valueToTrade) {
-		return valueToTrade / 3;
+	private static int getValueOfValue3CoinsRemoved(int valueToTrade, int fromPlayerValueOfValue3Coins) {
+		if (valueToTrade >= fromPlayerValueOfValue3Coins) {
+			return fromPlayerValueOfValue3Coins;
+		}
+		
+		return valueToTrade;
+	}
+
+	private static int getNumValue1Coins(int valueRemaining) {
+		return valueRemaining;
 	}
 
 	public static void tradeFromToValue1(Player from, Player to, int numCoinsToTrade) {
