@@ -29,11 +29,11 @@ public class TradeHandler {
 		return numOfRemovedValue3;
 	}
 
-	private static int getValueOfValue3CoinsRemoved(int valueToTrade, int fromPlayerValueOfValue3Coins) {
-		if (valueToTrade >= fromPlayerValueOfValue3Coins) {
-			return fromPlayerValueOfValue3Coins;
+	private static int getValueOfValue3CoinsRemoved(int valueToTrade, int valueOfValue3Coins) {
+		if (valueToTrade >= valueOfValue3Coins) {
+			return valueOfValue3Coins;
 		}
-		
+
 		return valueToTrade;
 	}
 
