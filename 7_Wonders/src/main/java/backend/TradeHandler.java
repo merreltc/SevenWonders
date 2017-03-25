@@ -9,12 +9,16 @@ public class TradeHandler {
 		// 1 coins
 		int numValue1Coins;
 		int numValue3Coins;
-		if (from.getNumValue3Coins() != 0) {
-			numValue1Coins = getNumValue1Coins(valueToTrade);
-			numValue3Coins = getNumValue3Coins(valueToTrade);
-		} else {
+		if (from.getNumValue3Coins() == 0) {
 			numValue1Coins = valueToTrade;
 			numValue3Coins = 0;
+		} else if (from.getNumValue3Coins() == 1) {
+			numValue1Coins = valueToTrade - 3;
+			numValue3Coins = 1;
+		} else {
+			numValue1Coins = getNumValue1Coins(valueToTrade);
+			numValue3Coins = getNumValue3Coins(valueToTrade);
+
 		}
 
 		tradeFromToValue1(from, to, numValue1Coins);
