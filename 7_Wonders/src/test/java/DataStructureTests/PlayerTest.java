@@ -337,4 +337,21 @@ public class PlayerTest {
 		assertEquals(6, player2.getNumValue1Coins());
 		assertEquals(0, player2.getNumValue3Coins());
 	}
+	
+	@Test
+	public void testTradeFromToGreaterValue1ThanValue3() {
+		Player player1 = new Player();
+		Player player2 = new Player();
+		
+		player1.addValue3(1);
+		TradeHandler.tradeFromTo(player1, player2, 6);
+		
+		assertEquals(0, player1.getCoinTotal());
+		assertEquals(0, player1.getNumValue1Coins());
+		assertEquals(0, player1.getNumValue3Coins());
+		
+		assertEquals(9, player2.getCoinTotal());
+		assertEquals(6, player2.getNumValue1Coins());
+		assertEquals(1, player2.getNumValue3Coins());
+	}
 }
