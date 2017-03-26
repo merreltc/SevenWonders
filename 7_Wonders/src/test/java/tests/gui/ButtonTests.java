@@ -52,48 +52,48 @@ public class ButtonTests {
 	@Test
 	public void testButtonCollisionTopBoundTrue(){
 		Button button = new Button(new Point(20, 20), new Point(100, 100), "4");
-		Assert.assertTrue(button.checkCollision(new Point(40,20)));
+		Assert.assertTrue(button.checkButtonClicked(new Point(40,20)));
 	}
 	
 	@Test
 	public void testButtonCollisionTopBoundFalse(){
 		Button button = new Button(new Point(20, 20), new Point(100, 100), "4");
-		Assert.assertFalse(button.checkCollision(new Point(40,19)));
+		Assert.assertFalse(button.checkButtonClicked(new Point(40,19)));
 	}
 	
 	@Test
 	public void testButtonCollisionBottomBoundTrue(){
 		Button button = new Button(new Point(20, 20), new Point(100, 100), "4");
-		Assert.assertTrue(button.checkCollision(new Point(40,120)));
+		Assert.assertTrue(button.checkButtonClicked(new Point(40,120)));
 	}
 	
 	@Test
 	public void testButtonCollisionBottomBoundFalse(){
 		Button button = new Button(new Point(20, 20), new Point(100, 100), "4");
-		Assert.assertFalse(button.checkCollision(new Point(40,121)));
+		Assert.assertFalse(button.checkButtonClicked(new Point(40,121)));
 	}
 	
 	@Test
 	public void testButtonCollisionLeftBoundTrue(){
 		Button button = new Button(new Point(20, 20), new Point(100, 100), "4");
-		Assert.assertTrue(button.checkCollision(new Point(20,60)));
+		Assert.assertTrue(button.checkButtonClicked(new Point(20,60)));
 	}
 	
 	@Test
 	public void testButtonCollisionLeftBoundFalse(){
 		Button button = new Button(new Point(20, 20), new Point(100, 100), "4");
-		Assert.assertFalse(button.checkCollision(new Point(19,60)));
+		Assert.assertFalse(button.checkButtonClicked(new Point(19,60)));
 	}
 	
 	@Test
 	public void testButtonCollisionRightBoundTrue(){
 		Button button = new Button(new Point(20, 20), new Point(100, 100), "4");
-		Assert.assertTrue(button.checkCollision(new Point(120,60)));
+		Assert.assertTrue(button.checkButtonClicked(new Point(120,60)));
 	}
 	
 	@Test
 	public void testButtonCollisionRightBoundFalse(){
 		Button button = new Button(new Point(20, 20), new Point(100, 100), "4");
-		Assert.assertFalse(button.checkCollision(new Point(121,60)));
+		Assert.assertFalse(button.checkButtonClicked(new Point(121,60)));
 	}
 }

@@ -14,20 +14,20 @@ public class RenderImage {
 	private Image image;
 	private JPanel panel;
 	private Graphics g;
-	
-	public RenderImage(){
+
+	public RenderImage() {
 	}
-	
-	public void draw(Graphics g, String name, int x, int y, int width, int height){
+
+	public void draw(Graphics g, String name, int x, int y, int width, int height) {
 		BufferedImage img = null;
 		try {
-			/*TODO Add correct File path to the below command*/
-		    img = ImageIO.read(new File("images\\" + name + ".png"));
-		    g.drawImage(img, x, y, width, height, null);
+			/* TODO Add correct File path to the below command */
+			img = ImageIO.read(new File("images\\" + name + ".png"));
+			g.drawImage(img, x, y, width, height, null);
 		} catch (IOException e) {
 			System.out.println("Fail");
 		}
-		
+
 	}
-	
+
 }

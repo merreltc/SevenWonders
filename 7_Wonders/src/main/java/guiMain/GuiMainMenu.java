@@ -13,9 +13,25 @@ import javax.swing.JPanel;
 import javax.swing.Timer;
 
 public class GuiMainMenu extends JPanel implements ActionListener {
+	private static final int FrameWidth = 1900;
+	private static final int FrameHeight = 1000;
+
+	private static final Point StartButtonPosition = new Point(850, 400);
+	private static final Point StartButtonBounds = new Point(200, 100);
+
+	private static final Font TitleFont = new Font("Courier New", Font.BOLD, 70);
+	private static final Color TitleColor = Color.cyan;
+
+	private static final Point MainMenuTitlePosition = new Point(740, 100);
+
+	private static final Point PlayerSelectButtonBounds = new Point(150, 100);
+	private static final Point PlayerSelectTitlePosition = new Point(570, 300);
+
+	private static final Font ErrorFont = new Font("Courier New", Font.BOLD, 100);
+	private static final Point ErrorMessagePosition = new Point(500, 400);
 
 	private static final int MessageTimeLength = 60;
-	
+
 	private JFrame frame;
 	private Timer timer;
 	private Menu currentMenu;
@@ -23,12 +39,11 @@ public class GuiMainMenu extends JPanel implements ActionListener {
 	private boolean initialized = false;
 	private ArrayList<Button> buttons = new ArrayList<Button>();
 	private ArrayList<PlayerBoard> boards = new ArrayList<>();
-	//private ArrayList<Player> players = new ArrayList<Player>();
+	// private ArrayList<Player> players = new ArrayList<Player>();
 	private String message = "Error";
 	private int messageTimeCounter = 0;
 	private Integer numOfPlayers;
 
-	//TODO: Lowercase start of all method names
 	public enum Menu {
 		MainMenu, PlayerSelect, Game
 	}
@@ -37,9 +52,9 @@ public class GuiMainMenu extends JPanel implements ActionListener {
 		currentMenu = Menu.MainMenu;
 	}
 
-	public void Start() {
+	public void start() {
 		frame = new JFrame();
-		frame.setSize(1900, 1000);
+		frame.setSize(FrameWidth, FrameHeight);
 		frame.setVisible(true);
 		frame.setTitle("Seven Wonders");
 		frame.setResizable(false);
@@ -51,11 +66,11 @@ public class GuiMainMenu extends JPanel implements ActionListener {
 		timer.start();
 	}
 
-	public JFrame GetFrame() {
+	public JFrame getFrame() {
 		return frame;
 	}
 
-	public Timer GetTimer() {
+	public Timer getTimer() {
 		return timer;
 	}
 
@@ -67,98 +82,110 @@ public class GuiMainMenu extends JPanel implements ActionListener {
 	@Override
 	public void paintComponent(Graphics graphics) {
 		graphics.setColor(Color.RED);
-		graphics.fillRect(0, 0, 1900, 1000);
+		graphics.fillRect(0, 0, FrameHeight, FrameWidth);
+		
 		switch (this.currentMenu) {
 		case MainMenu:
-			//Refactor initializations into individual methods
 			if (!initialized) {
-				this.buttons.clear();
-				Button startGame = new Button(new Point(850, 400), new Point(200, 100), "Start");
-				buttons.add(startGame);
-				initialized = true;
+				intializeMainMenu();
 			}
-			graphics.setFont(new Font("Courier New", Font.BOLD, 70));
-			graphics.setColor(Color.cyan);
-			graphics.drawString("7 Wonders", 740, 100);
+			graphics.setFont(TitleFont);
+			graphics.setColor(TitleColor);
+			graphics.drawString("7 Wonders", MainMenuTitlePosition.x, MainMenuTitlePosition.y);
 
 			for (Button button : buttons) {
 				button.draw(graphics);
 			}
 			break;
+			
 		case PlayerSelect:
 			if (!initialized) {
-				this.buttons.clear();
-				for (int i = 3; i <= 7; i++) {
-					Button startGame = new Button(new Point(400 + 250 * (i - 3), 400), new Point(150, 100), i + "");
-					buttons.add(startGame);
-				}
-				initialized = true;
+				intializePlayerSelect();
 			}
 			for (Button button : buttons) {
 				button.draw(graphics);
 			}
-			graphics.setFont(new Font("Courier New", Font.BOLD, 50));
-			graphics.setColor(Color.cyan);
-			graphics.drawString("Choose number of players", 570, 300);
+			graphics.setFont(TitleFont);
+			graphics.setColor(TitleColor);
+			graphics.drawString("Choose number of players", PlayerSelectTitlePosition.x, PlayerSelectButtonBounds.y);
 			break;
-		case Game:
 			
+		case Game:
 			if (!initialized) {
-				for (int i = -1; i < this.numOfPlayers-1; i++){
-					PlayerBoard board = new PlayerBoard(i, 5);
-					boards.add(board);
-				}
-				initialized = true;
+				initializeGame();
 			}
-			for (int i = 0; i < boards.size(); i++){
-				
+			for (int i = 0; i < boards.size(); i++) {
+
 				boards.get(i).draw(graphics);
 			}
-			if (this.messageTimeCounter > 0){
-				this.DrawMessageOnScreen(graphics);
+			if (this.messageTimeCounter > 0) {
+				this.drawMessageOnScreen(graphics);
 				this.messageTimeCounter--;
 			}
 			break;
 		}
 	}
 
+	private void initializeGame() {
+		for (int i = -1; i < this.numOfPlayers - 1; i++) {
+			PlayerBoard board = new PlayerBoard(i, numOfPlayers);
+			boards.add(board);
+		}
+		initialized = true;
+	}
+
+	private void intializePlayerSelect() {
+		this.buttons.clear();
+		for (int i = 3; i <= 7; i++) {
+			Button startGame = new Button(new Point(400 + 250 * (i - 3), 400), PlayerSelectButtonBounds, i + "");
+			buttons.add(startGame);
+		}
+		initialized = true;
+	}
+
+	private void intializeMainMenu() {
+		this.buttons.clear();
+		Button startGame = new Button(StartButtonPosition, StartButtonBounds, "Start");
+		buttons.add(startGame);
+		initialized = true;
+	}
+
 	public void onButtonClick(Button clicked) {
 		String text = clicked.getValue();
 		switch (currentMenu) {
 		case MainMenu:
-			SwitchMenu(Menu.PlayerSelect);
+			switchMenu(Menu.PlayerSelect);
 			break;
 		case PlayerSelect:
 			numOfPlayers = Integer.parseInt(text);
-			//players = (Method to get/set players)
-			SwitchMenu(Menu.Game);
+			// players = (Method to get/set players)
+			switchMenu(Menu.Game);
 			break;
 		}
 	}
 
-	public void SwitchMenu(Menu menu) {
+	public void switchMenu(Menu menu) {
 		this.currentMenu = menu;
 		this.initialized = false;
 	}
 
-	public ArrayList<Button> GetActiveButtons() {
+	public ArrayList<Button> getActiveButtons() {
 		return buttons;
 	}
-	
-	public void DrawMessageOnScreen(Graphics graphics){
-		graphics.setFont(new Font("Courier New", Font.BOLD, 100));
-		graphics.setColor(Color.cyan);
-		graphics.drawString(this.message, 500, 400);
-		
+
+	public void drawMessageOnScreen(Graphics graphics) {
+		graphics.setFont(ErrorFont);
+		graphics.setColor(TitleColor);
+		graphics.drawString(this.message, ErrorMessagePosition.x, ErrorMessagePosition.y);
 	}
-	
-	public void SetMessage(String message){
+
+	public void setMessage(String message) {
 		this.message = message;
 		this.messageTimeCounter = this.MessageTimeLength;
 	}
 
 	public static void main(String[] args) {
 		GuiMainMenu menu = new GuiMainMenu();
-		menu.Start();
+		menu.start();
 	}
 }
