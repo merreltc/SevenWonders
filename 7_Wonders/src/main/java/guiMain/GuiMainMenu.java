@@ -155,8 +155,4 @@ public class GuiMainMenu extends JPanel implements ActionListener {
 		this.messageTimeCounter = this.MessageTimeLength;
 	}
 
-	public static void main(String[] args) {
-		GuiMainMenu menu = new GuiMainMenu();
-		menu.Start();
-	}
 }
