@@ -82,7 +82,7 @@ public class GuiMainMenu extends JPanel implements ActionListener {
 	@Override
 	public void paintComponent(Graphics graphics) {
 		graphics.setColor(Color.RED);
-		graphics.fillRect(0, 0, FrameHeight, FrameWidth);
+		graphics.fillRect(0, 0, FrameWidth, FrameHeight);
 		
 		switch (this.currentMenu) {
 		case MainMenu:
