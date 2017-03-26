@@ -29,8 +29,9 @@ public class GuiMainMenu extends JPanel implements ActionListener {
 
 	private static final Font ErrorFont = new Font("Courier New", Font.BOLD, 100);
 	private static final Point ErrorMessagePosition = new Point(500, 400);
-
-	private static final int MessageTimeLength = 60;
+	
+	private static final Point CloseMessageButtonBounds = new Point(200, 80);
+	private static final Point CloseMessageButtonPosition = new Point(FrameWidth - CloseMessageButtonBounds.x - 50, FrameHeight - CloseMessageButtonBounds.y - 50);
 
 	private JFrame frame;
 	private Timer timer;
@@ -41,7 +42,6 @@ public class GuiMainMenu extends JPanel implements ActionListener {
 	private ArrayList<PlayerBoard> boards = new ArrayList<>();
 	// private ArrayList<Player> players = new ArrayList<Player>();
 	private String message = "Error";
-	private int messageTimeCounter = 0;
 	private Integer numOfPlayers;
 
 	public enum Menu {
@@ -118,9 +118,11 @@ public class GuiMainMenu extends JPanel implements ActionListener {
 
 				boards.get(i).draw(graphics);
 			}
-			if (this.messageTimeCounter > 0) {
+			if (!this.message.equals("")) {
 				this.drawMessageOnScreen(graphics);
-				this.messageTimeCounter--;
+			}
+			for (Button button : buttons) {
+				button.draw(graphics);
 			}
 			break;
 		}
@@ -131,6 +133,8 @@ public class GuiMainMenu extends JPanel implements ActionListener {
 			PlayerBoard board = new PlayerBoard(i, numOfPlayers);
 			boards.add(board);
 		}
+		Button exitMessage = new Button(CloseMessageButtonPosition, CloseMessageButtonBounds, "Close");
+		buttons.add(exitMessage);
 		initialized = true;
 	}
 
@@ -161,11 +165,15 @@ public class GuiMainMenu extends JPanel implements ActionListener {
 			// players = (Method to get/set players)
 			switchMenu(Menu.Game);
 			break;
+		case Game:
+			this.message = "";
+			break;
 		}
 	}
 
 	public void switchMenu(Menu menu) {
 		this.currentMenu = menu;
+		this.buttons.clear();
 		this.initialized = false;
 	}
 
@@ -181,7 +189,6 @@ public class GuiMainMenu extends JPanel implements ActionListener {
 
 	public void setMessage(String message) {
 		this.message = message;
-		this.messageTimeCounter = this.MessageTimeLength;
 	}
 
 	public static void main(String[] args) {
