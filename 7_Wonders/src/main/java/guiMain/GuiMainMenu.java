@@ -12,6 +12,9 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
+import backend.SetUpHandler;
+import dataStructures.Player;
+
 public class GuiMainMenu extends JPanel implements ActionListener {
 
 	private static final int MessageTimeLength = 60;
@@ -23,8 +26,9 @@ public class GuiMainMenu extends JPanel implements ActionListener {
 	private boolean initialized = false;
 	private ArrayList<Button> buttons = new ArrayList<Button>();
 	private ArrayList<PlayerBoard> boards = new ArrayList<>();
+	private ArrayList<Player> players = new ArrayList<>();
 	//private ArrayList<Player> players = new ArrayList<Player>();
-	private String message = "Error";
+	private String message = "";
 	private int messageTimeCounter = 0;
 	private Integer numOfPlayers;
 
@@ -128,7 +132,9 @@ public class GuiMainMenu extends JPanel implements ActionListener {
 			break;
 		case PlayerSelect:
 			numOfPlayers = Integer.parseInt(text);
-			//players = (Method to get/set players)
+			SetUpHandler setUp = new SetUpHandler();
+			setUp.setPlayerNum(numOfPlayers);
+			
 			SwitchMenu(Menu.Game);
 			break;
 		}
@@ -147,7 +153,6 @@ public class GuiMainMenu extends JPanel implements ActionListener {
 		graphics.setFont(new Font("Courier New", Font.BOLD, 100));
 		graphics.setColor(Color.cyan);
 		graphics.drawString(this.message, 500, 400);
-		
 	}
 	
 	public void SetMessage(String message){
@@ -155,4 +160,9 @@ public class GuiMainMenu extends JPanel implements ActionListener {
 		this.messageTimeCounter = this.MessageTimeLength;
 	}
 
+	public static void main(String[] args){
+		GuiMainMenu menu = new GuiMainMenu();
+		menu.Start();
+	}
+	
 }
