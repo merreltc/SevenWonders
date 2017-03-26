@@ -129,6 +129,7 @@ public class GuiMainMenu extends JPanel implements ActionListener {
 	}
 
 	private void initializeGame() {
+		this.buttons.clear();
 		for (int i = -1; i < this.numOfPlayers - 1; i++) {
 			PlayerBoard board = new PlayerBoard(i, numOfPlayers);
 			boards.add(board);
@@ -173,7 +174,6 @@ public class GuiMainMenu extends JPanel implements ActionListener {
 
 	public void switchMenu(Menu menu) {
 		this.currentMenu = menu;
-		this.buttons.clear();
 		this.initialized = false;
 	}
 
