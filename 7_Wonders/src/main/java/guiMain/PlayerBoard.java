@@ -24,7 +24,7 @@ public class PlayerBoard {
 
 	private static final int BackPlayerBoardWidth = 300;
 	private static final int BackPlayerBoardHeight = 150;
-	private static final int BackPlayerStartingBoardPositionX = 1900 - BackPlayerBoardWidth - 20;
+	//private static final int BackPlayerStartingBoardPositionX = 1900 - BackPlayerBoardWidth - 20;
 	private static final int BackPlayerBoardXOffset = BackPlayerBoardWidth + 40;
 	private static final int BackPlayerBoardPositionY = 10;
 
@@ -33,6 +33,7 @@ public class PlayerBoard {
 	/* zero index is the current player, next player is last */
 	private int playerPosition;
 	private int totalNumberOfPlayers;
+	private int backPlayerStartingBoardPositionX;
 
 	// private Player player;
 
@@ -41,6 +42,7 @@ public class PlayerBoard {
 	 * board
 	 */
 	public PlayerBoard(int startingPosition, int totalNumberOfPlayers) {
+		backPlayerStartingBoardPositionX = 950 + ((totalNumberOfPlayers-3) * BackPlayerBoardWidth)/2;
 		this.totalNumberOfPlayers = totalNumberOfPlayers;
 		this.playerPosition = startingPosition;
 	}
@@ -62,7 +64,7 @@ public class PlayerBoard {
 		default:
 			sizePoint = new Point(BackPlayerBoardWidth, BackPlayerBoardHeight);
 			this.position = new Point(
-					BackPlayerStartingBoardPositionX - BackPlayerBoardXOffset * (this.playerPosition - 1),
+					backPlayerStartingBoardPositionX - BackPlayerBoardXOffset * (this.playerPosition - 1),
 					BackPlayerBoardPositionY);
 			break;
 		}
