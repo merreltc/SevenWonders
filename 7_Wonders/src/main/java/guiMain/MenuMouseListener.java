@@ -14,11 +14,11 @@ public class MenuMouseListener implements MouseListener{
 	}
 	
 	@Override
-	public void mouseClicked(MouseEvent arg0) {
+	public void mouseClicked(MouseEvent mouseEvent) {
 		ArrayList<Button> buttons = menu.GetActiveButtons();
-		System.out.println(arg0.getPoint());
+		//Refactor checkcollisions and set offset points to named variables
 		for (Button button : buttons){
-			if (button.checkCollision(new Point(arg0.getPoint().x - 10, arg0.getPoint().y - 35))){
+			if (button.checkCollision(new Point(mouseEvent.getPoint().x - 10, mouseEvent.getPoint().y - 35))){
 				this.menu.onButtonClick(button);
 			}
 		}

@@ -28,6 +28,7 @@ public class GuiMainMenu extends JPanel implements ActionListener {
 	private int messageTimeCounter = 0;
 	private Integer numOfPlayers;
 
+	//TODO: Lowercase start of all method names
 	public enum Menu {
 		MainMenu, PlayerSelect, Game
 	}
@@ -69,6 +70,7 @@ public class GuiMainMenu extends JPanel implements ActionListener {
 		graphics.fillRect(0, 0, 1900, 1000);
 		switch (this.currentMenu) {
 		case MainMenu:
+			//Refactor initializations into individual methods
 			if (!initialized) {
 				this.buttons.clear();
 				Button startGame = new Button(new Point(850, 400), new Point(200, 100), "Start");
