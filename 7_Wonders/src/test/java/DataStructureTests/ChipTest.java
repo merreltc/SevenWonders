@@ -127,4 +127,14 @@ public class ChipTest {
 			assertEquals(message, error.getMessage());
 		}
 	}
+	
+	@Test
+	public void testInvalidCoin2ErrorMessage() {
+		try{
+			Chip coin = new Coin(2);
+		}catch(IllegalArgumentException error){
+			String message = "Cannot have a coin whose's value is 2";
+			assertEquals(message, error.getMessage());
+		}
+	}
 }
