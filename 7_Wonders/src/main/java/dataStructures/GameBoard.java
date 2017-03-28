@@ -9,7 +9,7 @@ public class GameBoard {
 	}
 	
 	public GameBoard(ArrayList<Player> players) {
-		this.numPlayers = 3;
+		this.numPlayers = players.size();
 	}
 
 	public int getNumPlayers(){
