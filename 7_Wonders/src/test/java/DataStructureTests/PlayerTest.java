@@ -378,4 +378,16 @@ public class PlayerTest {
 			assertEquals(message, error.getMessage());
 		}
 	}
+	
+	@Test
+	public void testAddInvalidNumValue3CoinsNeg1ErrorMessage() {
+		Player player = new Player();
+
+		try{
+		player.addValue3(-1);
+		}catch(IllegalArgumentException error){
+			String message = "Cannot add -1 value 3 coins";
+			assertEquals(message, error.getMessage());
+		}
+	}
 }
