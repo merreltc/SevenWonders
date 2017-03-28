@@ -46,4 +46,15 @@ public class GameBoardTests {
 		assertEquals(7, board.getNumPlayers());
 	}
 
+	@Test
+	public void testGameBoardGetPlayers() {
+		ArrayList<Player> players = new ArrayList<Player>();
+		players.add(new Player());
+		players.add(new Player());
+		players.add(new Player());
+
+		GameBoard board = new GameBoard(players);
+
+		assertEquals(players, board.getPlayers());
+	}
 }
