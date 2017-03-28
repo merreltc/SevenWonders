@@ -67,7 +67,7 @@ public class Player {
 
 	private void validateNumCoinsToRemove(int numCoins, CoinType type) {
 		if (numCoins <= -1) {
-			throw new IllegalArgumentException();
+			throw new IllegalArgumentException("Cannot remove -1 value 1 coins");
 		}
 
 		int numCoinsToCheck = getNumOfCoinType(type);
