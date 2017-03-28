@@ -47,6 +47,12 @@ public class GameManagerTest {
 		manager.getGameBoard();
 		
 		EasyMock.verify(manager, board);
+	}
+	
+	@Test
+	public void testSetUpGameBoardMinPlayers() {
+		GameManager manager = new GameManager(3);
 		
+		assertEquals(3, manager.getNumPlayers());
 	}
 }
