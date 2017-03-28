@@ -1,6 +1,9 @@
 package backend;
 
+import java.util.ArrayList;
+
 import dataStructures.GameBoard;
+import dataStructures.Player;
 
 public class SetUpHandler {
 	private int playerNum;
@@ -18,7 +21,12 @@ public class SetUpHandler {
 	}
 
 	public GameBoard createGameBoard() {
-		return new GameBoard();
+		ArrayList<Player> players = new ArrayList<Player>();
+		players.add(new Player());
+		players.add(new Player());
+		players.add(new Player());
+		
+		return new GameBoard(players);
 	}
 
 	public int getPlayerNum() {
