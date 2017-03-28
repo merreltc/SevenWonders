@@ -10,7 +10,7 @@ public class ConflictToken extends Chip {
 	public ConflictToken(int value) {
 		super();
 		if(value <= -2 || (value % 2) == 0 || value >= 6){
-			throw new IllegalArgumentException();
+			throw new IllegalArgumentException("Cannot have a conflict token whose's value is -2");
 		}
 		
 		this.setValue(value);
