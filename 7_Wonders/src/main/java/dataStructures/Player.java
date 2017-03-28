@@ -73,7 +73,7 @@ public class Player {
 		int numCoinsToCheck = getNumOfCoinType(type);
 
 		if (numCoins > numCoinsToCheck) {
-			throw new InsufficientFundsException("Player does not have 4 value 1 coins");
+			throw new InsufficientFundsException("Player does not have " + numCoins + " value 1 coins");
 		}
 	}
 
