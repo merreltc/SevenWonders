@@ -3,7 +3,7 @@ package dataStructures;
 import java.util.ArrayList;
 
 public class GameBoard {
-	private int numPlayers = 0;
+	private int numPlayers = 3;
 	private ArrayList<Player> players = new ArrayList<Player>();
 	
 	public GameBoard(){
