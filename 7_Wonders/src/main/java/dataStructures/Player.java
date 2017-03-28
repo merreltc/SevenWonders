@@ -33,7 +33,7 @@ public class Player {
 
 	private void validateNumCoinsToAdd(int numCoins, int max) {
 		if (numCoins <= -1 || numCoins > max) {
-			throw new IllegalArgumentException();
+			throw new IllegalArgumentException("Cannot add a -1 value 1 coins");
 		}
 	}
 
