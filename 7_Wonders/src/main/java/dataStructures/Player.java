@@ -4,11 +4,11 @@ import exceptions.InsufficientFundsException;
 
 public class Player {
 	private String name = "Jane Doe";
-	
+
 	private int coinTotal = 3;
 	private int numOfValue1Coins = 3;
 	private int numOfValue3Coins = 0;
-	
+
 	private int conflictTotal = 0;
 
 	private enum CoinType {
@@ -16,24 +16,38 @@ public class Player {
 	}
 
 	public void addValue1(int numCoinsToAdd) {
-		int maxValue1CoinsInGame = 46;
-		validateNumCoinsToAdd(numCoinsToAdd, maxValue1CoinsInGame);
+		validateNumCoinsToAdd(numCoinsToAdd, CoinType.ONE);
 
 		this.coinTotal += numCoinsToAdd;
 		this.numOfValue1Coins += numCoinsToAdd;
 	}
 
 	public void addValue3(int numCoinsToAdd) {
-		int maxValue3CoinsInGame = 24;
-		validateNumCoinsToAdd(numCoinsToAdd, maxValue3CoinsInGame);
+		validateNumCoinsToAdd(numCoinsToAdd, CoinType.THREE);
 
 		this.coinTotal += 3 * numCoinsToAdd;
 		this.numOfValue3Coins += numCoinsToAdd;
 	}
 
-	private void validateNumCoinsToAdd(int numCoins, int max) {
+	private void validateNumCoinsToAdd(int numCoins, CoinType type) {
+		int max;
+		String coinType;
+
+		switch (type) {
+		case ONE:
+			max = 46;
+			coinType = "1";
+			break;
+		case THREE:
+			max = 24;
+			coinType = "3";
+			break;
+		default:
+			throw new IllegalArgumentException("Bad CoinType");
+		}
+
 		if (numCoins <= -1 || numCoins > max) {
-			throw new IllegalArgumentException("Cannot add " + numCoins + " value 1 coins");
+			throw new IllegalArgumentException("Cannot add " + numCoins + " value " + coinType + " coins");
 		}
 	}
 
@@ -43,14 +57,14 @@ public class Player {
 		this.coinTotal -= numCoinsToRemove;
 		this.numOfValue1Coins -= numCoinsToRemove;
 	}
-	
+
 	public void removeValue3(int numCoinsToRemove) {
 		validateNumCoinsToRemove(numCoinsToRemove, CoinType.THREE);
 
 		this.coinTotal -= 3 * numCoinsToRemove;
 		this.numOfValue3Coins -= numCoinsToRemove;
 	}
-	
+
 	private void validateNumCoinsToRemove(int numCoins, CoinType type) {
 		if (numCoins <= -1) {
 			throw new IllegalArgumentException();
@@ -70,7 +84,7 @@ public class Player {
 
 		return this.numOfValue3Coins;
 	}
-	
+
 	public String getName() {
 		return this.name;
 	}
@@ -86,7 +100,7 @@ public class Player {
 	public int getNumValue3Coins() {
 		return this.numOfValue3Coins;
 	}
-	
+
 	public int getConflictTotal() {
 		return this.conflictTotal;
 	}
