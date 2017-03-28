@@ -10,7 +10,7 @@ public class SetUpHandler {
 
 	public GameBoard setUp(int numPlayers) {
 		setPlayerNum(numPlayers);
-		return createGameBoard();
+		return createDefaultGameBoard();
 	}
 
 	public void setPlayerNum(int num) {
@@ -20,15 +20,10 @@ public class SetUpHandler {
 
 	}
 
-	public GameBoard createGameBoard() {
+	public GameBoard createDefaultGameBoard() {
 		ArrayList<Player> players = new ArrayList<Player>();
-		players.add(new Player());
-		players.add(new Player());
-		players.add(new Player());
-		if (this.playerNum == 7) {
-			players.add(new Player());
-			players.add(new Player());
-			players.add(new Player());
+
+		for (int i = 0; i < this.playerNum; i++) {
 			players.add(new Player());
 		}
 

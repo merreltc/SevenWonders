@@ -61,11 +61,11 @@ public class SetupBackendTest {
 	
 	@Test
 	public void testCreateGameBoardDefault() {
-		SetUpHandler setup = EasyMock.createMockBuilder(SetUpHandler.class).addMockedMethod("createGameBoard").createMock();
+		SetUpHandler setup = EasyMock.createMockBuilder(SetUpHandler.class).addMockedMethod("createDefaultGameBoard").createMock();
 		GameBoard board = EasyMock.createStrictMock(GameBoard.class);
 		
 		setup.setPlayerNum(3);
-		EasyMock.expect(setup.createGameBoard()).andReturn(board);
+		EasyMock.expect(setup.createDefaultGameBoard()).andReturn(board);
 		
 		EasyMock.replay(board, setup);
 		
