@@ -73,4 +73,12 @@ public class SetupBackendTest {
 		
 		EasyMock.verify(board, setup);
 	}
+	
+	@Test
+	public void testCreateGameBoardMinPlayers() {
+		SetUpHandler setup = new SetUpHandler();
+		GameBoard board = setup.setUp(3);
+		
+		assertEquals(3, board.getNumPlayers());
+	}
 }
