@@ -55,4 +55,11 @@ public class GameManagerTest {
 		
 		assertEquals(3, manager.getNumPlayers());
 	}
+	
+	@Test
+	public void testSetUpGameBoardMaxPlayers() {
+		GameManager manager = new GameManager(7);
+		
+		assertEquals(7, manager.getNumPlayers());
+	}
 }
