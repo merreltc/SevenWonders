@@ -71,12 +71,7 @@ public class Player {
 		}
 
 		int numCoinsToCheck = getNumOfCoinType(type);
-		String coinType;
-		if (type == CoinType.ONE) {
-			coinType = "1";
-		} else {
-			coinType = "3";
-		}
+		String coinType = CoinTypeToString(type);
 
 		if (numCoins > numCoinsToCheck) {
 			throw new InsufficientFundsException("Player does not have " + numCoins + " value " + coinType + " coin(s)");
@@ -89,6 +84,17 @@ public class Player {
 		}
 
 		return this.numOfValue3Coins;
+	}
+	
+	private String CoinTypeToString(CoinType type){
+		switch(type) {
+		case ONE:
+			return "1";
+		case THREE:
+			return "3";
+		default:
+			throw new IllegalArgumentException("Bad CoinType");
+		}
 	}
 
 	public String getName() {
