@@ -5,6 +5,11 @@ public class GameManager {
 	
 	public GameManager(int numPlayers){
 		this.numPlayers = numPlayers;
+		setUpGame();
+	}
+	
+	public void setUpGame() {
+		(new SetUpHandler()).setUp(3);
 	}
 	
 	public int getPlayerNum() {
