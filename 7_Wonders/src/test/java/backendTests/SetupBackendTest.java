@@ -44,4 +44,16 @@ public class SetupBackendTest {
 			assertEquals(message, error.getMessage());
 		}
 	}
+	
+	@Test
+	public void testInvalidPlayerNum8ErrorMessage() {
+		SetUpHandler setup = new SetUpHandler();
+		
+		try{
+		setup.setPlayerNum(8);
+		} catch (IllegalArgumentException error){
+			String message = "Cannot play with 8 players";
+			assertEquals(message, error.getMessage());
+		}
+	}
 }
