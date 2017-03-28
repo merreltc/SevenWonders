@@ -1,13 +1,10 @@
 package backendTests;
 import static org.junit.Assert.*;
 
-import java.io.Writer;
-
 import org.easymock.EasyMock;
 import org.junit.Test;
 
 import backend.SetUpHandler;
-import code.MyStack;
 import dataStructures.GameBoard;
 
 public class SetupBackendTest {
@@ -70,10 +67,10 @@ public class SetupBackendTest {
 		setup.setPlayerNum(3);
 		EasyMock.expect(setup.createGameBoard()).andReturn(board);
 		
-		EasyMock.replay(board);
+		EasyMock.replay(board, setup);
 		
 		setup.setUp(3);
 		
-		EasyMock.verify(board);
+		EasyMock.verify(board, setup);
 	}
 }
