@@ -4,6 +4,8 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
+import backend.GameManager;
+
 public class GameManagerTest {
 
 	@Test
