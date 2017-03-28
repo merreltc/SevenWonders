@@ -67,14 +67,28 @@ public class Player {
 
 	private void validateNumCoinsToRemove(int numCoins, CoinType type) {
 		if (numCoins <= -1) {
-			throw new IllegalArgumentException("Cannot remove " + numCoins + " value 1 coins");
+			String coinType;
+
+			switch (type) {
+			case ONE:
+				coinType = "1";
+				break;
+			case THREE:
+				coinType = "3";
+				break;
+			default:
+				throw new IllegalArgumentException("Bad CoinType");
+			}
+
+			throw new IllegalArgumentException("Cannot remove " + numCoins + " value " + coinType + " coins");
 		}
 
 		int numCoinsToCheck = getNumOfCoinType(type);
 		String coinType = CoinTypeToString(type);
 
 		if (numCoins > numCoinsToCheck) {
-			throw new InsufficientFundsException("Player does not have " + numCoins + " value " + coinType + " coin(s)");
+			throw new InsufficientFundsException(
+					"Player does not have " + numCoins + " value " + coinType + " coin(s)");
 		}
 	}
 
@@ -85,9 +99,9 @@ public class Player {
 
 		return this.numOfValue3Coins;
 	}
-	
-	private String CoinTypeToString(CoinType type){
-		switch(type) {
+
+	private String CoinTypeToString(CoinType type) {
+		switch (type) {
 		case ONE:
 			return "1";
 		case THREE:

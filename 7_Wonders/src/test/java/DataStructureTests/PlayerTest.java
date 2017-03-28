@@ -416,6 +416,30 @@ public class PlayerTest {
 	}
 
 	@Test
+	public void testInvalidRemoveNumValue3CoinsNeg1ErrorMessage() {
+		Player player = new Player();
+
+		try {
+			player.removeValue3(-1);
+		} catch (IllegalArgumentException error) {
+			String message = "Cannot remove -1 value 3 coins";
+			assertEquals(message, error.getMessage());
+		}
+	}
+
+	@Test
+	public void testInvalidRemoveNumValue3CoinsNeg2ErrorMessage() {
+		Player player = new Player();
+
+		try {
+			player.removeValue3(-2);
+		} catch (IllegalArgumentException error) {
+			String message = "Cannot remove -2 value 3 coins";
+			assertEquals(message, error.getMessage());
+		}
+	}
+
+	@Test
 	public void testInsufficientFundsForRemove4Value1CoinsErrorMessage() {
 		Player player = new Player();
 
@@ -426,7 +450,7 @@ public class PlayerTest {
 			assertEquals(message, error.getMessage());
 		}
 	}
-	
+
 	@Test
 	public void testInsufficientFundsForRemove5Value1CoinsErrorMessage() {
 		Player player = new Player();
@@ -438,28 +462,28 @@ public class PlayerTest {
 			assertEquals(message, error.getMessage());
 		}
 	}
-	
+
 	@Test
 	public void testInsufficientFundsForRemove1Value3CoinsErrorMessage() {
 		Player player = new Player();
 
 		try {
-		player.removeValue3(1);
-		fail();
-		} catch(InsufficientFundsException error) {
+			player.removeValue3(1);
+			fail();
+		} catch (InsufficientFundsException error) {
 			String message = "Player does not have 1 value 3 coin(s)";
 			assertEquals(message, error.getMessage());
 		}
 	}
-	
+
 	@Test
 	public void testInsufficientFundsForRemove2Value3CoinsErrorMessage() {
 		Player player = new Player();
 
 		try {
-		player.removeValue3(2);
-		fail();
-		} catch(InsufficientFundsException error) {
+			player.removeValue3(2);
+			fail();
+		} catch (InsufficientFundsException error) {
 			String message = "Player does not have 2 value 3 coin(s)";
 			assertEquals(message, error.getMessage());
 		}
