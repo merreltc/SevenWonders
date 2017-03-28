@@ -23,6 +23,6 @@ public class GameManager {
 	}
 
 	public int getNumPlayers() {
-		return 3;
+		return this.numPlayers;
 	}
 }
