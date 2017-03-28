@@ -422,7 +422,7 @@ public class PlayerTest {
 		try {
 			player.removeValue1(4);
 		} catch (InsufficientFundsException error) {
-			String message = "Player does not have 4 value 1 coins";
+			String message = "Player does not have 4 value 1 coin(s)";
 			assertEquals(message, error.getMessage());
 		}
 	}
@@ -434,7 +434,7 @@ public class PlayerTest {
 		try {
 			player.removeValue1(5);
 		} catch (InsufficientFundsException error) {
-			String message = "Player does not have 5 value 1 coins";
+			String message = "Player does not have 5 value 1 coin(s)";
 			assertEquals(message, error.getMessage());
 		}
 	}

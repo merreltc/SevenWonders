@@ -71,9 +71,15 @@ public class Player {
 		}
 
 		int numCoinsToCheck = getNumOfCoinType(type);
+		String coinType;
+		if (type == CoinType.ONE) {
+			coinType = "1";
+		} else {
+			coinType = "3";
+		}
 
 		if (numCoins > numCoinsToCheck) {
-			throw new InsufficientFundsException("Player does not have " + numCoins + " value 1 coins");
+			throw new InsufficientFundsException("Player does not have " + numCoins + " value " + coinType + " coin(s)");
 		}
 	}
 
