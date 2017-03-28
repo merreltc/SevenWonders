@@ -15,7 +15,7 @@ public class GameBoardTests {
 	public void testDefaultGameBoard() {
 		GameBoard board = new GameBoard();
 
-		assertEquals(0, board.getNumPlayers());
+		assertEquals(3, board.getNumPlayers());
 	}
 
 	@Test
