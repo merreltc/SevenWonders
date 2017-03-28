@@ -81,4 +81,12 @@ public class SetupBackendTest {
 		
 		assertEquals(3, board.getNumPlayers());
 	}
+	
+	@Test
+	public void testCreateGameBoardMaxPlayers() {
+		SetUpHandler setup = new SetUpHandler();
+		GameBoard board = setup.setUp(7);
+		
+		assertEquals(7, board.getNumPlayers());
+	}
 }
