@@ -67,7 +67,20 @@ public class Player {
 
 	private void validateNumCoinsToRemove(int numCoins, CoinType type) {
 		if (numCoins <= -1) {
-			throw new IllegalArgumentException("Cannot remove " + numCoins + " value 1 coins");
+			String coinType;
+
+			switch (type) {
+			case ONE:
+				coinType = "1";
+				break;
+			case THREE:
+				coinType = "3";
+				break;
+			default:
+				throw new IllegalArgumentException("Bad CoinType");
+			}
+
+			throw new IllegalArgumentException("Cannot remove " + numCoins + " value " + coinType + " coins");
 		}
 
 		int numCoinsToCheck = getNumOfCoinType(type);
