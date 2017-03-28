@@ -14,20 +14,36 @@ public class GameBoardTests {
 	@Test
 	public void testDefaultGameBoard() {
 		GameBoard board = new GameBoard();
-		
+
 		assertEquals(0, board.getNumPlayers());
 	}
-	
+
 	@Test
-	public void testGameBoardMinPlayers(){
+	public void testGameBoardMinPlayers() {
 		ArrayList<Player> players = new ArrayList<Player>();
 		players.add(new Player());
 		players.add(new Player());
 		players.add(new Player());
-		
+
 		GameBoard board = new GameBoard(players);
-		
+
 		assertEquals(3, board.getNumPlayers());
+	}
+
+	@Test
+	public void testGameBoardMaxPlayers() {
+		ArrayList<Player> players = new ArrayList<Player>();
+		players.add(new Player());
+		players.add(new Player());
+		players.add(new Player());
+		players.add(new Player());
+		players.add(new Player());
+		players.add(new Player());
+		players.add(new Player());
+
+		GameBoard board = new GameBoard(players);
+
+		assertEquals(7, board.getNumPlayers());
 	}
 
 }
