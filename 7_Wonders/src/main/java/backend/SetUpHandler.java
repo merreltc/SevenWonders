@@ -25,7 +25,13 @@ public class SetUpHandler {
 		players.add(new Player());
 		players.add(new Player());
 		players.add(new Player());
-		
+		if (this.playerNum == 7) {
+			players.add(new Player());
+			players.add(new Player());
+			players.add(new Player());
+			players.add(new Player());
+		}
+
 		return new GameBoard(players);
 	}
 
