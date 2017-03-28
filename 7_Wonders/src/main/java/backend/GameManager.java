@@ -1,5 +1,7 @@
 package backend;
 
+import dataStructures.GameBoard;
+
 public class GameManager {
 	private int numPlayers = 3;
 	
@@ -14,5 +16,9 @@ public class GameManager {
 	
 	public int getPlayerNum() {
 		return this.numPlayers;
+	}
+
+	public GameBoard getGameBoard() {
+		return new GameBoard();
 	}
 }
