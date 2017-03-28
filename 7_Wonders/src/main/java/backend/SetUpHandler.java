@@ -6,7 +6,7 @@ public class SetUpHandler {
 
 	public void setPlayerNum(int num) {
 		if(num < 3 || num > 7)
-			throw new IllegalArgumentException("Cannot play with 2 players");
+			throw new IllegalArgumentException("Cannot play with " + num + " players");
 		playerNum = num;
 		
 	}
