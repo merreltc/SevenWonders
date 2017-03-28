@@ -354,4 +354,16 @@ public class PlayerTest {
 		assertEquals(6, player2.getNumValue1Coins());
 		assertEquals(1, player2.getNumValue3Coins());
 	}
+	
+	@Test
+	public void testAddInvalidNumValue1CoinsNeg1ErrorMessage() {
+		Player player = new Player();
+
+		try{
+		player.addValue1(-1);
+		}catch(IllegalArgumentException error){
+			String message = "Cannot add a -1 value 1 coins";
+			assertEquals(message, error.getMessage());
+		}
+	}
 }
