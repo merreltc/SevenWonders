@@ -6,31 +6,32 @@ import dataStructures.GameBoard;
 import dataStructures.Player;
 
 public class SetUpHandler {
-	private int playerNum;
+	private static int playerNum;
 
-	public GameBoard setUp(int numPlayers) {
+	public static GameBoard setUp(int numPlayers) {
 		setPlayerNum(numPlayers);
 		return createDefaultGameBoard();
 	}
 
-	public void setPlayerNum(int num) {
-		if (num < 3 || num > 7)
+	public static void setPlayerNum(int num) {
+		if (num < 3 || num > 7) {
 			throw new IllegalArgumentException("Cannot play with " + num + " players");
+		}
+		
 		playerNum = num;
-
 	}
 
-	public GameBoard createDefaultGameBoard() {
+	public static GameBoard createDefaultGameBoard() {
 		ArrayList<Player> players = new ArrayList<Player>();
 
-		for (int i = 0; i < this.playerNum; i++) {
+		for (int i = 0; i < playerNum; i++) {
 			players.add(new Player());
 		}
 
 		return new GameBoard(players);
 	}
 
-	public int getPlayerNum() {
-		return this.playerNum;
+	public static int getPlayerNum() {
+		return playerNum;
 	}
 }

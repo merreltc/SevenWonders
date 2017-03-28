@@ -14,21 +14,21 @@ public class GameManagerTest {
 	public void testGameManagerGetMinPlayers() {
 		GameManager manager = new GameManager(3);
 
-		assertEquals(3, manager.getPlayerNum());
+		assertEquals(3, manager.getNumPlayers());
 	}
 
 	@Test
 	public void testGameManagerGetMaxPlayers() {
 		GameManager manager = new GameManager(7);
 
-		assertEquals(7, manager.getPlayerNum());
+		assertEquals(7, manager.getNumPlayers());
 	}
 
 	@Test
 	public void testDefaultSetUp() {
 		GameManager manager = EasyMock.createMockBuilder(GameManager.class).withConstructor(3).createMock();
 
-		manager.setUpGame();
+		manager.setUpGame(3);
 
 		EasyMock.replay(manager);
 

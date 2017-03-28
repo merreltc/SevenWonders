@@ -3,26 +3,21 @@ package backend;
 import dataStructures.GameBoard;
 
 public class GameManager {
-	private int numPlayers = 3;
+	private GameBoard board;
 	
 	public GameManager(int numPlayers){
-		this.numPlayers = numPlayers;
-		setUpGame();
+		setUpGame(numPlayers);
 	}
 	
-	public void setUpGame() {
-		(new SetUpHandler()).setUp(3);
+	public void setUpGame(int numPlayers) {
+		this.board = SetUpHandler.setUp(numPlayers);
 	}
 	
-	public int getPlayerNum() {
-		return this.numPlayers;
+	public int getNumPlayers() {
+		return this.board.getNumPlayers();
 	}
 
 	public GameBoard getGameBoard() {
-		return new GameBoard();
-	}
-
-	public int getNumPlayers() {
-		return this.numPlayers;
+		return this.board;
 	}
 }
