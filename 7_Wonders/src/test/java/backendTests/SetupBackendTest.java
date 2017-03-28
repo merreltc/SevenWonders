@@ -1,9 +1,14 @@
 package backendTests;
 import static org.junit.Assert.*;
 
+import java.io.Writer;
+
+import org.easymock.EasyMock;
 import org.junit.Test;
 
 import backend.SetUpHandler;
+import code.MyStack;
+import dataStructures.GameBoard;
 
 public class SetupBackendTest {
 
@@ -38,7 +43,7 @@ public class SetupBackendTest {
 		SetUpHandler setup = new SetUpHandler();
 		
 		try{
-		setup.setPlayerNum(2);
+			setup.setPlayerNum(2);
 		} catch (IllegalArgumentException error){
 			String message = "Cannot play with 2 players";
 			assertEquals(message, error.getMessage());
@@ -50,10 +55,25 @@ public class SetupBackendTest {
 		SetUpHandler setup = new SetUpHandler();
 		
 		try{
-		setup.setPlayerNum(8);
+			setup.setPlayerNum(8);
 		} catch (IllegalArgumentException error){
 			String message = "Cannot play with 8 players";
 			assertEquals(message, error.getMessage());
 		}
+	}
+	
+	@Test
+	public void testCreateGameBoardDefault() {
+		SetUpHandler setup = EasyMock.createMockBuilder(SetUpHandler.class).addMockedMethod("createGameBoard").createMock();
+		GameBoard board = EasyMock.createStrictMock(GameBoard.class);
+		
+		setup.setPlayerNum(3);
+		EasyMock.expect(setup.createGameBoard()).andReturn(board);
+		
+		EasyMock.replay(board);
+		
+		setup.setUp(3);
+		
+		EasyMock.verify(board);
 	}
 }
