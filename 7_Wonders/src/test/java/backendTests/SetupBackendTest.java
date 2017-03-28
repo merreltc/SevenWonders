@@ -33,6 +33,15 @@ public class SetupBackendTest {
 		fail();
 	}
 	
-	
-
+	@Test
+	public void testInvalidPlayerNum2ErrorMessage() {
+		SetUpHandler setup = new SetUpHandler();
+		
+		try{
+		setup.setPlayerNum(2);
+		} catch (IllegalArgumentException error){
+			String message = "Cannot play with 2 players";
+			assertEquals(message, error.getMessage());
+		}
+	}
 }
