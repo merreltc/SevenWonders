@@ -1,0 +1,69 @@
+Formal Code Inspections:
+
+Logistics:
+	1. when:
+		*At the middle and end of a feature
+		*Before a merge
+	2. Moderator:
+		* In general, we will collaborate during inspections
+		* In case of emergency, Carrie Utter will moderate inspections
+	3. How will we share
+		* Participate together and communicate over a group meeting
+		* Merge the cleaned code onto master (cleaned after feedback)
+
+Criteria:
+	4. Code Smells:
+		* Names:
+			> Descriptive, albeit long names
+		* Functions:
+			> Short (extract functions where necessary)
+			> With as few arguments as possible
+			> Descriptive, verb names
+		* Comments: 
+			> Explain a feature succinctly
+			> Not overpower the code (only use when necessary)
+			> No commented code
+		* Formatting:
+			> Camel case functions and variable names
+			> Ctrl-Shift-F before committing
+			> One blank line between methods
+			> Decreasing order of function abstraction levels
+			> Getters/Setters at the bottom
+		* Demeter:
+			> Avoid trainwrecks by extracting methods in calling code
+		* Error Handling:
+			> Use try-catch/RuntimeException for user-created exceptions
+			> Descriptive messages
+			> Don't pass/return null
+			> Use Exceptions rather than error codes
+		* Unit Testing:
+			> Use BVA to test all boundaries
+			> Single responsibility/concept per test
+		* Classes:
+			> Small
+			> Single Responsibility
+			> Object classes should be "Open for extension, Closed for modification"
+			> Organized for change
+		* TDD:
+			> Follow steps:
+				1. Failing test
+				2. Write minimal code to pass
+				3. Refactor after major responsibility is fully tested
+	5. Will everyone apply all criteria:
+		* Use of pair programming allows for good oversight by partner
+		* Whoever is not coding is primarily responsible for ensuring code cleanliness
+
+Scope:
+	6/7. How many files will be inspected:
+		* Code reviews go through only classes that a feature touches (full team)
+		* During programming, we will review the classes that we are working on (pairs)
+
+Tools:
+	8. Automated tools:
+		* Using checkstyle and findbugs
+		** Run findbugs and gradle build at the end of every pair session
+	9. Human Intervention:
+		* Comments are relevant
+		* Function/variable names are descriptive
+		* Ordering of functions within a class has proper flow
+		* Integrity for TDD
