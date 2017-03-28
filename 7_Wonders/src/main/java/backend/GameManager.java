@@ -21,4 +21,8 @@ public class GameManager {
 	public GameBoard getGameBoard() {
 		return new GameBoard();
 	}
+
+	public int getNumPlayers() {
+		return 3;
+	}
 }
