@@ -151,7 +151,7 @@ public class ChipTest {
 	@Test
 	public void testInvalidConflictTokenNeg2ErrorMessage() {
 		try{
-		Chip conTokenNeg2 = new ConflictToken(-2);
+		Chip conToken = new ConflictToken(-2);
 		}catch(IllegalArgumentException error){
 			String message = "Cannot have a conflict token whose's value is -2";
 			assertEquals(message, error.getMessage());
@@ -161,7 +161,7 @@ public class ChipTest {
 	@Test
 	public void testInvalidConflictToken0ErrorMessage() {
 		try{
-		Chip conTokenNeg2 = new ConflictToken(0);
+		Chip conToken = new ConflictToken(0);
 		}catch(IllegalArgumentException error){
 			String message = "Cannot have a conflict token whose's value is 0";
 			assertEquals(message, error.getMessage());
@@ -171,7 +171,7 @@ public class ChipTest {
 	@Test
 	public void testInvalidConflictToken2ErrorMessage() {
 		try{
-		Chip conTokenNeg2 = new ConflictToken(2);
+		Chip conToken = new ConflictToken(2);
 		}catch(IllegalArgumentException error){
 			String message = "Cannot have a conflict token whose's value is 2";
 			assertEquals(message, error.getMessage());
@@ -181,9 +181,19 @@ public class ChipTest {
 	@Test
 	public void testInvalidConflictToken4ErrorMessage() {
 		try{
-		Chip conTokenNeg2 = new ConflictToken();
+		Chip conToken = new ConflictToken();
 		}catch(IllegalArgumentException error){
 			String message = "Cannot have a conflict token whose's value is 4";
+			assertEquals(message, error.getMessage());
+		}
+	}
+	
+	@Test
+	public void testInvalidConflictToken6ErrorMessage() {
+		try{
+		Chip conToken = new ConflictToken(6);
+		}catch(IllegalArgumentException error){
+			String message = "Cannot have a conflict token whose's value is 6";
 			assertEquals(message, error.getMessage());
 		}
 	}
