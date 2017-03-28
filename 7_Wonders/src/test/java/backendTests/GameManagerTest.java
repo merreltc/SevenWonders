@@ -37,11 +37,16 @@ public class GameManagerTest {
 	
 	@Test
 	public void testDefaultSetUpGetGameBoard() {
-		GameManager manager = new GameManager(3);
+		GameManager manager = EasyMock.createMockBuilder(GameManager.class).withConstructor(3).addMockedMethod("getGameBoard").createMock();
+		GameBoard board = EasyMock.strictMock(GameBoard.class);
 		
-		GameBoard board = manager.getGameBoard();
+		EasyMock.expect(manager.getGameBoard()).andReturn(board);
 		
-		assertEquals(new GameBoard(), board);
+		EasyMock.replay(manager, board);
+		
+		manager.getGameBoard();
+		
+		EasyMock.verify(manager, board);
 		
 	}
 }
