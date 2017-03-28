@@ -157,4 +157,14 @@ public class ChipTest {
 			assertEquals(message, error.getMessage());
 		}
 	}
+	
+	@Test
+	public void testInvalidConflictToken0ErrorMessage() {
+		try{
+		Chip conTokenNeg2 = new ConflictToken(0);
+		}catch(IllegalArgumentException error){
+			String message = "Cannot have a conflict token whose's value is 0";
+			assertEquals(message, error.getMessage());
+		}
+	}
 }
