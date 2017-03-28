@@ -438,4 +438,17 @@ public class PlayerTest {
 			assertEquals(message, error.getMessage());
 		}
 	}
+	
+	@Test
+	public void testInsufficientFundsForRemove1Value3CoinsErrorMessage() {
+		Player player = new Player();
+
+		try {
+		player.removeValue3(1);
+		fail();
+		} catch(InsufficientFundsException error) {
+			String message = "Player does not have 1 value 3 coin(s)";
+			assertEquals(message, error.getMessage());
+		}
+	}
 }
