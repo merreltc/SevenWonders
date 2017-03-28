@@ -362,7 +362,7 @@ public class PlayerTest {
 		try{
 		player.addValue1(-1);
 		}catch(IllegalArgumentException error){
-			String message = "Cannot add a -1 value 1 coins";
+			String message = "Cannot add -1 value 1 coins";
 			assertEquals(message, error.getMessage());
 		}
 	}
