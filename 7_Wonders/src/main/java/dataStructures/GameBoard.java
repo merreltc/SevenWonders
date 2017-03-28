@@ -7,6 +7,9 @@ public class GameBoard {
 	private ArrayList<Player> players = new ArrayList<Player>();
 	
 	public GameBoard(){
+		players.add(new Player());
+		players.add(new Player());
+		players.add(new Player());
 	}
 	
 	public GameBoard(ArrayList<Player> players) {
