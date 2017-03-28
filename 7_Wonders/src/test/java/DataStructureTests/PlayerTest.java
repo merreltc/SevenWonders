@@ -426,4 +426,16 @@ public class PlayerTest {
 			assertEquals(message, error.getMessage());
 		}
 	}
+	
+	@Test
+	public void testInvalidRemoveNumValue3CoinsNeg2ErrorMessage() {
+		Player player = new Player();
+		
+		try{
+		player.removeValue3(-2);
+		}catch (IllegalArgumentException error){
+			String message = "Cannot remove -2 value 3 coins";
+			assertEquals(message, error.getMessage());
+		}
+	}
 }
