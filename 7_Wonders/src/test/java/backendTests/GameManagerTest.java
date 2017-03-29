@@ -69,4 +69,14 @@ public class GameManagerTest {
 		
 		assertEquals(7, manager.getPlayers().size());
 	}
+	
+	@Test
+	public void testTrade(){
+		GameManager manager = new GameManager(7);
+		
+		manager.trade(manager.getPlayer(0), manager.getPlayer(1), 3);
+		
+		assertEquals(0, manager.getPlayerCoinTotal(0));
+		assertEquals(6, manager.getPlayerCoinTotal(1));
+	}
 }
