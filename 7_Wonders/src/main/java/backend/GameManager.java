@@ -27,4 +27,16 @@ public class GameManager {
 	public ArrayList<Player> getPlayers() {
 		return this.board.getPlayers();
 	}
+
+	public Player getPlayer(int i) {
+		return this.board.getPlayers().get(i);
+	}
+
+	public int getPlayerCoinTotal(int i) {
+		return getPlayer(i).getCoinTotal();
+	}
+
+	public void trade(Player from, Player to, int valueToTrade) {
+		TradeHandler.tradeFromTo(from, to, valueToTrade);
+	}
 }
