@@ -27,11 +27,18 @@ public class GuiMainMenu extends JPanel implements ActionListener {
 	private static final Point PlayerSelectButtonBounds = new Point(150, 100);
 	private static final Point PlayerSelectTitlePosition = new Point(570, 300);
 
-	private static final Font ErrorFont = new Font("Courier New", Font.BOLD, 100);
-	private static final Point ErrorMessagePosition = new Point(500, 400);
+	private static final Font ErrorFont = new Font("Courier New", Font.BOLD, 70);
+	private static final Point ErrorMessagePosition = new Point(600, 400);
 	
 	private static final Point CloseMessageButtonBounds = new Point(200, 80);
 	private static final Point CloseMessageButtonPosition = new Point(FrameWidth - CloseMessageButtonBounds.x - 50, FrameHeight - CloseMessageButtonBounds.y - 50);
+	
+	private static final Point TradeButtonBounds = new Point(20,20);
+	
+	private static final Point TradeLeftBaseButtonPoint = new Point(30, 300);
+	private static final Point TradeRightBaseButtonPoint = new Point(1390,300);
+	
+	private static final int TradeButtonYOffet = TradeButtonBounds.y + 20;
 
 	private JFrame frame;
 	private Timer timer;
@@ -114,15 +121,15 @@ public class GuiMainMenu extends JPanel implements ActionListener {
 			if (!initialized) {
 				initializeGame();
 			}
+			for (Button button : buttons) {
+				button.draw(graphics);
+			}
 			for (int i = 0; i < boards.size(); i++) {
 
 				boards.get(i).draw(graphics);
 			}
 			if (!this.message.equals("")) {
 				this.drawMessageOnScreen(graphics);
-			}
-			for (Button button : buttons) {
-				button.draw(graphics);
 			}
 			break;
 		}
@@ -136,6 +143,18 @@ public class GuiMainMenu extends JPanel implements ActionListener {
 		}
 		Button exitMessage = new Button(CloseMessageButtonPosition, CloseMessageButtonBounds, "Close");
 		buttons.add(exitMessage);
+		String[] values = new String[]{"Stone","Wood","Ore","Clay"};
+		for (int i = 0; i < 4; i++){
+			Point buttonPosition = new Point(TradeLeftBaseButtonPoint.x, TradeLeftBaseButtonPoint.y + TradeButtonYOffet*i);
+			Button LeftTradeButton = new Button(buttonPosition, TradeButtonBounds, "Left-" + values[i],false);
+			buttons.add(LeftTradeButton);
+		}
+		for (int i = 0; i < 4; i++){
+			Point buttonPosition = new Point(TradeRightBaseButtonPoint.x, TradeRightBaseButtonPoint.y + TradeButtonYOffet*i);
+			Button RightTradeButton = new Button(buttonPosition, TradeButtonBounds, "Right-" + values[i],false);
+			buttons.add(RightTradeButton);
+		}
+		
 		initialized = true;
 	}
 
@@ -167,7 +186,16 @@ public class GuiMainMenu extends JPanel implements ActionListener {
 			switchMenu(Menu.Game);
 			break;
 		case Game:
-			this.message = "";
+			if (clicked.getValue().equals("Close")){
+				this.message = "";
+			}else {
+				String[] splitValue = clicked.getValue().split("-");
+				if (splitValue[0].equals("Right")){
+					//Trade splitValue[1] with right player
+				}else {
+					//Trade splitValue[1] with left player
+				}
+			}
 			break;
 		}
 	}

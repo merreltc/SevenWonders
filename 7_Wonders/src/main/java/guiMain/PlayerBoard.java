@@ -15,12 +15,12 @@ public class PlayerBoard {
 	private static final int LastPlayerBoardWidth = 500;
 	private static final int LastPlayerBoardHeight = 300;
 	private static final int LastPlayerBoardPositionX = 1900 - LastPlayerBoardWidth - 20;
-	private static final int LastPlayerBoardPositionY = 800 - LastPlayerBoardHeight - 10;
+	private static final int LastPlayerBoardPositionY = 600 - LastPlayerBoardHeight - 10;
 
 	private static final int NextPlayerBoardWidth = 500;
 	private static final int NextPlayerBoardHeight = 300;
 	private static final int NextPlayerBoardPositionX = 20;
-	private static final int NextPlayerBoardPositionY = 800 - NextPlayerBoardHeight - 10;
+	private static final int NextPlayerBoardPositionY = 600 - NextPlayerBoardHeight - 10;
 
 	private static final int BackPlayerBoardWidth = 300;
 	private static final int BackPlayerBoardHeight = 150;
