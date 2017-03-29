@@ -6,9 +6,6 @@ import java.awt.Graphics;
 import java.awt.Point;
 
 public class PlayerBoard {
-
-
-
 	private Point position;
 	private Point sizePoint;
 	/* zero index is the current player, next player is last */
@@ -23,7 +20,7 @@ public class PlayerBoard {
 	 * board
 	 */
 	public PlayerBoard(int startingPosition, int totalNumberOfPlayers) {
-		backPlayerStartingBoardPositionX = 950 + ((totalNumberOfPlayers-3) * Constants.BackPlayerBoardWidth)/2;
+		backPlayerStartingBoardPositionX = 950 + ((totalNumberOfPlayers - 3) * Constants.BackPlayerBoardWidth) / 2;
 		this.totalNumberOfPlayers = totalNumberOfPlayers;
 		this.playerPosition = startingPosition;
 	}
@@ -53,11 +50,11 @@ public class PlayerBoard {
 		graphics.fillRect(position.x, position.y, sizePoint.x, sizePoint.y);
 		graphics.setFont(new Font("Courier New", Font.BOLD, 30));
 		graphics.setColor(Color.RED);
-		
+
 		/* First render money and war tokens */
 		graphics.drawString("1", position.x + sizePoint.x - 30, position.y + 25);
 		graphics.drawString("1", position.x + sizePoint.x - 30, position.y + 65);
-		
+
 		/* rendering resources owned */
 		graphics.drawString("1", position.x + 10, position.y + 25);
 		graphics.drawString("1", position.x + 10, position.y + 65);

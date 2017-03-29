@@ -44,14 +44,6 @@ public class GuiMainMenu extends JPanel implements ActionListener {
 		timer.start();
 	}
 
-	public JFrame getFrame() {
-		return frame;
-	}
-
-	public Timer getTimer() {
-		return timer;
-	}
-
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
 		repaint();
@@ -144,6 +136,14 @@ public class GuiMainMenu extends JPanel implements ActionListener {
 			return this.game.getButtons();
 		}
 		return buttons;
+	}
+
+	public JFrame getFrame() {
+		return frame;
+	}
+
+	public Timer getTimer() {
+		return timer;
 	}
 
 	public static void main(String[] args) {

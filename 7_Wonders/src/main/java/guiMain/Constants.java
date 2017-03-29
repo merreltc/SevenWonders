@@ -22,17 +22,18 @@ public class Constants {
 
 	public static final Font ErrorFont = new Font("Courier New", Font.BOLD, 70);
 	public static final Point ErrorMessagePosition = new Point(600, 400);
-	
+
 	public static final Point CloseMessageButtonBounds = new Point(200, 80);
-	public static final Point CloseMessageButtonPosition = new Point(FrameWidth - CloseMessageButtonBounds.x - 50, FrameHeight - CloseMessageButtonBounds.y - 50);
-	
-	public static final Point TradeButtonBounds = new Point(20,20);
-	
+	public static final Point CloseMessageButtonPosition = new Point(FrameWidth - CloseMessageButtonBounds.x - 50,
+			FrameHeight - CloseMessageButtonBounds.y - 50);
+
+	public static final Point TradeButtonBounds = new Point(20, 20);
+
 	public static final Point TradeLeftBaseButtonPoint = new Point(30, 300);
-	public static final Point TradeRightBaseButtonPoint = new Point(1390,300);
-	
+	public static final Point TradeRightBaseButtonPoint = new Point(1390, 300);
+
 	public static final int TradeButtonYOffet = TradeButtonBounds.y + 20;
-	
+
 	/* For PlayerBoard Class */
 	public static final int CurrentPlayerBoardWidth = 700;
 	public static final int CurrentPlayerBoardHeight = 400;
@@ -51,7 +52,8 @@ public class Constants {
 
 	public static final int BackPlayerBoardWidth = 300;
 	public static final int BackPlayerBoardHeight = 150;
-	//public static final int BackPlayerStartingBoardPositionX = 1900 - BackPlayerBoardWidth - 20;
+	// public static final int BackPlayerStartingBoardPositionX = 1900 -
+	// BackPlayerBoardWidth - 20;
 	public static final int BackPlayerBoardXOffset = BackPlayerBoardWidth + 40;
 	public static final int BackPlayerBoardPositionY = 10;
 }
