@@ -67,6 +67,6 @@ public class GameManagerTest {
 	public void testGetPlayers() {
 		GameManager manager = new GameManager(7);
 		
-		assertEquals(3, manager.getPlayers().size());
+		assertEquals(7, manager.getPlayers().size());
 	}
 }

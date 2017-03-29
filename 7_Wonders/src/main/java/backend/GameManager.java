@@ -1,6 +1,9 @@
 package backend;
 
+import java.util.ArrayList;
+
 import dataStructures.GameBoard;
+import dataStructures.Player;
 
 public class GameManager {
 	private GameBoard board;
@@ -19,5 +22,9 @@ public class GameManager {
 
 	public GameBoard getGameBoard() {
 		return this.board;
+	}
+
+	public ArrayList<Player> getPlayers() {
+		return this.board.getPlayers();
 	}
 }
