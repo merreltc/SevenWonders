@@ -145,6 +145,7 @@ public class GuiMainMenu extends JPanel implements ActionListener {
 	public Timer getTimer() {
 		return timer;
 	}
+	
 
 	public static void main(String[] args) {
 		GuiMainMenu menu = new GuiMainMenu();
