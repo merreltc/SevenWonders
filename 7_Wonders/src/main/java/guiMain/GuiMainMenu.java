@@ -117,7 +117,6 @@ public class GuiMainMenu extends JPanel implements ActionListener {
 			break;
 		case PlayerSelect:
 			numOfPlayers = Integer.parseInt(text);
-			// TODO: players = (Method to get/set players)
 			switchMenu(Menu.Game);
 			break;
 		case Game:
@@ -145,7 +144,6 @@ public class GuiMainMenu extends JPanel implements ActionListener {
 	public Timer getTimer() {
 		return timer;
 	}
-	
 
 	public static void main(String[] args) {
 		GuiMainMenu menu = new GuiMainMenu();

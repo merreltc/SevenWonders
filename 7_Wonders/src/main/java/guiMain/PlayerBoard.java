@@ -21,10 +21,11 @@ public class PlayerBoard {
 	 * TODO Pass in a player as well. This will be the player that controls the
 	 * board
 	 */
-	public PlayerBoard(int startingPosition, int totalNumberOfPlayers) {
+	public PlayerBoard(int startingPosition, int totalNumberOfPlayers, Player player) {
 		backPlayerStartingBoardPositionX = 950 + ((totalNumberOfPlayers - 3) * Constants.BackPlayerBoardWidth) / 2;
 		this.totalNumberOfPlayers = totalNumberOfPlayers;
 		this.playerPosition = startingPosition;
+		this.player = player;
 	}
 
 	public void draw(Graphics graphics) {
@@ -54,7 +55,7 @@ public class PlayerBoard {
 		graphics.setColor(Color.RED);
 
 		/* First render money and war tokens */
-		graphics.drawString("1", position.x + sizePoint.x - 30, position.y + 25);
+		graphics.drawString(this.player.getCoinTotal() + "", position.x + sizePoint.x - 30, position.y + 25);
 		graphics.drawString("1", position.x + sizePoint.x - 30, position.y + 65);
 
 		/* rendering resources owned */

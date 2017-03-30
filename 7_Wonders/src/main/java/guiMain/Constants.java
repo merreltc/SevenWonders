@@ -20,8 +20,8 @@ public class Constants {
 	public static final Point PlayerSelectButtonBounds = new Point(150, 100);
 	public static final Point PlayerSelectTitlePosition = new Point(570, 300);
 
-	public static final Font ErrorFont = new Font("Courier New", Font.BOLD, 70);
-	public static final Point ErrorMessagePosition = new Point(600, 400);
+	public static final Font ErrorFont = new Font("Courier New", Font.BOLD, 35);
+	public static final Point ErrorMessagePosition = new Point(550, 400);
 
 	public static final Point CloseMessageButtonBounds = new Point(200, 80);
 	public static final Point CloseMessageButtonPosition = new Point(FrameWidth - CloseMessageButtonBounds.x - 50,

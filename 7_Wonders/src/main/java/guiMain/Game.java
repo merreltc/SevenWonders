@@ -4,17 +4,21 @@ import java.awt.Graphics;
 import java.awt.Point;
 import java.util.ArrayList;
 
+import backend.GameManager;
 import dataStructures.Player;
+import exceptions.InsufficientFundsException;
 
 public class Game {
 	private ArrayList<Button> buttons = new ArrayList<Button>();
 	private ArrayList<PlayerBoard> boards = new ArrayList<>();
-	private ArrayList<Player> players = new ArrayList<Player>();
+	private GameManager gameManager;
 	private String message = "Error";
 	private int numOfPlayers;
+	private int currentPlayer = 1;
 
 	public Game(int numOfPlayers) {
 		this.numOfPlayers = numOfPlayers;
+		this.gameManager = new GameManager(this.numOfPlayers);
 	}
 
 	public void draw(Graphics graphics) {
@@ -33,12 +37,14 @@ public class Game {
 	public void initializeGame() {
 		this.buttons.clear();
 		for (int i = -1; i < this.numOfPlayers - 1; i++) {
-			PlayerBoard board = new PlayerBoard(i, numOfPlayers);
+			PlayerBoard board = new PlayerBoard(i, numOfPlayers, this.gameManager.getPlayer(i+1));
 			boards.add(board);
 		}
+		
 		Button exitMessage = new Button(Constants.CloseMessageButtonPosition, Constants.CloseMessageButtonBounds,
 				"Close");
 		buttons.add(exitMessage);
+		
 		String[] values = new String[] { "Stone", "Wood", "Ore", "Clay" };
 		for (int i = 0; i < 4; i++) {
 			Point buttonPosition = new Point(Constants.TradeLeftBaseButtonPoint.x,
@@ -61,10 +67,19 @@ public class Game {
 			this.message = "";
 		} else {
 			String[] splitValue = clicked.getValue().split("-");
+			Player tradeTo;
+			Player tradeFrom = this.gameManager.getPlayer(this.currentPlayer);
 			if (splitValue[0].equals("Right")) {
-				// TODO: Trade splitValue[1] with right player
+				tradeTo = this.gameManager.getPlayer((this.currentPlayer + 1) % this.numOfPlayers);
+			
 			} else {
-				// TODO: Trade splitValue[1] with left player
+				tradeTo = this.gameManager.getPlayer((this.currentPlayer + (this.numOfPlayers - 1)) % this.numOfPlayers);
+			}
+			
+			try {
+				this.gameManager.trade(tradeFrom, tradeTo, 3);
+			} catch(InsufficientFundsException e) {
+				this.message = e.getMessage();
 			}
 		}
 	}
