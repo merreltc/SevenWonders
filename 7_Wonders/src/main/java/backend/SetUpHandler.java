@@ -31,6 +31,7 @@ public class SetUpHandler {
 		return new GameBoard(players);
 	}
 
+	// TODO: get rid of this function. Not necessary
 	public static int getPlayerNum() {
 		return playerNum;
 	}

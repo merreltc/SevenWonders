@@ -11,25 +11,21 @@ public class Player {
 
 	private int conflictTotal = 0;
 
-	private enum CoinType {
-		ONE, THREE
-	}
-
 	public void addValue1(int numCoinsToAdd) {
-		validateNumCoinsToAdd(numCoinsToAdd, CoinType.ONE);
+		validateNumCoinsToAdd(numCoinsToAdd, Coin.CoinType.ONE);
 
 		this.coinTotal += numCoinsToAdd;
 		this.numOfValue1Coins += numCoinsToAdd;
 	}
 
 	public void addValue3(int numCoinsToAdd) {
-		validateNumCoinsToAdd(numCoinsToAdd, CoinType.THREE);
+		validateNumCoinsToAdd(numCoinsToAdd, Coin.CoinType.THREE);
 
 		this.coinTotal += 3 * numCoinsToAdd;
 		this.numOfValue3Coins += numCoinsToAdd;
 	}
 
-	private void validateNumCoinsToAdd(int numCoins, CoinType type) {
+	private void validateNumCoinsToAdd(int numCoins, Coin.CoinType type) {
 		int max;
 		String coinType;
 
@@ -43,7 +39,7 @@ public class Player {
 			coinType = "3";
 			break;
 		default:
-			throw new IllegalArgumentException("Bad CoinType");
+			throw new IllegalArgumentException("Bad Coin.CoinType");
 		}
 
 		if (numCoins <= -1 || numCoins > max) {
@@ -52,20 +48,20 @@ public class Player {
 	}
 
 	public void removeValue1(int numCoinsToRemove) {
-		validateNumCoinsToRemove(numCoinsToRemove, CoinType.ONE);
+		validateNumCoinsToRemove(numCoinsToRemove, Coin.CoinType.ONE);
 
 		this.coinTotal -= numCoinsToRemove;
 		this.numOfValue1Coins -= numCoinsToRemove;
 	}
 
 	public void removeValue3(int numCoinsToRemove) {
-		validateNumCoinsToRemove(numCoinsToRemove, CoinType.THREE);
+		validateNumCoinsToRemove(numCoinsToRemove, Coin.CoinType.THREE);
 
 		this.coinTotal -= 3 * numCoinsToRemove;
 		this.numOfValue3Coins -= numCoinsToRemove;
 	}
 
-	private void validateNumCoinsToRemove(int numCoins, CoinType type) {
+	private void validateNumCoinsToRemove(int numCoins, Coin.CoinType type) {
 		if (numCoins <= -1) {
 			String coinType;
 
@@ -77,14 +73,14 @@ public class Player {
 				coinType = "3";
 				break;
 			default:
-				throw new IllegalArgumentException("Bad CoinType");
+				throw new IllegalArgumentException("Bad Coin.CoinType");
 			}
 
 			throw new IllegalArgumentException("Cannot remove " + numCoins + " value " + coinType + " coins");
 		}
 
 		int numCoinsToCheck = getNumOfCoinType(type);
-		String coinType = CoinTypeToString(type);
+		String coinType = coinTypeToString(type);
 
 		if (numCoins > numCoinsToCheck) {
 			throw new InsufficientFundsException(
@@ -92,22 +88,22 @@ public class Player {
 		}
 	}
 
-	private int getNumOfCoinType(CoinType type) {
-		if (type == CoinType.ONE) {
+	private int getNumOfCoinType(Coin.CoinType type) {
+		if (type == Coin.CoinType.ONE) {
 			return this.numOfValue1Coins;
 		}
 
 		return this.numOfValue3Coins;
 	}
 
-	private String CoinTypeToString(CoinType type) {
+	private String coinTypeToString(Coin.CoinType type) {
 		switch (type) {
 		case ONE:
 			return "1";
 		case THREE:
 			return "3";
 		default:
-			throw new IllegalArgumentException("Bad CoinType");
+			throw new IllegalArgumentException("Bad Coin.CoinType");
 		}
 	}
 
