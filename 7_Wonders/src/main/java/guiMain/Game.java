@@ -4,10 +4,12 @@ import java.awt.Graphics;
 import java.awt.Point;
 import java.util.ArrayList;
 
+import dataStructures.Player;
+
 public class Game {
 	private ArrayList<Button> buttons = new ArrayList<Button>();
 	private ArrayList<PlayerBoard> boards = new ArrayList<>();
-	// TODO: private ArrayList<Player> players = new ArrayList<Player>();
+	private ArrayList<Player> players = new ArrayList<Player>();
 	private String message = "Error";
 	private int numOfPlayers;
 

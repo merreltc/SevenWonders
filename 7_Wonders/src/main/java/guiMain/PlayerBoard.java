@@ -5,6 +5,8 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Point;
 
+import dataStructures.Player;
+
 public class PlayerBoard {
 	private Point position;
 	private Point sizePoint;
@@ -13,7 +15,7 @@ public class PlayerBoard {
 	private int totalNumberOfPlayers;
 	private int backPlayerStartingBoardPositionX;
 
-	// TODO: private Player player;
+	private Player player;
 
 	/*
 	 * TODO Pass in a player as well. This will be the player that controls the
