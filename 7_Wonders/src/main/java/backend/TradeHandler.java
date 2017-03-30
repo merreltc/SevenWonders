@@ -5,11 +5,8 @@ import dataStructures.Player;
 public class TradeHandler {
 
 	public static void tradeFromTo(Player from, Player to, int valueToTrade) {
-		int fromPlayerNumvalue3Coins = from.getNumValue3Coins();
-
 		// player's number of value 3 coins is calculated first because
 		// they have precedence over number of value 1 coins
-
 		int numValue3Coins = getNumValue3Coins(from, valueToTrade);
 		int valueRemaining = valueToTrade - (numValue3Coins * 3);
 		int numValue1Coins = getNumValue1Coins(valueRemaining);
