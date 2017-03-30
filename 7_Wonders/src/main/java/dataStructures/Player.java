@@ -39,7 +39,7 @@ public class Player {
 			coinType = "3";
 			break;
 		default:
-			throw new IllegalArgumentException("Bad Coin.CoinType");
+			throw new IllegalArgumentException("Bad CoinType");
 		}
 
 		if (numCoins <= -1 || numCoins > max) {
@@ -73,7 +73,7 @@ public class Player {
 				coinType = "3";
 				break;
 			default:
-				throw new IllegalArgumentException("Bad Coin.CoinType");
+				throw new IllegalArgumentException("Bad CoinType");
 			}
 
 			throw new IllegalArgumentException("Cannot remove " + numCoins + " value " + coinType + " coins");
