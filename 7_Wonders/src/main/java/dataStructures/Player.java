@@ -8,7 +8,6 @@ public class Player {
 	private int coinTotal = 3;
 	private int numOfValue1Coins = 3;
 	private int numOfValue3Coins = 0;
-
 	private int conflictTotal = 0;
 
 	public void addValue1(int numCoinsToAdd) {

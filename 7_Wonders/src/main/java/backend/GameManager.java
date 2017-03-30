@@ -15,6 +15,10 @@ public class GameManager {
 	public void setUpGame(int numPlayers) {
 		this.board = SetUpHandler.setUp(numPlayers);
 	}
+
+	public void trade(Player from, Player to, int valueToTrade) {
+		TradeHandler.tradeFromTo(from, to, valueToTrade);
+	}
 	
 	public int getNumPlayers() {
 		return this.board.getNumPlayers();
@@ -34,9 +38,5 @@ public class GameManager {
 
 	public int getPlayerCoinTotal(int i) {
 		return getPlayer(i).getCoinTotal();
-	}
-
-	public void trade(Player from, Player to, int valueToTrade) {
-		TradeHandler.tradeFromTo(from, to, valueToTrade);
 	}
 }
