@@ -1,6 +1,9 @@
 package dataStructures;
 
 public class Coin extends Chip {
+	public enum CoinType {
+		ONE, THREE
+	}
 
 	public Coin() {
 		super();
