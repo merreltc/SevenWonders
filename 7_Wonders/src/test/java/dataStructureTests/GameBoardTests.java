@@ -64,4 +64,18 @@ public class GameBoardTests {
 			assertEquals(players.get(i), board.getPlayer(i));
 		}
 	}
+	
+	@Test
+	public void testGameBoardGetPlayerCoinTotal() {
+		ArrayList<Player> players = new ArrayList<Player>();
+		players.add(new Player("Wolverine"));
+		players.add(new Player("Captain America"));
+		players.add(new Player("Black Widow"));
+
+		GameBoard board = new GameBoard(players);
+
+		for(int i = 0; i < players.size(); i++) {
+			assertEquals(3, board.getPlayerCoinTotal(i));
+		}
+	}
 }
