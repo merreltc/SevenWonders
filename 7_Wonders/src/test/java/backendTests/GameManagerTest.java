@@ -2,6 +2,8 @@ package backendTests;
 
 import static org.junit.Assert.*;
 
+import java.util.ArrayList;
+
 import org.easymock.EasyMock;
 import org.junit.Test;
 
@@ -12,7 +14,11 @@ public class GameManagerTest {
 
 	@Test
 	public void testGameManagerGetMinPlayers() {
-		GameManager manager = new GameManager(3);
+		ArrayList<String> playerNames = new ArrayList<String>();
+		playerNames.add("Wolverine");
+		playerNames.add("Captain America");
+		playerNames.add("Black Widow");
+		GameManager manager = new GameManager(playerNames);
 
 		assertEquals(3, manager.getNumPlayers());
 	}
