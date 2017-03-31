@@ -52,6 +52,9 @@ public class SetupBackendTest {
 	@Test
 	public void testSetUpReturnsPlayerNames() {
 		ArrayList<String> playerNames = new ArrayList<String>();
+		playerNames.add("Wolverine");
+		playerNames.add("Captain America");
+		playerNames.add("Black Widow");
 		assertEquals(playerNames, SetUpHandler.setUp(playerNames));
 	}
 	
