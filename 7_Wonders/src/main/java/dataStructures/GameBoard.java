@@ -33,6 +33,7 @@ public class GameBoard {
 			this.previousPlayerIndex = 1;
 		}else {
 			this.currentPlayerIndex = 0;
+			this.nextPlayerIndex = 1;
 			this.previousPlayerIndex = 4;
 		}
 
