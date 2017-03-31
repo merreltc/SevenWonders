@@ -5,13 +5,18 @@ import java.util.ArrayList;
 import dataStructures.GameBoard;
 import dataStructures.Player;
 
+/**
+ * Controls the actions of the game and delegates those responsibilities to
+ * different classes
+ *
+ */
 public class GameManager {
 	private GameBoard board;
-	
-	public GameManager(int numPlayers){
+
+	public GameManager(int numPlayers) {
 		setUpGame(numPlayers);
 	}
-	
+
 	public void setUpGame(int numPlayers) {
 		this.board = SetUpHandler.setUp(numPlayers);
 	}
@@ -19,7 +24,7 @@ public class GameManager {
 	public void trade(Player from, Player to, int valueToTrade) {
 		TradeHandler.tradeFromTo(from, to, valueToTrade);
 	}
-	
+
 	public int getNumPlayers() {
 		return this.board.getNumPlayers();
 	}

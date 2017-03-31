@@ -17,7 +17,7 @@ public class SetUpHandler {
 		if (num < 3 || num > 7) {
 			throw new IllegalArgumentException("Cannot play with " + num + " players");
 		}
-		
+
 		playerNum = num;
 	}
 
@@ -31,7 +31,7 @@ public class SetUpHandler {
 		return new GameBoard(players);
 	}
 
-	// TODO: get rid of this function. Not necessary
+	// TODO: get rid of this function. Not necessary - testing purposes only
 	public static int getPlayerNum() {
 		return playerNum;
 	}
