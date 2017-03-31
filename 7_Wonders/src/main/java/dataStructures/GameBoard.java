@@ -35,4 +35,8 @@ public class GameBoard {
 		return this.players.get(1);
 	}
 
+	public Player getPreviousPlayer() {
+		return this.players.get(2);
+	}
+
 }
