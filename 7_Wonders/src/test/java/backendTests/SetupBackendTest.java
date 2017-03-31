@@ -8,6 +8,7 @@ import org.junit.Test;
 
 import backend.SetUpHandler;
 import dataStructures.GameBoard;
+import dataStructures.Player;
 
 public class SetupBackendTest {
 
@@ -55,7 +56,14 @@ public class SetupBackendTest {
 		playerNames.add("Wolverine");
 		playerNames.add("Captain America");
 		playerNames.add("Black Widow");
-		assertEquals(playerNames, SetUpHandler.setUpAndReturnPlayers(playerNames));
+		
+		ArrayList<Player> players = (ArrayList<Player>) EasyMock.mock(ArrayList.class);
+		EasyMock.expect(SetUpHandler.setUpHandler.setUpAndReturnPlayers(playerNames)).andReturn(players);
+		
+		EasyMock.replay(players);
+		SetUpHandler.setUpHandler.setUpAndReturnPlayers(playerNames);
+		
+		EasyMock.verify(players);
 	}
 	
 	@Test
