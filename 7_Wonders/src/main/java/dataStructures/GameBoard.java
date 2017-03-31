@@ -22,4 +22,8 @@ public class GameBoard {
 	public Player getPlayer(int index) {
 		return this.players.get(index);
 	}
+
+	public int getPlayerCoinTotal(int index) {
+		return this.getPlayer(index).getCoinTotal();
+	}
 }
