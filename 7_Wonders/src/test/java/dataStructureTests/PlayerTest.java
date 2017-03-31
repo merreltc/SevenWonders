@@ -34,6 +34,13 @@ public class PlayerTest {
 
 		assertEquals("Sandman", player.getName());
 	}
+	
+	@Test
+	public void testToStringDefaultPlayer() {
+		Player player = new Player();
+		
+		assertEquals("Jane Doe", player.toString());
+	}
 
 	@Test
 	public void testAddValue1Coins() {
