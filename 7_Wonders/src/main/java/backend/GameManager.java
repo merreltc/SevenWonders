@@ -12,7 +12,6 @@ import dataStructures.Player;
  */
 public class GameManager {
 	private GameBoard board;
-	ArrayList<String> playerNames;
 
 	public GameManager(ArrayList<String> playerNames) {
 		setUpGame(playerNames);
@@ -29,7 +28,7 @@ public class GameManager {
 	}
 
 	public int getNumPlayers() {
-		return this.playerNames.size();
+		return this.board.getNumPlayers();
 	}
 
 	public GameBoard getGameBoard() {
