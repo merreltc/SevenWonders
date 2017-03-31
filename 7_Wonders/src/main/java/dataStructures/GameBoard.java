@@ -28,15 +28,16 @@ public class GameBoard {
 	}
 
 	public Player getCurrentPlayer() {
-		return this.players.get(0);
+		return this.getPlayer(0);
 	}
 
 	public Player getNextPlayer() {
-		return this.players.get(1);
+		return this.getPlayer(1);
 	}
 
 	public Player getPreviousPlayer() {
-		return this.players.get(2);
+		int previousPlayerIndex = this.players.size() - 1;
+		return this.players.get(previousPlayerIndex);
 	}
 
 }
