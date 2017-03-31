@@ -30,4 +30,9 @@ public class GameBoard {
 	public Player getCurrentPlayer() {
 		return this.players.get(0);
 	}
+
+	public Player getNextPlayer() {
+		return this.players.get(1);
+	}
+
 }
