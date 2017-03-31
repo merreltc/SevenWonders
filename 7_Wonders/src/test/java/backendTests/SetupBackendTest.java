@@ -61,10 +61,10 @@ public class SetupBackendTest {
 		ArrayList<Player> players = (ArrayList<Player>) EasyMock.mock(ArrayList.class);
 		EasyMock.expect(SetUpHandler.setUpHandler.setUpAndReturnPlayers(playerNames)).andReturn(players);
 		
-		EasyMock.replay(players);
+		EasyMock.replay(players, SetUpHandler.setUpHandler);
 		SetUpHandler.setUpHandler.setUpAndReturnPlayers(playerNames);
 		
-		EasyMock.verify(players);
+		EasyMock.verify(players, SetUpHandler.setUpHandler);
 	}
 	
 	@Test
