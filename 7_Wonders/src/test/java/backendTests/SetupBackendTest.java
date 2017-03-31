@@ -14,26 +14,26 @@ public class SetupBackendTest {
 
 	@Test
 	public void testValidPlayerNum() {
-		assertTrue(SetUpHandler.validatePlayerNum(3));
-		assertTrue(SetUpHandler.validatePlayerNum(7));
+		assertTrue(SetUpHandler.setUpHandler.validatePlayerNum(3));
+		assertTrue(SetUpHandler.setUpHandler.validatePlayerNum(7));
 	}
 	
 	@Test(expected = IllegalArgumentException.class)
 	public void testInvalidPlayerNum2() {
-		SetUpHandler.validatePlayerNum(2);
+		SetUpHandler.setUpHandler.validatePlayerNum(2);
 		fail();
 	}
 	
 	@Test(expected = IllegalArgumentException.class)
 	public void testInvalidPlayerNum8() {
-		SetUpHandler.validatePlayerNum(8);
+		SetUpHandler.setUpHandler.validatePlayerNum(8);
 		fail();
 	}
 	
 	@Test
 	public void testInvalidPlayerNum2ErrorMessage() {	
 		try{
-			SetUpHandler.validatePlayerNum(2);
+			SetUpHandler.setUpHandler.validatePlayerNum(2);
 		} catch (IllegalArgumentException error){
 			String message = "Cannot play with 2 players";
 			assertEquals(message, error.getMessage());
@@ -43,7 +43,7 @@ public class SetupBackendTest {
 	@Test
 	public void testInvalidPlayerNum8ErrorMessage() {
 		try{
-			SetUpHandler.validatePlayerNum(8);
+			SetUpHandler.setUpHandler.validatePlayerNum(8);
 		} catch (IllegalArgumentException error){
 			String message = "Cannot play with 8 players";
 			assertEquals(message, error.getMessage());
