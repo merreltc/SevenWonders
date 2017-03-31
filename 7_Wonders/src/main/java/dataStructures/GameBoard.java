@@ -8,12 +8,14 @@ public class GameBoard {
 	private int numPlayers;
 	
 	private int currentPlayerIndex;
+	private int nextPlayerIndex;
 	private int previousPlayerIndex;
 	private int numClockwiseRotates = 0;
 
 	public GameBoard(ArrayList<Player> players) {
 		this.numPlayers = players.size();
 		this.currentPlayerIndex = 0;
+		this.nextPlayerIndex = 1;
 		this.previousPlayerIndex = this.numPlayers - 1;
 		this.players = players;
 	}
@@ -23,6 +25,7 @@ public class GameBoard {
 		
 		if (currClockwiseRotates == 1) {
 			this.currentPlayerIndex = 1;
+			this.nextPlayerIndex = 2;
 			this.previousPlayerIndex = 0;
 		} else if (currClockwiseRotates == 2){
 			this.currentPlayerIndex = 2;
@@ -55,7 +58,7 @@ public class GameBoard {
 	}
 
 	public Player getNextPlayer() {
-		return this.getPlayer(1);
+		return this.getPlayer(this.nextPlayerIndex);
 	}
 
 	public Player getPreviousPlayer() {
