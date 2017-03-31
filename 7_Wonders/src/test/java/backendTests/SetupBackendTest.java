@@ -4,12 +4,18 @@ import static org.junit.Assert.*;
 import java.util.ArrayList;
 
 import org.easymock.EasyMock;
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 
 import backend.SetUpHandler;
 import dataStructures.Player;
 
 public class SetupBackendTest {
+	
+	@After public void setUp() { 
+		SetUpHandler.setUpHandler = new SetUpHandler();
+    }
 
 	@Test
 	public void testValidPlayerNum() {
@@ -141,6 +147,20 @@ public class SetupBackendTest {
 		SetUpHandler.setUpHandler.createPlayers(playerNames);
 		
 		EasyMock.verify(players, SetUpHandler.setUpHandler);
+	}
+	
+	@Test
+	public void testCreateNamedPlayers() {
+		ArrayList<String> playerNames = new ArrayList<String>();
+		playerNames.add("Wolverine");
+		playerNames.add("Captain America");
+		playerNames.add("Black Widow");
+		
+		ArrayList<Player> players = SetUpHandler.setUpHandler.setUpAndReturnPlayers(playerNames);
+		
+		assertEquals("Wolverine", players.get(0).getName());
+		assertEquals("Captain America", players.get(1).getName());
+		assertEquals("Black Widow", players.get(2).getName());
 	}
 
 
