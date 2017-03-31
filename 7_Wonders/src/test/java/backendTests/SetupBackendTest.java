@@ -150,7 +150,7 @@ public class SetupBackendTest {
 	}
 	
 	@Test
-	public void testCreateNamedPlayers() {
+	public void testCreateNamedPlayersMin() {
 		ArrayList<String> playerNames = new ArrayList<String>();
 		playerNames.add("Wolverine");
 		playerNames.add("Captain America");

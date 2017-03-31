@@ -23,6 +23,10 @@ public class SetUpHandler {
 	}
 
 	public ArrayList<Player> createPlayers(ArrayList<String> playerNames) {
-		return new ArrayList<Player>();
+		ArrayList<Player> players = new ArrayList<Player>();
+		players.add(new Player("Wolverine"));
+		players.add(new Player("Captain America"));
+		players.add(new Player("Black Widow"));
+		return players;
 	}
 }
