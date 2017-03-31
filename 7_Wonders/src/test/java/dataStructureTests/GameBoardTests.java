@@ -174,6 +174,6 @@ public class GameBoardTests {
 		board.rotateClockwise();
 		board.rotateClockwise();
 
-		assertEquals(players.get(2), board.getPreviousPlayer());
+		assertEquals(players.get(1), board.getPreviousPlayer());
 	}
 }

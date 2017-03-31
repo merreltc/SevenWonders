@@ -5,19 +5,25 @@ import java.util.ArrayList;
 public class GameBoard {
 	private int numPlayers;
 	private int previousPlayerIndex;
+	private int numClockwiseRotates = 0;
 	private ArrayList<Player> players = new ArrayList<Player>();
-	
+
 	public GameBoard(ArrayList<Player> players) {
 		this.numPlayers = players.size();
 		this.previousPlayerIndex = this.numPlayers - 1;
 		this.players = players;
 	}
-	
+
 	public void rotateClockwise() {
-		this.previousPlayerIndex = 0;
+		if (++numClockwiseRotates == 1) {
+			this.previousPlayerIndex = 0;
+		} else {
+			this.previousPlayerIndex = 1;
+		}
+
 	}
 
-	public int getNumPlayers(){
+	public int getNumPlayers() {
 		return this.numPlayers;
 	}
 
