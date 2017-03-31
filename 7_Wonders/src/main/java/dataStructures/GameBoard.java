@@ -37,7 +37,7 @@ public class GameBoard {
 
 	public Player getPreviousPlayer() {
 		int previousPlayerIndex = this.players.size() - 1;
-		return this.players.get(previousPlayerIndex);
+		return this.getPlayer(previousPlayerIndex);
 	}
 
 }
