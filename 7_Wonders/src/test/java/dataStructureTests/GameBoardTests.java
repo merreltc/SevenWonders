@@ -66,7 +66,7 @@ public class GameBoardTests {
 	}
 	
 	@Test
-	public void testGameBoardGetPlayerCoinTotal() {
+	public void testGameBoardGetPlayerCoinTotalOnStart() {
 		ArrayList<Player> players = new ArrayList<Player>();
 		players.add(new Player("Wolverine"));
 		players.add(new Player("Captain America"));
