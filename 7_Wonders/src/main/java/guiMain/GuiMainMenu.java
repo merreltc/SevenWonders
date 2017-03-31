@@ -16,20 +16,13 @@ import backend.SetUpHandler;
 import dataStructures.Player;
 
 public class GuiMainMenu extends JPanel implements ActionListener {
-
-	private static final int MessageTimeLength = 60;
-	
+	private Game game;
 	private JFrame frame;
 	private Timer timer;
 	private Menu currentMenu;
 	private MenuMouseListener menuMouse;
 	private boolean initialized = false;
 	private ArrayList<Button> buttons = new ArrayList<Button>();
-	private ArrayList<PlayerBoard> boards = new ArrayList<>();
-	private ArrayList<Player> players = new ArrayList<>();
-	//private ArrayList<Player> players = new ArrayList<Player>();
-	private String message = "";
-	private int messageTimeCounter = 0;
 	private Integer numOfPlayers;
 
 	public enum Menu {
@@ -40,9 +33,9 @@ public class GuiMainMenu extends JPanel implements ActionListener {
 		currentMenu = Menu.MainMenu;
 	}
 
-	public void Start() {
+	public void start() {
 		frame = new JFrame();
-		frame.setSize(1900, 1000);
+		frame.setSize(Constants.FrameWidth, Constants.FrameHeight);
 		frame.setVisible(true);
 		frame.setTitle("Seven Wonders");
 		frame.setResizable(false);
@@ -54,14 +47,6 @@ public class GuiMainMenu extends JPanel implements ActionListener {
 		timer.start();
 	}
 
-	public JFrame GetFrame() {
-		return frame;
-	}
-
-	public Timer GetTimer() {
-		return timer;
-	}
-
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
 		repaint();
@@ -70,99 +55,103 @@ public class GuiMainMenu extends JPanel implements ActionListener {
 	@Override
 	public void paintComponent(Graphics graphics) {
 		graphics.setColor(Color.RED);
-		graphics.fillRect(0, 0, 1900, 1000);
+		graphics.fillRect(0, 0, Constants.FrameWidth, Constants.FrameHeight);
+
 		switch (this.currentMenu) {
 		case MainMenu:
 			if (!initialized) {
-				this.buttons.clear();
-				Button startGame = new Button(new Point(850, 400), new Point(200, 100), "Start");
-				buttons.add(startGame);
-				initialized = true;
+				intializeMainMenu();
 			}
-			graphics.setFont(new Font("Courier New", Font.BOLD, 70));
-			graphics.setColor(Color.cyan);
-			graphics.drawString("7 Wonders", 740, 100);
+			graphics.setFont(Constants.TitleFont);
+			graphics.setColor(Constants.TitleColor);
+			graphics.drawString("7 Wonders", Constants.MainMenuTitlePosition.x, Constants.MainMenuTitlePosition.y);
 
 			for (Button button : buttons) {
 				button.draw(graphics);
 			}
 			break;
+
 		case PlayerSelect:
 			if (!initialized) {
-				this.buttons.clear();
-				for (int i = 3; i <= 7; i++) {
-					Button startGame = new Button(new Point(400 + 250 * (i - 3), 400), new Point(150, 100), i + "");
-					buttons.add(startGame);
-				}
-				initialized = true;
+				intializePlayerSelect();
 			}
 			for (Button button : buttons) {
 				button.draw(graphics);
 			}
-			graphics.setFont(new Font("Courier New", Font.BOLD, 50));
-			graphics.setColor(Color.cyan);
-			graphics.drawString("Choose number of players", 570, 300);
+			graphics.setFont(Constants.TitleFont);
+			graphics.setColor(Constants.TitleColor);
+			graphics.drawString("Choose number of players", Constants.PlayerSelectTitlePosition.x,
+					Constants.PlayerSelectButtonBounds.y);
 			break;
+
 		case Game:
-			
 			if (!initialized) {
-				for (int i = -1; i < this.numOfPlayers-1; i++){
-					PlayerBoard board = new PlayerBoard(i, 5);
-					boards.add(board);
-				}
+				this.game = new Game(this.numOfPlayers);
+				game.initializeGame();
 				initialized = true;
 			}
-			for (int i = 0; i < boards.size(); i++){
-				
-				boards.get(i).draw(graphics);
-			}
-			if (this.messageTimeCounter > 0){
-				this.DrawMessageOnScreen(graphics);
-				this.messageTimeCounter--;
-			}
+			game.draw(graphics);
 			break;
 		}
+	}
+
+	private void intializePlayerSelect() {
+		this.buttons.clear();
+		for (int i = 3; i <= 7; i++) {
+			Button startGame = new Button(new Point(400 + 250 * (i - 3), 400), Constants.PlayerSelectButtonBounds,
+					i + "");
+			buttons.add(startGame);
+		}
+		initialized = true;
+	}
+
+	private void intializeMainMenu() {
+		this.buttons.clear();
+		Button startGame = new Button(Constants.StartButtonPosition, Constants.StartButtonBounds, "Start");
+		buttons.add(startGame);
+		initialized = true;
 	}
 
 	public void onButtonClick(Button clicked) {
 		String text = clicked.getValue();
 		switch (currentMenu) {
 		case MainMenu:
-			SwitchMenu(Menu.PlayerSelect);
+			switchMenu(Menu.PlayerSelect);
 			break;
 		case PlayerSelect:
 			numOfPlayers = Integer.parseInt(text);
-			SetUpHandler setUp = new SetUpHandler();
-			setUp.setPlayerNum(numOfPlayers);
-			
-			SwitchMenu(Menu.Game);
+
+			switchMenu(Menu.Game);
+			break;
+		case Game:
+			this.game.onButtonClickInGame(clicked);
 			break;
 		}
 	}
 
-	public void SwitchMenu(Menu menu) {
+	public void switchMenu(Menu menu) {
 		this.currentMenu = menu;
 		this.initialized = false;
 	}
 
-	public ArrayList<Button> GetActiveButtons() {
+	public ArrayList<Button> getActiveButtons() {
+		if (this.currentMenu == Menu.Game) {
+			return this.game.getButtons();
+		}
 		return buttons;
 	}
-	
-	public void DrawMessageOnScreen(Graphics graphics){
-		graphics.setFont(new Font("Courier New", Font.BOLD, 100));
-		graphics.setColor(Color.cyan);
-		graphics.drawString(this.message, 500, 400);
-	}
-	
-	public void SetMessage(String message){
-		this.message = message;
-		this.messageTimeCounter = this.MessageTimeLength;
+
+	public JFrame getFrame() {
+		return frame;
 	}
 
-	public static void main(String[] args){
-		GuiMainMenu menu = new GuiMainMenu();
-		menu.Start();
+	public Timer getTimer() {
+		return timer;
 	}
-	
+
+	public static void main(String[] args) {
+		GuiMainMenu menu = new GuiMainMenu();
+		menu.start();
+	}
+
 }

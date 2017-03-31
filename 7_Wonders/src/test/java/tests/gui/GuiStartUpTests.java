@@ -14,55 +14,55 @@ public class GuiStartUpTests {
 	@Before
 	public void SetUp(){
 		menu = new GuiMainMenu();
-		menu.Start();
+		menu.start();
 	}
 	
 	
 	@Test
 	public void testMakeFrame(){
-		Assert.assertNotNull(menu.GetFrame());
+		Assert.assertNotNull(menu.getFrame());
 	}
 	
 	@Test
 	public void testSize(){
-		Assert.assertEquals(1000, menu.GetFrame().getHeight());
-		Assert.assertEquals(1000, menu.GetFrame().getWidth());
+		Assert.assertEquals(1000, menu.getFrame().getHeight());
+		Assert.assertEquals(1000, menu.getFrame().getWidth());
 	}
 	
 	@Test
 	public void testVisible(){
-		Assert.assertTrue(menu.GetFrame().isVisible());
+		Assert.assertTrue(menu.getFrame().isVisible());
 	}
 	
 	@Test
 	public void testTitle(){
-		Assert.assertEquals("Seven Wonders", menu.GetFrame().getTitle());
+		Assert.assertEquals("Seven Wonders", menu.getFrame().getTitle());
 	}
 	
 	@Test
 	public void testTimer(){
-		Timer time = menu.GetTimer();
+		Timer time = menu.getTimer();
 		Assert.assertEquals(20, time.getDelay());
 	}
 	
 	@Test
 	public void testAddGuiMainMenuToFrame(){
-		Assert.assertEquals(1, menu.GetFrame().getComponentCount());
+		Assert.assertEquals(1, menu.getFrame().getComponentCount());
 	}
 	
 	@Test
 	public void testAddKeyListener() {
-		Assert.assertEquals(1, menu.GetFrame().getKeyListeners().length);
+		Assert.assertEquals(1, menu.getFrame().getKeyListeners().length);
 	}
 	
 	@Test
 	public void testAddMouseListener(){
-		Assert.assertEquals(1, menu.GetFrame().getMouseListeners().length);
+		Assert.assertEquals(1, menu.getFrame().getMouseListeners().length);
 	}
 	
 	@Test
 	public void testTimeIsRunning(){
-		Timer time = menu.GetTimer();
+		Timer time = menu.getTimer();
 		Assert.assertTrue(time.isRunning());
 	}
 }
