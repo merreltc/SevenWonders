@@ -52,7 +52,7 @@ public class SetupBackendTest {
 	@Test
 	public void testSetUpReturnsPlayerNames() {
 		ArrayList<String> playerNames = new ArrayList<String>();
-		SetUpHandler.setUp(playerNames);
+		assertEquals(playerNames, SetUpHandler.setUp(playerNames));
 	}
 	
 	@Test
