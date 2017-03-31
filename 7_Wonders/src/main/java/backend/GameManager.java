@@ -12,14 +12,14 @@ import dataStructures.Player;
  */
 public class GameManager {
 	private GameBoard board;
+	int playerNum;
 
 	public GameManager(ArrayList<String> playerNames) {
 		setUpGame(playerNames);
 	}
 
 	public void setUpGame(ArrayList<String> playerNames) {
-		SetUpHandler.setUp(playerNames);
-		this.board = new GameBoard();
+		playerNum = SetUpHandler.setUp(playerNames).size();
 	}
 
 	public void trade(Player from, Player to, int valueToTrade) {
@@ -27,7 +27,7 @@ public class GameManager {
 	}
 
 	public int getNumPlayers() {
-		return this.board.getNumPlayers();
+		return this.playerNum;
 	}
 
 	public GameBoard getGameBoard() {
