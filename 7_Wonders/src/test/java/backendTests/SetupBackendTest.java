@@ -1,6 +1,8 @@
 package backendTests;
 import static org.junit.Assert.*;
 
+import java.util.ArrayList;
+
 import org.easymock.EasyMock;
 import org.junit.Test;
 
@@ -48,17 +50,9 @@ public class SetupBackendTest {
 	}
 	
 	@Test
-	public void testCreateGameBoardDefault() {
-		GameBoard board = EasyMock.createStrictMock(GameBoard.class);
-		
-		SetUpHandler.validatePlayerNum(3);
-		//EasyMock.expect(SetUpHandler.createDefaultGameBoard()).andReturn(board);
-		
-		EasyMock.replay(board);
-		
-		SetUpHandler.setUp(3);
-		
-		EasyMock.verify(board);
+	public void testSetUpReturnsPlayerNames() {
+		ArrayList<String> playerNames = new ArrayList<String>();
+		SetUpHandler.setUp(playerNames);
 	}
 	
 	@Test
