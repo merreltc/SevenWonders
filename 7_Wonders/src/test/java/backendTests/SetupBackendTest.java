@@ -50,7 +50,7 @@ public class SetupBackendTest {
 	}
 	
 	@Test
-	public void testSetUpReturnsPlayerNames() {
+	public void testSetUpReturnsPlayerNamesMin() {
 		ArrayList<String> playerNames = new ArrayList<String>();
 		playerNames.add("Wolverine");
 		playerNames.add("Captain America");
@@ -59,16 +59,16 @@ public class SetupBackendTest {
 	}
 	
 	@Test
-	public void testCreateGameBoardMinPlayers() {
-		GameBoard board = SetUpHandler.setUp(3);
-		
-		assertEquals(3, board.getNumPlayers());
+	public void testSetUpReturnsPlayerNamesMax() {
+		ArrayList<String> playerNames = new ArrayList<String>();
+		playerNames.add("Wolverine");
+		playerNames.add("Captain America");
+		playerNames.add("Black Widow");
+		playerNames.add("Hulk");
+		playerNames.add("Iron Man");
+		playerNames.add("Spider Man");
+		playerNames.add("Thor");
+		assertEquals(playerNames, SetUpHandler.setUp(playerNames));
 	}
-	
-	@Test
-	public void testCreateGameBoardMaxPlayers() {
-		GameBoard board = SetUpHandler.setUp(7);
-		
-		assertEquals(7, board.getNumPlayers());
-	}
+
 }
