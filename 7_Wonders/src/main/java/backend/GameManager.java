@@ -13,12 +13,13 @@ import dataStructures.Player;
 public class GameManager {
 	private GameBoard board;
 
-	public GameManager(int numPlayers) {
-		setUpGame(numPlayers);
+	public GameManager(ArrayList<String> playerNames) {
+		setUpGame(playerNames);
 	}
 
-	public void setUpGame(int numPlayers) {
-		this.board = SetUpHandler.setUp(numPlayers);
+	public void setUpGame(ArrayList<String> playerNames) {
+		SetUpHandler.setUp(playerNames);
+		this.board = new GameBoard();
 	}
 
 	public void trade(Player from, Player to, int valueToTrade) {
