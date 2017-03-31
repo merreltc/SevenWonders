@@ -39,11 +39,11 @@ public class GameManager {
 		return this.board.getPlayers();
 	}
 
-	public Player getPlayer(int i) {
-		return this.board.getPlayers().get(i);
+	public Player getPlayer(int index) {
+		return this.board.getPlayer(index);
 	}
 
-	public int getPlayerCoinTotal(int i) {
-		return getPlayer(i).getCoinTotal();
+	public int getPlayerCoinTotal(int index) {
+		return this.board.getPlayerCoinTotal(index);
 	}
 }
