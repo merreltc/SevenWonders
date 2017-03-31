@@ -28,6 +28,7 @@ public class GameBoard {
 			this.currentPlayerIndex = 2;
 			this.previousPlayerIndex = 1;
 		}else {
+			this.currentPlayerIndex = 0;
 			this.previousPlayerIndex = 4;
 		}
 
