@@ -57,6 +57,7 @@ public class SetupBackendTest {
 		playerNames.add("Captain America");
 		playerNames.add("Black Widow");
 		
+		SetUpHandler.setUpHandler = EasyMock.mock(SetUpHandler.class);
 		ArrayList<Player> players = (ArrayList<Player>) EasyMock.mock(ArrayList.class);
 		EasyMock.expect(SetUpHandler.setUpHandler.setUpAndReturnPlayers(playerNames)).andReturn(players);
 		
