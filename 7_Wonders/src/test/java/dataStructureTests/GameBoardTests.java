@@ -165,7 +165,7 @@ public class GameBoardTests {
 	}
 	
 	@Test
-	public void testGameGetPreviousAndCurrentPlayerOnRotateClockwiseMany() {
+	public void testGameGetPlayerPositionsOnRotateClockwiseMany() {
 		ArrayList<Player> players = new ArrayList<Player>();
 		players.add(new Player("Wolverine"));
 		players.add(new Player("Captain America"));
@@ -180,6 +180,7 @@ public class GameBoardTests {
 		}
 		
 		assertEquals(players.get(0), board.getCurrentPlayer());
+		assertEquals(players.get(1), board.getNextPlayer());
 		assertEquals(players.get(4), board.getPreviousPlayer());
 	}
 }
