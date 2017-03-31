@@ -95,6 +95,10 @@ public class Player {
 		}
 	}
 
+	public String toString() {
+		return this.name;
+	}
+	
 	private int getNumOfCoinType(Chip.ChipType type) {
 		if (type == Chip.ChipType.ONE) {
 			return this.numOfValue1Coins;
