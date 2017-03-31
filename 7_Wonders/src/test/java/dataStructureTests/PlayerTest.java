@@ -26,6 +26,14 @@ public class PlayerTest {
 		assertEquals(3, player.getNumValue1Coins());
 		assertEquals(0, player.getNumValue3Coins());
 	}
+	
+	@Test
+	public void testNamedPlayer() {
+		String name = "Sandman";
+		Player player = new Player(name);
+
+		assertEquals("Sandman", player.getName());
+	}
 
 	@Test
 	public void testAddValue1Coins() {
