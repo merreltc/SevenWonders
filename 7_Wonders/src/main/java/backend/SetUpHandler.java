@@ -9,16 +9,18 @@ public class SetUpHandler {
 	private static int playerNum;
 
 	public static GameBoard setUp(int numPlayers) {
-		setPlayerNum(numPlayers);
+		validatePlayerNum(numPlayers);
 		return createDefaultGameBoard();
 	}
 
-	public static void setPlayerNum(int num) {
+	public static boolean validatePlayerNum(int num) {
 		if (num < 3 || num > 7) {
 			throw new IllegalArgumentException("Cannot play with " + num + " players");
 		}
-
+		
 		playerNum = num;
+
+		return true;
 	}
 
 	public static GameBoard createDefaultGameBoard() {

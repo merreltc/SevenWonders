@@ -17,20 +17,20 @@ public class SetupBackendTest {
 	
 	@Test(expected = IllegalArgumentException.class)
 	public void testInvalidPlayerNum2() {
-		SetUpHandler.setPlayerNum(2);
+		SetUpHandler.validatePlayerNum(2);
 		fail();
 	}
 	
 	@Test(expected = IllegalArgumentException.class)
 	public void testInvalidPlayerNum8() {
-		SetUpHandler.setPlayerNum(8);
+		SetUpHandler.validatePlayerNum(8);
 		fail();
 	}
 	
 	@Test
 	public void testInvalidPlayerNum2ErrorMessage() {	
 		try{
-			SetUpHandler.setPlayerNum(2);
+			SetUpHandler.validatePlayerNum(2);
 		} catch (IllegalArgumentException error){
 			String message = "Cannot play with 2 players";
 			assertEquals(message, error.getMessage());
@@ -40,7 +40,7 @@ public class SetupBackendTest {
 	@Test
 	public void testInvalidPlayerNum8ErrorMessage() {
 		try{
-			SetUpHandler.setPlayerNum(8);
+			SetUpHandler.validatePlayerNum(8);
 		} catch (IllegalArgumentException error){
 			String message = "Cannot play with 8 players";
 			assertEquals(message, error.getMessage());
@@ -51,7 +51,7 @@ public class SetupBackendTest {
 	public void testCreateGameBoardDefault() {
 		GameBoard board = EasyMock.createStrictMock(GameBoard.class);
 		
-		SetUpHandler.setPlayerNum(3);
+		SetUpHandler.validatePlayerNum(3);
 		//EasyMock.expect(SetUpHandler.createDefaultGameBoard()).andReturn(board);
 		
 		EasyMock.replay(board);
