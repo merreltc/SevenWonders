@@ -25,6 +25,7 @@ public class GameBoard {
 			this.currentPlayerIndex = 1;
 			this.previousPlayerIndex = 0;
 		} else if (currClockwiseRotates == 2){
+			this.currentPlayerIndex = 2;
 			this.previousPlayerIndex = 1;
 		}else {
 			this.previousPlayerIndex = 4;
