@@ -9,6 +9,14 @@ public class Player {
 	private int numOfValue1Coins = 3;
 	private int numOfValue3Coins = 0;
 	private int conflictTotal = 0;
+	
+	public Player() {
+		
+	}
+
+	public Player(String playerName) {
+		this.name = playerName;
+	}
 
 	public void addValue1(int numCoinsToAdd) {
 		validateNumCoinsToAdd(numCoinsToAdd, Chip.ChipType.ONE);
