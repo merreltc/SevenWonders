@@ -13,7 +13,7 @@ import dataStructures.GameBoard;
 public class GameManagerTest {
 
 	@Test
-	public void testGameManagerGetMinPlayers() {
+	public void testSetUpGameBoardMinPlayers() {
 		ArrayList<String> playerNames = new ArrayList<String>();
 		playerNames.add("Wolverine");
 		playerNames.add("Captain America");
@@ -24,7 +24,7 @@ public class GameManagerTest {
 	}
 
 	@Test
-	public void testGameManagerGetMaxPlayers() {
+	public void testSetUpGameBoardMaxPlayers() {
 		ArrayList<String> playerNames = new ArrayList<String>();
 		playerNames.add("Wolverine");
 		playerNames.add("Captain America");
@@ -39,29 +39,12 @@ public class GameManagerTest {
 	}
 	
 	@Test
-	public void testSetUpGameBoardMinPlayers() {
-		GameManager manager = new GameManager(3);
-		
-		assertEquals(3, manager.getNumPlayers());
-	}
-	
-	@Test
-	public void testSetUpGameBoardMaxPlayers() {
-		GameManager manager = new GameManager(7);
-		
-		assertEquals(7, manager.getNumPlayers());
-	}
-	
-	@Test
-	public void testGetPlayers() {
-		GameManager manager = new GameManager(7);
-		
-		assertEquals(7, manager.getPlayers().size());
-	}
-	
-	@Test
 	public void testTrade(){
-		GameManager manager = new GameManager(7);
+		ArrayList<String> playerNames = new ArrayList<String>();
+		playerNames.add("Wolverine");
+		playerNames.add("Captain America");
+		playerNames.add("Black Widow");
+		GameManager manager = new GameManager(playerNames);
 		
 		manager.trade(manager.getPlayer(0), manager.getPlayer(1), 3);
 		
