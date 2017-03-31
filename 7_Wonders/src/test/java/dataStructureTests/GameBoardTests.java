@@ -90,4 +90,16 @@ public class GameBoardTests {
 
 		assertEquals(players.get(0), board.getCurrentPlayer());
 	}
+	
+	@Test
+	public void testGameGetNextPlayerOnStart() {
+		ArrayList<Player> players = new ArrayList<Player>();
+		players.add(new Player("Wolverine"));
+		players.add(new Player("Captain America"));
+		players.add(new Player("Black Widow"));
+
+		GameBoard board = new GameBoard(players);
+
+		assertEquals(players.get(1), board.getNextPlayer());
+	}
 }
