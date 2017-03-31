@@ -15,12 +15,13 @@ public class GameManager {
 	ArrayList<String> playerNames;
 
 	public GameManager(ArrayList<String> playerNames) {
-		this.playerNames = playerNames;
 		setUpGame(playerNames);
+
 	}
 
 	public void setUpGame(ArrayList<String> playerNames) {
-		SetUpHandler.setUpHandler.setUpAndReturnPlayers(playerNames);
+		ArrayList<Player> players = SetUpHandler.setUpHandler.setUpAndReturnPlayers(playerNames);
+		this.board = new GameBoard(players);
 	}
 
 	public void trade(Player from, Player to, int valueToTrade) {
