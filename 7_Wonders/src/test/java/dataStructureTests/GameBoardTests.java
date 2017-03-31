@@ -12,7 +12,7 @@ import dataStructures.Player;
 public class GameBoardTests {
 
 	@Test
-	public void testGameBoardMinPlayers() {
+	public void testGameBoardGMinPlayers() {
 		ArrayList<Player> players = new ArrayList<Player>();
 		players.add(new Player());
 		players.add(new Player());
@@ -20,9 +20,7 @@ public class GameBoardTests {
 		GameBoard board = new GameBoard(players);
 
 		
-		for(int i = 0; i < players.size(); i++) {
-			assertEquals(players.get(i), board.getPlayer(i).getName());
-		}
+		assertEquals(3, board.getNumPlayers());
 	}
 
 	@Test
@@ -51,5 +49,19 @@ public class GameBoardTests {
 		GameBoard board = new GameBoard(players);
 
 		assertEquals(players, board.getPlayers());
+	}
+	
+	@Test
+	public void testGameBoardGetPlayerByIndex() {
+		ArrayList<Player> players = new ArrayList<Player>();
+		players.add(new Player("Wolverine"));
+		players.add(new Player("Captain America"));
+		players.add(new Player("Black Widow"));
+
+		GameBoard board = new GameBoard(players);
+
+		for(int i = 0; i < players.size(); i++) {
+			assertEquals(players.get(i), board.getPlayer(i));
+		}
 	}
 }
