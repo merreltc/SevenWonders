@@ -77,5 +77,21 @@ public class SetupBackendTest {
 		assertEquals(playerNames, SetUpHandler.setUp(playerNames));
 		fail();
 	}
+	
+	@Test(expected = IllegalArgumentException.class)
+	public void testSetUpReturnsPlayerNamesTooMany() {
+		ArrayList<String> playerNames = new ArrayList<String>();
+		playerNames.add("Wolverine");
+		playerNames.add("Captain America");
+		playerNames.add("Black Widow");
+		playerNames.add("Hulk");
+		playerNames.add("Iron Man");
+		playerNames.add("Spider Man");
+		playerNames.add("Thor");
+		playerNames.add("Ultron");
+		assertEquals(playerNames, SetUpHandler.setUp(playerNames));
+		fail();
+	}
+
 
 }
