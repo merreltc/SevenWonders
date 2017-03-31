@@ -3,21 +3,26 @@ package dataStructures;
 import java.util.ArrayList;
 
 public class GameBoard {
+	private ArrayList<Player> players = new ArrayList<Player>();
+	
 	private int numPlayers;
+	
+	private int currentPlayerIndex;
 	private int previousPlayerIndex;
 	private int numClockwiseRotates = 0;
-	private ArrayList<Player> players = new ArrayList<Player>();
 
 	public GameBoard(ArrayList<Player> players) {
 		this.numPlayers = players.size();
+		this.currentPlayerIndex = 0;
 		this.previousPlayerIndex = this.numPlayers - 1;
 		this.players = players;
 	}
 
 	public void rotateClockwise() {
-		int currClockwiseRotates = ++numClockwiseRotates;
+		int currClockwiseRotates = ++this.numClockwiseRotates;
 		
 		if (currClockwiseRotates == 1) {
+			this.currentPlayerIndex = 1;
 			this.previousPlayerIndex = 0;
 		} else if (currClockwiseRotates == 2){
 			this.previousPlayerIndex = 1;
@@ -44,7 +49,7 @@ public class GameBoard {
 	}
 
 	public Player getCurrentPlayer() {
-		return this.getPlayer(0);
+		return this.getPlayer(this.currentPlayerIndex);
 	}
 
 	public Player getNextPlayer() {
