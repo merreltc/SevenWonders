@@ -11,7 +11,7 @@ public class SetUpHandler {
 
 	public ArrayList<Player> setUpAndReturnPlayers(ArrayList<String> playerNames) {
 		validatePlayerNum(playerNames.size());
-		return new ArrayList<Player>();
+		return createPlayers(playerNames);
 	}
 
 	public boolean validatePlayerNum(int num) {
@@ -20,5 +20,9 @@ public class SetUpHandler {
 		}
 
 		return true;
+	}
+
+	public ArrayList<Player> createPlayers(ArrayList<String> playerNames) {
+		return new ArrayList<Player>();
 	}
 }
