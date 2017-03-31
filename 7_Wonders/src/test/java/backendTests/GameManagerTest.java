@@ -25,7 +25,15 @@ public class GameManagerTest {
 
 	@Test
 	public void testGameManagerGetMaxPlayers() {
-		GameManager manager = new GameManager(7);
+		ArrayList<String> playerNames = new ArrayList<String>();
+		playerNames.add("Wolverine");
+		playerNames.add("Captain America");
+		playerNames.add("Black Widow");
+		playerNames.add("Hulk");
+		playerNames.add("Iron Man");
+		playerNames.add("Spider Man");
+		playerNames.add("Thor");
+		GameManager manager = new GameManager(playerNames);
 
 		assertEquals(7, manager.getNumPlayers());
 	}
