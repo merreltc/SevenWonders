@@ -55,7 +55,7 @@ public class SetupBackendTest {
 		playerNames.add("Wolverine");
 		playerNames.add("Captain America");
 		playerNames.add("Black Widow");
-		assertEquals(playerNames, SetUpHandler.setUp(playerNames));
+		assertEquals(playerNames, SetUpHandler.setUpAndReturnPlayers(playerNames));
 	}
 	
 	@Test
@@ -68,13 +68,13 @@ public class SetupBackendTest {
 		playerNames.add("Iron Man");
 		playerNames.add("Spider Man");
 		playerNames.add("Thor");
-		assertEquals(playerNames, SetUpHandler.setUp(playerNames));
+		assertEquals(playerNames, SetUpHandler.setUpAndReturnPlayers(playerNames));
 	}
 	
 	@Test(expected = IllegalArgumentException.class)
 	public void testSetUpReturnsPlayerNamesZero() {
 		ArrayList<String> playerNames = new ArrayList<String>();
-		assertEquals(playerNames, SetUpHandler.setUp(playerNames));
+		assertEquals(playerNames, SetUpHandler.setUpAndReturnPlayers(playerNames));
 		fail();
 	}
 	
@@ -89,7 +89,7 @@ public class SetupBackendTest {
 		playerNames.add("Spider Man");
 		playerNames.add("Thor");
 		playerNames.add("Ultron");
-		assertEquals(playerNames, SetUpHandler.setUp(playerNames));
+		assertEquals(playerNames, SetUpHandler.setUpAndReturnPlayers(playerNames));
 		fail();
 	}
 
