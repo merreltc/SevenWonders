@@ -77,14 +77,30 @@ public class SetupBackendTest {
 		playerNames.add("Iron Man");
 		playerNames.add("Spider Man");
 		playerNames.add("Thor");
-		assertEquals(playerNames, SetUpHandler.setUpAndReturnPlayers(playerNames));
+		
+		SetUpHandler.setUpHandler = EasyMock.mock(SetUpHandler.class);
+		ArrayList<Player> players = (ArrayList<Player>) EasyMock.mock(ArrayList.class);
+		EasyMock.expect(SetUpHandler.setUpHandler.setUpAndReturnPlayers(playerNames)).andReturn(players);
+		
+		EasyMock.replay(players, SetUpHandler.setUpHandler);
+		SetUpHandler.setUpHandler.setUpAndReturnPlayers(playerNames);
+		
+		EasyMock.verify(players, SetUpHandler.setUpHandler);
 	}
 	
 	@Test(expected = IllegalArgumentException.class)
 	public void testSetUpReturnsPlayerNamesZero() {
 		ArrayList<String> playerNames = new ArrayList<String>();
-		assertEquals(playerNames, SetUpHandler.setUpAndReturnPlayers(playerNames));
-		fail();
+		
+		SetUpHandler.setUpHandler = EasyMock.mock(SetUpHandler.class);
+		ArrayList<Player> players = (ArrayList<Player>) EasyMock.mock(ArrayList.class);
+		EasyMock.expect(SetUpHandler.setUpHandler.setUpAndReturnPlayers(playerNames)).andThrow(new IllegalArgumentException());
+		EasyMock.expect(SetUpHandler.setUpHandler.validatePlayerNum(0)).andThrow(new IllegalArgumentException());
+		
+		EasyMock.replay(players, SetUpHandler.setUpHandler);
+		SetUpHandler.setUpHandler.setUpAndReturnPlayers(playerNames);
+		
+		EasyMock.verify(players, SetUpHandler.setUpHandler);
 	}
 	
 	@Test(expected = IllegalArgumentException.class)
@@ -98,8 +114,16 @@ public class SetupBackendTest {
 		playerNames.add("Spider Man");
 		playerNames.add("Thor");
 		playerNames.add("Ultron");
-		assertEquals(playerNames, SetUpHandler.setUpAndReturnPlayers(playerNames));
-		fail();
+		
+		SetUpHandler.setUpHandler = EasyMock.mock(SetUpHandler.class);
+		ArrayList<Player> players = (ArrayList<Player>) EasyMock.mock(ArrayList.class);
+		EasyMock.expect(SetUpHandler.setUpHandler.setUpAndReturnPlayers(playerNames)).andThrow(new IllegalArgumentException());
+		EasyMock.expect(SetUpHandler.setUpHandler.validatePlayerNum(7)).andThrow(new IllegalArgumentException());
+		
+		EasyMock.replay(players, SetUpHandler.setUpHandler);
+		SetUpHandler.setUpHandler.setUpAndReturnPlayers(playerNames);
+		
+		EasyMock.verify(players, SetUpHandler.setUpHandler);
 	}
 
 
