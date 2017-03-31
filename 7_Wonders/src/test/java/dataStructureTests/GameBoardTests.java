@@ -12,19 +12,6 @@ import dataStructures.Player;
 public class GameBoardTests {
 
 	@Test
-	public void testDefaultGameBoard() {
-		ArrayList<Player> players = new ArrayList<Player>();
-		players.add(new Player());
-		players.add(new Player());
-		players.add(new Player());
-
-		GameBoard board = new GameBoard();
-
-		assertEquals(3, board.getPlayers().size());
-		assertEquals(3, board.getNumPlayers());
-	}
-
-	@Test
 	public void testGameBoardMinPlayers() {
 		ArrayList<Player> players = new ArrayList<Player>();
 		players.add(new Player());
