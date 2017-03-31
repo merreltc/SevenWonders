@@ -15,10 +15,14 @@ public class GameBoard {
 	}
 
 	public void rotateClockwise() {
-		if (++numClockwiseRotates == 1) {
+		int currClockwiseRotates = ++numClockwiseRotates;
+		
+		if (currClockwiseRotates == 1) {
 			this.previousPlayerIndex = 0;
-		} else {
+		} else if (currClockwiseRotates == 2){
 			this.previousPlayerIndex = 1;
+		}else {
+			this.previousPlayerIndex = 4;
 		}
 
 	}
