@@ -17,10 +17,12 @@ public class GameBoardTests {
 		players.add(new Player());
 		players.add(new Player());
 		players.add(new Player());
-
 		GameBoard board = new GameBoard(players);
 
-		assertEquals(3, board.getNumPlayers());
+		
+		for(int i = 0; i < players.size(); i++) {
+			assertEquals(players.get(i), board.getPlayer(i).getName());
+		}
 	}
 
 	@Test
