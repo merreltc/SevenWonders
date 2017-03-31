@@ -70,5 +70,12 @@ public class SetupBackendTest {
 		playerNames.add("Thor");
 		assertEquals(playerNames, SetUpHandler.setUp(playerNames));
 	}
+	
+	@Test(expected = IllegalArgumentException.class)
+	public void testSetUpReturnsPlayerNamesZero() {
+		ArrayList<String> playerNames = new ArrayList<String>();
+		assertEquals(playerNames, SetUpHandler.setUp(playerNames));
+		fail();
+	}
 
 }
