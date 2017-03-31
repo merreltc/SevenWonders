@@ -8,9 +8,9 @@ import dataStructures.Player;
 public class SetUpHandler {
 	private static int playerNum;
 
-	public static GameBoard setUp(int numPlayers) {
-		validatePlayerNum(numPlayers);
-		return createDefaultGameBoard();
+	public static ArrayList<String> setUp(ArrayList<String> playerNames) {
+		validatePlayerNum(playerNames.size());
+		return playerNames;
 	}
 
 	public static boolean validatePlayerNum(int num) {
