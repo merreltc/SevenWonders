@@ -7,7 +7,6 @@ import org.easymock.EasyMock;
 import org.junit.Test;
 
 import backend.SetUpHandler;
-import dataStructures.GameBoard;
 import dataStructures.Player;
 
 public class SetupBackendTest {
@@ -119,6 +118,25 @@ public class SetupBackendTest {
 		ArrayList<Player> players = (ArrayList<Player>) EasyMock.mock(ArrayList.class);
 		EasyMock.expect(SetUpHandler.setUpHandler.setUpAndReturnPlayers(playerNames)).andThrow(new IllegalArgumentException());
 		EasyMock.expect(SetUpHandler.setUpHandler.validatePlayerNum(7)).andThrow(new IllegalArgumentException());
+		
+		EasyMock.replay(players, SetUpHandler.setUpHandler);
+		SetUpHandler.setUpHandler.setUpAndReturnPlayers(playerNames);
+		
+		EasyMock.verify(players, SetUpHandler.setUpHandler);
+	}
+	
+	@Test
+	public void testCreatePlayersMinNumPlayers() {
+		ArrayList<String> playerNames = new ArrayList<String>();
+		playerNames.add("Wolverine");
+		playerNames.add("Captain America");
+		playerNames.add("Black Widow");
+		
+		SetUpHandler.setUpHandler = EasyMock.mock(SetUpHandler.class);
+		ArrayList<Player> players = (ArrayList<Player>) EasyMock.mock(ArrayList.class);
+		EasyMock.expect(SetUpHandler.setUpHandler.setUpAndReturnPlayers(playerNames)).andReturn(players);
+		EasyMock.expect(SetUpHandler.setUpHandler.validatePlayerNum(3)).andThrow(true);
+		EasyMock.expect(SetUpHandler.setUpHandler.createPlayers(playerNames)).andReturn(players);
 		
 		EasyMock.replay(players, SetUpHandler.setUpHandler);
 		SetUpHandler.setUpHandler.setUpAndReturnPlayers(playerNames);
