@@ -158,9 +158,28 @@ public class SetupBackendTest {
 		
 		ArrayList<Player> players = SetUpHandler.setUpHandler.setUpAndReturnPlayers(playerNames);
 		
-		assertEquals("Wolverine", players.get(0).getName());
-		assertEquals("Captain America", players.get(1).getName());
-		assertEquals("Black Widow", players.get(2).getName());
+		for(int i = 0; i < playerNames.size(); i++) {
+			assertEquals(playerNames.get(i), players.get(i).getName());
+		}
+	}
+	
+	@Test
+	public void testCreateNamedPlayersMax() {
+		ArrayList<String> playerNames = new ArrayList<String>();
+		playerNames.add("Wolverine");
+		playerNames.add("Captain America");
+		playerNames.add("Black Widow");
+		playerNames.add("Hulk");
+		playerNames.add("Iron Man");
+		playerNames.add("Spider Man");
+		playerNames.add("Thor");
+		
+		ArrayList<Player> players = SetUpHandler.setUpHandler.setUpAndReturnPlayers(playerNames);
+		
+		
+		for(int i = 0; i < playerNames.size(); i++) {
+			assertEquals(playerNames.get(i), players.get(i).getName());
+		}
 	}
 
 
