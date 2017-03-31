@@ -20,7 +20,7 @@ public class GameManager {
 	}
 
 	public void setUpGame(ArrayList<String> playerNames) {
-		SetUpHandler.setUp(playerNames);
+		SetUpHandler.setUpHandler.setUpAndReturnPlayers(playerNames);
 	}
 
 	public void trade(Player from, Player to, int valueToTrade) {
