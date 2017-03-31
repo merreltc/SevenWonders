@@ -176,4 +176,22 @@ public class GameBoardTests {
 
 		assertEquals(players.get(1), board.getPreviousPlayer());
 	}
+	
+	@Test
+	public void testGameGetPreviousPlayerOnRotateClockwiseMany() {
+		ArrayList<Player> players = new ArrayList<Player>();
+		players.add(new Player("Wolverine"));
+		players.add(new Player("Captain America"));
+		players.add(new Player("Black Widow"));
+		players.add(new Player("Hulk"));
+		players.add(new Player("Iron Man"));
+
+		GameBoard board = new GameBoard(players);
+
+		for(int i = 0; i < 10; i++){
+			board.rotateClockwise();
+		}
+		
+		assertEquals(players.get(4), board.getPreviousPlayer());
+	}
 }
