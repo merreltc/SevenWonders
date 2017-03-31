@@ -4,13 +4,12 @@ import java.util.ArrayList;
 
 public class GameBoard {
 	private ArrayList<Player> players = new ArrayList<Player>();
-	
+
 	private int numPlayers;
-	
+
 	private int currentPlayerIndex;
 	private int nextPlayerIndex;
 	private int previousPlayerIndex;
-	private int numClockwiseRotates = 0;
 
 	public GameBoard(ArrayList<Player> players) {
 		this.numPlayers = players.size();
@@ -21,22 +20,13 @@ public class GameBoard {
 	}
 
 	public void rotateClockwise() {
-		int currClockwiseRotates = ++this.numClockwiseRotates;
-		
-		if (currClockwiseRotates == 1) {
-			this.currentPlayerIndex = 1;
-			this.nextPlayerIndex = 2;
-			this.previousPlayerIndex = 0;
-		} else if (currClockwiseRotates == 2){
-			this.currentPlayerIndex = 2;
-			this.nextPlayerIndex = 3;
-			this.previousPlayerIndex = 1;
-		}else {
-			this.currentPlayerIndex = 0;
-			this.nextPlayerIndex = 1;
-			this.previousPlayerIndex = 4;
+		this.previousPlayerIndex = this.currentPlayerIndex;
+		this.currentPlayerIndex = this.nextPlayerIndex;
+		if (this.nextPlayerIndex == this.numPlayers - 1) {
+			this.nextPlayerIndex = 0;
+		} else {
+			this.nextPlayerIndex++;
 		}
-
 	}
 
 	public int getNumPlayers() {
