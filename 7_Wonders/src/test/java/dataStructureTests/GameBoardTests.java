@@ -104,7 +104,7 @@ public class GameBoardTests {
 	}
 	
 	@Test
-	public void testGameGetPreviousPlayerOnStartMin() {
+	public void testGameGetPreviousPlayerOnStart() {
 		ArrayList<Player> players = new ArrayList<Player>();
 		players.add(new Player("Wolverine"));
 		players.add(new Player("Captain America"));
@@ -113,21 +113,5 @@ public class GameBoardTests {
 		GameBoard board = new GameBoard(players);
 
 		assertEquals(players.get(2), board.getPreviousPlayer());
-	}
-	
-	@Test
-	public void testGameGetPreviousPlayerOnStartMax() {
-		ArrayList<Player> players = new ArrayList<Player>();
-		players.add(new Player("Wolverine"));
-		players.add(new Player("Captain America"));
-		players.add(new Player("Black Widow"));
-		players.add(new Player("Hulk"));
-		players.add(new Player("Iron Man"));
-		players.add(new Player("Spider Man"));
-		players.add(new Player("Thor"));
-
-		GameBoard board = new GameBoard(players);
-
-		assertEquals(players.get(6), board.getPreviousPlayer());
 	}
 }
