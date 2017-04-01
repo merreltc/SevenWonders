@@ -47,7 +47,7 @@ public class PlayerTest {
 		String name = "Sandman";
 		Player player = new Player(name);
 		
-		assertEquals("Sandman", player.toString());
+		assertEquals("Name: Sandman\nCoin Total: 3\nValue 1 Coins: 3\nValue 3 Coins: 0", player.toString());
 	}
 
 	@Test
