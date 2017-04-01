@@ -58,7 +58,7 @@ public class GameBoard {
 		} else {
 			this.currentPlayerIndex = 0;
 			this.nextPlayerIndex = 4;
-			this.previousPlayerIndex = 2;
+			this.previousPlayerIndex = 1;
 		}
 	}
 
