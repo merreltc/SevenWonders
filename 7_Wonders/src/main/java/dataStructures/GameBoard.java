@@ -29,6 +29,10 @@ public class GameBoard {
 			this.currentPlayerIndex = 0;
 			this.nextPlayerIndex = this.previousPlayerIndex;
 			this.previousPlayerIndex = 1;
+		} if (direction == Direction.CLOCKWISE) {
+			this.currentPlayerIndex = 0;
+			this.nextPlayerIndex = 1;
+			this.previousPlayerIndex = this.numPlayers - 1;
 		}
 	}
 
@@ -50,9 +54,13 @@ public class GameBoard {
 				this.currentPlayerIndex = 2;
 				this.nextPlayerIndex = 1;
 				this.previousPlayerIndex = 0;
-			} else {
+			} else if (this.numPlayers == 7) {
 				this.currentPlayerIndex = 6;
 				this.nextPlayerIndex = 5;
+				this.previousPlayerIndex = 0;
+			} else {
+				this.currentPlayerIndex = 4;
+				this.nextPlayerIndex = 3;
 				this.previousPlayerIndex = 0;
 			}
 		} else if (currNumCCRotates == 2) {
