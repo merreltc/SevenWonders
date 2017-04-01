@@ -205,7 +205,11 @@ public class GameBoardTests {
 		players.add(new Player("Wolverine"));
 		players.add(new Player("Captain America"));
 		players.add(new Player("Black Widow"));
-
+		players.add(new Player("Hulk"));
+		players.add(new Player("Iron Man"));
+		players.add(new Player("Spider Man"));
+		players.add(new Player("Thor"));
+		
 		GameBoard board = new GameBoard(players);
 		board.rotateCounterClockwise();
 
