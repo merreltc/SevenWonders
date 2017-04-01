@@ -43,10 +43,14 @@ public class GameBoard {
 				this.nextPlayerIndex = 5;
 				this.previousPlayerIndex = 0;
 			}
-		} else {
+		} else if(currNumCCRotates == 2) {
 			this.currentPlayerIndex = 3;
 			this.nextPlayerIndex = 2;
 			this.previousPlayerIndex = 4;
+		} else {
+			this.currentPlayerIndex = 0;
+			this.nextPlayerIndex = 4;
+			this.previousPlayerIndex = 2;
 		}
 	}
 
