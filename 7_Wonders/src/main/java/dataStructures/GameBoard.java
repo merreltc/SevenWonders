@@ -25,12 +25,13 @@ public class GameBoard {
 	}
 
 	public void changeRotateDirectionAndResetPositions(Direction direction) {
+		this.currentPlayerIndex = 0;
+
 		if (direction == Direction.COUNTERCLOCKWISE) {
-			this.currentPlayerIndex = 0;
 			this.nextPlayerIndex = this.numPlayers - 1;
 			this.previousPlayerIndex = 1;
-		} if (direction == Direction.CLOCKWISE) {
-			this.currentPlayerIndex = 0;
+		}
+		if (direction == Direction.CLOCKWISE) {
 			this.nextPlayerIndex = 1;
 			this.previousPlayerIndex = this.numPlayers - 1;
 		}
@@ -47,30 +48,12 @@ public class GameBoard {
 	}
 
 	public void rotateCounterClockwise() {
-		int currNumCCRotates = ++this.numRotateCounterClockwise;
-
-		if (currNumCCRotates == 1) {
-			if (this.numPlayers == 3) {
-				this.currentPlayerIndex = 2;
-				this.nextPlayerIndex = 1;
-				this.previousPlayerIndex = 0;
-			} else if (this.numPlayers == 7) {
-				this.currentPlayerIndex = 6;
-				this.nextPlayerIndex = 5;
-				this.previousPlayerIndex = 0;
-			} else {
-				this.currentPlayerIndex = 4;
-				this.nextPlayerIndex = 3;
-				this.previousPlayerIndex = 0;
-			}
-		} else if (currNumCCRotates == 2) {
-			this.currentPlayerIndex = 3;
-			this.nextPlayerIndex = 2;
-			this.previousPlayerIndex = 4;
+		this.previousPlayerIndex = this.currentPlayerIndex;
+		this.currentPlayerIndex = this.nextPlayerIndex;
+		if (this.nextPlayerIndex == 0) {
+			this.nextPlayerIndex = this.numPlayers - 1;
 		} else {
-			this.currentPlayerIndex = 0;
-			this.nextPlayerIndex = 4;
-			this.previousPlayerIndex = 1;
+			this.nextPlayerIndex--;
 		}
 	}
 
