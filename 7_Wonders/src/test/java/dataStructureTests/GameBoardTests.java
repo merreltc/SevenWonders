@@ -302,4 +302,22 @@ public class GameBoardTests {
 		assertEquals(players.get(6), board.getNextPlayer());
 		assertEquals(players.get(1), board.getPreviousPlayer());
 	}
+	
+	@Test
+	public void testChangeRotateDirectionAndResetPositionsAfterOppositeRotate() {
+		ArrayList<Player> players = new ArrayList<Player>();
+		players.add(new Player("Wolverine"));
+		players.add(new Player("Captain America"));
+		players.add(new Player("Black Widow"));
+		players.add(new Player("Hulk"));
+		players.add(new Player("Iron Man"));
+
+		GameBoard board = new GameBoard(players);
+		board.rotateCounterClockwise();
+		board.changeRotateDirectionAndResetPositions(Direction.CLOCKWISE);
+
+		assertEquals(players.get(0), board.getCurrentPlayer());
+		assertEquals(players.get(1), board.getNextPlayer());
+		assertEquals(players.get(4), board.getPreviousPlayer());
+	}
 }
