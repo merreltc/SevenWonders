@@ -198,4 +198,19 @@ public class GameBoardTests {
 		assertEquals(players.get(1), board.getNextPlayer());
 		assertEquals(players.get(0), board.getPreviousPlayer());
 	}
+	
+	@Test
+	public void testGameGetPlayerPositionsOnRotateCounterClockwiseMax() {
+		ArrayList<Player> players = new ArrayList<Player>();
+		players.add(new Player("Wolverine"));
+		players.add(new Player("Captain America"));
+		players.add(new Player("Black Widow"));
+
+		GameBoard board = new GameBoard(players);
+		board.rotateCounterClockwise();
+
+		assertEquals(players.get(6), board.getCurrentPlayer());
+		assertEquals(players.get(5), board.getNextPlayer());
+		assertEquals(players.get(0), board.getPreviousPlayer());
+	}
 }
