@@ -295,5 +295,11 @@ public class GameBoardTests {
 		assertEquals(players.get(0), board.getCurrentPlayer());
 		assertEquals(players.get(1), board.getNextPlayer());
 		assertEquals(players.get(6), board.getPreviousPlayer());
+		
+		board.changeRotateDirectionAndResetPositions(Direction.COUNTERCLOCKWISE);
+
+		assertEquals(players.get(0), board.getCurrentPlayer());
+		assertEquals(players.get(6), board.getNextPlayer());
+		assertEquals(players.get(1), board.getPreviousPlayer());
 	}
 }
