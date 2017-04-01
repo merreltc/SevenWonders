@@ -31,9 +31,15 @@ public class GameBoard {
 	}
 
 	public void rotateCounterClockwise() {
-		this.currentPlayerIndex = 2;
-		this.nextPlayerIndex = 1;
-		this.previousPlayerIndex = 0;
+		if (this.numPlayers == 3) {
+			this.currentPlayerIndex = 2;
+			this.nextPlayerIndex = 1;
+			this.previousPlayerIndex = 0;
+		} else {
+			this.currentPlayerIndex = 6;
+			this.nextPlayerIndex = 5;
+			this.previousPlayerIndex = 0;
+		}
 	}
 
 	public int getNumPlayers() {
