@@ -11,9 +11,9 @@ public class GameBoard {
 	private int nextPlayerIndex;
 	private int previousPlayerIndex;
 	private int numRotateCounterClockwise = 0;
-	
-	public enum Direction{
-		CLOCKWISE;
+
+	public enum Direction {
+		CLOCKWISE, COUNTERCLOCKWISE;
 	}
 
 	public GameBoard(ArrayList<Player> players) {
@@ -23,9 +23,13 @@ public class GameBoard {
 		this.previousPlayerIndex = this.numPlayers - 1;
 		this.players = players;
 	}
-	
+
 	public void changeRotateDirectionAndResetPositions(Direction direction) {
-		
+		if (direction == Direction.COUNTERCLOCKWISE) {
+			this.currentPlayerIndex = 0;
+			this.nextPlayerIndex = this.previousPlayerIndex;
+			this.previousPlayerIndex = 1;
+		}
 	}
 
 	public void rotateClockwise() {
@@ -40,7 +44,7 @@ public class GameBoard {
 
 	public void rotateCounterClockwise() {
 		int currNumCCRotates = ++this.numRotateCounterClockwise;
-		
+
 		if (currNumCCRotates == 1) {
 			if (this.numPlayers == 3) {
 				this.currentPlayerIndex = 2;
@@ -51,7 +55,7 @@ public class GameBoard {
 				this.nextPlayerIndex = 5;
 				this.previousPlayerIndex = 0;
 			}
-		} else if(currNumCCRotates == 2) {
+		} else if (currNumCCRotates == 2) {
 			this.currentPlayerIndex = 3;
 			this.nextPlayerIndex = 2;
 			this.previousPlayerIndex = 4;
