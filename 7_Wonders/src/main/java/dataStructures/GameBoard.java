@@ -31,14 +31,22 @@ public class GameBoard {
 	}
 
 	public void rotateCounterClockwise() {
-		if (this.numPlayers == 3) {
-			this.currentPlayerIndex = 2;
-			this.nextPlayerIndex = 1;
-			this.previousPlayerIndex = 0;
+		int currNumCCRotates = ++this.numRotateCounterClockwise;
+		
+		if (currNumCCRotates == 1) {
+			if (this.numPlayers == 3) {
+				this.currentPlayerIndex = 2;
+				this.nextPlayerIndex = 1;
+				this.previousPlayerIndex = 0;
+			} else {
+				this.currentPlayerIndex = 6;
+				this.nextPlayerIndex = 5;
+				this.previousPlayerIndex = 0;
+			}
 		} else {
-			this.currentPlayerIndex = 6;
-			this.nextPlayerIndex = 5;
-			this.previousPlayerIndex = 0;
+			this.currentPlayerIndex = 3;
+			this.nextPlayerIndex = 2;
+			this.previousPlayerIndex = 4;
 		}
 	}
 
