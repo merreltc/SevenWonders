@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import org.junit.Test;
 
 import dataStructures.GameBoard;
+import dataStructures.GameBoard.Direction;
 import dataStructures.Player;
 
 public class GameBoardTests {
