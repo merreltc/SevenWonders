@@ -254,7 +254,7 @@ public class GameBoardTests {
 		
 		assertEquals(players.get(0), board.getCurrentPlayer());
 		assertEquals(players.get(4), board.getNextPlayer());
-		assertEquals(players.get(2), board.getPreviousPlayer());
+		assertEquals(players.get(1), board.getPreviousPlayer());
 	}
 	
 	@Test
@@ -270,5 +270,24 @@ public class GameBoardTests {
 		assertEquals(players.get(0), board.getCurrentPlayer());
 		assertEquals(players.get(1), board.getNextPlayer());
 		assertEquals(players.get(2), board.getPreviousPlayer());
+	}
+	
+	@Test
+	public void testChangeRotateDirectionAndResetPositionsMax() {
+		ArrayList<Player> players = new ArrayList<Player>();
+		players.add(new Player("Wolverine"));
+		players.add(new Player("Captain America"));
+		players.add(new Player("Black Widow"));
+		players.add(new Player("Hulk"));
+		players.add(new Player("Iron Man"));
+		players.add(new Player("Spider Man"));
+		players.add(new Player("Thor"));
+
+		GameBoard board = new GameBoard(players);
+		board.changeRotateDirectionAndResetPositions(Direction.CLOCKWISE);
+
+		assertEquals(players.get(0), board.getCurrentPlayer());
+		assertEquals(players.get(1), board.getNextPlayer());
+		assertEquals(players.get(6), board.getPreviousPlayer());
 	}
 }
