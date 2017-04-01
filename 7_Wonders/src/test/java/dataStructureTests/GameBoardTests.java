@@ -313,6 +313,14 @@ public class GameBoardTests {
 		players.add(new Player("Iron Man"));
 
 		GameBoard board = new GameBoard(players);
+		board.rotateClockwise();
+		board.changeRotateDirectionAndResetPositions(Direction.COUNTERCLOCKWISE);
+
+		assertEquals(players.get(0), board.getCurrentPlayer());
+		assertEquals(players.get(4), board.getNextPlayer());
+		assertEquals(players.get(1), board.getPreviousPlayer());
+		
+		
 		board.rotateCounterClockwise();
 		board.changeRotateDirectionAndResetPositions(Direction.CLOCKWISE);
 
