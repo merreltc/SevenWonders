@@ -27,7 +27,7 @@ public class GameBoard {
 	public void changeRotateDirectionAndResetPositions(Direction direction) {
 		if (direction == Direction.COUNTERCLOCKWISE) {
 			this.currentPlayerIndex = 0;
-			this.nextPlayerIndex = this.previousPlayerIndex;
+			this.nextPlayerIndex = this.numPlayers - 1;
 			this.previousPlayerIndex = 1;
 		} if (direction == Direction.CLOCKWISE) {
 			this.currentPlayerIndex = 0;
