@@ -80,7 +80,7 @@ public class GameBoardTests {
 	}
 	
 	@Test
-	public void testGameGetPlayerPositionsOnStartMin() {
+	public void testGetPlayerPositionsOnStartMin() {
 		ArrayList<Player> players = new ArrayList<Player>();
 		players.add(new Player("Wolverine"));
 		players.add(new Player("Captain America"));
@@ -95,7 +95,7 @@ public class GameBoardTests {
 
 	
 	@Test
-	public void testGameGetPlayerPositionsOnStartMax() {
+	public void testGetPlayerPositionsOnStartMax() {
 		ArrayList<Player> players = new ArrayList<Player>();
 		players.add(new Player("Wolverine"));
 		players.add(new Player("Captain America"));
@@ -113,7 +113,7 @@ public class GameBoardTests {
 	}
 	
 	@Test
-	public void testGameGetPlayerPositionsOnRotateClockwiseMin() {
+	public void testGetPlayerPositionsOnRotateClockwiseMin() {
 		ArrayList<Player> players = new ArrayList<Player>();
 		players.add(new Player("Wolverine"));
 		players.add(new Player("Captain America"));
@@ -128,7 +128,7 @@ public class GameBoardTests {
 	}
 	
 	@Test
-	public void testGameGetPlayerPositionsOnRotateClockwiseMax() {
+	public void testGetPlayerPositionsOnRotateClockwiseMax() {
 		ArrayList<Player> players = new ArrayList<Player>();
 		players.add(new Player("Wolverine"));
 		players.add(new Player("Captain America"));
@@ -147,7 +147,7 @@ public class GameBoardTests {
 	}
 	
 	@Test
-	public void testGameGetPlayerPositionsOnRotateClockwiseTwice() {
+	public void testGetPlayerPositionsOnRotateClockwiseTwice() {
 		ArrayList<Player> players = new ArrayList<Player>();
 		players.add(new Player("Wolverine"));
 		players.add(new Player("Captain America"));
@@ -165,7 +165,7 @@ public class GameBoardTests {
 	}
 	
 	@Test
-	public void testGameGetPlayerPositionsOnRotateClockwiseMany() {
+	public void testGetPlayerPositionsOnRotateClockwiseMany() {
 		ArrayList<Player> players = new ArrayList<Player>();
 		players.add(new Player("Wolverine"));
 		players.add(new Player("Captain America"));
@@ -185,7 +185,7 @@ public class GameBoardTests {
 	}
 	
 	@Test
-	public void testGameGetPlayerPositionsOnRotateCounterClockwiseMin() {
+	public void testGetPlayerPositionsOnRotateCounterClockwiseMin() {
 		ArrayList<Player> players = new ArrayList<Player>();
 		players.add(new Player("Wolverine"));
 		players.add(new Player("Captain America"));
@@ -200,7 +200,7 @@ public class GameBoardTests {
 	}
 	
 	@Test
-	public void testGameGetPlayerPositionsOnRotateCounterClockwiseMax() {
+	public void testGetPlayerPositionsOnRotateCounterClockwiseMax() {
 		ArrayList<Player> players = new ArrayList<Player>();
 		players.add(new Player("Wolverine"));
 		players.add(new Player("Captain America"));
@@ -219,7 +219,7 @@ public class GameBoardTests {
 	}
 	
 	@Test
-	public void testGameGetPlayerPositionsOnRotateCounterClockwiseTwice() {
+	public void testGetPlayerPositionsOnRotateCounterClockwiseTwice() {
 		ArrayList<Player> players = new ArrayList<Player>();
 		players.add(new Player("Wolverine"));
 		players.add(new Player("Captain America"));
@@ -237,7 +237,7 @@ public class GameBoardTests {
 	}
 	
 	@Test
-	public void testGameGetPlayerPositionsOnRotateCounterClockwiseMany() {
+	public void testGetPlayerPositionsOnRotateCounterClockwiseMany() {
 		ArrayList<Player> players = new ArrayList<Player>();
 		players.add(new Player("Wolverine"));
 		players.add(new Player("Captain America"));
