@@ -49,6 +49,16 @@ public class PlayerTest {
 		
 		assertEquals("Name: Sandman\nCoin Total: 3\nValue 1 Coins: 3\nValue 3 Coins: 0", player.toString());
 	}
+	
+	@Test
+	public void testToStringPlayerAfterAddCoins() {
+		String name = "Sandman";
+		Player player = new Player(name);
+		player.addValue1(2);
+		player.addValue3(1);
+		
+		assertEquals("Name: Sandman\nCoin Total: 8\nValue 1 Coins: 5\nValue 3 Coins: 1", player.toString());
+	}
 
 	@Test
 	public void testAddValue1Coins() {
