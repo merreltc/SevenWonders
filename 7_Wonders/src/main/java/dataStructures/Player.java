@@ -9,9 +9,9 @@ public class Player {
 	private int numOfValue1Coins = 3;
 	private int numOfValue3Coins = 0;
 	private int conflictTotal = 0;
-	
+
 	public Player() {
-		
+
 	}
 
 	public Player(String playerName) {
@@ -96,9 +96,9 @@ public class Player {
 	}
 
 	public String toString() {
-		return "Name: Jane Doe\nCoin Total: 3\nValue 1 Coins: 3\nValue 3 Coins: 0";
+		return "Name: " + this.name + "\nCoin Total: 3\nValue 1 Coins: 3\nValue 3 Coins: 0";
 	}
-	
+
 	private int getNumOfCoinType(Chip.ChipType type) {
 		if (type == Chip.ChipType.ONE) {
 			return this.numOfValue1Coins;
