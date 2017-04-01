@@ -39,7 +39,7 @@ public class PlayerTest {
 	public void testToStringDefaultPlayer() {
 		Player player = new Player();
 		
-		assertEquals("Name: Jane Doe\nCoin Total: 3\nValue 1 Coins: 3\nValue 3 Coins: 0", player.toString());
+		assertEquals("Name: Jane Doe\nCoin Total: 3", player.toString());
 	}
 	
 	@Test
@@ -47,7 +47,7 @@ public class PlayerTest {
 		String name = "Sandman";
 		Player player = new Player(name);
 		
-		assertEquals("Name: Sandman\nCoin Total: 3\nValue 1 Coins: 3\nValue 3 Coins: 0", player.toString());
+		assertEquals("Name: Sandman\nCoin Total: 3", player.toString());
 	}
 	
 	@Test
@@ -57,7 +57,7 @@ public class PlayerTest {
 		player.addValue1(2);
 		player.addValue3(1);
 		
-		assertEquals("Name: Sandman\nCoin Total: 8\nValue 1 Coins: 5\nValue 3 Coins: 1", player.toString());
+		assertEquals("Name: Sandman\nCoin Total: 8", player.toString());
 	}
 
 	@Test
