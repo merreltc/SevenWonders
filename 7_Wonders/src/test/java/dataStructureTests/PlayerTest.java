@@ -39,7 +39,7 @@ public class PlayerTest {
 	public void testToStringDefaultPlayer() {
 		Player player = new Player();
 		
-		assertEquals("Jane Doe", player.toString());
+		assertEquals("Name: Jane Doe\nCoin Total: 3\nValue 1 Coins: 3\nValue 3 Coins: 0", player.toString());
 	}
 	
 	@Test
