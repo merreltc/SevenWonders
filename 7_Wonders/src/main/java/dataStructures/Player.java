@@ -96,7 +96,7 @@ public class Player {
 	}
 
 	public String toString() {
-		return "Name: " + this.name + "\nCoin Total: 3\nValue 1 Coins: 3\nValue 3 Coins: 0";
+		return "Name: " + this.name + "\nCoin Total: " + this.getCoinTotal();
 	}
 
 	private int getNumOfCoinType(Chip.ChipType type) {
