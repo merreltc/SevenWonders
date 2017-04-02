@@ -46,4 +46,16 @@ public class GameManager {
 	public int getPlayerCoinTotal(int index) {
 		return this.board.getPlayerCoinTotal(index);
 	}
+
+	public Player getCurrentPlayer() {
+		return this.board.getCurrentPlayer();
+	}
+
+	public Player getNextPlayer() {
+		return this.board.getNextPlayer();
+	}
+
+	public Player getPreviousPlayer() {
+		return this.board.getPreviousPlayer();
+	}
 }
