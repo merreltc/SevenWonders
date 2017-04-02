@@ -7,9 +7,9 @@ import java.util.ArrayList;
 import org.junit.Test;
 
 import backend.RotateHandler;
+import backend.RotateHandler.Direction;
 import dataStructures.GameBoard;
 import dataStructures.Player;
-import dataStructures.GameBoard.Direction;
 
 public class RotateHandlerTest {
 

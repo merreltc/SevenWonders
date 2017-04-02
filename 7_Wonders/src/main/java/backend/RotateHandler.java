@@ -1,13 +1,16 @@
 package backend;
 
 import dataStructures.GameBoard;
-import dataStructures.GameBoard.Direction;
 
 public class RotateHandler {
 	private GameBoard board;
 	
 	public RotateHandler(GameBoard board) {
 		this.board = board;
+	}
+	
+	public enum Direction {
+		CLOCKWISE, COUNTERCLOCKWISE;
 	}
 
 	public void changeRotateDirectionAndResetPositions(Direction direction) {

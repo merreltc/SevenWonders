@@ -8,9 +8,9 @@ import org.easymock.EasyMock;
 import org.junit.Test;
 
 import backend.GameManager;
+import backend.RotateHandler.Direction;
 import dataStructures.GameBoard;
 import dataStructures.Player;
-import dataStructures.GameBoard.Direction;
 
 public class GameManagerTest {
 
@@ -158,10 +158,10 @@ public class GameManagerTest {
 		
 		GameManager manager = new GameManager(playerNames);
 		
-		manager.changeRotateDirectionAndResetPositions("Clockwise");
+		manager.changeRotateDirectionAndResetPositions(Direction.CLOCKWISE);
 		comparePlayerPositions(manager.getPlayers(), manager, 0, 1, 6);
 
-		manager.changeRotateDirectionAndResetPositions("CounterClockwise");
+		manager.changeRotateDirectionAndResetPositions(Direction.COUNTERCLOCKWISE);
 		comparePlayerPositions(manager.getPlayers(), manager, 0, 6, 1);
 	}
 	
@@ -175,10 +175,10 @@ public class GameManagerTest {
 		
 		GameManager manager = new GameManager(playerNames);
 		
-		manager.changeRotateDirectionAndResetPositions("Clockwise");
+		manager.changeRotateDirectionAndResetPositions(Direction.CLOCKWISE);
 		comparePlayerPositions(manager.getPlayers(), manager, 0, 1, 2);
 
-		manager.changeRotateDirectionAndResetPositions("CounterClockwise");
+		manager.changeRotateDirectionAndResetPositions(Direction.COUNTERCLOCKWISE);
 		comparePlayerPositions(manager.getPlayers(), manager, 0, 2, 1);
 	}
 	
@@ -190,7 +190,7 @@ public class GameManagerTest {
 		playerNames.add("Black Widow");
 		
 		GameManager manager = new GameManager(playerNames);
-		manager.changeRotateDirectionAndResetPositions("CounterClockwise");
+		manager.changeRotateDirectionAndResetPositions(Direction.COUNTERCLOCKWISE);
 		manager.rotateCounterClockwise();
 		
 		comparePlayerPositions(manager.getPlayers(), manager, 2, 1, 0);
@@ -208,7 +208,7 @@ public class GameManagerTest {
 		playerNames.add("Thor");
 		
 		GameManager manager = new GameManager(playerNames);
-		manager.changeRotateDirectionAndResetPositions("CounterClockwise");
+		manager.changeRotateDirectionAndResetPositions(Direction.COUNTERCLOCKWISE);
 		manager.rotateCounterClockwise();
 		
 		comparePlayerPositions(manager.getPlayers(), manager, 6, 5, 0);
@@ -224,7 +224,7 @@ public class GameManagerTest {
 		playerNames.add("Iron Man");
 		
 		GameManager manager = new GameManager(playerNames);
-		manager.changeRotateDirectionAndResetPositions("CounterClockwise");
+		manager.changeRotateDirectionAndResetPositions(Direction.COUNTERCLOCKWISE);
 		manager.rotateCounterClockwise();
 		manager.rotateCounterClockwise();
 		
@@ -241,7 +241,7 @@ public class GameManagerTest {
 		playerNames.add("Iron Man");
 		
 		GameManager manager = new GameManager(playerNames);
-		manager.changeRotateDirectionAndResetPositions("CounterClockwise");
+		manager.changeRotateDirectionAndResetPositions(Direction.COUNTERCLOCKWISE);
 		
 		for (int i = 0; i < 10; i++) {
 			manager.rotateCounterClockwise();

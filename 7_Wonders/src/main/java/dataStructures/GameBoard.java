@@ -10,11 +10,6 @@ public class GameBoard {
 	private int currentPlayerIndex;
 	private int nextPlayerIndex;
 	private int previousPlayerIndex;
-	private int numRotateCounterClockwise = 0;
-
-	public enum Direction {
-		CLOCKWISE, COUNTERCLOCKWISE;
-	}
 
 	public GameBoard(ArrayList<Player> players) {
 		this.numPlayers = players.size();

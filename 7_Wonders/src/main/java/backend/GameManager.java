@@ -2,8 +2,8 @@ package backend;
 
 import java.util.ArrayList;
 
+import backend.RotateHandler.Direction;
 import dataStructures.GameBoard;
-import dataStructures.GameBoard.Direction;
 import dataStructures.Player;
 
 /**
@@ -13,35 +13,33 @@ import dataStructures.Player;
  */
 public class GameManager {
 	private GameBoard board;
+	private RotateHandler rotateHandler;
 
 	public GameManager(ArrayList<String> playerNames) {
 		setUpGame(playerNames);
-
 	}
 
 	public void setUpGame(ArrayList<String> playerNames) {
 		ArrayList<Player> players = SetUpHandler.setUpHandler.setUpAndReturnPlayers(playerNames);
 		this.board = new GameBoard(players);
+		this.rotateHandler = new RotateHandler(this.board);
+
 	}
 
 	public void trade(Player from, Player to, int valueToTrade) {
 		TradeHandler.tradeFromTo(from, to, valueToTrade);
 	}
-	
-	public void changeRotateDirectionAndResetPositions(String direction) {
-		if(direction.equals("Clockwise")){
-			this.board.changeRotateDirectionAndResetPositions(Direction.CLOCKWISE);
-		}else {
-			this.board.changeRotateDirectionAndResetPositions(Direction.COUNTERCLOCKWISE);
-		}
+
+	public void changeRotateDirectionAndResetPositions(Direction direction) {
+		this.rotateHandler.changeRotateDirectionAndResetPositions(direction);
 	}
-	
+
 	public void rotateClockwise() {
-		this.board.rotateClockwise();
+		this.rotateHandler.rotateClockwise();
 	}
-	
+
 	public void rotateCounterClockwise() {
-		this.board.rotateCounterClockwise();
+		this.rotateHandler.rotateCounterClockwise();
 	}
 
 	public int getNumPlayers() {
