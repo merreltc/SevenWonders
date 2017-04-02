@@ -26,6 +26,10 @@ public class GameManager {
 	public void trade(Player from, Player to, int valueToTrade) {
 		TradeHandler.tradeFromTo(from, to, valueToTrade);
 	}
+	
+	public void rotateClockwise() {
+		this.board.rotateClockwise();
+	}
 
 	public int getNumPlayers() {
 		return this.board.getNumPlayers();
