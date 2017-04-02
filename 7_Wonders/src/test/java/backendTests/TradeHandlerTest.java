@@ -246,4 +246,20 @@ public class TradeHandlerTest {
 		assertEquals(0, board.getPlayerCoinTotal(board.getCurrentPlayerIndex()));
 		assertEquals(6, board.getPlayerCoinTotal(board.getPreviousPlayerIndex()));
 	}
+	
+	@Test(expected = InvalidTradeException.class)
+	public void testTradeToInvalidPlayer() {
+		ArrayList<Player> players = new ArrayList<Player>();
+		players.add(new Player("Wolverine"));
+		players.add(new Player("Captain America"));
+		players.add(new Player("Black Widow"));
+		players.add(new Player("Hulk"));
+		players.add(new Player("Iron Man"));
+
+		GameBoard board = new GameBoard(players);
+		TradeHandler tradeHandler = new TradeHandler(board);
+		
+		tradeHandler.tradeFromTo(board.getCurrentPlayer(), board.getPlayer(2), 3);
+		fail();
+	}
 }
