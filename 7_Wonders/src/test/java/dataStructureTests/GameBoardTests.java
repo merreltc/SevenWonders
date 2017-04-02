@@ -417,4 +417,18 @@ public class GameBoardTests {
 		board.setPreviousPlayer(-1);
 		fail();
 	}
+	
+	@Test(expected = IllegalArgumentException.class)
+	public void testSetPreviousPlayerInvalidMaxPlus1() {
+		ArrayList<Player> players = new ArrayList<Player>();
+		players.add(new Player("Wolverine"));
+		players.add(new Player("Captain America"));
+		players.add(new Player("Black Widow"));
+		players.add(new Player("Hulk"));
+		players.add(new Player("Iron Man"));
+
+		GameBoard board = new GameBoard(players);
+		board.setPreviousPlayer(5);
+		fail();
+	}
 }
