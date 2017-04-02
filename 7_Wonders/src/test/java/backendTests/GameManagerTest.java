@@ -128,6 +128,24 @@ public class GameManagerTest {
 	}
 	
 	@Test
+	public void testGetPlayerPositionsOnRotateClockwiseMany() {
+		ArrayList<String> playerNames = new ArrayList<String>();
+		playerNames.add("Wolverine");
+		playerNames.add("Captain America");
+		playerNames.add("Black Widow");
+		playerNames.add("Hulk");
+		playerNames.add("Iron Man");
+		
+		GameManager manager = new GameManager(playerNames);
+		
+		for (int i = 0; i < 10; i++) {
+			manager.rotateClockwise();
+		}
+		
+		comparePlayerPositions(manager.getPlayers(), manager, 0, 1, 4);
+	}
+	
+	@Test
 	public void testChangeRotateDirectionAndResetPositionsMin() {
 		ArrayList<String> playerNames = new ArrayList<String>();
 		playerNames.add("Wolverine");
