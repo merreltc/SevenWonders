@@ -309,6 +309,8 @@ public class GameBoardTests {
 		players.add(new Player("Wolverine"));
 		players.add(new Player("Captain America"));
 		players.add(new Player("Black Widow"));
+		players.add(new Player("Hulk"));
+		players.add(new Player("Iron Man"));
 
 		GameBoard board = new GameBoard(players);
 		board.setCurrentPlayer(0);
@@ -322,6 +324,8 @@ public class GameBoardTests {
 		players.add(new Player("Wolverine"));
 		players.add(new Player("Captain America"));
 		players.add(new Player("Black Widow"));
+		players.add(new Player("Hulk"));
+		players.add(new Player("Iron Man"));
 
 		GameBoard board = new GameBoard(players);
 		board.setCurrentPlayer(-1);
