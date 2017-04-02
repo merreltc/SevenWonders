@@ -93,6 +93,9 @@ public class GameBoard {
 	}
 
 	public void setNextPlayer(int index) {
+		if(index == -1){
+			throw new IllegalArgumentException("Invalid next player index: " + index);
+		}
 		this.nextPlayerIndex = index;
 	}
 }
