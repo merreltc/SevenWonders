@@ -24,15 +24,9 @@ public class SetUpHandler {
 
 	public ArrayList<Player> createPlayers(ArrayList<String> playerNames) {
 		ArrayList<Player> players = new ArrayList<Player>();
-		players.add(new Player("Wolverine"));
-		players.add(new Player("Captain America"));
-		players.add(new Player("Black Widow"));
 		
-		if(playerNames.size() == 7) {
-			players.add(new Player("Hulk"));
-			players.add(new Player("Iron Man"));
-			players.add(new Player("Spider Man"));
-			players.add(new Player("Thor"));
+		for(int i = 0; i < playerNames.size(); i++){
+			players.add(new Player(playerNames.get(i)));
 		}
 		
 		return players;
