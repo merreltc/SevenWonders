@@ -64,6 +64,22 @@ public class GameManagerTest {
 		comparePlayerPositions(manager.getPlayers(), manager, 0, 1, 2);
 	}
 	
+	@Test
+	public void testGetPlayerPositionsOnStartMax() {
+		ArrayList<String> playerNames = new ArrayList<String>();
+		playerNames.add("Wolverine");
+		playerNames.add("Captain America");
+		playerNames.add("Black Widow");
+		playerNames.add("Hulk");
+		playerNames.add("Iron Man");
+		playerNames.add("Spider Man");
+		playerNames.add("Thor");
+
+		GameManager manager = new GameManager(playerNames);
+		
+		comparePlayerPositions(manager.getPlayers(), manager, 0, 1, 6);
+	}
+	
 	public void comparePlayerPositions(ArrayList<Player> players, GameManager manager, int currIndex, int nextIndex,
 			int previousIndex) {
 		assertEquals(players.get(currIndex), manager.getCurrentPlayer());
