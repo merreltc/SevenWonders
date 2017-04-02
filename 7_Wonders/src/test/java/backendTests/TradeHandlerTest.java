@@ -10,6 +10,7 @@ import backend.TradeHandler;
 import dataStructures.GameBoard;
 import dataStructures.Player;
 import exceptions.InsufficientFundsException;
+import exceptions.InvalidTradeException;
 
 public class TradeHandlerTest {
 	@Test
@@ -94,6 +95,7 @@ public class TradeHandlerTest {
 		Player player2 = new Player();
 
 		player1.addValue3(3);
+		
 		TradeHandler.tradeFromToValue3(player1, player2, 2);
 		TradeHandler.tradeFromToValue3(player2, player1, 1);
 		TradeHandler.tradeFromToValue1(player2, player1, 3);
@@ -114,7 +116,15 @@ public class TradeHandlerTest {
 
 		player1.addValue3(2);
 
-		TradeHandler.tradeFromTo(player1, player2, 4);
+		ArrayList<Player> players = new ArrayList<Player>();
+		players.add(player1);
+		players.add(player2);
+		players.add(new Player());
+		
+		GameBoard board = new GameBoard(players);
+		TradeHandler tradeHandler = new TradeHandler(board);
+		
+		tradeHandler.tradeFromTo(player1, player2, 4);
 
 		assertEquals(5, player1.getCoinTotal());
 		assertEquals(2, player1.getNumValue1Coins());
@@ -132,7 +142,15 @@ public class TradeHandlerTest {
 
 		player1.addValue3(2);
 
-		TradeHandler.tradeFromTo(player1, player2, 5);
+		ArrayList<Player> players = new ArrayList<Player>();
+		players.add(player1);
+		players.add(player2);
+		players.add(new Player());
+		
+		GameBoard board = new GameBoard(players);
+		TradeHandler tradeHandler = new TradeHandler(board);
+		
+		tradeHandler.tradeFromTo(player1, player2, 5);
 
 		assertEquals(4, player1.getCoinTotal());
 		assertEquals(1, player1.getNumValue1Coins());
@@ -150,7 +168,15 @@ public class TradeHandlerTest {
 
 		player1.addValue3(2);
 
-		TradeHandler.tradeFromTo(player1, player2, 7);
+		ArrayList<Player> players = new ArrayList<Player>();
+		players.add(player1);
+		players.add(player2);
+		players.add(new Player());
+		
+		GameBoard board = new GameBoard(players);
+		TradeHandler tradeHandler = new TradeHandler(board);
+		
+		tradeHandler.tradeFromTo(player1, player2, 7);
 
 		assertEquals(2, player1.getCoinTotal());
 		assertEquals(2, player1.getNumValue1Coins());
@@ -168,7 +194,15 @@ public class TradeHandlerTest {
 
 		player1.addValue3(2);
 
-		TradeHandler.tradeFromTo(player1, player2, 8);
+		ArrayList<Player> players = new ArrayList<Player>();
+		players.add(player1);
+		players.add(player2);
+		players.add(new Player());
+		
+		GameBoard board = new GameBoard(players);
+		TradeHandler tradeHandler = new TradeHandler(board);
+		
+		tradeHandler.tradeFromTo(player1, player2, 8);
 
 		assertEquals(1, player1.getCoinTotal());
 		assertEquals(1, player1.getNumValue1Coins());
@@ -183,8 +217,16 @@ public class TradeHandlerTest {
 	public void testTradeFromToSufficientValue1NoValue3() {
 		Player player1 = new Player();
 		Player player2 = new Player();
+		
+		ArrayList<Player> players = new ArrayList<Player>();
+		players.add(player1);
+		players.add(player2);
+		players.add(new Player());
+		
+		GameBoard board = new GameBoard(players);
+		TradeHandler tradeHandler = new TradeHandler(board);
 
-		TradeHandler.tradeFromTo(player1, player2, 3);
+		tradeHandler.tradeFromTo(player1, player2, 3);
 
 		assertEquals(0, player1.getCoinTotal());
 		assertEquals(0, player1.getNumValue1Coins());
@@ -199,9 +241,18 @@ public class TradeHandlerTest {
 	public void testTradeFromToGreaterValue1ThanValue3() {
 		Player player1 = new Player();
 		Player player2 = new Player();
-
+		
 		player1.addValue3(1);
-		TradeHandler.tradeFromTo(player1, player2, 6);
+		
+		ArrayList<Player> players = new ArrayList<Player>();
+		players.add(player1);
+		players.add(player2);
+		players.add(new Player());
+		
+		GameBoard board = new GameBoard(players);
+		TradeHandler tradeHandler = new TradeHandler(board);
+		
+		tradeHandler.tradeFromTo(player1, player2, 6);
 
 		assertEquals(0, player1.getCoinTotal());
 		assertEquals(0, player1.getNumValue1Coins());
