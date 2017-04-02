@@ -242,4 +242,20 @@ public class GameBoardTests {
 		board.setPreviousPlayer(5);
 		fail();
 	}
+	
+	@Test
+	public void testGetPlayerPositionIndexes(){
+		ArrayList<Player> players = new ArrayList<Player>();
+		players.add(new Player("Wolverine"));
+		players.add(new Player("Captain America"));
+		players.add(new Player("Black Widow"));
+		players.add(new Player("Hulk"));
+		players.add(new Player("Iron Man"));
+
+		GameBoard board = new GameBoard(players);
+		
+		assertEquals(0, board.getCurrentPlayerIndex());
+		assertEquals(1, board.getNextPlayerIndex());
+		assertEquals(4, board.getPreviousPlayerIndex());
+	}
 }
