@@ -304,7 +304,7 @@ public class GameBoardTests {
 	}
 	
 	@Test
-	public void testSetCurrentPlayer() {
+	public void testSetCurrentPlayerValid() {
 		ArrayList<Player> players = new ArrayList<Player>();
 		players.add(new Player("Wolverine"));
 		players.add(new Player("Captain America"));
@@ -314,5 +314,17 @@ public class GameBoardTests {
 		board.setCurrentPlayer(0);
 		
 		assertEquals(players.get(0), board.getCurrentPlayer());
+	}
+	
+	@Test(expected = IllegalArgumentException.class)
+	public void testSetCurrentPlayerInvalidNeg1() {
+		ArrayList<Player> players = new ArrayList<Player>();
+		players.add(new Player("Wolverine"));
+		players.add(new Player("Captain America"));
+		players.add(new Player("Black Widow"));
+
+		GameBoard board = new GameBoard(players);
+		board.setCurrentPlayer(-1);
+		fail();
 	}
 }
