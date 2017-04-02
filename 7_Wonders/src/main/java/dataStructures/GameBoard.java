@@ -100,6 +100,9 @@ public class GameBoard {
 	}
 
 	public void setPreviousPlayer(int index) {
+		if(index == -1){
+			throw new IllegalArgumentException("Invalid previous player index: " + index);
+		}
 		this.previousPlayerIndex = index;
 	}
 }
