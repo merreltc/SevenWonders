@@ -86,23 +86,23 @@ public class GameBoard {
 	}
 
 	public void setCurrentPlayer(int index) {
-		if(index <= -1 || index >= this.numPlayers){
-			throw new IllegalArgumentException("Invalid current player index: " + index);
-		}
+		validatePlayerIndex(index);
 		this.currentPlayerIndex = index;
 	}
 
 	public void setNextPlayer(int index) {
-		if(index <= -1 || index >= this.numPlayers){
-			throw new IllegalArgumentException("Invalid next player index: " + index);
-		}
+		validatePlayerIndex(index);
 		this.nextPlayerIndex = index;
 	}
 
 	public void setPreviousPlayer(int index) {
-		if(index <= -1 || index >= this.numPlayers){
-			throw new IllegalArgumentException("Invalid previous player index: " + index);
-		}
+		validatePlayerIndex(index);
 		this.previousPlayerIndex = index;
+	}
+
+	private void validatePlayerIndex(int index) {
+		if(index <= -1 || index >= this.numPlayers){
+			throw new IllegalArgumentException("Invalid player index: " + index);
+		}
 	}
 }
