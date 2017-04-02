@@ -133,6 +133,27 @@ public class GameManagerTest {
 		playerNames.add("Wolverine");
 		playerNames.add("Captain America");
 		playerNames.add("Black Widow");
+		playerNames.add("Hulk");
+		playerNames.add("Iron Man");
+		playerNames.add("Spider Man");
+		playerNames.add("Thor");
+		
+		GameManager manager = new GameManager(playerNames);
+		
+		manager.changeRotateDirectionAndResetPositions("Clockwise");
+		comparePlayerPositions(manager.getPlayers(), manager, 0, 1, 6);
+
+		manager.changeRotateDirectionAndResetPositions("CounterClockwise");
+		comparePlayerPositions(manager.getPlayers(), manager, 0, 6, 1);
+	}
+	
+
+	@Test
+	public void testChangeRotateDirectionAndResetPositionsMax() {
+		ArrayList<String> playerNames = new ArrayList<String>();
+		playerNames.add("Wolverine");
+		playerNames.add("Captain America");
+		playerNames.add("Black Widow");
 		
 		GameManager manager = new GameManager(playerNames);
 		
