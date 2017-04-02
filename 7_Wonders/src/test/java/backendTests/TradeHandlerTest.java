@@ -121,7 +121,6 @@ public class TradeHandlerTest {
 		assertEquals(4, player2.getNumValue1Coins());
 		assertEquals(1, player2.getNumValue3Coins());
 	}
-	private static int playerNum;
 
 	@Test
 	public void testTradeFromToMultiValue1SingleValue3() {
@@ -209,139 +208,10 @@ public class TradeHandlerTest {
 		assertEquals(6, player2.getNumValue1Coins());
 		assertEquals(1, player2.getNumValue3Coins());
 	}
-
+	
 	@Test
-	public void testAddInvalidNumValue1CoinsNeg1ErrorMessage() {
-		Player player = new Player();
-
-		try {
-			player.addValue1(-1);
-		} catch (IllegalArgumentException error) {
-			String message = "Cannot add -1 value 1 coins";
-			assertEquals(message, error.getMessage());
-		}
-	}
-
-	@Test
-	public void testAddInvalidNumValue1Coins47ErrorMessage() {
-		Player player = new Player();
-
-		try {
-			player.addValue1(47);
-		} catch (IllegalArgumentException error) {
-			String message = "Cannot add 47 value 1 coins";
-			assertEquals(message, error.getMessage());
-		}
-	}
-
-	@Test
-	public void testAddInvalidNumValue3CoinsNeg1ErrorMessage() {
-		Player player = new Player();
-
-		try {
-			player.addValue3(-1);
-		} catch (IllegalArgumentException error) {
-			String message = "Cannot add -1 value 3 coins";
-			assertEquals(message, error.getMessage());
-		}
-	}
-
-	@Test
-	public void testInvalidRemoveNumValue1CoinsNeg1ErrorMessage() {
-		Player player = new Player();
-
-		try {
-			player.removeValue1(-1);
-		} catch (IllegalArgumentException error) {
-			String message = "Cannot remove -1 value 1 coins";
-			assertEquals(message, error.getMessage());
-		}
-	}
-
-	@Test
-	public void testInvalidRemoveNumValue1CoinsNeg2ErrorMessage() {
-		Player player = new Player();
-
-		try {
-			player.removeValue1(-2);
-		} catch (IllegalArgumentException error) {
-			String message = "Cannot remove -2 value 1 coins";
-			assertEquals(message, error.getMessage());
-		}
-	}
-
-	@Test
-	public void testInvalidRemoveNumValue3CoinsNeg1ErrorMessage() {
-		Player player = new Player();
-
-		try {
-			player.removeValue3(-1);
-		} catch (IllegalArgumentException error) {
-			String message = "Cannot remove -1 value 3 coins";
-			assertEquals(message, error.getMessage());
-		}
-	}
-
-	@Test
-	public void testInvalidRemoveNumValue3CoinsNeg2ErrorMessage() {
-		Player player = new Player();
-
-		try {
-			player.removeValue3(-2);
-		} catch (IllegalArgumentException error) {
-			String message = "Cannot remove -2 value 3 coins";
-			assertEquals(message, error.getMessage());
-		}
-	}
-
-	@Test
-	public void testInsufficientFundsForRemove4Value1CoinsErrorMessage() {
-		Player player = new Player();
-
-		try {
-			player.removeValue1(4);
-		} catch (InsufficientFundsException error) {
-			String message = "Player does not have 4 value 1 coin(s)";
-			assertEquals(message, error.getMessage());
-		}
-	}
-
-	@Test
-	public void testInsufficientFundsForRemove5Value1CoinsErrorMessage() {
-		Player player = new Player();
-
-		try {
-			player.removeValue1(5);
-		} catch (InsufficientFundsException error) {
-			String message = "Player does not have 5 value 1 coin(s)";
-			assertEquals(message, error.getMessage());
-		}
-	}
-
-	@Test
-	public void testInsufficientFundsForRemove1Value3CoinsErrorMessage() {
-		Player player = new Player();
-
-		try {
-			player.removeValue3(1);
-			fail();
-		} catch (InsufficientFundsException error) {
-			String message = "Player does not have 1 value 3 coin(s)";
-			assertEquals(message, error.getMessage());
-		}
-	}
-
-	@Test
-	public void testInsufficientFundsForRemove2Value3CoinsErrorMessage() {
-		Player player = new Player();
-
-		try {
-			player.removeValue3(2);
-			fail();
-		} catch (InsufficientFundsException error) {
-			String message = "Player does not have 2 value 3 coin(s)";
-			assertEquals(message, error.getMessage());
-		}
+	public void testTradeToNextPlayer() {
+		
 	}
 
 }
