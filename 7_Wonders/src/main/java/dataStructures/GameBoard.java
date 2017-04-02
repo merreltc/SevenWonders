@@ -91,4 +91,8 @@ public class GameBoard {
 		}
 		this.currentPlayerIndex = index;
 	}
+
+	public void setNextPlayer(int index) {
+		this.nextPlayerIndex = index;
+	}
 }
