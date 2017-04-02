@@ -25,32 +25,43 @@ public class RotateHandler {
 	}
 
 	public void rotateClockwise() {
-		this.board.setPreviousPlayer(this.board.getCurrentPlayerIndex());
-		this.board.setCurrentPlayer(this.board.getNextPlayerIndex());
-		
-		int tempNextPlayerIndex = this.board.getNextPlayerIndex();
-		int lastPlayerIndex = this.board.getNumPlayers() - 1;
-		int firstPlayerIndex = 0;
-		
-		if (tempNextPlayerIndex == lastPlayerIndex) {
-			this.board.setNextPlayer(firstPlayerIndex);
-		} else {
-			this.board.setNextPlayer(++tempNextPlayerIndex);
-		}
+		setCurrentAndPreviousPlayers();
+		setNextPlayer(Direction.CLOCKWISE);
 	}
 
 	public void rotateCounterClockwise() {
-		this.board.setPreviousPlayer(this.board.getCurrentPlayerIndex());
-		this.board.setCurrentPlayer(this.board.getNextPlayerIndex());
-		
+		setCurrentAndPreviousPlayers();
+		setNextPlayer(Direction.COUNTERCLOCKWISE);
+	}
+
+	private void setNextPlayer(Direction rotateDirection) {
 		int tempNextPlayerIndex = this.board.getNextPlayerIndex();
 		int lastPlayerIndex = this.board.getNumPlayers() - 1;
 		int firstPlayerIndex = 0;
+		int compareIndex;
+		int equalsCompareIndex;
+		int notEqualsCompareIndex;
 		
-		if (tempNextPlayerIndex == firstPlayerIndex) {
-			this.board.setNextPlayer(lastPlayerIndex);
-		} else {
-			this.board.setNextPlayer(--tempNextPlayerIndex);
+		if(rotateDirection == Direction.CLOCKWISE){
+			compareIndex = lastPlayerIndex;
+			equalsCompareIndex = firstPlayerIndex;
+			notEqualsCompareIndex = tempNextPlayerIndex + 1;
+		} else{
+			compareIndex = firstPlayerIndex;
+			equalsCompareIndex = lastPlayerIndex;
+			notEqualsCompareIndex = tempNextPlayerIndex - 1;
 		}
+		
+		if (tempNextPlayerIndex == compareIndex) {
+			this.board.setNextPlayer(equalsCompareIndex);
+		} else {
+			this.board.setNextPlayer(notEqualsCompareIndex);
+		}
+		
+	}
+
+	private void setCurrentAndPreviousPlayers() {
+		this.board.setPreviousPlayer(this.board.getCurrentPlayerIndex());
+		this.board.setCurrentPlayer(this.board.getNextPlayerIndex());
 	}
 }
