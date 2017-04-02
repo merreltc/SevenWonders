@@ -24,39 +24,6 @@ public class GameBoard {
 		this.players = players;
 	}
 
-	public void changeRotateDirectionAndResetPositions(Direction direction) {
-		this.currentPlayerIndex = 0;
-
-		if (direction == Direction.COUNTERCLOCKWISE) {
-			this.nextPlayerIndex = this.numPlayers - 1;
-			this.previousPlayerIndex = 1;
-		}
-		if (direction == Direction.CLOCKWISE) {
-			this.nextPlayerIndex = 1;
-			this.previousPlayerIndex = this.numPlayers - 1;
-		}
-	}
-
-	public void rotateClockwise() {
-		this.previousPlayerIndex = this.currentPlayerIndex;
-		this.currentPlayerIndex = this.nextPlayerIndex;
-		if (this.nextPlayerIndex == this.numPlayers - 1) {
-			this.nextPlayerIndex = 0;
-		} else {
-			this.nextPlayerIndex++;
-		}
-	}
-
-	public void rotateCounterClockwise() {
-		this.previousPlayerIndex = this.currentPlayerIndex;
-		this.currentPlayerIndex = this.nextPlayerIndex;
-		if (this.nextPlayerIndex == 0) {
-			this.nextPlayerIndex = this.numPlayers - 1;
-		} else {
-			this.nextPlayerIndex--;
-		}
-	}
-
 	public int getNumPlayers() {
 		return this.numPlayers;
 	}
