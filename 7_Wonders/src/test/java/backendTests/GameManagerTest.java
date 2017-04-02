@@ -9,6 +9,7 @@ import org.junit.Test;
 
 import backend.GameManager;
 import dataStructures.GameBoard;
+import dataStructures.Player;
 
 public class GameManagerTest {
 
@@ -50,5 +51,23 @@ public class GameManagerTest {
 		
 		assertEquals(0, manager.getPlayerCoinTotal(0));
 		assertEquals(6, manager.getPlayerCoinTotal(1));
+	}
+	
+	@Test
+	public void testGetCurrentPositionsOnStartMin() {
+		ArrayList<String> playerNames = new ArrayList<String>();
+		playerNames.add("Wolverine");
+		playerNames.add("Captain America");
+		playerNames.add("Black Widow");
+		GameManager manager = new GameManager(playerNames);
+		
+		comparePlayerPositions(manager.getPlayers(), manager, 0, 1, 2);
+	}
+	
+	public void comparePlayerPositions(ArrayList<Player> players, GameManager manager, int currIndex, int nextIndex,
+			int previousIndex) {
+		assertEquals(players.get(currIndex), manager.getCurrentPlayer());
+		assertEquals(players.get(nextIndex), manager.getNextPlayer());
+		assertEquals(players.get(previousIndex), manager.getPreviousPlayer());
 	}
 }
