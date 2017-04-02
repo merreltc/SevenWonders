@@ -68,8 +68,20 @@ public class GameBoard {
 	}
 
 	private void validatePlayerIndex(int index) {
-		if(index <= -1 || index >= this.numPlayers){
+		if (index <= -1 || index >= this.numPlayers) {
 			throw new IllegalArgumentException("Invalid player index: " + index);
 		}
+	}
+
+	public int getCurrentPlayerIndex() {
+		return this.currentPlayerIndex;
+	}
+
+	public int getNextPlayerIndex() {
+		return this.nextPlayerIndex;
+	}
+
+	public int getPreviousPlayerIndex() {
+		return this.previousPlayerIndex;
 	}
 }
