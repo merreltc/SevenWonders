@@ -3,6 +3,7 @@ package backend;
 import java.util.ArrayList;
 
 import dataStructures.GameBoard;
+import dataStructures.GameBoard.Direction;
 import dataStructures.Player;
 
 /**
@@ -29,6 +30,14 @@ public class GameManager {
 	
 	public void rotateClockwise() {
 		this.board.rotateClockwise();
+	}
+	
+	public void changeRotateDirectionAndResetPositions(String direction) {
+		if(direction.equals("Clockwise")){
+			this.board.changeRotateDirectionAndResetPositions(Direction.CLOCKWISE);
+		}else {
+			this.board.changeRotateDirectionAndResetPositions(Direction.COUNTERCLOCKWISE);
+		}
 	}
 
 	public int getNumPlayers() {
@@ -62,4 +71,5 @@ public class GameManager {
 	public Player getPreviousPlayer() {
 		return this.board.getPreviousPlayer();
 	}
+
 }
