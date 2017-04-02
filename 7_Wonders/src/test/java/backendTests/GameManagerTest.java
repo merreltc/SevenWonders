@@ -109,6 +109,22 @@ public class GameManagerTest {
 		comparePlayerPositions(manager.getPlayers(), manager, 1, 2, 0);
 	}
 	
+	@Test
+	public void testGetPlayerPositionsOnRotateClockwiseTwice() {
+		ArrayList<String> playerNames = new ArrayList<String>();
+		playerNames.add("Wolverine");
+		playerNames.add("Captain America");
+		playerNames.add("Black Widow");
+		playerNames.add("Hulk");
+		playerNames.add("Iron Man");
+
+		GameManager manager = new GameManager(playerNames);
+		manager.rotateClockwise();
+		manager.rotateClockwise();
+
+		comparePlayerPositions(manager.getPlayers(), manager, 2, 3, 1);
+	}
+	
 	public void comparePlayerPositions(ArrayList<Player> players, GameManager manager, int currIndex, int nextIndex,
 			int previousIndex) {
 		assertEquals(players.get(currIndex), manager.getCurrentPlayer());
