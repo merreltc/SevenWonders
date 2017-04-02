@@ -10,6 +10,7 @@ import org.junit.Test;
 import backend.GameManager;
 import dataStructures.GameBoard;
 import dataStructures.Player;
+import dataStructures.GameBoard.Direction;
 
 public class GameManagerTest {
 
@@ -86,6 +87,7 @@ public class GameManagerTest {
 		playerNames.add("Wolverine");
 		playerNames.add("Captain America");
 		playerNames.add("Black Widow");
+		
 		GameManager manager = new GameManager(playerNames);
 		manager.rotateClockwise();
 		
@@ -123,6 +125,22 @@ public class GameManagerTest {
 		manager.rotateClockwise();
 
 		comparePlayerPositions(manager.getPlayers(), manager, 2, 3, 1);
+	}
+	
+	@Test
+	public void testChangeRotateDirectionAndResetPositionsMin() {
+		ArrayList<String> playerNames = new ArrayList<String>();
+		playerNames.add("Wolverine");
+		playerNames.add("Captain America");
+		playerNames.add("Black Widow");
+		
+		GameManager manager = new GameManager(playerNames);
+		
+		manager.changeRotateDirectionAndResetPositions("Clockwise");
+		comparePlayerPositions(manager.getPlayers(), manager, 0, 1, 2);
+
+		manager.changeRotateDirectionAndResetPositions("CounterClockwise");
+		comparePlayerPositions(manager.getPlayers(), manager, 0, 2, 1);
 	}
 	
 	public void comparePlayerPositions(ArrayList<Player> players, GameManager manager, int currIndex, int nextIndex,
