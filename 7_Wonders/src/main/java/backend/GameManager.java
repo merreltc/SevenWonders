@@ -28,16 +28,20 @@ public class GameManager {
 		TradeHandler.tradeFromTo(from, to, valueToTrade);
 	}
 	
-	public void rotateClockwise() {
-		this.board.rotateClockwise();
-	}
-	
 	public void changeRotateDirectionAndResetPositions(String direction) {
 		if(direction.equals("Clockwise")){
 			this.board.changeRotateDirectionAndResetPositions(Direction.CLOCKWISE);
 		}else {
 			this.board.changeRotateDirectionAndResetPositions(Direction.COUNTERCLOCKWISE);
 		}
+	}
+	
+	public void rotateClockwise() {
+		this.board.rotateClockwise();
+	}
+	
+	public void rotateCounterClockwise() {
+		this.board.rotateCounterClockwise();
 	}
 
 	public int getNumPlayers() {
@@ -71,5 +75,4 @@ public class GameManager {
 	public Player getPreviousPlayer() {
 		return this.board.getPreviousPlayer();
 	}
-
 }
