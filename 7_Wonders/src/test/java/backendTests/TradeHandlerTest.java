@@ -2,9 +2,12 @@ package backendTests;
 
 import static org.junit.Assert.*;
 
+import java.util.ArrayList;
+
 import org.junit.Test;
 
 import backend.TradeHandler;
+import dataStructures.GameBoard;
 import dataStructures.Player;
 import exceptions.InsufficientFundsException;
 
@@ -211,7 +214,19 @@ public class TradeHandlerTest {
 	
 	@Test
 	public void testTradeToNextPlayer() {
+		ArrayList<Player> players = new ArrayList<Player>();
+		players.add(new Player("Wolverine"));
+		players.add(new Player("Captain America"));
+		players.add(new Player("Black Widow"));
+		players.add(new Player("Hulk"));
+		players.add(new Player("Iron Man"));
+
+		GameBoard board = new GameBoard(players);
+		TradeHandler tradeHandler = new TradeHandler(board);
 		
+		TradeHandler.tradeFromTo(board.getCurrentPlayer(), board.getNextPlayer(), 3);
+		assertEquals(0, board.getPlayerCoinTotal(board.getCurrentPlayerIndex()));
+		assertEquals(6, board.getPlayerCoinTotal(board.getNextPlayerIndex()));
 	}
 
 }
