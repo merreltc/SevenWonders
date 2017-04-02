@@ -1,8 +1,13 @@
 package backend;
 
+import dataStructures.GameBoard;
 import dataStructures.Player;
 
 public class TradeHandler {
+
+	public TradeHandler(GameBoard board) {
+		
+	}
 
 	public static void tradeFromTo(Player from, Player to, int valueToTrade) {
 		// player's number of value 3 coins is calculated first because
