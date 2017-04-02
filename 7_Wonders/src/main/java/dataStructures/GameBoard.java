@@ -86,7 +86,7 @@ public class GameBoard {
 	}
 
 	public void setCurrentPlayer(int index) {
-		if(index == -1 || index == 5){
+		if(index <= -1 || index >= this.numPlayers){
 			throw new IllegalArgumentException("Invalid current player index: " + index);
 		}
 		this.currentPlayerIndex = index;
