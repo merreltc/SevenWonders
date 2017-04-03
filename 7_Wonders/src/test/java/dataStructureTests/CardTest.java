@@ -2,6 +2,8 @@ package dataStructureTests;
 
 import static org.junit.Assert.*;
 
+import java.util.HashMap;
+
 import org.junit.Test;
 
 import dataStructures.Card;
@@ -130,5 +132,27 @@ public class CardTest {
 		assertEquals(1, card.getCoinCost());
 		assertEquals(0, card2.getCoinCost());
 		assertEquals(0, card3.getCoinCost());
+	}
+	
+
+	@Test
+	public void testGetResourceCost() {
+		Card card = new Card("Tree Farm", 6, CardType.RAWMATERIAL, Cost.COIN, Effect.RESOURCE);
+		Card card2 = new Card("Lumber Yard", 3, CardType.RAWMATERIAL, Cost.NONE, Effect.RESOURCE);
+		Card card3 = new Card("Haven", 3, CardType.CIVILIANSTRUCTURE, Cost.RESOURCE, Effect.VICTORYPOINTS);
+
+		assertEquals(0, card.getResourceCost().size());
+		assertEquals(0, card2.getResourceCost().size());
+		
+		HashMap<ResourceType, Integer> actualCost = card3.getResourceCost();
+		HashMap<ResourceType, Integer> expectedCost = new HashMap<ResourceType, Integer>();
+		
+		expectedCost.put(ResourceType.LOOM, 1);
+		expectedCost.put(ResourceType.ORE, 1);
+		expectedCost.put(ResourceType.LUMBER, 1);
+		
+		assertEquals(expectedCost.get(ResourceType.LOOM), actualCost.get(ResourceType.LOOM));
+		assertEquals(expectedCost.get(ResourceType.ORE), actualCost.get(ResourceType.ORE));
+		assertEquals(expectedCost.get(ResourceType.LUMBER), actualCost.get(ResourceType.LUMBER));
 	}
 }
