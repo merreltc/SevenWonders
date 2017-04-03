@@ -12,7 +12,7 @@ public class TradeHandler {
 	}
 
 	public void tradeFromTo(Player from, Player to, int valueToTrade) {
-		if(to == this.board.getPlayer(2)){
+		if(to != this.board.getPreviousPlayer() && to != this.board.getNextPlayer()){
 			throw new InvalidTradeException("You cannot trade to this player");
 		}
 		
@@ -58,5 +58,4 @@ public class TradeHandler {
 		from.removeValue3(numCoinsToTrade);
 		to.addValue3(numCoinsToTrade);
 	}
-
 }
