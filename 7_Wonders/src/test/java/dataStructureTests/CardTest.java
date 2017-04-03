@@ -54,5 +54,17 @@ public class CardTest {
 		assertEquals(Cost.RESOURCE, card.getCostType());
 		assertEquals(Effect.MULTI, card.getEffectType());
 	}
+	
+
+	@Test
+	public void testScientificStructureCard() {
+		Card card = new Card("Apothecary", 3, CardType.SCIENTIFICSTRUCTURE, Cost.RESOURCE, Effect.SCIENCE);
+		
+		assertEquals("Apothecary", card.getName());
+		assertEquals(3, card.getMinNumPlayers());
+		assertEquals(CardType.SCIENTIFICSTRUCTURE, card.getCardType());
+		assertEquals(Cost.RESOURCE, card.getCostType());
+		assertEquals(Effect.SCIENCE, card.getEffectType());
+	}
 
 }
