@@ -17,5 +17,14 @@ public class CostTest {
 		assertEquals(0, cost.getResourceCost().size());
 		assertEquals(0, cost.getCoinCost());
 	}
+	
+	@Test
+	public void testValueCost() {
+		Cost cost = new Cost(CostType.COIN, 1);
+		
+		assertEquals(CostType.COIN, cost.getType());
+		assertEquals(0, cost.getResourceCost().size());
+		assertEquals(1, cost.getCoinCost());
+	}
 
 }
