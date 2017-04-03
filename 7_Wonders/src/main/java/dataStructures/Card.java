@@ -11,15 +11,15 @@ public class Card {
 	private Effect effect = Effect.NONE;
 
 	public enum CardType {
-		DEFAULT, RAWMATERIAL, MANUFACTUREDGOOD
+		DEFAULT, RAWMATERIAL, MANUFACTUREDGOOD, CIVILIANSTRUCTURE
 	}
 
 	public enum Cost {
-		NONE
+		NONE, RESOURCE
 	}
 
 	public enum Effect {
-		NONE, RESOURCE
+		NONE, RESOURCE, MULTI
 	}
 
 	public Card() {
