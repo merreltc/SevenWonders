@@ -53,4 +53,11 @@ public class Card {
 	public Effect getEffectType() {
 		return this.effect;
 	}
+
+	public int getCoinCost() {
+		if(this.cost == Cost.COIN) {
+			return 1;
+		}
+		return 0;
+	}
 }
