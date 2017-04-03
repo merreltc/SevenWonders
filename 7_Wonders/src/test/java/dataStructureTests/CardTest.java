@@ -104,7 +104,7 @@ public class CardTest {
 	public void testGuildCard() {
 		Card card = new Card("Workers Guild", 3, CardType.GUILD, Cost.RESOURCE, Effect.VICTORYPOINTS);
 		
-		assertEquals("Stockade", card.getName());
+		assertEquals("Workers Guild", card.getName());
 		assertEquals(3, card.getMinNumPlayers());
 		assertEquals(CardType.GUILD, card.getCardType());
 		assertEquals(Cost.RESOURCE, card.getCostType());
