@@ -88,5 +88,16 @@ public class CardTest {
 		assertEquals(Cost.RESOURCE, card.getCostType());
 		assertEquals(Effect.VICTORYPOINTS, card.getEffectType());
 	}
+	
+	@Test
+	public void testMilitaryStructureCard() {
+		Card card = new Card("Stockade", 3, CardType.MILITARYSTRUCTURE, Cost.RESOURCE, Effect.CONFLICTTOKENS);
+		
+		assertEquals("Haven", card.getName());
+		assertEquals(3, card.getMinNumPlayers());
+		assertEquals(CardType.MILITARYSTRUCTURE, card.getCardType());
+		assertEquals(Cost.RESOURCE, card.getCostType());
+		assertEquals(Effect.CONFLICTTOKENS, card.getEffectType());
+	}
 
 }
