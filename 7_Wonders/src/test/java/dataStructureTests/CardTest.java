@@ -156,4 +156,16 @@ public class CardTest {
 		assertEquals(expectedCost.get(ResourceType.ORE), actualCost.get(ResourceType.ORE));
 		assertEquals(expectedCost.get(ResourceType.LUMBER), actualCost.get(ResourceType.LUMBER));
 	}
+	
+	@Test
+	public void testGetEffectOneTypeResource() {
+		Card card = new Card("Tree Farm", 6, CardType.RAWMATERIAL, Cost.COIN, Effect.RESOURCE);
+	
+		HashMap<ResourceType, Integer> actualEffect = card.getEffect();
+		HashMap<ResourceType, Integer> expectedEffect = new HashMap<ResourceType, Integer>();
+		
+		expectedEffect.put(ResourceType.LUMBER, 2);
+	
+		assertEquals(expectedEffect.get(ResourceType.LUMBER), actualEffect.get(ResourceType.LUMBER));
+	}
 }
