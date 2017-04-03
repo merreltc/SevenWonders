@@ -2,10 +2,13 @@ package dataStructureTests;
 
 import static org.junit.Assert.*;
 
+import java.util.HashMap;
+
 import org.junit.Test;
 
 import dataStructures.Cost;
 import dataStructures.Cost.CostType;
+import dataStructures.Cost.ResourceType;
 
 public class CostTest {
 
@@ -26,5 +29,19 @@ public class CostTest {
 		assertEquals(0, cost.getResourceCost().size());
 		assertEquals(1, cost.getCoinCost());
 	}
-
+	
+	@Test
+	public void testSingleResourceCost() {
+		HashMap<ResourceType, Integer> expectedResourceCost = new HashMap<ResourceType, Integer>();
+		HashMap<ResourceType, Integer> actualResourceCost = new HashMap<ResourceType, Integer>();
+		
+		expectedResourceCost.put(ResourceType.LOOM, 2);
+		actualResourceCost.put(ResourceType.LOOM, 2);
+		
+		Cost cost = new Cost(CostType.RESOURCE, actualResourceCost);
+		
+		assertEquals(CostType.RESOURCE, cost.getType());
+		assertEquals(expectedResourceCost.get(ResourceType.LOOM), cost.getResourceCost().get(ResourceType.LOOM));
+		assertEquals(0, cost.getCoinCost());
+	}
 }
