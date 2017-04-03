@@ -1,7 +1,6 @@
 package dataStructures;
 
-import dataStructures.Card.Cost;
-import dataStructures.Card.Effect;
+import java.util.HashMap;
 
 public class Card {
 	private String name = "Default Card";
@@ -17,6 +16,10 @@ public class Card {
 
 	public enum Cost {
 		NONE, RESOURCE, COIN
+	}
+
+	public enum ResourceType {
+		LOOM, ORE, LUMBER
 	}
 
 	public enum Effect {
@@ -55,9 +58,22 @@ public class Card {
 	}
 
 	public int getCoinCost() {
-		if(this.cost == Cost.COIN) {
+		if (this.cost == Cost.COIN) {
 			return 1;
 		}
 		return 0;
+	}
+
+	public HashMap<ResourceType, Integer> getResourceCost() {
+		if (this.cost == Cost.RESOURCE) {
+			HashMap<ResourceType, Integer> resourceCost = new HashMap<ResourceType, Integer>();
+
+			resourceCost.put(ResourceType.LOOM, 1);
+			resourceCost.put(ResourceType.ORE, 1);
+			resourceCost.put(ResourceType.LUMBER, 1);
+			return resourceCost;
+		}
+
+		return new HashMap<ResourceType, Integer>();
 	}
 }

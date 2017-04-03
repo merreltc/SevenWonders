@@ -10,6 +10,7 @@ import dataStructures.Card;
 import dataStructures.Card.CardType;
 import dataStructures.Card.Cost;
 import dataStructures.Card.Effect;
+import dataStructures.Card.ResourceType;
 
 public class CardTest {
 
