@@ -16,6 +16,7 @@ public class CardTest {
 		
 		assertEquals("Default Card", card.getName());
 		assertEquals(3, card.getMinNumPlayers());
+		assertEquals(CardType.DEFAULT, card.getCardType());
 		assertEquals(Cost.NONE, card.getCostType());
 		assertEquals(Effect.NONE, card.getEffectType());
 	}
@@ -26,6 +27,18 @@ public class CardTest {
 		
 		assertEquals("Lumber Yard", card.getName());
 		assertEquals(3, card.getMinNumPlayers());
+		assertEquals(CardType.RAWMATERIAL, card.getCardType());
+		assertEquals(Cost.NONE, card.getCostType());
+		assertEquals(Effect.RESOURCE, card.getEffectType());
+	}
+	
+	@Test
+	public void testManufacturedGoodCard() {
+		Card card = new Card("Loom", 3, Cost.NONE, Effect.RESOURCE);
+		
+		assertEquals("Loom", card.getName());
+		assertEquals(3, card.getMinNumPlayers());
+		assertEquals(CardType.MANUFACTUREDGOOD, card.getCardType());
 		assertEquals(Cost.NONE, card.getCostType());
 		assertEquals(Effect.RESOURCE, card.getEffectType());
 	}
