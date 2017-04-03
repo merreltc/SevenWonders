@@ -55,6 +55,17 @@ public class CardTest {
 		assertEquals(Effect.MULTI, card.getEffectType());
 	}
 	
+	@Test
+	public void testCommercialStructureCardCommercialEffect() {
+		Card card = new Card("East Trading Post", 3, CardType.COMMERCIALSTRUCTURE, Cost.RESOURCE, Effect.COMMERCIAL);
+		
+		assertEquals("East Trading Post", card.getName());
+		assertEquals(3, card.getMinNumPlayers());
+		assertEquals(CardType.COMMERCIALSTRUCTURE, card.getCardType());
+		assertEquals(Cost.RESOURCE, card.getCostType());
+		assertEquals(Effect.COMMERCIAL, card.getEffectType());
+	}
+	
 
 	@Test
 	public void testScientificStructureCard() {
