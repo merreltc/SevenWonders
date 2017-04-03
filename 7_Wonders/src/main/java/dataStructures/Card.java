@@ -16,7 +16,7 @@ public class Card {
 	}
 
 	public enum Cost {
-		NONE, RESOURCE
+		NONE, RESOURCE, COIN
 	}
 
 	public enum Effect {
