@@ -44,4 +44,26 @@ public class CostTest {
 		assertEquals(expectedResourceCost.get(ResourceType.LOOM), cost.getResourceCost().get(ResourceType.LOOM));
 		assertEquals(0, cost.getCoinCost());
 	}
+	
+	@Test
+	public void testMultiResourceCost() {
+		HashMap<ResourceType, Integer> expectedResourceCost = new HashMap<ResourceType, Integer>();
+		HashMap<ResourceType, Integer> actualResourceCost = new HashMap<ResourceType, Integer>();
+		
+		expectedResourceCost.put(ResourceType.ORE, 1);
+		expectedResourceCost.put(ResourceType.LUMBER, 3);
+		expectedResourceCost.put(ResourceType.LOOM, 3);
+		
+		actualResourceCost.put(ResourceType.ORE, 1);
+		actualResourceCost.put(ResourceType.LUMBER, 3);
+		actualResourceCost.put(ResourceType.LOOM, 3);
+		
+		Cost cost = new Cost(CostType.RESOURCE, actualResourceCost);
+		
+		assertEquals(CostType.RESOURCE, cost.getType());
+		assertEquals(expectedResourceCost.get(ResourceType.ORE), cost.getResourceCost().get(ResourceType.ORE));
+		assertEquals(expectedResourceCost.get(ResourceType.LUMBER), cost.getResourceCost().get(ResourceType.LUMBER));
+		assertEquals(expectedResourceCost.get(ResourceType.LOOM), cost.getResourceCost().get(ResourceType.LOOM));
+		assertEquals(0, cost.getCoinCost());
+	}
 }
