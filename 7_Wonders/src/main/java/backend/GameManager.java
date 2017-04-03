@@ -14,6 +14,7 @@ import dataStructures.Player;
 public class GameManager {
 	private GameBoard board;
 	private RotateHandler rotateHandler;
+	private TradeHandler tradeHandler;
 
 	public GameManager(ArrayList<String> playerNames) {
 		setUpGame(playerNames);
@@ -23,11 +24,11 @@ public class GameManager {
 		ArrayList<Player> players = SetUpHandler.setUpHandler.setUpAndReturnPlayers(playerNames);
 		this.board = new GameBoard(players);
 		this.rotateHandler = new RotateHandler(this.board);
-
+		this.tradeHandler = new TradeHandler(this.board);
 	}
 
 	public void trade(Player from, Player to, int valueToTrade) {
-		TradeHandler.tradeFromTo(from, to, valueToTrade);
+		tradeHandler.tradeFromTo(from, to, valueToTrade);
 	}
 
 	public void changeRotateDirectionAndResetPositions(Direction direction) {
