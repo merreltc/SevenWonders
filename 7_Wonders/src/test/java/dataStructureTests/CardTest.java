@@ -45,12 +45,12 @@ public class CardTest {
 	}
 	
 	@Test
-	public void testCivilianStructureCard() {
-		Card card = new Card("Haven", 3, CardType.CIVILIANSTRUCTURE, Cost.RESOURCE, Effect.MULTI);
+	public void testCommercialStructureCard() {
+		Card card = new Card("Haven", 3, CardType.COMMERCIALSTRUCTURE, Cost.RESOURCE, Effect.MULTI);
 		
 		assertEquals("Haven", card.getName());
 		assertEquals(3, card.getMinNumPlayers());
-		assertEquals(CardType.CIVILIANSTRUCTURE, card.getCardType());
+		assertEquals(CardType.COMMERCIALSTRUCTURE, card.getCardType());
 		assertEquals(Cost.RESOURCE, card.getCostType());
 		assertEquals(Effect.MULTI, card.getEffectType());
 	}
