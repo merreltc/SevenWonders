@@ -77,5 +77,16 @@ public class CardTest {
 		assertEquals(Cost.RESOURCE, card.getCostType());
 		assertEquals(Effect.SCIENCE, card.getEffectType());
 	}
+	
+	@Test
+	public void testCivilianStructureCard() {
+		Card card = new Card("Haven", 3, CardType.CIVILIANSTRUCTURE, Cost.RESOURCE, Effect.VICTORYPOINTS);
+		
+		assertEquals("Haven", card.getName());
+		assertEquals(3, card.getMinNumPlayers());
+		assertEquals(CardType.CIVILIANSTRUCTURE, card.getCardType());
+		assertEquals(Cost.RESOURCE, card.getCostType());
+		assertEquals(Effect.VICTORYPOINTS, card.getEffectType());
+	}
 
 }
