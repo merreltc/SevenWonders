@@ -4,7 +4,8 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-import dataStructures.Card.Cost;
+import dataStructures.Cost;
+import dataStructures.Cost.CostType;
 
 public class CostTest {
 
@@ -12,7 +13,7 @@ public class CostTest {
 	public void testDefaultCost() {
 		Cost cost = new Cost();
 		
-		assertEquals(Cost.NONE, cost.getType());
+		assertEquals(CostType.NONE, cost.getType());
 		assertEquals(0, cost.getResourceCost().size());
 		assertEquals(0, cost.getCoinCost());
 	}
