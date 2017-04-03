@@ -19,5 +19,15 @@ public class CardTest {
 		assertEquals(Cost.NONE, card.getCostType());
 		assertEquals(Effect.NONE, card.getEffectType());
 	}
+	
+	@Test
+	public void testRawMaterialCard() {
+		Card card = new Card("Lumber Yard", 3, Cost.NONE, Effect.RESOURCE);
+		
+		assertEquals("Lumber Yard", card.getName());
+		assertEquals(3, card.getMinNumPlayers());
+		assertEquals(Cost.NONE, card.getCostType());
+		assertEquals(Effect.RESOURCE, card.getEffectType());
+	}
 
 }
