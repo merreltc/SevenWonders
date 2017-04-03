@@ -11,7 +11,7 @@ public class Card {
 	private Effect effect = Effect.NONE;
 
 	public enum CardType {
-		DEFAULT, RAWMATERIAL, MANUFACTUREDGOOD, CIVILIANSTRUCTURE
+		DEFAULT, RAWMATERIAL, MANUFACTUREDGOOD, CIVILIANSTRUCTURE, SCIENTIFICSTRUCTURE
 	}
 
 	public enum Cost {
@@ -19,7 +19,7 @@ public class Card {
 	}
 
 	public enum Effect {
-		NONE, RESOURCE, MULTI
+		NONE, RESOURCE, MULTI, SCIENCE
 	}
 
 	public Card() {
