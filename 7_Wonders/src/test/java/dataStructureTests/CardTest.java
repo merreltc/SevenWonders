@@ -93,7 +93,7 @@ public class CardTest {
 	public void testMilitaryStructureCard() {
 		Card card = new Card("Stockade", 3, CardType.MILITARYSTRUCTURE, Cost.RESOURCE, Effect.CONFLICTTOKENS);
 		
-		assertEquals("Haven", card.getName());
+		assertEquals("Stockade", card.getName());
 		assertEquals(3, card.getMinNumPlayers());
 		assertEquals(CardType.MILITARYSTRUCTURE, card.getCardType());
 		assertEquals(Cost.RESOURCE, card.getCostType());
