@@ -110,5 +110,16 @@ public class CardTest {
 		assertEquals(Cost.RESOURCE, card.getCostType());
 		assertEquals(Effect.VICTORYPOINTS, card.getEffectType());
 	}
+	
+	@Test
+	public void testCoinCostAndMinNumPlayersCard() {
+Card card = new Card("Tree Farm", 6, CardType.RAWMATERIAL, Cost.COIN, Effect.RESOURCE);
+		
+		assertEquals("Tree Farm", card.getName());
+		assertEquals(6, card.getMinNumPlayers());
+		assertEquals(CardType.RAWMATERIAL, card.getCardType());
+		assertEquals(Cost.COIN, card.getCostType());
+		assertEquals(Effect.RESOURCE, card.getEffectType());
+	}
 
 }
