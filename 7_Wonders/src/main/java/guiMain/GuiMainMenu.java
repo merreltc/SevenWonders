@@ -14,12 +14,13 @@ import javax.swing.Timer;
 
 public class GuiMainMenu extends JPanel implements ActionListener {
 	private Game game;
+	private PlayerSelect playerSelect;
+	private MainMenu mainMenu;
 	private JFrame frame;
 	private Timer timer;
 	private Menu currentMenu;
 	private MenuMouseListener menuMouse;
 	private boolean initialized = false;
-	private ArrayList<Button> buttons = new ArrayList<Button>();
 	private Integer numOfPlayers;
 
 	public enum Menu {
@@ -31,17 +32,17 @@ public class GuiMainMenu extends JPanel implements ActionListener {
 	}
 
 	public void start() {
-		frame = new JFrame();
-		frame.setSize(Constants.FrameWidth, Constants.FrameHeight);
-		frame.setVisible(true);
-		frame.setTitle("Seven Wonders");
-		frame.setResizable(false);
-		frame.add(this);
-		frame.addKeyListener(new MenuKeyListener());
-		menuMouse = new MenuMouseListener(this);
-		frame.addMouseListener(menuMouse);
-		timer = new Timer(20, this);
-		timer.start();
+		this.frame = new JFrame();
+		this.frame.setSize(Constants.FrameWidth, Constants.FrameHeight);
+		this.frame.setVisible(true);
+		this.frame.setTitle("Seven Wonders");
+		this.frame.setResizable(false);
+		this.frame.add(this);
+		this.frame.addKeyListener(new MenuKeyListener());
+		this.menuMouse = new MenuMouseListener(this);
+		this.frame.addMouseListener(menuMouse);
+		this.timer = new Timer(20, this);
+		this.timer.start();
 	}
 
 	@Override
@@ -57,56 +58,31 @@ public class GuiMainMenu extends JPanel implements ActionListener {
 		switch (this.currentMenu) {
 		case MainMenu:
 			if (!initialized) {
-				intializeMainMenu();
+				this.mainMenu = new MainMenu();
+				this.mainMenu.initializeMainMenu();
+				initialized = true;
 			}
-			graphics.setFont(Constants.TitleFont);
-			graphics.setColor(Constants.TitleColor);
-			graphics.drawString("7 Wonders", Constants.MainMenuTitlePosition.x, Constants.MainMenuTitlePosition.y);
-
-			for (Button button : buttons) {
-				button.draw(graphics);
-			}
+			this.mainMenu.draw(graphics);
 			break;
 
 		case PlayerSelect:
 			if (!initialized) {
-				intializePlayerSelect();
+				this.playerSelect = new PlayerSelect();
+				this.playerSelect.initializePlayerSelect();
+				initialized = true;
 			}
-			for (Button button : buttons) {
-				button.draw(graphics);
-			}
-			graphics.setFont(Constants.TitleFont);
-			graphics.setColor(Constants.TitleColor);
-			graphics.drawString("Choose number of players", Constants.PlayerSelectTitlePosition.x,
-					Constants.PlayerSelectButtonBounds.y);
+			this.playerSelect.draw(graphics);
 			break;
 
 		case Game:
 			if (!initialized) {
 				this.game = new Game(this.numOfPlayers);
-				game.initializeGame();
+				this.game.initializeGame();
 				initialized = true;
 			}
-			game.draw(graphics);
+			this.game.draw(graphics);
 			break;
 		}
-	}
-
-	private void intializePlayerSelect() {
-		this.buttons.clear();
-		for (int i = 3; i <= 7; i++) {
-			Button startGame = new Button(new Point(400 + 250 * (i - 3), 400), Constants.PlayerSelectButtonBounds,
-					i + "");
-			buttons.add(startGame);
-		}
-		initialized = true;
-	}
-
-	private void intializeMainMenu() {
-		this.buttons.clear();
-		Button startGame = new Button(Constants.StartButtonPosition, Constants.StartButtonBounds, "Start");
-		buttons.add(startGame);
-		initialized = true;
 	}
 
 	public void onButtonClick(Button clicked) {
@@ -131,10 +107,16 @@ public class GuiMainMenu extends JPanel implements ActionListener {
 	}
 
 	public ArrayList<Button> getActiveButtons() {
-		if (this.currentMenu == Menu.Game) {
+		switch (currentMenu) {
+		case MainMenu:
+			return this.mainMenu.getButtons();
+		case PlayerSelect:
+			return this.playerSelect.getButtons();
+		/* if the current Menu is the Game Menu */
+		default:
 			return this.game.getButtons();
 		}
-		return buttons;
+		
 	}
 
 	public JFrame getFrame() {
