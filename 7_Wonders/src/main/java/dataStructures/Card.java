@@ -2,6 +2,8 @@ package dataStructures;
 
 import java.util.HashMap;
 
+import dataStructures.Card.ResourceType;
+
 public class Card {
 	private String name = "Default Card";
 	private int minNumPlayers = 3;
@@ -75,5 +77,12 @@ public class Card {
 		}
 
 		return new HashMap<ResourceType, Integer>();
+	}
+
+	public HashMap<ResourceType, Integer> getEffect() {
+		HashMap<ResourceType, Integer> effect = new HashMap<ResourceType, Integer>();
+
+		effect.put(ResourceType.LUMBER, 2);
+		return effect;
 	}
 }
