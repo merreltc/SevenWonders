@@ -19,7 +19,7 @@ public class Card {
 	}
 
 	public enum Effect {
-		NONE, RESOURCE, MULTI, SCIENCE, COMMERCIAL
+		NONE, RESOURCE, MULTI, SCIENCE, COMMERCIAL, VICTORYPOINTS
 	}
 
 	public Card() {
