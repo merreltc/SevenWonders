@@ -4,6 +4,10 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
+import dataStructures.Card;
+import dataStructures.Card.Cost;
+import dataStructures.Card.Effect;
+
 public class CardTest {
 
 	@Test
