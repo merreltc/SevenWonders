@@ -5,6 +5,7 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 
 import dataStructures.Card;
+import dataStructures.Card.CardType;
 import dataStructures.Card.Cost;
 import dataStructures.Card.Effect;
 
@@ -23,7 +24,7 @@ public class CardTest {
 	
 	@Test
 	public void testRawMaterialCard() {
-		Card card = new Card("Lumber Yard", 3, Cost.NONE, Effect.RESOURCE);
+		Card card = new Card("Lumber Yard", 3, CardType.RAWMATERIAL, Cost.NONE, Effect.RESOURCE);
 		
 		assertEquals("Lumber Yard", card.getName());
 		assertEquals(3, card.getMinNumPlayers());
@@ -34,7 +35,7 @@ public class CardTest {
 	
 	@Test
 	public void testManufacturedGoodCard() {
-		Card card = new Card("Loom", 3, Cost.NONE, Effect.RESOURCE);
+		Card card = new Card("Loom", 3, CardType.MANUFACTUREDGOOD, Cost.NONE, Effect.RESOURCE);
 		
 		assertEquals("Loom", card.getName());
 		assertEquals(3, card.getMinNumPlayers());
