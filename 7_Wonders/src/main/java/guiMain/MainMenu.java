@@ -3,27 +3,23 @@ package guiMain;
 import java.awt.Graphics;
 import java.util.ArrayList;
 
-public class MainMenu {
-	private ArrayList<Button> buttons = new ArrayList<Button>();
+public class MainMenu extends Menu{
 
 	public void draw(Graphics graphics) {
 		graphics.setFont(Constants.TitleFont);
 		graphics.setColor(Constants.TitleColor);
 		graphics.drawString("7 Wonders", Constants.MainMenuTitlePosition.x, Constants.MainMenuTitlePosition.y);
 
-		for (Button button : buttons) {
+		for (Interactable button : this.getInteractables()) {
 			button.draw(graphics);
 		}
 	}
 
-	public void initializeMainMenu() {
-		this.buttons.clear();
-		Button startGame = new Button(Constants.StartButtonPosition, Constants.StartButtonBounds, "Start");
-		buttons.add(startGame);
-	}
-	
-	public ArrayList<Button> getButtons() {
-		return this.buttons;
+	@Override
+	public void initialize() {
+		this.clearButtons();
+		Interactable startGame = new Button(Constants.StartButtonPosition, Constants.StartButtonBounds, "Start");
+		this.addInteractable(startGame);
 	}
 
 }

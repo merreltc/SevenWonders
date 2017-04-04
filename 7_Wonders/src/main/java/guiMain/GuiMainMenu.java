@@ -13,13 +13,10 @@ import javax.swing.JPanel;
 import javax.swing.Timer;
 
 public class GuiMainMenu extends JPanel implements ActionListener {
-	private Game game;
-	private Menu playerSelect;
-	private MainMenu mainMenu;
+	
+	private Menu current;
 	private JFrame frame;
 	private Timer timer;
-	private MenuType currentMenu;
-	private boolean initialized = false;
 	private Integer numOfPlayers;
 
 	public enum MenuType {
@@ -27,7 +24,6 @@ public class GuiMainMenu extends JPanel implements ActionListener {
 	}
 
 	public GuiMainMenu() {
-		currentMenu = MenuType.MainMenu;
 		this.frame = new JFrame();
 		this.frame.setSize(Constants.FrameWidth, Constants.FrameHeight);
 		this.frame.setVisible(true);
@@ -37,6 +33,7 @@ public class GuiMainMenu extends JPanel implements ActionListener {
 		this.frame.addKeyListener(new MenuKeyListener());
 		MenuMouseListener menuMouse = new MenuMouseListener(this);
 		this.frame.addMouseListener(menuMouse);
+		this.switchMenu(MenuType.MainMenu);
 		this.timer = new Timer(20, this);
 		this.timer.start();
 	}
@@ -51,67 +48,45 @@ public class GuiMainMenu extends JPanel implements ActionListener {
 		graphics.setColor(Color.RED);
 		graphics.fillRect(0, 0, Constants.FrameWidth, Constants.FrameHeight);
 
-		switch (this.currentMenu) {
-		case MainMenu:
-			if (!initialized) {
-				this.mainMenu = new MainMenu();
-				this.mainMenu.initializeMainMenu();
-				initialized = true;
-			}
-			this.mainMenu.draw(graphics);
-			break;
-
-		case PlayerSelect:
-			if (!initialized) {
-				this.playerSelect = new PlayerSelect();
-				this.playerSelect.initialize();
-				initialized = true;
-			}
-			this.playerSelect.draw(graphics);
-			break;
-
-		case Game:
-			if (!initialized) {
-				this.game = new Game(this.numOfPlayers);
-				this.game.initializeGame();
-				initialized = true;
-			}
-			this.game.draw(graphics);
-			break;
-		}
+		this.current.draw(graphics);
 	}
 
-	public void onButtonClick(Button clicked) {
+	public void onClick(Interactable clicked) {
 		String text = clicked.getValue();
+		String classString = current.getClass().getName();
+		String currentMenu = classString.substring(8);
 		switch (currentMenu) {
-		case MainMenu:
+		case "MainMenu":
 			switchMenu(MenuType.PlayerSelect);
 			break;
-		case PlayerSelect:
+		case "PlayerSelect":
 			numOfPlayers = Integer.parseInt(text);
 			switchMenu(MenuType.Game);
 			break;
-		case Game:
-			this.game.onButtonClickInGame(clicked);
+		case "Game":
+			this.current.onClick(clicked);
 			break;
 		}
 	}
 
 	public void switchMenu(MenuType menu) {
-		this.currentMenu = menu;
-		this.initialized = false;
+		
+		switch (menu) {
+		case MainMenu:
+			this.current = new MainMenu();
+			break;
+		case PlayerSelect:
+			this.current = new PlayerSelect();
+			break;
+		case Game:
+			this.current = new Game(this.numOfPlayers);
+			break;
+		}	
+		this.current.initialize();
 	}
 
-	public ArrayList<Button> getActiveButtons() {
-		switch (currentMenu) {
-		case MainMenu:
-			return this.mainMenu.getButtons();
-		case PlayerSelect:
-			return this.playerSelect.getButtons();
-		/* if the current Menu is the Game Menu */
-		default:
-			return this.game.getButtons();
-		}
+	public ArrayList<Interactable> getActiveButtons() {
+		return this.current.getInteractables();
 		
 	}
 

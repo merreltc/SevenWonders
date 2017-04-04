@@ -8,8 +8,7 @@ import backend.GameManager;
 import dataStructures.Player;
 import exceptions.InsufficientFundsException;
 
-public class Game {
-	private ArrayList<Button> buttons = new ArrayList<Button>();
+public class Game extends Menu {
 	private ArrayList<PlayerBoard> boards = new ArrayList<>();
 	private GameManager gameManager;
 	private Message message;
@@ -20,8 +19,9 @@ public class Game {
 		this.message = new Message();
 	}
 
+	@Override
 	public void draw(Graphics graphics) {
-		for (Button button : buttons) {
+		for (Interactable button : this.getInteractables()) {
 			button.draw(graphics);
 		}
 		for (int i = 0; i < boards.size(); i++) {
@@ -29,13 +29,6 @@ public class Game {
 			boards.get(i).draw(graphics);
 		}
 		this.message.drawMessageOnScreen(graphics);
-	}
-
-	public void initializeGame() {
-		this.buttons.clear();
-		createBoardsForEachPlayer();
-		setUpMessageButton();
-		setUpTradingButtons();
 	}
 
 	private void createBoardsForEachPlayer() {
@@ -49,7 +42,7 @@ public class Game {
 	private void setUpMessageButton() {
 		Button exitMessage = new Button(Constants.CloseMessageButtonPosition, Constants.CloseMessageButtonBounds,
 				"Close");
-		buttons.add(exitMessage);
+		this.addInteractable(exitMessage);
 	}
 
 	private void setUpTradingButtons() {
@@ -59,18 +52,19 @@ public class Game {
 					Constants.TradeLeftBaseButtonPoint.y + Constants.TradeButtonYOffet * i);
 			Button LeftTradeButton = new Button(buttonPosition, Constants.TradeButtonBounds, "Left-" + values[i]);
 			LeftTradeButton.showValue(false);
-			buttons.add(LeftTradeButton);
+			this.addInteractable(LeftTradeButton);
 		}
 		for (int i = 0; i < 4; i++) {
 			Point buttonPosition = new Point(Constants.TradeRightBaseButtonPoint.x,
 					Constants.TradeRightBaseButtonPoint.y + Constants.TradeButtonYOffet * i);
 			Button RightTradeButton = new Button(buttonPosition, Constants.TradeButtonBounds, "Right-" + values[i]);
 			RightTradeButton.showValue(false);
-			buttons.add(RightTradeButton);
+			this.addInteractable(RightTradeButton);
 		}
 	}
 
-	public void onButtonClickInGame(Button clicked) {
+	@Override
+	public void onClick(Interactable clicked) {
 		if (clicked.getValue().equals("Close")) {
 			this.message.clearMessage();
 		} else {
@@ -80,11 +74,15 @@ public class Game {
 		}
 	}
 
-//	public void setMessage(String message) {
-//		this.message.setMessage(message);
-//	}
+	 public void setMessage(String message) {
+	 this.message.setMessage(message);
+	 }
 
-	public ArrayList<Button> getButtons() {
-		return this.buttons;
+	@Override
+	public void initialize() {
+		this.clearButtons();
+		createBoardsForEachPlayer();
+		setUpMessageButton();
+		setUpTradingButtons();
 	}
 }

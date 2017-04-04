@@ -9,7 +9,7 @@ public class PlayerSelect extends Menu{
 
 	@Override
 	public void draw(Graphics graphics) {
-		for (Button button : this.getButtons()) {
+		for (Interactable button : this.getInteractables()) {
 			button.draw(graphics);
 		}
 		graphics.setFont(Constants.TitleFont);
@@ -29,8 +29,9 @@ public class PlayerSelect extends Menu{
 		for (int i = 3; i <= 7; i++) {
 			Button startGame = new Button(new Point(400 + 250 * (i - 3), 400), Constants.PlayerSelectButtonBounds,
 					i + "");
-			this.addButton(startGame);
+			this.addInteractable(startGame);
 		}
 
 	}
+
 }

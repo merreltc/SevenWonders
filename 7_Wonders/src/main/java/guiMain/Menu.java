@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 public abstract class Menu {
 	
-	private ArrayList<Button> buttons = new ArrayList<Button>();
+	private ArrayList<Interactable> interactables = new ArrayList<>();
 
 	public void Menu(){
 		
@@ -15,15 +15,19 @@ public abstract class Menu {
 	
 	public abstract void initialize();
 	
-	public ArrayList<Button> getButtons(){
-		return buttons;
+	public ArrayList<Interactable> getInteractables(){
+		return interactables;
 	}
 	
-	public void addButton(Button button){
-		this.buttons.add(button);
+	public void addInteractable(Interactable button){
+		this.interactables.add(button);
 	}
 	
 	public void clearButtons(){
-		this.buttons.clear();
+		this.interactables.clear();
 	}
+	
+	public void onClick(Interactable clicked) {
+	}
+
 }
