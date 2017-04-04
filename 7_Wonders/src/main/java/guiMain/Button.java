@@ -20,13 +20,6 @@ public class Button {
 		this.showValue = true;
 	}
 
-	public Button(Point position, Point bounds, String value, boolean showValue) {
-		this.boundPoint = bounds;
-		this.positionPoint = position;
-		this.value = value;
-		this.showValue = showValue;
-	}
-
 	public boolean checkButtonClicked(Point point) {
 		if (positionPoint.x <= point.x && positionPoint.x + boundPoint.x >= point.x) {
 			if (positionPoint.y <= point.y && positionPoint.y + boundPoint.y >= point.y) {
@@ -46,6 +39,11 @@ public class Button {
 				graphics.drawString(value, positionPoint.x + 10, positionPoint.y + this.boundPoint.y - 10);
 			}
 		}
+	}
+	
+	public void showValue(boolean show){
+		showValue = show;
+		
 	}
 	
 	public Point2D getBounds() {

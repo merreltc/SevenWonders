@@ -13,15 +13,11 @@ public class Game {
 	private ArrayList<PlayerBoard> boards = new ArrayList<>();
 	private GameManager gameManager;
 	private Message message;
-	private TradeHandler tradeHandler;
-	private int numOfPlayers;
 	private int currentPlayer = 1;
 
 	public Game(int numOfPlayers) {
-		this.numOfPlayers = numOfPlayers;
-		this.gameManager = new GameManager(this.numOfPlayers);
+		this.gameManager = new GameManager(numOfPlayers);
 		this.message = new Message();
-		this.tradeHandler = new TradeHandler(this.gameManager, this.message);
 	}
 
 	public void draw(Graphics graphics) {
@@ -43,7 +39,8 @@ public class Game {
 	}
 
 	private void createBoardsForEachPlayer() {
-		for (int i = -1; i < this.numOfPlayers - 1; i++) {
+		int numOfPlayers = this.gameManager.getNumPlayers();
+		for (int i = -1; i < numOfPlayers - 1; i++) {
 			PlayerBoard board = new PlayerBoard(i, numOfPlayers, this.gameManager.getPlayer(i + 1));
 			boards.add(board);
 		}
@@ -60,15 +57,15 @@ public class Game {
 		for (int i = 0; i < 4; i++) {
 			Point buttonPosition = new Point(Constants.TradeLeftBaseButtonPoint.x,
 					Constants.TradeLeftBaseButtonPoint.y + Constants.TradeButtonYOffet * i);
-			Button LeftTradeButton = new Button(buttonPosition, Constants.TradeButtonBounds, "Left-" + values[i],
-					false);
+			Button LeftTradeButton = new Button(buttonPosition, Constants.TradeButtonBounds, "Left-" + values[i]);
+			LeftTradeButton.showValue(false);
 			buttons.add(LeftTradeButton);
 		}
 		for (int i = 0; i < 4; i++) {
 			Point buttonPosition = new Point(Constants.TradeRightBaseButtonPoint.x,
 					Constants.TradeRightBaseButtonPoint.y + Constants.TradeButtonYOffet * i);
-			Button RightTradeButton = new Button(buttonPosition, Constants.TradeButtonBounds, "Right-" + values[i],
-					false);
+			Button RightTradeButton = new Button(buttonPosition, Constants.TradeButtonBounds, "Right-" + values[i]);
+			RightTradeButton.showValue(false);
 			buttons.add(RightTradeButton);
 		}
 	}
@@ -78,13 +75,14 @@ public class Game {
 			this.message.clearMessage();
 		} else {
 			String[] splitValue = clicked.getValue().split("-");
-			this.tradeHandler.trade(splitValue, this.currentPlayer);
+			TradeHandler tradeHandler = new TradeHandler(this.gameManager, this.message);
+			tradeHandler.trade(splitValue, this.currentPlayer);
 		}
 	}
 
-	public void setMessage(String message) {
-		this.message.setMessage(message);
-	}
+//	public void setMessage(String message) {
+//		this.message.setMessage(message);
+//	}
 
 	public ArrayList<Button> getButtons() {
 		return this.buttons;

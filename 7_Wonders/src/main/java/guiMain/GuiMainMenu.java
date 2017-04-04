@@ -14,24 +14,20 @@ import javax.swing.Timer;
 
 public class GuiMainMenu extends JPanel implements ActionListener {
 	private Game game;
-	private PlayerSelect playerSelect;
+	private Menu playerSelect;
 	private MainMenu mainMenu;
 	private JFrame frame;
 	private Timer timer;
-	private Menu currentMenu;
-	private MenuMouseListener menuMouse;
+	private MenuType currentMenu;
 	private boolean initialized = false;
 	private Integer numOfPlayers;
 
-	public enum Menu {
+	public enum MenuType {
 		MainMenu, PlayerSelect, Game
 	}
 
 	public GuiMainMenu() {
-		currentMenu = Menu.MainMenu;
-	}
-
-	public void start() {
+		currentMenu = MenuType.MainMenu;
 		this.frame = new JFrame();
 		this.frame.setSize(Constants.FrameWidth, Constants.FrameHeight);
 		this.frame.setVisible(true);
@@ -39,7 +35,7 @@ public class GuiMainMenu extends JPanel implements ActionListener {
 		this.frame.setResizable(false);
 		this.frame.add(this);
 		this.frame.addKeyListener(new MenuKeyListener());
-		this.menuMouse = new MenuMouseListener(this);
+		MenuMouseListener menuMouse = new MenuMouseListener(this);
 		this.frame.addMouseListener(menuMouse);
 		this.timer = new Timer(20, this);
 		this.timer.start();
@@ -68,7 +64,7 @@ public class GuiMainMenu extends JPanel implements ActionListener {
 		case PlayerSelect:
 			if (!initialized) {
 				this.playerSelect = new PlayerSelect();
-				this.playerSelect.initializePlayerSelect();
+				this.playerSelect.initialize();
 				initialized = true;
 			}
 			this.playerSelect.draw(graphics);
@@ -89,11 +85,11 @@ public class GuiMainMenu extends JPanel implements ActionListener {
 		String text = clicked.getValue();
 		switch (currentMenu) {
 		case MainMenu:
-			switchMenu(Menu.PlayerSelect);
+			switchMenu(MenuType.PlayerSelect);
 			break;
 		case PlayerSelect:
 			numOfPlayers = Integer.parseInt(text);
-			switchMenu(Menu.Game);
+			switchMenu(MenuType.Game);
 			break;
 		case Game:
 			this.game.onButtonClickInGame(clicked);
@@ -101,7 +97,7 @@ public class GuiMainMenu extends JPanel implements ActionListener {
 		}
 	}
 
-	public void switchMenu(Menu menu) {
+	public void switchMenu(MenuType menu) {
 		this.currentMenu = menu;
 		this.initialized = false;
 	}
@@ -129,6 +125,5 @@ public class GuiMainMenu extends JPanel implements ActionListener {
 
 	public static void main(String[] args) {
 		GuiMainMenu menu = new GuiMainMenu();
-		menu.start();
 	}
 }

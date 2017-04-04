@@ -4,11 +4,12 @@ import java.awt.Graphics;
 import java.awt.Point;
 import java.util.ArrayList;
 
-public class PlayerSelect {
-	private ArrayList<Button> buttons = new ArrayList<Button>();
+public class PlayerSelect extends Menu{
+	//private ArrayList<Button> buttons = new ArrayList<Button>();
 
+	@Override
 	public void draw(Graphics graphics) {
-		for (Button button : buttons) {
+		for (Button button : this.getButtons()) {
 			button.draw(graphics);
 		}
 		graphics.setFont(Constants.TitleFont);
@@ -18,16 +19,18 @@ public class PlayerSelect {
 	}
 
 	public void initializePlayerSelect() {
-		this.buttons.clear();
+		
+	}
+
+	@Override
+	public void initialize() {
+		
+		this.clearButtons();
 		for (int i = 3; i <= 7; i++) {
 			Button startGame = new Button(new Point(400 + 250 * (i - 3), 400), Constants.PlayerSelectButtonBounds,
 					i + "");
-			buttons.add(startGame);
+			this.addButton(startGame);
 		}
 
-	}
-
-	public ArrayList<Button> getButtons() {
-		return this.buttons;
 	}
 }
