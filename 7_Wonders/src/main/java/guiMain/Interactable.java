@@ -42,6 +42,9 @@ public abstract class Interactable {
 		}
 	}
 	
+	public void hide(){
+		this.drawUnit = false;
+	}
 	
 	public Point2D getBounds() {
 		return this.boundPoint;

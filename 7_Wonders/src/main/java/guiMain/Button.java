@@ -14,7 +14,7 @@ public class Button extends Interactable{
 
 	@Override
 	public void draw(Graphics graphics) {
-		super.draw(graphics, Color.GREEN, Color.RED);
+		super.draw(graphics, Color.BLUE, Color.RED);
 	}
 
 }

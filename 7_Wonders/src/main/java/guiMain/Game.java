@@ -12,21 +12,40 @@ public class Game extends Menu {
 	private ArrayList<PlayerBoard> boards = new ArrayList<>();
 	private GameManager gameManager;
 	private Message message;
+	private HandManager handManager;
 	private int currentPlayer = 1;
 
 	public Game(int numOfPlayers) {
 		this.gameManager = new GameManager(numOfPlayers);
 		this.message = new Message();
 	}
+	
+	@Override
+	public void initialize() {
+		this.clearButtons();
+		createBoardsForEachPlayer();
+		setUpMessageButton();
+		setUpTradingButtons();
+		setUpCardSlots();
+	}
+
+	private void setUpCardSlots() {
+		this.handManager = new HandManager();
+		this.handManager.rotatePlayers(this.gameManager.getPlayer(0));
+		for (int i = 0; i < this.handManager.getPlayerHandSize(); i++){
+			this.addInteractable(this.handManager.getCardHolder(i));
+		}
+	}
 
 	@Override
 	public void draw(Graphics graphics) {
-		for (Interactable button : this.getInteractables()) {
-			button.draw(graphics);
-		}
+		
 		for (int i = 0; i < boards.size(); i++) {
 
 			boards.get(i).draw(graphics);
+		}
+		for (Interactable button : this.getInteractables()) {
+			button.draw(graphics);
 		}
 		this.message.drawMessageOnScreen(graphics);
 	}
@@ -51,21 +70,24 @@ public class Game extends Menu {
 			Point buttonPosition = new Point(Constants.TradeLeftBaseButtonPoint.x,
 					Constants.TradeLeftBaseButtonPoint.y + Constants.TradeButtonYOffet * i);
 			Button LeftTradeButton = new Button(buttonPosition, Constants.TradeButtonBounds, "Left-" + values[i]);
-			LeftTradeButton.showValue(false);
+			//LeftTradeButton.hide();;
 			this.addInteractable(LeftTradeButton);
 		}
 		for (int i = 0; i < 4; i++) {
 			Point buttonPosition = new Point(Constants.TradeRightBaseButtonPoint.x,
 					Constants.TradeRightBaseButtonPoint.y + Constants.TradeButtonYOffet * i);
 			Button RightTradeButton = new Button(buttonPosition, Constants.TradeButtonBounds, "Right-" + values[i]);
-			RightTradeButton.showValue(false);
+			//RightTradeButton.hide();
 			this.addInteractable(RightTradeButton);
 		}
 	}
 
 	@Override
 	public void onClick(Interactable clicked) {
-		if (clicked.getValue().equals("Close")) {
+		if (clicked.getClass().equals(CardHolder.class)){
+			//(CardHolder) clicked.activate();
+		}
+		else if (clicked.getValue().equals("Close")) {
 			this.message.clearMessage();
 		} else {
 			String[] splitValue = clicked.getValue().split("-");
@@ -75,14 +97,7 @@ public class Game extends Menu {
 	}
 
 	 public void setMessage(String message) {
-	 this.message.setMessage(message);
+		 this.message.setMessage(message);
 	 }
 
-	@Override
-	public void initialize() {
-		this.clearButtons();
-		createBoardsForEachPlayer();
-		setUpMessageButton();
-		setUpTradingButtons();
-	}
 }
