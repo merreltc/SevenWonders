@@ -19,7 +19,7 @@ public class TradeHandler {
 		int numOfPlayers = gameManager.getNumPlayers();
 		Player tradeTo;
 		Player tradeFrom = this.gameManager.getPlayer(currentPlayer);
-		if (splitValue[0].equals("Right")) {
+		if (splitValue[0].equals("Left")) {
 			tradeTo = this.gameManager.getPlayer((currentPlayer + 1) % numOfPlayers);
 
 		} else {
