@@ -5,9 +5,9 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 
 import dataStructures.Effect;
+import dataStructures.Effect.AffectedEntityType;
 import dataStructures.Effect.Direction;
 import dataStructures.Effect.EffectType;
-import dataStructures.Effect.AffectedEntityType;
 import dataStructures.Effect.ScienceType;
 
 public class EffectTest {
