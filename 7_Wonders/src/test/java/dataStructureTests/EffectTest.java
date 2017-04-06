@@ -4,6 +4,12 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
+import dataStructures.Effect;
+import dataStructures.Effect.Direction;
+import dataStructures.Effect.EffectType;
+import dataStructures.Effect.AffectedEntityType;
+import dataStructures.Effect.ScienceType;
+
 public class EffectTest {
 
 	@Test
@@ -18,9 +24,9 @@ public class EffectTest {
 		// Victory points can be stand-alone or attributed to an EffectedType
 		assertEquals(0, effect.getVictoryPoints());
 		assertEquals(0, effect.getCoinTotal());
-		assertEquals(EffectedType.NONE, effect.getEffectedType());
+		assertEquals(AffectedEntityType.NONE, effect.getAffectedEntityType());
 		
-		assertEquals(0, effect.getCommerceResource().size());
+		assertEquals(0, effect.getCommerceResources().size());
 		assertEquals(0, effect.getCommerceValue());
 		assertEquals(Direction.NONE, effect.getCommerceDirection());
 	}
