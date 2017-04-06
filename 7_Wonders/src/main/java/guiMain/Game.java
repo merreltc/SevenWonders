@@ -16,7 +16,7 @@ public class Game extends Menu {
 	private int currentPlayer = 1;
 
 	public Game(int numOfPlayers) {
-		this.gameManager = new GameManager(numOfPlayers);
+		this.gameManager = new GameManager(1);
 		this.message = new Message();
 	}
 
