@@ -3,6 +3,8 @@ package guiMain;
 import java.awt.Graphics;
 import java.util.ArrayList;
 
+import GuiDataStructures.Constants;
+
 public class MainMenu extends Menu{
 
 	public void draw(Graphics graphics) {

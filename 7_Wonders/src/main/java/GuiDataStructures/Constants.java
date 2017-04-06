@@ -1,4 +1,4 @@
-package guiMain;
+package GuiDataStructures;
 
 import java.awt.Color;
 import java.awt.Font;

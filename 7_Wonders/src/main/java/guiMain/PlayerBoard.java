@@ -5,6 +5,7 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Point;
 
+import GuiDataStructures.Constants;
 import dataStructures.Player;
 
 public class PlayerBoard {

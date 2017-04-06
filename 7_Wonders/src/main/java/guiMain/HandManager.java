@@ -4,6 +4,7 @@ import java.awt.Graphics;
 import java.awt.Point;
 import java.util.ArrayList;
 
+import GuiDataStructures.Constants;
 import dataStructures.Player;
 
 public class HandManager {

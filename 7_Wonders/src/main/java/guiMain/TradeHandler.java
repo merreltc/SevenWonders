@@ -7,8 +7,8 @@ import dataStructures.Player;
 import exceptions.InsufficientFundsException;
 
 public class TradeHandler {
-	GameManager gameManager;
-	Message message;
+	private GameManager gameManager;
+	private Message message;
 
 	public TradeHandler(GameManager gameManager, Message message) {
 		this.gameManager = gameManager;

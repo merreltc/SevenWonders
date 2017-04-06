@@ -7,10 +7,6 @@ public abstract class Menu {
 	
 	private ArrayList<Interactable> interactables = new ArrayList<>();
 
-	public void Menu(){
-		
-	}
-	
 	public abstract void draw(Graphics graphics);
 	
 	public abstract void initialize();

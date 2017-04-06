@@ -2,8 +2,10 @@ package guiMain;
 
 import java.awt.Graphics;
 
+import GuiDataStructures.Constants;
+
 public class Message {
-	private String message = "Error";
+	private String message = "";
 	
 
 	

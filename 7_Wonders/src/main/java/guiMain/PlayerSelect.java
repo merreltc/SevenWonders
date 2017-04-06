@@ -4,8 +4,9 @@ import java.awt.Graphics;
 import java.awt.Point;
 import java.util.ArrayList;
 
+import GuiDataStructures.Constants;
+
 public class PlayerSelect extends Menu{
-	//private ArrayList<Button> buttons = new ArrayList<Button>();
 
 	@Override
 	public void draw(Graphics graphics) {
@@ -16,10 +17,6 @@ public class PlayerSelect extends Menu{
 		graphics.setColor(Constants.TitleColor);
 		graphics.drawString("Choose number of players", Constants.PlayerSelectTitlePosition.x,
 				Constants.PlayerSelectButtonBounds.y);
-	}
-
-	public void initializePlayerSelect() {
-		
 	}
 
 	@Override

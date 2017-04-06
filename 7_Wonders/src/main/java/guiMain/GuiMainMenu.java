@@ -12,6 +12,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
+import GuiDataStructures.Constants;
 import backend.SetUpHandler;
 import dataStructures.Player;
 
