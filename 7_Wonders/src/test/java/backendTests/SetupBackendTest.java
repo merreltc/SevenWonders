@@ -1,39 +1,44 @@
 package backendTests;
 import static org.junit.Assert.*;
 
+import java.util.ArrayList;
+
 import org.easymock.EasyMock;
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 
 import backend.SetUpHandler;
-import dataStructures.GameBoard;
+import dataStructures.Player;
 
 public class SetupBackendTest {
+	
+	@After public void setUp() { 
+		SetUpHandler.setUpHandler = new SetUpHandler();
+    }
 
 	@Test
 	public void testValidPlayerNum() {
-		
-		SetUpHandler.setPlayerNum(3);
-		assertEquals(3, SetUpHandler.getPlayerNum());
-		SetUpHandler.setPlayerNum(7);
-		assertEquals(7, SetUpHandler.getPlayerNum());
+		assertTrue(SetUpHandler.setUpHandler.validatePlayerNum(3));
+		assertTrue(SetUpHandler.setUpHandler.validatePlayerNum(7));
 	}
 	
 	@Test(expected = IllegalArgumentException.class)
 	public void testInvalidPlayerNum2() {
-		SetUpHandler.setPlayerNum(2);
+		SetUpHandler.setUpHandler.validatePlayerNum(2);
 		fail();
 	}
 	
 	@Test(expected = IllegalArgumentException.class)
 	public void testInvalidPlayerNum8() {
-		SetUpHandler.setPlayerNum(8);
+		SetUpHandler.setUpHandler.validatePlayerNum(8);
 		fail();
 	}
 	
 	@Test
 	public void testInvalidPlayerNum2ErrorMessage() {	
 		try{
-			SetUpHandler.setPlayerNum(2);
+			SetUpHandler.setUpHandler.validatePlayerNum(2);
 		} catch (IllegalArgumentException error){
 			String message = "Cannot play with 2 players";
 			assertEquals(message, error.getMessage());
@@ -43,7 +48,7 @@ public class SetupBackendTest {
 	@Test
 	public void testInvalidPlayerNum8ErrorMessage() {
 		try{
-			SetUpHandler.setPlayerNum(8);
+			SetUpHandler.setUpHandler.validatePlayerNum(8);
 		} catch (IllegalArgumentException error){
 			String message = "Cannot play with 8 players";
 			assertEquals(message, error.getMessage());
@@ -51,30 +56,131 @@ public class SetupBackendTest {
 	}
 	
 	@Test
-	public void testCreateGameBoardDefault() {
-		GameBoard board = EasyMock.createStrictMock(GameBoard.class);
+	public void testSetUpReturnsPlayerNamesMin() {
+		ArrayList<String> playerNames = new ArrayList<String>();
+		playerNames.add("Wolverine");
+		playerNames.add("Captain America");
+		playerNames.add("Black Widow");
 		
-		SetUpHandler.setPlayerNum(3);
-		//EasyMock.expect(SetUpHandler.createDefaultGameBoard()).andReturn(board);
+		SetUpHandler.setUpHandler = EasyMock.mock(SetUpHandler.class);
+		ArrayList<Player> players = (ArrayList<Player>) EasyMock.mock(ArrayList.class);
+		EasyMock.expect(SetUpHandler.setUpHandler.setUpAndReturnPlayers(playerNames)).andReturn(players);
 		
-		EasyMock.replay(board);
+		EasyMock.replay(players, SetUpHandler.setUpHandler);
+		SetUpHandler.setUpHandler.setUpAndReturnPlayers(playerNames);
 		
-		SetUpHandler.setUp(3);
-		
-		EasyMock.verify(board);
+		EasyMock.verify(players, SetUpHandler.setUpHandler);
 	}
 	
 	@Test
-	public void testCreateGameBoardMinPlayers() {
-		GameBoard board = SetUpHandler.setUp(3);
+	public void testSetUpReturnsPlayerNamesMax() {
+		ArrayList<String> playerNames = new ArrayList<String>();
+		playerNames.add("Wolverine");
+		playerNames.add("Captain America");
+		playerNames.add("Black Widow");
+		playerNames.add("Hulk");
+		playerNames.add("Iron Man");
+		playerNames.add("Spider Man");
+		playerNames.add("Thor");
 		
-		assertEquals(3, board.getNumPlayers());
+		SetUpHandler.setUpHandler = EasyMock.mock(SetUpHandler.class);
+		ArrayList<Player> players = (ArrayList<Player>) EasyMock.mock(ArrayList.class);
+		EasyMock.expect(SetUpHandler.setUpHandler.setUpAndReturnPlayers(playerNames)).andReturn(players);
+		
+		EasyMock.replay(players, SetUpHandler.setUpHandler);
+		SetUpHandler.setUpHandler.setUpAndReturnPlayers(playerNames);
+		
+		EasyMock.verify(players, SetUpHandler.setUpHandler);
+	}
+	
+	@Test(expected = IllegalArgumentException.class)
+	public void testSetUpReturnsPlayerNamesZero() {
+		ArrayList<String> playerNames = new ArrayList<String>();
+		
+		SetUpHandler.setUpHandler = EasyMock.mock(SetUpHandler.class);
+		ArrayList<Player> players = (ArrayList<Player>) EasyMock.mock(ArrayList.class);
+		EasyMock.expect(SetUpHandler.setUpHandler.setUpAndReturnPlayers(playerNames)).andThrow(new IllegalArgumentException());
+		EasyMock.expect(SetUpHandler.setUpHandler.validatePlayerNum(0)).andThrow(new IllegalArgumentException());
+		
+		EasyMock.replay(players, SetUpHandler.setUpHandler);
+		SetUpHandler.setUpHandler.setUpAndReturnPlayers(playerNames);
+		
+		EasyMock.verify(players, SetUpHandler.setUpHandler);
+	}
+	
+	@Test(expected = IllegalArgumentException.class)
+	public void testSetUpReturnsPlayerNamesTooMany() {
+		ArrayList<String> playerNames = new ArrayList<String>();
+		playerNames.add("Wolverine");
+		playerNames.add("Captain America");
+		playerNames.add("Black Widow");
+		playerNames.add("Hulk");
+		playerNames.add("Iron Man");
+		playerNames.add("Spider Man");
+		playerNames.add("Thor");
+		playerNames.add("Ultron");
+		
+		SetUpHandler.setUpHandler = EasyMock.mock(SetUpHandler.class);
+		ArrayList<Player> players = (ArrayList<Player>) EasyMock.mock(ArrayList.class);
+		EasyMock.expect(SetUpHandler.setUpHandler.setUpAndReturnPlayers(playerNames)).andThrow(new IllegalArgumentException());
+		EasyMock.expect(SetUpHandler.setUpHandler.validatePlayerNum(7)).andThrow(new IllegalArgumentException());
+		
+		EasyMock.replay(players, SetUpHandler.setUpHandler);
+		SetUpHandler.setUpHandler.setUpAndReturnPlayers(playerNames);
+		
+		EasyMock.verify(players, SetUpHandler.setUpHandler);
 	}
 	
 	@Test
-	public void testCreateGameBoardMaxPlayers() {
-		GameBoard board = SetUpHandler.setUp(7);
+	public void testCreatePlayersMinNumPlayers() {
+		ArrayList<String> playerNames = new ArrayList<String>();
+		playerNames.add("Wolverine");
+		playerNames.add("Captain America");
+		playerNames.add("Black Widow");
 		
-		assertEquals(7, board.getNumPlayers());
+		SetUpHandler.setUpHandler = EasyMock.mock(SetUpHandler.class);
+		ArrayList<Player> players = (ArrayList<Player>) EasyMock.mock(ArrayList.class);
+		EasyMock.expect(SetUpHandler.setUpHandler.createPlayers(playerNames)).andReturn(players);
+
+		EasyMock.replay(players, SetUpHandler.setUpHandler);
+		
+		SetUpHandler.setUpHandler.createPlayers(playerNames);
+		
+		EasyMock.verify(players, SetUpHandler.setUpHandler);
 	}
+	
+	@Test
+	public void testCreateNamedPlayersMin() {
+		ArrayList<String> playerNames = new ArrayList<String>();
+		playerNames.add("Wolverine");
+		playerNames.add("Captain America");
+		playerNames.add("Black Widow");
+		
+		ArrayList<Player> players = SetUpHandler.setUpHandler.setUpAndReturnPlayers(playerNames);
+		
+		for(int i = 0; i < playerNames.size(); i++) {
+			assertEquals(playerNames.get(i), players.get(i).getName());
+		}
+	}
+	
+	@Test
+	public void testCreateNamedPlayersMax() {
+		ArrayList<String> playerNames = new ArrayList<String>();
+		playerNames.add("Wolverine");
+		playerNames.add("Captain America");
+		playerNames.add("Black Widow");
+		playerNames.add("Hulk");
+		playerNames.add("Iron Man");
+		playerNames.add("Spider Man");
+		playerNames.add("Thor");
+		
+		ArrayList<Player> players = SetUpHandler.setUpHandler.setUpAndReturnPlayers(playerNames);
+		
+		
+		for(int i = 0; i < playerNames.size(); i++) {
+			assertEquals(playerNames.get(i), players.get(i).getName());
+		}
+	}
+
+
 }

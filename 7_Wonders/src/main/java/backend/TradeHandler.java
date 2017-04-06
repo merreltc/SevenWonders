@@ -1,15 +1,23 @@
 package backend;
 
+import dataStructures.GameBoard;
 import dataStructures.Player;
+import exceptions.InvalidTradeException;
 
 public class TradeHandler {
+	private GameBoard board;
+	
+	public TradeHandler(GameBoard board) {
+		this.board = board;
+	}
 
-	public static void tradeFromTo(Player from, Player to, int valueToTrade) {
-		int fromPlayerNumvalue3Coins = from.getNumValue3Coins();
-
+	public void tradeFromTo(Player from, Player to, int valueToTrade) {
+		if(to != this.board.getPreviousPlayer() && to != this.board.getNextPlayer()){
+			throw new InvalidTradeException("You cannot trade to this player");
+		}
+		
 		// player's number of value 3 coins is calculated first because
 		// they have precedence over number of value 1 coins
-
 		int numValue3Coins = getNumValue3Coins(from, valueToTrade);
 		int valueRemaining = valueToTrade - (numValue3Coins * 3);
 		int numValue1Coins = getNumValue1Coins(valueRemaining);
@@ -50,5 +58,4 @@ public class TradeHandler {
 		from.removeValue3(numCoinsToTrade);
 		to.addValue3(numCoinsToTrade);
 	}
-
 }

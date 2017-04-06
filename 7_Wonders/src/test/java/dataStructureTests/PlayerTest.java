@@ -4,7 +4,6 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-import backend.TradeHandler;
 import dataStructures.Player;
 import exceptions.InsufficientFundsException;
 
@@ -25,6 +24,39 @@ public class PlayerTest {
 
 		assertEquals(3, player.getNumValue1Coins());
 		assertEquals(0, player.getNumValue3Coins());
+	}
+	
+	@Test
+	public void testNamedPlayer() {
+		String name = "Sandman";
+		Player player = new Player(name);
+
+		assertEquals("Sandman", player.getName());
+	}
+	
+	@Test
+	public void testToStringDefaultPlayer() {
+		Player player = new Player();
+		
+		assertEquals("Name: Jane Doe\nCoin Total: 3", player.toString());
+	}
+	
+	@Test
+	public void testToStringNamedPlayer() {
+		String name = "Sandman";
+		Player player = new Player(name);
+		
+		assertEquals("Name: Sandman\nCoin Total: 3", player.toString());
+	}
+	
+	@Test
+	public void testToStringPlayerAfterAddCoins() {
+		String name = "Sandman";
+		Player player = new Player(name);
+		player.addValue1(2);
+		player.addValue3(1);
+		
+		assertEquals("Name: Sandman\nCoin Total: 8", player.toString());
 	}
 
 	@Test
@@ -154,207 +186,7 @@ public class PlayerTest {
 		player.removeValue3(1);
 		fail();
 	}
-
-	@Test
-	public void testSingleTradeValue1Coins() {
-		Player player1 = new Player();
-		Player player2 = new Player();
-
-		TradeHandler.tradeFromToValue1(player1, player2, 1);
-
-		assertEquals(4, player2.getCoinTotal());
-		assertEquals(4, player2.getNumValue1Coins());
-		assertEquals(2, player1.getCoinTotal());
-		assertEquals(2, player1.getNumValue1Coins());
-
-	}
-
-	@Test
-	public void testMultiTradesValue1Coins() {
-		Player player1 = new Player();
-		Player player2 = new Player();
-
-		TradeHandler.tradeFromToValue1(player1, player2, 2);
-		TradeHandler.tradeFromToValue1(player1, player2, 1);
-
-		assertEquals(6, player2.getCoinTotal());
-		assertEquals(6, player2.getNumValue1Coins());
-		assertEquals(0, player1.getCoinTotal());
-		assertEquals(0, player1.getNumValue1Coins());
-
-	}
-
-	@Test(expected = InsufficientFundsException.class)
-	public void testInvalidTradeValue1Coin() {
-		Player player1 = new Player();
-		Player player2 = new Player();
-
-		TradeHandler.tradeFromToValue1(player1, player2, 4);
-		fail();
-	}
-
-	@Test
-	public void testSingleTradeValue3Coins() {
-		Player player1 = new Player();
-		Player player2 = new Player();
-
-		player1.addValue3(1);
-		TradeHandler.tradeFromToValue3(player1, player2, 1);
-
-		assertEquals(6, player2.getCoinTotal());
-		assertEquals(1, player2.getNumValue3Coins());
-		assertEquals(3, player1.getCoinTotal());
-		assertEquals(0, player1.getNumValue3Coins());
-	}
-
-	@Test
-	public void testMultiTradesValue3Coins() {
-		Player player1 = new Player();
-		Player player2 = new Player();
-
-		player1.addValue3(3);
-		TradeHandler.tradeFromToValue3(player1, player2, 2);
-		TradeHandler.tradeFromToValue3(player1, player2, 1);
-
-		assertEquals(12, player2.getCoinTotal());
-		assertEquals(3, player2.getNumValue3Coins());
-		assertEquals(3, player1.getCoinTotal());
-		assertEquals(0, player1.getNumValue3Coins());
-	}
-
-	@Test(expected = InsufficientFundsException.class)
-	public void testInvalidTradeValue3Coin() {
-		Player player1 = new Player();
-		Player player2 = new Player();
-
-		TradeHandler.tradeFromToValue3(player1, player2, 1);
-		fail();
-	}
-
-	@Test
-	public void testMultiTrades() {
-		Player player1 = new Player();
-		Player player2 = new Player();
-
-		player1.addValue3(3);
-		TradeHandler.tradeFromToValue3(player1, player2, 2);
-		TradeHandler.tradeFromToValue3(player2, player1, 1);
-		TradeHandler.tradeFromToValue1(player2, player1, 3);
-
-		assertEquals(12, player1.getCoinTotal());
-		assertEquals(6, player1.getNumValue1Coins());
-		assertEquals(2, player1.getNumValue3Coins());
-
-		assertEquals(3, player2.getCoinTotal());
-		assertEquals(0, player2.getNumValue1Coins());
-		assertEquals(1, player2.getNumValue3Coins());
-	}
-
-	@Test
-	public void testTradeFromTo() {
-		Player player1 = new Player();
-		Player player2 = new Player();
-
-		player1.addValue3(2);
-
-		TradeHandler.tradeFromTo(player1, player2, 4);
-
-		assertEquals(5, player1.getCoinTotal());
-		assertEquals(2, player1.getNumValue1Coins());
-		assertEquals(1, player1.getNumValue3Coins());
-
-		assertEquals(7, player2.getCoinTotal());
-		assertEquals(4, player2.getNumValue1Coins());
-		assertEquals(1, player2.getNumValue3Coins());
-	}
-
-	@Test
-	public void testTradeFromToMultiValue1SingleValue3() {
-		Player player1 = new Player();
-		Player player2 = new Player();
-
-		player1.addValue3(2);
-
-		TradeHandler.tradeFromTo(player1, player2, 5);
-
-		assertEquals(4, player1.getCoinTotal());
-		assertEquals(1, player1.getNumValue1Coins());
-		assertEquals(1, player1.getNumValue3Coins());
-
-		assertEquals(8, player2.getCoinTotal());
-		assertEquals(5, player2.getNumValue1Coins());
-		assertEquals(1, player2.getNumValue3Coins());
-	}
-
-	@Test
-	public void testTradeFromToSingleValue1MultiValue3() {
-		Player player1 = new Player();
-		Player player2 = new Player();
-
-		player1.addValue3(2);
-
-		TradeHandler.tradeFromTo(player1, player2, 7);
-
-		assertEquals(2, player1.getCoinTotal());
-		assertEquals(2, player1.getNumValue1Coins());
-		assertEquals(0, player1.getNumValue3Coins());
-
-		assertEquals(10, player2.getCoinTotal());
-		assertEquals(4, player2.getNumValue1Coins());
-		assertEquals(2, player2.getNumValue3Coins());
-	}
-
-	@Test
-	public void testTradeFromToMultiValue1MultiValue3() {
-		Player player1 = new Player();
-		Player player2 = new Player();
-
-		player1.addValue3(2);
-
-		TradeHandler.tradeFromTo(player1, player2, 8);
-
-		assertEquals(1, player1.getCoinTotal());
-		assertEquals(1, player1.getNumValue1Coins());
-		assertEquals(0, player1.getNumValue3Coins());
-
-		assertEquals(11, player2.getCoinTotal());
-		assertEquals(5, player2.getNumValue1Coins());
-		assertEquals(2, player2.getNumValue3Coins());
-	}
-
-	@Test
-	public void testTradeFromToSufficientValue1NoValue3() {
-		Player player1 = new Player();
-		Player player2 = new Player();
-
-		TradeHandler.tradeFromTo(player1, player2, 3);
-
-		assertEquals(0, player1.getCoinTotal());
-		assertEquals(0, player1.getNumValue1Coins());
-		assertEquals(0, player1.getNumValue3Coins());
-
-		assertEquals(6, player2.getCoinTotal());
-		assertEquals(6, player2.getNumValue1Coins());
-		assertEquals(0, player2.getNumValue3Coins());
-	}
-
-	@Test
-	public void testTradeFromToGreaterValue1ThanValue3() {
-		Player player1 = new Player();
-		Player player2 = new Player();
-
-		player1.addValue3(1);
-		TradeHandler.tradeFromTo(player1, player2, 6);
-
-		assertEquals(0, player1.getCoinTotal());
-		assertEquals(0, player1.getNumValue1Coins());
-		assertEquals(0, player1.getNumValue3Coins());
-
-		assertEquals(9, player2.getCoinTotal());
-		assertEquals(6, player2.getNumValue1Coins());
-		assertEquals(1, player2.getNumValue3Coins());
-	}
-
+	
 	@Test
 	public void testAddInvalidNumValue1CoinsNeg1ErrorMessage() {
 		Player player = new Player();
@@ -488,4 +320,6 @@ public class PlayerTest {
 			assertEquals(message, error.getMessage());
 		}
 	}
+
+	
 }

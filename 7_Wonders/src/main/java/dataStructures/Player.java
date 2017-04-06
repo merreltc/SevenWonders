@@ -10,21 +10,29 @@ public class Player {
 	private int numOfValue3Coins = 0;
 	private int conflictTotal = 0;
 
+	public Player() {
+
+	}
+
+	public Player(String playerName) {
+		this.name = playerName;
+	}
+
 	public void addValue1(int numCoinsToAdd) {
-		validateNumCoinsToAdd(numCoinsToAdd, Coin.CoinType.ONE);
+		validateNumCoinsToAdd(numCoinsToAdd, Chip.ChipType.ONE);
 
 		this.coinTotal += numCoinsToAdd;
 		this.numOfValue1Coins += numCoinsToAdd;
 	}
 
 	public void addValue3(int numCoinsToAdd) {
-		validateNumCoinsToAdd(numCoinsToAdd, Coin.CoinType.THREE);
+		validateNumCoinsToAdd(numCoinsToAdd, Chip.ChipType.THREE);
 
 		this.coinTotal += 3 * numCoinsToAdd;
 		this.numOfValue3Coins += numCoinsToAdd;
 	}
 
-	private void validateNumCoinsToAdd(int numCoins, Coin.CoinType type) {
+	private void validateNumCoinsToAdd(int numCoins, Chip.ChipType type) {
 		int max;
 		String coinType;
 
@@ -47,20 +55,20 @@ public class Player {
 	}
 
 	public void removeValue1(int numCoinsToRemove) {
-		validateNumCoinsToRemove(numCoinsToRemove, Coin.CoinType.ONE);
+		validateNumCoinsToRemove(numCoinsToRemove, Chip.ChipType.ONE);
 
 		this.coinTotal -= numCoinsToRemove;
 		this.numOfValue1Coins -= numCoinsToRemove;
 	}
 
 	public void removeValue3(int numCoinsToRemove) {
-		validateNumCoinsToRemove(numCoinsToRemove, Coin.CoinType.THREE);
+		validateNumCoinsToRemove(numCoinsToRemove, Chip.ChipType.THREE);
 
 		this.coinTotal -= 3 * numCoinsToRemove;
 		this.numOfValue3Coins -= numCoinsToRemove;
 	}
 
-	private void validateNumCoinsToRemove(int numCoins, Coin.CoinType type) {
+	private void validateNumCoinsToRemove(int numCoins, Chip.ChipType type) {
 		if (numCoins <= -1) {
 			String coinType;
 
@@ -87,15 +95,19 @@ public class Player {
 		}
 	}
 
-	private int getNumOfCoinType(Coin.CoinType type) {
-		if (type == Coin.CoinType.ONE) {
+	public String toString() {
+		return "Name: " + this.name + "\nCoin Total: " + this.getCoinTotal();
+	}
+
+	private int getNumOfCoinType(Chip.ChipType type) {
+		if (type == Chip.ChipType.ONE) {
 			return this.numOfValue1Coins;
 		}
 
 		return this.numOfValue3Coins;
 	}
 
-	private String coinTypeToString(Coin.CoinType type) {
+	private String coinTypeToString(Chip.ChipType type) {
 		switch (type) {
 		case ONE:
 			return "1";

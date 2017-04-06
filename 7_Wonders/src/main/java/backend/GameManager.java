@@ -2,24 +2,47 @@ package backend;
 
 import java.util.ArrayList;
 
+import backend.RotateHandler.Direction;
 import dataStructures.GameBoard;
 import dataStructures.Player;
 
+/**
+ * Controls the actions of the game and delegates those responsibilities to
+ * different classes
+ *
+ */
 public class GameManager {
 	private GameBoard board;
-	
-	public GameManager(int numPlayers){
-		setUpGame(numPlayers);
+	private RotateHandler rotateHandler;
+	private TradeHandler tradeHandler;
+
+	public GameManager(ArrayList<String> playerNames) {
+		setUpGame(playerNames);
 	}
-	
-	public void setUpGame(int numPlayers) {
-		this.board = SetUpHandler.setUp(numPlayers);
+
+	public void setUpGame(ArrayList<String> playerNames) {
+		ArrayList<Player> players = SetUpHandler.setUpHandler.setUpAndReturnPlayers(playerNames);
+		this.board = new GameBoard(players);
+		this.rotateHandler = new RotateHandler(this.board);
+		this.tradeHandler = new TradeHandler(this.board);
 	}
 
 	public void trade(Player from, Player to, int valueToTrade) {
-		TradeHandler.tradeFromTo(from, to, valueToTrade);
+		tradeHandler.tradeFromTo(from, to, valueToTrade);
 	}
-	
+
+	public void changeRotateDirectionAndResetPositions(Direction direction) {
+		this.rotateHandler.changeRotateDirectionAndResetPositions(direction);
+	}
+
+	public void rotateClockwise() {
+		this.rotateHandler.rotateClockwise();
+	}
+
+	public void rotateCounterClockwise() {
+		this.rotateHandler.rotateCounterClockwise();
+	}
+
 	public int getNumPlayers() {
 		return this.board.getNumPlayers();
 	}
@@ -32,11 +55,23 @@ public class GameManager {
 		return this.board.getPlayers();
 	}
 
-	public Player getPlayer(int i) {
-		return this.board.getPlayers().get(i);
+	public Player getPlayer(int index) {
+		return this.board.getPlayer(index);
 	}
 
-	public int getPlayerCoinTotal(int i) {
-		return getPlayer(i).getCoinTotal();
+	public int getPlayerCoinTotal(int index) {
+		return this.board.getPlayerCoinTotal(index);
+	}
+
+	public Player getCurrentPlayer() {
+		return this.board.getCurrentPlayer();
+	}
+
+	public Player getNextPlayer() {
+		return this.board.getNextPlayer();
+	}
+
+	public Player getPreviousPlayer() {
+		return this.board.getPreviousPlayer();
 	}
 }
