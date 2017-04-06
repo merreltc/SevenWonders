@@ -16,35 +16,29 @@ import backend.SetUpHandler;
 import dataStructures.Player;
 
 public class GuiMainMenu extends JPanel implements ActionListener {
-	private Game game;
+	
+	private Menu current;
 	private JFrame frame;
 	private Timer timer;
-	private Menu currentMenu;
-	private MenuMouseListener menuMouse;
-	private boolean initialized = false;
-	private ArrayList<Button> buttons = new ArrayList<Button>();
 	private Integer numOfPlayers;
 
-	public enum Menu {
+	public enum MenuType {
 		MainMenu, PlayerSelect, Game
 	}
 
 	public GuiMainMenu() {
-		currentMenu = Menu.MainMenu;
-	}
-
-	public void start() {
-		frame = new JFrame();
-		frame.setSize(Constants.FrameWidth, Constants.FrameHeight);
-		frame.setVisible(true);
-		frame.setTitle("Seven Wonders");
-		frame.setResizable(false);
-		frame.add(this);
-		frame.addKeyListener(new MenuKeyListener());
-		menuMouse = new MenuMouseListener(this);
-		frame.addMouseListener(menuMouse);
-		timer = new Timer(20, this);
-		timer.start();
+		this.frame = new JFrame();
+		this.frame.setSize(Constants.FrameWidth, Constants.FrameHeight);
+		this.frame.setVisible(true);
+		this.frame.setTitle("Seven Wonders");
+		this.frame.setResizable(false);
+		this.frame.add(this);
+		this.frame.addKeyListener(new MenuKeyListener());
+		MenuMouseListener menuMouse = new MenuMouseListener(this);
+		this.frame.addMouseListener(menuMouse);
+		this.switchMenu(MenuType.MainMenu);
+		this.timer = new Timer(20, this);
+		this.timer.start();
 	}
 
 	@Override
@@ -57,88 +51,46 @@ public class GuiMainMenu extends JPanel implements ActionListener {
 		graphics.setColor(Color.RED);
 		graphics.fillRect(0, 0, Constants.FrameWidth, Constants.FrameHeight);
 
-		switch (this.currentMenu) {
-		case MainMenu:
-			if (!initialized) {
-				intializeMainMenu();
-			}
-			graphics.setFont(Constants.TitleFont);
-			graphics.setColor(Constants.TitleColor);
-			graphics.drawString("7 Wonders", Constants.MainMenuTitlePosition.x, Constants.MainMenuTitlePosition.y);
-
-			for (Button button : buttons) {
-				button.draw(graphics);
-			}
-			break;
-
-		case PlayerSelect:
-			if (!initialized) {
-				intializePlayerSelect();
-			}
-			for (Button button : buttons) {
-				button.draw(graphics);
-			}
-			graphics.setFont(Constants.TitleFont);
-			graphics.setColor(Constants.TitleColor);
-			graphics.drawString("Choose number of players", Constants.PlayerSelectTitlePosition.x,
-					Constants.PlayerSelectButtonBounds.y);
-			break;
-
-		case Game:
-			if (!initialized) {
-				this.game = new Game(this.numOfPlayers);
-				game.initializeGame();
-				initialized = true;
-			}
-			game.draw(graphics);
-			break;
-		}
+		this.current.draw(graphics);
 	}
 
-	private void intializePlayerSelect() {
-		this.buttons.clear();
-		for (int i = 3; i <= 7; i++) {
-			Button startGame = new Button(new Point(400 + 250 * (i - 3), 400), Constants.PlayerSelectButtonBounds,
-					i + "");
-			buttons.add(startGame);
-		}
-		initialized = true;
-	}
-
-	private void intializeMainMenu() {
-		this.buttons.clear();
-		Button startGame = new Button(Constants.StartButtonPosition, Constants.StartButtonBounds, "Start");
-		buttons.add(startGame);
-		initialized = true;
-	}
-
-	public void onButtonClick(Button clicked) {
+	public void onClick(Interactable clicked) {
 		String text = clicked.getValue();
+		String classString = current.getClass().getName();
+		String currentMenu = classString.substring(8);
 		switch (currentMenu) {
+		case "MainMenu":
+			switchMenu(MenuType.PlayerSelect);
+			break;
+		case "PlayerSelect":
+			numOfPlayers = Integer.parseInt(text);
+			switchMenu(MenuType.Game);
+			break;
+		case "Game":
+			this.current.onClick(clicked);
+			break;
+		}
+	}
+
+	public void switchMenu(MenuType menu) {
+		
+		switch (menu) {
 		case MainMenu:
-			switchMenu(Menu.PlayerSelect);
+			this.current = new MainMenu();
 			break;
 		case PlayerSelect:
-			numOfPlayers = Integer.parseInt(text);
-
-			switchMenu(Menu.Game);
+			this.current = new PlayerSelect();
 			break;
 		case Game:
-			this.game.onButtonClickInGame(clicked);
+			this.current = new Game(this.numOfPlayers);
 			break;
-		}
+		}	
+		this.current.initialize();
 	}
 
-	public void switchMenu(Menu menu) {
-		this.currentMenu = menu;
-		this.initialized = false;
-	}
-
-	public ArrayList<Button> getActiveButtons() {
-		if (this.currentMenu == Menu.Game) {
-			return this.game.getButtons();
-		}
-		return buttons;
+	public ArrayList<Interactable> getActiveButtons() {
+		return this.current.getInteractables();
+		
 	}
 
 	public JFrame getFrame() {
@@ -151,7 +103,6 @@ public class GuiMainMenu extends JPanel implements ActionListener {
 
 	public static void main(String[] args) {
 		GuiMainMenu menu = new GuiMainMenu();
-		menu.start();
 	}
 
 }

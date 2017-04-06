@@ -14,7 +14,6 @@ public class GuiStartUpTests {
 	@Before
 	public void SetUp(){
 		menu = new GuiMainMenu();
-		menu.start();
 	}
 	
 	

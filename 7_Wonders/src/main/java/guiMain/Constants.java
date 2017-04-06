@@ -26,34 +26,42 @@ public class Constants {
 	public static final Point CloseMessageButtonBounds = new Point(200, 80);
 	public static final Point CloseMessageButtonPosition = new Point(FrameWidth - CloseMessageButtonBounds.x - 50,
 			FrameHeight - CloseMessageButtonBounds.y - 50);
-
-	public static final Point TradeButtonBounds = new Point(20, 20);
-
-	public static final Point TradeLeftBaseButtonPoint = new Point(30, 300);
-	public static final Point TradeRightBaseButtonPoint = new Point(1390, 300);
-
-	public static final int TradeButtonYOffet = TradeButtonBounds.y + 20;
-
+	
 	/* For PlayerBoard Class */
-	public static final int CurrentPlayerBoardWidth = 700;
-	public static final int CurrentPlayerBoardHeight = 400;
+	public static final int CurrentPlayerBoardWidth = 1200;
+	public static final int CurrentPlayerBoardHeight = 521;
 	public static final int CurrentPlayerBoardPositionX = 950 - CurrentPlayerBoardWidth / 2;
 	public static final int CurrentPlayerBoardPositionY = 950 - CurrentPlayerBoardHeight - 10;
 
-	public static final int LastPlayerBoardWidth = 500;
-	public static final int LastPlayerBoardHeight = 300;
+	public static final int LastPlayerBoardWidth = 530;
+	public static final int LastPlayerBoardHeight = 230;
 	public static final int LastPlayerBoardPositionX = 1900 - LastPlayerBoardWidth - 20;
-	public static final int LastPlayerBoardPositionY = 600 - LastPlayerBoardHeight - 10;
+	public static final int LastPlayerBoardPositionY = 500 - LastPlayerBoardHeight - 10;
 
-	public static final int NextPlayerBoardWidth = 500;
-	public static final int NextPlayerBoardHeight = 300;
+	public static final int NextPlayerBoardWidth = 530;
+	public static final int NextPlayerBoardHeight = 230;
 	public static final int NextPlayerBoardPositionX = 20;
-	public static final int NextPlayerBoardPositionY = 600 - NextPlayerBoardHeight - 10;
+	public static final int NextPlayerBoardPositionY = 500 - NextPlayerBoardHeight - 10;
 
-	public static final int BackPlayerBoardWidth = 300;
+	public static final int BackPlayerBoardWidth = 345;
 	public static final int BackPlayerBoardHeight = 150;
 	// public static final int BackPlayerStartingBoardPositionX = 1900 -
 	// BackPlayerBoardWidth - 20;
 	public static final int BackPlayerBoardXOffset = BackPlayerBoardWidth + 40;
 	public static final int BackPlayerBoardPositionY = 10;
+
+	public static final Point TradeButtonBounds = new Point(20, 20);
+
+	public static final Point TradeLeftBaseButtonPoint = new Point(LastPlayerBoardPositionX + 10, LastPlayerBoardPositionY + 10);
+	public static final Point TradeRightBaseButtonPoint = new Point(NextPlayerBoardPositionX + 10, NextPlayerBoardPositionY + 10);
+
+	public static final int TradeButtonYOffet = TradeButtonBounds.y + 20;
+
+	public static final int CardHeight = 238;
+	public static final int CardWidth = 150;
+	
+	public static final int CardOffset = CardWidth + 10;
+	
+	public static final int PlayerHandLeftMostCardPositionX = CurrentPlayerBoardPositionX +10;
+	public static final int PlayerHandLeftMostCardPositionY = CurrentPlayerBoardPositionY + CurrentPlayerBoardHeight - CardHeight/2 - 30;
 }
