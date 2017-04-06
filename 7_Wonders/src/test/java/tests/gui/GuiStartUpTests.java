@@ -25,7 +25,7 @@ public class GuiStartUpTests {
 	@Test
 	public void testSize(){
 		Assert.assertEquals(1000, menu.getFrame().getHeight());
-		Assert.assertEquals(1000, menu.getFrame().getWidth());
+		Assert.assertEquals(1900, menu.getFrame().getWidth());
 	}
 	
 	@Test
