@@ -53,17 +53,15 @@ public class Effect {
 	}
 
 	public HashMap<Object, Object> getCommerceResources() {
-		return null;
+		return new HashMap<Object, Object>();
 	}
 
-	public Object getCommerceValue() {
-		// TODO Auto-generated method stub
-		return null;
+	public int getCommerceValue() {
+		return 0;
 	}
 
-	public Object getCommerceDirection() {
-		// TODO Auto-generated method stub
-		return null;
+	public Direction getCommerceDirection() {
+		return Direction.NONE;
 	}
 
 }

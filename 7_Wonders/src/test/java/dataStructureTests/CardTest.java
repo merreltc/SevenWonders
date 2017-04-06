@@ -169,16 +169,16 @@ public class CardTest {
 		assertEquals(expectedEffect.get(ResourceType.LUMBER), actualEffect.get(ResourceType.LUMBER));
 	}
 	
-	@Test
-	public void testGetEffectOneTypeScience() {
-		Card card = new Card("Apothecary", 3, CardType.SCIENTIFICSTRUCTURE, Cost.RESOURCE, Effect.SCIENCE);
-
-	
-		HashMap<ScienceType, Integer> actualEffect = card.getEffect();
-		HashMap<ScienceType, Integer> expectedEffect = new HashMap<ScienceType, Integer>();
-		
-		expectedEffect.put(ScienceType.PROTRACTOR, 2);
-	
-		assertEquals(expectedEffect.get(ScienceType.PROTRACTOR), actualEffect.get(ScienceType.PROTRACTOR));
-	}
+//	@Test
+//	public void testGetEffectOneTypeScience() {
+//		Card card = new Card("Apothecary", 3, CardType.SCIENTIFICSTRUCTURE, Cost.RESOURCE, Effect.SCIENCE);
+//
+//	
+//		HashMap<ScienceType, Integer> actualEffect = card.getEffect();
+//		HashMap<ScienceType, Integer> expectedEffect = new HashMap<ScienceType, Integer>();
+//		
+//		expectedEffect.put(ScienceType.PROTRACTOR, 2);
+//	
+//		assertEquals(expectedEffect.get(ScienceType.PROTRACTOR), actualEffect.get(ScienceType.PROTRACTOR));
+//	}
 }
