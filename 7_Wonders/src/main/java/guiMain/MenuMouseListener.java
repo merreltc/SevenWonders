@@ -15,12 +15,12 @@ public class MenuMouseListener implements MouseListener {
 
 	@Override
 	public void mouseClicked(MouseEvent mouseEvent) {
-		ArrayList<Button> buttons = menu.getActiveButtons();
-		for (Button button : buttons) {
+		ArrayList<Interactable> buttons = menu.getActiveButtons();
+		for (Interactable button : buttons) {
 			/* fix the offset of getPoint by x - 10 and y - 35 */
 			Point offsetClickedPoint = new Point(mouseEvent.getPoint().x - 10, mouseEvent.getPoint().y - 35);
 			if (button.checkButtonClicked(offsetClickedPoint)) {
-				this.menu.onButtonClick(button);
+				this.menu.onClick(button);
 			}
 		}
 
