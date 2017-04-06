@@ -57,12 +57,10 @@ public class Effect {
 	}
 
 	public int getCommerceValue() {
-		// TODO Auto-generated method stub
 		return 0;
 	}
 
 	public Direction getCommerceDirection() {
-		// TODO Auto-generated method stub
 		return Direction.NONE;
 	}
 
