@@ -17,7 +17,11 @@ public class Game extends Menu {
 	private int currentPlayer = 1;
 
 	public Game(int numOfPlayers) {
-		this.gameManager = new GameManager(new ArrayList<String>());
+		ArrayList<String> players = new ArrayList<String>();
+		for(int i = 0; i < numOfPlayers; i++) {
+			players.add("Player" + i);
+		}
+		this.gameManager = new GameManager(players);
 		this.message = new Message();
 	}
 
@@ -25,7 +29,7 @@ public class Game extends Menu {
 	public void initialize() {
 		this.clearButtons();
 		createBoardsForEachPlayer();
-		setUpMessageButton();
+		setUpExitButton();
 		setUpTradingButtons();
 		setUpCardSlots();
 	}
@@ -48,21 +52,20 @@ public class Game extends Menu {
 		for (Interactable button : this.getInteractables()) {
 			button.draw(graphics);
 		}
-		this.message.drawMessageOnScreen(graphics);
 	}
 
 	private void createBoardsForEachPlayer() {
 		int numOfPlayers = this.gameManager.getNumPlayers();
-		for (int i = -1; i < numOfPlayers - 1; i++) {
-			PlayerBoard board = new PlayerBoard(i, numOfPlayers, this.gameManager.getPlayer(i + 1));
+		for (int i = -1; i < numOfPlayers-1; i++) {
+			PlayerBoard board = new PlayerBoard(i, numOfPlayers, this.gameManager.getPlayer((numOfPlayers + i) % numOfPlayers));
 			boards.add(board);
 		}
 	}
 
-	private void setUpMessageButton() {
-		Button exitMessage = new Button(Constants.CloseMessageButtonPosition, Constants.CloseMessageButtonBounds,
-				"Close");
-		this.addInteractable(exitMessage);
+	private void setUpExitButton() {
+		Button exitButton = new Button(Constants.ExitButtonPosition, Constants.ExitButtonBounds,
+				"Exit");
+		this.addInteractable(exitButton);
 	}
 
 	private void setUpTradingButtons() {
@@ -87,18 +90,13 @@ public class Game extends Menu {
 	@Override
 	public void onClick(Interactable clicked) {
 		if (clicked.getClass().equals(CardHolder.class)) {
-			// (CardHolder) clicked.activate();
-		} else if (clicked.getValue().equals("Close")) {
-			this.message.clearMessage();
+			// TODO: (CardHolder) clicked.activate();
+		} else if (clicked.getValue().equals("Exit")) {
+			System.exit(0);
 		} else {
 			String[] splitValue = clicked.getValue().split("-");
 			TradeHandler tradeHandler = new TradeHandler(this.gameManager, this.message);
 			tradeHandler.trade(splitValue, this.currentPlayer);
 		}
 	}
-
-	// public void setMessage(String message) {
-	// this.message.setMessage(message);
-	// }
-
 }

@@ -23,9 +23,9 @@ public class Constants {
 	public static final Font ErrorFont = new Font("Courier New", Font.BOLD, 35);
 	public static final Point ErrorMessagePosition = new Point(550, 400);
 
-	public static final Point CloseMessageButtonBounds = new Point(200, 80);
-	public static final Point CloseMessageButtonPosition = new Point(FrameWidth - CloseMessageButtonBounds.x - 50,
-			FrameHeight - CloseMessageButtonBounds.y - 50);
+	public static final Point ExitButtonBounds = new Point(200, 80);
+	public static final Point ExitButtonPosition = new Point(FrameWidth - ExitButtonBounds.x - 50,
+			FrameHeight - ExitButtonBounds.y - 50);
 	
 	/* For PlayerBoard Class */
 	public static final int CurrentPlayerBoardWidth = 1200;
