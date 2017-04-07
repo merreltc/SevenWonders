@@ -6,24 +6,23 @@ import backend.GameManager;
 import dataStructures.Player;
 import exceptions.InsufficientFundsException;
 
-public class TradeHandler {
+public class GuiTradeHelper {
 	private GameManager gameManager;
 	private Message message;
 
-	public TradeHandler(GameManager gameManager, Message message) {
+	public GuiTradeHelper(GameManager gameManager, Message message) {
 		this.gameManager = gameManager;
 		this.message = message;
 	}
 
 	public void trade(String[] splitValue, int currentPlayer) {
-		int numOfPlayers = gameManager.getNumPlayers();
+		System.out.println("Trying to trade");
 		Player tradeTo;
 		Player tradeFrom = this.gameManager.getPlayer(currentPlayer);
-		if (splitValue[0].equals("Left")) {
-			tradeTo = this.gameManager.getPlayer((currentPlayer + 1) % numOfPlayers);
-
+		if (splitValue[0].equals("Right")) {
+			tradeTo = this.gameManager.getNextPlayer();
 		} else {
-			tradeTo = this.gameManager.getPlayer((currentPlayer + (numOfPlayers - 1)) % numOfPlayers);
+			tradeTo = this.gameManager.getPreviousPlayer();
 		}
 
 		try {
