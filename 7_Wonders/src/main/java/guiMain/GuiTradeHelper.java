@@ -15,11 +15,11 @@ public class GuiTradeHelper {
 		this.message = message;
 	}
 
-	public void trade(String[] splitValue, int currentPlayer) {
-		System.out.println("Trying to trade");
+	public void trade(String[] splitValue) {
 		Player tradeTo;
-		Player tradeFrom = this.gameManager.getPlayer(currentPlayer);
-		if (splitValue[0].equals("Right")) {
+		Player tradeFrom = this.gameManager.getCurrentPlayer();
+		
+		if (splitValue[0].equals("Left")) {
 			tradeTo = this.gameManager.getNextPlayer();
 		} else {
 			tradeTo = this.gameManager.getPreviousPlayer();

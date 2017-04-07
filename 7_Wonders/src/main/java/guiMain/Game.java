@@ -96,7 +96,7 @@ public class Game extends Menu {
 		} else {
 			String[] splitValue = clicked.getValue().split("-");
 			GuiTradeHelper tradeHandler = new GuiTradeHelper(this.gameManager, this.message);
-			tradeHandler.trade(splitValue, this.currentPlayer);
+			tradeHandler.trade(splitValue);
 		}
 	}
 }
