@@ -32,34 +32,43 @@ public class PlayerBoard {
 	public void draw(Graphics graphics) {
 		switch (playerPosition) {
 		case 0:
-			sizePoint = new Point(Constants.CurrentPlayerBoardWidth, Constants.CurrentPlayerBoardHeight);
+			this.sizePoint = new Point(Constants.CurrentPlayerBoardWidth, Constants.CurrentPlayerBoardHeight);
 			this.position = new Point(Constants.CurrentPlayerBoardPositionX, Constants.CurrentPlayerBoardPositionY);
 			break;
 		case 1:
-			sizePoint = new Point(Constants.LastPlayerBoardWidth, Constants.LastPlayerBoardHeight);
+			this.sizePoint = new Point(Constants.LastPlayerBoardWidth, Constants.LastPlayerBoardHeight);
 			this.position = new Point(Constants.LastPlayerBoardPositionX, Constants.LastPlayerBoardPositionY);
 			break;
 		case -1:
-			sizePoint = new Point(Constants.NextPlayerBoardWidth, Constants.NextPlayerBoardHeight);
+			this.sizePoint = new Point(Constants.NextPlayerBoardWidth, Constants.NextPlayerBoardHeight);
 			this.position = new Point(Constants.NextPlayerBoardPositionX, Constants.NextPlayerBoardPositionY);
 			break;
 		default:
-			sizePoint = new Point(Constants.BackPlayerBoardWidth, Constants.BackPlayerBoardHeight);
+			this.sizePoint = new Point(Constants.BackPlayerBoardWidth, Constants.BackPlayerBoardHeight);
 			this.position = new Point(
 					backPlayerStartingBoardPositionX - Constants.BackPlayerBoardXOffset * (this.playerPosition - 1),
 					Constants.BackPlayerBoardPositionY);
 			break;
 		}
+		
+		drawBoard(graphics);
+		drawCoinAndWarTokens(graphics);
+		drawResources(graphics);
+	}
+	
+	public void drawBoard(Graphics graphics) {
 		graphics.setColor(Color.GREEN);
-		graphics.fillRect(position.x, position.y, sizePoint.x, sizePoint.y);
+		graphics.fillRect(this.position.x, this.position.y, this.sizePoint.x, this.sizePoint.y);
 		graphics.setFont(new Font("Courier New", Font.BOLD, 30));
 		graphics.setColor(Color.RED);
-
-		/* First render money and war tokens */
+	}
+	
+	public void drawCoinAndWarTokens(Graphics graphics) {
 		graphics.drawString(this.player.getCoinTotal() + "", position.x + sizePoint.x - 30, position.y + 25);
 		graphics.drawString("1", position.x + sizePoint.x - 30, position.y + 65);
-
-		/* rendering resources owned */
+	}
+	
+	public void drawResources(Graphics graphics) {
 		graphics.drawString("1", position.x + 10, position.y + 25);
 		graphics.drawString("1", position.x + 10, position.y + 65);
 		graphics.drawString("1", position.x + 10, position.y + 105);
