@@ -14,7 +14,6 @@ public class Game extends Menu {
 	private GameManager gameManager;
 	private Message message;
 	private HandManager handManager;
-	private int currentPlayer = 1;
 
 	public Game(int numOfPlayers) {
 		ArrayList<String> players = new ArrayList<String>();
@@ -47,7 +46,8 @@ public class Game extends Menu {
 
 		for (int i = 0; i < boards.size(); i++) {
 			/* This will always draw the current players board last (on top) */
-			boards.get((currentPlayer + i + 1) % this.gameManager.getNumPlayers()).draw(graphics);
+			int currentPlayerIndex = this.gameManager.getGameBoard().getCurrentPlayerIndex();
+			boards.get((currentPlayerIndex + i + 2) % this.gameManager.getNumPlayers()).draw(graphics);
 		}
 		for (Interactable button : this.getInteractables()) {
 			button.draw(graphics);
