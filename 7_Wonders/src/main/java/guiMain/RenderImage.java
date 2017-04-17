@@ -19,9 +19,8 @@ public class RenderImage {
 			BufferedImage image = ImageIO.read(new File(name));
 			graphics.drawImage(image, x, y, width, height, null);
 		} catch (IOException e) {
-			System.out.println("Fail");
+			e.printStackTrace();
 		}
-
 	}
 
 }
