@@ -1,10 +1,12 @@
-package guiMain;
+package guiMain.Menus;
 
 import java.awt.Graphics;
 import java.awt.Point;
 import java.util.ArrayList;
 
 import GuiDataStructures.Constants;
+import guiMain.Interactables.Button;
+import guiMain.Interactables.Interactable;
 
 public class PlayerSelect extends Menu{
 

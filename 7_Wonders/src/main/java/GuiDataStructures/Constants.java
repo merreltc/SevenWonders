@@ -8,6 +8,8 @@ public class Constants {
 	/* For GuiMainMenu Class */
 	public static final int FrameWidth = 1900;
 	public static final int FrameHeight = 1000;
+	
+	public static final int FrameWidthModifier = 70;
 
 	public static final Point StartButtonPosition = new Point(850, 400);
 	public static final Point StartButtonBounds = new Point(200, 100);
@@ -45,8 +47,8 @@ public class Constants {
 
 	public static final int BackPlayerBoardWidth = 345;
 	public static final int BackPlayerBoardHeight = 150;
-	// public static final int BackPlayerStartingBoardPositionX = 1900 -
-	// BackPlayerBoardWidth - 20;
+	public static final int PlayerNameYOffset = 50;
+	
 	public static final int BackPlayerBoardXOffset = BackPlayerBoardWidth + 40;
 	public static final int BackPlayerBoardPositionY = 10;
 

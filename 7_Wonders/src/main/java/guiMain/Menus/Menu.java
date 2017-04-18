@@ -1,7 +1,9 @@
-package guiMain;
+package guiMain.Menus;
 
 import java.awt.Graphics;
 import java.util.ArrayList;
+
+import guiMain.Interactables.Interactable;
 
 public abstract class Menu {
 	

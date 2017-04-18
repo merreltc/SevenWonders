@@ -6,6 +6,8 @@ import java.util.ArrayList;
 
 import GuiDataStructures.Constants;
 import dataStructures.Player;
+import guiMain.Interactables.CardHolder;
+import guiMain.Interactables.Interactable;
 
 public class HandManager {
 

@@ -1,9 +1,10 @@
-package guiMain;
+package guiMain.Interactables;
 
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Point;
 
+import backend.GameManager;
 import dataStructures.Card;
 
 public class CardHolder extends Interactable{
@@ -12,7 +13,6 @@ public class CardHolder extends Interactable{
 	
 	public CardHolder(Point positionPoint, Point boundPoint, String value) {
 		super(positionPoint, boundPoint, value);
-		
 	}
 	
 	public void giveCard(Card card){
@@ -24,9 +24,9 @@ public class CardHolder extends Interactable{
 		super.draw(graphics, Color.BLUE, Color.YELLOW);
 	}
 	
-	public void activate(){
+	public void activate(GameManager gameManager){
 		/*TODO: Change to play card*/
-		this.card.getEffect();
+		gameManager.rotateClockwise();
 	}
 
 }

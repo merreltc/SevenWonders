@@ -4,7 +4,8 @@ import java.awt.Point;
 import java.awt.geom.Point2D;
 
 import org.junit.Test;
-import guiMain.Button;
+
+import guiMain.Interactables.Button;
 import junit.framework.Assert;
 
 public class ButtonTests {

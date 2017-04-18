@@ -1,9 +1,11 @@
-package guiMain;
+package guiMain.Interactables;
 
 import java.awt.Point;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
+
+import guiMain.GuiMainMenu;
 
 public class MenuMouseListener implements MouseListener {
 

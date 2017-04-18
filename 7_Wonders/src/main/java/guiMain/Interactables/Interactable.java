@@ -1,4 +1,4 @@
-package guiMain;
+package guiMain.Interactables;
 
 import java.awt.Color;
 import java.awt.Font;

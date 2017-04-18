@@ -9,12 +9,21 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 import javax.swing.Timer;
 
 import GuiDataStructures.Constants;
 import backend.SetUpHandler;
 import dataStructures.Player;
+import guiMain.Interactables.Interactable;
+import guiMain.Interactables.MenuKeyListener;
+import guiMain.Interactables.MenuMouseListener;
+import guiMain.Menus.Game;
+import guiMain.Menus.MainMenu;
+import guiMain.Menus.Menu;
+import guiMain.Menus.PlayerSelect;
 
 public class GuiMainMenu extends JPanel implements ActionListener {
 	
@@ -58,7 +67,8 @@ public class GuiMainMenu extends JPanel implements ActionListener {
 	public void onClick(Interactable clicked) {
 		String text = clicked.getValue();
 		String classString = current.getClass().getName();
-		String currentMenu = classString.substring(8);
+		System.out.println(classString);
+		String currentMenu = classString.substring(14);
 		switch (currentMenu) {
 		case "MainMenu":
 			switchMenu(MenuType.PlayerSelect);
