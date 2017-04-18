@@ -1,9 +1,8 @@
 package dataStructures;
 
-import dataStructures.Effect.EffectType;
-
 public class Effect {
 	private EffectType effectType = EffectType.NONE;
+	private Resource resource;
 	
 	public enum EffectType {
 		NONE, ENTITY
@@ -13,8 +12,16 @@ public class Effect {
 		SELF
 	}
 	
-	public enum AffectedEntityType {
+	public enum AffectingEntity {
 		NONE
+	}
+	
+	public enum Entity {
+		RESOURCE
+	}
+	
+	public enum Resource {
+		LUMBER, CLAY, ORE, STONE
 	}
 	
 	public Effect() {
@@ -25,6 +32,11 @@ public class Effect {
 		this.effectType = effectType;
 	}
 
+	public Effect(EffectType effectType, Entity entity, Resource resource, int entityAmount) {
+		this.effectType = effectType;
+		this.resource = resource;
+	}
+
 	public EffectType getEffectType() {
 		return this.effectType;
 	}
@@ -33,8 +45,20 @@ public class Effect {
 		return Direction.SELF;
 	}
 
-	public AffectedEntityType getAffectedEntityType() {
-		return AffectedEntityType.NONE;
+	public AffectingEntity getAffectingEntity() {
+		return AffectingEntity.NONE;
+	}
+
+	public Entity getEntity() {
+		return Entity.RESOURCE;
+	}
+
+	public int getEntityAmount() {
+		return 1;
+	}
+
+	public Resource getResource() {
+		return this.resource;
 	}
 
 }
