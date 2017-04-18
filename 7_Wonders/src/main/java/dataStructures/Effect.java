@@ -1,9 +1,12 @@
 package dataStructures;
 
+import dataStructures.Effect.EffectType;
+
 public class Effect {
+	private EffectType effectType = EffectType.NONE;
 	
 	public enum EffectType {
-		NONE
+		NONE, ENTITY
 	}
 	
 	public enum Direction {
@@ -13,9 +16,17 @@ public class Effect {
 	public enum AffectedEntityType {
 		NONE
 	}
+	
+	public Effect() {
+		
+	}
+
+	public Effect(EffectType effectType) {
+		this.effectType = effectType;
+	}
 
 	public EffectType getEffectType() {
-		return EffectType.NONE;
+		return this.effectType;
 	}
 
 	public Direction getDirection() {
