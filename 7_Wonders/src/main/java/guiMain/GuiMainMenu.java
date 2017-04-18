@@ -67,7 +67,6 @@ public class GuiMainMenu extends JPanel implements ActionListener {
 	public void onClick(Interactable clicked) {
 		String text = clicked.getValue();
 		String classString = current.getClass().getName();
-		System.out.println(classString);
 		String currentMenu = classString.substring(14);
 		switch (currentMenu) {
 		case "MainMenu":
