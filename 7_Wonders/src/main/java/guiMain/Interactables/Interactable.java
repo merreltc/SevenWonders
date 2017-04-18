@@ -3,8 +3,11 @@ package guiMain.Interactables;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
+import java.awt.Image;
 import java.awt.Point;
 import java.awt.geom.Point2D;
+
+import guiMain.RenderImage;
 
 public abstract class Interactable {
 	
@@ -13,6 +16,7 @@ public abstract class Interactable {
 	private String value;
 	private boolean showValue = true;
 	private boolean drawUnit = true;
+	private Image image = null;
 
 	
 	public Interactable(Point positionPoint, Point boundPoint, String value){
@@ -39,6 +43,8 @@ public abstract class Interactable {
 				graphics.setFont(new Font("Courier New", Font.BOLD, 50));
 				graphics.drawString(value, positionPoint.x + 10, positionPoint.y + this.boundPoint.y - 10);
 			}
+		} else {
+			RenderImage.draw(graphics, this.image, this.positionPoint.x, this.positionPoint.y, this.boundPoint.x, this.boundPoint.y);
 		}
 	}
 	
@@ -60,6 +66,11 @@ public abstract class Interactable {
 	
 	public void showValue(boolean show){
 		showValue = show;
+	}
+	
+	public void addImage(Image image) {
+		this.image  = image;
+		this.drawUnit = false;
 	}
 	
 	public abstract void draw(Graphics graphics);

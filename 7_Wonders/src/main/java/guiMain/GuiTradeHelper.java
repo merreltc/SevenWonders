@@ -19,7 +19,7 @@ public class GuiTradeHelper {
 		Player tradeTo;
 		Player tradeFrom = this.gameManager.getCurrentPlayer();
 		
-		if (splitValue[0].equals("Left")) {
+		if (splitValue[0].equals("Right")) {
 			tradeTo = this.gameManager.getNextPlayer();
 		} else {
 			tradeTo = this.gameManager.getPreviousPlayer();

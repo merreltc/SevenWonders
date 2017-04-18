@@ -1,10 +1,12 @@
 package guiMain.Menus;
 
 import java.awt.Graphics;
+import java.awt.Image;
 import java.awt.Point;
 import java.util.ArrayList;
 
 import GuiDataStructures.Constants;
+import guiMain.RenderImage;
 import guiMain.Interactables.Button;
 import guiMain.Interactables.Interactable;
 
@@ -23,11 +25,12 @@ public class PlayerSelect extends Menu{
 
 	@Override
 	public void initialize() {
-		
 		this.clearButtons();
 		for (int i = 3; i <= 7; i++) {
 			Button startGame = new Button(new Point(400 + 250 * (i - 3), 400), Constants.PlayerSelectButtonBounds,
 					i + "");
+			Image image = RenderImage.getImage(i + "");
+			startGame.addImage(image);
 			this.addInteractable(startGame);
 		}
 

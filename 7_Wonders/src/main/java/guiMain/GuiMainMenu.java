@@ -3,6 +3,7 @@ package guiMain;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
+import java.awt.Image;
 import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -59,8 +60,8 @@ public class GuiMainMenu extends JPanel implements ActionListener {
 	@Override
 	public void paintComponent(Graphics graphics) {
 		graphics.setColor(Color.RED);
-		graphics.fillRect(0, 0, Constants.FrameWidth, Constants.FrameHeight);
-
+		Image image = RenderImage.getImage("Background");
+		RenderImage.draw(graphics, image, 0, 0, Constants.FrameWidth, Constants.FrameHeight);
 		this.current.draw(graphics);
 	}
 

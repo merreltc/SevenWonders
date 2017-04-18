@@ -6,8 +6,9 @@ import java.awt.Graphics;
 import java.awt.Point;
 import java.awt.geom.Point2D;
 
-public class Button extends Interactable{
+import guiMain.RenderImage;
 
+public class Button extends Interactable {
 	public Button(Point position, Point bounds, String value) {
 		super(position, bounds, value);
 	}
@@ -16,5 +17,4 @@ public class Button extends Interactable{
 	public void draw(Graphics graphics) {
 		super.draw(graphics, Color.BLUE, Color.RED);
 	}
-
 }

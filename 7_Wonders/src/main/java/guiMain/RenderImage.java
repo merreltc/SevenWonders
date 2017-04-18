@@ -10,17 +10,29 @@ import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
 public class RenderImage {
-
-
-	public void draw(Graphics graphics, String name, int x, int y, int width, int height) {
-
-		try {
-			/* TODO Add correct File path to the below command */
-			BufferedImage image = ImageIO.read(new File(name));
+	
+	public static void draw(Graphics graphics, Image image, int x, int y, int width, int height) {
 			graphics.drawImage(image, x, y, width, height, null);
-		} catch (IOException e) {
-			e.printStackTrace();
+	}
+	
+	public static Image getImage(String name) {
+		try {
+			BufferedImage image = ImageIO.read(new File("Images\\" + name + ".png"));
+			return image;
 		}
+		catch (IOException e) {
+				System.err.println("Cannot load image:" + name);
+		}
+		
+		try {
+			BufferedImage image = ImageIO.read(new File("Images\\x.png"));
+			return image;
+		}
+		catch (IOException e) {
+				System.err.println("Cannot load image:" + name);
+		}
+		// TODO: Solve the returning null issue.
+		return null;
 	}
 
 }
