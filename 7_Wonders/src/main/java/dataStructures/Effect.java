@@ -3,6 +3,8 @@ package dataStructures;
 public class Effect {
 	private EffectType effectType = EffectType.NONE;
 	private Resource resource;
+	private Entity entity;
+	private Good good;
 	
 	public enum EffectType {
 		NONE, ENTITY
@@ -17,11 +19,15 @@ public class Effect {
 	}
 	
 	public enum Entity {
-		RESOURCE
+		RESOURCE, MANUFACTUREDGOOD
 	}
 	
 	public enum Resource {
 		LUMBER, CLAY, ORE, STONE
+	}
+	
+	public enum Good {
+		LOOM, GLASS, PRESS
 	}
 	
 	public Effect() {
@@ -34,7 +40,14 @@ public class Effect {
 
 	public Effect(EffectType effectType, Entity entity, Resource resource, int entityAmount) {
 		this.effectType = effectType;
+		this.entity = entity;
 		this.resource = resource;
+	}
+
+	public Effect(EffectType effectType, Entity entity,  Good good, int entityAmount) {
+		this.effectType = effectType;
+		this.entity = entity;
+		this.good = good;
 	}
 
 	public EffectType getEffectType() {
@@ -50,7 +63,7 @@ public class Effect {
 	}
 
 	public Entity getEntity() {
-		return Entity.RESOURCE;
+		return this.entity;
 	}
 
 	public int getEntityAmount() {
@@ -59,6 +72,10 @@ public class Effect {
 
 	public Resource getResource() {
 		return this.resource;
+	}
+
+	public Good getGood() {
+		return this.good;
 	}
 
 }

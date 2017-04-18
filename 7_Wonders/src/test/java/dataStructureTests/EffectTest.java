@@ -9,6 +9,7 @@ import dataStructures.Effect.AffectingEntity;
 import dataStructures.Effect.Direction;
 import dataStructures.Effect.EffectType;
 import dataStructures.Effect.Entity;
+import dataStructures.Effect.Good;
 import dataStructures.Effect.Resource;
 
 public class EffectTest {
@@ -73,5 +74,38 @@ public class EffectTest {
 		assertEquals(1, effect.getEntityAmount());
 		assertEquals(Entity.RESOURCE, effect.getEntity());
 		assertEquals(Resource.STONE, effect.getResource());
+	}
+	
+	@Test
+	public void test1LoomEntityEffect() {
+		Effect effect = new Effect(EffectType.ENTITY, Entity.MANUFACTUREDGOOD, Good.LOOM, 1);
+
+		assertEquals(EffectType.ENTITY, effect.getEffectType());
+		assertEquals(Direction.SELF, effect.getDirection());
+		assertEquals(1, effect.getEntityAmount());
+		assertEquals(Entity.MANUFACTUREDGOOD, effect.getEntity());
+		assertEquals(Good.LOOM, effect.getGood());
+	}
+	
+	@Test
+	public void test1GlassEntityEffect() {
+		Effect effect = new Effect(EffectType.ENTITY, Entity.MANUFACTUREDGOOD, Good.GLASS, 1);
+
+		assertEquals(EffectType.ENTITY, effect.getEffectType());
+		assertEquals(Direction.SELF, effect.getDirection());
+		assertEquals(1, effect.getEntityAmount());
+		assertEquals(Entity.MANUFACTUREDGOOD, effect.getEntity());
+		assertEquals(Good.GLASS, effect.getGood());
+	}
+	
+	@Test
+	public void test1PressEntityEffect() {
+		Effect effect = new Effect(EffectType.ENTITY, Entity.MANUFACTUREDGOOD, Good.PRESS, 1);
+
+		assertEquals(EffectType.ENTITY, effect.getEffectType());
+		assertEquals(Direction.SELF, effect.getDirection());
+		assertEquals(1, effect.getEntityAmount());
+		assertEquals(Entity.MANUFACTUREDGOOD, effect.getEntity());
+		assertEquals(Good.PRESS, effect.getGood());
 	}
 }
