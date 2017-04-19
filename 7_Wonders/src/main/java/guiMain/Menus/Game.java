@@ -28,6 +28,9 @@ public class Game extends Menu {
 		ArrayList<String> players = new ArrayList<String>();
 		for(int i = 0; i < numOfPlayers; i++) {
 			String name = JOptionPane.showInputDialog("Player " + (i + 1) + " name:");
+			if (name == null || name.equals("")){
+				name = i + "";
+			}
 			players.add(name);
 		}
 		this.gameManager = new GameManager(players);

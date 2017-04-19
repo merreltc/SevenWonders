@@ -32,6 +32,7 @@ public class GuiMainMenu extends JPanel implements ActionListener {
 	private JFrame frame;
 	private Timer timer;
 	private Integer numOfPlayers;
+	private Image image;
 
 	public enum MenuType {
 		MainMenu, PlayerSelect, Game
@@ -47,6 +48,7 @@ public class GuiMainMenu extends JPanel implements ActionListener {
 		this.frame.addKeyListener(new MenuKeyListener());
 		MenuMouseListener menuMouse = new MenuMouseListener(this);
 		this.frame.addMouseListener(menuMouse);
+		image = RenderImage.getImage("Background");
 		this.switchMenu(MenuType.MainMenu);
 		this.timer = new Timer(20, this);
 		this.timer.start();
@@ -60,7 +62,7 @@ public class GuiMainMenu extends JPanel implements ActionListener {
 	@Override
 	public void paintComponent(Graphics graphics) {
 		graphics.setColor(Color.RED);
-		Image image = RenderImage.getImage("Background");
+		
 		RenderImage.draw(graphics, image, 0, 0, Constants.FrameWidth, Constants.FrameHeight);
 		this.current.draw(graphics);
 	}
