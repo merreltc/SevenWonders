@@ -236,4 +236,16 @@ public class EffectTest {
 		assertEquals(ValueType.COIN, effect.getValueType());
 		assertEquals(AffectingEntity.MANUFACTUREDGOODS, effect.getAffectingEntity());
 	}
+	
+	@Test
+	public void test1GuildValuerCommercialStructuresEffect(){
+		Effect effect = new Effect(EffectType.VALUE, Value.GUILD, AffectingEntity.COMMERCIALSTRUCTURES, Direction.NEIGHBORS, 1);
+		
+		assertEquals(EffectType.VALUE, effect.getEffectType());
+		assertEquals(Direction.NEIGHBORS, effect.getDirection());
+		assertEquals(1, effect.getValueAmount());
+		assertEquals(Value.GUILD, effect.getValue());
+		assertEquals(ValueType.VICTORYPOINT, effect.getValueType());
+		assertEquals(AffectingEntity.COMMERCIALSTRUCTURES, effect.getAffectingEntity());
+	}
 }

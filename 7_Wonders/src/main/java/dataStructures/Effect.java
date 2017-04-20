@@ -20,7 +20,7 @@ public class Effect {
 	}
 
 	public enum AffectingEntity {
-		NONE, RAWRESOURCES, MANUFACTUREDGOODS
+		NONE, RAWRESOURCES, MANUFACTUREDGOODS, COMMERCIALSTRUCTURES
 	}
 
 	public enum Entity {
@@ -36,7 +36,7 @@ public class Effect {
 	}
 
 	public enum Value {
-		VICTORYPOINTS, MILITARY, COMMERCE
+		VICTORYPOINTS, MILITARY, COMMERCE, GUILD
 	}
 
 	public enum ValueType {
@@ -126,6 +126,8 @@ public class Effect {
 			return ValueType.VICTORYPOINT;
 		case COMMERCE:
 			return ValueType.COIN;
+		case GUILD:
+			return ValueType.VICTORYPOINT;
 		default:
 			return ValueType.CONFLICTTOKEN;
 		}
