@@ -8,7 +8,7 @@ import org.junit.Test;
 
 import dataStructures.Cost;
 import dataStructures.Cost.CostType;
-import dataStructures.Cost.ResourceType;
+import dataStructures.Cost.Resource;
 
 public class CostTest {
 
@@ -17,7 +17,7 @@ public class CostTest {
 		Cost cost = new Cost();
 		
 		assertEquals(CostType.NONE, cost.getType());
-		assertEquals(0, cost.getResourceCost().size());
+		assertEquals(0, cost.getCost().size());
 		assertEquals(0, cost.getCoinCost());
 	}
 	
@@ -26,44 +26,44 @@ public class CostTest {
 		Cost cost = new Cost(CostType.COIN, 1);
 		
 		assertEquals(CostType.COIN, cost.getType());
-		assertEquals(0, cost.getResourceCost().size());
+		assertEquals(0, cost.getCost().size());
 		assertEquals(1, cost.getCoinCost());
 	}
 	
 	@Test
-	public void testSingleResourceCost() {
-		HashMap<ResourceType, Integer> expectedResourceCost = new HashMap<ResourceType, Integer>();
-		HashMap<ResourceType, Integer> actualResourceCost = new HashMap<ResourceType, Integer>();
+	public void test2LoomCost() {
+		HashMap<Enum, Integer> expectedCost = new HashMap<Enum, Integer>();
+		HashMap<Enum, Integer> actualCost = new HashMap<Enum, Integer>();
 		
-		expectedResourceCost.put(ResourceType.LOOM, 2);
-		actualResourceCost.put(ResourceType.LOOM, 2);
+		expectedCost.put(Resource.LOOM, 2);
+		actualCost.put(Resource.LOOM, 2);
 		
-		Cost cost = new Cost(CostType.RESOURCE, actualResourceCost);
+		Cost cost = new Cost(CostType.RESOURCE, actualCost);
 		
 		assertEquals(CostType.RESOURCE, cost.getType());
-		assertEquals(expectedResourceCost.get(ResourceType.LOOM), cost.getResourceCost().get(ResourceType.LOOM));
+		assertEquals(expectedCost.get(Resource.LOOM), cost.getCost().get(Resource.LOOM));
 		assertEquals(0, cost.getCoinCost());
 	}
 	
 	@Test
-	public void testMultiResourceCost() {
-		HashMap<ResourceType, Integer> expectedResourceCost = new HashMap<ResourceType, Integer>();
-		HashMap<ResourceType, Integer> actualResourceCost = new HashMap<ResourceType, Integer>();
+	public void testOreLumberLoomCost() {
+		HashMap<Enum, Integer> expectedCost = new HashMap<Enum, Integer>();
+		HashMap<Enum, Integer> actualCost = new HashMap<Enum, Integer>();
 		
-		expectedResourceCost.put(ResourceType.ORE, 1);
-		expectedResourceCost.put(ResourceType.LUMBER, 3);
-		expectedResourceCost.put(ResourceType.LOOM, 3);
+		expectedCost.put(Resource.ORE, 1);
+		expectedCost.put(Resource.LUMBER, 3);
+		expectedCost.put(Resource.LOOM, 3);
 		
-		actualResourceCost.put(ResourceType.ORE, 1);
-		actualResourceCost.put(ResourceType.LUMBER, 3);
-		actualResourceCost.put(ResourceType.LOOM, 3);
+		actualCost.put(Resource.ORE, 1);
+		actualCost.put(Resource.LUMBER, 3);
+		actualCost.put(Resource.LOOM, 3);
 		
-		Cost cost = new Cost(CostType.RESOURCE, actualResourceCost);
+		Cost cost = new Cost(CostType.RESOURCE, actualCost);
 		
 		assertEquals(CostType.RESOURCE, cost.getType());
-		assertEquals(expectedResourceCost.get(ResourceType.ORE), cost.getResourceCost().get(ResourceType.ORE));
-		assertEquals(expectedResourceCost.get(ResourceType.LUMBER), cost.getResourceCost().get(ResourceType.LUMBER));
-		assertEquals(expectedResourceCost.get(ResourceType.LOOM), cost.getResourceCost().get(ResourceType.LOOM));
+		assertEquals(expectedCost.get(Resource.ORE), cost.getCost().get(Resource.ORE));
+		assertEquals(expectedCost.get(Resource.LUMBER), cost.getCost().get(Resource.LUMBER));
+		assertEquals(expectedCost.get(Resource.LOOM), cost.getCost().get(Resource.LOOM));
 		assertEquals(0, cost.getCoinCost());
 	}
 }

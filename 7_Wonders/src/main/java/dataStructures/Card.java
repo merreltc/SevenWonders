@@ -2,8 +2,6 @@ package dataStructures;
 
 import java.util.HashMap;
 
-import dataStructures.Card.ResourceType;
-
 public class Card {
 	private String name = "Default Card";
 	private int minNumPlayers = 3;
