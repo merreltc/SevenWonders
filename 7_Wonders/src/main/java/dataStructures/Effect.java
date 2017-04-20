@@ -69,11 +69,8 @@ public class Effect {
 		this.value = value;
 		this.affectingEntity = affectingEntity;
 
-		if (valueAmount <= 0 || valueAmount >= 9) {
-			throw new IllegalArgumentException("Cannot have valueAmount of " + valueAmount);
-		} else {
-			this.valueAmount = valueAmount;
-		}
+		validateValueAmount(value, valueAmount);
+		this.valueAmount = valueAmount;
 	}
 
 	public Effect(EffectType effectType, Value value, AffectingEntity affectingEntity, Direction direction,
@@ -83,6 +80,21 @@ public class Effect {
 		this.direction = direction;
 		this.affectingEntity = affectingEntity;
 		this.valueAmount = valueAmount;
+	}
+	
+	private void validateValueAmount(Value value, int valueAmount) {
+		switch (value){
+		case VICTORYPOINTS:
+			if (valueAmount <= 0 || valueAmount >= 9){
+				throw new IllegalArgumentException("Cannot have valueAmount of " + valueAmount);
+			}
+			break;
+		default:
+			if (valueAmount == 8){
+				throw new IllegalArgumentException("Cannot have valueAmount of " + valueAmount);
+			}
+			break;
+		}
 	}
 
 	public EffectType getEffectType() {

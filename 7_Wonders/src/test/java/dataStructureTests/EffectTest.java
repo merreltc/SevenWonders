@@ -201,6 +201,12 @@ public class EffectTest {
 		assertEquals(AffectingEntity.NONE, effect.getAffectingEntity());
 	}
 	
+	@Test(expected=IllegalArgumentException.class)
+	public void testInvalidMilitaryValue8Effect(){
+	    new Effect(EffectType.VALUE, Value.MILITARY, AffectingEntity.NONE, 8);
+		fail();
+	}
+	
 	@Test
 	public void test1CommerceValueRightEffect(){
 		Effect effect = new Effect(EffectType.VALUE, Value.COMMERCE, AffectingEntity.RAWRESOURCES, Direction.RIGHT, 1);
