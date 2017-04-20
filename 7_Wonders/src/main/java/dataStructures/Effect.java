@@ -90,7 +90,7 @@ public class Effect {
 			}
 			break;
 		default:
-			if (valueAmount == 8){
+			if (valueAmount >= 4){
 				throw new IllegalArgumentException("Cannot have valueAmount of " + valueAmount);
 			}
 			break;

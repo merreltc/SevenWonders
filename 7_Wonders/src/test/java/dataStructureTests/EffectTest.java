@@ -207,6 +207,12 @@ public class EffectTest {
 		fail();
 	}
 	
+	@Test(expected=IllegalArgumentException.class)
+	public void testInvalidMilitaryValue4Effect(){
+	    new Effect(EffectType.VALUE, Value.MILITARY, AffectingEntity.NONE, 4);
+		fail();
+	}
+	
 	@Test
 	public void test1CommerceValueRightEffect(){
 		Effect effect = new Effect(EffectType.VALUE, Value.COMMERCE, AffectingEntity.RAWRESOURCES, Direction.RIGHT, 1);
