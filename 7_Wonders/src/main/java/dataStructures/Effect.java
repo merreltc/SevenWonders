@@ -1,11 +1,15 @@
 package dataStructures;
 
+import java.util.HashMap;
+import java.util.HashSet;
+
 public class Effect {
 	private EffectType effectType = EffectType.NONE;
 	private Resource resource;
 	private Entity entity;
 	private Good good;
 	private int entityAmount = 1;
+	private HashMap<Resource, Integer> resourcesAndAmount;
 	
 	public enum EffectType {
 		NONE, ENTITY
@@ -45,13 +49,21 @@ public class Effect {
 		this.resource = resource;
 		this.entityAmount = entityAmount;
 	}
+	
+
+	public Effect(EffectType effectType, Entity entity, HashMap<Resource, Integer> resourcesAndAmount) {
+		this.effectType = effectType;
+		this.entity = entity;
+		this.resourcesAndAmount = resourcesAndAmount;
+	}
+
 
 	public Effect(EffectType effectType, Entity entity,  Good good, int entityAmount) {
 		this.effectType = effectType;
 		this.entity = entity;
 		this.good = good;
 	}
-
+	
 	public EffectType getEffectType() {
 		return this.effectType;
 	}
@@ -78,6 +90,10 @@ public class Effect {
 
 	public Good getGood() {
 		return this.good;
+	}
+
+	public HashMap<Resource, Integer> getResources() {
+		return this.resourcesAndAmount;
 	}
 
 }

@@ -2,6 +2,9 @@ package dataStructureTests;
 
 import static org.junit.Assert.assertEquals;
 
+import java.util.HashMap;
+import java.util.HashSet;
+
 import org.junit.Test;
 
 import dataStructures.Effect;
@@ -119,6 +122,90 @@ public class EffectTest {
 		assertEquals(2, effect.getEntityAmount());
 		assertEquals(Entity.RESOURCE, effect.getEntity());
 		assertEquals(Resource.STONE, effect.getResource());
+	}
+	
+	@Test
+	public void testLumberClayEntityEffect() {
+		HashMap<Resource, Integer> resourcesAndAmount = new HashMap<Resource, Integer>();
+		resourcesAndAmount.put(Resource.LUMBER, 1);
+		resourcesAndAmount.put(Resource.CLAY, 1);
+		
+		Effect effect = new Effect(EffectType.ENTITY, Entity.RESOURCE, resourcesAndAmount);
+
+		assertEquals(EffectType.ENTITY, effect.getEffectType());
+		assertEquals(Direction.SELF, effect.getDirection());
+		assertEquals(Entity.RESOURCE, effect.getEntity());
+		assertEquals(resourcesAndAmount, effect.getResources());
+	}
+	
+	@Test
+	public void testStoneClayEntityEffect() {
+		HashMap<Resource, Integer> resourcesAndAmount = new HashMap<Resource, Integer>();
+		resourcesAndAmount.put(Resource.STONE, 1);
+		resourcesAndAmount.put(Resource.CLAY, 1);
+		
+		Effect effect = new Effect(EffectType.ENTITY, Entity.RESOURCE, resourcesAndAmount);
+
+		assertEquals(EffectType.ENTITY, effect.getEffectType());
+		assertEquals(Direction.SELF, effect.getDirection());
+		assertEquals(Entity.RESOURCE, effect.getEntity());
+		assertEquals(resourcesAndAmount, effect.getResources());
+	}
+	
+	@Test
+	public void testClayOreEntityEffect() {
+		HashMap<Resource, Integer> resourcesAndAmount = new HashMap<Resource, Integer>();
+		resourcesAndAmount.put(Resource.CLAY, 1);
+		resourcesAndAmount.put(Resource.ORE, 1);
+		
+		Effect effect = new Effect(EffectType.ENTITY, Entity.RESOURCE, resourcesAndAmount);
+
+		assertEquals(EffectType.ENTITY, effect.getEffectType());
+		assertEquals(Direction.SELF, effect.getDirection());
+		assertEquals(Entity.RESOURCE, effect.getEntity());
+		assertEquals(resourcesAndAmount, effect.getResources());
+	}
+	
+	@Test
+	public void testStoneLumberEntityEffect() {
+		HashMap<Resource, Integer> resourcesAndAmount = new HashMap<Resource, Integer>();
+		resourcesAndAmount.put(Resource.STONE, 1);
+		resourcesAndAmount.put(Resource.LUMBER, 1);
+		
+		Effect effect = new Effect(EffectType.ENTITY, Entity.RESOURCE, resourcesAndAmount);
+
+		assertEquals(EffectType.ENTITY, effect.getEffectType());
+		assertEquals(Direction.SELF, effect.getDirection());
+		assertEquals(Entity.RESOURCE, effect.getEntity());
+		assertEquals(resourcesAndAmount, effect.getResources());
+	}
+	
+	@Test
+	public void testLumberOreEntityEffect() {
+		HashMap<Resource, Integer> resourcesAndAmount = new HashMap<Resource, Integer>();
+		resourcesAndAmount.put(Resource.LUMBER, 1);
+		resourcesAndAmount.put(Resource.ORE, 1);
+		
+		Effect effect = new Effect(EffectType.ENTITY, Entity.RESOURCE, resourcesAndAmount);
+
+		assertEquals(EffectType.ENTITY, effect.getEffectType());
+		assertEquals(Direction.SELF, effect.getDirection());
+		assertEquals(Entity.RESOURCE, effect.getEntity());
+		assertEquals(resourcesAndAmount, effect.getResources());
+	}
+	
+	@Test
+	public void testOreStoneEntityEffect() {
+		HashMap<Resource, Integer> resourcesAndAmount = new HashMap<Resource, Integer>();
+		resourcesAndAmount.put(Resource.ORE, 1);
+		resourcesAndAmount.put(Resource.STONE, 1);
+		
+		Effect effect = new Effect(EffectType.ENTITY, Entity.RESOURCE, resourcesAndAmount);
+
+		assertEquals(EffectType.ENTITY, effect.getEffectType());
+		assertEquals(Direction.SELF, effect.getDirection());
+		assertEquals(Entity.RESOURCE, effect.getEntity());
+		assertEquals(resourcesAndAmount, effect.getResources());
 	}
 	
 	@Test
