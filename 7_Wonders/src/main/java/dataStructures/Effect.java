@@ -9,6 +9,7 @@ public class Effect {
 	private Resource resource;
 	private Entity entity;
 	private Good good;
+	private int valueAmount;
 	
 	public enum EffectType {
 		NONE, ENTITY, VALUE
@@ -35,11 +36,11 @@ public class Effect {
 	}
 	
 	public enum Value {
-		VICTORYPOINTS
+		VICTORYPOINTS, MILITARY
 	}
 	
 	public enum ValueType{
-		VICTORYPOINT
+		VICTORYPOINT, CONFLICTTOKEN
 	}
 	public Effect() {
 		
@@ -63,6 +64,7 @@ public class Effect {
 
 	public Effect(EffectType effectType, Value value, AffectingEntity affectedEntity, int valueAmount) {
 		this.effectType = effectType;	
+		this.valueAmount = valueAmount;
 	}
 
 	public EffectType getEffectType() {
@@ -94,7 +96,7 @@ public class Effect {
 	}
 
 	public int getValueAmount() {
-		return 2;
+		return this.valueAmount;
 	}
 
 	public Value getValue() {

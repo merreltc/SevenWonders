@@ -122,4 +122,16 @@ public class EffectTest {
 		assertEquals(ValueType.VICTORYPOINT, effect.getValueType());
 		assertEquals(AffectingEntity.NONE, effect.getAffectingEntity());
 	}
+	
+	@Test
+	public void test8VictoryPointsValueEffect(){
+		Effect effect = new Effect(EffectType.VALUE, Value.VICTORYPOINTS, AffectingEntity.NONE, 8);
+		
+		assertEquals(EffectType.VALUE, effect.getEffectType());
+		assertEquals(Direction.SELF, effect.getDirection());
+		assertEquals(8, effect.getValueAmount());
+		assertEquals(Value.VICTORYPOINTS, effect.getValue());
+		assertEquals(ValueType.VICTORYPOINT, effect.getValueType());
+		assertEquals(AffectingEntity.NONE, effect.getAffectingEntity());
+	}
 }
