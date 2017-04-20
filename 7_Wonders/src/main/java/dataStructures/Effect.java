@@ -16,7 +16,7 @@ public class Effect {
 	}
 
 	public enum Direction {
-		SELF, RIGHT, LEFT, ALL
+		SELF, RIGHT, LEFT, ALL, NEIGHBORS
 	}
 
 	public enum AffectingEntity {
