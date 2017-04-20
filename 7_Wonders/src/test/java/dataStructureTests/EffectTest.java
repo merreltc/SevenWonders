@@ -200,4 +200,16 @@ public class EffectTest {
 		assertEquals(ValueType.COIN, effect.getValueType());
 		assertEquals(AffectingEntity.RAWRESOURCES, effect.getAffectingEntity());
 	}
+	
+	@Test
+	public void test1CommerceValueLeftEffect(){
+		Effect effect = new Effect(EffectType.VALUE, Value.COIN, AffectingEntity.RAWRESOURCES, Direction.LEFT, 1);
+		
+		assertEquals(EffectType.VALUE, effect.getEffectType());
+		assertEquals(Direction.LEFT, effect.getDirection());
+		assertEquals(1, effect.getValueAmount());
+		assertEquals(Value.COIN, effect.getValue());
+		assertEquals(ValueType.COIN, effect.getValueType());
+		assertEquals(AffectingEntity.RAWRESOURCES, effect.getAffectingEntity());
+	}
 }
