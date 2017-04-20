@@ -3,7 +3,6 @@ package dataStructureTests;
 import static org.junit.Assert.assertEquals;
 
 import java.util.HashMap;
-import java.util.HashSet;
 
 import org.junit.Test;
 
@@ -209,6 +208,22 @@ public class EffectTest {
 	}
 	
 	@Test
+	public void testAllResourcesEntityEffect() {
+		HashMap<Resource, Integer> resourcesAndAmount = new HashMap<Resource, Integer>();
+		resourcesAndAmount.put(Resource.LUMBER, 1);
+		resourcesAndAmount.put(Resource.CLAY, 1);
+		resourcesAndAmount.put(Resource.ORE, 1);
+		resourcesAndAmount.put(Resource.STONE, 1);
+		
+		Effect effect = new Effect(EffectType.ENTITY, Entity.RESOURCE, resourcesAndAmount);
+
+		assertEquals(EffectType.ENTITY, effect.getEffectType());
+		assertEquals(Direction.SELF, effect.getDirection());
+		assertEquals(Entity.RESOURCE, effect.getEntity());
+		assertEquals(resourcesAndAmount, effect.getResources());
+	}
+	
+	@Test
 	public void test1LoomEntityEffect() {
 		Effect effect = new Effect(EffectType.ENTITY, Entity.MANUFACTUREDGOOD, Good.LOOM, 1);
 
@@ -240,4 +255,5 @@ public class EffectTest {
 		assertEquals(Entity.MANUFACTUREDGOOD, effect.getEntity());
 		assertEquals(Good.PRESS, effect.getGood());
 	}
+	
 }
