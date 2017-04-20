@@ -10,40 +10,41 @@ public class Effect {
 	private Entity entity;
 	private Good good;
 	private int valueAmount;
-	
+
 	public enum EffectType {
 		NONE, ENTITY, VALUE
 	}
-	
+
 	public enum Direction {
 		SELF
 	}
-	
+
 	public enum AffectingEntity {
 		NONE
 	}
-	
+
 	public enum Entity {
 		RESOURCE, MANUFACTUREDGOOD
 	}
-	
+
 	public enum Resource {
 		LUMBER, CLAY, ORE, STONE
 	}
-	
+
 	public enum Good {
 		LOOM, GLASS, PRESS
 	}
-	
+
 	public enum Value {
 		VICTORYPOINTS, MILITARY
 	}
-	
-	public enum ValueType{
+
+	public enum ValueType {
 		VICTORYPOINT, CONFLICTTOKEN
 	}
+
 	public Effect() {
-		
+
 	}
 
 	public Effect(EffectType effectType) {
@@ -56,15 +57,20 @@ public class Effect {
 		this.resource = resource;
 	}
 
-	public Effect(EffectType effectType, Entity entity,  Good good, int entityAmount) {
+	public Effect(EffectType effectType, Entity entity, Good good, int entityAmount) {
 		this.effectType = effectType;
 		this.entity = entity;
 		this.good = good;
 	}
 
 	public Effect(EffectType effectType, Value value, AffectingEntity affectedEntity, int valueAmount) {
-		this.effectType = effectType;	
-		this.valueAmount = valueAmount;
+		this.effectType = effectType;
+
+		if (valueAmount == 0) {
+			throw new IllegalArgumentException();
+		} else {
+			this.valueAmount = valueAmount;
+		}
 	}
 
 	public EffectType getEffectType() {

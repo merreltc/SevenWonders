@@ -1,6 +1,6 @@
 package dataStructureTests;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 
 import org.junit.Test;
 
@@ -133,5 +133,11 @@ public class EffectTest {
 		assertEquals(Value.VICTORYPOINTS, effect.getValue());
 		assertEquals(ValueType.VICTORYPOINT, effect.getValueType());
 		assertEquals(AffectingEntity.NONE, effect.getAffectingEntity());
+	}
+	
+	@Test(expected=IllegalArgumentException.class)
+	public void testInvalidVictoryPointsValue0Effect(){
+		Effect effect = new Effect(EffectType.VALUE, Value.VICTORYPOINTS, AffectingEntity.NONE, 0);
+		fail();
 	}
 }
