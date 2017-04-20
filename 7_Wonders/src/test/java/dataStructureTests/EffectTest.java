@@ -220,6 +220,12 @@ public class EffectTest {
 	}
 	
 	@Test(expected=IllegalArgumentException.class)
+	public void testInvalidMilitaryValueNeg2Effect(){
+	    new Effect(EffectType.VALUE, Value.MILITARY, AffectingEntity.NONE, -2);
+		fail();
+	}
+	
+	@Test(expected=IllegalArgumentException.class)
 	public void testInvalidMilitaryValue8Effect(){
 	    new Effect(EffectType.VALUE, Value.MILITARY, AffectingEntity.NONE, 8);
 		fail();
