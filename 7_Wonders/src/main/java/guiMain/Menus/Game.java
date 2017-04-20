@@ -29,7 +29,7 @@ public class Game extends Menu {
 		for(int i = 0; i < numOfPlayers; i++) {
 			String name = JOptionPane.showInputDialog("Player " + (i + 1) + " name:");
 			if (name == null || name.equals("")){
-				name = i + "";
+				name = "Player: " + i;
 			}
 			players.add(name);
 		}
