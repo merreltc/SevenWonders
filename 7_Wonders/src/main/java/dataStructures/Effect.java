@@ -5,6 +5,7 @@ public class Effect {
 	private Resource resource;
 	private Entity entity;
 	private Good good;
+	private int entityAmount = 1;
 	
 	public enum EffectType {
 		NONE, ENTITY
@@ -42,6 +43,7 @@ public class Effect {
 		this.effectType = effectType;
 		this.entity = entity;
 		this.resource = resource;
+		this.entityAmount = entityAmount;
 	}
 
 	public Effect(EffectType effectType, Entity entity,  Good good, int entityAmount) {
@@ -67,7 +69,7 @@ public class Effect {
 	}
 
 	public int getEntityAmount() {
-		return 1;
+		return this.entityAmount;
 	}
 
 	public Resource getResource() {
