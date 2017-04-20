@@ -11,6 +11,8 @@ import dataStructures.Effect.EffectType;
 import dataStructures.Effect.Entity;
 import dataStructures.Effect.Good;
 import dataStructures.Effect.Resource;
+import dataStructures.Effect.Value;
+import dataStructures.Effect.ValueType;
 
 public class EffectTest {
 
@@ -107,5 +109,17 @@ public class EffectTest {
 		assertEquals(1, effect.getEntityAmount());
 		assertEquals(Entity.MANUFACTUREDGOOD, effect.getEntity());
 		assertEquals(Good.PRESS, effect.getGood());
+	}
+	
+	@Test
+	public void test2VictoryPointsValueEffect(){
+		Effect effect = new Effect(EffectType.VALUE, Value.VICTORYPOINTS, AffectingEntity.NONE, 2);
+		
+		assertEquals(EffectType.VALUE, effect.getEffectType());
+		assertEquals(Direction.SELF, effect.getDirection());
+		assertEquals(2, effect.getValueAmount());
+		assertEquals(Value.VICTORYPOINTS, effect.getValue());
+		assertEquals(ValueType.VICTORYPOINT, effect.getValueType());
+		assertEquals(AffectingEntity.NONE, effect.getAffectingEntity());
 	}
 }

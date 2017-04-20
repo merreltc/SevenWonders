@@ -1,5 +1,9 @@
 package dataStructures;
 
+import dataStructures.Effect.AffectingEntity;
+import dataStructures.Effect.EffectType;
+import dataStructures.Effect.Value;
+
 public class Effect {
 	private EffectType effectType = EffectType.NONE;
 	private Resource resource;
@@ -7,7 +11,7 @@ public class Effect {
 	private Good good;
 	
 	public enum EffectType {
-		NONE, ENTITY
+		NONE, ENTITY, VALUE
 	}
 	
 	public enum Direction {
@@ -30,6 +34,13 @@ public class Effect {
 		LOOM, GLASS, PRESS
 	}
 	
+	public enum Value {
+		VICTORYPOINTS
+	}
+	
+	public enum ValueType{
+		VICTORYPOINT
+	}
 	public Effect() {
 		
 	}
@@ -48,6 +59,10 @@ public class Effect {
 		this.effectType = effectType;
 		this.entity = entity;
 		this.good = good;
+	}
+
+	public Effect(EffectType effectType, Value value, AffectingEntity affectedEntity, int valueAmount) {
+		this.effectType = effectType;	
 	}
 
 	public EffectType getEffectType() {
@@ -76,6 +91,18 @@ public class Effect {
 
 	public Good getGood() {
 		return this.good;
+	}
+
+	public int getValueAmount() {
+		return 2;
+	}
+
+	public Value getValue() {
+		return Value.VICTORYPOINTS;
+	}
+
+	public ValueType getValueType() {
+		return ValueType.VICTORYPOINT;
 	}
 
 }
