@@ -238,7 +238,7 @@ public class EffectTest {
 	}
 	
 	@Test
-	public void test1GuildValuerCommercialStructuresEffect(){
+	public void test1GuildValueCommercialStructuresEffect(){
 		Effect effect = new Effect(EffectType.VALUE, Value.GUILD, AffectingEntity.COMMERCIALSTRUCTURES, Direction.NEIGHBORS, 1);
 		
 		assertEquals(EffectType.VALUE, effect.getEffectType());
@@ -247,5 +247,17 @@ public class EffectTest {
 		assertEquals(Value.GUILD, effect.getValue());
 		assertEquals(ValueType.VICTORYPOINT, effect.getValueType());
 		assertEquals(AffectingEntity.COMMERCIALSTRUCTURES, effect.getAffectingEntity());
+	}
+	
+	@Test
+	public void test1GuildValueScientificStructuresEffect(){
+		Effect effect = new Effect(EffectType.VALUE, Value.GUILD, AffectingEntity.SCIENTIFICSTRUCTURES, Direction.NEIGHBORS, 1);
+		
+		assertEquals(EffectType.VALUE, effect.getEffectType());
+		assertEquals(Direction.NEIGHBORS, effect.getDirection());
+		assertEquals(1, effect.getValueAmount());
+		assertEquals(Value.GUILD, effect.getValue());
+		assertEquals(ValueType.VICTORYPOINT, effect.getValueType());
+		assertEquals(AffectingEntity.SCIENTIFICSTRUCTURES, effect.getAffectingEntity());
 	}
 }
