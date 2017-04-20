@@ -12,11 +12,11 @@ public class Cost {
 	}
 	
 	public enum Resource {
-		ORE, LUMBER, STONE
+		ORE, LUMBER, STONE, CLAY
 	}
 	
 	public enum Good {
-		LOOM, GLASS
+		LOOM, GLASS, PAPER
 	}
 	
 	public Cost() {
