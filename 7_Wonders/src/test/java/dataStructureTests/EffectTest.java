@@ -176,4 +176,16 @@ public class EffectTest {
 			assertEquals("Cannot have valueAmount of 10", error.getMessage());
 		}
 	}
+
+	@Test
+	public void test1MilitaryValueEffect(){
+		Effect effect = new Effect(EffectType.VALUE, Value.MILITARY, AffectingEntity.NONE, 1);
+		
+		assertEquals(EffectType.VALUE, effect.getEffectType());
+		assertEquals(Direction.SELF, effect.getDirection());
+		assertEquals(1, effect.getValueAmount());
+		assertEquals(Value.MILITARY, effect.getValue());
+		assertEquals(ValueType.CONFLICTTOKEN, effect.getValueType());
+		assertEquals(AffectingEntity.NONE, effect.getAffectingEntity());
+	}
 }

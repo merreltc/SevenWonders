@@ -9,6 +9,7 @@ public class Effect {
 	private Resource resource;
 	private Entity entity;
 	private Good good;
+	private Value value;
 	private int valueAmount;
 
 	public enum EffectType {
@@ -39,7 +40,7 @@ public class Effect {
 		VICTORYPOINTS, MILITARY
 	}
 
-	public enum ValueType {
+	public enum ValueType{
 		VICTORYPOINT, CONFLICTTOKEN
 	}
 
@@ -65,6 +66,7 @@ public class Effect {
 
 	public Effect(EffectType effectType, Value value, AffectingEntity affectedEntity, int valueAmount) {
 		this.effectType = effectType;
+		this.value = value;
 
 		if (valueAmount <= 0 || valueAmount >= 9) {
 			throw new IllegalArgumentException("Cannot have valueAmount of " + valueAmount);
@@ -106,11 +108,16 @@ public class Effect {
 	}
 
 	public Value getValue() {
-		return Value.VICTORYPOINTS;
+		return this.value;
 	}
 
 	public ValueType getValueType() {
-		return ValueType.VICTORYPOINT;
+		switch (this.value) {
+		case VICTORYPOINTS:
+			return ValueType.VICTORYPOINT;
+		default:
+			return ValueType.CONFLICTTOKEN;
+		}
 	}
 
 }
