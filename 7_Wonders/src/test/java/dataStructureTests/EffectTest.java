@@ -201,6 +201,24 @@ public class EffectTest {
 		assertEquals(AffectingEntity.NONE, effect.getAffectingEntity());
 	}
 	
+	@Test
+	public void testNeg1MilitaryValueEffect(){
+		Effect effect = new Effect(EffectType.VALUE, Value.MILITARY, AffectingEntity.NONE, -1);
+		
+		assertEquals(EffectType.VALUE, effect.getEffectType());
+		assertEquals(Direction.SELF, effect.getDirection());
+		assertEquals(-1, effect.getValueAmount());
+		assertEquals(Value.MILITARY, effect.getValue());
+		assertEquals(ValueType.CONFLICTTOKEN, effect.getValueType());
+		assertEquals(AffectingEntity.NONE, effect.getAffectingEntity());
+	}
+	
+	@Test(expected=IllegalArgumentException.class)
+	public void testInvalidMilitaryValue0Effect(){
+	    new Effect(EffectType.VALUE, Value.MILITARY, AffectingEntity.NONE, 0);
+		fail();
+	}
+	
 	@Test(expected=IllegalArgumentException.class)
 	public void testInvalidMilitaryValue8Effect(){
 	    new Effect(EffectType.VALUE, Value.MILITARY, AffectingEntity.NONE, 8);
