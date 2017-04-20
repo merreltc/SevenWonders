@@ -15,7 +15,7 @@ public class SetupBackendTest {
 	
 	@After public void setUp() { 
 		SetUpHandler.setUpHandler = new SetUpHandler();
-    }
+	}
 
 	@Test
 	public void testValidPlayerNum() {

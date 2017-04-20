@@ -21,7 +21,7 @@ public class RotateHandler {
 		if (direction == Direction.COUNTERCLOCKWISE) {
 			this.board.setNextPlayer(playerToLeft);
 			this.board.setPreviousPlayer(playerToRight);
-		} else if (direction == Direction.CLOCKWISE) {
+		} else {
 			this.board.setNextPlayer(playerToRight);
 			this.board.setPreviousPlayer(playerToLeft);
 		}

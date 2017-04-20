@@ -2,10 +2,6 @@ package dataStructures;
 
 import java.util.HashMap;
 
-import dataStructures.Card.ResourceType;
-import dataStructures.Cost.CostType;
-
-
 public class Cost {
 	private int coinCost = 0;
 	private CostType type = CostType.NONE;
