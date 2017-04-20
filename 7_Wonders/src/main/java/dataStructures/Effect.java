@@ -1,15 +1,14 @@
 package dataStructures;
 
-import dataStructures.Effect.AffectingEntity;
-import dataStructures.Effect.EffectType;
-import dataStructures.Effect.Value;
-
 public class Effect {
 	private EffectType effectType = EffectType.NONE;
 	private Resource resource;
 	private Entity entity;
 	private Good good;
 	private Value value;
+	private Direction direction = Direction.SELF;
+	private AffectingEntity affectingEntity = AffectingEntity.NONE;
+
 	private int valueAmount;
 
 	public enum EffectType {
@@ -17,11 +16,11 @@ public class Effect {
 	}
 
 	public enum Direction {
-		SELF
+		SELF, RIGHT
 	}
 
 	public enum AffectingEntity {
-		NONE
+		NONE, RAWRESOURCES
 	}
 
 	public enum Entity {
@@ -37,11 +36,11 @@ public class Effect {
 	}
 
 	public enum Value {
-		VICTORYPOINTS, MILITARY
+		VICTORYPOINTS, MILITARY, COIN
 	}
 
-	public enum ValueType{
-		VICTORYPOINT, CONFLICTTOKEN
+	public enum ValueType {
+		VICTORYPOINT, CONFLICTTOKEN, COIN
 	}
 
 	public Effect() {
@@ -64,9 +63,10 @@ public class Effect {
 		this.good = good;
 	}
 
-	public Effect(EffectType effectType, Value value, AffectingEntity affectedEntity, int valueAmount) {
+	public Effect(EffectType effectType, Value value, AffectingEntity affectingEntity, int valueAmount) {
 		this.effectType = effectType;
 		this.value = value;
+		this.affectingEntity = affectingEntity;
 
 		if (valueAmount <= 0 || valueAmount >= 9) {
 			throw new IllegalArgumentException("Cannot have valueAmount of " + valueAmount);
@@ -75,16 +75,25 @@ public class Effect {
 		}
 	}
 
+	public Effect(EffectType effectType, Value value, AffectingEntity affectingEntity, Direction direction,
+			int valueAmount) {
+		this.effectType = effectType;
+		this.value = value;
+		this.direction = direction;
+		this.affectingEntity = affectingEntity;
+		this.valueAmount = valueAmount;
+	}
+
 	public EffectType getEffectType() {
 		return this.effectType;
 	}
 
 	public Direction getDirection() {
-		return Direction.SELF;
+		return this.direction;
 	}
 
 	public AffectingEntity getAffectingEntity() {
-		return AffectingEntity.NONE;
+		return this.affectingEntity;
 	}
 
 	public Entity getEntity() {
@@ -115,6 +124,8 @@ public class Effect {
 		switch (this.value) {
 		case VICTORYPOINTS:
 			return ValueType.VICTORYPOINT;
+		case COIN:
+			return ValueType.COIN;
 		default:
 			return ValueType.CONFLICTTOKEN;
 		}

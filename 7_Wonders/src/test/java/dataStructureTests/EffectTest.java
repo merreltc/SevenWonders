@@ -188,4 +188,16 @@ public class EffectTest {
 		assertEquals(ValueType.CONFLICTTOKEN, effect.getValueType());
 		assertEquals(AffectingEntity.NONE, effect.getAffectingEntity());
 	}
+	
+	@Test
+	public void test1CommerceValueRightEffect(){
+		Effect effect = new Effect(EffectType.VALUE, Value.COIN, AffectingEntity.RAWRESOURCES, Direction.RIGHT, 1);
+		
+		assertEquals(EffectType.VALUE, effect.getEffectType());
+		assertEquals(Direction.RIGHT, effect.getDirection());
+		assertEquals(1, effect.getValueAmount());
+		assertEquals(Value.COIN, effect.getValue());
+		assertEquals(ValueType.COIN, effect.getValueType());
+		assertEquals(AffectingEntity.RAWRESOURCES, effect.getAffectingEntity());
+	}
 }
