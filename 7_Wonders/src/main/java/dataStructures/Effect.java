@@ -67,7 +67,7 @@ public class Effect {
 		this.effectType = effectType;
 
 		if (valueAmount <= 0 || valueAmount >= 9) {
-			throw new IllegalArgumentException("Cannot have valueAmount of 0");
+			throw new IllegalArgumentException("Cannot have valueAmount of " + valueAmount);
 		} else {
 			this.valueAmount = valueAmount;
 		}

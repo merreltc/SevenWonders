@@ -162,9 +162,18 @@ public class EffectTest {
 	@Test
 	public void testInvalidVictoryPointsValue0EffectMessage(){
 		try{
-			new Effect(EffectType.VALUE, Value.VICTORYPOINTS, AffectingEntity.NONE, 10);
+			new Effect(EffectType.VALUE, Value.VICTORYPOINTS, AffectingEntity.NONE, 0);
 		}catch(IllegalArgumentException error){
 			assertEquals("Cannot have valueAmount of 0", error.getMessage());
+		}
+	}
+	
+	@Test
+	public void testInvalidVictoryPointsValue10EffectMessage(){
+		try{
+			new Effect(EffectType.VALUE, Value.VICTORYPOINTS, AffectingEntity.NONE, 10);
+		}catch(IllegalArgumentException error){
+			assertEquals("Cannot have valueAmount of 10", error.getMessage());
 		}
 	}
 }
