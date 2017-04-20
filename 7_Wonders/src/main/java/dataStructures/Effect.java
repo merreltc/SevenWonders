@@ -36,7 +36,7 @@ public class Effect {
 	}
 
 	public enum Value {
-		VICTORYPOINTS, MILITARY, COIN
+		VICTORYPOINTS, MILITARY, COMMERCE
 	}
 
 	public enum ValueType {
@@ -124,7 +124,7 @@ public class Effect {
 		switch (this.value) {
 		case VICTORYPOINTS:
 			return ValueType.VICTORYPOINT;
-		case COIN:
+		case COMMERCE:
 			return ValueType.COIN;
 		default:
 			return ValueType.CONFLICTTOKEN;

@@ -191,48 +191,48 @@ public class EffectTest {
 	
 	@Test
 	public void test1CommerceValueRightEffect(){
-		Effect effect = new Effect(EffectType.VALUE, Value.COIN, AffectingEntity.RAWRESOURCES, Direction.RIGHT, 1);
+		Effect effect = new Effect(EffectType.VALUE, Value.COMMERCE, AffectingEntity.RAWRESOURCES, Direction.RIGHT, 1);
 		
 		assertEquals(EffectType.VALUE, effect.getEffectType());
 		assertEquals(Direction.RIGHT, effect.getDirection());
 		assertEquals(1, effect.getValueAmount());
-		assertEquals(Value.COIN, effect.getValue());
+		assertEquals(Value.COMMERCE, effect.getValue());
 		assertEquals(ValueType.COIN, effect.getValueType());
 		assertEquals(AffectingEntity.RAWRESOURCES, effect.getAffectingEntity());
 	}
 	
 	@Test
 	public void test1CommerceValueLeftEffect(){
-		Effect effect = new Effect(EffectType.VALUE, Value.COIN, AffectingEntity.RAWRESOURCES, Direction.LEFT, 1);
+		Effect effect = new Effect(EffectType.VALUE, Value.COMMERCE, AffectingEntity.RAWRESOURCES, Direction.LEFT, 1);
 		
 		assertEquals(EffectType.VALUE, effect.getEffectType());
 		assertEquals(Direction.LEFT, effect.getDirection());
 		assertEquals(1, effect.getValueAmount());
-		assertEquals(Value.COIN, effect.getValue());
+		assertEquals(Value.COMMERCE, effect.getValue());
 		assertEquals(ValueType.COIN, effect.getValueType());
 		assertEquals(AffectingEntity.RAWRESOURCES, effect.getAffectingEntity());
 	}
 	
 	@Test
 	public void test1CommerceValueAllEffect(){
-		Effect effect = new Effect(EffectType.VALUE, Value.COIN, AffectingEntity.MANUFACTUREDGOODS, Direction.ALL, 1);
+		Effect effect = new Effect(EffectType.VALUE, Value.COMMERCE, AffectingEntity.MANUFACTUREDGOODS, Direction.ALL, 1);
 		
 		assertEquals(EffectType.VALUE, effect.getEffectType());
 		assertEquals(Direction.ALL, effect.getDirection());
 		assertEquals(1, effect.getValueAmount());
-		assertEquals(Value.COIN, effect.getValue());
+		assertEquals(Value.COMMERCE, effect.getValue());
 		assertEquals(ValueType.COIN, effect.getValueType());
 		assertEquals(AffectingEntity.MANUFACTUREDGOODS, effect.getAffectingEntity());
 	}
 	
 	@Test
 	public void test1CommerceValueNeighborsEffect(){
-		Effect effect = new Effect(EffectType.VALUE, Value.COIN, AffectingEntity.MANUFACTUREDGOODS, Direction.NEIGHBORS, 1);
+		Effect effect = new Effect(EffectType.VALUE, Value.COMMERCE, AffectingEntity.MANUFACTUREDGOODS, Direction.NEIGHBORS, 1);
 		
 		assertEquals(EffectType.VALUE, effect.getEffectType());
 		assertEquals(Direction.NEIGHBORS, effect.getDirection());
 		assertEquals(1, effect.getValueAmount());
-		assertEquals(Value.COIN, effect.getValue());
+		assertEquals(Value.COMMERCE, effect.getValue());
 		assertEquals(ValueType.COIN, effect.getValueType());
 		assertEquals(AffectingEntity.MANUFACTUREDGOODS, effect.getAffectingEntity());
 	}
