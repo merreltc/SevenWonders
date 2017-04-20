@@ -16,11 +16,11 @@ public class Effect {
 	}
 
 	public enum Direction {
-		SELF, RIGHT, LEFT
+		SELF, RIGHT, LEFT, ALL
 	}
 
 	public enum AffectingEntity {
-		NONE, RAWRESOURCES
+		NONE, RAWRESOURCES, MANUFACTUREDGOODS
 	}
 
 	public enum Entity {
