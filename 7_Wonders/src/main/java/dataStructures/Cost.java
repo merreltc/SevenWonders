@@ -8,11 +8,15 @@ public class Cost {
 	private HashMap<Enum, Integer> cost = new HashMap<Enum, Integer>();
 	
 	public enum CostType{
-		NONE, COIN, RESOURCE
+		NONE, COIN, RESOURCE, MULTITYPE
 	}
 	
 	public enum Resource {
-		LOOM, ORE, LUMBER
+		LOOM, ORE, LUMBER, STONE
+	}
+	
+	public enum Good {
+		GLASS
 	}
 	
 	public Cost() {
