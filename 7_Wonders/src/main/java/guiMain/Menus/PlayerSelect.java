@@ -5,7 +5,7 @@ import java.awt.Image;
 import java.awt.Point;
 import java.util.ArrayList;
 
-import GuiDataStructures.Constants;
+import guiDataStructures.Constants;
 import guiMain.RenderImage;
 import guiMain.Interactables.Button;
 import guiMain.Interactables.Interactable;
@@ -20,7 +20,7 @@ public class PlayerSelect extends Menu{
 		graphics.setFont(Constants.TitleFont);
 		graphics.setColor(Constants.TitleColor);
 		graphics.drawString("Choose number of players", Constants.PlayerSelectTitlePosition.x,
-				Constants.PlayerSelectButtonBounds.y);
+				Constants.PlayerSelectTitlePosition.y);
 	}
 
 	@Override

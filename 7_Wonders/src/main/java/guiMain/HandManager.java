@@ -4,8 +4,8 @@ import java.awt.Graphics;
 import java.awt.Point;
 import java.util.ArrayList;
 
-import GuiDataStructures.Constants;
 import dataStructures.Player;
+import guiDataStructures.Constants;
 import guiMain.Interactables.CardHolder;
 import guiMain.Interactables.Interactable;
 
@@ -27,7 +27,7 @@ public class HandManager {
 	public void rotatePlayers(Player nextPlayer) {
 		this.currentPlayer = nextPlayer;
 		playerHand.clear();
-		// TODO: change 5 to the number of cards in the player's hand
+		// TODO: change 7 to the number of cards in the player's hand
 		for (int i = 0; i < 7; i++) {
 			Point handPosition = new Point(Constants.PlayerHandLeftMostCardPositionX + Constants.CardOffset * i,
 					Constants.PlayerHandLeftMostCardPositionY);

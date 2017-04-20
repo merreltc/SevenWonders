@@ -5,8 +5,8 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Point;
 
-import GuiDataStructures.Constants;
 import dataStructures.Player;
+import guiDataStructures.Constants;
 
 public class PlayerBoard {
 	private Point position;
@@ -81,18 +81,26 @@ public class PlayerBoard {
 
 	public void rotatePlayers() {
 		if (this.rotateClockwise) {
-			this.playerPosition++;
-			if (this.playerPosition >= this.totalNumberOfPlayers) {
-				this.playerPosition = 0;
-			}
-			if (this.playerPosition == this.totalNumberOfPlayers - 1) {
-				this.playerPosition = -1;
-			}
-		}else{
-			this.playerPosition--;
-			if (this.playerPosition < -1){
-				this.playerPosition = this.totalNumberOfPlayers - 2;
-			}
+			rotateClockwise();
+		} else {
+			rotateCounterclockwise();
+		}
+	}
+
+	private void rotateClockwise() {
+		this.playerPosition++;
+		if (this.playerPosition >= this.totalNumberOfPlayers) {
+			this.playerPosition = 0;
+		}
+		if (this.playerPosition == this.totalNumberOfPlayers - 1) {
+			this.playerPosition = -1;
+		}
+	}
+
+	private void rotateCounterclockwise() {
+		this.playerPosition--;
+		if (this.playerPosition < -1) {
+			this.playerPosition = this.totalNumberOfPlayers - 2;
 		}
 	}
 

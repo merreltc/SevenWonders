@@ -1,4 +1,4 @@
-package GuiDataStructures;
+package guiDataStructures;
 
 import java.awt.Color;
 import java.awt.Font;
@@ -14,13 +14,13 @@ public class Constants {
 	public static final Point StartButtonPosition = new Point(850, 400);
 	public static final Point StartButtonBounds = new Point(200, 100);
 
-	public static final Font TitleFont = new Font("Courier New", Font.BOLD, 70);
-	public static final Color TitleColor = Color.cyan;
+	public static final Font TitleFont = new Font("Courier New", Font.BOLD, 66);
+	public static final Color TitleColor = Color.yellow;
 
 	public static final Point MainMenuTitlePosition = new Point(740, 100);
 
 	public static final Point PlayerSelectButtonBounds = new Point(150, 100);
-	public static final Point PlayerSelectTitlePosition = new Point(570, 300);
+	public static final Point PlayerSelectTitlePosition = new Point(500, 280);
 
 	public static final Font ErrorFont = new Font("Courier New", Font.BOLD, 35);
 	public static final Point ErrorMessagePosition = new Point(550, 400);
@@ -54,8 +54,8 @@ public class Constants {
 
 	public static final Point TradeButtonBounds = new Point(20, 20);
 
-	public static final Point TradeLeftBaseButtonPoint = new Point(LastPlayerBoardPositionX + 10, LastPlayerBoardPositionY + 10);
-	public static final Point TradeRightBaseButtonPoint = new Point(NextPlayerBoardPositionX + 10, NextPlayerBoardPositionY + 10);
+	public static final Point TradeLeftBaseButtonPoint = new Point(LastPlayerBoardPositionX - 5, LastPlayerBoardPositionY + 5);
+	public static final Point TradeRightBaseButtonPoint = new Point(NextPlayerBoardPositionX - 5, NextPlayerBoardPositionY + 5);
 
 	public static final int TradeButtonYOffet = TradeButtonBounds.y + 20;
 
@@ -66,4 +66,7 @@ public class Constants {
 	
 	public static final int PlayerHandLeftMostCardPositionX = CurrentPlayerBoardPositionX +10;
 	public static final int PlayerHandLeftMostCardPositionY = CurrentPlayerBoardPositionY + CurrentPlayerBoardHeight - CardHeight/2 - 30;
+
+	/* For Game Class */
+	public static final String[] ResourceTypes = new String[] { "Stone", "Wood", "Ore", "Clay" };
 }

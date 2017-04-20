@@ -6,10 +6,10 @@ import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
 
-import GuiDataStructures.Constants;
 import backend.GameManager;
 import dataStructures.Player;
 import exceptions.InsufficientFundsException;
+import guiDataStructures.Constants;
 import guiMain.GuiTradeHelper;
 import guiMain.HandManager;
 import guiMain.Message;
@@ -43,7 +43,6 @@ public class Game extends Menu {
 
 	@Override
 	public void draw(Graphics graphics) {
-
 		for (int i = 0; i < boards.size(); i++) {
 			/* This will always draw the current players board last (on top) */
 			int currentPlayerIndex = this.gameManager.getGameBoard().getCurrentPlayerIndex();
@@ -78,22 +77,26 @@ public class Game extends Menu {
 	}
 
 	private void setUpTradingButtons() {
-		String[] values = new String[] { "Stone", "Wood", "Ore", "Clay" };
 		for (int i = 0; i < 4; i++) {
-			Point buttonPosition = new Point(Constants.TradeLeftBaseButtonPoint.x,
-					Constants.TradeLeftBaseButtonPoint.y + Constants.TradeButtonYOffet * i);
-			Button LeftTradeButton = new Button(buttonPosition, Constants.TradeButtonBounds, "Left-" + values[i]);
-			LeftTradeButton.hide();
-			;
-			this.addInteractable(LeftTradeButton);
-		}
-		for (int i = 0; i < 4; i++) {
-			Point buttonPosition = new Point(Constants.TradeRightBaseButtonPoint.x,
-					Constants.TradeRightBaseButtonPoint.y + Constants.TradeButtonYOffet * i);
-			Button RightTradeButton = new Button(buttonPosition, Constants.TradeButtonBounds, "Right-" + values[i]);
-			RightTradeButton.hide();
-			this.addInteractable(RightTradeButton);
-		}
+			makeLeftButton(i);
+			makeRightButton(i);
+		}	
+	}
+	
+	private void makeLeftButton(int i) {
+		Point buttonPosition = new Point(Constants.TradeLeftBaseButtonPoint.x,
+				Constants.TradeLeftBaseButtonPoint.y + Constants.TradeButtonYOffet * i);
+		Button leftTradeButton = new Button(buttonPosition, Constants.TradeButtonBounds, "Left-" + Constants.ResourceTypes[i]);
+		leftTradeButton.hide();
+		this.addInteractable(leftTradeButton);
+	}
+	
+	private void makeRightButton(int i) {
+		Point buttonPosition = new Point(Constants.TradeRightBaseButtonPoint.x,
+				Constants.TradeRightBaseButtonPoint.y + Constants.TradeButtonYOffet * i);
+		Button rightTradeButton =  new Button(buttonPosition, Constants.TradeButtonBounds, "Right-" + Constants.ResourceTypes[i]);
+		rightTradeButton.hide();
+		this.addInteractable(rightTradeButton);	
 	}
 
 	@Override

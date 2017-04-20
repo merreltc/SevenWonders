@@ -15,11 +15,10 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.Timer;
 
-import GuiDataStructures.Constants;
 import backend.SetUpHandler;
 import dataStructures.Player;
+import guiDataStructures.Constants;
 import guiMain.Interactables.Interactable;
-import guiMain.Interactables.MenuKeyListener;
 import guiMain.Interactables.MenuMouseListener;
 import guiMain.Menus.Game;
 import guiMain.Menus.MainMenu;
@@ -46,7 +45,6 @@ public class GuiMainMenu extends JPanel implements ActionListener {
 		this.frame.setTitle("Seven Wonders");
 		this.frame.setResizable(false);
 		this.frame.add(this);
-		this.frame.addKeyListener(new MenuKeyListener());
 		MenuMouseListener menuMouse = new MenuMouseListener(this);
 		this.frame.addMouseListener(menuMouse);
 		image = RenderImage.getImage("Background");

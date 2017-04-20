@@ -4,7 +4,7 @@ import java.awt.Graphics;
 
 import javax.swing.JOptionPane;
 
-import GuiDataStructures.Constants;
+import guiDataStructures.Constants;
 
 public class Message {
 	
