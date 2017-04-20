@@ -146,4 +146,10 @@ public class EffectTest {
 		Effect effect = new Effect(EffectType.VALUE, Value.VICTORYPOINTS, AffectingEntity.NONE, -1);
 		fail();
 	}
+	
+	@Test(expected=IllegalArgumentException.class)
+	public void testInvalidVictoryPointsValue9Effect(){
+		Effect effect = new Effect(EffectType.VALUE, Value.VICTORYPOINTS, AffectingEntity.NONE, 9);
+		fail();
+	}
 }
