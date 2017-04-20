@@ -286,6 +286,18 @@ public class EffectTest {
 	}
 	
 	@Test
+	public void test1GuildValueGuildEffect(){
+		Effect effect = new Effect(EffectType.VALUE, Value.GUILD, AffectingEntity.GUILD, Direction.SELF, 1);
+		
+		assertEquals(EffectType.VALUE, effect.getEffectType());
+		assertEquals(Direction.SELF, effect.getDirection());
+		assertEquals(1, effect.getValueAmount());
+		assertEquals(Value.GUILD, effect.getValue());
+		assertEquals(ValueType.VICTORYPOINT, effect.getValueType());
+		assertEquals(AffectingEntity.GUILD, effect.getAffectingEntity());
+	}
+	
+	@Test
 	public void test1GuildValueWonderLevelEffect(){
 		Effect effect = new Effect(EffectType.VALUE, Value.GUILD, AffectingEntity.WONDERLEVEL, Direction.ALL, 1);
 		
