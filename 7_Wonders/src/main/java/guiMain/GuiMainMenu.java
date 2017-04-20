@@ -39,6 +39,7 @@ public class GuiMainMenu extends JPanel implements ActionListener {
 	}
 
 	public GuiMainMenu() {
+		this.switchMenu(MenuType.MainMenu);
 		this.frame = new JFrame();
 		this.frame.setSize(Constants.FrameWidth, Constants.FrameHeight);
 		this.frame.setVisible(true);
@@ -49,7 +50,6 @@ public class GuiMainMenu extends JPanel implements ActionListener {
 		MenuMouseListener menuMouse = new MenuMouseListener(this);
 		this.frame.addMouseListener(menuMouse);
 		image = RenderImage.getImage("Background");
-		this.switchMenu(MenuType.MainMenu);
 		this.timer = new Timer(20, this);
 		this.timer.start();
 	}
