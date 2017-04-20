@@ -8,11 +8,9 @@ import exceptions.InsufficientFundsException;
 
 public class GuiTradeHelper {
 	private GameManager gameManager;
-	private Message message;
 
-	public GuiTradeHelper(GameManager gameManager, Message message) {
+	public GuiTradeHelper(GameManager gameManager) {
 		this.gameManager = gameManager;
-		this.message = message;
 	}
 
 	public void trade(String[] splitValue) {
@@ -28,7 +26,7 @@ public class GuiTradeHelper {
 		try {
 			this.gameManager.trade(tradeFrom, tradeTo, 3);
 		} catch (InsufficientFundsException e) {
-			this.message.setMessage(e.getMessage());
+			Message.showMessage(e.getMessage());
 		}
 	}
 

@@ -21,20 +21,15 @@ import guiMain.Interactables.Interactable;
 public class Game extends Menu {
 	private ArrayList<PlayerBoard> boards = new ArrayList<>();
 	private GameManager gameManager;
-	private Message message;
 	private HandManager handManager;
 
 	public Game(int numOfPlayers) {
 		ArrayList<String> players = new ArrayList<String>();
 		for(int i = 0; i < numOfPlayers; i++) {
-			String name = JOptionPane.showInputDialog("Player " + (i + 1) + " name:");
-			if (name == null || name.equals("")){
-				name = "Player: " + i;
-			}
+			String name = Message.inputPlayerNameMessage(i);
 			players.add(name);
 		}
 		this.gameManager = new GameManager(players);
-		this.message = new Message();
 	}
 
 	@Override
@@ -110,7 +105,7 @@ public class Game extends Menu {
 			System.exit(0);
 		} else {
 			String[] splitValue = clicked.getValue().split("-");
-			GuiTradeHelper tradeHandler = new GuiTradeHelper(this.gameManager, this.message);
+			GuiTradeHelper tradeHandler = new GuiTradeHelper(this.gameManager);
 			tradeHandler.trade(splitValue);
 		}
 	}
