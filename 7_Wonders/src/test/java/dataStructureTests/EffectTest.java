@@ -137,19 +137,25 @@ public class EffectTest {
 	
 	@Test(expected=IllegalArgumentException.class)
 	public void testInvalidVictoryPointsValue0Effect(){
-		Effect effect = new Effect(EffectType.VALUE, Value.VICTORYPOINTS, AffectingEntity.NONE, 0);
+		new Effect(EffectType.VALUE, Value.VICTORYPOINTS, AffectingEntity.NONE, 0);
 		fail();
 	}
 	
 	@Test(expected=IllegalArgumentException.class)
 	public void testInvalidVictoryPointsValueNeg1Effect(){
-		Effect effect = new Effect(EffectType.VALUE, Value.VICTORYPOINTS, AffectingEntity.NONE, -1);
+		new Effect(EffectType.VALUE, Value.VICTORYPOINTS, AffectingEntity.NONE, -1);
 		fail();
 	}
 	
 	@Test(expected=IllegalArgumentException.class)
 	public void testInvalidVictoryPointsValue9Effect(){
-		Effect effect = new Effect(EffectType.VALUE, Value.VICTORYPOINTS, AffectingEntity.NONE, 9);
+		new Effect(EffectType.VALUE, Value.VICTORYPOINTS, AffectingEntity.NONE, 9);
+		fail();
+	}
+	
+	@Test(expected=IllegalArgumentException.class)
+	public void testInvalidVictoryPointsValue10Effect(){
+		new Effect(EffectType.VALUE, Value.VICTORYPOINTS, AffectingEntity.NONE, 10);
 		fail();
 	}
 }

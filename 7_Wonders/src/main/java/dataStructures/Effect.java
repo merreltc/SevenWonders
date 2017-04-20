@@ -66,7 +66,7 @@ public class Effect {
 	public Effect(EffectType effectType, Value value, AffectingEntity affectedEntity, int valueAmount) {
 		this.effectType = effectType;
 
-		if (valueAmount <= 0 || valueAmount == 9) {
+		if (valueAmount <= 0 || valueAmount >= 9) {
 			throw new IllegalArgumentException();
 		} else {
 			this.valueAmount = valueAmount;
