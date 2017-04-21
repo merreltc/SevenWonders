@@ -2,17 +2,9 @@ package dataStructures;
 
 import java.util.HashMap;
 
-import dataStructures.Effect.AffectingEntity;
-import dataStructures.Effect.EffectType;
-import dataStructures.Effect.Value;
-
 public class Effect {
 	private EffectType effectType = EffectType.NONE;
 	
-	private Resource resource;
-	private EntityType entityType;
-	private Good good;
-	private Science science;
 	private HashMap<Enum, Integer> entitiesAndAmounts;
 	
 	private Value value;
@@ -33,22 +25,6 @@ public class Effect {
 		NONE, RAWRESOURCES, MANUFACTUREDGOODS, COMMERCIALSTRUCTURES, 
 		SCIENTIFICSTRUCTURES, MILITARYSTRUCTURES, CIVILIANSTRUCTURES, GUILD, WONDERLEVEL
 	}
-
-	public enum EntityType {
-		RESOURCE, MANUFACTUREDGOOD, SCIENCE
-	}
-
-	public enum Resource {
-		LUMBER, CLAY, ORE, STONE
-	}
-
-	public enum Good {
-		LOOM, GLASS, PRESS
-	}
-
-	public enum Science {
-		PROTRACTOR, WHEEL, TABLET		
-	}
 	
 	public enum Value {
 		VICTORYPOINTS, MILITARY, COMMERCE, GUILD
@@ -58,18 +34,8 @@ public class Effect {
 		VICTORYPOINT, CONFLICTTOKEN, COIN
 	}
 
-	public Effect() {
-
-	}
-
 	public Effect(EffectType effectType) {
 		this.effectType = effectType;
-	}
-
-	public Effect(EffectType effectType, EntityType entityType, HashMap<Enum, Integer> entitiesAndAmounts) {
-		this.effectType = effectType;
-		this.entityType = entityType;
-		this.entitiesAndAmounts = entitiesAndAmounts;
 	}
 
 	public Effect(EffectType effectType, Value value, AffectingEntity affectingEntity, int valueAmount) {
@@ -123,22 +89,6 @@ public class Effect {
 
 	public AffectingEntity getAffectingEntity() {
 		return this.affectingEntity;
-	}
-
-	public EntityType getEntityType() {
-		return this.entityType;
-	}
-	
-	public Resource getResource() {
-		return this.resource;
-	}
-
-	public Good getGood() {
-		return this.good;
-	}
-	
-	public Science getScience() {
-		return this.science;
 	}
 
 	public HashMap<Enum, Integer> getEntities() {
