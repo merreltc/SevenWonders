@@ -191,6 +191,11 @@ public class Effect {
 	}
 
 	public int getMultiValueAmount() {
-		return 2;
+		int amount = 0;
+		for(Enum entity: this.entitiesAndAmounts.keySet()){
+			amount += this.entitiesAndAmounts.get(entity);
+		}
+		
+		return amount;
 	}
 }

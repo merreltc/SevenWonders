@@ -594,4 +594,18 @@ public class EffectTest {
 		assertEquals(Value.COMMERCE, effect.getValue());
 		assertEquals(AffectingEntity.COMMERCIALSTRUCTURES, effect.getAffectingEntity());
 	}
+	
+	@Test
+	public void test1MultiValueCommerceWonderLevelEffect() {
+		HashMap<Enum, Integer> entitiesAndAmounts = new HashMap<Enum, Integer>();
+		entitiesAndAmounts.put(ValueType.COIN, 3);
+		entitiesAndAmounts.put(ValueType.VICTORYPOINT, 1);
+		Effect effect = new Effect(EffectType.MULTIVALUE, Value.COMMERCE, AffectingEntity.WONDERLEVEL, Direction.SELF, entitiesAndAmounts);
+		
+		assertEquals(EffectType.MULTIVALUE, effect.getEffectType());
+		assertEquals(Direction.SELF, effect.getDirection());
+		assertEquals(4, effect.getMultiValueAmount());
+		assertEquals(Value.COMMERCE, effect.getValue());
+		assertEquals(AffectingEntity.WONDERLEVEL, effect.getAffectingEntity());
+	}
 }
