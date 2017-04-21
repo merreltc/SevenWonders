@@ -608,4 +608,18 @@ public class EffectTest {
 		assertEquals(Value.COMMERCE, effect.getValue());
 		assertEquals(AffectingEntity.WONDERLEVEL, effect.getAffectingEntity());
 	}
+	
+	@Test
+	public void test1MultiValueGuildEffect() {
+		HashMap<Enum, Integer> entitiesAndAmounts = new HashMap<Enum, Integer>();
+		entitiesAndAmounts.put(ValueType.CONFLICTTOKEN, -1);
+		entitiesAndAmounts.put(ValueType.VICTORYPOINT, 1);
+		Effect effect = new Effect(EffectType.MULTIVALUE, Value.GUILD, AffectingEntity.NONE, Direction.NEIGHBORS, entitiesAndAmounts);
+		
+		assertEquals(EffectType.MULTIVALUE, effect.getEffectType());
+		assertEquals(Direction.NEIGHBORS, effect.getDirection());
+		assertEquals(0, effect.getMultiValueAmount());
+		assertEquals(Value.GUILD, effect.getValue());
+		assertEquals(AffectingEntity.NONE, effect.getAffectingEntity());
+	}
 }
