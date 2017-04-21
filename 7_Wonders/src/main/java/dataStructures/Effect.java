@@ -2,6 +2,10 @@ package dataStructures;
 
 import java.util.HashMap;
 
+import dataStructures.Effect.AffectingEntity;
+import dataStructures.Effect.EffectType;
+import dataStructures.Effect.Value;
+
 public class Effect {
 	private EffectType effectType = EffectType.NONE;
 	
@@ -19,7 +23,7 @@ public class Effect {
 	private int valueAmount;
 	
 	public enum EffectType {
-		NONE, ENTITY, VALUE
+		NONE, ENTITY, VALUE, MULTIVALUE
 	}
 
 	public enum Direction {
@@ -106,6 +110,14 @@ public class Effect {
 		this.valueAmount = valueAmount;
 	}
 	
+	public Effect(EffectType effectType, Value value, AffectingEntity affectingEntity, Direction direction, HashMap<Enum, Integer> entitiesAndAmounts) {
+		this.effectType = effectType;
+		this.value = value;
+		this.direction = direction;
+		this.affectingEntity = affectingEntity;
+		this.entitiesAndAmounts = entitiesAndAmounts;
+	}
+
 	private void validateValueAmount(Value value, int valueAmount) {
 		switch (value){
 		case VICTORYPOINTS:
@@ -176,5 +188,9 @@ public class Effect {
 		default:
 			return ValueType.CONFLICTTOKEN;
 		}
+	}
+
+	public int getMultiValueAmount() {
+		return 2;
 	}
 }

@@ -552,4 +552,18 @@ public class EffectTest {
 		assertEquals(ValueType.VICTORYPOINT, effect.getValueType());
 		assertEquals(AffectingEntity.WONDERLEVEL, effect.getAffectingEntity());
 	}
+	
+	@Test
+	public void test1MultiValueCommerceResourcesEffect() {
+		HashMap<Enum, Integer> entitiesAndAmounts = new HashMap<Enum, Integer>();
+		entitiesAndAmounts.put(ValueType.COIN, 1);
+		entitiesAndAmounts.put(ValueType.VICTORYPOINT, 1);
+		Effect effect = new Effect(EffectType.MULTIVALUE, Value.COMMERCE, AffectingEntity.RAWRESOURCES, Direction.SELF, entitiesAndAmounts);
+		
+		assertEquals(EffectType.MULTIVALUE, effect.getEffectType());
+		assertEquals(Direction.SELF, effect.getDirection());
+		assertEquals(2, effect.getMultiValueAmount());
+		assertEquals(Value.COMMERCE, effect.getValue());
+		assertEquals(AffectingEntity.RAWRESOURCES, effect.getAffectingEntity());
+	}
 }
