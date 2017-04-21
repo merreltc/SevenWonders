@@ -1,9 +1,5 @@
 package dataStructures;
 
-import dataStructures.Effect.AffectingEntity;
-import dataStructures.Effect.EffectType;
-import dataStructures.Effect.Value;
-
 public class ValueEffect extends Effect {
 	private Value value;
 	private int valueAmount;

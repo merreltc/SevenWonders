@@ -7,11 +7,12 @@ import java.util.HashMap;
 import org.junit.Test;
 
 import dataStructures.Effect;
-import dataStructures.Effect.AffectingEntity;
 import dataStructures.Effect.Direction;
 import dataStructures.Effect.EffectType;
-import dataStructures.Effect.Value;
-import dataStructures.Effect.ValueType;
+import dataStructures.MultiValueEffect;
+import dataStructures.MultiValueEffect.AffectingEntity;
+import dataStructures.MultiValueEffect.Value;
+import dataStructures.MultiValueEffect.ValueType;
 
 public class MultiValueEffectTest {
 	
@@ -24,7 +25,7 @@ public class MultiValueEffectTest {
 		
 		assertEquals(EffectType.MULTIVALUE, effect.getEffectType());
 		assertEquals(Direction.SELF, effect.getDirection());
-		assertEquals(2, effect.getMultiValueAmount());
+		assertEquals(2, ((MultiValueEffect) effect).getMultiValueAmount());
 		assertEquals(Value.COMMERCE, ((MultiValueEffect) effect).getValue());
 		assertEquals(AffectingEntity.RAWRESOURCES, ((MultiValueEffect) effect).getAffectingEntity());
 	}
@@ -38,7 +39,7 @@ public class MultiValueEffectTest {
 		
 		assertEquals(EffectType.MULTIVALUE, effect.getEffectType());
 		assertEquals(Direction.SELF, effect.getDirection());
-		assertEquals(2, effect.getMultiValueAmount());
+		assertEquals(2, ((MultiValueEffect) effect).getMultiValueAmount());
 		assertEquals(Value.COMMERCE, ((MultiValueEffect) effect).getValue());
 		assertEquals(AffectingEntity.MANUFACTUREDGOODS, ((MultiValueEffect) effect).getAffectingEntity());
 	}
@@ -52,7 +53,7 @@ public class MultiValueEffectTest {
 		
 		assertEquals(EffectType.MULTIVALUE, effect.getEffectType());
 		assertEquals(Direction.SELF, effect.getDirection());
-		assertEquals(2, effect.getMultiValueAmount());
+		assertEquals(2, ((MultiValueEffect) effect).getMultiValueAmount());
 		assertEquals(Value.COMMERCE, ((MultiValueEffect) effect).getValue());
 		assertEquals(AffectingEntity.COMMERCIALSTRUCTURES, ((MultiValueEffect) effect).getAffectingEntity());
 	}
@@ -66,7 +67,7 @@ public class MultiValueEffectTest {
 		
 		assertEquals(EffectType.MULTIVALUE, effect.getEffectType());
 		assertEquals(Direction.SELF, effect.getDirection());
-		assertEquals(4, effect.getMultiValueAmount());
+		assertEquals(4, ((MultiValueEffect) effect).getMultiValueAmount());
 		assertEquals(Value.COMMERCE, ((MultiValueEffect) effect).getValue());
 		assertEquals(AffectingEntity.WONDERLEVEL, ((MultiValueEffect) effect).getAffectingEntity());
 	}
@@ -80,7 +81,7 @@ public class MultiValueEffectTest {
 		
 		assertEquals(EffectType.MULTIVALUE, effect.getEffectType());
 		assertEquals(Direction.NEIGHBORS, effect.getDirection());
-		assertEquals(0, effect.getMultiValueAmount());
+		assertEquals(0, ((MultiValueEffect) effect).getMultiValueAmount());
 		assertEquals(Value.GUILD, ((MultiValueEffect) effect).getValue());
 		assertEquals(AffectingEntity.NONE, ((MultiValueEffect) effect).getAffectingEntity());
 	}
