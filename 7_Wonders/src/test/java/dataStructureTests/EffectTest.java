@@ -308,6 +308,21 @@ public class EffectTest {
 	}
 	
 	@Test
+	public void testAllScienceEntityEffect() {
+		HashMap<Enum, Integer> sciencesAndAmount = new HashMap<Enum, Integer>();
+		sciencesAndAmount.put(Science.PROTRACTOR, 1);
+		sciencesAndAmount.put(Science.WHEEL, 1);
+		sciencesAndAmount.put(Science.TABLET, 1);
+		
+		Effect effect = new Effect(EffectType.ENTITY, Entity.SCIENCE, sciencesAndAmount);
+
+		assertEquals(EffectType.ENTITY, effect.getEffectType());
+		assertEquals(Direction.SELF, effect.getDirection());
+		assertEquals(Entity.SCIENCE, effect.getEntity());
+		assertEquals(sciencesAndAmount, effect.getEntities());
+	}
+	
+	@Test
 	public void test2VictoryPointsValueEffect(){
 		Effect effect = new Effect(EffectType.VALUE, Value.VICTORYPOINTS, AffectingEntity.NONE, 2);
 		
