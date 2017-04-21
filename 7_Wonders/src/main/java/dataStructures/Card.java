@@ -45,15 +45,6 @@ public class Card {
 		this.effect = effect;
 	}
 
-	public Card(String name, int minNumPlayers, CardType type, Cost cost, Effect effect, String previousStructure) {
-		this.name = name;
-		this.minNumPlayers = minNumPlayers;
-		this.type = type;
-		this.cost = cost;
-		this.effect = effect;
-		this.previousStructure = previousStructure;
-	}
-
 	public Card(String name, int minNumPlayers, CardType type, Cost cost, Effect effect, String previousStructure,
 			String nextStructure) {
 		this.name = name;

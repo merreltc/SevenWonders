@@ -179,14 +179,14 @@ public class CardTest {
 	
 	@Test
 	public void testGetPreviousStructureOfStatue() {
-		Card card = new Card("Statue", 3, CardType.RAWMATERIAL, Cost.NONE, Effect.VICTORYPOINTS, "Theater");
+		Card card = new Card("Statue", 3, CardType.RAWMATERIAL, Cost.NONE, Effect.VICTORYPOINTS, "Theater", "None");
 		
 		assertEquals("Theater", card.getPreviousStructureName());
 	}
 	
 	@Test
 	public void testGetPreviousStructureOfForum() {
-		Card card = new Card("Forum", 3, CardType.RAWMATERIAL, Cost.NONE, Effect.VICTORYPOINTS, "Trading Post");
+		Card card = new Card("Forum", 3, CardType.RAWMATERIAL, Cost.NONE, Effect.VICTORYPOINTS, "Trading Post", "None");
 		
 		assertEquals("Trading Post", card.getPreviousStructureName());
 	}
