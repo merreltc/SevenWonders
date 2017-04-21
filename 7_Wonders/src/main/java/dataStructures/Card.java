@@ -83,4 +83,8 @@ public class Card {
 		effect.put(ResourceType.LUMBER, 2);
 		return effect;
 	}
+
+	public String getPreviousStructureName() {
+		return "None";
+	}
 }

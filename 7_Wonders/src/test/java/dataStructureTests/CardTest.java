@@ -168,17 +168,12 @@ public class CardTest {
 	
 		assertEquals(expectedEffect.get(ResourceType.LUMBER), actualEffect.get(ResourceType.LUMBER));
 	}
-	
-//	@Test
-//	public void testGetEffectOneTypeScience() {
-//		Card card = new Card("Apothecary", 3, CardType.SCIENTIFICSTRUCTURE, Cost.RESOURCE, Effect.SCIENCE);
-//
-//	
-//		HashMap<ScienceType, Integer> actualEffect = card.getEffect();
-//		HashMap<ScienceType, Integer> expectedEffect = new HashMap<ScienceType, Integer>();
-//		
-//		expectedEffect.put(ScienceType.PROTRACTOR, 2);
-//	
-//		assertEquals(expectedEffect.get(ScienceType.PROTRACTOR), actualEffect.get(ScienceType.PROTRACTOR));
-//	}
+
+	//Start of previous structure tests
+	@Test
+	public void testGetPreviousStructureNone (){
+		Card card = new Card("Tree Farm", 6, CardType.RAWMATERIAL, Cost.COIN, Effect.RESOURCE);
+		
+		assertEquals("None", card.getPreviousStructureName());
+	}
 }
