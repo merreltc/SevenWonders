@@ -595,4 +595,74 @@ public class EffectTest {
 		assertEquals(ValueType.VICTORYPOINT, effect.getValueType());
 		assertEquals(AffectingEntity.WONDERLEVEL, effect.getAffectingEntity());
 	}
+	
+	@Test
+	public void test1MultiValueCommerceResourcesEffect() {
+		HashMap<Enum, Integer> entitiesAndAmounts = new HashMap<Enum, Integer>();
+		entitiesAndAmounts.put(ValueType.COIN, 1);
+		entitiesAndAmounts.put(ValueType.VICTORYPOINT, 1);
+		Effect effect = new Effect(EffectType.MULTIVALUE, Value.COMMERCE, AffectingEntity.RAWRESOURCES, Direction.SELF, entitiesAndAmounts);
+		
+		assertEquals(EffectType.MULTIVALUE, effect.getEffectType());
+		assertEquals(Direction.SELF, effect.getDirection());
+		assertEquals(2, effect.getMultiValueAmount());
+		assertEquals(Value.COMMERCE, effect.getValue());
+		assertEquals(AffectingEntity.RAWRESOURCES, effect.getAffectingEntity());
+	}
+	
+	@Test
+	public void test1MultiValueCommerceManufacturedGoodsEffect() {
+		HashMap<Enum, Integer> entitiesAndAmounts = new HashMap<Enum, Integer>();
+		entitiesAndAmounts.put(ValueType.COIN, 1);
+		entitiesAndAmounts.put(ValueType.VICTORYPOINT, 1);
+		Effect effect = new Effect(EffectType.MULTIVALUE, Value.COMMERCE, AffectingEntity.MANUFACTUREDGOODS, Direction.SELF, entitiesAndAmounts);
+		
+		assertEquals(EffectType.MULTIVALUE, effect.getEffectType());
+		assertEquals(Direction.SELF, effect.getDirection());
+		assertEquals(2, effect.getMultiValueAmount());
+		assertEquals(Value.COMMERCE, effect.getValue());
+		assertEquals(AffectingEntity.MANUFACTUREDGOODS, effect.getAffectingEntity());
+	}
+	
+	@Test
+	public void test1MultiValueCommerceCommercialStructuresEffect() {
+		HashMap<Enum, Integer> entitiesAndAmounts = new HashMap<Enum, Integer>();
+		entitiesAndAmounts.put(ValueType.COIN, 1);
+		entitiesAndAmounts.put(ValueType.VICTORYPOINT, 1);
+		Effect effect = new Effect(EffectType.MULTIVALUE, Value.COMMERCE, AffectingEntity.COMMERCIALSTRUCTURES, Direction.SELF, entitiesAndAmounts);
+		
+		assertEquals(EffectType.MULTIVALUE, effect.getEffectType());
+		assertEquals(Direction.SELF, effect.getDirection());
+		assertEquals(2, effect.getMultiValueAmount());
+		assertEquals(Value.COMMERCE, effect.getValue());
+		assertEquals(AffectingEntity.COMMERCIALSTRUCTURES, effect.getAffectingEntity());
+	}
+	
+	@Test
+	public void test1MultiValueCommerceWonderLevelEffect() {
+		HashMap<Enum, Integer> entitiesAndAmounts = new HashMap<Enum, Integer>();
+		entitiesAndAmounts.put(ValueType.COIN, 3);
+		entitiesAndAmounts.put(ValueType.VICTORYPOINT, 1);
+		Effect effect = new Effect(EffectType.MULTIVALUE, Value.COMMERCE, AffectingEntity.WONDERLEVEL, Direction.SELF, entitiesAndAmounts);
+		
+		assertEquals(EffectType.MULTIVALUE, effect.getEffectType());
+		assertEquals(Direction.SELF, effect.getDirection());
+		assertEquals(4, effect.getMultiValueAmount());
+		assertEquals(Value.COMMERCE, effect.getValue());
+		assertEquals(AffectingEntity.WONDERLEVEL, effect.getAffectingEntity());
+	}
+	
+	@Test
+	public void test1MultiValueGuildEffect() {
+		HashMap<Enum, Integer> entitiesAndAmounts = new HashMap<Enum, Integer>();
+		entitiesAndAmounts.put(ValueType.CONFLICTTOKEN, -1);
+		entitiesAndAmounts.put(ValueType.VICTORYPOINT, 1);
+		Effect effect = new Effect(EffectType.MULTIVALUE, Value.GUILD, AffectingEntity.NONE, Direction.NEIGHBORS, entitiesAndAmounts);
+		
+		assertEquals(EffectType.MULTIVALUE, effect.getEffectType());
+		assertEquals(Direction.NEIGHBORS, effect.getDirection());
+		assertEquals(0, effect.getMultiValueAmount());
+		assertEquals(Value.GUILD, effect.getValue());
+		assertEquals(AffectingEntity.NONE, effect.getAffectingEntity());
+	}
 }
