@@ -2,6 +2,10 @@ package dataStructures;
 
 import java.util.HashMap;
 
+import dataStructures.Card.CardType;
+import dataStructures.Card.Cost;
+import dataStructures.Card.Effect;
+
 public class Card {
 	private String name = "Default Card";
 	private int minNumPlayers = 3;
@@ -30,6 +34,14 @@ public class Card {
 	}
 
 	public Card(String name, int minNumPlayers, CardType type, Cost cost, Effect effect) {
+		this.name = name;
+		this.minNumPlayers = minNumPlayers;
+		this.type = type;
+		this.cost = cost;
+		this.effect = effect;
+	}
+
+	public Card(String name, int minNumPlayers, CardType type, Cost cost, Effect effect, String previousStructure) {
 		this.name = name;
 		this.minNumPlayers = minNumPlayers;
 		this.type = type;

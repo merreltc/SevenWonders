@@ -179,7 +179,7 @@ public class CardTest {
 	
 	@Test
 	public void testGetPreviousStructureOfStatue (){
-		Card card = new Card("Statue", 3, CardType.RAWMATERIAL, Cost.NONE, Effect.VICTORYPOINTS);
+		Card card = new Card("Statue", 3, CardType.RAWMATERIAL, Cost.NONE, Effect.VICTORYPOINTS, "Theater");
 		
 		assertEquals("Theater", card.getPreviousStructureName());
 	}
