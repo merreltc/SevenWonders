@@ -1,7 +1,6 @@
 package dataStructures;
 
 import java.util.HashMap;
-import java.util.HashSet;
 
 public class Effect {
 	private EffectType effectType = EffectType.NONE;
@@ -9,8 +8,9 @@ public class Effect {
 	private Resource resource;
 	private Entity entity;
 	private Good good;
+	private Science science;
 	private int entityAmount = 1;
-	private HashMap<Resource, Integer> resourcesAndAmount;
+	private HashMap<Enum, Integer> entitiesAndAmounts;
 	
 	private Value value;
 	private Direction direction = Direction.SELF;
@@ -32,7 +32,7 @@ public class Effect {
 	}
 
 	public enum Entity {
-		RESOURCE, MANUFACTUREDGOOD
+		RESOURCE, MANUFACTUREDGOOD, SCIENCE
 	}
 
 	public enum Resource {
@@ -43,6 +43,10 @@ public class Effect {
 		LOOM, GLASS, PRESS
 	}
 
+	public enum Science {
+		PROTRACTOR, WHEEL, TABLET		
+	}
+	
 	public enum Value {
 		VICTORYPOINTS, MILITARY, COMMERCE, GUILD
 	}
@@ -66,17 +70,22 @@ public class Effect {
 		this.entityAmount = entityAmount;
 	}
 	
-
-	public Effect(EffectType effectType, Entity entity, HashMap<Resource, Integer> resourcesAndAmount) {
-		this.effectType = effectType;
-		this.entity = entity;
-		this.resourcesAndAmount = resourcesAndAmount;
-	}
-
-	public Effect(EffectType effectType, Entity entity, Good good, int entityAmount) {
+	public Effect(EffectType effectType, Entity entity,  Good good, int entityAmount) {
 		this.effectType = effectType;
 		this.entity = entity;
 		this.good = good;
+	}
+	
+	public Effect(EffectType effectType, Entity entity,  Science science, int entityAmount) {
+		this.effectType = effectType;
+		this.entity = entity;
+		this.science = science;
+	}	
+
+	public Effect(EffectType effectType, Entity entity, HashMap<Enum, Integer> entitiesAndAmounts) {
+		this.effectType = effectType;
+		this.entity = entity;
+		this.entitiesAndAmounts = entitiesAndAmounts;
 	}
 
 	public Effect(EffectType effectType, Value value, AffectingEntity affectingEntity, int valueAmount) {
@@ -139,9 +148,13 @@ public class Effect {
 	public Good getGood() {
 		return this.good;
 	}
+	
+	public Science getScience() {
+		return this.science;
+	}
 
-	public HashMap<Resource, Integer> getResources() {
-		return this.resourcesAndAmount;
+	public HashMap<Enum, Integer> getEntities() {
+		return this.entitiesAndAmounts;
 	}
 
 	public int getValueAmount() {
