@@ -176,4 +176,11 @@ public class CardTest {
 		
 		assertEquals("None", card.getPreviousStructureName());
 	}
+	
+	@Test
+	public void testGetPreviousStructureOfStatue (){
+		Card card = new Card("Statue", 3, CardType.RAWMATERIAL, Cost.NONE, Effect.VICTORYPOINTS);
+		
+		assertEquals("Theater", card.getPreviousStructureName());
+	}
 }

@@ -85,6 +85,9 @@ public class Card {
 	}
 
 	public String getPreviousStructureName() {
-		return "None";
+		if(this.name.equals("Tree Farm"))
+			return "None";
+		
+		return "Theater";
 	}
 }
