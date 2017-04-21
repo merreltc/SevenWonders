@@ -53,6 +53,16 @@ public class Card {
 		this.previousStructure = previousStructure;
 	}
 
+	public Card(String name, int minNumPlayers, CardType type, Cost cost, Effect effect, String previousStructure,
+			String nextStructure) {
+		this.name = name;
+		this.minNumPlayers = minNumPlayers;
+		this.type = type;
+		this.cost = cost;
+		this.effect = effect;
+		this.previousStructure = previousStructure;
+	}
+
 	public String getName() {
 		return this.name;
 	}
@@ -103,4 +113,10 @@ public class Card {
 	public String getPreviousStructureName() {
 		return this.previousStructure;
 	}
+
+	public String getNextStructureName() {
+		return "None";
+	}
+	
+	
 }

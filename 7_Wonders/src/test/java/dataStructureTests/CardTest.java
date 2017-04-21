@@ -190,4 +190,12 @@ public class CardTest {
 		
 		assertEquals("Trading Post", card.getPreviousStructureName());
 	}
+	
+	@Test
+	public void testGetNextStructureOfStatue (){
+		Card card = new Card("Statue", 3, CardType.RAWMATERIAL, Cost.NONE, Effect.VICTORYPOINTS, "Theater", "None");
+		
+		assertEquals("Theater", card.getPreviousStructureName());
+		assertEquals("None", card.getNextStructureName());
+	}
 }
