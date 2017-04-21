@@ -15,6 +15,7 @@ public class Card {
 	private Effect effect = Effect.NONE;
 	
 	private String previousStructure = "None";
+	private String nextStructure = "None";
 
 	public enum CardType {
 		DEFAULT, RAWMATERIAL, MANUFACTUREDGOOD, CIVILIANSTRUCTURE, 
@@ -61,6 +62,7 @@ public class Card {
 		this.cost = cost;
 		this.effect = effect;
 		this.previousStructure = previousStructure;
+		this.nextStructure = nextStructure;
 	}
 
 	public String getName() {
@@ -115,10 +117,7 @@ public class Card {
 	}
 
 	public String getNextStructureName() {
-		if(this.name.equals("Statue"))
-			return "None";
-		
-		return "Haven";
+		return this.nextStructure;
 	}
 	
 	

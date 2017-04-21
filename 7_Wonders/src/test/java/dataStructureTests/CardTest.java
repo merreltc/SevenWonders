@@ -192,11 +192,19 @@ public class CardTest {
 	}
 	
 	@Test
+	public void testGetNextStructureOfArena() {
+		Card card = new Card("Arena", 3, CardType.RAWMATERIAL, Cost.NONE, Effect.VICTORYPOINTS, "Dispensary", "None");
+		
+		assertEquals("Dispensary", card.getPreviousStructureName());
+		assertEquals("None", card.getNextStructureName());
+	}
+	
+	@Test
 	public void testGetNextStructureOfStatue() {
-		Card card = new Card("Statue", 3, CardType.RAWMATERIAL, Cost.NONE, Effect.VICTORYPOINTS, "Theater", "None");
+		Card card = new Card("Statue", 3, CardType.RAWMATERIAL, Cost.NONE, Effect.VICTORYPOINTS, "Theater", "Gardens");
 		
 		assertEquals("Theater", card.getPreviousStructureName());
-		assertEquals("None", card.getNextStructureName());
+		assertEquals("Gardens", card.getNextStructureName());
 	}
 	
 	@Test
