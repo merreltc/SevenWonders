@@ -115,7 +115,10 @@ public class Card {
 	}
 
 	public String getNextStructureName() {
-		return "None";
+		if(this.name.equals("Statue"))
+			return "None";
+		
+		return "Haven";
 	}
 	
 	

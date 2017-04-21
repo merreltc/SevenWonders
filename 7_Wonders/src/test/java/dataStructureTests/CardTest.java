@@ -171,31 +171,39 @@ public class CardTest {
 
 	//Start of previous structure tests
 	@Test
-	public void testGetPreviousStructureNone (){
+	public void testGetPreviousStructureNone() {
 		Card card = new Card("Tree Farm", 6, CardType.RAWMATERIAL, Cost.COIN, Effect.RESOURCE);
 		
 		assertEquals("None", card.getPreviousStructureName());
 	}
 	
 	@Test
-	public void testGetPreviousStructureOfStatue (){
+	public void testGetPreviousStructureOfStatue() {
 		Card card = new Card("Statue", 3, CardType.RAWMATERIAL, Cost.NONE, Effect.VICTORYPOINTS, "Theater");
 		
 		assertEquals("Theater", card.getPreviousStructureName());
 	}
 	
 	@Test
-	public void testGetPreviousStructureOfForum (){
+	public void testGetPreviousStructureOfForum() {
 		Card card = new Card("Forum", 3, CardType.RAWMATERIAL, Cost.NONE, Effect.VICTORYPOINTS, "Trading Post");
 		
 		assertEquals("Trading Post", card.getPreviousStructureName());
 	}
 	
 	@Test
-	public void testGetNextStructureOfStatue (){
+	public void testGetNextStructureOfStatue() {
 		Card card = new Card("Statue", 3, CardType.RAWMATERIAL, Cost.NONE, Effect.VICTORYPOINTS, "Theater", "None");
 		
 		assertEquals("Theater", card.getPreviousStructureName());
 		assertEquals("None", card.getNextStructureName());
+	}
+	
+	@Test
+	public void testGetNextStructureOfForum() {
+		Card card = new Card("Forum", 3, CardType.RAWMATERIAL, Cost.NONE, Effect.VICTORYPOINTS, "Trading Post", "Haven");
+		
+		assertEquals("Trading Post", card.getPreviousStructureName());
+		assertEquals("Haven", card.getNextStructureName());
 	}
 }
