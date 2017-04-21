@@ -6,10 +6,9 @@ public class Effect {
 	private EffectType effectType = EffectType.NONE;
 	
 	private Resource resource;
-	private Entity entity;
+	private EntityType entityType;
 	private Good good;
 	private Science science;
-	private int entityAmount = 1;
 	private HashMap<Enum, Integer> entitiesAndAmounts;
 	
 	private Value value;
@@ -31,7 +30,7 @@ public class Effect {
 		SCIENTIFICSTRUCTURES, MILITARYSTRUCTURES, CIVILIANSTRUCTURES, GUILD, WONDERLEVEL
 	}
 
-	public enum Entity {
+	public enum EntityType {
 		RESOURCE, MANUFACTUREDGOOD, SCIENCE
 	}
 
@@ -63,28 +62,9 @@ public class Effect {
 		this.effectType = effectType;
 	}
 
-	public Effect(EffectType effectType, Entity entity, Resource resource, int entityAmount) {
+	public Effect(EffectType effectType, EntityType entityType, HashMap<Enum, Integer> entitiesAndAmounts) {
 		this.effectType = effectType;
-		this.entity = entity;
-		this.resource = resource;
-		this.entityAmount = entityAmount;
-	}
-	
-	public Effect(EffectType effectType, Entity entity,  Good good, int entityAmount) {
-		this.effectType = effectType;
-		this.entity = entity;
-		this.good = good;
-	}
-	
-	public Effect(EffectType effectType, Entity entity,  Science science, int entityAmount) {
-		this.effectType = effectType;
-		this.entity = entity;
-		this.science = science;
-	}	
-
-	public Effect(EffectType effectType, Entity entity, HashMap<Enum, Integer> entitiesAndAmounts) {
-		this.effectType = effectType;
-		this.entity = entity;
+		this.entityType = entityType;
 		this.entitiesAndAmounts = entitiesAndAmounts;
 	}
 
@@ -133,14 +113,10 @@ public class Effect {
 		return this.affectingEntity;
 	}
 
-	public Entity getEntity() {
-		return this.entity;
+	public EntityType getEntityType() {
+		return this.entityType;
 	}
-
-	public int getEntityAmount() {
-		return this.entityAmount;
-	}
-
+	
 	public Resource getResource() {
 		return this.resource;
 	}
