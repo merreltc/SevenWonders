@@ -9,9 +9,12 @@ import dataStructures.Card.Effect;
 public class Card {
 	private String name = "Default Card";
 	private int minNumPlayers = 3;
+	
 	private CardType type = CardType.DEFAULT;
 	private Cost cost = Cost.NONE;
 	private Effect effect = Effect.NONE;
+	
+	private String previousStructure = "None";
 
 	public enum CardType {
 		DEFAULT, RAWMATERIAL, MANUFACTUREDGOOD, CIVILIANSTRUCTURE, 
@@ -47,6 +50,7 @@ public class Card {
 		this.type = type;
 		this.cost = cost;
 		this.effect = effect;
+		this.previousStructure = previousStructure;
 	}
 
 	public String getName() {
@@ -97,9 +101,6 @@ public class Card {
 	}
 
 	public String getPreviousStructureName() {
-		if(this.name.equals("Tree Farm"))
-			return "None";
-		
-		return "Theater";
+		return this.previousStructure;
 	}
 }

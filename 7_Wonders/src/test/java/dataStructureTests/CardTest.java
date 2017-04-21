@@ -183,4 +183,11 @@ public class CardTest {
 		
 		assertEquals("Theater", card.getPreviousStructureName());
 	}
+	
+	@Test
+	public void testGetPreviousStructureOfForum (){
+		Card card = new Card("Forum", 3, CardType.RAWMATERIAL, Cost.NONE, Effect.VICTORYPOINTS, "Trading Post");
+		
+		assertEquals("Trading Post", card.getPreviousStructureName());
+	}
 }
