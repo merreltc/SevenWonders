@@ -197,4 +197,14 @@ public class ChipTest {
 			assertEquals(message, error.getMessage());
 		}
 	}
+	
+	@Test
+	public void testInvalidConflictToken7ErrorMessage() {
+		try {
+			new ConflictToken(7);
+		} catch (IllegalArgumentException error) {
+			String message = "Cannot have a conflict token whose's value is 7";
+			assertEquals(message, error.getMessage());
+		}
+	}
 }
