@@ -10,9 +10,9 @@ import dataStructures.Effect;
 import dataStructures.Effect.Direction;
 import dataStructures.Effect.EffectType;
 import dataStructures.MultiValueEffect;
-import dataStructures.MultiValueEffect.AffectingEntity;
-import dataStructures.MultiValueEffect.Value;
-import dataStructures.MultiValueEffect.ValueType;
+import dataStructures.ValueEffect.AffectingEntity;
+import dataStructures.ValueEffect.Value;
+import dataStructures.ValueEffect.ValueType;
 
 public class MultiValueEffectTest {
 	

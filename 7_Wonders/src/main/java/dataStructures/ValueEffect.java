@@ -4,6 +4,7 @@ public class ValueEffect extends Effect {
 	private Value value;
 	private int valueAmount;
 	private AffectingEntity affectingEntity = AffectingEntity.NONE;
+	private static final int NO_VALUE_AMOUNT = -1;
 	
 	public enum Value {
 		VICTORYPOINTS, MILITARY, COMMERCE, GUILD
@@ -18,7 +19,8 @@ public class ValueEffect extends Effect {
 		SCIENTIFICSTRUCTURES, MILITARYSTRUCTURES, CIVILIANSTRUCTURES, GUILD, WONDERLEVEL
 	}
 
-	public ValueEffect(EffectType effectType, Value value, AffectingEntity affectingEntity, int valueAmount) {
+	public ValueEffect(EffectType effectType, Value value,
+			AffectingEntity affectingEntity, int valueAmount) {
 		super(effectType);
 		this.value = value;
 		this.affectingEntity = affectingEntity;
@@ -26,8 +28,18 @@ public class ValueEffect extends Effect {
 		validateValueAmount(value, valueAmount);
 		this.valueAmount = valueAmount;
 	}
+	
+	public ValueEffect(EffectType effectType, Value value,
+			AffectingEntity affectingEntity, Direction direction) {
+		super(effectType);
+		this.value = value;
+		this.setDirection(direction);
+		this.affectingEntity = affectingEntity;
+		this.valueAmount = NO_VALUE_AMOUNT;
+	}
 
-	public ValueEffect(EffectType effectType, Value value, AffectingEntity affectingEntity, Direction direction,
+	public ValueEffect(EffectType effectType, Value value,
+			AffectingEntity affectingEntity, Direction direction,
 			int valueAmount) {
 		super(effectType);
 		this.value = value;
