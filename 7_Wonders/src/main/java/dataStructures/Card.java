@@ -2,14 +2,20 @@ package dataStructures;
 
 import java.util.HashMap;
 
-import dataStructures.Card.ResourceType;
+import dataStructures.Card.CardType;
+import dataStructures.Card.Cost;
+import dataStructures.Card.Effect;
 
 public class Card {
 	private String name = "Default Card";
 	private int minNumPlayers = 3;
+	
 	private CardType type = CardType.DEFAULT;
 	private Cost cost = Cost.NONE;
 	private Effect effect = Effect.NONE;
+	
+	private String previousStructure = "None";
+	private String nextStructure = "None";
 
 	public enum CardType {
 		DEFAULT, RAWMATERIAL, MANUFACTUREDGOOD, CIVILIANSTRUCTURE, 
@@ -37,6 +43,17 @@ public class Card {
 		this.type = type;
 		this.cost = cost;
 		this.effect = effect;
+	}
+
+	public Card(String name, int minNumPlayers, CardType type, Cost cost, Effect effect, String previousStructure,
+			String nextStructure) {
+		this.name = name;
+		this.minNumPlayers = minNumPlayers;
+		this.type = type;
+		this.cost = cost;
+		this.effect = effect;
+		this.previousStructure = previousStructure;
+		this.nextStructure = nextStructure;
 	}
 
 	public String getName() {
@@ -84,5 +101,13 @@ public class Card {
 
 		effect.put(ResourceType.LUMBER, 2);
 		return effect;
+	}
+
+	public String getPreviousStructureName() {
+		return this.previousStructure;
+	}
+
+	public String getNextStructureName() {
+		return this.nextStructure;
 	}
 }

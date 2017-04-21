@@ -168,17 +168,50 @@ public class CardTest {
 	
 		assertEquals(expectedEffect.get(ResourceType.LUMBER), actualEffect.get(ResourceType.LUMBER));
 	}
+
+	//Start of previous structure tests
+	@Test
+	public void testGetPreviousStructureNone() {
+		Card card = new Card("Tree Farm", 6, CardType.RAWMATERIAL, Cost.COIN, Effect.RESOURCE);
+		
+		assertEquals("None", card.getPreviousStructureName());
+	}
 	
-//	@Test
-//	public void testGetEffectOneTypeScience() {
-//		Card card = new Card("Apothecary", 3, CardType.SCIENTIFICSTRUCTURE, Cost.RESOURCE, Effect.SCIENCE);
-//
-//	
-//		HashMap<ScienceType, Integer> actualEffect = card.getEffect();
-//		HashMap<ScienceType, Integer> expectedEffect = new HashMap<ScienceType, Integer>();
-//		
-//		expectedEffect.put(ScienceType.PROTRACTOR, 2);
-//	
-//		assertEquals(expectedEffect.get(ScienceType.PROTRACTOR), actualEffect.get(ScienceType.PROTRACTOR));
-//	}
+	@Test
+	public void testGetPreviousStructureOfStatue() {
+		Card card = new Card("Statue", 3, CardType.RAWMATERIAL, Cost.NONE, Effect.VICTORYPOINTS, "Theater", "None");
+		
+		assertEquals("Theater", card.getPreviousStructureName());
+	}
+	
+	@Test
+	public void testGetPreviousStructureOfForum() {
+		Card card = new Card("Forum", 3, CardType.RAWMATERIAL, Cost.NONE, Effect.VICTORYPOINTS, "Trading Post", "None");
+		
+		assertEquals("Trading Post", card.getPreviousStructureName());
+	}
+	
+	@Test
+	public void testGetNextStructureOfArena() {
+		Card card = new Card("Arena", 3, CardType.RAWMATERIAL, Cost.NONE, Effect.VICTORYPOINTS, "Dispensary", "None");
+		
+		assertEquals("Dispensary", card.getPreviousStructureName());
+		assertEquals("None", card.getNextStructureName());
+	}
+	
+	@Test
+	public void testGetNextStructureOfStatue() {
+		Card card = new Card("Statue", 3, CardType.RAWMATERIAL, Cost.NONE, Effect.VICTORYPOINTS, "Theater", "Gardens");
+		
+		assertEquals("Theater", card.getPreviousStructureName());
+		assertEquals("Gardens", card.getNextStructureName());
+	}
+	
+	@Test
+	public void testGetNextStructureOfForum() {
+		Card card = new Card("Forum", 3, CardType.RAWMATERIAL, Cost.NONE, Effect.VICTORYPOINTS, "Trading Post", "Haven");
+		
+		assertEquals("Trading Post", card.getPreviousStructureName());
+		assertEquals("Haven", card.getNextStructureName());
+	}
 }
