@@ -110,6 +110,4 @@ public class Card {
 	public String getNextStructureName() {
 		return this.nextStructure;
 	}
-	
-	
 }
