@@ -6,22 +6,22 @@ public class Cost {
 	private int coinCost = 0;
 	private CostType type = CostType.NONE;
 	private HashMap<Enum, Integer> cost = new HashMap<Enum, Integer>();
-	
-	public enum CostType{
+
+	public enum CostType {
 		NONE, COIN, RESOURCE, GOOD, MULTITYPE
 	}
-	
+
 	public enum Resource {
 		ORE, LUMBER, STONE, CLAY
 	}
-	
+
 	public enum Good {
 		LOOM, GLASS, PAPER
 	}
-	
+
 	public Cost() {
 	}
-	
+
 	public Cost(CostType type, HashMap<Enum, Integer> cost) {
 		this.type = type;
 		this.cost = cost;
