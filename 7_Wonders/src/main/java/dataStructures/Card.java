@@ -1,5 +1,6 @@
 package dataStructures;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import dataStructures.Card.CardType;
@@ -8,7 +9,7 @@ import dataStructures.Card.Effect;
 
 public class Card {
 	private String name = "Default Card";
-	private int minNumPlayers = 3;
+	private ArrayList<Integer> frequencyByNumPlayers;
 	
 	private CardType type = CardType.DEFAULT;
 	private Cost cost = Cost.NONE;
@@ -34,21 +35,18 @@ public class Card {
 		NONE, RESOURCE, MULTI, SCIENCE, COMMERCIAL, VICTORYPOINTS, CONFLICTTOKENS
 	}
 
-	public Card() {
-	}
-
-	public Card(String name, int minNumPlayers, CardType type, Cost cost, Effect effect) {
+	public Card(String name, ArrayList<Integer> frequencyByNumPlayers, CardType type, Cost cost, Effect effect) {
 		this.name = name;
-		this.minNumPlayers = minNumPlayers;
+		this.frequencyByNumPlayers = frequencyByNumPlayers;
 		this.type = type;
 		this.cost = cost;
 		this.effect = effect;
 	}
 
-	public Card(String name, int minNumPlayers, CardType type, Cost cost, Effect effect, String previousStructure,
+	public Card(String name, ArrayList<Integer> frequencyByNumPlayers, CardType type, Cost cost, Effect effect, String previousStructure,
 			String nextStructure) {
 		this.name = name;
-		this.minNumPlayers = minNumPlayers;
+		this.frequencyByNumPlayers = frequencyByNumPlayers;
 		this.type = type;
 		this.cost = cost;
 		this.effect = effect;
@@ -56,12 +54,19 @@ public class Card {
 		this.nextStructure = nextStructure;
 	}
 
+	public Card(String name, CardType type, Cost cost, Effect effect) {
+		this.name = name;
+		this.type = type;
+		this.cost = cost;
+		this.effect = effect;
+	}
+
 	public String getName() {
 		return this.name;
 	}
 
-	public int getMinNumPlayers() {
-		return this.minNumPlayers;
+	public ArrayList<Integer> getFrequencyByNumPlayers() {
+		return this.frequencyByNumPlayers;
 	}
 
 	public CardType getCardType() {

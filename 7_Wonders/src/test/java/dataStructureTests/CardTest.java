@@ -2,6 +2,7 @@ package dataStructureTests;
 
 import static org.junit.Assert.*;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import org.junit.Test;
@@ -15,22 +16,15 @@ import dataStructures.Card.ResourceType;
 public class CardTest {
 
 	@Test
-	public void testDefaultCard() {
-		Card card = new Card();
-
-		assertEquals("Default Card", card.getName());
-		assertEquals(3, card.getMinNumPlayers());
-		assertEquals(CardType.DEFAULT, card.getCardType());
-		assertEquals(Cost.NONE, card.getCostType());
-		assertEquals(Effect.NONE, card.getEffectType());
-	}
-
-	@Test
 	public void testRawMaterialCard() {
-		Card card = new Card("Lumber Yard", 3, CardType.RAWMATERIAL, Cost.NONE, Effect.RESOURCE);
-
+		ArrayList<Integer> frequency = new ArrayList<Integer>();
+		frequency.add(3);
+		frequency.add(4);
+		
+		Card card = new Card("Lumber Yard", frequency, CardType.RAWMATERIAL, Cost.NONE, Effect.RESOURCE);
+		
 		assertEquals("Lumber Yard", card.getName());
-		assertEquals(3, card.getMinNumPlayers());
+		assertEquals(frequency, card.getFrequencyByNumPlayers());
 		assertEquals(CardType.RAWMATERIAL, card.getCardType());
 		assertEquals(Cost.NONE, card.getCostType());
 		assertEquals(Effect.RESOURCE, card.getEffectType());
@@ -38,10 +32,14 @@ public class CardTest {
 
 	@Test
 	public void testManufacturedGoodCard() {
-		Card card = new Card("Loom", 3, CardType.MANUFACTUREDGOOD, Cost.NONE, Effect.RESOURCE);
-
+		ArrayList<Integer> frequency = new ArrayList<Integer>();
+		frequency.add(3);
+		frequency.add(6);
+		
+		Card card = new Card("Loom", frequency, CardType.MANUFACTUREDGOOD, Cost.NONE, Effect.RESOURCE);
+		
 		assertEquals("Loom", card.getName());
-		assertEquals(3, card.getMinNumPlayers());
+		assertEquals(frequency, card.getFrequencyByNumPlayers());
 		assertEquals(CardType.MANUFACTUREDGOOD, card.getCardType());
 		assertEquals(Cost.NONE, card.getCostType());
 		assertEquals(Effect.RESOURCE, card.getEffectType());
@@ -49,10 +47,14 @@ public class CardTest {
 
 	@Test
 	public void testCommercialStructureCard() {
-		Card card = new Card("Haven", 3, CardType.COMMERCIALSTRUCTURE, Cost.RESOURCE, Effect.MULTI);
+		ArrayList<Integer> frequency = new ArrayList<Integer>();
+		frequency.add(3);
+		frequency.add(4);
+		
+		Card card = new Card("Haven", frequency, CardType.COMMERCIALSTRUCTURE, Cost.RESOURCE, Effect.MULTI);
 
 		assertEquals("Haven", card.getName());
-		assertEquals(3, card.getMinNumPlayers());
+		assertEquals(frequency, card.getFrequencyByNumPlayers());
 		assertEquals(CardType.COMMERCIALSTRUCTURE, card.getCardType());
 		assertEquals(Cost.RESOURCE, card.getCostType());
 		assertEquals(Effect.MULTI, card.getEffectType());
@@ -60,10 +62,14 @@ public class CardTest {
 
 	@Test
 	public void testCommercialStructureCardCommercialEffect() {
-		Card card = new Card("East Trading Post", 3, CardType.COMMERCIALSTRUCTURE, Cost.RESOURCE, Effect.COMMERCIAL);
+		ArrayList<Integer> frequency = new ArrayList<Integer>();
+		frequency.add(3);
+		frequency.add(7);
+		
+		Card card = new Card("East Trading Post", frequency, CardType.COMMERCIALSTRUCTURE, Cost.RESOURCE, Effect.COMMERCIAL);
 
 		assertEquals("East Trading Post", card.getName());
-		assertEquals(3, card.getMinNumPlayers());
+		assertEquals(frequency, card.getFrequencyByNumPlayers());
 		assertEquals(CardType.COMMERCIALSTRUCTURE, card.getCardType());
 		assertEquals(Cost.RESOURCE, card.getCostType());
 		assertEquals(Effect.COMMERCIAL, card.getEffectType());
@@ -71,10 +77,14 @@ public class CardTest {
 
 	@Test
 	public void testScientificStructureCard() {
-		Card card = new Card("Apothecary", 3, CardType.SCIENTIFICSTRUCTURE, Cost.RESOURCE, Effect.SCIENCE);
+		ArrayList<Integer> frequency = new ArrayList<Integer>();
+		frequency.add(3);
+		frequency.add(5);
+		
+		Card card = new Card("Apothecary", frequency, CardType.SCIENTIFICSTRUCTURE, Cost.RESOURCE, Effect.SCIENCE);
 
 		assertEquals("Apothecary", card.getName());
-		assertEquals(3, card.getMinNumPlayers());
+		assertEquals(frequency, card.getFrequencyByNumPlayers());
 		assertEquals(CardType.SCIENTIFICSTRUCTURE, card.getCardType());
 		assertEquals(Cost.RESOURCE, card.getCostType());
 		assertEquals(Effect.SCIENCE, card.getEffectType());
@@ -82,10 +92,14 @@ public class CardTest {
 
 	@Test
 	public void testCivilianStructureCard() {
-		Card card = new Card("Haven", 3, CardType.CIVILIANSTRUCTURE, Cost.RESOURCE, Effect.VICTORYPOINTS);
+		ArrayList<Integer> frequency = new ArrayList<Integer>();
+		frequency.add(3);
+		frequency.add(4);
+		
+		Card card = new Card("Haven", frequency, CardType.CIVILIANSTRUCTURE, Cost.RESOURCE, Effect.VICTORYPOINTS);
 
 		assertEquals("Haven", card.getName());
-		assertEquals(3, card.getMinNumPlayers());
+		assertEquals(frequency, card.getFrequencyByNumPlayers());
 		assertEquals(CardType.CIVILIANSTRUCTURE, card.getCardType());
 		assertEquals(Cost.RESOURCE, card.getCostType());
 		assertEquals(Effect.VICTORYPOINTS, card.getEffectType());
@@ -93,10 +107,14 @@ public class CardTest {
 
 	@Test
 	public void testMilitaryStructureCard() {
-		Card card = new Card("Stockade", 3, CardType.MILITARYSTRUCTURE, Cost.RESOURCE, Effect.CONFLICTTOKENS);
+		ArrayList<Integer> frequency = new ArrayList<Integer>();
+		frequency.add(3);
+		frequency.add(7);
+		
+		Card card = new Card("Stockade", frequency, CardType.MILITARYSTRUCTURE, Cost.RESOURCE, Effect.CONFLICTTOKENS);
 
 		assertEquals("Stockade", card.getName());
-		assertEquals(3, card.getMinNumPlayers());
+		assertEquals(frequency, card.getFrequencyByNumPlayers());
 		assertEquals(CardType.MILITARYSTRUCTURE, card.getCardType());
 		assertEquals(Cost.RESOURCE, card.getCostType());
 		assertEquals(Effect.CONFLICTTOKENS, card.getEffectType());
@@ -104,10 +122,9 @@ public class CardTest {
 
 	@Test
 	public void testGuildCard() {
-		Card card = new Card("Workers Guild", 3, CardType.GUILD, Cost.RESOURCE, Effect.VICTORYPOINTS);
+		Card card = new Card("Workers Guild", CardType.GUILD, Cost.RESOURCE, Effect.VICTORYPOINTS);
 
 		assertEquals("Workers Guild", card.getName());
-		assertEquals(3, card.getMinNumPlayers());
 		assertEquals(CardType.GUILD, card.getCardType());
 		assertEquals(Cost.RESOURCE, card.getCostType());
 		assertEquals(Effect.VICTORYPOINTS, card.getEffectType());
@@ -115,10 +132,13 @@ public class CardTest {
 
 	@Test
 	public void testCoinCostAndMinNumPlayersCard() {
-		Card card = new Card("Tree Farm", 6, CardType.RAWMATERIAL, Cost.COIN, Effect.RESOURCE);
+		ArrayList<Integer> frequency = new ArrayList<Integer>();
+		frequency.add(6);
+		
+		Card card = new Card("Tree Farm", frequency, CardType.RAWMATERIAL, Cost.COIN, Effect.RESOURCE);
 
 		assertEquals("Tree Farm", card.getName());
-		assertEquals(6, card.getMinNumPlayers());
+		assertEquals(frequency, card.getFrequencyByNumPlayers());
 		assertEquals(CardType.RAWMATERIAL, card.getCardType());
 		assertEquals(Cost.COIN, card.getCostType());
 		assertEquals(Effect.RESOURCE, card.getEffectType());
@@ -126,9 +146,20 @@ public class CardTest {
 
 	@Test
 	public void testGetCoinCost() {
-		Card card = new Card("Tree Farm", 6, CardType.RAWMATERIAL, Cost.COIN, Effect.RESOURCE);
-		Card card2 = new Card("Lumber Yard", 3, CardType.RAWMATERIAL, Cost.NONE, Effect.RESOURCE);
-		Card card3 = new Card("Haven", 3, CardType.CIVILIANSTRUCTURE, Cost.RESOURCE, Effect.VICTORYPOINTS);
+		ArrayList<Integer> frequencyTree = new ArrayList<Integer>();
+		frequencyTree.add(6);
+		
+		ArrayList<Integer> frequencyLumber = new ArrayList<Integer>();
+		frequencyLumber.add(3);
+		frequencyLumber.add(4);
+		
+		ArrayList<Integer> frequencyHaven = new ArrayList<Integer>();
+		frequencyHaven.add(3);
+		frequencyHaven.add(4);
+		
+		Card card = new Card("Tree Farm", frequencyTree, CardType.RAWMATERIAL, Cost.COIN, Effect.RESOURCE);
+		Card card2 = new Card("Lumber Yard", frequencyLumber, CardType.RAWMATERIAL, Cost.NONE, Effect.RESOURCE);
+		Card card3 = new Card("Haven", frequencyHaven, CardType.CIVILIANSTRUCTURE, Cost.RESOURCE, Effect.VICTORYPOINTS);
 
 		assertEquals(1, card.getCoinCost());
 		assertEquals(0, card2.getCoinCost());
@@ -138,9 +169,20 @@ public class CardTest {
 
 	@Test
 	public void testGetResourceCost() {
-		Card card = new Card("Tree Farm", 6, CardType.RAWMATERIAL, Cost.COIN, Effect.RESOURCE);
-		Card card2 = new Card("Lumber Yard", 3, CardType.RAWMATERIAL, Cost.NONE, Effect.RESOURCE);
-		Card card3 = new Card("Haven", 3, CardType.CIVILIANSTRUCTURE, Cost.RESOURCE, Effect.VICTORYPOINTS);
+		ArrayList<Integer> frequencyTree = new ArrayList<Integer>();
+		frequencyTree.add(6);
+		
+		ArrayList<Integer> frequencyLumber = new ArrayList<Integer>();
+		frequencyLumber.add(3);
+		frequencyLumber.add(4);
+		
+		ArrayList<Integer> frequencyHaven = new ArrayList<Integer>();
+		frequencyHaven.add(3);
+		frequencyHaven.add(4);
+		
+		Card card = new Card("Tree Farm", frequencyTree, CardType.RAWMATERIAL, Cost.COIN, Effect.RESOURCE);
+		Card card2 = new Card("Lumber Yard", frequencyLumber, CardType.RAWMATERIAL, Cost.NONE, Effect.RESOURCE);
+		Card card3 = new Card("Haven", frequencyHaven, CardType.CIVILIANSTRUCTURE, Cost.RESOURCE, Effect.VICTORYPOINTS);
 
 		assertEquals(0, card.getResourceCost().size());
 		assertEquals(0, card2.getResourceCost().size());
@@ -159,7 +201,10 @@ public class CardTest {
 	
 	@Test
 	public void testGetEffectOneTypeResource() {
-		Card card = new Card("Tree Farm", 6, CardType.RAWMATERIAL, Cost.COIN, Effect.RESOURCE);
+		ArrayList<Integer> frequency = new ArrayList<Integer>();
+		frequency.add(6);
+		
+		Card card = new Card("Tree Farm", frequency, CardType.RAWMATERIAL, Cost.COIN, Effect.RESOURCE);
 	
 		HashMap<ResourceType, Integer> actualEffect = card.getEffect();
 		HashMap<ResourceType, Integer> expectedEffect = new HashMap<ResourceType, Integer>();
@@ -172,28 +217,45 @@ public class CardTest {
 	//Start of previous structure tests
 	@Test
 	public void testGetPreviousStructureNone() {
-		Card card = new Card("Tree Farm", 6, CardType.RAWMATERIAL, Cost.COIN, Effect.RESOURCE);
+		ArrayList<Integer> frequency = new ArrayList<Integer>();
+		frequency.add(6);
 		
+		Card card = new Card("Tree Farm", frequency, CardType.RAWMATERIAL, Cost.COIN, Effect.RESOURCE);
+
 		assertEquals("None", card.getPreviousStructureName());
 	}
 	
 	@Test
 	public void testGetPreviousStructureOfStatue() {
-		Card card = new Card("Statue", 3, CardType.RAWMATERIAL, Cost.NONE, Effect.VICTORYPOINTS, "Theater", "None");
+		ArrayList<Integer> frequency = new ArrayList<Integer>();
+		frequency.add(3);
+		frequency.add(7);
+		
+		Card card = new Card("Statue", frequency, CardType.RAWMATERIAL, Cost.NONE, Effect.VICTORYPOINTS, "Theater", "None");
 		
 		assertEquals("Theater", card.getPreviousStructureName());
 	}
 	
 	@Test
 	public void testGetPreviousStructureOfForum() {
-		Card card = new Card("Forum", 3, CardType.RAWMATERIAL, Cost.NONE, Effect.VICTORYPOINTS, "Trading Post", "None");
+		ArrayList<Integer> frequency = new ArrayList<Integer>();
+		frequency.add(3);
+		frequency.add(6);
+		frequency.add(7);
+		
+		Card card = new Card("Forum", frequency, CardType.RAWMATERIAL, Cost.NONE, Effect.VICTORYPOINTS, "Trading Post", "None");
 		
 		assertEquals("Trading Post", card.getPreviousStructureName());
 	}
 	
 	@Test
 	public void testGetNextStructureOfArena() {
-		Card card = new Card("Arena", 3, CardType.RAWMATERIAL, Cost.NONE, Effect.VICTORYPOINTS, "Dispensary", "None");
+		ArrayList<Integer> frequency = new ArrayList<Integer>();
+		frequency.add(3);
+		frequency.add(5);
+		frequency.add(7);
+		
+		Card card = new Card("Arena", frequency, CardType.RAWMATERIAL, Cost.NONE, Effect.VICTORYPOINTS, "Dispensary", "None");
 		
 		assertEquals("Dispensary", card.getPreviousStructureName());
 		assertEquals("None", card.getNextStructureName());
@@ -201,7 +263,11 @@ public class CardTest {
 	
 	@Test
 	public void testGetNextStructureOfStatue() {
-		Card card = new Card("Statue", 3, CardType.RAWMATERIAL, Cost.NONE, Effect.VICTORYPOINTS, "Theater", "Gardens");
+		ArrayList<Integer> frequency = new ArrayList<Integer>();
+		frequency.add(3);
+		frequency.add(7);
+		
+		Card card = new Card("Statue", frequency, CardType.RAWMATERIAL, Cost.NONE, Effect.VICTORYPOINTS, "Theater", "Gardens");
 		
 		assertEquals("Theater", card.getPreviousStructureName());
 		assertEquals("Gardens", card.getNextStructureName());
@@ -209,7 +275,12 @@ public class CardTest {
 	
 	@Test
 	public void testGetNextStructureOfForum() {
-		Card card = new Card("Forum", 3, CardType.RAWMATERIAL, Cost.NONE, Effect.VICTORYPOINTS, "Trading Post", "Haven");
+		ArrayList<Integer> frequency = new ArrayList<Integer>();
+		frequency.add(3);
+		frequency.add(6);
+		frequency.add(7);
+		
+		Card card = new Card("Forum", frequency, CardType.RAWMATERIAL, Cost.NONE, Effect.VICTORYPOINTS, "Trading Post", "Haven");
 		
 		assertEquals("Trading Post", card.getPreviousStructureName());
 		assertEquals("Haven", card.getNextStructureName());
