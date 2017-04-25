@@ -3,11 +3,14 @@ package dataStructureTests;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 
+import java.util.HashMap;
+
 import org.junit.Test;
 
 import dataStructures.Effect;
 import dataStructures.Effect.Direction;
 import dataStructures.Effect.EffectType;
+import dataStructures.EntityEffect.Science;
 import dataStructures.ValueEffect;
 import dataStructures.ValueEffect.AffectingEntity;
 import dataStructures.ValueEffect.Value;
@@ -258,5 +261,22 @@ public class ValueEffectTest {
 		assertEquals(Value.GUILD, ((ValueEffect) effect).getValue());
 		assertEquals(ValueType.VICTORYPOINT, ((ValueEffect) effect).getValueType());
 		assertEquals(AffectingEntity.WONDERLEVEL, ((ValueEffect) effect).getAffectingEntity());
+	}
+	
+	@Test
+	public void testThreeValueAffectingEntityEffect () {
+		HashMap<Enum, Integer> affectingEntities = new HashMap<Enum, Integer>();
+		affectingEntities.put(AffectingEntity.RAWRESOURCES, 1);
+		affectingEntities.put(AffectingEntity.MANUFACTUREDGOODS, 1);
+		affectingEntities.put(AffectingEntity.GUILD, 1);
+		
+		Effect effect = new ValueEffect(EffectType.VALUE, Value.GUILD, affectingEntities, 3);
+		
+		assertEquals(EffectType.VALUE, effect.getEffectType());
+		assertEquals(Direction.SELF, effect.getDirection());
+		assertEquals(3, ((ValueEffect) effect).getValueAmount());
+		assertEquals(Value.GUILD, ((ValueEffect) effect).getValue());
+		assertEquals(ValueType.VICTORYPOINT, ((ValueEffect) effect).getValueType());
+		assertEquals(affectingEntities, ((ValueEffect) effect).getAffectingEntities());
 	}
 }
