@@ -7,7 +7,7 @@
 				"coinCost": 1
 			},
 	"Effect": {
-				"Effect": "ENTITY",
+				"EffectType": "ENTITY",
 				"EntityType": "RESOURCE",
 				"entitiesAndAmounts": [{
 										"Resource": "LUMBER",
@@ -24,7 +24,7 @@
 				"coinCost": 1
 			},
 	"Effect": {
-				"Effect": "ENTITY",
+				"EffectType": "ENTITY",
 				"EntityType": "RESOURCE",
 				"entitiesAndAmounts": [{
 										"Resource": "STONE",
@@ -41,7 +41,7 @@
 				"coinCost": 1
 			},
 	"Effect": {
-				"Effect": "ENTITY",
+				"EffectType": "ENTITY",
 				"EntityType": "RESOURCE",
 				"entitiesAndAmounts": [{
 										"Resource": "CLAY",
@@ -58,7 +58,7 @@
 				"coinCost": 1
 			},
 	"Effect": {
-				"Effect": "ENTITY",
+				"EffectType": "ENTITY",
 				"EntityType": "RESOURCE",
 				"entitiesAndAmounts": [{
 										"Resource": "ORE",
@@ -74,7 +74,7 @@
 				"CostType": "NONE"
 			},
 	"Effect": {
-				"Effect": "ENTITY",
+				"EffectType": "ENTITY",
 				"EntityType": "MANUFACTUREDGOOD",
 				"entitiesAndAmounts": [{
 										"GOOD": "LOOM",
@@ -90,7 +90,7 @@
 				"CostType": "NONE"
 			},
 	"Effect": {
-				"Effect": "ENTITY",
+				"EffectType": "ENTITY",
 				"EntityType": "MANUFACTUREDGOOD",
 				"entitiesAndAmounts": [{
 										"GOOD": "GLASS",
@@ -106,7 +106,7 @@
 				"CostType": "NONE"
 			},
 	"Effect": {
-				"Effect": "ENTITY",
+				"EffectType": "ENTITY",
 				"EntityType": "MANUFACTUREDGOOD",
 				"entitiesAndAmounts": [{
 										"GOOD": "PRESS",
@@ -122,7 +122,7 @@
 			},
 	"minNumPlayers": 4,
 	"Effect": {
-				"Effect": "VALUE",
+				"EffectType": "VALUE",
 				"Value": "VICTORYPOINTS",
 				"AffectingEntities": "NONE",
 				"valueAmount": 3
@@ -140,7 +140,7 @@
 			},
 	"minNumPlayers": 3,
 	"Effect": {
-				"Effect": "VALUE",
+				"EffectType": "VALUE",
 				"Value": "VICTORYPOINTS",
 				"AffectingEntities": "NONE",
 				"valueAmount": 5
@@ -166,7 +166,7 @@
 			},
 	"minNumPlayers": 3,
 	"Effect": {
-				"Effect": "VALUE",
+				"EffectType": "VALUE",
 				"Value": "VICTORYPOINTS",
 				"AffectingEntities": "NONE",
 				"valueAmount": 3
@@ -188,7 +188,7 @@
 			},
 	"minNumPlayers": 3,
 	"Effect": {
-				"Effect": "VALUE",
+				"EffectType": "VALUE",
 				"Value": "VICTORYPOINTS",
 				"AffectingEntities": "NONE",
 				"valueAmount": 4
@@ -206,7 +206,7 @@
 			},
 	"minNumPlayers": 3,
 	"Effect": {
-				"Effect": "ENTITY",
+				"EffectType": "ENTITY",
 				"EntityType": "MANUFACTUREDGOOD",
 				"entitiesAndAmounts": [{
 										"Good": "LOOM",
@@ -234,7 +234,7 @@
 			},
 	"minNumPlayers": 3,
 	"Effect": {
-				"Effect": "ENTITY",
+				"EffectType": "ENTITY",
 				"EntityType": "RESOURCE",
 				"entitiesAndAmounts": [{
 										"Resource": "LUMBER",
@@ -262,7 +262,7 @@
 			},
 	"minNumPlayers": 3,
 	"Effect": {
-				"Effect": "VALUE",
+				"EffectType": "VALUE",
 				"Value": "COMMERCE",
 				"AffectingEntities": "RAWRESOURCES",
 				"Direction": "ALL",
@@ -277,7 +277,7 @@
 			},
 	"minNumPlayers": 4,
 	"Effect": {
-				"Effect": "VALUE",
+				"EffectType": "VALUE",
 				"Value": "COMMERCE",
 				"AffectingEntities": "MANUFACTUREDGOODS",
 				"Direction": "ALL",
@@ -296,7 +296,7 @@
 			},
 	"minNumPlayers": 3,
 	"Effect": {
-				"Effect": "VALUE",
+				"EffectType": "VALUE",
 				"Value": "MILITARY",
 				"AffectingEntities": "NONE",
 				"valueAmount": 2
@@ -318,7 +318,7 @@
 			},
 	"minNumPlayers": 4,
 	"Effect": {
-				"Effect": "VALUE",
+				"EffectType": "VALUE",
 				"Value": "MILITARY",
 				"AffectingEntities": "NONE",
 				"valueAmount": 2
@@ -344,7 +344,7 @@
 			},
 	"minNumPlayers": 3,
 	"Effect": {
-				"Effect": "VALUE",
+				"EffectType": "VALUE",
 				"Value": "MILITARY",
 				"AffectingEntities": "NONE",
 				"valueAmount": 2
@@ -366,7 +366,7 @@
 			},
 	"minNumPlayers": 3,
 	"Effect": {
-				"Effect": "VALUE",
+				"EffectType": "VALUE",
 				"Value": "MILITARY",
 				"AffectingEntities": "NONE",
 				"valueAmount": 2
@@ -388,7 +388,7 @@
 			},
 	"minNumPlayers": 3,
 	"Effect": {
-				"Effect": "ENTITY",
+				"EffectType": "ENTITY",
 				"EntityType": "SCIENCE",
 				"entitiesAndAmounts": [{
 										"Science": "PROTRACTOR",
@@ -412,7 +412,7 @@
 			},
 	"minNumPlayers": 3,
 	"Effect": {
-				"Effect": "ENTITY",
+				"EffectType": "ENTITY",
 				"EntityType": "SCIENCE",
 				"entitiesAndAmounts": [{
 										"Science": "WHEEL",
@@ -436,7 +436,7 @@
 			},
 	"minNumPlayers": 3,
 	"Effect": {
-				"Effect": "ENTITY",
+				"EffectType": "ENTITY",
 				"EntityType": "SCIENCE",
 				"entitiesAndAmounts": [{
 										"Science": "TABLET",
@@ -460,7 +460,7 @@
 			},
 	"minNumPlayers": 3,
 	"Effect": {
-				"Effect": "ENTITY",
+				"EffectType": "ENTITY",
 				"EntityType": "SCIENCE",
 				"entitiesAndAmounts": [{
 										"Science": "TABLET",

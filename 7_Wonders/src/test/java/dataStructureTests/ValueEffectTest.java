@@ -270,11 +270,10 @@ public class ValueEffectTest {
 		affectingEntities.put(AffectingEntity.MANUFACTUREDGOODS, 1);
 		affectingEntities.put(AffectingEntity.GUILD, 1);
 		
-		Effect effect = new ValueEffect(EffectType.VALUE, Value.GUILD, affectingEntities, 3);
+		Effect effect = new ValueEffect(EffectType.VALUE, Value.GUILD, affectingEntities);
 		
 		assertEquals(EffectType.VALUE, effect.getEffectType());
 		assertEquals(Direction.SELF, effect.getDirection());
-		assertEquals(3, ((ValueEffect) effect).getValueAmount());
 		assertEquals(Value.GUILD, ((ValueEffect) effect).getValue());
 		assertEquals(ValueType.VICTORYPOINT, ((ValueEffect) effect).getValueType());
 		assertEquals(affectingEntities, ((ValueEffect) effect).getAffectingEntities());

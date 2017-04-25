@@ -54,11 +54,11 @@ public class ValueEffect extends Effect {
 		this.valueAmount = valueAmount;
 	}
 
-	public ValueEffect(EffectType effectType, Value value, HashMap<Enum, Integer> affectingEntities, int valueAmount) {
+	public ValueEffect(EffectType effectType, Value value, HashMap<Enum, Integer> affectingEntities) {
 		super(effectType);
 		this.value = value;
 		this.affectingEntities = affectingEntities;
-		this.valueAmount = valueAmount;
+		this.valueAmount = NO_VALUE_AMOUNT;
 	}
 
 	private void validateValueAmount(Value value, int valueAmount) {

@@ -22,7 +22,7 @@
 						}]
 			},
 	"Effect": {
-				"Effect": "VALUE",
+				"EffectType": "VALUE",
 				"Value": "GUILD",
 				"AffectedEntities": "RAWRESOURCES",
 				"Direction": "NEIGHBORS",
@@ -45,7 +45,7 @@
 						}]
 			},
 	"Effect": {
-				"Effect": "VALUE",
+				"EffectType": "VALUE",
 				"Value": "GUILD",
 				"AffectedEntities": "MANUFACTUREDGOODS",
 				"Direction": "NEIGHBORS",
@@ -72,7 +72,7 @@
 						}]
 			},
 	"Effect": {
-				"Effect": "VALUE",
+				"EffectType": "VALUE",
 				"Value": "GUILD",
 				"AffectedEntities": "COMMERCIALSTRUCTURES",
 				"Direction": "NEIGHBORS",
@@ -99,7 +99,7 @@
 						}]
 			},
 	"Effect": {
-				"Effect": "VALUE",
+				"EffectType": "VALUE",
 				"Value": "GUILD",
 				"AffectedEntities": "SCIENTIFICSTRUCTURES",
 				"Direction": "NEIGHBORS",
@@ -122,7 +122,7 @@
 						}]
 			},
 	"Effect": {
-				"Effect": "VALUE",
+				"EffectType": "VALUE",
 				"Value": "GUILD",
 				"AffectedEntities": "MILITARYSTRUCTURES",
 				"Direction": "NEIGHBORS",
@@ -149,7 +149,7 @@
 						}]
 			},
 	"Effect": {
-				"Effect": "VALUE",
+				"EffectType": "VALUE",
 				"Value": "GUILD",
 				"AffectedEntities": "MILITARYVICTORYPOINTS",
 				"Direction": "NEIGHBORS",
@@ -176,7 +176,7 @@
 						}]
 			},
 	"Effect": {
-				"Effect": "VALUE",
+				"EffectType": "VALUE",
 				"Value": "GUILD",
 				"AffectedEntities": ["RAWRESOURCES", "MANUFACTUREDGOODS", "GUILD"]
 			  }
@@ -201,7 +201,7 @@
 						}]
 			},
 	"Effect": {
-				"Effect": "ENTITY",
+				"EffectType": "ENTITY",
 				"EntityType": "SCIENCE",
 				"entitiesAndAmounts": [{
 										"Science": "PROTRACTOR",
@@ -237,7 +237,7 @@
 						}]
 			},
 	"Effect": {
-				"Effect": "VALUE",
+				"EffectType": "VALUE",
 				"Value": "GUILD",
 				"AffectedEntities": "CIVILIANSTRUCTURES",
 				"Direction": "NEIGHBORS",
@@ -264,7 +264,7 @@
 						}]
 			},
 	"Effect": {
-				"Effect": "VALUE",
+				"EffectType": "VALUE",
 				"Value": "GUILD",
 				"AffectedEntities": "WONDERLEVEL",
 				"Direction": "ALL",
@@ -299,7 +299,7 @@
 			},
 	"minNumPlayers": 3,
 	"Effect": {
-				"Effect": "VALUE",
+				"EffectType": "VALUE",
 				"Value": "VICTORYPOINTS",
 				"AffectingEntities": "NONE",
 				"valueAmount": 7
@@ -321,7 +321,7 @@
 			},
 	"minNumPlayers": 3,
 	"Effect": {
-				"Effect": "VALUE",
+				"EffectType": "VALUE",
 				"Value": "VICTORYPOINTS",
 				"AffectingEntities": "NONE",
 				"valueAmount": 5
@@ -347,7 +347,7 @@
 			},
 	"minNumPlayers": 3,
 	"Effect": {
-				"Effect": "VALUE",
+				"EffectType": "VALUE",
 				"Value": "VICTORYPOINTS",
 				"AffectingEntities": "NONE",
 				"valueAmount": 6
@@ -389,7 +389,7 @@
 			},
 	"minNumPlayers": 3,
 	"Effect": {
-				"Effect": "VALUE",
+				"EffectType": "VALUE",
 				"Value": "VICTORYPOINTS",
 				"AffectingEntities": "NONE",
 				"valueAmount": 8
@@ -416,7 +416,7 @@
 			},
 	"minNumPlayers": 3,
 	"Effect": {
-				"Effect": "MULTIVALUE",
+				"EffectType": "MULTIVALUE",
 				"Value": "COMMERCE"
 				"AffectingEntity": "RAWRESOURCES",
 				"entitiesAndAmounts": [{
@@ -446,7 +446,7 @@
 			},
 	"minNumPlayers": 3,
 	"Effect": {
-				"Effect": "MULTIVALUE",
+				"EffectType": "MULTIVALUE",
 				"Value": "COMMERCE"
 				"AffectingEntity": "COMMERCIALSTRUCTURE",
 				"entitiesAndAmounts": [{
@@ -476,7 +476,7 @@
 			},
 	"minNumPlayers": 4,
 	"Effect": {
-				"Effect": "MULTIVALUE",
+				"EffectType": "MULTIVALUE",
 				"Value": "COMMERCE"
 				"AffectingEntity": "MANUFACTUREDGOODS",
 				"entitiesAndAmounts": [{
@@ -505,7 +505,7 @@
 			},
 	"minNumPlayers": 3,
 	"Effect": {
-				"Effect": "VALUE",
+				"EffectType": "VALUE",
 				"Value": "MILITARY",
 				"AffectingEntities": "NONE",
 				"valueAmount": 3
@@ -527,7 +527,7 @@
 			},
 	"minNumPlayers": 4,
 	"Effect": {
-				"Effect": "VALUE",
+				"EffectType": "VALUE",
 				"Value": "MILITARY",
 				"AffectingEntities": "NONE",
 				"valueAmount": 3
@@ -553,7 +553,7 @@
 			},
 	"minNumPlayers": 3,
 	"Effect": {
-				"Effect": "VALUE",
+				"EffectType": "VALUE",
 				"Value": "MILITARY",
 				"AffectingEntities": "NONE",
 				"valueAmount": 3
@@ -575,7 +575,7 @@
 			},
 	"minNumPlayers": 3,
 	"Effect": {
-				"Effect": "VALUE",
+				"EffectType": "VALUE",
 				"Value": "MILITARY",
 				"AffectingEntities": "NONE",
 				"valueAmount": 3
@@ -601,7 +601,7 @@
 			},
 	"minNumPlayers": 3,
 	"Effect": {
-				"Effect": "ENTITY",
+				"EffectType": "ENTITY",
 				"EntityType": "SCIENCE",
 				"entitiesAndAmounts": [{
 										"Science": "PROTRACTOR",
@@ -629,7 +629,7 @@
 			},
 	"minNumPlayers": 3,
 	"Effect": {
-				"Effect": "ENTITY",
+				"EffectType": "ENTITY",
 				"EntityType": "SCIENCE",
 				"entitiesAndAmounts": [{
 										"Science": "WHEEL",
@@ -657,7 +657,7 @@
 			},
 	"minNumPlayers": 3,
 	"Effect": {
-				"Effect": "ENTITY",
+				"EffectType": "ENTITY",
 				"EntityType": "SCIENCE",
 				"entitiesAndAmounts": [{
 										"Science": "TABLET",
@@ -681,7 +681,7 @@
 			},
 	"minNumPlayers": 3,
 	"Effect": {
-				"Effect": "ENTITY",
+				"EffectType": "ENTITY",
 				"EntityType": "SCIENCE",
 				"entitiesAndAmounts": [{
 										"Science": "PROTRACTOR",
@@ -709,7 +709,7 @@
 			},
 	"minNumPlayers": 3,
 	"Effect": {
-				"Effect": "ENTITY",
+				"EffectType": "ENTITY",
 				"EntityType": "SCIENCE",
 				"entitiesAndAmounts": [{
 										"Science": "WHEEL",
