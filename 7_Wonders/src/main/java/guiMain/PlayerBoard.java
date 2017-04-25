@@ -78,33 +78,37 @@ public class PlayerBoard {
 		graphics.drawString("1", position.x + 10, position.y + 105);
 		graphics.drawString("1", position.x + 10, position.y + 145);
 	}
-
-	public void rotatePlayers() {
-		if (this.rotateClockwise) {
-			rotateClockwise();
-		} else {
-			rotateCounterclockwise();
-		}
+	
+	public void changePlayer(Player player){
+		this.player = player;
 	}
 
-	private void rotateClockwise() {
-		this.playerPosition++;
-		if (this.playerPosition >= this.totalNumberOfPlayers) {
-			this.playerPosition = 0;
-		}
-		if (this.playerPosition == this.totalNumberOfPlayers - 1) {
-			this.playerPosition = -1;
-		}
-	}
-
-	private void rotateCounterclockwise() {
-		this.playerPosition--;
-		if (this.playerPosition < -1) {
-			this.playerPosition = this.totalNumberOfPlayers - 2;
-		}
-	}
-
-	public void changeDirection() {
-		this.rotateClockwise = !this.rotateClockwise;
-	}
+//	public void rotatePlayers() {
+//		if (this.rotateClockwise) {
+//			rotateClockwise();
+//		} else {
+//			rotateCounterclockwise();
+//		}
+//	}
+//
+//	private void rotateClockwise() {
+//		this.playerPosition++;
+//		if (this.playerPosition >= this.totalNumberOfPlayers) {
+//			this.playerPosition = 0;
+//		}
+//		if (this.playerPosition == this.totalNumberOfPlayers - 1) {
+//			this.playerPosition = -1;
+//		}
+//	}
+//
+//	private void rotateCounterclockwise() {
+//		this.playerPosition--;
+//		if (this.playerPosition < -1) {
+//			this.playerPosition = this.totalNumberOfPlayers - 2;
+//		}
+//	}
+//
+//	public void changeDirection() {
+//		this.rotateClockwise = !this.rotateClockwise;
+//	}
 }

@@ -44,9 +44,10 @@ public class Game extends Menu {
 	@Override
 	public void draw(Graphics graphics) {
 		for (int i = 0; i < boards.size(); i++) {
+			boards.get(i).draw(graphics);
 			/* This will always draw the current players board last (on top) */
-			int currentPlayerIndex = this.gameManager.getGameBoard().getCurrentPlayerIndex();
-			boards.get((currentPlayerIndex + i + 2) % this.gameManager.getNumPlayers()).draw(graphics);
+			//int currentPlayerIndex = this.gameManager.getGameBoard().getCurrentPlayerIndex();
+			//boards.get((currentPlayerIndex + i + 2) % this.gameManager.getNumPlayers()).draw(graphics);
 		}
 		
 		for (Interactable button : this.getInteractables()) {
@@ -114,8 +115,18 @@ public class Game extends Menu {
 	}
 	
 	public void RotateBoards(){
-		for (int i = 0; i < this.boards.size(); i++){
-			this.boards.get(i).rotatePlayers();
+		/*TODO: Talk to them about their rotations.  Possibly one rotate method.  Also, fix the train wreck some how*/
+		this.gameManager.rotateCounterClockwise();
+		
+		ArrayList<Player> players = this.gameManager.getPlayers();
+		System.out.println(players.toString());
+		Player nextPlayer= this.gameManager.getNextPlayer();
+		System.out.println(players.indexOf(nextPlayer));
+		int totalNumberOfPlayers = this.gameManager.getNumPlayers();
+		int nextPlayerIndex = players.indexOf(nextPlayer);
+		
+		for (int i = 0; i < players.size(); i++){
+			boards.get(i).changePlayer(players.get((nextPlayerIndex + i)%totalNumberOfPlayers));
 		}
 	}
 }
