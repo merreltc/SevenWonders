@@ -14,5 +14,4 @@ public class WonderTest {
 		
 		assertEquals(3, wonder.getNumLevels());
 	}
-
 }
