@@ -6,6 +6,9 @@ import dataStructures.Cost.CostType;
 import dataStructures.Effect.Direction;
 import dataStructures.Effect.EffectType;
 import dataStructures.EntityEffect.EntityType;
+import dataStructures.ValueEffect.AffectingEntity;
+import dataStructures.ValueEffect.Value;
+import dataStructures.ValueEffect.ValueType;
 
 public class Level {
 	private int priority;
@@ -44,5 +47,17 @@ public class Level {
 
 	public HashMap<Enum, Integer> getEntities() {
 		return ((EntityEffect) this.effect).getEntities();
+	}
+
+	public Value getEffectValue() {
+		return ((ValueEffect) this.effect).getValue();
+	}
+
+	public ValueType getEffectValueType() {
+		return ((ValueEffect) this.effect).getValueType();
+	}
+
+	public AffectingEntity getAffectingEntity() {
+		return ((ValueEffect) this.effect).getAffectingEntity();
 	}
 }

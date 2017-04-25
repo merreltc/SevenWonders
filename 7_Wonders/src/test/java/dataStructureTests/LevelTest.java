@@ -16,6 +16,10 @@ import dataStructures.Effect.EffectType;
 import dataStructures.EntityEffect.EntityType;
 import dataStructures.EntityEffect;
 import dataStructures.Level;
+import dataStructures.ValueEffect;
+import dataStructures.ValueEffect.AffectingEntity;
+import dataStructures.ValueEffect.Value;
+import dataStructures.ValueEffect.ValueType;
 
 public class LevelTest {
 
@@ -98,5 +102,34 @@ public class LevelTest {
 		assertEquals(Direction.SELF, direction);
 		assertEquals(EntityType.RESOURCE, entityType);
 		assertEquals(expectedEntities, actualEntities);
+	}
+	
+	@Test
+	public void testValueEffect() {
+		Cost cost = EasyMock.createStrictMock(Cost.class);
+		ValueEffect effect = EasyMock.createStrictMock(ValueEffect.class);
+
+		EasyMock.expect(effect.getEffectType()).andReturn(EffectType.ENTITY);
+		EasyMock.expect(effect.getDirection()).andReturn(Direction.SELF);
+		EasyMock.expect(effect.getValue()).andReturn(Value.VICTORYPOINTS);
+		EasyMock.expect(effect.getValueType()).andReturn(ValueType.VICTORYPOINT);
+		EasyMock.expect(effect.getAffectingEntity()).andReturn(AffectingEntity.RAWRESOURCES);
+		EasyMock.replay(effect);
+		
+		int priority = 1;
+		Level level = new Level(priority, cost, effect);
+		
+		EffectType effectType = level.getEffectType();
+		Direction direction = level.getEffectDirection();
+		Value value = level.getEffectValue();
+		ValueType valueType = level.getEffectValueType();
+		AffectingEntity affEntity = level.getAffectingEntity();
+		
+		EasyMock.verify(effect);
+		assertEquals(EffectType.ENTITY, effectType);
+		assertEquals(Direction.SELF, direction);
+		assertEquals(Value.VICTORYPOINTS, value);
+		assertEquals(ValueType.VICTORYPOINT, valueType);
+		assertEquals(AffectingEntity.RAWRESOURCES, affEntity);
 	}
 }
