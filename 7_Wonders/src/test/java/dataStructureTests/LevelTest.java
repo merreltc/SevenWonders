@@ -11,6 +11,10 @@ import dataStructures.Cost;
 import dataStructures.Cost.CostType;
 import dataStructures.Cost.Resource;
 import dataStructures.Effect;
+import dataStructures.Effect.Direction;
+import dataStructures.Effect.EffectType;
+import dataStructures.EntityEffect.EntityType;
+import dataStructures.EntityEffect;
 import dataStructures.Level;
 
 public class LevelTest {
@@ -67,4 +71,32 @@ public class LevelTest {
 		assertEquals(expected, actual);
 	}
 
+	@Test
+	public void testEntityEffect() {
+		Cost cost = EasyMock.createStrictMock(Cost.class);
+		EntityEffect effect = EasyMock.createStrictMock(EntityEffect.class);
+		
+		HashMap<Enum, Integer> expectedEntities = new HashMap<Enum, Integer>();
+		expectedEntities.put(Resource.LUMBER, 2);
+
+		EasyMock.expect(effect.getEffectType()).andReturn(EffectType.ENTITY);
+		EasyMock.expect(effect.getDirection()).andReturn(Direction.SELF);
+		EasyMock.expect(effect.getEntityType()).andReturn(EntityType.RESOURCE);
+		EasyMock.expect(effect.getEntities()).andReturn(expectedEntities);
+		EasyMock.replay(effect);
+		
+		int priority = 1;
+		Level level = new Level(priority, cost, effect);
+		
+		EffectType effectType = level.getEffectType();
+		Direction direction = level.getEffectDirection();
+		EntityType entityType = level.getEntityType();
+		HashMap<Enum, Integer> actualEntities = level.getEntities();
+		
+		EasyMock.verify(effect);
+		assertEquals(EffectType.ENTITY, effectType);
+		assertEquals(Direction.SELF, direction);
+		assertEquals(EntityType.RESOURCE, entityType);
+		assertEquals(expectedEntities, actualEntities);
+	}
 }
