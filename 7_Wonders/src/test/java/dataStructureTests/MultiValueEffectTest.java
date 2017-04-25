@@ -23,7 +23,7 @@ public class MultiValueEffectTest {
 		valuesAndAmounts.put(ValueType.VICTORYPOINT, 1);
 		Effect effect = new MultiValueEffect(EffectType.MULTIVALUE, Value.GUILD, AffectingEntity.NONE, Direction.NEIGHBORS, valuesAndAmounts);
 		
-		assertEquals(valuesAndAmounts, ((MultiValueEffect) effect).getValuesAndAmounts());
+		assertEquals(valuesAndAmounts, ((MultiValueEffect) effect).getValues());
 	}
 	
 	@Test

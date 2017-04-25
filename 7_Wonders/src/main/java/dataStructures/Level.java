@@ -60,4 +60,8 @@ public class Level {
 	public AffectingEntity getAffectingEntity() {
 		return ((ValueEffect) this.effect).getAffectingEntity();
 	}
+
+	public HashMap<Enum, Integer> getValues() {
+		return ((MultiValueEffect) this.effect).getValues();
+	}
 }

@@ -16,6 +16,7 @@ import dataStructures.Effect.EffectType;
 import dataStructures.EntityEffect.EntityType;
 import dataStructures.EntityEffect;
 import dataStructures.Level;
+import dataStructures.MultiValueEffect;
 import dataStructures.ValueEffect;
 import dataStructures.ValueEffect.AffectingEntity;
 import dataStructures.ValueEffect.Value;
@@ -109,7 +110,7 @@ public class LevelTest {
 		Cost cost = EasyMock.createStrictMock(Cost.class);
 		ValueEffect effect = EasyMock.createStrictMock(ValueEffect.class);
 
-		EasyMock.expect(effect.getEffectType()).andReturn(EffectType.ENTITY);
+		EasyMock.expect(effect.getEffectType()).andReturn(EffectType.VALUE);
 		EasyMock.expect(effect.getDirection()).andReturn(Direction.SELF);
 		EasyMock.expect(effect.getValue()).andReturn(Value.VICTORYPOINTS);
 		EasyMock.expect(effect.getValueType()).andReturn(ValueType.VICTORYPOINT);
@@ -126,10 +127,46 @@ public class LevelTest {
 		AffectingEntity affEntity = level.getAffectingEntity();
 		
 		EasyMock.verify(effect);
-		assertEquals(EffectType.ENTITY, effectType);
+		assertEquals(EffectType.VALUE, effectType);
 		assertEquals(Direction.SELF, direction);
 		assertEquals(Value.VICTORYPOINTS, value);
 		assertEquals(ValueType.VICTORYPOINT, valueType);
 		assertEquals(AffectingEntity.RAWRESOURCES, affEntity);
+	}
+	
+	@Test
+	public void testMultiValueEffect() {
+		Cost cost = EasyMock.createStrictMock(Cost.class);
+		MultiValueEffect effect = EasyMock.createStrictMock(MultiValueEffect.class);
+
+		EasyMock.expect(effect.getEffectType()).andReturn(EffectType.MULTIVALUE);
+		EasyMock.expect(effect.getDirection()).andReturn(Direction.SELF);
+		EasyMock.expect(effect.getValue()).andReturn(Value.COMMERCE);
+		EasyMock.expect(effect.getAffectingEntity()).andReturn(AffectingEntity.MANUFACTUREDGOODS);
+		
+		HashMap<Enum, Integer> expectedValues = new HashMap<Enum, Integer>();
+		expectedValues.put(ValueType.COIN, 1);
+		expectedValues.put(ValueType.VICTORYPOINT, 1);
+		
+		EasyMock.expect(effect.getValues()).andReturn(expectedValues);
+
+		
+		EasyMock.replay(effect);
+		
+		int priority = 1;
+		Level level = new Level(priority, cost, effect);
+		
+		EffectType effectType = level.getEffectType();
+		Direction direction = level.getEffectDirection();
+		Value value = level.getEffectValue();
+		AffectingEntity affEntity = level.getAffectingEntity();
+		HashMap<Enum, Integer> actualValues = level.getValues();
+		
+		EasyMock.verify(effect);
+		assertEquals(EffectType.MULTIVALUE, effectType);
+		assertEquals(Direction.SELF, direction);
+		assertEquals(Value.COMMERCE, value);
+		assertEquals(AffectingEntity.MANUFACTUREDGOODS, affEntity);
+		assertEquals(expectedValues, actualValues);
 	}
 }
