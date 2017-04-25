@@ -59,13 +59,13 @@ public class Constants {
 
 	public static final int TradeButtonYOffet = TradeButtonBounds.y + 20;
 
-	public static final int CardHeight = 238;
+	public static final int CardHeight = 258;
 	public static final int CardWidth = 150;
 	
 	public static final int CardOffset = CardWidth + 10;
 	
 	public static final int PlayerHandLeftMostCardPositionX = CurrentPlayerBoardPositionX +10;
-	public static final int PlayerHandLeftMostCardPositionY = CurrentPlayerBoardPositionY + CurrentPlayerBoardHeight - CardHeight/2 - 30;
+	public static final int PlayerHandLeftMostCardPositionY = CurrentPlayerBoardPositionY + CurrentPlayerBoardHeight - CardHeight;
 
 	/* For Game Class */
 	public static final String[] ResourceTypes = new String[] { "Stone", "Wood", "Ore", "Clay" };

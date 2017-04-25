@@ -4,6 +4,7 @@ import java.awt.Graphics;
 import java.awt.Point;
 import java.util.ArrayList;
 
+import dataStructures.Card;
 import dataStructures.Player;
 import guiDataStructures.Constants;
 import guiMain.Interactables.CardHolder;
@@ -31,9 +32,12 @@ public class HandManager {
 		for (int i = 0; i < 7; i++) {
 			Point handPosition = new Point(Constants.PlayerHandLeftMostCardPositionX + Constants.CardOffset * i,
 					Constants.PlayerHandLeftMostCardPositionY);
-			Point handBounds = new Point(Constants.CardWidth, Constants.CardWidth);
-			Interactable card = new CardHolder(handPosition, handBounds, i + "");
-			playerHand.add(card);
+			Point handBounds = new Point(Constants.CardWidth, Constants.CardHeight);
+			Interactable cardHolder = new CardHolder(handPosition, handBounds, i + "");
+			Card card = new Card("Statue",0,Card.CardType.CIVILIANSTRUCTURE, Card.Cost.COIN,Card.Effect.COMMERCIAL);
+			((CardHolder) cardHolder).giveCard(card);
+			cardHolder.addImage(RenderImage.getImage(card.getName()));
+			playerHand.add(cardHolder);
 		}
 	}
 

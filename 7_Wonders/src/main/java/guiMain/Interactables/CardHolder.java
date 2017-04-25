@@ -26,7 +26,7 @@ public class CardHolder extends Interactable{
 	
 	public void activate(GameManager gameManager){
 		/*TODO: Change to play card*/
-		gameManager.rotateClockwise();
+
 	}
 
 }
