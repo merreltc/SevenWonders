@@ -12,7 +12,7 @@ import dataStructures.Level;
 public class LevelTest {
 
 	@Test
-	public void testPriority1Level() {
+	public void testPriority1() {
 		Cost cost = EasyMock.createStrictMock(Cost.class);
 		Effect effect = EasyMock.createStrictMock(Effect.class);
 		
@@ -22,13 +22,23 @@ public class LevelTest {
 	}
 	
 	@Test
-	public void testPriority2Level() {
+	public void testPriority2() {
 		Cost cost = EasyMock.createStrictMock(Cost.class);
 		Effect effect = EasyMock.createStrictMock(Effect.class);
 		
 		int priority = 2;
 		Level level = new Level(priority, cost, effect);
 		assertEquals(2, level.getPriority());
+	}
+	
+	@Test
+	public void testPriority3() {
+		Cost cost = EasyMock.createStrictMock(Cost.class);
+		Effect effect = EasyMock.createStrictMock(Effect.class);
+		
+		int priority = 3;
+		Level level = new Level(priority, cost, effect);
+		assertEquals(3, level.getPriority());
 	}
 
 }
