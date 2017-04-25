@@ -178,9 +178,7 @@
 	"Effect": {
 				"Effect": "VALUE",
 				"Value": "GUILD",
-				"AffectedEntities": "RAWRESOURCES",
-				"Direction": "NEIGHBORS",
-				"valueAmount": 1
+				"AffectedEntities": ["RAWRESOURCES", "MANUFACTUREDGOODS", "GUILD"]
 			  }
 },
 {

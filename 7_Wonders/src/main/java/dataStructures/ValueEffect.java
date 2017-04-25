@@ -1,9 +1,15 @@
 package dataStructures;
 
+import java.util.HashMap;
+
+import dataStructures.Effect.EffectType;
+import dataStructures.ValueEffect.Value;
+
 public class ValueEffect extends Effect {
 	private Value value;
 	private int valueAmount;
 	private AffectingEntity affectingEntity = AffectingEntity.NONE;
+	private HashMap<Enum, Integer> affectingEntities = new HashMap<Enum, Integer>();
 	private static final int NO_VALUE_AMOUNT = -1;
 	
 	public enum Value {
@@ -48,6 +54,13 @@ public class ValueEffect extends Effect {
 		this.valueAmount = valueAmount;
 	}
 
+	public ValueEffect(EffectType effectType, Value value, HashMap<Enum, Integer> affectingEntities, int valueAmount) {
+		super(effectType);
+		this.value = value;
+		this.affectingEntities = affectingEntities;
+		this.valueAmount = valueAmount;
+	}
+
 	private void validateValueAmount(Value value, int valueAmount) {
 		switch (value){
 		case VICTORYPOINTS:
@@ -86,5 +99,9 @@ public class ValueEffect extends Effect {
 	
 	public AffectingEntity getAffectingEntity() {
 		return this.affectingEntity;
+	}
+
+	public HashMap<Enum, Integer> getAffectingEntities() {
+		return this.affectingEntities;
 	}
 }
