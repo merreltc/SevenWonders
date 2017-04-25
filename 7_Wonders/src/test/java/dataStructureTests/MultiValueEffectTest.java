@@ -17,11 +17,21 @@ import dataStructures.ValueEffect.ValueType;
 public class MultiValueEffectTest {
 	
 	@Test
-	public void test1MultiValueCommerceResourcesEffect() {
-		HashMap<Enum, Integer> entitiesAndAmounts = new HashMap<Enum, Integer>();
-		entitiesAndAmounts.put(ValueType.COIN, 1);
-		entitiesAndAmounts.put(ValueType.VICTORYPOINT, 1);
-		Effect effect = new MultiValueEffect(EffectType.MULTIVALUE, Value.COMMERCE, AffectingEntity.RAWRESOURCES, Direction.SELF, entitiesAndAmounts);
+	public void testValuesAndAmounts() {
+		HashMap<Enum, Integer> valuesAndAmounts = new HashMap<Enum, Integer>();
+		valuesAndAmounts.put(ValueType.CONFLICTTOKEN, -1);
+		valuesAndAmounts.put(ValueType.VICTORYPOINT, 1);
+		Effect effect = new MultiValueEffect(EffectType.MULTIVALUE, Value.GUILD, AffectingEntity.NONE, Direction.NEIGHBORS, valuesAndAmounts);
+		
+		assertEquals(valuesAndAmounts, ((MultiValueEffect) effect).getValuesAndAmounts());
+	}
+	
+	@Test
+	public void testCommerceResourcesEffect() {
+		HashMap<Enum, Integer> valuesAndAmounts = new HashMap<Enum, Integer>();
+		valuesAndAmounts.put(ValueType.COIN, 1);
+		valuesAndAmounts.put(ValueType.VICTORYPOINT, 1);
+		Effect effect = new MultiValueEffect(EffectType.MULTIVALUE, Value.COMMERCE, AffectingEntity.RAWRESOURCES, Direction.SELF, valuesAndAmounts);
 		
 		assertEquals(EffectType.MULTIVALUE, effect.getEffectType());
 		assertEquals(Direction.SELF, effect.getDirection());
@@ -31,11 +41,11 @@ public class MultiValueEffectTest {
 	}
 	
 	@Test
-	public void test1MultiValueCommerceManufacturedGoodsEffect() {
-		HashMap<Enum, Integer> entitiesAndAmounts = new HashMap<Enum, Integer>();
-		entitiesAndAmounts.put(ValueType.COIN, 1);
-		entitiesAndAmounts.put(ValueType.VICTORYPOINT, 1);
-		Effect effect = new MultiValueEffect(EffectType.MULTIVALUE, Value.COMMERCE, AffectingEntity.MANUFACTUREDGOODS, Direction.SELF, entitiesAndAmounts);
+	public void testCommerceManufacturedGoodsEffect() {
+		HashMap<Enum, Integer> valuesAndAmounts = new HashMap<Enum, Integer>();
+		valuesAndAmounts.put(ValueType.COIN, 1);
+		valuesAndAmounts.put(ValueType.VICTORYPOINT, 1);
+		Effect effect = new MultiValueEffect(EffectType.MULTIVALUE, Value.COMMERCE, AffectingEntity.MANUFACTUREDGOODS, Direction.SELF, valuesAndAmounts);
 		
 		assertEquals(EffectType.MULTIVALUE, effect.getEffectType());
 		assertEquals(Direction.SELF, effect.getDirection());
@@ -45,11 +55,11 @@ public class MultiValueEffectTest {
 	}
 	
 	@Test
-	public void test1MultiValueCommerceCommercialStructuresEffect() {
-		HashMap<Enum, Integer> entitiesAndAmounts = new HashMap<Enum, Integer>();
-		entitiesAndAmounts.put(ValueType.COIN, 1);
-		entitiesAndAmounts.put(ValueType.VICTORYPOINT, 1);
-		Effect effect = new MultiValueEffect(EffectType.MULTIVALUE, Value.COMMERCE, AffectingEntity.COMMERCIALSTRUCTURES, Direction.SELF, entitiesAndAmounts);
+	public void testCommerceCommercialStructuresEffect() {
+		HashMap<Enum, Integer> valuesAndAmounts = new HashMap<Enum, Integer>();
+		valuesAndAmounts.put(ValueType.COIN, 1);
+		valuesAndAmounts.put(ValueType.VICTORYPOINT, 1);
+		Effect effect = new MultiValueEffect(EffectType.MULTIVALUE, Value.COMMERCE, AffectingEntity.COMMERCIALSTRUCTURES, Direction.SELF, valuesAndAmounts);
 		
 		assertEquals(EffectType.MULTIVALUE, effect.getEffectType());
 		assertEquals(Direction.SELF, effect.getDirection());
@@ -59,11 +69,11 @@ public class MultiValueEffectTest {
 	}
 	
 	@Test
-	public void test1MultiValueCommerceWonderLevelEffect() {
-		HashMap<Enum, Integer> entitiesAndAmounts = new HashMap<Enum, Integer>();
-		entitiesAndAmounts.put(ValueType.COIN, 3);
-		entitiesAndAmounts.put(ValueType.VICTORYPOINT, 1);
-		Effect effect = new MultiValueEffect(EffectType.MULTIVALUE, Value.COMMERCE, AffectingEntity.WONDERLEVEL, Direction.SELF, entitiesAndAmounts);
+	public void testCommerceWonderLevelEffect() {
+		HashMap<Enum, Integer> valuesAndAmounts = new HashMap<Enum, Integer>();
+		valuesAndAmounts.put(ValueType.COIN, 3);
+		valuesAndAmounts.put(ValueType.VICTORYPOINT, 1);
+		Effect effect = new MultiValueEffect(EffectType.MULTIVALUE, Value.COMMERCE, AffectingEntity.WONDERLEVEL, Direction.SELF, valuesAndAmounts);
 		
 		assertEquals(EffectType.MULTIVALUE, effect.getEffectType());
 		assertEquals(Direction.SELF, effect.getDirection());
@@ -73,11 +83,11 @@ public class MultiValueEffectTest {
 	}
 	
 	@Test
-	public void test1MultiValueGuildEffect() {
-		HashMap<Enum, Integer> entitiesAndAmounts = new HashMap<Enum, Integer>();
-		entitiesAndAmounts.put(ValueType.CONFLICTTOKEN, -1);
-		entitiesAndAmounts.put(ValueType.VICTORYPOINT, 1);
-		Effect effect = new MultiValueEffect(EffectType.MULTIVALUE, Value.GUILD, AffectingEntity.NONE, Direction.NEIGHBORS, entitiesAndAmounts);
+	public void testGuildEffect() {
+		HashMap<Enum, Integer> valuesAndAmounts = new HashMap<Enum, Integer>();
+		valuesAndAmounts.put(ValueType.CONFLICTTOKEN, -1);
+		valuesAndAmounts.put(ValueType.VICTORYPOINT, 1);
+		Effect effect = new MultiValueEffect(EffectType.MULTIVALUE, Value.GUILD, AffectingEntity.NONE, Direction.NEIGHBORS, valuesAndAmounts);
 		
 		assertEquals(EffectType.MULTIVALUE, effect.getEffectType());
 		assertEquals(Direction.NEIGHBORS, effect.getDirection());
