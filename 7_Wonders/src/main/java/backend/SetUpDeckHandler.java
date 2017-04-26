@@ -37,8 +37,8 @@ public class SetUpDeckHandler {
 		String jsonData;
 		JSONObject jsonObj;
 		JSONArray jarr;
-		
-		switch (age){
+
+		switch (age) {
 		case AGE2:
 			jsonData = readFile("src/assets/age2cards.json");
 			jsonObj = new JSONObject(jsonData);
@@ -66,47 +66,48 @@ public class SetUpDeckHandler {
 			for (int j = 0; j < frequencyByNumPlayersJSON.length(); j++) {
 				frequencyByNumPlayers.add(frequencyByNumPlayersJSON.getInt(j));
 			}
-			
+
 			CardType cardType = CardType.valueOf(cardData.getString("cardType"));
 
 			Cost cost = parseCost(cardData);
 			Effect effect = parseEffect(cardData);
 			String previousStructure = cardData.getString("Previous");
 			String nextStructure = cardData.getString("Next");
-			
+
 			Card card;
-			
-			if(cardType.equals(CardType.GUILD)){
+
+			if (cardType.equals(CardType.GUILD)) {
 				card = new Card(cardName, cardType, cost, effect);
-			}else{
-				card = new Card(cardName, frequencyByNumPlayers, cardType, cost, effect, previousStructure, nextStructure);
+			} else {
+				card = new Card(cardName, frequencyByNumPlayers, cardType, cost, effect, previousStructure,
+						nextStructure);
 			}
-			
-			for(Integer numOfFrequencyByNumPlayers: frequencyByNumPlayers){
-				if(numPlayers >= numOfFrequencyByNumPlayers){
+
+			for (Integer numOfFrequencyByNumPlayers : frequencyByNumPlayers) {
+				if (numPlayers >= numOfFrequencyByNumPlayers) {
 					cards.add(card);
 				}
 			}
 		}
-		
+
 		return cards;
 	}
-	
+
 	private String readFile(String filename) {
 		String result = "";
-	    try {
-	        BufferedReader br = new BufferedReader(new FileReader(filename));
-	        StringBuilder sb = new StringBuilder();
-	        String line = br.readLine();
-	        while (line != null) {
-	            sb.append(line);
-	            line = br.readLine();
-	        }
-	        result = sb.toString();
-	    } catch(Exception e) {
-	        e.printStackTrace();
-	    }
-	    return result;
+		try {
+			BufferedReader br = new BufferedReader(new FileReader(filename));
+			StringBuilder sb = new StringBuilder();
+			String line = br.readLine();
+			while (line != null) {
+				sb.append(line);
+				line = br.readLine();
+			}
+			result = sb.toString();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return result;
 	}
 
 	private Cost parseCost(JSONObject cardData) {
@@ -115,20 +116,20 @@ public class SetUpDeckHandler {
 		CostType costType;
 		Cost cost;
 
-		if(costTypeS.equals("COIN")){
+		if (costTypeS.equals("COIN")) {
 			costType = CostType.COIN;
 			int coinCost = costObj.getInt("coinCost");
 			cost = new Cost(costType, coinCost);
-		}else if (costTypeS.equals("RESOURCE")){
+		} else if (costTypeS.equals("RESOURCE")) {
 			costType = CostType.RESOURCE;
 			cost = createResourceOrGoodCost(costObj, costType, "Resource");
-		}else if (costTypeS.equals("GOOD")){
+		} else if (costTypeS.equals("GOOD")) {
 			costType = CostType.GOOD;
 			cost = createResourceOrGoodCost(costObj, costType, "Good");
-		}else if (costTypeS.equals("MULTITYPE")) {
+		} else if (costTypeS.equals("MULTITYPE")) {
 			costType = CostType.MULTITYPE;
 			cost = createMultiTypeCost(costObj, costType);
-		}else{
+		} else {
 			costType = CostType.NONE;
 			cost = new Cost(costType, 0);
 		}
@@ -144,14 +145,14 @@ public class SetUpDeckHandler {
 		for (int c = 0; c < costs.length(); c++) {
 			JSONObject costValueObj = costs.getJSONObject(c);
 			String type = "";
-			try{
+			try {
 				type = costValueObj.getString("Resource");
-				
+
 				int amount = costValueObj.getInt("amount");
 				Resource costResource = Resource.valueOf(type);
 
 				givenCosts.put(costResource, amount);
-			}catch(JSONException exception){
+			} catch (JSONException exception) {
 				type = costValueObj.getString("Good");
 				int amount = costValueObj.getInt("amount");
 				Good costGood = Good.valueOf(type);
@@ -174,11 +175,11 @@ public class SetUpDeckHandler {
 			JSONObject resource = costs.getJSONObject(c);
 			String costTypeValue = resource.getString(resourceTypeKey);
 			int amount = resource.getInt("amount");
-			
-			if(resourceTypeKey.equals("Resource")){
+
+			if (resourceTypeKey.equals("Resource")) {
 				Resource costResource = Resource.valueOf(costTypeValue);
 				givenCosts.put(costResource, amount);
-			}else{
+			} else {
 				Good costGood = Good.valueOf(costTypeValue);
 				givenCosts.put(costGood, amount);
 			}
@@ -187,22 +188,22 @@ public class SetUpDeckHandler {
 		cost = new Cost(costType, givenCosts);
 		return cost;
 	}
-	
+
 	private Effect parseEffect(JSONObject cardData) {
 		JSONObject effectObj = cardData.getJSONObject("Effect");
 		String effectStr = effectObj.getString("EffectType");
 		EffectType effectTypeEnum;
 		Effect effect = null;
 
-		if(effectStr.equals("ENTITY")){
+		if (effectStr.equals("ENTITY")) {
 			effectTypeEnum = EffectType.ENTITY;
 			String entityStr = effectObj.getString("EntityType");
 			EntityType entityEnum = EntityType.valueOf(entityStr);
 			effect = createEntityEffect(effectObj, effectTypeEnum, entityEnum);
-		}else if (effectStr.equals("VALUE")){
+		} else if (effectStr.equals("VALUE")) {
 			effectTypeEnum = EffectType.VALUE;
 			effect = createValueEffect(effectObj, effectTypeEnum);
-		}else{
+		} else {
 			effectTypeEnum = EffectType.MULTIVALUE;
 			effect = createMultiValueEffect(effectObj, effectTypeEnum);
 		}
@@ -216,8 +217,8 @@ public class SetUpDeckHandler {
 		AffectingEntity affectingEntities = AffectingEntity.valueOf(affecting);
 		JSONArray entitiesAndAmounts = effectObj.getJSONArray("entitiesAndAmounts");
 		HashMap<Enum, Integer> valuesAndAmounts = new HashMap<Enum, Integer>();
-		
-		for (int ae = 0; ae < entitiesAndAmounts.length(); ae++){
+
+		for (int ae = 0; ae < entitiesAndAmounts.length(); ae++) {
 			JSONObject entity = entitiesAndAmounts.getJSONObject(ae);
 			valuesAndAmounts.put(ValueType.valueOf(entity.getString("ValueType")), entity.getInt("entityAmount"));
 		}
@@ -233,19 +234,20 @@ public class SetUpDeckHandler {
 			Value value = Value.valueOf(effectObj.getString("Value"));
 			AffectingEntity affectingEntities = AffectingEntity.valueOf(affecting);
 			int valueAmount = effectObj.getInt("valueAmount");
-			
-			if (affecting.equals("NONE")){
+
+			if (affecting.equals("NONE")) {
 				effect = new ValueEffect(effectTypeEnum, value, affectingEntities, valueAmount);
-			}else{				
+			} else {
 				Direction direction = Direction.valueOf(effectObj.getString("Direction"));
 				effect = new ValueEffect(effectTypeEnum, value, affectingEntities, direction, valueAmount);
 			}
-		} catch (JSONException exception) { //the affecting entities was an array
+		} catch (JSONException exception) { // the affecting entities was an
+											// array
 			JSONArray affecting = effectObj.getJSONArray("AffectingEntities");
 			Value value = Value.valueOf(effectObj.getString("Value"));
 			HashMap<Enum, Integer> affectingEntities = new HashMap<Enum, Integer>();
-			
-			for (int ae = 0; ae < affecting.length(); ae++){
+
+			for (int ae = 0; ae < affecting.length(); ae++) {
 				affectingEntities.put(AffectingEntity.valueOf(affecting.getString(ae)), 1);
 			}
 
@@ -268,15 +270,15 @@ public class SetUpDeckHandler {
 			String entityType = entityKeysArr[1];
 			int entityAmount;
 
-			if(entityType.equals("Science")){
+			if (entityType.equals("Science")) {
 				entityAmount = entityToAdd.getInt("entityAmount");
 				Science science = Science.valueOf(entityToAdd.getString(entityType));
 				entitiesAndAmounts.put(science, entityAmount);
-			}else if (entityType.equals("Good")){
+			} else if (entityType.equals("Good")) {
 				entityAmount = entityToAdd.getInt("entityAmount");
 				Good good = Good.valueOf(entityToAdd.getString(entityType));
 				entitiesAndAmounts.put(good, entityAmount);
-			}else{
+			} else {
 				entityAmount = entityToAdd.getInt("entityAmount");
 				Resource resource = Resource.valueOf(entityToAdd.getString(entityType));
 				entitiesAndAmounts.put(resource, entityAmount);
