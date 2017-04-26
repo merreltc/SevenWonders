@@ -53,6 +53,16 @@ public class DeckTest {
 		
 		assertEquals(16, deck.getNumCards());
 	}
+	
+	@Test
+	public void testGetCardValidIndex0() {
+		ArrayList<Card> cards = new ArrayList<Card>();
+		initiateCards(cards);
+		
+		Deck deck = new Deck(Age.AGE1, cards);
+		
+		assertEquals(cards.get(0), deck.getCard(0));
+	}
 
 	private void initiateCards(ArrayList<Card> cards) {
 		ArrayList<Integer> frequency = new ArrayList<Integer>();

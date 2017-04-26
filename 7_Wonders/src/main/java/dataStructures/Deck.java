@@ -24,4 +24,8 @@ public class Deck {
 	public int getNumCards() {
 		return this.cards.size();
 	}
+
+	public Card getCard(int index) {
+		return this.cards.get(index);
+	}
 }
