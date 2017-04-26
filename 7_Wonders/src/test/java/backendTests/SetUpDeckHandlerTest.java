@@ -104,6 +104,29 @@ public class SetUpDeckHandlerTest {
 		assertEquals("Alter", temple.getPreviousStructureName());
 	}
 	
+	@Test
+	public void testVerifyCardInformationRawmaterialCoinCostEntityEffect() {
+		int numPlayers = 3;
+		ArrayList<Card> cards = new ArrayList<Card>();
+
+		String jsonData = readFile("src/assets/age2cards.json");
+		createCards(numPlayers, cards, jsonData, "age2");
+		
+		
+		ArrayList<Card> actual = SetUpDeckHandler.setUpDeckHandler.createDeck(Age.AGE2, numPlayers);
+		Card card = actual.get(0);
+		EntityEffect effect = (EntityEffect) card.getEffect();
+		HashMap<Enum, Integer> entitiesAndAmounts = effect.getEntities();
+	
+		assertEquals("Sawmill", card.getName());
+		assertEquals(CostType.COIN, card.getCostType());
+		assertEquals(EffectType.ENTITY, effect.getEffectType());
+		assertEquals(EntityType.RESOURCE, effect.getEntityType());
+		assertEquals(2, (int) entitiesAndAmounts.get(Resource.LUMBER));
+		assertEquals("None", card.getNextStructureName());
+		assertEquals("None", card.getPreviousStructureName());
+	}
+	
 
 	private void createCards(int numPlayers, ArrayList<Card> cards, String jsonData, String age) {
 		JSONObject jsonObj = new JSONObject(jsonData);
@@ -149,8 +172,7 @@ public class SetUpDeckHandlerTest {
 		EffectType effectTypeEnum;
 		Effect effect = null;
 
-		switch (effectStr) {
-		case "ENTITY":
+		if(effectStr.equals("ENTITY")){
 			effectTypeEnum = EffectType.ENTITY;
 			String entityStr = effectObj.getString("EntityType");
 			EntityType entityEnum = EntityType.valueOf(entityStr);
@@ -160,38 +182,45 @@ public class SetUpDeckHandlerTest {
 
 			for (int entity = 0; entity < entitiesJSON.length(); entity++) {
 				JSONObject entityToAdd = entitiesJSON.getJSONObject(entity);
-
 				Set<String> entityKeys = entityToAdd.keySet();
 
-				String entityType = entityKeys.iterator().next();
+				String[] entityKeysArr = entityKeys.toArray(new String[entityKeys.size()]);
+				String entityType = entityKeysArr[1];
 				int entityAmount;
 
-				switch (entityType) {
-				case "Science":
+				if(entityType.equals("Science")){
 					entityAmount = entityToAdd.getInt("entityAmount");
 					Science science = Science.valueOf(entityToAdd.getString(entityType));
 					entitiesAndAmounts.put(science, entityAmount);
-					break;
-				case "Good":
+				}else if (entityType.equals("Good")){
 					entityAmount = entityToAdd.getInt("entityAmount");
 					Good good = Good.valueOf(entityToAdd.getString(entityType));
 					entitiesAndAmounts.put(good, entityAmount);
-				case "Resource":
+				}else{
 					entityAmount = entityToAdd.getInt("entityAmount");
+					System.out.println("Adding Resource: " + entityToAdd.getString(entityType));
 					Resource resource = Resource.valueOf(entityToAdd.getString(entityType));
 					entitiesAndAmounts.put(resource, entityAmount);
-					break;
-				default:
-					break;
 				}
 			}
-
+			
 			effect = new EntityEffect(effectTypeEnum, entityEnum, entitiesAndAmounts);
-			break;
-		case "VALUE":
+		}else if (effectStr.equals("VALUE")){
 			effectTypeEnum = EffectType.VALUE;
 
 			try {
+				String affecting = effectObj.getString("AffectingEntities");
+				Value value = Value.valueOf(effectObj.getString("Value"));
+				AffectingEntity affectingEntities = AffectingEntity.valueOf(affecting);
+				int valueAmount = effectObj.getInt("valueAmount");
+				
+				if (affecting.equals("NONE")){
+					effect = new ValueEffect(effectTypeEnum, value, affectingEntities, valueAmount);
+				}else{				
+					Direction direction = Direction.valueOf(effectObj.getString("Direction"));
+					effect = new ValueEffect(effectTypeEnum, value, affectingEntities, direction, valueAmount);
+				}
+			} catch (JSONException exception) { //the affecting entities was an array
 				JSONArray affecting = effectObj.getJSONArray("AffectingEntities");
 				Value value = Value.valueOf(effectObj.getString("Value"));
 				HashMap<Enum, Integer> affectingEntities = new HashMap<Enum, Integer>();
@@ -201,24 +230,8 @@ public class SetUpDeckHandlerTest {
 				}
 
 				effect = new ValueEffect(effectTypeEnum, value, affectingEntities);
-			} catch (JSONException exception) { //the affecting entities was an array
-				String affecting = effectObj.getString("AffectingEntities");
-				Value value = Value.valueOf(effectObj.getString("Value"));
-				AffectingEntity affectingEntities = AffectingEntity.valueOf(affecting);
-				int valueAmount = effectObj.getInt("valueAmount");
-				
-				if (affecting.equals("NONE")){
-					effect = new ValueEffect(effectTypeEnum, value, affectingEntities, valueAmount);
-					break;
-				}
-				
-				Direction direction = Direction.valueOf(effectObj.getString("Direction"));
-				effect = new ValueEffect(effectTypeEnum, value, affectingEntities, direction, valueAmount);
-				break;
 			}
-
-			break;
-		case "MULTIVALUE":
+		}else{
 			effectTypeEnum = EffectType.MULTIVALUE;
 			
 			String affecting = effectObj.getString("AffectingEntities");
@@ -234,7 +247,6 @@ public class SetUpDeckHandlerTest {
 			
 			Direction direction = Direction.valueOf(effectObj.getString("Direction"));
 			effect = new MultiValueEffect(effectTypeEnum, value, affectingEntities, direction, valuesAndAmounts);
-			break;
 		}
 		return effect;
 	}

@@ -219,7 +219,7 @@
 				"EffectType": "ENTITY",
 				"EntityType": "MANUFACTUREDGOOD",
 				"entitiesAndAmounts": [{
-										"GOOD": "LOOM",
+										"Good": "LOOM",
 										"entityAmount": 1
 									  }]
 			  },
@@ -237,7 +237,7 @@
 				"EffectType": "ENTITY",
 				"EntityType": "MANUFACTUREDGOOD",
 				"entitiesAndAmounts": [{
-										"GOOD": "GLASS",
+										"Good": "GLASS",
 										"entityAmount": 1
 									  }]
 			  },
@@ -255,7 +255,7 @@
 				"EffectType": "ENTITY",
 				"EntityType": "MANUFACTUREDGOOD",
 				"entitiesAndAmounts": [{
-										"GOOD": "PRESS",
+										"Good": "PRESS",
 										"entityAmount": 1
 									  }]
 			  },

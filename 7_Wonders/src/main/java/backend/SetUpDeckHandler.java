@@ -200,14 +200,12 @@ public class SetUpDeckHandler {
 		EffectType effectTypeEnum;
 		Effect effect = null;
 
-		switch (effectStr) {
-		case "ENTITY":
+		if(effectStr.equals("ENTITY")){
 			effectTypeEnum = EffectType.ENTITY;
 			String entityStr = effectObj.getString("EntityType");
 			EntityType entityEnum = EntityType.valueOf(entityStr);
 			effect = createEntityEffect(effectObj, effectTypeEnum, entityEnum);
-			break;
-		case "VALUE":
+		}else if (effectStr.equals("VALUE")){
 			effectTypeEnum = EffectType.VALUE;
 
 			try {
@@ -218,12 +216,10 @@ public class SetUpDeckHandler {
 				
 				if (affecting.equals("NONE")){
 					effect = new ValueEffect(effectTypeEnum, value, affectingEntities, valueAmount);
-					break;
+				}else{				
+					Direction direction = Direction.valueOf(effectObj.getString("Direction"));
+					effect = new ValueEffect(effectTypeEnum, value, affectingEntities, direction, valueAmount);
 				}
-				
-				Direction direction = Direction.valueOf(effectObj.getString("Direction"));
-				effect = new ValueEffect(effectTypeEnum, value, affectingEntities, direction, valueAmount);
-				break;
 			} catch (JSONException exception) { //the affecting entities was an array
 				JSONArray affecting = effectObj.getJSONArray("AffectingEntities");
 				Value value = Value.valueOf(effectObj.getString("Value"));
@@ -235,9 +231,7 @@ public class SetUpDeckHandler {
 
 				effect = new ValueEffect(effectTypeEnum, value, affectingEntities);
 			}
-
-			break;
-		case "MULTIVALUE":
+		}else{
 			effectTypeEnum = EffectType.MULTIVALUE;
 			
 			String affecting = effectObj.getString("AffectingEntities");
@@ -252,7 +246,6 @@ public class SetUpDeckHandler {
 			}
 			Direction direction = Direction.valueOf(effectObj.getString("Direction"));
 			effect = new MultiValueEffect(effectTypeEnum, value, affectingEntities, direction, valuesAndAmounts);
-			break;
 		}
 		return effect;
 	}
@@ -265,29 +258,24 @@ public class SetUpDeckHandler {
 
 		for (int entity = 0; entity < entitiesJSON.length(); entity++) {
 			JSONObject entityToAdd = entitiesJSON.getJSONObject(entity);
-
 			Set<String> entityKeys = entityToAdd.keySet();
 
-			String entityType = entityKeys.iterator().next();
+			String[] entityKeysArr = entityKeys.toArray(new String[entityKeys.size()]);
+			String entityType = entityKeysArr[1];
 			int entityAmount;
 
-			switch (entityType) {
-			case "Science":
+			if(entityType.equals("Science")){
 				entityAmount = entityToAdd.getInt("entityAmount");
 				Science science = Science.valueOf(entityToAdd.getString(entityType));
 				entitiesAndAmounts.put(science, entityAmount);
-				break;
-			case "Good":
+			}else if (entityType.equals("Good")){
 				entityAmount = entityToAdd.getInt("entityAmount");
 				Good good = Good.valueOf(entityToAdd.getString(entityType));
 				entitiesAndAmounts.put(good, entityAmount);
-			case "Resource":
+			}else{
 				entityAmount = entityToAdd.getInt("entityAmount");
 				Resource resource = Resource.valueOf(entityToAdd.getString(entityType));
 				entitiesAndAmounts.put(resource, entityAmount);
-				break;
-			default:
-				break;
 			}
 		}
 
