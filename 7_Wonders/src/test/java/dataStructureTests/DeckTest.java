@@ -76,6 +76,16 @@ public class DeckTest {
 		
 		assertEquals(cards.get(6), deck.getCard(6));
 	}
+	
+	@Test(expected=IndexOutOfBoundsException.class)
+	public void testGetCardEmptyCardList() {
+		ArrayList<Card> cards = new ArrayList<Card>();
+		
+		Deck deck = new Deck(Age.AGE1, cards);
+		
+		deck.getCard(0);
+		fail();
+	}
 
 	private void initiateCards(ArrayList<Card> cards) {
 		ArrayList<Integer> frequency = new ArrayList<Integer>();
