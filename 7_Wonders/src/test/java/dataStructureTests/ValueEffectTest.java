@@ -180,6 +180,18 @@ public class ValueEffectTest {
 	}
 	
 	@Test
+	public void test5CommerceValueNoneEffect(){
+		Effect effect = new ValueEffect(EffectType.VALUE, Value.COMMERCE, AffectingEntity.NONE, 5);
+		
+		assertEquals(EffectType.VALUE, effect.getEffectType());
+		assertEquals(Direction.SELF, effect.getDirection());
+		assertEquals(5, ((ValueEffect) effect).getValueAmount());
+		assertEquals(Value.COMMERCE, ((ValueEffect) effect).getValue());
+		assertEquals(ValueType.COIN, ((ValueEffect) effect).getValueType());
+		assertEquals(AffectingEntity.NONE, ((ValueEffect) effect).getAffectingEntity());
+	}
+	
+	@Test
 	public void test1CommerceValueNeighborsEffect(){
 		Effect effect = new ValueEffect(EffectType.VALUE, Value.COMMERCE, AffectingEntity.MANUFACTUREDGOODS, Direction.NEIGHBORS, 1);
 		
