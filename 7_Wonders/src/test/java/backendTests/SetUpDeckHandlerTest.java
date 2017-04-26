@@ -127,6 +127,29 @@ public class SetUpDeckHandlerTest {
 		assertEquals("None", card.getPreviousStructureName());
 	}
 	
+	@Test
+	public void testVerifyCardInformationGoodNoCostEntityEffect() {
+		int numPlayers = 3;
+		ArrayList<Card> cards = new ArrayList<Card>();
+
+		String jsonData = readFile("src/assets/age2cards.json");
+		createCards(numPlayers, cards, jsonData, "age2");
+		
+		
+		ArrayList<Card> actual = SetUpDeckHandler.setUpDeckHandler.createDeck(Age.AGE2, numPlayers);
+		Card card = actual.get(6);
+		EntityEffect effect = (EntityEffect) card.getEffect();
+		HashMap<Enum, Integer> entitiesAndAmounts = effect.getEntities();
+	
+		assertEquals("Press", card.getName());
+		assertEquals(CostType.NONE, card.getCostType());
+		assertEquals(EffectType.ENTITY, effect.getEffectType());
+		assertEquals(EntityType.MANUFACTUREDGOOD, effect.getEntityType());
+		assertEquals(1, (int) entitiesAndAmounts.get(Good.PRESS));
+		assertEquals("None", card.getNextStructureName());
+		assertEquals("None", card.getPreviousStructureName());
+	}
+	
 
 	private void createCards(int numPlayers, ArrayList<Card> cards, String jsonData, String age) {
 		JSONObject jsonObj = new JSONObject(jsonData);
