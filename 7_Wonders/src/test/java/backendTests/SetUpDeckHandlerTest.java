@@ -87,6 +87,23 @@ public class SetUpDeckHandlerTest {
 		}
 		
 	}
+	
+	@Test
+	public void testAge2Cards3PlayersTempleHasNextAndPrevious() {
+		int numPlayers = 3;
+		ArrayList<Card> cards = new ArrayList<Card>();
+
+		String jsonData = readFile("src/assets/age2cards.json");
+		createCards(numPlayers, cards, jsonData, "age2");
+		
+		
+		ArrayList<Card> actual = SetUpDeckHandler.setUpDeckHandler.createDeck(Age.AGE2, numPlayers);
+		Card temple = actual.get(8);
+		assertEquals("Temple", temple.getName());
+		assertEquals("Pantheon", temple.getNextStructureName());
+		assertEquals("Alter", temple.getPreviousStructureName());
+	}
+	
 
 	private void createCards(int numPlayers, ArrayList<Card> cards, String jsonData, String age) {
 		JSONObject jsonObj = new JSONObject(jsonData);
@@ -107,13 +124,15 @@ public class SetUpDeckHandlerTest {
 
 			Cost cost = parseCost(cardData);
 			Effect effect = parseEffect(cardData);
+			String previousStructure = cardData.getString("Previous");
+			String nextStructure = cardData.getString("Next");
 			
 			Card card;
 			
 			if(cardType.equals(CardType.GUILD)){
 				card = new Card(cardName, cardType, cost, effect);
 			}else{
-				card = new Card(cardName, frequencyByNumPlayers, cardType, cost, effect);
+				card = new Card(cardName, frequencyByNumPlayers, cardType, cost, effect, previousStructure, nextStructure);
 			}
 			
 			for(Integer numOfFrequencyByNumPlayers: frequencyByNumPlayers){

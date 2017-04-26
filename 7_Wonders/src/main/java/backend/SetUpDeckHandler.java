@@ -71,13 +71,15 @@ public class SetUpDeckHandler {
 
 			Cost cost = parseCost(cardData);
 			Effect effect = parseEffect(cardData);
+			String previousStructure = cardData.getString("Previous");
+			String nextStructure = cardData.getString("Next");
 			
 			Card card;
 			
 			if(cardType.equals(CardType.GUILD)){
 				card = new Card(cardName, cardType, cost, effect);
 			}else{
-				card = new Card(cardName, frequencyByNumPlayers, cardType, cost, effect);
+				card = new Card(cardName, frequencyByNumPlayers, cardType, cost, effect, previousStructure, nextStructure);
 			}
 			
 			for(Integer numOfFrequencyByNumPlayers: frequencyByNumPlayers){

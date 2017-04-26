@@ -12,7 +12,9 @@
 										"Resource": "LUMBER",
 										"entityAmount": 1
 									  }]
-			  }
+			  },
+	"Next": "None",
+	"Previous": "None"
 },
 {
 	"cardName": "Stone Pit",
@@ -28,7 +30,9 @@
 										"Resource": "STONE",
 										"entityAmount": 1
 									  }]
-			  }
+			  },
+	"Next": "None",
+	"Previous": "None"
 },
 {
 	"cardName": "Clay Pool",
@@ -44,7 +48,9 @@
 										"Resource": "CLAY",
 										"entityAmount": 1
 									  }]
-			  }
+			  },
+	"Next": "None",
+	"Previous": "None"
 },
 {
 	"cardName": "Ore Vein",
@@ -60,7 +66,9 @@
 										"Resource": "ORE",
 										"entityAmount": 1
 									  }]
-			  }
+			  },
+	"Next": "None",
+	"Previous": "None"
 },
 {
 	"cardName": "Tree Farm",
@@ -81,7 +89,9 @@
 										"Resource": "CLAY",
 										"entityAmount": 1
 									  }]
-			  }
+			  },
+	"Next": "None",
+	"Previous": "None"
 },
 {
 	"cardName": "Excavation",
@@ -102,7 +112,9 @@
 										"Resource": "CLAY",
 										"entityAmount": 1
 									  }]
-			  }
+			  },
+	"Next": "None",
+	"Previous": "None"
 },
 {
 	"cardName": "Clay Pit",
@@ -123,7 +135,9 @@
 										"Resource": "ORE",
 										"entityAmount": 1
 									  }]
-			  }
+			  },
+	"Next": "None",
+	"Previous": "None"
 },
 {
 	"cardName": "Timber Yard",
@@ -144,7 +158,9 @@
 										"Resource": "LUMBER",
 										"entityAmount": 1
 									  }]
-			  }
+			  },
+	"Next": "None",
+	"Previous": "None"
 },
 {
 	"cardName": "Forest Cave",
@@ -165,7 +181,9 @@
 										"Resource": "ORE",
 										"entityAmount": 1
 									  }]
-			  }
+			  },
+	"Next": "None",
+	"Previous": "None"
 },			
 {
 	"cardName": "Mine",
@@ -186,7 +204,9 @@
 										"Resource": "STONE",
 										"entityAmount": 1
 									  }]
-			  }
+			  },
+	"Next": "None",
+	"Previous": "None"
 },			
 {
 	"cardName": "Loom",
@@ -202,7 +222,9 @@
 										"GOOD": "LOOM",
 										"entityAmount": 1
 									  }]
-			  }
+			  },
+	"Next": "None",
+	"Previous": "None"
 },			
 {
 	"cardName": "Glassworks",
@@ -218,7 +240,9 @@
 										"GOOD": "GLASS",
 										"entityAmount": 1
 									  }]
-			  }
+			  },
+	"Next": "None",
+	"Previous": "None"
 },			
 {
 	"cardName": "Press",
@@ -234,7 +258,9 @@
 										"GOOD": "PRESS",
 										"entityAmount": 1
 									  }]
-			  }
+			  },
+	"Next": "None",
+	"Previous": "None"
 },			
 {
 	"cardName": "Pawnshop",
@@ -248,7 +274,9 @@
 				"Value": "VICTORYPOINTS",
 				"AffectingEntities": "NONE",
 				"valueAmount": 3
-			  }
+			  },
+	"Next": "None",
+	"Previous": "None"
 },			
 {
 	"cardName": "Baths",
@@ -266,7 +294,9 @@
 				"Value": "VICTORYPOINTS",
 				"AffectingEntities": "NONE",
 				"valueAmount": 3
-			  }
+			  },
+	"Next": "Aqueduct",
+	"Previous": "None"
 },			
 {
 	"cardName": "Alter",
@@ -280,7 +310,9 @@
 				"Value": "VICTORYPOINTS",
 				"AffectingEntities": "NONE",
 				"valueAmount": 2
-			  }
+			  },
+	"Next": "Temple",
+	"Previous": "None"
 },			
 {
 	"cardName": "Theater",
@@ -294,7 +326,9 @@
 				"Value": "VICTORYPOINTS",
 				"AffectingEntities": "NONE",
 				"valueAmount": 2
-			  }
+			  },
+	"Next": "Statue",
+	"Previous": "None"
 },			
 {
 	"cardName": "Tavern",
@@ -308,7 +342,9 @@
 				"Value": "COMMERCE",
 				"AffectingEntities": "NONE",
 				"valueAmount": 5
-			  }
+			  },
+	"Next": "None",
+	"Previous": "None"
 },
 {
 	"cardName": "East Trading Post",
@@ -323,7 +359,9 @@
 				"AffectingEntities": "RAWRESOURCES",
 				"Direction": "RIGHT",
 				"valueAmount": 1
-			  }
+			  },
+	"Next": "Forum",
+	"Previous": "None"
 },			
 {
 	"cardName": "West Trading Post",
@@ -338,7 +376,9 @@
 				"AffectingEntities": "RAWRESOURCES",
 				"Direction": "LEFT",
 				"valueAmount": 1
-			  }
+			  },
+	"Next": "Forum",
+	"Previous": "None"
 },			
 {
 	"cardName": "MARKETPLACE",
@@ -353,7 +393,9 @@
 				"AffectingEntities": "MANUFACTUREDGOODS",
 				"Direction": "NEIGHBORS",
 				"valueAmount": 1
-			  }
+			  },
+	"Next": "Caravansery",
+	"Previous": "None"
 },			
 {
 	"cardName": "Stockade",
@@ -371,7 +413,9 @@
 				"Value": "MILITARY",
 				"AffectingEntities": "NONE",
 				"valueAmount": 1
-			  }
+			  },
+	"Next": "None",
+	"Previous": "None"
 },
 {
 	"cardName": "Barracks",
@@ -389,7 +433,9 @@
 				"Value": "MILITARY",
 				"AffectingEntities": "NONE",
 				"valueAmount": 1
-			  }
+			  },
+	"Next": "None",
+	"Previous": "None"
 },
 {
 	"cardName": "Guard Tower",
@@ -407,7 +453,9 @@
 				"Value": "MILITARY",
 				"AffectingEntities": "NONE",
 				"valueAmount": 1
-			  }
+			  },
+	"Next": "None",
+	"Previous": "None"
 },
 {
 	"cardName": "Apothecary",
@@ -427,7 +475,9 @@
 										"Science": "PROTRACTOR",
 										"entityAmount": 1
 									  }]
-			  }
+			  },
+	"Next": "Stables/Dispensary",
+	"Previous": "None"
 },
 {
 	"cardName": "Workshop",
@@ -447,7 +497,9 @@
 										"Science": "WHEEL",
 										"entityAmount": 1
 									  }]
-			  }
+			  },
+	"Next": "Archery Range/Laboratory",
+	"Previous": "None"
 },
 {
 	"cardName": "Scriptorium",
@@ -467,6 +519,8 @@
 										"Science": "TABLET",
 										"entityAmount": 1
 									  }]
-			  }
+			  },
+	"Next": "Courthouse/Library",
+	"Previous": "None"
 }]
 }

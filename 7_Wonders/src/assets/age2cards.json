@@ -13,7 +13,9 @@
 										"Resource": "LUMBER",
 										"entityAmount": 2
 									  }]
-			  }
+			  },
+	"Next": "None",
+	"Previous": "None"
 },
 {
 	"cardName": "Quarry",
@@ -30,7 +32,9 @@
 										"Resource": "STONE",
 										"entityAmount": 2
 									  }]
-			  }
+			  },
+	"Next": "None",
+	"Previous": "None"
 },
 {
 	"cardName": "Brickyard",
@@ -47,7 +51,9 @@
 										"Resource": "CLAY",
 										"entityAmount": 2
 									  }]
-			  }
+			  },
+	"Next": "None",
+	"Previous": "None"
 },
 {
 	"cardName": "Foundry",
@@ -64,7 +70,9 @@
 										"Resource": "ORE",
 										"entityAmount": 2
 									  }]
-			  }
+			  },
+	"Next": "None",
+	"Previous": "None"
 },
 {
 	"cardName": "Loom",
@@ -80,7 +88,9 @@
 										"GOOD": "LOOM",
 										"entityAmount": 1
 									  }]
-			  }
+			  },
+	"Next": "None",
+	"Previous": "None"
 },			
 {
 	"cardName": "Glassworks",
@@ -96,7 +106,9 @@
 										"GOOD": "GLASS",
 										"entityAmount": 1
 									  }]
-			  }
+			  },
+	"Next": "None",
+	"Previous": "None"
 },			
 {
 	"cardName": "Press",
@@ -112,7 +124,9 @@
 										"GOOD": "PRESS",
 										"entityAmount": 1
 									  }]
-			  }
+			  },
+	"Next": "None",
+	"Previous": "None"
 },		
 {
 	"cardName": "Aqueduct",
@@ -130,7 +144,9 @@
 				"Value": "VICTORYPOINTS",
 				"AffectingEntities": "NONE",
 				"valueAmount": 5
-			  }
+			  },
+	"Next": "None",
+	"Previous": "Baths"
 },			
 {
 	"cardName": "Temple",
@@ -156,7 +172,9 @@
 				"Value": "VICTORYPOINTS",
 				"AffectingEntities": "NONE",
 				"valueAmount": 3
-			  }
+			  },
+	"Next": "Pantheon",
+	"Previous": "Alter"
 },			
 {
 	"cardName": "Statue",
@@ -178,7 +196,9 @@
 				"Value": "VICTORYPOINTS",
 				"AffectingEntities": "NONE",
 				"valueAmount": 4
-			  }
+			  },
+	"Next": "Gardens",
+	"Previous": "Theater"
 },
 {
 	"cardName": "Forum",
@@ -206,7 +226,9 @@
 										"Good": "PRESS",
 										"entityAmount": 1
 									  }]
-			  }
+			  },
+	"Next": "Haven",
+	"Previous": "Trading Post"
 },			
 {
 	"cardName": "Caravansery",
@@ -238,7 +260,9 @@
 										"Resource": "STONE",
 										"entityAmount": 1
 									  }]
-			  }
+			  },
+	"Next": "Lighthouse",
+	"Previous": "Marketplace"
 },			
 {
 	"cardName": "Vineyard",
@@ -253,7 +277,9 @@
 				"AffectingEntities": "RAWRESOURCES",
 				"Direction": "ALL",
 				"valueAmount": 1
-			  }
+			  },
+	"Next": "None",
+	"Previous": "None"
 },			
 {
 	"cardName": "Bazar",
@@ -268,7 +294,9 @@
 				"AffectingEntities": "MANUFACTUREDGOODS",
 				"Direction": "ALL",
 				"valueAmount": 2
-			  }
+			  },
+	"Next": "None",
+	"Previous": "None"
 },
 {
 	"cardName": "Walls",
@@ -286,7 +314,9 @@
 				"Value": "MILITARY",
 				"AffectingEntities": "NONE",
 				"valueAmount": 2
-			  }
+			  },
+	"Next": "Fortifications",
+	"Previous": "None"
 },
 {
 	"cardName": "Training Ground",
@@ -308,7 +338,9 @@
 				"Value": "MILITARY",
 				"AffectingEntities": "NONE",
 				"valueAmount": 2
-			  }
+			  },
+	"Next": "Circus",
+	"Previous": "None"
 },
 {
 	"cardName": "Stables",
@@ -334,7 +366,9 @@
 				"Value": "MILITARY",
 				"AffectingEntities": "NONE",
 				"valueAmount": 2
-			  }
+			  },
+	"Next": "None",
+	"Previous": "Apothecary"
 },
 {
 	"cardName": "Archery Range",
@@ -356,7 +390,9 @@
 				"Value": "MILITARY",
 				"AffectingEntities": "NONE",
 				"valueAmount": 2
-			  }
+			  },
+	"Next": "None",
+	"Previous": "Workshop"
 },
 {
 	"cardName": "Dispensary",
@@ -380,7 +416,9 @@
 										"Science": "PROTRACTOR",
 										"entityAmount": 1
 									  }]
-			  }
+			  },
+	"Next": "Arena/Lodge",
+	"Previous": "Apothecary"
 },
 {
 	"cardName": "Laboratory",
@@ -404,7 +442,9 @@
 										"Science": "WHEEL",
 										"entityAmount": 1
 									  }]
-			  }
+			  },
+	"Next": "Siege Workshop/Observatory",
+	"Previous": "Workshop"
 },
 {
 	"cardName": "Library",
@@ -428,7 +468,9 @@
 										"Science": "TABLET",
 										"entityAmount": 1
 									  }]
-			  }
+			  },
+	"Next": "Senate/University",
+	"Previous": "Scriptorium"
 },
 {
 	"cardName": "School",
@@ -452,6 +494,32 @@
 										"Science": "TABLET",
 										"entityAmount": 1
 									  }]
-			  }
+			  },
+	"Next": "Academy/Study",
+	"Previous": "None"
+},
+{
+	"cardName": "Courthouse",
+	"cardType": "CIVILIANSTRUCTURE",
+	"Cost": {
+				"CostType": "MULTIVALUE",
+				"cost": [{
+							"Good": "LOOM",
+							"amount": 1
+						},
+						{
+							"Resource": "CLAY",
+							"amount": 2
+						}]
+			},
+	"frequencyByNumPlayers": [3, 5],
+	"Effect": {
+				"EffectType": "VALUE",
+				"Value": "VICTORYPOINTS",
+				"AffectingEntities": "NONE",
+				"valueAmount": 4
+			  },
+	"Next": "None",
+	"Previous": "Scriptorium"
 }]
 }
