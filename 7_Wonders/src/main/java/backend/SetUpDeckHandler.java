@@ -115,28 +115,22 @@ public class SetUpDeckHandler {
 		CostType costType;
 		Cost cost;
 
-		switch (costTypeS) {
-		case "COIN":
+		if(costTypeS.equals("COIN")){
 			costType = CostType.COIN;
 			int coinCost = costObj.getInt("coinCost");
 			cost = new Cost(costType, coinCost);
-			break;
-		case "RESOURCE":
+		}else if (costTypeS.equals("RESOURCE")){
 			costType = CostType.RESOURCE;
 			cost = createResourceOrGoodCost(costObj, costType, "Resource");
-			break;
-		case "GOOD":
+		}else if (costTypeS.equals("GOOD")){
 			costType = CostType.GOOD;
 			cost = createResourceOrGoodCost(costObj, costType, "Good");
-			break;
-		case "MULTITYPE":
+		}else if (costTypeS.equals("MULTITYPE")) {
 			costType = CostType.MULTITYPE;
 			cost = createMultiTypeCost(costObj, costType);
-			break;
-		default:
+		}else{
 			costType = CostType.NONE;
 			cost = new Cost(costType, 0);
-			break;
 		}
 		return cost;
 	}
@@ -207,45 +201,55 @@ public class SetUpDeckHandler {
 			effect = createEntityEffect(effectObj, effectTypeEnum, entityEnum);
 		}else if (effectStr.equals("VALUE")){
 			effectTypeEnum = EffectType.VALUE;
-
-			try {
-				String affecting = effectObj.getString("AffectingEntities");
-				Value value = Value.valueOf(effectObj.getString("Value"));
-				AffectingEntity affectingEntities = AffectingEntity.valueOf(affecting);
-				int valueAmount = effectObj.getInt("valueAmount");
-				
-				if (affecting.equals("NONE")){
-					effect = new ValueEffect(effectTypeEnum, value, affectingEntities, valueAmount);
-				}else{				
-					Direction direction = Direction.valueOf(effectObj.getString("Direction"));
-					effect = new ValueEffect(effectTypeEnum, value, affectingEntities, direction, valueAmount);
-				}
-			} catch (JSONException exception) { //the affecting entities was an array
-				JSONArray affecting = effectObj.getJSONArray("AffectingEntities");
-				Value value = Value.valueOf(effectObj.getString("Value"));
-				HashMap<Enum, Integer> affectingEntities = new HashMap<Enum, Integer>();
-				
-				for (int ae = 0; ae < affecting.length(); ae++){
-					affectingEntities.put(AffectingEntity.valueOf(affecting.getString(ae)), 1);
-				}
-
-				effect = new ValueEffect(effectTypeEnum, value, affectingEntities);
-			}
+			effect = createValueEffect(effectObj, effectTypeEnum);
 		}else{
 			effectTypeEnum = EffectType.MULTIVALUE;
-			
+			effect = createMultiValueEffect(effectObj, effectTypeEnum);
+		}
+		return effect;
+	}
+
+	private Effect createMultiValueEffect(JSONObject effectObj, EffectType effectTypeEnum) {
+		Effect effect;
+		String affecting = effectObj.getString("AffectingEntities");
+		Value value = Value.valueOf(effectObj.getString("Value"));
+		AffectingEntity affectingEntities = AffectingEntity.valueOf(affecting);
+		JSONArray entitiesAndAmounts = effectObj.getJSONArray("entitiesAndAmounts");
+		HashMap<Enum, Integer> valuesAndAmounts = new HashMap<Enum, Integer>();
+		
+		for (int ae = 0; ae < entitiesAndAmounts.length(); ae++){
+			JSONObject entity = entitiesAndAmounts.getJSONObject(ae);
+			valuesAndAmounts.put(ValueType.valueOf(entity.getString("ValueType")), entity.getInt("entityAmount"));
+		}
+		Direction direction = Direction.valueOf(effectObj.getString("Direction"));
+		effect = new MultiValueEffect(effectTypeEnum, value, affectingEntities, direction, valuesAndAmounts);
+		return effect;
+	}
+
+	private Effect createValueEffect(JSONObject effectObj, EffectType effectTypeEnum) {
+		Effect effect;
+		try {
 			String affecting = effectObj.getString("AffectingEntities");
 			Value value = Value.valueOf(effectObj.getString("Value"));
 			AffectingEntity affectingEntities = AffectingEntity.valueOf(affecting);
-			JSONArray entitiesAndAmounts = effectObj.getJSONArray("entitiesAndAmounts");
-			HashMap<Enum, Integer> valuesAndAmounts = new HashMap<Enum, Integer>();
+			int valueAmount = effectObj.getInt("valueAmount");
 			
-			for (int ae = 0; ae < entitiesAndAmounts.length(); ae++){
-				JSONObject entity = entitiesAndAmounts.getJSONObject(ae);
-				valuesAndAmounts.put(ValueType.valueOf(entity.getString("ValueType")), entity.getInt("entityAmount"));
+			if (affecting.equals("NONE")){
+				effect = new ValueEffect(effectTypeEnum, value, affectingEntities, valueAmount);
+			}else{				
+				Direction direction = Direction.valueOf(effectObj.getString("Direction"));
+				effect = new ValueEffect(effectTypeEnum, value, affectingEntities, direction, valueAmount);
 			}
-			Direction direction = Direction.valueOf(effectObj.getString("Direction"));
-			effect = new MultiValueEffect(effectTypeEnum, value, affectingEntities, direction, valuesAndAmounts);
+		} catch (JSONException exception) { //the affecting entities was an array
+			JSONArray affecting = effectObj.getJSONArray("AffectingEntities");
+			Value value = Value.valueOf(effectObj.getString("Value"));
+			HashMap<Enum, Integer> affectingEntities = new HashMap<Enum, Integer>();
+			
+			for (int ae = 0; ae < affecting.length(); ae++){
+				affectingEntities.put(AffectingEntity.valueOf(affecting.getString(ae)), 1);
+			}
+
+			effect = new ValueEffect(effectTypeEnum, value, affectingEntities);
 		}
 		return effect;
 	}

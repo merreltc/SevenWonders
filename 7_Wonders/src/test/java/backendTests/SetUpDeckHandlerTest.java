@@ -198,7 +198,6 @@ public class SetUpDeckHandlerTest {
 					entitiesAndAmounts.put(good, entityAmount);
 				}else{
 					entityAmount = entityToAdd.getInt("entityAmount");
-					System.out.println("Adding Resource: " + entityToAdd.getString(entityType));
 					Resource resource = Resource.valueOf(entityToAdd.getString(entityType));
 					entitiesAndAmounts.put(resource, entityAmount);
 				}
@@ -258,28 +257,22 @@ public class SetUpDeckHandlerTest {
 		CostType costType;
 		Cost cost;
 
-		switch (costTypeS) {
-		case "COIN":
+		if(costTypeS.equals("COIN")){
 			costType = CostType.COIN;
 			int coinCost = costObj.getInt("coinCost");
 			cost = new Cost(costType, coinCost);
-			break;
-		case "RESOURCE":
+		}else if (costTypeS.equals("RESOURCE")){
 			costType = CostType.RESOURCE;
 			cost = createResourceOrGoodCost(costObj, costType, "Resource");
-			break;
-		case "GOOD":
+		}else if (costTypeS.equals("GOOD")){
 			costType = CostType.GOOD;
 			cost = createResourceOrGoodCost(costObj, costType, "Good");
-			break;
-		case "MULTITYPE":
+		}else if (costTypeS.equals("MULTITYPE")) {
 			costType = CostType.MULTITYPE;
 			cost = createMultiTypeCost(costObj, costType);
-			break;
-		default:
+		}else{
 			costType = CostType.NONE;
 			cost = new Cost(costType, 0);
-			break;
 		}
 		
 		return cost;
