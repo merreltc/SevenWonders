@@ -19,7 +19,7 @@ public class DeckTest {
 	@Test
 	public void testDeckConstructor() {
 		ArrayList<Card> cards = new ArrayList<Card>();
-		initiateCardes(cards);
+		initiateCards(cards);
 		
 		Deck deck = new Deck(Age.AGE1, cards);
 		
@@ -30,14 +30,31 @@ public class DeckTest {
 	@Test
 	public void testGetNumCardsSmall() {
 		ArrayList<Card> cards = new ArrayList<Card>();
-		initiateCardes(cards);
+		initiateCards(cards);
 		
 		Deck deck = new Deck(Age.AGE1, cards);
 		
 		assertEquals(2, deck.getNumCards());
 	}
+	
+	@Test
+	public void testGetNumCardsLarger() {
+		ArrayList<Card> cards = new ArrayList<Card>();
+		initiateCards(cards);
+		initiateCards(cards);
+		initiateCards(cards);
+		initiateCards(cards);
+		initiateCards(cards);
+		initiateCards(cards);
+		initiateCards(cards);
+		initiateCards(cards);
+		
+		Deck deck = new Deck(Age.AGE1, cards);
+		
+		assertEquals(16, deck.getNumCards());
+	}
 
-	private void initiateCardes(ArrayList<Card> cards) {
+	private void initiateCards(ArrayList<Card> cards) {
 		ArrayList<Integer> frequency = new ArrayList<Integer>();
 		frequency.add(3);
 		frequency.add(6);

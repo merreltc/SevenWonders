@@ -22,6 +22,6 @@ public class Deck {
 	}
 
 	public int getNumCards() {
-		return 2;
+		return this.cards.size();
 	}
 }
