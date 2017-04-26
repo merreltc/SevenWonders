@@ -63,6 +63,19 @@ public class DeckTest {
 		
 		assertEquals(cards.get(0), deck.getCard(0));
 	}
+	
+	@Test
+	public void testGetCardValidIndex6() {
+		ArrayList<Card> cards = new ArrayList<Card>();
+		initiateCards(cards);
+		initiateCards(cards);
+		initiateCards(cards);
+		initiateCards(cards);
+		
+		Deck deck = new Deck(Age.AGE1, cards);
+		
+		assertEquals(cards.get(6), deck.getCard(6));
+	}
 
 	private void initiateCards(ArrayList<Card> cards) {
 		ArrayList<Integer> frequency = new ArrayList<Integer>();
