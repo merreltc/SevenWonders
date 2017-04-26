@@ -370,4 +370,30 @@ public class CardTest {
 		assertEquals("Trading Post", card.getPreviousStructureName());
 		assertEquals("Haven", card.getNextStructureName());
 	}
+	
+	@Test
+	public void testToStringEastTrading(){
+		ArrayList<Integer> frequency = new ArrayList<Integer>();
+		frequency.add(3);
+		frequency.add(6);
+		frequency.add(7);
+
+		Cost cost = EasyMock.createStrictMock(Cost.class);
+		Effect effect = EasyMock.createStrictMock(Effect.class);
+
+		EasyMock.expect(cost.getType()).andReturn(CostType.RESOURCE);
+		EasyMock.expect(effect.getEffectType()).andReturn(Effect.EffectType.VALUE);
+
+		EasyMock.replay(cost, effect);
+
+		Card card = new Card("East Trading Post", frequency, CardType.COMMERCIALSTRUCTURE, cost, effect);
+		String expected = "name: East Trading Post" + System.lineSeparator()
+						+ "minFrequencyByNumPlayers: 3" + System.lineSeparator()
+						+ "costType: RESOURCE" + System.lineSeparator()
+						+ "effectType: VALUE";
+		
+		assertEquals(expected, card.toString());
+		
+		EasyMock.verify(cost, effect);
+	}
 }

@@ -53,6 +53,13 @@ public class Card {
 		this.effect = effect;
 	}
 
+	public String toString(){
+		String value = "name: " + this.name + System.lineSeparator() + "minFrequencyByNumPlayers: "
+				+ this.frequencyByNumPlayers.get(0) + System.lineSeparator() + "costType: "
+				+ this.getCostType().toString() + System.lineSeparator() + "effectType: "
+				+ this.getEffectType().toString();
+		return value;
+	}
 	public String getName() {
 		return this.name;
 	}
