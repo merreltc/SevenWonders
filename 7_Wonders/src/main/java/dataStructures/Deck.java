@@ -20,4 +20,8 @@ public class Deck {
 	public ArrayList<Card> getCards() {
 		return this.cards;
 	}
+
+	public int getNumCards() {
+		return 2;
+	}
 }
