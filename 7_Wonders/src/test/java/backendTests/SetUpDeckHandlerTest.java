@@ -150,6 +150,29 @@ public class SetUpDeckHandlerTest {
 		assertEquals("None", card.getPreviousStructureName());
 	}
 	
+	@Test
+	public void testVerifyCardInformationCivilianResourceCostValueEffect() {
+		int numPlayers = 3;
+		ArrayList<Card> cards = new ArrayList<Card>();
+
+		String jsonData = readFile("src/assets/age2cards.json");
+		createCards(numPlayers, cards, jsonData, "age2");
+		
+		
+		ArrayList<Card> actual = SetUpDeckHandler.setUpDeckHandler.createDeck(Age.AGE2, numPlayers);
+		Card card = actual.get(7);
+		ValueEffect effect = (ValueEffect) card.getEffect();
+	
+		assertEquals("Aqueduct", card.getName());
+		assertEquals(CostType.RESOURCE, card.getCostType());
+		assertEquals(EffectType.VALUE, effect.getEffectType());
+		assertEquals(Value.VICTORYPOINTS, effect.getValue());
+		assertEquals(ValueType.VICTORYPOINT, effect.getValueType());
+		assertEquals(AffectingEntity.NONE, effect.getAffectingEntity());
+		assertEquals(5, effect.getValueAmount());
+		assertEquals("None", card.getNextStructureName());
+		assertEquals("Baths", card.getPreviousStructureName());
+	}
 
 	private void createCards(int numPlayers, ArrayList<Card> cards, String jsonData, String age) {
 		JSONObject jsonObj = new JSONObject(jsonData);
