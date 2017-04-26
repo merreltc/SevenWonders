@@ -1,6 +1,6 @@
 { "age1": [{
 	"cardName": "Lumber Yard",
-	"frequencyByNumPlayers": [3],
+	"frequencyByNumPlayers": [3, 4],
 	"cardType": "RAWMATERIAL",
 	"Cost": {
 				"CostType": "NONE"
@@ -16,7 +16,7 @@
 },
 {
 	"cardName": "Stone Pit",
-	"frequencyByNumPlayers": [3],
+	"frequencyByNumPlayers": [3, 5],
 	"cardType": "RAWMATERIAL",
 	"Cost": {
 				"CostType": "NONE"
@@ -32,7 +32,7 @@
 },
 {
 	"cardName": "Clay Pool",
-	"frequencyByNumPlayers": [3],
+	"frequencyByNumPlayers": [3, 5],
 	"cardType": "RAWMATERIAL",
 	"Cost": {
 				"CostType": "NONE"
@@ -48,7 +48,7 @@
 },
 {
 	"cardName": "Ore Vein",
-	"frequencyByNumPlayers": [3],
+	"frequencyByNumPlayers": [3, 4],
 	"cardType": "RAWMATERIAL",
 	"Cost": {
 				"CostType": "NONE"
@@ -190,7 +190,7 @@
 },			
 {
 	"cardName": "Loom",
-	"frequencyByNumPlayers": [3],
+	"frequencyByNumPlayers": [3, 6],
 	"cardType": "MANUFACTUREDGOOD",
 	"Cost": {
 				"CostType": "NONE"
@@ -206,7 +206,7 @@
 },			
 {
 	"cardName": "Glassworks",
-	"frequencyByNumPlayers": [3],
+	"frequencyByNumPlayers": [3, 6],
 	"cardType": "MANUFACTUREDGOOD",
 	"Cost": {
 				"CostType": "NONE"
@@ -222,7 +222,7 @@
 },			
 {
 	"cardName": "Press",
-	"frequencyByNumPlayers": [3],
+	"frequencyByNumPlayers": [3, 6],
 	"cardType": "MANUFACTUREDGOOD",
 	"Cost": {
 				"CostType": "NONE"
@@ -242,7 +242,7 @@
 	"Cost": {
 				"CostType": "NONE"
 			},
-	"frequencyByNumPlayers": [4],
+	"frequencyByNumPlayers": [4, 7],
 	"Effect": {
 				"EffectType": "VALUE",
 				"Value": "VICTORYPOINTS",
@@ -260,7 +260,7 @@
 							"amount": 1
 						}]
 			},
-	"frequencyByNumPlayers": [3],
+	"frequencyByNumPlayers": [3, 7],
 	"Effect": {
 				"EffectType": "VALUE",
 				"Value": "VICTORYPOINTS",
@@ -274,7 +274,7 @@
 	"Cost": {
 				"CostType": "NONE"
 			},
-	"frequencyByNumPlayers": [3],
+	"frequencyByNumPlayers": [3, 5],
 	"Effect": {
 				"EffectType": "VALUE",
 				"Value": "VICTORYPOINTS",
@@ -288,7 +288,7 @@
 	"Cost": {
 				"CostType": "NONE"
 			},
-	"frequencyByNumPlayers": [3],
+	"frequencyByNumPlayers": [3, 6],
 	"Effect": {
 				"EffectType": "VALUE",
 				"Value": "VICTORYPOINTS",
@@ -302,7 +302,7 @@
 	"Cost": {
 				"CostType": "NONE"
 			},
-	"frequencyByNumPlayers": [4],
+	"frequencyByNumPlayers": [4, 5, 7],
 	"Effect": {
 				"EffectType": "VALUE",
 				"Value": "COMMERCE",
@@ -316,7 +316,7 @@
 	"Cost": {
 				"CostType": "NONE"
 			},
-	"frequencyByNumPlayers": [3],
+	"frequencyByNumPlayers": [3, 7],
 	"Effect": {
 				"EffectType": "VALUE",
 				"Value": "COMMERCE",
@@ -331,7 +331,7 @@
 	"Cost": {
 				"CostType": "NONE"
 			},
-	"frequencyByNumPlayers": [3],
+	"frequencyByNumPlayers": [3, 7],
 	"Effect": {
 				"EffectType": "VALUE",
 				"Value": "COMMERCE",
@@ -346,7 +346,7 @@
 	"Cost": {
 				"CostType": "NONE"
 			},
-	"frequencyByNumPlayers": [3],
+	"frequencyByNumPlayers": [3, 6],
 	"Effect": {
 				"EffectType": "VALUE",
 				"Value": "COMMERCE",
@@ -365,7 +365,7 @@
 							"amount": 1
 						}]
 			},
-	"frequencyByNumPlayers": [3],
+	"frequencyByNumPlayers": [3, 7],
 	"Effect": {
 				"EffectType": "VALUE",
 				"Value": "MILITARY",
@@ -383,7 +383,7 @@
 							"amount": 1
 						}]
 			},
-	"frequencyByNumPlayers": [3],
+	"frequencyByNumPlayers": [3, 5],
 	"Effect": {
 				"EffectType": "VALUE",
 				"Value": "MILITARY",
@@ -401,7 +401,7 @@
 							"amount": 1
 						}]
 			},
-	"frequencyByNumPlayers": [3],
+	"frequencyByNumPlayers": [3, 4],
 	"Effect": {
 				"EffectType": "VALUE",
 				"Value": "MILITARY",
@@ -419,7 +419,7 @@
 							"amount": 1
 						}]
 			},
-	"frequencyByNumPlayers": [3],
+	"frequencyByNumPlayers": [3, 5],
 	"Effect": {
 				"EffectType": "ENTITY",
 				"EntityType": "SCIENCE",
@@ -439,7 +439,7 @@
 							"amount": 1
 						}]
 			},
-	"frequencyByNumPlayers": [3],
+	"frequencyByNumPlayers": [3, 7],
 	"Effect": {
 				"EffectType": "ENTITY",
 				"EntityType": "SCIENCE",
@@ -459,7 +459,7 @@
 							"amount": 1
 						}]
 			},
-	"frequencyByNumPlayers": [3],
+	"frequencyByNumPlayers": [3, 4],
 	"Effect": {
 				"EffectType": "ENTITY",
 				"EntityType": "SCIENCE",

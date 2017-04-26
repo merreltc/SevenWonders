@@ -1,10 +1,10 @@
-[{
+{ "age3": [{
 	"cardName": "Workers Guild",
-	"minNumPlayers": 3,
+	"frequencyByNumPlayers": [3],
 	"cardType": "GUILD",
 	"Cost": {
 				"CostType": "RESOURCE",
-				"Cost": [{
+				"cost": [{
 							"Resource": "LUMBER",
 							"amount": 1
 						},
@@ -31,11 +31,11 @@
 },
 {
 	"cardName": "Craftsmens Guild",
-	"minNumPlayers": 3,
+	"frequencyByNumPlayers": [3],
 	"cardType": "GUILD",
 	"Cost": {
 				"CostType": "RESOURCE",
-				"Cost": [{
+				"cost": [{
 							"Resource": "ORE",
 							"amount": 2
 						},
@@ -54,11 +54,11 @@
 },
 {
 	"cardName": "Traders Guild",
-	"minNumPlayers": 3,
+	"frequencyByNumPlayers": [3],
 	"cardType": "GUILD",
 	"Cost": {
 				"CostType": "MANUFACTUREDGOOD",
-				"Cost": [{
+				"cost": [{
 							"Good": "LOOM",
 							"amount": 1
 						},
@@ -81,11 +81,11 @@
 },
 {
 	"cardName": "Philosophers Guild",
-	"minNumPlayers": 3,
+	"frequencyByNumPlayers": [3],
 	"cardType": "GUILD",
 	"Cost": {
 				"CostType": "MULTITYPE",
-				"Cost": [{
+				"cost": [{
 							"Good": "LOOM",
 							"amount": 1
 						},
@@ -108,11 +108,11 @@
 },
 {
 	"cardName": "Spies Guild",
-	"minNumPlayers": 3,
+	"frequencyByNumPlayers": [3],
 	"cardType": "GUILD",
 	"Cost": {
 				"CostType": "MULTITYPE",
-				"Cost": [{
+				"cost": [{
 							"Good": "GLASS",
 							"amount": 1
 						},
@@ -131,11 +131,11 @@
 },
 {
 	"cardName": "Strategists Guild",
-	"minNumPlayers": 3,
+	"frequencyByNumPlayers": [3],
 	"cardType": "GUILD",
 	"Cost": {
 				"CostType": "MULTITYPE",
-				"Cost": [{
+				"cost": [{
 							"Good": "LOOM",
 							"amount": 1
 						},
@@ -158,11 +158,11 @@
 },
 {
 	"cardName": "Shipowners Guild",
-	"minNumPlayers": 3,
+	"frequencyByNumPlayers": [3],
 	"cardType": "GUILD",
 	"Cost": {
 				"CostType": "MULTITYPE",
-				"Cost": [{
+				"cost": [{
 							"Good": "GLASS",
 							"amount": 1
 						},
@@ -183,11 +183,11 @@
 },
 {
 	"cardName": "Scientists Guild",
-	"minNumPlayers": 3,
+	"frequencyByNumPlayers": [3],
 	"cardType": "GUILD",
 	"Cost": {
 				"CostType": "MULTITYPE",
-				"Cost": [{
+				"cost": [{
 							"Good": "PRESS",
 							"amount": 1
 						},
@@ -219,11 +219,11 @@
 },
 {
 	"cardName": "Magistrates Guild",
-	"minNumPlayers": 3,
+	"frequencyByNumPlayers": [3],
 	"cardType": "GUILD",
 	"Cost": {
 				"CostType": "MULTITYPE",
-				"Cost": [{
+				"cost": [{
 							"Good": "LOOM",
 							"amount": 1
 						},
@@ -246,11 +246,11 @@
 },
 {
 	"cardName": "Builders Guild",
-	"minNumPlayers": 3,
+	"frequencyByNumPlayers": [3],
 	"cardType": "GUILD",
 	"Cost": {
 				"CostType": "MULTITYPE",
-				"Cost": [{
+				"cost": [{
 							"Good": "GLASS",
 							"amount": 1
 						},
@@ -276,7 +276,7 @@
 	"cardType": "CIVILIANSTRUCTURE",
 	"Cost": {
 				"CostType": "MULTITYPE",
-				"Cost": [{
+				"cost": [{
 							"Good": "GLASS",
 							"amount": 1
 						},
@@ -297,7 +297,7 @@
 							"amount": 1
 						}]
 			},
-	"minNumPlayers": 3,
+	"frequencyByNumPlayers": [3, 6],
 	"Effect": {
 				"EffectType": "VALUE",
 				"Value": "VICTORYPOINTS",
@@ -310,7 +310,7 @@
 	"cardType": "CIVILIANSTRUCTURE",
 	"Cost": {
 				"CostType": "RESOURCE",
-				"Cost": [{
+				"cost": [{
 							"Resource": "CLAY",
 							"amount": 2
 						},
@@ -319,7 +319,7 @@
 							"amount": 1
 						}]
 			},
-	"minNumPlayers": 3,
+	"frequencyByNumPlayers": [3, 4],
 	"Effect": {
 				"EffectType": "VALUE",
 				"Value": "VICTORYPOINTS",
@@ -332,7 +332,7 @@
 	"cardType": "CIVILIANSTRUCTURE",
 	"Cost": {
 				"CostType": "MULTITYPE",
-				"Cost": [{
+				"cost": [{
 							"Resource": "ORE",
 							"amount": 1
 						},
@@ -345,7 +345,7 @@
 							"amount": 1
 						}]
 			},
-	"minNumPlayers": 3,
+	"frequencyByNumPlayers": [3, 5, 6],
 	"Effect": {
 				"EffectType": "VALUE",
 				"Value": "VICTORYPOINTS",
@@ -358,7 +358,7 @@
 	"cardType": "CIVILIANSTRUCTURE",
 	"Cost": {
 				"CostType": "MULTITYPE",
-				"Cost": [{
+				"cost": [{
 							"Good": "GLASS",
 							"amount": 1
 						},
@@ -387,7 +387,7 @@
 							"amount": 1
 						}]
 			},
-	"minNumPlayers": 3,
+	"frequencyByNumPlayers": [3, 7],
 	"Effect": {
 				"EffectType": "VALUE",
 				"Value": "VICTORYPOINTS",
@@ -399,9 +399,8 @@
 	"cardName": "Haven",
 	"cardType": "COMMERCIALSTRUCTURE",
 	"Cost": {
-				"CostType": "RESOURCE",
-				"Cost": "CostType": "MULTITYPE",
-				"Cost": [{
+				"CostType": "MULTITYPE",
+				"cost": [{
 							"Good": "LOOM",
 							"amount": 1
 						},
@@ -414,7 +413,7 @@
 							"amount": 1
 						}]
 			},
-	"minNumPlayers": 3,
+	"frequencyByNumPlayers": [3, 4],
 	"Effect": {
 				"EffectType": "MULTIVALUE",
 				"Value": "COMMERCE"
@@ -433,9 +432,8 @@
 	"cardName": "Lighthouse",
 	"cardType": "COMMERCIALSTRUCTURE",
 	"Cost": {
-				"CostType": "RESOURCE",
-				"Cost": "CostType": "MULTITYPE",
-				"Cost": [{
+				"CostType": "MULTITYPE",
+				"cost": [{
 							"Good": "LOOM",
 							"amount": 1
 						},
@@ -444,7 +442,7 @@
 							"amount": 1
 						}]
 			},
-	"minNumPlayers": 3,
+	"frequencyByNumPlayers": [3, 6],
 	"Effect": {
 				"EffectType": "MULTIVALUE",
 				"Value": "COMMERCE"
@@ -463,9 +461,8 @@
 	"cardName": "Chamber Of Commerce",
 	"cardType": "COMMERCIALSTRUCTURE",
 	"Cost": {
-				"CostType": "RESOURCE",
-				"Cost": "CostType": "MULTITYPE",
-				"Cost": [{
+				"CostType": "MULTITYPE",
+				"cost": [{
 							"Good": "PRESS",
 							"amount": 1
 						},
@@ -474,7 +471,7 @@
 							"amount": 2
 						}]
 			},
-	"minNumPlayers": 4,
+	"frequencyByNumPlayers": [4, 6],
 	"Effect": {
 				"EffectType": "MULTIVALUE",
 				"Value": "COMMERCE"
@@ -503,7 +500,7 @@
 							"amount": 3
 						}]
 			},
-	"minNumPlayers": 3,
+	"frequencyByNumPlayers": [3, 7],
 	"Effect": {
 				"EffectType": "VALUE",
 				"Value": "MILITARY",
@@ -525,7 +522,7 @@
 							"amount": 1
 						}]
 			},
-	"minNumPlayers": 4,
+	"frequencyByNumPlayers": [4, 5, 6],
 	"Effect": {
 				"EffectType": "VALUE",
 				"Value": "MILITARY",
@@ -551,7 +548,7 @@
 							"amount": 1
 						}]
 			},
-	"minNumPlayers": 3,
+	"frequencyByNumPlayers": [3, 4, 7],
 	"Effect": {
 				"EffectType": "VALUE",
 				"Value": "MILITARY",
@@ -573,7 +570,7 @@
 							"amount": 3
 						}]
 			},
-	"minNumPlayers": 3,
+	"frequencyByNumPlayers": [3, 5],
 	"Effect": {
 				"EffectType": "VALUE",
 				"Value": "MILITARY",
@@ -599,7 +596,7 @@
 							"amount": 1
 						}]
 			},
-	"minNumPlayers": 3,
+	"frequencyByNumPlayers": [3, 6],
 	"Effect": {
 				"EffectType": "ENTITY",
 				"EntityType": "SCIENCE",
@@ -627,7 +624,7 @@
 							"amount": 1
 						}]
 			},
-	"minNumPlayers": 3,
+	"frequencyByNumPlayers": [3, 7],
 	"Effect": {
 				"EffectType": "ENTITY",
 				"EntityType": "SCIENCE",
@@ -655,7 +652,7 @@
 							"amount": 1
 						}]
 			},
-	"minNumPlayers": 3,
+	"frequencyByNumPlayers": [3, 4],
 	"Effect": {
 				"EffectType": "ENTITY",
 				"EntityType": "SCIENCE",
@@ -679,7 +676,7 @@
 							"amount": 1
 						}]
 			},
-	"minNumPlayers": 3,
+	"frequencyByNumPlayers": [3, 7],
 	"Effect": {
 				"EffectType": "ENTITY",
 				"EntityType": "SCIENCE",
@@ -707,7 +704,7 @@
 							"amount": 1
 						}]
 			},
-	"minNumPlayers": 3,
+	"frequencyByNumPlayers": [3, 5],
 	"Effect": {
 				"EffectType": "ENTITY",
 				"EntityType": "SCIENCE",
@@ -717,3 +714,4 @@
 									  }]
 			  }
 }]
+}

@@ -6,7 +6,7 @@ public class Deck {
 	private ArrayList<Card> cards = new ArrayList<Card>();
 	
 	public enum Age {
-		AGE1
+		AGE1, AGE2
 	}
 
 	public Deck(Age age, ArrayList<Card> cards) {

@@ -32,9 +32,22 @@ public class SetUpDeckHandler {
 	public ArrayList<Card> createDeck(Age age, int numPlayers) {
 		ArrayList<Card> cards = new ArrayList<Card>();
 
-		String jsonData = readFile("src/assets/age1cards.json");
-		JSONObject jsonObj = new JSONObject(jsonData);
-		JSONArray jarr = new JSONArray(jsonObj.getJSONArray("age1").toString());
+		String jsonData;
+		JSONObject jsonObj;
+		JSONArray jarr;
+		
+		switch (age){
+		case AGE2:
+			jsonData = readFile("src/assets/age2cards.json");
+			jsonObj = new JSONObject(jsonData);
+			jarr = new JSONArray(jsonObj.getJSONArray("age2").toString());
+			break;
+		default:
+			jsonData = readFile("src/assets/age1cards.json");
+			jsonObj = new JSONObject(jsonData);
+			jarr = new JSONArray(jsonObj.getJSONArray("age1").toString());
+			break;
+		}
 
 		for (int i = 0; i < jarr.length(); i++) {
 			JSONObject cardData = jarr.getJSONObject(i);
@@ -60,7 +73,11 @@ public class SetUpDeckHandler {
 				card = new Card(cardName, frequencyByNumPlayers, cardType, cost, effect);
 			}
 			
-			cards.add(card);
+			for(Integer numOfFrequencyByNumPlayers: frequencyByNumPlayers){
+				if(numPlayers >= numOfFrequencyByNumPlayers){
+					cards.add(card);
+				}
+			}
 		}
 		
 		return cards;
@@ -95,13 +112,17 @@ public class SetUpDeckHandler {
 			int coinCost = costObj.getInt("coinCost");
 			cost = new Cost(costType, coinCost);
 			break;
-		case "NONE":
-			costType = CostType.NONE;
-			cost = new Cost(costType, 0);
-			break;
 		case "RESOURCE":
 			costType = CostType.RESOURCE;
-			cost = createResourceCost(costObj, costType);
+			cost = createResourceOrGoodCost(costObj, costType, "Resource");
+			break;
+		case "GOOD":
+			costType = CostType.GOOD;
+			cost = createResourceOrGoodCost(costObj, costType, "Good");
+			break;
+		case "MULTITYPE":
+			costType = CostType.MULTITYPE;
+			cost = createMultiTypeCost(costObj, costType);
 			break;
 		default:
 			costType = CostType.NONE;
@@ -111,22 +132,56 @@ public class SetUpDeckHandler {
 		return cost;
 	}
 
-	private Cost createResourceCost(JSONObject costObj, CostType costType) {
-		Cost cost;
+	private Cost createMultiTypeCost(JSONObject costObj, CostType costType) {
 		JSONArray costs = costObj.getJSONArray("cost");
+		Cost cost;
 
-		HashMap<Enum, Integer> resourceCosts = new HashMap<Enum, Integer>();
+		HashMap<Enum, Integer> givenCosts = new HashMap<Enum, Integer>();
+
+		for (int c = 0; c < costs.length(); c++) {
+			JSONObject costValueObj = costs.getJSONObject(c);
+			String type = "";
+			try{
+				type = costValueObj.getString("Resource");
+				
+				int amount = costValueObj.getInt("amount");
+				Resource costResource = Resource.valueOf(type);
+
+				givenCosts.put(costResource, amount);
+			}catch(JSONException exception){
+				type = costValueObj.getString("Good");
+				int amount = costValueObj.getInt("amount");
+				Good costGood = Good.valueOf(type);
+
+				givenCosts.put(costGood, amount);
+			}
+		}
+
+		cost = new Cost(costType, givenCosts);
+		return cost;
+	}
+
+	private Cost createResourceOrGoodCost(JSONObject costObj, CostType costType, String resourceTypeKey) {
+		JSONArray costs = costObj.getJSONArray("cost");
+		Cost cost;
+
+		HashMap<Enum, Integer> givenCosts = new HashMap<Enum, Integer>();
 
 		for (int c = 0; c < costs.length(); c++) {
 			JSONObject resource = costs.getJSONObject(c);
-			String resourceType = resource.getString("Resource");
+			String costTypeValue = resource.getString(resourceTypeKey);
 			int amount = resource.getInt("amount");
-			Resource costResource = Resource.valueOf(resourceType);
-
-			resourceCosts.put(costResource, amount);
+			
+			if(resourceTypeKey.equals("Resource")){
+				Resource costResource = Resource.valueOf(costTypeValue);
+				givenCosts.put(costResource, amount);
+			}else{
+				Good costGood = Good.valueOf(costTypeValue);
+				givenCosts.put(costGood, amount);
+			}
 		}
 
-		cost = new Cost(costType, resourceCosts);
+		cost = new Cost(costType, givenCosts);
 		return cost;
 	}
 	
