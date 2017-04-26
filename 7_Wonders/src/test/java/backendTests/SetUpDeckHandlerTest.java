@@ -162,6 +162,7 @@ public class SetUpDeckHandlerTest {
 		ArrayList<Card> actual = SetUpDeckHandler.setUpDeckHandler.createDeck(Age.AGE2, numPlayers);
 		Card card = actual.get(7);
 		ValueEffect effect = (ValueEffect) card.getEffect();
+		HashMap<Enum, Integer> costs = card.getCost();
 	
 		assertEquals("Aqueduct", card.getName());
 		assertEquals(CostType.RESOURCE, card.getCostType());
@@ -169,10 +170,44 @@ public class SetUpDeckHandlerTest {
 		assertEquals(Value.VICTORYPOINTS, effect.getValue());
 		assertEquals(ValueType.VICTORYPOINT, effect.getValueType());
 		assertEquals(AffectingEntity.NONE, effect.getAffectingEntity());
+		assertEquals(3, (int) costs.get(Resource.STONE));
 		assertEquals(5, effect.getValueAmount());
 		assertEquals("None", card.getNextStructureName());
 		assertEquals("Baths", card.getPreviousStructureName());
 	}
+	
+	@Test
+	public void testCardInformationCommercialMultiCostMultiEffect() {
+		int numPlayers = 3;
+		ArrayList<Card> cards = new ArrayList<Card>();
+
+		String jsonData = readFile("src/assets/age3cards.json");
+		createCards(numPlayers, cards, jsonData, "age3");
+		
+		
+		ArrayList<Card> actual = SetUpDeckHandler.setUpDeckHandler.createDeck(Age.AGE3, numPlayers);
+		Card card = actual.get(14);
+		HashMap<Enum, Integer> costs = card.getCost();
+		
+		assertEquals("Haven", card.getName());
+		assertEquals(CostType.MULTITYPE, card.getCostType());
+		assertEquals(1, (int) costs.get(Good.LOOM));
+		assertEquals(1, (int) costs.get(Resource.LUMBER));
+		assertEquals(1, (int) costs.get(Resource.ORE));
+		
+		MultiValueEffect effect = (MultiValueEffect) card.getEffect();
+		HashMap<Enum, Integer> effects = effect.getValues();
+		assertEquals(EffectType.MULTIVALUE, effect.getEffectType());
+		assertEquals(Value.COMMERCE, effect.getValue());
+		assertEquals(Direction.SELF, effect.getDirection());
+		assertEquals(AffectingEntity.RAWRESOURCES, effect.getAffectingEntity());
+		assertEquals(1, (int) effects.get(ValueType.COIN));
+		assertEquals(1, (int) effects.get(ValueType.VICTORYPOINT));
+		
+		assertEquals("None", card.getNextStructureName());
+		assertEquals("Forum", card.getPreviousStructureName());
+	}
+
 
 	private void createCards(int numPlayers, ArrayList<Card> cards, String jsonData, String age) {
 		JSONObject jsonObj = new JSONObject(jsonData);
