@@ -20,8 +20,10 @@ import dataStructures.EntityEffect.EntityType;
 import dataStructures.EntityEffect.Good;
 import dataStructures.EntityEffect.Resource;
 import dataStructures.EntityEffect.Science;
+import dataStructures.MultiValueEffect;
 import dataStructures.ValueEffect.AffectingEntity;
 import dataStructures.ValueEffect.Value;
+import dataStructures.ValueEffect.ValueType;
 import json.JSONArray;
 import json.JSONException;
 import json.JSONObject;
@@ -41,6 +43,11 @@ public class SetUpDeckHandler {
 			jsonData = readFile("src/assets/age2cards.json");
 			jsonObj = new JSONObject(jsonData);
 			jarr = new JSONArray(jsonObj.getJSONArray("age2").toString());
+			break;
+		case AGE3:
+			jsonData = readFile("src/assets/age3cards.json");
+			jsonObj = new JSONObject(jsonData);
+			jarr = new JSONArray(jsonObj.getJSONArray("age3").toString());
 			break;
 		default:
 			jsonData = readFile("src/assets/age1cards.json");
@@ -227,6 +234,22 @@ public class SetUpDeckHandler {
 				effect = new ValueEffect(effectTypeEnum, value, affectingEntities);
 			}
 
+			break;
+		case "MULTIVALUE":
+			effectTypeEnum = EffectType.MULTIVALUE;
+			
+			String affecting = effectObj.getString("AffectingEntities");
+			Value value = Value.valueOf(effectObj.getString("Value"));
+			AffectingEntity affectingEntities = AffectingEntity.valueOf(affecting);
+			JSONArray entitiesAndAmounts = effectObj.getJSONArray("entitiesAndAmounts");
+			HashMap<Enum, Integer> valuesAndAmounts = new HashMap<Enum, Integer>();
+			
+			for (int ae = 0; ae < entitiesAndAmounts.length(); ae++){
+				JSONObject entity = entitiesAndAmounts.getJSONObject(ae);
+				valuesAndAmounts.put(ValueType.valueOf(entity.getString("ValueType")), entity.getInt("entityAmount"));
+			}
+			Direction direction = Direction.valueOf(effectObj.getString("Direction"));
+			effect = new MultiValueEffect(effectTypeEnum, value, affectingEntities, direction, valuesAndAmounts);
 			break;
 		}
 		return effect;

@@ -22,6 +22,7 @@ import dataStructures.Effect;
 import dataStructures.Effect.Direction;
 import dataStructures.Effect.EffectType;
 import dataStructures.EntityEffect;
+import dataStructures.MultiValueEffect;
 import dataStructures.EntityEffect.EntityType;
 import dataStructures.EntityEffect.Good;
 import dataStructures.EntityEffect.Resource;
@@ -30,6 +31,7 @@ import dataStructures.ValueEffect;
 import dataStructures.Card.CardType;
 import dataStructures.ValueEffect.AffectingEntity;
 import dataStructures.ValueEffect.Value;
+import dataStructures.ValueEffect.ValueType;
 import json.JSONArray;
 import json.JSONException;
 import json.JSONObject;
@@ -62,6 +64,23 @@ public class SetUpDeckHandlerTest {
 		
 		
 		ArrayList<Card> actual = SetUpDeckHandler.setUpDeckHandler.createDeck(Age.AGE2, numPlayers);
+		
+		for(int i = 0; i < actual.size(); i++) {
+			assertEquals(cards.get(i).toString(), actual.get(i).toString());
+		}
+		
+	}
+	
+	@Test
+	public void testCreateAge3Cards3Players() {
+		int numPlayers = 3;
+		ArrayList<Card> cards = new ArrayList<Card>();
+
+		String jsonData = readFile("src/assets/age3cards.json");
+		createCards(numPlayers, cards, jsonData, "age3");
+		
+		
+		ArrayList<Card> actual = SetUpDeckHandler.setUpDeckHandler.createDeck(Age.AGE3, numPlayers);
 		
 		for(int i = 0; i < actual.size(); i++) {
 			assertEquals(cards.get(i).toString(), actual.get(i).toString());
@@ -154,6 +173,16 @@ public class SetUpDeckHandlerTest {
 			effectTypeEnum = EffectType.VALUE;
 
 			try {
+				JSONArray affecting = effectObj.getJSONArray("AffectingEntities");
+				Value value = Value.valueOf(effectObj.getString("Value"));
+				HashMap<Enum, Integer> affectingEntities = new HashMap<Enum, Integer>();
+				
+				for (int ae = 0; ae < affecting.length(); ae++){
+					affectingEntities.put(AffectingEntity.valueOf(affecting.getString(ae)), 1);
+				}
+
+				effect = new ValueEffect(effectTypeEnum, value, affectingEntities);
+			} catch (JSONException exception) { //the affecting entities was an array
 				String affecting = effectObj.getString("AffectingEntities");
 				Value value = Value.valueOf(effectObj.getString("Value"));
 				AffectingEntity affectingEntities = AffectingEntity.valueOf(affecting);
@@ -167,18 +196,25 @@ public class SetUpDeckHandlerTest {
 				Direction direction = Direction.valueOf(effectObj.getString("Direction"));
 				effect = new ValueEffect(effectTypeEnum, value, affectingEntities, direction, valueAmount);
 				break;
-			} catch (JSONException exception) { //the affecting entities was an array
-				JSONArray affecting = effectObj.getJSONArray("AffectingEntities");
-				Value value = Value.valueOf(effectObj.getString("Value"));
-				HashMap<Enum, Integer> affectingEntities = new HashMap<Enum, Integer>();
-				
-				for (int ae = 0; ae < affecting.length(); ae++){
-					affectingEntities.put(AffectingEntity.valueOf(affecting.getString(ae)), 1);
-				}
-
-				effect = new ValueEffect(effectTypeEnum, value, affectingEntities);
 			}
 
+			break;
+		case "MULTIVALUE":
+			effectTypeEnum = EffectType.MULTIVALUE;
+			
+			String affecting = effectObj.getString("AffectingEntities");
+			Value value = Value.valueOf(effectObj.getString("Value"));
+			AffectingEntity affectingEntities = AffectingEntity.valueOf(affecting);
+			JSONArray entitiesAndAmountsJSON = effectObj.getJSONArray("entitiesAndAmounts");
+			HashMap<Enum, Integer> valuesAndAmounts = new HashMap<Enum, Integer>();
+			
+			for (int ae = 0; ae < entitiesAndAmountsJSON.length(); ae++){
+				JSONObject entity = entitiesAndAmountsJSON.getJSONObject(ae);
+				valuesAndAmounts.put(ValueType.valueOf(entity.getString("ValueType")), entity.getInt("entityAmount"));
+			}
+			
+			Direction direction = Direction.valueOf(effectObj.getString("Direction"));
+			effect = new MultiValueEffect(effectTypeEnum, value, affectingEntities, direction, valuesAndAmounts);
 			break;
 		}
 		return effect;

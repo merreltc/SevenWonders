@@ -10,6 +10,7 @@ import dataStructures.Effect.EffectType;
 public class Card {
 	private String name = "Default Card";
 	private ArrayList<Integer> frequencyByNumPlayers;
+	private static final int GUILD_NO_FREQUENCY = -1;
 	
 	private CardType type = CardType.DEFAULT;
 	private Cost cost;
@@ -48,6 +49,8 @@ public class Card {
 
 	public Card(String name, CardType type, Cost cost, Effect effect) {
 		this.name = name;
+		this.frequencyByNumPlayers = new ArrayList<Integer>();
+		this.frequencyByNumPlayers.add(GUILD_NO_FREQUENCY);
 		this.type = type;
 		this.cost = cost;
 		this.effect = effect;
