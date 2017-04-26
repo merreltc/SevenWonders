@@ -78,13 +78,28 @@ public class DeckTest {
 	}
 	
 	@Test(expected=IndexOutOfBoundsException.class)
-	public void testGetCardEmptyCardList() {
+	public void testInvalidGetCardEmptyCardList() {
 		ArrayList<Card> cards = new ArrayList<Card>();
 		
 		Deck deck = new Deck(Age.AGE1, cards);
 		
 		deck.getCard(0);
 		fail();
+	}
+	
+	@Test
+	public void testInvalidGetCardEmptyCardListMessage() {
+		ArrayList<Card> cards = new ArrayList<Card>();
+		
+		Deck deck = new Deck(Age.AGE1, cards);
+		
+		try{
+			deck.getCard(0);
+		}catch(IndexOutOfBoundsException ex){
+			String message = "There are not enough cards in the deck to get card: 0";
+			assertEquals(message, ex.getMessage());
+		}
+		
 	}
 
 	private void initiateCards(ArrayList<Card> cards) {

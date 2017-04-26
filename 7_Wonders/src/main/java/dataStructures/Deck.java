@@ -26,6 +26,9 @@ public class Deck {
 	}
 
 	public Card getCard(int index) {
+		if(this.cards.size() == index){
+			throw new IndexOutOfBoundsException("There are not enough cards in the deck to get card: 0");
+		}
 		return this.cards.get(index);
 	}
 }
