@@ -255,7 +255,7 @@
 	"cardType": "CIVILIANSTRUCTURE",
 	"Cost": {
 				"CostType": "RESOURCE",
-				"Cost": [{
+				"cost": [{
 							"Resource": "STONE",
 							"amount": 1
 						}]
