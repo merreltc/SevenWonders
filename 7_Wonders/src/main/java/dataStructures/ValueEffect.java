@@ -69,7 +69,7 @@ public class ValueEffect extends Effect {
 			}
 			break;
 		case COMMERCE:
-			if(valueAmount == 0){
+			if(valueAmount <= 0){
 				throw new IllegalArgumentException("Cannot have valueAmount of " + valueAmount);
 			}
 			break;
