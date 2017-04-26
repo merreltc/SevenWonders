@@ -69,6 +69,9 @@ public class ValueEffect extends Effect {
 			}
 			break;
 		case COMMERCE:
+			if(valueAmount == 0){
+				throw new IllegalArgumentException("Cannot have valueAmount of " + valueAmount);
+			}
 			break;
 		default:
 			if (valueAmount <= -2 || valueAmount == 0 || valueAmount >= 4){

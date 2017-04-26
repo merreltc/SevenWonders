@@ -191,6 +191,12 @@ public class ValueEffectTest {
 		assertEquals(AffectingEntity.NONE, ((ValueEffect) effect).getAffectingEntity());
 	}
 	
+	@Test(expected=IllegalArgumentException.class)
+	public void testInvalidCommerceValueNoneEffect0(){
+		new ValueEffect(EffectType.VALUE, Value.COMMERCE, AffectingEntity.NONE, 0);
+		fail();
+	}
+	
 	@Test
 	public void test1CommerceValueNeighborsEffect(){
 		Effect effect = new ValueEffect(EffectType.VALUE, Value.COMMERCE, AffectingEntity.MANUFACTUREDGOODS, Direction.NEIGHBORS, 1);
