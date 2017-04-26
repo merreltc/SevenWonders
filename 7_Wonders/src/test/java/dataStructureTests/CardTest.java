@@ -39,7 +39,7 @@ public class CardTest {
 
 		EasyMock.replay(cost, effect);
 
-		Card card = new Card("Lumber Yard", frequency, CardType.RAWMATERIAL, cost, effect);
+		Card card = new Card("Lumber Yard", frequency, CardType.RAWMATERIAL, cost, effect, "None", "None");
 
 		assertEquals("Lumber Yard", card.getName());
 		assertEquals(frequency, card.getFrequencyByNumPlayers());
@@ -67,7 +67,7 @@ public class CardTest {
 
 		EasyMock.replay(cost, effect);
 
-		Card card = new Card("Loom", frequency, CardType.MANUFACTUREDGOOD, cost, effect);
+		Card card = new Card("Loom", frequency, CardType.MANUFACTUREDGOOD, cost, effect, "None", "None");
 
 		assertEquals("Loom", card.getName());
 		assertEquals(frequency, card.getFrequencyByNumPlayers());
@@ -94,7 +94,7 @@ public class CardTest {
 		EasyMock.expect(effect.getEffectType()).andReturn(Effect.EffectType.MULTIVALUE);
 
 		EasyMock.replay(cost, effect);
-		Card card = new Card("Haven", frequency, CardType.COMMERCIALSTRUCTURE, cost, effect);
+		Card card = new Card("Haven", frequency, CardType.COMMERCIALSTRUCTURE, cost, effect, "None", "None");
 
 		assertEquals("Haven", card.getName());
 		assertEquals(frequency, card.getFrequencyByNumPlayers());
@@ -122,7 +122,7 @@ public class CardTest {
 
 		EasyMock.replay(cost, effect);
 
-		Card card = new Card("East Trading Post", frequency, CardType.COMMERCIALSTRUCTURE, cost, effect);
+		Card card = new Card("East Trading Post", frequency, CardType.COMMERCIALSTRUCTURE, cost, effect, "None", "None");
 
 		assertEquals("East Trading Post", card.getName());
 		assertEquals(frequency, card.getFrequencyByNumPlayers());
@@ -150,7 +150,7 @@ public class CardTest {
 
 		EasyMock.replay(cost, effect);
 
-		Card card = new Card("Apothecary", frequency, CardType.SCIENTIFICSTRUCTURE, cost, effect);
+		Card card = new Card("Apothecary", frequency, CardType.SCIENTIFICSTRUCTURE, cost, effect, "None", "None");
 
 		assertEquals("Apothecary", card.getName());
 		assertEquals(frequency, card.getFrequencyByNumPlayers());
@@ -178,7 +178,7 @@ public class CardTest {
 
 		EasyMock.replay(cost, effect);
 
-		Card card = new Card("Haven", frequency, CardType.CIVILIANSTRUCTURE, cost, effect);
+		Card card = new Card("Haven", frequency, CardType.CIVILIANSTRUCTURE, cost, effect, "None", "None");
 
 		assertEquals("Haven", card.getName());
 		assertEquals(frequency, card.getFrequencyByNumPlayers());
@@ -206,7 +206,7 @@ public class CardTest {
 
 		EasyMock.replay(cost, effect);
 
-		Card card = new Card("Stockade", frequency, CardType.MILITARYSTRUCTURE, cost, effect);
+		Card card = new Card("Stockade", frequency, CardType.MILITARYSTRUCTURE, cost, effect, "None", "None");
 
 		assertEquals("Stockade", card.getName());
 		assertEquals(frequency, card.getFrequencyByNumPlayers());
@@ -253,7 +253,7 @@ public class CardTest {
 
 		EasyMock.replay(cost, effect);
 
-		Card card = new Card("Tree Farm", frequency, CardType.RAWMATERIAL, cost, effect);
+		Card card = new Card("Tree Farm", frequency, CardType.RAWMATERIAL, cost, effect, "None", "None");
 
 		assertEquals(effect, card.getEffect());
 
@@ -274,7 +274,7 @@ public class CardTest {
 		EasyMock.expect(cost.getCost()).andReturn(expected);
 		EasyMock.replay(cost);
 
-		Card card = new Card("Tree Farm", frequency, CardType.RAWMATERIAL, cost, effect);
+		Card card = new Card("Tree Farm", frequency, CardType.RAWMATERIAL, cost, effect, "None", "None");
 
 		assertEquals(expected, card.getCost());
 
@@ -290,7 +290,7 @@ public class CardTest {
 		Cost cost = EasyMock.createStrictMock(Cost.class);
 		Effect effect = EasyMock.createStrictMock(Effect.class);
 
-		Card card = new Card("Tree Farm", frequency, CardType.RAWMATERIAL, cost, effect);
+		Card card = new Card("Tree Farm", frequency, CardType.RAWMATERIAL, cost, effect, "None", "None");
 
 		assertEquals("None", card.getPreviousStructureName());
 	}
@@ -386,7 +386,7 @@ public class CardTest {
 
 		EasyMock.replay(cost, effect);
 
-		Card card = new Card("East Trading Post", frequency, CardType.COMMERCIALSTRUCTURE, cost, effect);
+		Card card = new Card("East Trading Post", frequency, CardType.COMMERCIALSTRUCTURE, cost, effect, "None", "None");
 		String expected = "name: East Trading Post" + System.lineSeparator()
 						+ "minFrequencyByNumPlayers: 3" + System.lineSeparator()
 						+ "costType: RESOURCE" + System.lineSeparator()

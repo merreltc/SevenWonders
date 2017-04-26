@@ -28,14 +28,6 @@ public class Card {
 		LOOM, ORE, LUMBER
 	}
 
-	public Card(String name, ArrayList<Integer> frequencyByNumPlayers, CardType type, Cost cost, Effect effect) {
-		this.name = name;
-		this.frequencyByNumPlayers = frequencyByNumPlayers;
-		this.type = type;
-		this.cost = cost;
-		this.effect = effect;
-	}
-
 	public Card(String name, ArrayList<Integer> frequencyByNumPlayers, CardType type, Cost cost, Effect effect, String previousStructure,
 			String nextStructure) {
 		this.name = name;
