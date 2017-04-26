@@ -99,7 +99,21 @@ public class DeckTest {
 			String message = "There are not enough cards in the deck to get card: 0";
 			assertEquals(message, ex.getMessage());
 		}
+	}
+	
+	@Test
+	public void testInvalidGetCardListMessage() {
+		ArrayList<Card> cards = new ArrayList<Card>();
+		initiateCards(cards);
 		
+		Deck deck = new Deck(Age.AGE1, cards);
+		
+		try{
+			deck.getCard(3);
+		}catch(IndexOutOfBoundsException ex){
+			String message = "There are not enough cards in the deck to get card: 3";
+			assertEquals(message, ex.getMessage());
+		}
 	}
 
 	private void initiateCards(ArrayList<Card> cards) {
