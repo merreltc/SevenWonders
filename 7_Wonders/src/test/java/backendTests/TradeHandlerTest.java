@@ -6,9 +6,13 @@ import java.util.ArrayList;
 
 import org.junit.Test;
 
+import backend.SetUpDeckHandler;
 import backend.TradeHandler;
+import dataStructures.Card;
+import dataStructures.Deck;
 import dataStructures.GameBoard;
 import dataStructures.Player;
+import dataStructures.Deck.Age;
 import exceptions.InsufficientFundsException;
 import exceptions.InvalidTradeException;
 
@@ -121,7 +125,10 @@ public class TradeHandlerTest {
 		players.add(player2);
 		players.add(new Player());
 		
-		GameBoard board = new GameBoard(players);
+		ArrayList<Card> cards = SetUpDeckHandler.setUpDeckHandler.createDeck(Age.AGE1, 3);
+		Deck deck = new Deck(Age.AGE1, cards);
+
+		GameBoard board = new GameBoard(players, deck);
 		TradeHandler tradeHandler = new TradeHandler(board);
 		
 		tradeHandler.tradeFromTo(player1, player2, 4);
@@ -147,7 +154,10 @@ public class TradeHandlerTest {
 		players.add(player2);
 		players.add(new Player());
 		
-		GameBoard board = new GameBoard(players);
+		ArrayList<Card> cards = SetUpDeckHandler.setUpDeckHandler.createDeck(Age.AGE1, 3);
+		Deck deck = new Deck(Age.AGE1, cards);
+
+		GameBoard board = new GameBoard(players, deck);
 		TradeHandler tradeHandler = new TradeHandler(board);
 		
 		tradeHandler.tradeFromTo(player1, player2, 5);
@@ -173,7 +183,10 @@ public class TradeHandlerTest {
 		players.add(player2);
 		players.add(new Player());
 		
-		GameBoard board = new GameBoard(players);
+		ArrayList<Card> cards = SetUpDeckHandler.setUpDeckHandler.createDeck(Age.AGE1, 3);
+		Deck deck = new Deck(Age.AGE1, cards);
+
+		GameBoard board = new GameBoard(players, deck);
 		TradeHandler tradeHandler = new TradeHandler(board);
 		
 		tradeHandler.tradeFromTo(player1, player2, 7);
@@ -199,7 +212,10 @@ public class TradeHandlerTest {
 		players.add(player2);
 		players.add(new Player());
 		
-		GameBoard board = new GameBoard(players);
+		ArrayList<Card> cards = SetUpDeckHandler.setUpDeckHandler.createDeck(Age.AGE1, 3);
+		Deck deck = new Deck(Age.AGE1, cards);
+
+		GameBoard board = new GameBoard(players, deck);
 		TradeHandler tradeHandler = new TradeHandler(board);
 		
 		tradeHandler.tradeFromTo(player1, player2, 8);
@@ -223,7 +239,10 @@ public class TradeHandlerTest {
 		players.add(player2);
 		players.add(new Player());
 		
-		GameBoard board = new GameBoard(players);
+		ArrayList<Card> cards = SetUpDeckHandler.setUpDeckHandler.createDeck(Age.AGE1, 3);
+		Deck deck = new Deck(Age.AGE1, cards);
+
+		GameBoard board = new GameBoard(players, deck);
 		TradeHandler tradeHandler = new TradeHandler(board);
 
 		tradeHandler.tradeFromTo(player1, player2, 3);
@@ -249,7 +268,10 @@ public class TradeHandlerTest {
 		players.add(player2);
 		players.add(new Player());
 		
-		GameBoard board = new GameBoard(players);
+		ArrayList<Card> cards = SetUpDeckHandler.setUpDeckHandler.createDeck(Age.AGE1, 3);
+		Deck deck = new Deck(Age.AGE1, cards);
+
+		GameBoard board = new GameBoard(players, deck);
 		TradeHandler tradeHandler = new TradeHandler(board);
 		
 		tradeHandler.tradeFromTo(player1, player2, 6);
@@ -272,7 +294,10 @@ public class TradeHandlerTest {
 		players.add(new Player("Hulk"));
 		players.add(new Player("Iron Man"));
 
-		GameBoard board = new GameBoard(players);
+		ArrayList<Card> cards = SetUpDeckHandler.setUpDeckHandler.createDeck(Age.AGE1, 3);
+		Deck deck = new Deck(Age.AGE1, cards);
+
+		GameBoard board = new GameBoard(players, deck);
 		TradeHandler tradeHandler = new TradeHandler(board);
 		
 		tradeHandler.tradeFromTo(board.getCurrentPlayer(), board.getNextPlayer(), 3);
@@ -290,7 +315,10 @@ public class TradeHandlerTest {
 		players.add(new Player("Hulk"));
 		players.add(new Player("Iron Man"));
 
-		GameBoard board = new GameBoard(players);
+		ArrayList<Card> cards = SetUpDeckHandler.setUpDeckHandler.createDeck(Age.AGE1, 3);
+		Deck deck = new Deck(Age.AGE1, cards);
+
+		GameBoard board = new GameBoard(players, deck);
 		TradeHandler tradeHandler = new TradeHandler(board);
 		
 		tradeHandler.tradeFromTo(board.getCurrentPlayer(), board.getPreviousPlayer(), 3);
@@ -307,7 +335,10 @@ public class TradeHandlerTest {
 		players.add(new Player("Hulk"));
 		players.add(new Player("Iron Man"));
 
-		GameBoard board = new GameBoard(players);
+		ArrayList<Card> cards = SetUpDeckHandler.setUpDeckHandler.createDeck(Age.AGE1, 3);
+		Deck deck = new Deck(Age.AGE1, cards);
+
+		GameBoard board = new GameBoard(players, deck);
 		TradeHandler tradeHandler = new TradeHandler(board);
 		
 		tradeHandler.tradeFromTo(board.getCurrentPlayer(), board.getPlayer(2), 3);
