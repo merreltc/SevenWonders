@@ -1,16 +1,21 @@
 package dataStructures;
 
 public class Wonder {
+	private char side;
 
 	public Wonder(char side) {
+		this.side = side;
 	}
 
 	public int getNumLevels() {
-		return 3;
+		if(side == 'A') {
+			return 3;
+		}
+		return 2;
 	}
 
 	public char getSide() {
-		return 'A';
+		return this.side;
 	}
 
 }
