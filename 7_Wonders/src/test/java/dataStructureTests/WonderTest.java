@@ -41,22 +41,47 @@ public class WonderTest {
 	}
 	
 	@Test(expected = IllegalArgumentException.class)
-	public void testInvalidNumLevelsNeg1() {
+	public void testInvalidNumLevelsNeg1SideA() {
+		Wonder wonder = new Wonder('A', -1);
+	}
+	
+	@Test(expected = IllegalArgumentException.class)
+	public void testInvalidNumLevelsNeg1SideB() {
 		Wonder wonder = new Wonder('B', -1);
 	}
 	
 	@Test(expected = IllegalArgumentException.class)
-	public void testInvalidNumLevels1() {
+	public void testInvalidNumLevels1SideA() {
+		Wonder wonder = new Wonder('A', 1);
+	}
+	
+	@Test(expected = IllegalArgumentException.class)
+	public void testInvalidNumLevels1SideB() {
 		Wonder wonder = new Wonder('B', 1);
 	}
 	
 	@Test(expected = IllegalArgumentException.class)
-	public void testInvalidNumLevels5() {
+	public void testInvalidNumLevels5SideA() {
+		Wonder wonder = new Wonder('A', 5);
+	}
+	
+	@Test(expected = IllegalArgumentException.class)
+	public void testInvalidNumLevels5SideB() {
 		Wonder wonder = new Wonder('B', 5);
 	}
 	
 	@Test(expected = IllegalArgumentException.class)
-	public void testInvalidNumLevels6() {
+	public void testInvalidNumLevels2SideA() {
+		Wonder wonder = new Wonder('A', 2);
+	}
+	
+	@Test(expected = IllegalArgumentException.class)
+	public void testInvalidNumLevels4SideA() {
+		Wonder wonder = new Wonder('A', 4);
+	}
+	
+	@Test(expected = IllegalArgumentException.class)
+	public void testInvalidNumLevels6SideB() {
 		Wonder wonder = new Wonder('B', 6);
 	}
 }
