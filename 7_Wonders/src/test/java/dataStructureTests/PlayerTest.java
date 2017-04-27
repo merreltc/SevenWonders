@@ -2,6 +2,7 @@ package dataStructureTests;
 
 import static org.junit.Assert.*;
 
+import org.junit.Assert;
 import org.junit.Test;
 
 import dataStructures.Player;
@@ -11,7 +12,7 @@ public class PlayerTest {
 
 	@Test
 	public void testDefaultPlayer() {
-		Player player = new Player();
+		Player player = new Player("Jane Doe");
 
 		assertEquals(3, player.getCoinTotal());
 		assertEquals(0, player.getConflictTotal());
@@ -20,12 +21,12 @@ public class PlayerTest {
 
 	@Test
 	public void testDefaultPlayerCoins() {
-		Player player = new Player();
+		Player player = new Player("Jane Doe");
 
 		assertEquals(3, player.getNumValue1Coins());
 		assertEquals(0, player.getNumValue3Coins());
 	}
-	
+
 	@Test
 	public void testNamedPlayer() {
 		String name = "Sandman";
@@ -33,35 +34,35 @@ public class PlayerTest {
 
 		assertEquals("Sandman", player.getName());
 	}
-	
+
 	@Test
 	public void testToStringDefaultPlayer() {
-		Player player = new Player();
-		
+		Player player = new Player("Jane Doe");
+
 		assertEquals("Name: Jane Doe\nCoin Total: 3", player.toString());
 	}
-	
+
 	@Test
 	public void testToStringNamedPlayer() {
 		String name = "Sandman";
 		Player player = new Player(name);
-		
+
 		assertEquals("Name: Sandman\nCoin Total: 3", player.toString());
 	}
-	
+
 	@Test
 	public void testToStringPlayerAfterAddCoins() {
 		String name = "Sandman";
 		Player player = new Player(name);
 		player.addValue1(2);
 		player.addValue3(1);
-		
+
 		assertEquals("Name: Sandman\nCoin Total: 8", player.toString());
 	}
 
 	@Test
 	public void testAddValue1Coins() {
-		Player player = new Player();
+		Player player = new Player("Jane Doe");
 
 		player.addValue1(1);
 		assertEquals(4, player.getCoinTotal());
@@ -74,7 +75,7 @@ public class PlayerTest {
 
 	@Test
 	public void testAddValue3Coins() {
-		Player player = new Player();
+		Player player = new Player("Jane Doe");
 
 		player.addValue3(1);
 		assertEquals(6, player.getCoinTotal());
@@ -87,7 +88,7 @@ public class PlayerTest {
 
 	@Test(expected = IllegalArgumentException.class)
 	public void testAddInvalidNumValue1CoinsNeg1() {
-		Player player = new Player();
+		Player player = new Player("Jane Doe");
 
 		player.addValue1(-1);
 		fail();
@@ -95,7 +96,7 @@ public class PlayerTest {
 
 	@Test(expected = IllegalArgumentException.class)
 	public void testAddInvalidNumValue1Coins47() {
-		Player player = new Player();
+		Player player = new Player("Jane Doe");
 
 		player.addValue1(47);
 		fail();
@@ -103,7 +104,7 @@ public class PlayerTest {
 
 	@Test(expected = IllegalArgumentException.class)
 	public void testAddInvalidNumValue3CoinsNeg1() {
-		Player player = new Player();
+		Player player = new Player("Jane Doe");
 
 		player.addValue3(-1);
 		fail();
@@ -111,7 +112,7 @@ public class PlayerTest {
 
 	@Test(expected = IllegalArgumentException.class)
 	public void testAddInvalidNumValue3Coins25() {
-		Player player = new Player();
+		Player player = new Player("Jane Doe");
 
 		player.addValue3(25);
 		fail();
@@ -119,7 +120,7 @@ public class PlayerTest {
 
 	@Test
 	public void testRemoveValidNumValue1Coins() {
-		Player player = new Player();
+		Player player = new Player("Jane Doe");
 
 		player.removeValue1(1);
 		assertEquals(2, player.getCoinTotal());
@@ -132,7 +133,7 @@ public class PlayerTest {
 
 	@Test
 	public void testRemoveValidNumValue3Coins() {
-		Player player = new Player();
+		Player player = new Player("Jane Doe");
 
 		player.addValue3(1);
 		player.removeValue3(1);
@@ -142,7 +143,7 @@ public class PlayerTest {
 
 	@Test
 	public void testMultiAddAndRemoveCoins() {
-		Player player = new Player();
+		Player player = new Player("Jane Doe");
 
 		player.addValue1(5);
 		player.addValue3(3);
@@ -157,7 +158,7 @@ public class PlayerTest {
 
 	@Test(expected = IllegalArgumentException.class)
 	public void testInvalidRemoveNumValue1CoinsNeg1() {
-		Player player = new Player();
+		Player player = new Player("Jane Doe");
 
 		player.removeValue1(-1);
 		fail();
@@ -165,7 +166,7 @@ public class PlayerTest {
 
 	@Test(expected = InsufficientFundsException.class)
 	public void testInsufficientFundsForRemoveValue1Coins() {
-		Player player = new Player();
+		Player player = new Player("Jane Doe");
 
 		player.removeValue1(4);
 		fail();
@@ -173,7 +174,7 @@ public class PlayerTest {
 
 	@Test(expected = IllegalArgumentException.class)
 	public void testInvalidRemoveNumValue3CoinsNeg1() {
-		Player player = new Player();
+		Player player = new Player("Jane Doe");
 
 		player.removeValue3(-1);
 		fail();
@@ -181,15 +182,15 @@ public class PlayerTest {
 
 	@Test(expected = InsufficientFundsException.class)
 	public void testInsufficientFundsForRemoveValue3Coins() {
-		Player player = new Player();
+		Player player = new Player("Jane Doe");
 
 		player.removeValue3(1);
 		fail();
 	}
-	
+
 	@Test
 	public void testAddInvalidNumValue1CoinsNeg1ErrorMessage() {
-		Player player = new Player();
+		Player player = new Player("Jane Doe");
 
 		try {
 			player.addValue1(-1);
@@ -201,7 +202,7 @@ public class PlayerTest {
 
 	@Test
 	public void testAddInvalidNumValue1Coins47ErrorMessage() {
-		Player player = new Player();
+		Player player = new Player("Jane Doe");
 
 		try {
 			player.addValue1(47);
@@ -213,7 +214,7 @@ public class PlayerTest {
 
 	@Test
 	public void testAddInvalidNumValue3CoinsNeg1ErrorMessage() {
-		Player player = new Player();
+		Player player = new Player("Jane Doe");
 
 		try {
 			player.addValue3(-1);
@@ -225,7 +226,7 @@ public class PlayerTest {
 
 	@Test
 	public void testInvalidRemoveNumValue1CoinsNeg1ErrorMessage() {
-		Player player = new Player();
+		Player player = new Player("Jane Doe");
 
 		try {
 			player.removeValue1(-1);
@@ -237,7 +238,7 @@ public class PlayerTest {
 
 	@Test
 	public void testInvalidRemoveNumValue1CoinsNeg2ErrorMessage() {
-		Player player = new Player();
+		Player player = new Player("Jane Doe");
 
 		try {
 			player.removeValue1(-2);
@@ -249,7 +250,7 @@ public class PlayerTest {
 
 	@Test
 	public void testInvalidRemoveNumValue3CoinsNeg1ErrorMessage() {
-		Player player = new Player();
+		Player player = new Player("Jane Doe");
 
 		try {
 			player.removeValue3(-1);
@@ -261,7 +262,7 @@ public class PlayerTest {
 
 	@Test
 	public void testInvalidRemoveNumValue3CoinsNeg2ErrorMessage() {
-		Player player = new Player();
+		Player player = new Player("Jane Doe");
 
 		try {
 			player.removeValue3(-2);
@@ -273,7 +274,7 @@ public class PlayerTest {
 
 	@Test
 	public void testInsufficientFundsForRemove4Value1CoinsErrorMessage() {
-		Player player = new Player();
+		Player player = new Player("Jane Doe");
 
 		try {
 			player.removeValue1(4);
@@ -285,7 +286,7 @@ public class PlayerTest {
 
 	@Test
 	public void testInsufficientFundsForRemove5Value1CoinsErrorMessage() {
-		Player player = new Player();
+		Player player = new Player("Jane Doe");
 
 		try {
 			player.removeValue1(5);
@@ -297,7 +298,7 @@ public class PlayerTest {
 
 	@Test
 	public void testInsufficientFundsForRemove1Value3CoinsErrorMessage() {
-		Player player = new Player();
+		Player player = new Player("Jane Doe");
 
 		try {
 			player.removeValue3(1);
@@ -310,7 +311,7 @@ public class PlayerTest {
 
 	@Test
 	public void testInsufficientFundsForRemove2Value3CoinsErrorMessage() {
-		Player player = new Player();
+		Player player = new Player("Jane Doe");
 
 		try {
 			player.removeValue3(2);
@@ -321,5 +322,11 @@ public class PlayerTest {
 		}
 	}
 
-	
+	@Test
+	public void testGetDefaultCurrentHand() {
+		Player player = new Player("Jane Doe");
+		
+		assertTrue(player.getCurrentHand().isEmpty());
+	}
+
 }

@@ -18,9 +18,9 @@ public class GameBoardTests {
 	@Test
 	public void testGameBoardGMinPlayers() {
 		ArrayList<Player> players = new ArrayList<Player>();
-		players.add(new Player());
-		players.add(new Player());
-		players.add(new Player());
+		players.add(new Player("Jane Doe"));
+		players.add(new Player("Jane Doe"));
+		players.add(new Player("Jane Doe"));
 
 		ArrayList<Card> cards = SetUpDeckHandler.setUpDeckHandler.createDeck(Age.AGE1, 3);
 		Deck deck = new Deck(Age.AGE1, cards);
@@ -33,13 +33,13 @@ public class GameBoardTests {
 	@Test
 	public void testGameBoardMaxPlayers() {
 		ArrayList<Player> players = new ArrayList<Player>();
-		players.add(new Player());
-		players.add(new Player());
-		players.add(new Player());
-		players.add(new Player());
-		players.add(new Player());
-		players.add(new Player());
-		players.add(new Player());
+		players.add(new Player("Jane Doe"));
+		players.add(new Player("Jane Doe"));
+		players.add(new Player("Jane Doe"));
+		players.add(new Player("Jane Doe"));
+		players.add(new Player("Jane Doe"));
+		players.add(new Player("Jane Doe"));
+		players.add(new Player("Jane Doe"));
 
 		ArrayList<Card> cards = SetUpDeckHandler.setUpDeckHandler.createDeck(Age.AGE1, 3);
 		Deck deck = new Deck(Age.AGE1, cards);
@@ -52,9 +52,9 @@ public class GameBoardTests {
 	@Test
 	public void testGameBoardGetPlayers() {
 		ArrayList<Player> players = new ArrayList<Player>();
-		players.add(new Player());
-		players.add(new Player());
-		players.add(new Player());
+		players.add(new Player("Jane Doe"));
+		players.add(new Player("Jane Doe"));
+		players.add(new Player("Jane Doe"));
 
 		ArrayList<Card> cards = SetUpDeckHandler.setUpDeckHandler.createDeck(Age.AGE1, 3);
 		Deck deck = new Deck(Age.AGE1, cards);

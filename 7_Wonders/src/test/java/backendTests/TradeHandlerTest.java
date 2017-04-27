@@ -19,8 +19,8 @@ import exceptions.InvalidTradeException;
 public class TradeHandlerTest {
 	@Test
 	public void testSingleTradeValue1Coins() {
-		Player player1 = new Player();
-		Player player2 = new Player();
+		Player player1 =new Player("Jane Doe");
+		Player player2 =new Player("Jane Doe");
 
 		TradeHandler.tradeFromToValue1(player1, player2, 1);
 
@@ -33,8 +33,8 @@ public class TradeHandlerTest {
 
 	@Test
 	public void testMultiTradesValue1Coins() {
-		Player player1 = new Player();
-		Player player2 = new Player();
+		Player player1 =new Player("Jane Doe");
+		Player player2 =new Player("Jane Doe");
 
 		TradeHandler.tradeFromToValue1(player1, player2, 2);
 		TradeHandler.tradeFromToValue1(player1, player2, 1);
@@ -48,8 +48,8 @@ public class TradeHandlerTest {
 
 	@Test(expected = InsufficientFundsException.class)
 	public void testInvalidTradeValue1Coin() {
-		Player player1 = new Player();
-		Player player2 = new Player();
+		Player player1 =new Player("Jane Doe");
+		Player player2 =new Player("Jane Doe");
 
 		TradeHandler.tradeFromToValue1(player1, player2, 4);
 		fail();
@@ -57,8 +57,8 @@ public class TradeHandlerTest {
 
 	@Test
 	public void testSingleTradeValue3Coins() {
-		Player player1 = new Player();
-		Player player2 = new Player();
+		Player player1 =new Player("Jane Doe");
+		Player player2 =new Player("Jane Doe");
 
 		player1.addValue3(1);
 		TradeHandler.tradeFromToValue3(player1, player2, 1);
@@ -71,8 +71,8 @@ public class TradeHandlerTest {
 
 	@Test
 	public void testMultiTradesValue3Coins() {
-		Player player1 = new Player();
-		Player player2 = new Player();
+		Player player1 =new Player("Jane Doe");
+		Player player2 =new Player("Jane Doe");
 
 		player1.addValue3(3);
 		TradeHandler.tradeFromToValue3(player1, player2, 2);
@@ -86,8 +86,8 @@ public class TradeHandlerTest {
 
 	@Test(expected = InsufficientFundsException.class)
 	public void testInvalidTradeValue3Coin() {
-		Player player1 = new Player();
-		Player player2 = new Player();
+		Player player1 =new Player("Jane Doe");
+		Player player2 =new Player("Jane Doe");
 
 		TradeHandler.tradeFromToValue3(player1, player2, 1);
 		fail();
@@ -95,8 +95,8 @@ public class TradeHandlerTest {
 
 	@Test
 	public void testMultiTrades() {
-		Player player1 = new Player();
-		Player player2 = new Player();
+		Player player1 =new Player("Jane Doe");
+		Player player2 =new Player("Jane Doe");
 
 		player1.addValue3(3);
 		
@@ -115,15 +115,15 @@ public class TradeHandlerTest {
 
 	@Test
 	public void testTradeFromTo() {
-		Player player1 = new Player();
-		Player player2 = new Player();
+		Player player1 =new Player("Jane Doe");
+		Player player2 =new Player("Jane Doe");
 
 		player1.addValue3(2);
 
 		ArrayList<Player> players = new ArrayList<Player>();
 		players.add(player1);
 		players.add(player2);
-		players.add(new Player());
+		players.add(new Player("Jane Doe"));
 		
 		ArrayList<Card> cards = SetUpDeckHandler.setUpDeckHandler.createDeck(Age.AGE1, 3);
 		Deck deck = new Deck(Age.AGE1, cards);
@@ -144,15 +144,15 @@ public class TradeHandlerTest {
 
 	@Test
 	public void testTradeFromToMultiValue1SingleValue3() {
-		Player player1 = new Player();
-		Player player2 = new Player();
+		Player player1 =new Player("Jane Doe");
+		Player player2 =new Player("Jane Doe");
 
 		player1.addValue3(2);
 
 		ArrayList<Player> players = new ArrayList<Player>();
 		players.add(player1);
 		players.add(player2);
-		players.add(new Player());
+		players.add(new Player("Jane Doe"));
 		
 		ArrayList<Card> cards = SetUpDeckHandler.setUpDeckHandler.createDeck(Age.AGE1, 3);
 		Deck deck = new Deck(Age.AGE1, cards);
@@ -173,15 +173,15 @@ public class TradeHandlerTest {
 
 	@Test
 	public void testTradeFromToSingleValue1MultiValue3() {
-		Player player1 = new Player();
-		Player player2 = new Player();
+		Player player1 =new Player("Jane Doe");
+		Player player2 =new Player("Jane Doe");
 
 		player1.addValue3(2);
 
 		ArrayList<Player> players = new ArrayList<Player>();
 		players.add(player1);
 		players.add(player2);
-		players.add(new Player());
+		players.add(new Player("Jane Doe"));
 		
 		ArrayList<Card> cards = SetUpDeckHandler.setUpDeckHandler.createDeck(Age.AGE1, 3);
 		Deck deck = new Deck(Age.AGE1, cards);
@@ -202,15 +202,15 @@ public class TradeHandlerTest {
 
 	@Test
 	public void testTradeFromToMultiValue1MultiValue3() {
-		Player player1 = new Player();
-		Player player2 = new Player();
+		Player player1 =new Player("Jane Doe");
+		Player player2 =new Player("Jane Doe");
 
 		player1.addValue3(2);
 
 		ArrayList<Player> players = new ArrayList<Player>();
 		players.add(player1);
 		players.add(player2);
-		players.add(new Player());
+		players.add(new Player("Jane Doe"));
 		
 		ArrayList<Card> cards = SetUpDeckHandler.setUpDeckHandler.createDeck(Age.AGE1, 3);
 		Deck deck = new Deck(Age.AGE1, cards);
@@ -231,13 +231,13 @@ public class TradeHandlerTest {
 
 	@Test
 	public void testTradeFromToSufficientValue1NoValue3() {
-		Player player1 = new Player();
-		Player player2 = new Player();
+		Player player1 =new Player("Jane Doe");
+		Player player2 =new Player("Jane Doe");
 		
 		ArrayList<Player> players = new ArrayList<Player>();
 		players.add(player1);
 		players.add(player2);
-		players.add(new Player());
+		players.add(new Player("Jane Doe"));
 		
 		ArrayList<Card> cards = SetUpDeckHandler.setUpDeckHandler.createDeck(Age.AGE1, 3);
 		Deck deck = new Deck(Age.AGE1, cards);
@@ -258,15 +258,15 @@ public class TradeHandlerTest {
 
 	@Test
 	public void testTradeFromToGreaterValue1ThanValue3() {
-		Player player1 = new Player();
-		Player player2 = new Player();
+		Player player1 =new Player("Jane Doe");
+		Player player2 =new Player("Jane Doe");
 		
 		player1.addValue3(1);
 		
 		ArrayList<Player> players = new ArrayList<Player>();
 		players.add(player1);
 		players.add(player2);
-		players.add(new Player());
+		players.add(new Player("Jane Doe"));
 		
 		ArrayList<Card> cards = SetUpDeckHandler.setUpDeckHandler.createDeck(Age.AGE1, 3);
 		Deck deck = new Deck(Age.AGE1, cards);
