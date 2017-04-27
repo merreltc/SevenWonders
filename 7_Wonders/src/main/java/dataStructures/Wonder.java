@@ -1,28 +1,42 @@
 package dataStructures;
 
+import java.util.HashMap;
+
+import dataStructures.Wonder.WonderType;
+
 public class Wonder {
+	private WonderType type;
 	private String name;
 	private char side;
 	private int numLevels;
+	private HashMap<WonderType, String> wonders;
 
-	public Wonder(char side) {
-		this(side, "Default", 3);
-	}
-	
-	public Wonder(char side, String name) {
-		this(side, name, 3);
+	public enum WonderType {
+		COLOSSUS, LIGHTHOUSE, TEMPLE, GARDENS, STATUE, MAUSOLEUM, PYRAMIDS
 	}
 
-	public Wonder(char side, int numLevels) {
-		this(side, "Default", numLevels);
+	public Wonder(char side, WonderType type) {
+		this(side, type, 3);
 	}
-	
-	public Wonder(char side, String name, int numLevels) {
-		this.name = name;
+
+	public Wonder(char side, WonderType type, int numLevels) {
+		setUpTypeMap();
+		this.type = type;
+		this.name = wonders.get(type);
 		this.side = side;
 		validateNumLevelsGeneral(numLevels);
-
 		this.numLevels = numLevels;
+	}
+
+	private void setUpTypeMap() {
+		this.wonders = new HashMap<WonderType, String>();
+		wonders.put(WonderType.COLOSSUS, "The Colossus of Rhodes");
+		wonders.put(WonderType.LIGHTHOUSE, "The Lighthouse of Alexandria");
+		wonders.put(WonderType.TEMPLE, "The Temple of Artemis in Ephesus");
+		wonders.put(WonderType.GARDENS, "The Hanging Gardens of Babylon");
+		wonders.put(WonderType.STATUE, "The Statue of Zeus in Olympia");
+		wonders.put(WonderType.MAUSOLEUM, "The Mausoleum of Halicarnassus");
+		wonders.put(WonderType.PYRAMIDS, "The Pyramids of Gize");
 	}
 
 	private void validateNumLevelsGeneral(int numLevels) {
@@ -44,16 +58,20 @@ public class Wonder {
 			throw new IllegalArgumentException("Invalid Number of Wonder Levels: " + numLevels);
 	}
 
-	public int getNumLevels() {
-		return this.numLevels;
+	public WonderType getType() {
+		return this.type;
+	}
+
+	public String getName() {
+		return this.name;
 	}
 
 	public char getSide() {
 		return this.side;
 	}
 
-	public String getName() {
-		return this.name;
+	public int getNumLevels() {
+		return this.numLevels;
 	}
 
 }
