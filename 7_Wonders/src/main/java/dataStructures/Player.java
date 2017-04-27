@@ -141,4 +141,8 @@ public class Player {
 	public ArrayList<Card> getCurrentHand() {
 		return this.currentHand;
 	}
+
+	public void setCurrentHand(ArrayList<Card> currentHand) {
+		this.currentHand = currentHand;
+	}
 }

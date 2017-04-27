@@ -1,10 +1,16 @@
 package dataStructureTests;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
-import org.junit.Assert;
+import java.util.ArrayList;
+
 import org.junit.Test;
 
+import backend.SetUpDeckHandler;
+import dataStructures.Card;
+import dataStructures.Deck.Age;
 import dataStructures.Player;
 import exceptions.InsufficientFundsException;
 
@@ -327,6 +333,24 @@ public class PlayerTest {
 		Player player = new Player("Jane Doe");
 		
 		assertTrue(player.getCurrentHand().isEmpty());
+	}
+	
+	@Test
+	public void testSetCurrectHand() {
+		Player player = new Player("Jane Doe");
+		ArrayList<Card> deckCards = SetUpDeckHandler.setUpDeckHandler.createCards(Age.AGE1, 3);
+		
+		ArrayList<Card> playerCards = new ArrayList<Card>();
+		playerCards.add(deckCards.get(0));
+		playerCards.add(deckCards.get(1));
+		playerCards.add(deckCards.get(2));
+		
+		player.setCurrentHand(playerCards);
+		
+		assertEquals(playerCards, player.getCurrentHand());
+		assertEquals(playerCards.get(0), player.getCurrentHand().get(0));
+		assertEquals(playerCards.get(1), player.getCurrentHand().get(1));
+		assertEquals(playerCards.get(2), player.getCurrentHand().get(2));
 	}
 
 }
