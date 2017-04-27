@@ -16,11 +16,18 @@ public class Level {
 	private Cost cost;
 	private Effect effect;
 	private HashSet<Effect> effects;
+	private Frequency frequency;
+	
+	public enum Frequency {
+		ENDOFTURN, EVERYTURN, SIXTHTURN, ONCEIMMEDIATE, ONCEAGE, ENDOFGAME
+		
+	}
 
-	public Level(int priority, Cost cost, Effect effect) {
+	public Level(int priority, Cost cost, Effect effect, Frequency frequency) {
 		this.priority = priority;
 		this.cost = cost;
 		this.effect = effect;
+		this.frequency = frequency;
 	}
 
 	public Level(int priority, Cost cost, HashSet<Effect> effects) {
@@ -75,5 +82,9 @@ public class Level {
 
 	public HashSet<Effect> getEffects() {
 		return this.effects;
+	}
+
+	public Frequency getFrequency() {
+		return this.frequency;
 	}
 }
