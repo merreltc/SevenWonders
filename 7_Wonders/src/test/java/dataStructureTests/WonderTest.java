@@ -9,9 +9,10 @@ import dataStructures.Wonder;
 public class WonderTest {
 
 	@Test
-	public void testNumLevelsSideA() {
+	public void testBasicsSideA() {
 		Wonder wonder = new Wonder('A');
 		
+		assertEquals('A', wonder.getSide());
 		assertEquals(3, wonder.getNumLevels());
 	}
 }

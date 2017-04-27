@@ -20,7 +20,6 @@ public class Level {
 	
 	public enum Frequency {
 		ENDOFTURN, EVERYTURN, SIXTHTURN, ONCEIMMEDIATE, ONCEAGE, ENDOFGAME
-		
 	}
 
 	public Level(int priority, Cost cost, Effect effect, Frequency frequency) {
