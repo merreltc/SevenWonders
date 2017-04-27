@@ -9,7 +9,7 @@ public class Wonder {
 	}
 	
 	public Wonder(char side, int numLevels) {
-		if(numLevels == -1) {
+		if(numLevels == -1 || numLevels == 1) {
 			throw new IllegalArgumentException("Invalid Number of Wonder Levels: " + numLevels);
 		}
 		
