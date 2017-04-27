@@ -1,8 +1,8 @@
 package dataStructureTests;
 
 import static org.junit.Assert.*;
-
 import java.util.HashMap;
+import java.util.HashSet;
 
 import org.easymock.EasyMock;
 import org.junit.Test;
@@ -13,9 +13,10 @@ import dataStructures.Cost.Resource;
 import dataStructures.Effect;
 import dataStructures.Effect.Direction;
 import dataStructures.Effect.EffectType;
-import dataStructures.EntityEffect.EntityType;
 import dataStructures.EntityEffect;
+import dataStructures.EntityEffect.EntityType;
 import dataStructures.Level;
+import dataStructures.Level.Frequency;
 import dataStructures.MultiValueEffect;
 import dataStructures.ValueEffect;
 import dataStructures.ValueEffect.AffectingEntity;
@@ -30,7 +31,7 @@ public class LevelTest {
 		Effect effect = EasyMock.createStrictMock(Effect.class);
 		
 		int priority = 1;
-		Level level = new Level(priority, cost, effect);
+		Level level = new Level(priority, cost, effect, Frequency.ONCEIMMEDIATE);
 		assertEquals(1, level.getPriority());
 	}
 	
@@ -40,7 +41,7 @@ public class LevelTest {
 		Effect effect = EasyMock.createStrictMock(Effect.class);
 		
 		int priority = 2;
-		Level level = new Level(priority, cost, effect);
+		Level level = new Level(priority, cost, effect, Frequency.ONCEIMMEDIATE);
 		assertEquals(2, level.getPriority());
 	}
 	
@@ -50,7 +51,7 @@ public class LevelTest {
 		Effect effect = EasyMock.createStrictMock(Effect.class);
 		
 		int priority = 3;
-		Level level = new Level(priority, cost, effect);
+		Level level = new Level(priority, cost, effect, Frequency.ONCEIMMEDIATE);
 		assertEquals(3, level.getPriority());
 	}
 	
@@ -67,7 +68,7 @@ public class LevelTest {
 		EasyMock.replay(cost);
 		
 		int priority = 1;
-		Level level = new Level(priority, cost, effect);
+		Level level = new Level(priority, cost, effect, Frequency.ONCEIMMEDIATE);
 		CostType costType = level.getCostType();
 		HashMap<Enum, Integer> actual = level.getCost();
 		
@@ -91,7 +92,7 @@ public class LevelTest {
 		EasyMock.replay(effect);
 		
 		int priority = 1;
-		Level level = new Level(priority, cost, effect);
+		Level level = new Level(priority, cost, effect, Frequency.ONCEIMMEDIATE);
 		
 		EffectType effectType = level.getEffectType();
 		Direction direction = level.getEffectDirection();
@@ -118,7 +119,7 @@ public class LevelTest {
 		EasyMock.replay(effect);
 		
 		int priority = 1;
-		Level level = new Level(priority, cost, effect);
+		Level level = new Level(priority, cost, effect, Frequency.ONCEIMMEDIATE);
 		
 		EffectType effectType = level.getEffectType();
 		Direction direction = level.getEffectDirection();
@@ -149,12 +150,11 @@ public class LevelTest {
 		expectedValues.put(ValueType.VICTORYPOINT, 1);
 		
 		EasyMock.expect(effect.getValues()).andReturn(expectedValues);
-
 		
 		EasyMock.replay(effect);
 		
 		int priority = 1;
-		Level level = new Level(priority, cost, effect);
+		Level level = new Level(priority, cost, effect, Frequency.ONCEIMMEDIATE);
 		
 		EffectType effectType = level.getEffectType();
 		Direction direction = level.getEffectDirection();
@@ -168,5 +168,79 @@ public class LevelTest {
 		assertEquals(Value.COMMERCE, value);
 		assertEquals(AffectingEntity.MANUFACTUREDGOODS, affEntity);
 		assertEquals(expectedValues, actualValues);
+	}
+	
+	@Test
+	public void testMultipleEffects() {
+		Cost cost = EasyMock.createStrictMock(Cost.class);
+		MultiValueEffect effect1 = EasyMock.createStrictMock(MultiValueEffect.class);
+		ValueEffect effect2 = EasyMock.createStrictMock(ValueEffect.class);
+		EasyMock.replay(effect1, effect2);
+		
+		int priority = 1;
+		Frequency freq = Frequency.ONCEIMMEDIATE;
+		HashMap<Effect, Frequency> expectedEffects = new HashMap<Effect, Frequency>();
+		expectedEffects.put(effect1, freq);
+		expectedEffects.put(effect2, freq);
+		Level level = new Level(priority, cost, expectedEffects);
+		
+		HashMap<Effect, Frequency> actualEffects = level.getEffects();
+		
+		EasyMock.verify(effect1, effect2);
+		assertEquals(expectedEffects, actualEffects);
+	}
+	
+	@Test
+	public void testSingleEffectFrequency() {
+		Cost cost = EasyMock.createStrictMock(Cost.class);
+		Effect endOfTurn = EasyMock.createStrictMock(Effect.class);		
+		Effect everyTurn = EasyMock.createStrictMock(Effect.class);
+		Effect sixthTurn = EasyMock.createStrictMock(Effect.class);
+		Effect onceImmediate = EasyMock.createStrictMock(Effect.class);
+		Effect onceAge = EasyMock.createStrictMock(Effect.class);
+		Effect endOfGame = EasyMock.createStrictMock(Effect.class);
+		
+		EasyMock.replay();
+		
+		int priority = 1;
+		Level level1 = new Level(priority, cost, endOfTurn, Frequency.ENDOFTURN);
+		Level level2 = new Level(priority, cost, everyTurn, Frequency.EVERYTURN);
+		Level level3 = new Level(priority, cost, sixthTurn, Frequency.SIXTHTURN);
+		Level level4 = new Level(priority, cost, onceImmediate, Frequency.ONCEIMMEDIATE);
+		Level level5 = new Level(priority, cost, onceAge, Frequency.ONCEAGE);
+		Level level6 = new Level(priority, cost, endOfGame, Frequency.ENDOFGAME);
+		
+		assertEquals(Frequency.ENDOFTURN, level1.getFrequency());
+		assertEquals(Frequency.EVERYTURN, level2.getFrequency());
+		assertEquals(Frequency.SIXTHTURN, level3.getFrequency());
+		assertEquals(Frequency.ONCEIMMEDIATE, level4.getFrequency());
+		assertEquals(Frequency.ONCEAGE, level5.getFrequency());
+		assertEquals(Frequency.ENDOFGAME, level6.getFrequency());
+		
+		EasyMock.verify();
+	}
+	
+	@Test
+	public void testMultiEffectFrequency() {
+		Cost cost = EasyMock.createStrictMock(Cost.class);
+		Effect endOfTurn = EasyMock.createStrictMock(Effect.class);		
+		Effect everyTurn = EasyMock.createStrictMock(Effect.class);
+		HashMap<Effect, Frequency> effects = new HashMap<Effect, Frequency>();
+		effects.put(endOfTurn, Frequency.ENDOFTURN);
+		effects.put(everyTurn, Frequency.EVERYTURN);
+		
+		EasyMock.replay();
+		
+		int priority = 1;
+		Level level1 = new Level(priority, cost, effects);
+		assertEquals(effects, level1.getEffects());
+		
+		for(Effect effect : effects.keySet()) {
+			Frequency freq = effects.get(effect);
+			boolean validFreq = (freq == Frequency.ENDOFTURN || freq == Frequency.EVERYTURN);
+			assertTrue(validFreq);
+		}
+		
+		EasyMock.verify();
 	}
 }

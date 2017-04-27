@@ -1,6 +1,7 @@
 package dataStructures;
 
 import java.util.HashMap;
+import java.util.HashSet;
 
 import dataStructures.Cost.CostType;
 import dataStructures.Effect.Direction;
@@ -14,11 +15,24 @@ public class Level {
 	private int priority;
 	private Cost cost;
 	private Effect effect;
+	private HashMap<Effect, Frequency> effects;
+	private Frequency frequency;
+	
+	public enum Frequency {
+		ENDOFTURN, EVERYTURN, SIXTHTURN, ONCEIMMEDIATE, ONCEAGE, ENDOFGAME
+	}
 
-	public Level(int priority, Cost cost, Effect effect) {
+	public Level(int priority, Cost cost, Effect effect, Frequency frequency) {
 		this.priority = priority;
 		this.cost = cost;
 		this.effect = effect;
+		this.frequency = frequency;
+	}
+
+	public Level(int priority, Cost cost, HashMap<Effect, Frequency> effects) {
+		this.priority = priority;
+		this.cost = cost;
+		this.effects = effects;
 	}
 
 	public int getPriority() {
@@ -63,5 +77,13 @@ public class Level {
 
 	public HashMap<Enum, Integer> getValues() {
 		return ((MultiValueEffect) this.effect).getValues();
+	}
+
+	public HashMap<Effect, Frequency> getEffects() {
+		return this.effects;
+	}
+
+	public Frequency getFrequency() {
+		return this.frequency;
 	}
 }
