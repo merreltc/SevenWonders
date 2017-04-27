@@ -134,14 +134,12 @@ public class Game extends Menu {
 		this.gameManager.rotateClockwise();
 
 		ArrayList<Player> players = this.gameManager.getPlayers();
-		System.out.println(players.toString());
 		Player nextPlayer = this.gameManager.getNextPlayer();
-		System.out.println(players.indexOf(nextPlayer));
 		int totalNumberOfPlayers = this.gameManager.getNumPlayers();
 		int nextPlayerIndex = players.indexOf(nextPlayer);
 
 		for (int i = 0; i < players.size(); i++) {
-			boards.get(i).changePlayer(players.get((nextPlayerIndex + i) % totalNumberOfPlayers));
+			boards.get(i).changePlayer(players.get((totalNumberOfPlayers + nextPlayerIndex - i) % totalNumberOfPlayers));
 		}
 	}
 }
