@@ -53,9 +53,9 @@ public class GameManagerTest {
 	@Test
 	public void testSetUpGameBoardCreateDeck() {
 		SetUpDeckHandler.setUpDeckHandler = EasyMock.createStrictMock(SetUpDeckHandler.class);
-		ArrayList<Card> cards = new ArrayList<Card>();
+		Deck deck = null;
 
-		EasyMock.expect(SetUpDeckHandler.setUpDeckHandler.createCards(Age.AGE1, 3)).andReturn(cards);
+		EasyMock.expect(SetUpDeckHandler.setUpDeckHandler.createDeck(Age.AGE1, 3)).andReturn(deck);
 		
 		EasyMock.replay(SetUpDeckHandler.setUpDeckHandler);
 		ArrayList<String> playerNames = new ArrayList<String>();
