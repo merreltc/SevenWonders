@@ -1,14 +1,24 @@
 package dataStructures;
 
 public class Wonder {
+	private String name;
 	private char side;
 	private int numLevels;
 
 	public Wonder(char side) {
-		this(side, 3);
+		this(side, "Default", 3);
+	}
+	
+	public Wonder(char side, String name) {
+		this(side, name, 3);
 	}
 
 	public Wonder(char side, int numLevels) {
+		this(side, "Default", numLevels);
+	}
+	
+	public Wonder(char side, String name, int numLevels) {
+		this.name = name;
 		this.side = side;
 		validateNumLevelsGeneral(numLevels);
 
@@ -40,6 +50,10 @@ public class Wonder {
 
 	public char getSide() {
 		return this.side;
+	}
+
+	public String getName() {
+		return this.name;
 	}
 
 }

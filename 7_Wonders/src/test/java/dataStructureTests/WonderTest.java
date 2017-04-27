@@ -10,18 +10,20 @@ public class WonderTest {
 
 	@Test
 	public void testBasicsSideA() {
-		Wonder wonder = new Wonder('A');
+		Wonder wonder = new Wonder('A', "The Lighthouse of Alexandria");
 		
 		assertEquals('A', wonder.getSide());
 		assertEquals(3, wonder.getNumLevels());
+		assertEquals("The Lighthouse of Alexandria", wonder.getName());
 	}
 	
 	@Test
 	public void testBasicsSideB2Levels() {
-		Wonder wonder = new Wonder('B', 2);
+		Wonder wonder = new Wonder('B', "Colossus of Rhodes", 2);
 		
 		assertEquals('B', wonder.getSide());
 		assertEquals(2, wonder.getNumLevels());
+		assertEquals("Colossus of Rhodes", wonder.getName());
 	}
 	
 	@Test
@@ -84,4 +86,6 @@ public class WonderTest {
 	public void testInvalidNumLevels6SideB() {
 		Wonder wonder = new Wonder('B', 6);
 	}
+	
+
 }
