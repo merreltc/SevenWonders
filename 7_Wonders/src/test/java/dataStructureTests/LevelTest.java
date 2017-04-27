@@ -1,8 +1,10 @@
 package dataStructureTests;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 
 import java.util.HashMap;
+import java.util.HashSet;
 
 import org.easymock.EasyMock;
 import org.junit.Test;
@@ -13,8 +15,8 @@ import dataStructures.Cost.Resource;
 import dataStructures.Effect;
 import dataStructures.Effect.Direction;
 import dataStructures.Effect.EffectType;
-import dataStructures.EntityEffect.EntityType;
 import dataStructures.EntityEffect;
+import dataStructures.EntityEffect.EntityType;
 import dataStructures.Level;
 import dataStructures.MultiValueEffect;
 import dataStructures.ValueEffect;
@@ -149,7 +151,6 @@ public class LevelTest {
 		expectedValues.put(ValueType.VICTORYPOINT, 1);
 		
 		EasyMock.expect(effect.getValues()).andReturn(expectedValues);
-
 		
 		EasyMock.replay(effect);
 		
@@ -168,5 +169,24 @@ public class LevelTest {
 		assertEquals(Value.COMMERCE, value);
 		assertEquals(AffectingEntity.MANUFACTUREDGOODS, affEntity);
 		assertEquals(expectedValues, actualValues);
+	}
+	
+	@Test
+	public void testMultipleEffects() {
+		Cost cost = EasyMock.createStrictMock(Cost.class);
+		MultiValueEffect effect1 = EasyMock.createStrictMock(MultiValueEffect.class);
+		ValueEffect effect2 = EasyMock.createStrictMock(ValueEffect.class);
+		EasyMock.replay(effect1, effect2);
+		
+		int priority = 1;
+		HashSet<Effect> expectedEffects = new HashSet<Effect>();
+		expectedEffects.add(effect1);
+		expectedEffects.add(effect2);
+		Level level = new Level(priority, cost, expectedEffects);
+		
+		HashSet<Effect> actualEffects = level.getEffects();
+		
+		EasyMock.verify(effect1, effect2);
+		assertEquals(expectedEffects, actualEffects);
 	}
 }
