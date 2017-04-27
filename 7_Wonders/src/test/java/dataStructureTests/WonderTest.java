@@ -31,4 +31,12 @@ public class WonderTest {
 		assertEquals('B', wonder.getSide());
 		assertEquals(3, wonder.getNumLevels());
 	}
+	
+	@Test
+	public void testBasicsSideB4Levels() {
+		Wonder wonder = new Wonder('B', 4);
+		
+		assertEquals('B', wonder.getSide());
+		assertEquals(4, wonder.getNumLevels());
+	}
 }
