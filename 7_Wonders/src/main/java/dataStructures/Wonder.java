@@ -7,7 +7,7 @@ public class Wonder {
 	public Wonder(char side) {
 		this(side, 3);
 	}
-	
+
 	public Wonder(char side, int numLevels) {
 		this.side = side;
 		validateNumLevelsGeneral(numLevels);
@@ -16,11 +16,22 @@ public class Wonder {
 	}
 
 	private void validateNumLevelsGeneral(int numLevels) {
-		if(this.side == 'A' && (numLevels == 2 || numLevels == 4))
-			throw new IllegalArgumentException("Invalid Number of Wonder Levels: " + numLevels);
-		if(numLevels <= 1 || numLevels >= 5) {
+		if (this.side == 'A') {
+			validateNumLevelsSideA(numLevels);
+		} else {
+			validateNumLevelsSideB(numLevels);
+		}
+	}
+
+	private void validateNumLevelsSideB(int numLevels) {
+		if (numLevels <= 1 || numLevels >= 5) {
 			throw new IllegalArgumentException("Invalid Number of Wonder Levels: " + numLevels);
 		}
+	}
+
+	private void validateNumLevelsSideA(int numLevels) {
+		if (numLevels <= 2 || numLevels >= 4)
+			throw new IllegalArgumentException("Invalid Number of Wonder Levels: " + numLevels);
 	}
 
 	public int getNumLevels() {
