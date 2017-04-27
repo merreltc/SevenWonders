@@ -1,8 +1,6 @@
 package dataStructureTests;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-
+import static org.junit.Assert.*;
 import java.util.HashMap;
 import java.util.HashSet;
 
@@ -180,12 +178,13 @@ public class LevelTest {
 		EasyMock.replay(effect1, effect2);
 		
 		int priority = 1;
-		HashSet<Effect> expectedEffects = new HashSet<Effect>();
-		expectedEffects.add(effect1);
-		expectedEffects.add(effect2);
+		Frequency freq = Frequency.ONCEIMMEDIATE;
+		HashMap<Effect, Frequency> expectedEffects = new HashMap<Effect, Frequency>();
+		expectedEffects.put(effect1, freq);
+		expectedEffects.put(effect2, freq);
 		Level level = new Level(priority, cost, expectedEffects);
 		
-		HashSet<Effect> actualEffects = level.getEffects();
+		HashMap<Effect, Frequency> actualEffects = level.getEffects();
 		
 		EasyMock.verify(effect1, effect2);
 		assertEquals(expectedEffects, actualEffects);
@@ -219,8 +218,29 @@ public class LevelTest {
 		assertEquals(Frequency.ENDOFGAME, level6.getFrequency());
 		
 		EasyMock.verify();
-
 	}
 	
-	
+	@Test
+	public void testMultiEffectFrequency() {
+		Cost cost = EasyMock.createStrictMock(Cost.class);
+		Effect endOfTurn = EasyMock.createStrictMock(Effect.class);		
+		Effect everyTurn = EasyMock.createStrictMock(Effect.class);
+		HashMap<Effect, Frequency> effects = new HashMap<Effect, Frequency>();
+		effects.put(endOfTurn, Frequency.ENDOFTURN);
+		effects.put(everyTurn, Frequency.EVERYTURN);
+		
+		EasyMock.replay();
+		
+		int priority = 1;
+		Level level1 = new Level(priority, cost, effects);
+		assertEquals(effects, level1.getEffects());
+		
+		for(Effect effect : effects.keySet()) {
+			Frequency freq = effects.get(effect);
+			boolean validFreq = (freq == Frequency.ENDOFTURN || freq == Frequency.EVERYTURN);
+			assertTrue(validFreq);
+		}
+		
+		EasyMock.verify();
+	}
 }

@@ -15,7 +15,7 @@ public class Level {
 	private int priority;
 	private Cost cost;
 	private Effect effect;
-	private HashSet<Effect> effects;
+	private HashMap<Effect, Frequency> effects;
 	private Frequency frequency;
 	
 	public enum Frequency {
@@ -30,7 +30,7 @@ public class Level {
 		this.frequency = frequency;
 	}
 
-	public Level(int priority, Cost cost, HashSet<Effect> effects) {
+	public Level(int priority, Cost cost, HashMap<Effect, Frequency> effects) {
 		this.priority = priority;
 		this.cost = cost;
 		this.effects = effects;
@@ -80,7 +80,7 @@ public class Level {
 		return ((MultiValueEffect) this.effect).getValues();
 	}
 
-	public HashSet<Effect> getEffects() {
+	public HashMap<Effect, Frequency> getEffects() {
 		return this.effects;
 	}
 
