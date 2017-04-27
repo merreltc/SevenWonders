@@ -20,7 +20,7 @@ public class WonderTest {
 		wonders.put(WonderType.GARDENS, "The Hanging Gardens of Babylon");
 		wonders.put(WonderType.STATUE, "The Statue of Zeus in Olympia");
 		wonders.put(WonderType.MAUSOLEUM, "The Mausoleum of Halicarnassus");
-		wonders.put(WonderType.PYRAMIDS, "The Pyramids of Gize");
+		wonders.put(WonderType.PYRAMIDS, "The Pyramids of Giza");
 		
 		for(WonderType type : wonders.keySet()) {
 			Wonder wonder = new Wonder('A', type);
@@ -108,73 +108,73 @@ public class WonderTest {
 		Wonder wonder = new Wonder('B', WonderType.MAUSOLEUM, 6);
 	}
 	
-//	@Test(expected = IllegalArgumentException.class)
-//	public void testInvalidNumLevels1SideBColossus() {
-//		Wonder wonder = new Wonder('B', "The Colossus of Rhodes", 1);
-//	}
-//	
-//	@Test(expected = IllegalArgumentException.class)
-//	public void testInvalidNumLevels3SideBColossus() {
-//		Wonder wonder = new Wonder('B', "The Colossus of Rhodes", 3);
-//	}
-//	
-//	@Test(expected = IllegalArgumentException.class)
-//	public void testInvalidNumLevels2SideBLighthouse() {
-//		Wonder wonder = new Wonder('B', "The Lighthouse of Alexandria", 2);
-//	}
-//	
-//	@Test(expected = IllegalArgumentException.class)
-//	public void testInvalidNumLevels4SideBLighthouse() {
-//		Wonder wonder = new Wonder('B', "The Lighthouse of Alexandria", 4);
-//	}
-//	
-//	@Test(expected = IllegalArgumentException.class)
-//	public void testInvalidNumLevels2SideBTemple() {
-//		Wonder wonder = new Wonder('B', "The Temple of Artemis", 2);
-//	}
-//	
-//	@Test(expected = IllegalArgumentException.class)
-//	public void testInvalidNumLevels4SideBTemple() {
-//		Wonder wonder = new Wonder('B', "The Temple of Artemis", 4);
-//	}
-//	
-//	@Test(expected = IllegalArgumentException.class)
-//	public void testInvalidNumLevels2SideBGardens() {
-//		Wonder wonder = new Wonder('B', "The Hanging Gardens of Babylon", 2);
-//	}
-//	
-//	@Test(expected = IllegalArgumentException.class)
-//	public void testInvalidNumLevels4SideBGardens() {
-//		Wonder wonder = new Wonder('B', "The Hanging Gardens of Babylon", 4);
-//	}
-//	
-//	@Test(expected = IllegalArgumentException.class)
-//	public void testInvalidNumLevels2SideBStatue() {
-//		Wonder wonder = new Wonder('B', "The State of Zeus in Olympia", 2);
-//	}
-//	
-//	@Test(expected = IllegalArgumentException.class)
-//	public void testInvalidNumLevels4SideBStatue() {
-//		Wonder wonder = new Wonder('B', "The State of Zeus in Olympia", 4);
-//	}
-//	
-//	@Test(expected = IllegalArgumentException.class)
-//	public void testInvalidNumLevels2SideBMausoleum() {
-//		Wonder wonder = new Wonder('B', "The Mausoleum of Halicamassus", 2);
-//	}
-//	
-//	@Test(expected = IllegalArgumentException.class)
-//	public void testInvalidNumLevels4SideBMausoleum() {
-//		Wonder wonder = new Wonder('B', "The Mausoleum of Halicamasses", 4);
-//	}
-//	
-//	@Test(expected = IllegalArgumentException.class)
-//	public void testInvalidNumLevels3SideBPyramids() {
-//		Wonder wonder = new Wonder('B', "The Pyramids of Giza", 3);
-//	}
-//	
-//	@Test(expected = IllegalArgumentException.class)
-//	public void testInvalidNumLevels5SideBPyramids() {
-//		Wonder wonder = new Wonder('B', "The Pyramids of Giza", 5);
-//	}
+	@Test(expected = IllegalArgumentException.class)
+	public void testInvalidNumLevels1SideBColossus() {
+		Wonder wonder = new Wonder('B', WonderType.COLOSSUS, 1);
+	}
+	
+	@Test(expected = IllegalArgumentException.class)
+	public void testInvalidNumLevels3SideBColossus() {
+		Wonder wonder = new Wonder('B', WonderType.COLOSSUS, 3);
+	}
+	
+	@Test(expected = IllegalArgumentException.class)
+	public void testInvalidNumLevels2SideBLighthouse() {
+		Wonder wonder = new Wonder('B', WonderType.LIGHTHOUSE, 2);
+	}
+	
+	@Test(expected = IllegalArgumentException.class)
+	public void testInvalidNumLevels4SideBLighthouse() {
+		Wonder wonder = new Wonder('B', WonderType.LIGHTHOUSE, 4);
+	}
+	
+	@Test(expected = IllegalArgumentException.class)
+	public void testInvalidNumLevels2SideBTemple() {
+		Wonder wonder = new Wonder('B', WonderType.TEMPLE, 2);
+	}
+	
+	@Test(expected = IllegalArgumentException.class)
+	public void testInvalidNumLevels4SideBTemple() {
+		Wonder wonder = new Wonder('B', WonderType.TEMPLE, 4);
+	}
+	
+	@Test(expected = IllegalArgumentException.class)
+	public void testInvalidNumLevels2SideBGardens() {
+		Wonder wonder = new Wonder('B', WonderType.GARDENS, 2);
+	}
+	
+	@Test(expected = IllegalArgumentException.class)
+	public void testInvalidNumLevels4SideBGardens() {
+		Wonder wonder = new Wonder('B', WonderType.GARDENS, 4);
+	}
+	
+	@Test(expected = IllegalArgumentException.class)
+	public void testInvalidNumLevels2SideBStatue() {
+		Wonder wonder = new Wonder('B', WonderType.STATUE, 2);
+	}
+	
+	@Test(expected = IllegalArgumentException.class)
+	public void testInvalidNumLevels4SideBStatue() {
+		Wonder wonder = new Wonder('B', WonderType.STATUE, 4);
+	}
+	
+	@Test(expected = IllegalArgumentException.class)
+	public void testInvalidNumLevels2SideBMausoleum() {
+		Wonder wonder = new Wonder('B', WonderType.MAUSOLEUM, 2);
+	}
+	
+	@Test(expected = IllegalArgumentException.class)
+	public void testInvalidNumLevels4SideBMausoleum() {
+		Wonder wonder = new Wonder('B', WonderType.MAUSOLEUM, 4);
+	}
+	
+	@Test(expected = IllegalArgumentException.class)
+	public void testInvalidNumLevels3SideBPyramids() {
+		Wonder wonder = new Wonder('B', WonderType.PYRAMIDS, 3);
+	}
+	
+	@Test(expected = IllegalArgumentException.class)
+	public void testInvalidNumLevels5SideBPyramids() {
+		Wonder wonder = new Wonder('B', WonderType.PYRAMIDS, 5);
+	}
 }

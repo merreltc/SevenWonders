@@ -1,6 +1,7 @@
 package dataStructures;
 
 import java.util.HashMap;
+import java.util.HashSet;
 
 import dataStructures.Wonder.WonderType;
 
@@ -24,7 +25,7 @@ public class Wonder {
 		this.type = type;
 		this.name = wonders.get(type);
 		this.side = side;
-		validateNumLevelsGeneral(numLevels);
+		validateNumLevels(type, numLevels);
 		this.numLevels = numLevels;
 	}
 
@@ -36,26 +37,46 @@ public class Wonder {
 		wonders.put(WonderType.GARDENS, "The Hanging Gardens of Babylon");
 		wonders.put(WonderType.STATUE, "The Statue of Zeus in Olympia");
 		wonders.put(WonderType.MAUSOLEUM, "The Mausoleum of Halicarnassus");
-		wonders.put(WonderType.PYRAMIDS, "The Pyramids of Gize");
+		wonders.put(WonderType.PYRAMIDS, "The Pyramids of Giza");
 	}
 
-	private void validateNumLevelsGeneral(int numLevels) {
+	private void validateNumLevels(WonderType type, int numLevels) {
 		if (this.side == 'A') {
 			validateNumLevelsSideA(numLevels);
 		} else {
-			validateNumLevelsSideB(numLevels);
-		}
-	}
-
-	private void validateNumLevelsSideB(int numLevels) {
-		if (numLevels <= 1 || numLevels >= 5) {
-			throw new IllegalArgumentException("Invalid Number of Wonder Levels: " + numLevels);
+			validateNumLevelsSideB(type, numLevels);
 		}
 	}
 
 	private void validateNumLevelsSideA(int numLevels) {
 		if (numLevels <= 2 || numLevels >= 4)
 			throw new IllegalArgumentException("Invalid Number of Wonder Levels: " + numLevels);
+	}
+
+	private void validateNumLevelsSideB(WonderType type, int numLevels) {
+		switch(type) {
+		case LIGHTHOUSE:
+		case TEMPLE:
+		case GARDENS:
+		case STATUE:
+		case MAUSOLEUM:
+			if (numLevels <= 2 || numLevels >= 4) {
+				throw new IllegalArgumentException("Invalid Number of Wonder Levels: " + numLevels);
+			} 
+			break;
+		case COLOSSUS:
+			if (numLevels <=1 || numLevels >= 3) {
+				throw new IllegalArgumentException("Invalid Number of Wonder Levels: " + numLevels);
+			}
+			break;
+		case PYRAMIDS:
+			if (numLevels <=3 || numLevels >= 5) {
+				throw new IllegalArgumentException("Invalid Number of Wonder Levels: " + numLevels);
+			}
+			break;
+		default:
+			throw new IllegalArgumentException("Invalid WonderType: " + type);
+		}
 	}
 
 	public WonderType getType() {
