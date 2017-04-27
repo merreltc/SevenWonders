@@ -6,8 +6,12 @@ import java.util.ArrayList;
 
 import org.junit.Test;
 
+import backend.SetUpDeckHandler;
+import dataStructures.Card;
+import dataStructures.Deck;
 import dataStructures.GameBoard;
 import dataStructures.Player;
+import dataStructures.Deck.Age;
 
 public class GameBoardTests {
 
@@ -17,7 +21,11 @@ public class GameBoardTests {
 		players.add(new Player());
 		players.add(new Player());
 		players.add(new Player());
-		GameBoard board = new GameBoard(players);
+
+		ArrayList<Card> cards = SetUpDeckHandler.setUpDeckHandler.createDeck(Age.AGE1, 3);
+		Deck deck = new Deck(Age.AGE1, cards);
+
+		GameBoard board = new GameBoard(players, deck);
 
 		assertEquals(3, board.getNumPlayers());
 	}
@@ -33,7 +41,10 @@ public class GameBoardTests {
 		players.add(new Player());
 		players.add(new Player());
 
-		GameBoard board = new GameBoard(players);
+		ArrayList<Card> cards = SetUpDeckHandler.setUpDeckHandler.createDeck(Age.AGE1, 3);
+		Deck deck = new Deck(Age.AGE1, cards);
+
+		GameBoard board = new GameBoard(players, deck);
 
 		assertEquals(7, board.getNumPlayers());
 	}
@@ -45,7 +56,10 @@ public class GameBoardTests {
 		players.add(new Player());
 		players.add(new Player());
 
-		GameBoard board = new GameBoard(players);
+		ArrayList<Card> cards = SetUpDeckHandler.setUpDeckHandler.createDeck(Age.AGE1, 3);
+		Deck deck = new Deck(Age.AGE1, cards);
+
+		GameBoard board = new GameBoard(players, deck);
 
 		assertEquals(players, board.getPlayers());
 	}
@@ -57,7 +71,10 @@ public class GameBoardTests {
 		players.add(new Player("Captain America"));
 		players.add(new Player("Black Widow"));
 
-		GameBoard board = new GameBoard(players);
+		ArrayList<Card> cards = SetUpDeckHandler.setUpDeckHandler.createDeck(Age.AGE1, 3);
+		Deck deck = new Deck(Age.AGE1, cards);
+
+		GameBoard board = new GameBoard(players, deck);
 
 		for (int i = 0; i < players.size(); i++) {
 			assertEquals(players.get(i), board.getPlayer(i));
@@ -71,7 +88,10 @@ public class GameBoardTests {
 		players.add(new Player("Captain America"));
 		players.add(new Player("Black Widow"));
 
-		GameBoard board = new GameBoard(players);
+		ArrayList<Card> cards = SetUpDeckHandler.setUpDeckHandler.createDeck(Age.AGE1, 3);
+		Deck deck = new Deck(Age.AGE1, cards);
+
+		GameBoard board = new GameBoard(players, deck);
 
 		for (int i = 0; i < players.size(); i++) {
 			assertEquals(3, board.getPlayerCoinTotal(i));
@@ -85,7 +105,10 @@ public class GameBoardTests {
 		players.add(new Player("Captain America"));
 		players.add(new Player("Black Widow"));
 
-		GameBoard board = new GameBoard(players);
+		ArrayList<Card> cards = SetUpDeckHandler.setUpDeckHandler.createDeck(Age.AGE1, 3);
+		Deck deck = new Deck(Age.AGE1, cards);
+
+		GameBoard board = new GameBoard(players, deck);
 		
 		comparePlayerPositions(players, board, 0, 1, 2);
 	}
@@ -101,7 +124,10 @@ public class GameBoardTests {
 		players.add(new Player("Spider Man"));
 		players.add(new Player("Thor"));
 
-		GameBoard board = new GameBoard(players);
+		ArrayList<Card> cards = SetUpDeckHandler.setUpDeckHandler.createDeck(Age.AGE1, 3);
+		Deck deck = new Deck(Age.AGE1, cards);
+
+		GameBoard board = new GameBoard(players, deck);
 		
 		comparePlayerPositions(players, board, 0, 1, 6);
 	}
@@ -122,7 +148,10 @@ public class GameBoardTests {
 		players.add(new Player("Hulk"));
 		players.add(new Player("Iron Man"));
 
-		GameBoard board = new GameBoard(players);
+		ArrayList<Card> cards = SetUpDeckHandler.setUpDeckHandler.createDeck(Age.AGE1, 3);
+		Deck deck = new Deck(Age.AGE1, cards);
+
+		GameBoard board = new GameBoard(players, deck);
 		board.setCurrentPlayer(0);
 		
 		assertEquals(players.get(0), board.getCurrentPlayer());
@@ -137,7 +166,10 @@ public class GameBoardTests {
 		players.add(new Player("Hulk"));
 		players.add(new Player("Iron Man"));
 
-		GameBoard board = new GameBoard(players);
+		ArrayList<Card> cards = SetUpDeckHandler.setUpDeckHandler.createDeck(Age.AGE1, 3);
+		Deck deck = new Deck(Age.AGE1, cards);
+
+		GameBoard board = new GameBoard(players, deck);
 		board.setCurrentPlayer(-1);
 		fail();
 	}
@@ -151,7 +183,10 @@ public class GameBoardTests {
 		players.add(new Player("Hulk"));
 		players.add(new Player("Iron Man"));
 
-		GameBoard board = new GameBoard(players);
+		ArrayList<Card> cards = SetUpDeckHandler.setUpDeckHandler.createDeck(Age.AGE1, 3);
+		Deck deck = new Deck(Age.AGE1, cards);
+
+		GameBoard board = new GameBoard(players, deck);
 		board.setCurrentPlayer(5);
 		fail();
 	}
@@ -165,7 +200,10 @@ public class GameBoardTests {
 		players.add(new Player("Hulk"));
 		players.add(new Player("Iron Man"));
 
-		GameBoard board = new GameBoard(players);
+		ArrayList<Card> cards = SetUpDeckHandler.setUpDeckHandler.createDeck(Age.AGE1, 3);
+		Deck deck = new Deck(Age.AGE1, cards);
+
+		GameBoard board = new GameBoard(players, deck);
 		board.setNextPlayer(0);
 		
 		assertEquals(players.get(0), board.getNextPlayer());
@@ -180,7 +218,10 @@ public class GameBoardTests {
 		players.add(new Player("Hulk"));
 		players.add(new Player("Iron Man"));
 
-		GameBoard board = new GameBoard(players);
+		ArrayList<Card> cards = SetUpDeckHandler.setUpDeckHandler.createDeck(Age.AGE1, 3);
+		Deck deck = new Deck(Age.AGE1, cards);
+
+		GameBoard board = new GameBoard(players, deck);
 		board.setNextPlayer(-1);
 		fail();
 	}
@@ -194,7 +235,10 @@ public class GameBoardTests {
 		players.add(new Player("Hulk"));
 		players.add(new Player("Iron Man"));
 
-		GameBoard board = new GameBoard(players);
+		ArrayList<Card> cards = SetUpDeckHandler.setUpDeckHandler.createDeck(Age.AGE1, 3);
+		Deck deck = new Deck(Age.AGE1, cards);
+
+		GameBoard board = new GameBoard(players, deck);
 		board.setNextPlayer(5);
 		fail();
 	}
@@ -208,7 +252,10 @@ public class GameBoardTests {
 		players.add(new Player("Hulk"));
 		players.add(new Player("Iron Man"));
 
-		GameBoard board = new GameBoard(players);
+		ArrayList<Card> cards = SetUpDeckHandler.setUpDeckHandler.createDeck(Age.AGE1, 3);
+		Deck deck = new Deck(Age.AGE1, cards);
+
+		GameBoard board = new GameBoard(players, deck);
 		board.setPreviousPlayer(0);
 		
 		assertEquals(players.get(0), board.getPreviousPlayer());
@@ -223,7 +270,10 @@ public class GameBoardTests {
 		players.add(new Player("Hulk"));
 		players.add(new Player("Iron Man"));
 
-		GameBoard board = new GameBoard(players);
+		ArrayList<Card> cards = SetUpDeckHandler.setUpDeckHandler.createDeck(Age.AGE1, 3);
+		Deck deck = new Deck(Age.AGE1, cards);
+
+		GameBoard board = new GameBoard(players, deck);
 		board.setPreviousPlayer(-1);
 		fail();
 	}
@@ -237,7 +287,10 @@ public class GameBoardTests {
 		players.add(new Player("Hulk"));
 		players.add(new Player("Iron Man"));
 
-		GameBoard board = new GameBoard(players);
+		ArrayList<Card> cards = SetUpDeckHandler.setUpDeckHandler.createDeck(Age.AGE1, 3);
+		Deck deck = new Deck(Age.AGE1, cards);
+
+		GameBoard board = new GameBoard(players, deck);
 		board.setPreviousPlayer(5);
 		fail();
 	}
@@ -250,11 +303,30 @@ public class GameBoardTests {
 		players.add(new Player("Black Widow"));
 		players.add(new Player("Hulk"));
 		players.add(new Player("Iron Man"));
+		
+		ArrayList<Card> cards = SetUpDeckHandler.setUpDeckHandler.createDeck(Age.AGE1, 3);
+		Deck deck = new Deck(Age.AGE1, cards);
 
-		GameBoard board = new GameBoard(players);
+		GameBoard board = new GameBoard(players, deck);
 		
 		assertEquals(0, board.getCurrentPlayerIndex());
 		assertEquals(1, board.getNextPlayerIndex());
 		assertEquals(4, board.getPreviousPlayerIndex());
+	}
+
+	@Test
+	public void testGetDeck() {
+		ArrayList<Player> players = new ArrayList<Player>();
+		players.add(new Player("Wolverine"));
+		players.add(new Player("Captain America"));
+		players.add(new Player("Black Widow"));
+		players.add(new Player("Hulk"));
+		players.add(new Player("Iron Man"));
+		
+		ArrayList<Card> cards = SetUpDeckHandler.setUpDeckHandler.createDeck(Age.AGE1, 3);
+		Deck deck = new Deck(Age.AGE1, cards);
+
+		GameBoard board = new GameBoard(players, deck);
+		assertEquals(deck, board.getDeck());
 	}
 }
