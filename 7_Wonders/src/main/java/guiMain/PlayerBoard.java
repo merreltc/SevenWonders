@@ -14,13 +14,9 @@ public class PlayerBoard {
 	/* zero index is the current player, next player is last */
 	private int playerPosition;
 	private int backPlayerStartingBoardPositionX;
-
+	
 	private Player player;
 
-	/*
-	 * TODO Pass in a player as well. This will be the player that controls the
-	 * board
-	 */
 	public PlayerBoard(int startingPosition, int totalNumberOfPlayers, Player player) {
 		backPlayerStartingBoardPositionX = Constants.FrameWidth / 2 - Constants.FrameWidthModifier
 				- ((totalNumberOfPlayers - 1) * Constants.BackPlayerBoardWidth) / 2;
