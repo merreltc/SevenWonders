@@ -5,7 +5,7 @@ public class Wonder {
 	private int numLevels;
 
 	public Wonder(char side) {
-		this.side = side;
+		this(side, 3);
 	}
 	
 	public Wonder(char side, int numLevels) {
@@ -14,9 +14,6 @@ public class Wonder {
 	}
 
 	public int getNumLevels() {
-		if(side == 'A') {
-			return 3;
-		}
 		return this.numLevels;
 	}
 
