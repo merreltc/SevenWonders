@@ -46,7 +46,7 @@ public class SetUpDeckHandlerTest {
 		String jsonData = readFile("src/assets/age1cards.json");
 		createCards(numPlayers, cards, jsonData, "age1");
 
-		ArrayList<Card> actual = SetUpDeckHandler.setUpDeckHandler.createDeck(Age.AGE1, numPlayers);
+		ArrayList<Card> actual = SetUpDeckHandler.setUpDeckHandler.createCards(Age.AGE1, numPlayers);
 
 		for (int i = 0; i < actual.size(); i++) {
 			assertEquals(cards.get(i).toString(), actual.get(i).toString());
@@ -61,7 +61,7 @@ public class SetUpDeckHandlerTest {
 		String jsonData = readFile("src/assets/age2cards.json");
 		createCards(numPlayers, cards, jsonData, "age2");
 
-		ArrayList<Card> actual = SetUpDeckHandler.setUpDeckHandler.createDeck(Age.AGE2, numPlayers);
+		ArrayList<Card> actual = SetUpDeckHandler.setUpDeckHandler.createCards(Age.AGE2, numPlayers);
 
 		for (int i = 0; i < actual.size(); i++) {
 			assertEquals(cards.get(i).toString(), actual.get(i).toString());
@@ -77,7 +77,7 @@ public class SetUpDeckHandlerTest {
 		String jsonData = readFile("src/assets/age3cards.json");
 		createCards(numPlayers, cards, jsonData, "age3");
 
-		ArrayList<Card> actual = SetUpDeckHandler.setUpDeckHandler.createDeck(Age.AGE3, numPlayers);
+		ArrayList<Card> actual = SetUpDeckHandler.setUpDeckHandler.createCards(Age.AGE3, numPlayers);
 
 		for (int i = 0; i < actual.size(); i++) {
 			assertEquals(cards.get(i).toString(), actual.get(i).toString());
@@ -93,7 +93,7 @@ public class SetUpDeckHandlerTest {
 		String jsonData = readFile("src/assets/age2cards.json");
 		createCards(numPlayers, cards, jsonData, "age2");
 
-		ArrayList<Card> actual = SetUpDeckHandler.setUpDeckHandler.createDeck(Age.AGE2, numPlayers);
+		ArrayList<Card> actual = SetUpDeckHandler.setUpDeckHandler.createCards(Age.AGE2, numPlayers);
 		Card temple = actual.get(8);
 		assertEquals("Temple", temple.getName());
 		assertEquals("Pantheon", temple.getNextStructureName());
@@ -108,7 +108,7 @@ public class SetUpDeckHandlerTest {
 		String jsonData = readFile("src/assets/age2cards.json");
 		createCards(numPlayers, cards, jsonData, "age2");
 
-		ArrayList<Card> actual = SetUpDeckHandler.setUpDeckHandler.createDeck(Age.AGE2, numPlayers);
+		ArrayList<Card> actual = SetUpDeckHandler.setUpDeckHandler.createCards(Age.AGE2, numPlayers);
 		Card card = actual.get(0);
 		EntityEffect effect = (EntityEffect) card.getEffect();
 		HashMap<Enum, Integer> entitiesAndAmounts = effect.getEntities();
@@ -130,7 +130,7 @@ public class SetUpDeckHandlerTest {
 		String jsonData = readFile("src/assets/age2cards.json");
 		createCards(numPlayers, cards, jsonData, "age2");
 
-		ArrayList<Card> actual = SetUpDeckHandler.setUpDeckHandler.createDeck(Age.AGE2, numPlayers);
+		ArrayList<Card> actual = SetUpDeckHandler.setUpDeckHandler.createCards(Age.AGE2, numPlayers);
 		Card card = actual.get(6);
 		EntityEffect effect = (EntityEffect) card.getEffect();
 		HashMap<Enum, Integer> entitiesAndAmounts = effect.getEntities();
@@ -152,7 +152,7 @@ public class SetUpDeckHandlerTest {
 		String jsonData = readFile("src/assets/age2cards.json");
 		createCards(numPlayers, cards, jsonData, "age2");
 
-		ArrayList<Card> actual = SetUpDeckHandler.setUpDeckHandler.createDeck(Age.AGE2, numPlayers);
+		ArrayList<Card> actual = SetUpDeckHandler.setUpDeckHandler.createCards(Age.AGE2, numPlayers);
 		Card card = actual.get(7);
 		ValueEffect effect = (ValueEffect) card.getEffect();
 		HashMap<Enum, Integer> costs = card.getCost();
@@ -177,7 +177,7 @@ public class SetUpDeckHandlerTest {
 		String jsonData = readFile("src/assets/age3cards.json");
 		createCards(numPlayers, cards, jsonData, "age3");
 
-		ArrayList<Card> actual = SetUpDeckHandler.setUpDeckHandler.createDeck(Age.AGE3, numPlayers);
+		ArrayList<Card> actual = SetUpDeckHandler.setUpDeckHandler.createCards(Age.AGE3, numPlayers);
 		Card card = actual.get(14);
 		HashMap<Enum, Integer> costs = card.getCost();
 
@@ -208,7 +208,7 @@ public class SetUpDeckHandlerTest {
 		String jsonData = readFile("src/assets/age2cards.json");
 		createCards(numPlayers, cards, jsonData, "age2");
 
-		ArrayList<Card> actual = SetUpDeckHandler.setUpDeckHandler.createDeck(Age.AGE2, numPlayers);
+		ArrayList<Card> actual = SetUpDeckHandler.setUpDeckHandler.createCards(Age.AGE2, numPlayers);
 		Card card = actual.get(14);
 		ValueEffect effect = (ValueEffect) card.getEffect();
 		HashMap<Enum, Integer> costs = card.getCost();
@@ -238,6 +238,11 @@ public class SetUpDeckHandlerTest {
 		assertEquals(5, effect2.getValueAmount());
 		assertEquals("None", card2.getNextStructureName());
 		assertEquals("Baths", card2.getPreviousStructureName());
+	}
+	
+	@Test
+	public void testCreateDeck(){
+		assertEquals(Deck.class, SetUpDeckHandler.setUpDeckHandler.createDeck(Age.AGE1, 3).getClass());
 	}
 
 	private void createCards(int numPlayers, ArrayList<Card> cards, String jsonData, String age) {

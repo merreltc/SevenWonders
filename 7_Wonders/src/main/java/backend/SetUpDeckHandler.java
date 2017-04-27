@@ -13,6 +13,7 @@ import dataStructures.EntityEffect;
 import dataStructures.ValueEffect;
 import dataStructures.Card.CardType;
 import dataStructures.Cost.CostType;
+import dataStructures.Deck;
 import dataStructures.Deck.Age;
 import dataStructures.Effect.Direction;
 import dataStructures.Effect.EffectType;
@@ -30,8 +31,13 @@ import json.JSONObject;
 
 public class SetUpDeckHandler {
 	public static SetUpDeckHandler setUpDeckHandler = new SetUpDeckHandler();
+	
+	public Deck createDeck(Age age, int numPlayers){
+		ArrayList<Card> cards = createCards(age, numPlayers);
+		return new Deck(age, cards);
+	}
 
-	public ArrayList<Card> createDeck(Age age, int numPlayers) {
+	public ArrayList<Card> createCards(Age age, int numPlayers) {
 		ArrayList<Card> cards = new ArrayList<Card>();
 
 		String jsonData;

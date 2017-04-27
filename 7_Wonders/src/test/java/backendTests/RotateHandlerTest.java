@@ -24,7 +24,7 @@ public class RotateHandlerTest {
 		players.add(new Player("Captain America"));
 		players.add(new Player("Black Widow"));
 
-		ArrayList<Card> cards = SetUpDeckHandler.setUpDeckHandler.createDeck(Age.AGE1, 3);
+		ArrayList<Card> cards = SetUpDeckHandler.setUpDeckHandler.createCards(Age.AGE1, 3);
 		Deck deck = new Deck(Age.AGE1, cards);
 
 		GameBoard board = new GameBoard(players, deck);
@@ -48,7 +48,7 @@ public class RotateHandlerTest {
 		players.add(new Player("Spider Man"));
 		players.add(new Player("Thor"));
 
-		ArrayList<Card> cards = SetUpDeckHandler.setUpDeckHandler.createDeck(Age.AGE1, 3);
+		ArrayList<Card> cards = SetUpDeckHandler.setUpDeckHandler.createCards(Age.AGE1, 3);
 		Deck deck = new Deck(Age.AGE1, cards);
 
 		GameBoard board = new GameBoard(players, deck);
@@ -70,7 +70,7 @@ public class RotateHandlerTest {
 		players.add(new Player("Hulk"));
 		players.add(new Player("Iron Man"));
 
-		ArrayList<Card> cards = SetUpDeckHandler.setUpDeckHandler.createDeck(Age.AGE1, 3);
+		ArrayList<Card> cards = SetUpDeckHandler.setUpDeckHandler.createCards(Age.AGE1, 3);
 		Deck deck = new Deck(Age.AGE1, cards);
 
 		GameBoard board = new GameBoard(players, deck);
@@ -94,7 +94,7 @@ public class RotateHandlerTest {
 		players.add(new Player("Captain America"));
 		players.add(new Player("Black Widow"));
 
-		ArrayList<Card> cards = SetUpDeckHandler.setUpDeckHandler.createDeck(Age.AGE1, 3);
+		ArrayList<Card> cards = SetUpDeckHandler.setUpDeckHandler.createCards(Age.AGE1, 3);
 		Deck deck = new Deck(Age.AGE1, cards);
 
 		GameBoard board = new GameBoard(players, deck);
@@ -116,7 +116,7 @@ public class RotateHandlerTest {
 		players.add(new Player("Spider Man"));
 		players.add(new Player("Thor"));
 
-		ArrayList<Card> cards = SetUpDeckHandler.setUpDeckHandler.createDeck(Age.AGE1, 3);
+		ArrayList<Card> cards = SetUpDeckHandler.setUpDeckHandler.createCards(Age.AGE1, 3);
 		Deck deck = new Deck(Age.AGE1, cards);
 
 		GameBoard board = new GameBoard(players, deck);
@@ -135,7 +135,7 @@ public class RotateHandlerTest {
 		players.add(new Player("Hulk"));
 		players.add(new Player("Iron Man"));
 
-		ArrayList<Card> cards = SetUpDeckHandler.setUpDeckHandler.createDeck(Age.AGE1, 3);
+		ArrayList<Card> cards = SetUpDeckHandler.setUpDeckHandler.createCards(Age.AGE1, 3);
 		Deck deck = new Deck(Age.AGE1, cards);
 
 		GameBoard board = new GameBoard(players, deck);
@@ -155,7 +155,7 @@ public class RotateHandlerTest {
 		players.add(new Player("Hulk"));
 		players.add(new Player("Iron Man"));
 
-		ArrayList<Card> cards = SetUpDeckHandler.setUpDeckHandler.createDeck(Age.AGE1, 3);
+		ArrayList<Card> cards = SetUpDeckHandler.setUpDeckHandler.createCards(Age.AGE1, 3);
 		Deck deck = new Deck(Age.AGE1, cards);
 
 		GameBoard board = new GameBoard(players, deck);
@@ -175,7 +175,7 @@ public class RotateHandlerTest {
 		players.add(new Player("Captain America"));
 		players.add(new Player("Black Widow"));
 
-		ArrayList<Card> cards = SetUpDeckHandler.setUpDeckHandler.createDeck(Age.AGE1, 3);
+		ArrayList<Card> cards = SetUpDeckHandler.setUpDeckHandler.createCards(Age.AGE1, 3);
 		Deck deck = new Deck(Age.AGE1, cards);
 
 		GameBoard board = new GameBoard(players, deck);
@@ -198,7 +198,7 @@ public class RotateHandlerTest {
 		players.add(new Player("Spider Man"));
 		players.add(new Player("Thor"));
 
-		ArrayList<Card> cards = SetUpDeckHandler.setUpDeckHandler.createDeck(Age.AGE1, 3);
+		ArrayList<Card> cards = SetUpDeckHandler.setUpDeckHandler.createCards(Age.AGE1, 3);
 		Deck deck = new Deck(Age.AGE1, cards);
 
 		GameBoard board = new GameBoard(players, deck);
@@ -219,7 +219,7 @@ public class RotateHandlerTest {
 		players.add(new Player("Hulk"));
 		players.add(new Player("Iron Man"));
 
-		ArrayList<Card> cards = SetUpDeckHandler.setUpDeckHandler.createDeck(Age.AGE1, 3);
+		ArrayList<Card> cards = SetUpDeckHandler.setUpDeckHandler.createCards(Age.AGE1, 3);
 		Deck deck = new Deck(Age.AGE1, cards);
 
 		GameBoard board = new GameBoard(players, deck);
@@ -241,7 +241,7 @@ public class RotateHandlerTest {
 		players.add(new Player("Hulk"));
 		players.add(new Player("Iron Man"));
 
-		ArrayList<Card> cards = SetUpDeckHandler.setUpDeckHandler.createDeck(Age.AGE1, 3);
+		ArrayList<Card> cards = SetUpDeckHandler.setUpDeckHandler.createCards(Age.AGE1, 3);
 		Deck deck = new Deck(Age.AGE1, cards);
 
 		GameBoard board = new GameBoard(players, deck);
