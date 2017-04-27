@@ -18,9 +18,17 @@ public class WonderTest {
 	
 	@Test
 	public void testBasicsSideB2Levels() {
-		Wonder wonder = new Wonder('B');
+		Wonder wonder = new Wonder('B', 2);
 		
 		assertEquals('B', wonder.getSide());
 		assertEquals(2, wonder.getNumLevels());
+	}
+	
+	@Test
+	public void testBasicsSideB3Levels() {
+		Wonder wonder = new Wonder('B', 3);
+		
+		assertEquals('B', wonder.getSide());
+		assertEquals(3, wonder.getNumLevels());
 	}
 }
