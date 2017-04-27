@@ -352,5 +352,13 @@ public class PlayerTest {
 		assertEquals(playerCards.get(1), player.getCurrentHand().get(1));
 		assertEquals(playerCards.get(2), player.getCurrentHand().get(2));
 	}
+	
+	@Test
+	public void testGetDefaultStoragePileHand() {
+		Player player = new Player("Jane Doe");
+		
+		assertTrue(player.getStoragePile().isEmpty());
+		assertEquals(ArrayList.class, player.getStoragePile().getClass());
+	}
 
 }

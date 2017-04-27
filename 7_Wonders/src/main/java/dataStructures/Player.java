@@ -13,6 +13,7 @@ public class Player {
 	private int conflictTotal = 0;
 	
 	private ArrayList<Card> currentHand = new ArrayList<Card>();
+	private ArrayList<Card> storagePile = new ArrayList<Card>();
 
 	public Player(String playerName) {
 		this.name = playerName;
@@ -144,5 +145,9 @@ public class Player {
 
 	public void setCurrentHand(ArrayList<Card> currentHand) {
 		this.currentHand = currentHand;
+	}
+
+	public ArrayList<Card> getStoragePile() {
+		return this.storagePile;
 	}
 }
