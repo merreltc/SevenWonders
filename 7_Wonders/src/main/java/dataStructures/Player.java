@@ -150,4 +150,8 @@ public class Player {
 	public ArrayList<Card> getStoragePile() {
 		return this.storagePile;
 	}
+
+	public void setStoragePile(ArrayList<Card> storagePile) {
+		this.storagePile = storagePile;
+	}
 }
