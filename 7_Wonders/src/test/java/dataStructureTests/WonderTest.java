@@ -49,4 +49,9 @@ public class WonderTest {
 	public void testInvalidNumLevels1() {
 		Wonder wonder = new Wonder('B', 1);
 	}
+	
+	@Test(expected = IllegalArgumentException.class)
+	public void testInvalidNumLevels5() {
+		Wonder wonder = new Wonder('B', 5);
+	}
 }
