@@ -39,4 +39,9 @@ public class WonderTest {
 		assertEquals('B', wonder.getSide());
 		assertEquals(4, wonder.getNumLevels());
 	}
+	
+	@Test(expected = IllegalArgumentException.class)
+	public void testInvalidNumLevelsNeg1() {
+		Wonder wonder = new Wonder('B', -1);
+	}
 }
