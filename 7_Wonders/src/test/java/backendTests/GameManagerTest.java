@@ -51,7 +51,7 @@ public class GameManagerTest {
 	}
 
 	@Test
-	public void testSetUpGameBoardCreateDeck() {
+	public void testSetUpGameBoardCreateDeck3Players() {
 		SetUpDeckHandler.setUpDeckHandler = EasyMock.createStrictMock(SetUpDeckHandler.class);
 		Deck deck = null;
 
@@ -62,13 +62,34 @@ public class GameManagerTest {
 		playerNames.add("Wolverine");
 		playerNames.add("Captain America");
 		playerNames.add("Black Widow");
-		playerNames.add("Hulk");
-		playerNames.add("Iron Man");
 
 		new GameManager(playerNames);
 
 		EasyMock.verify(SetUpDeckHandler.setUpDeckHandler);
 	}
+	
+	@Test
+	public void testSetUpGameBoardCreateDeck7Players() {
+		SetUpDeckHandler.setUpDeckHandler = EasyMock.createStrictMock(SetUpDeckHandler.class);
+		Deck deck = null;
+
+		EasyMock.expect(SetUpDeckHandler.setUpDeckHandler.createDeck(Age.AGE1, 7)).andReturn(deck);
+		
+		EasyMock.replay(SetUpDeckHandler.setUpDeckHandler);
+		ArrayList<String> playerNames = new ArrayList<String>();
+		playerNames.add("Wolverine");
+		playerNames.add("Captain America");
+		playerNames.add("Black Widow");
+		playerNames.add("Hulk");
+		playerNames.add("Iron Man");
+		playerNames.add("Spider Man");
+		playerNames.add("Thor");
+
+		new GameManager(playerNames);
+
+		EasyMock.verify(SetUpDeckHandler.setUpDeckHandler);
+	}
+
 
 	@Test
 	public void testTrade() {

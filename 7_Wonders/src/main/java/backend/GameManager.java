@@ -25,7 +25,7 @@ public class GameManager {
 
 	public void setUpGame(ArrayList<String> playerNames) {
 		ArrayList<Player> players = SetUpHandler.setUpHandler.setUpAndReturnPlayers(playerNames);
-		Deck deck = SetUpDeckHandler.setUpDeckHandler.createDeck(Age.AGE1, 3);
+		Deck deck = SetUpDeckHandler.setUpDeckHandler.createDeck(Age.AGE1, playerNames.size());
 
 		this.board = new GameBoard(players, deck);
 		this.rotateHandler = new RotateHandler(this.board);

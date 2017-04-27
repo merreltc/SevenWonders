@@ -9,7 +9,7 @@ import dataStructures.Player;
 public class TurnHandler {
 	public static TurnHandler turnHandler = new TurnHandler();
 
-	public void distributeInitialCards(ArrayList<Player> players, int numPlayers, Deck deck) {
+	public void dealInitialCards(ArrayList<Player> players, int numPlayers, Deck deck) {
 		for (Player player: players) {
 			ArrayList<Card> currentHand = new ArrayList<Card>();
 			
