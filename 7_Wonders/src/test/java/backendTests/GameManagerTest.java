@@ -12,6 +12,7 @@ import backend.GameManager;
 import backend.RotateHandler.Direction;
 import backend.SetUpDeckHandler;
 import backend.SetUpHandler;
+import backend.TurnHandler;
 import dataStructures.Card;
 import dataStructures.Deck;
 import dataStructures.GameBoard;
@@ -19,9 +20,11 @@ import dataStructures.Player;
 import dataStructures.Deck.Age;
 
 public class GameManagerTest {
-	
-	@After public void setUp() { 
+
+	@After
+	public void setUp() {
 		SetUpDeckHandler.setUpDeckHandler = new SetUpDeckHandler();
+		TurnHandler.turnHandler = new TurnHandler();
 	}
 
 	@Test
@@ -56,7 +59,7 @@ public class GameManagerTest {
 		Deck deck = null;
 
 		EasyMock.expect(SetUpDeckHandler.setUpDeckHandler.createDeck(Age.AGE1, 3)).andReturn(deck);
-		
+
 		EasyMock.replay(SetUpDeckHandler.setUpDeckHandler);
 		ArrayList<String> playerNames = new ArrayList<String>();
 		playerNames.add("Wolverine");
@@ -67,14 +70,14 @@ public class GameManagerTest {
 
 		EasyMock.verify(SetUpDeckHandler.setUpDeckHandler);
 	}
-	
+
 	@Test
 	public void testSetUpGameBoardCreateDeck7Players() {
 		SetUpDeckHandler.setUpDeckHandler = EasyMock.createStrictMock(SetUpDeckHandler.class);
 		Deck deck = null;
 
 		EasyMock.expect(SetUpDeckHandler.setUpDeckHandler.createDeck(Age.AGE1, 7)).andReturn(deck);
-		
+
 		EasyMock.replay(SetUpDeckHandler.setUpDeckHandler);
 		ArrayList<String> playerNames = new ArrayList<String>();
 		playerNames.add("Wolverine");
@@ -89,7 +92,6 @@ public class GameManagerTest {
 
 		EasyMock.verify(SetUpDeckHandler.setUpDeckHandler);
 	}
-
 
 	@Test
 	public void testTrade() {
@@ -305,5 +307,25 @@ public class GameManagerTest {
 		assertEquals(players.get(currIndex), manager.getCurrentPlayer());
 		assertEquals(players.get(nextIndex), manager.getNextPlayer());
 		assertEquals(players.get(previousIndex), manager.getPreviousPlayer());
+	}
+
+	@Test
+	public void testDealInitialCards() {
+		TurnHandler.turnHandler = EasyMock.createMock(TurnHandler.class);
+
+		ArrayList<String> playerNames = new ArrayList<String>();
+		playerNames.add("Wolverine");
+		playerNames.add("Captain America");
+		playerNames.add("Black Widow");
+
+		GameManager manager = new GameManager(playerNames);
+		TurnHandler.turnHandler.dealInitialTurnCards(manager.getPlayers(), manager.getNumPlayers(),
+				manager.getGameBoard().getDeck());
+
+		EasyMock.replay(TurnHandler.turnHandler);
+
+		manager.dealInitialTurnCards();
+
+		EasyMock.verify(TurnHandler.turnHandler);
 	}
 }

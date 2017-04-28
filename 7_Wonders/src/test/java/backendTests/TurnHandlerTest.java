@@ -24,7 +24,7 @@ public class TurnHandlerTest {
 		Deck deck = manager.getGameBoard().getDeck();
 		int expectedDeckSize = deck.getNumCards() - 9;
 		ArrayList<Player> players = manager.getPlayers();
-		TurnHandler.turnHandler.dealInitialCards(players, manager.getNumPlayers(), deck);
+		TurnHandler.turnHandler.dealInitialTurnCards(players, manager.getNumPlayers(), deck);
 		
 		for (Player player: players){
 			assertEquals(3, player.getCurrentHand().size());
@@ -46,10 +46,10 @@ public class TurnHandlerTest {
 		GameManager manager = new GameManager(playerNames);
 		
 		Deck deck = manager.getGameBoard().getDeck();
-		System.out.println(deck.getNumCards());
+		
 		int expectedDeckSize = deck.getNumCards() - 49;
 		ArrayList<Player> players = manager.getPlayers();
-		TurnHandler.turnHandler.dealInitialCards(players, manager.getNumPlayers(), deck);
+		TurnHandler.turnHandler.dealInitialTurnCards(players, manager.getNumPlayers(), deck);
 		
 		for (Player player: players){
 			assertEquals(7, player.getCurrentHand().size());

@@ -31,6 +31,10 @@ public class GameManager {
 		this.rotateHandler = new RotateHandler(this.board);
 		this.tradeHandler = new TradeHandler(this.board);
 	}
+	
+	public void dealInitialTurnCards() {
+		TurnHandler.turnHandler.dealInitialTurnCards(this.getPlayers(), this.getNumPlayers(), this.board.getDeck());
+	}
 
 	public void trade(Player from, Player to, int valueToTrade) {
 		tradeHandler.tradeFromTo(from, to, valueToTrade);
