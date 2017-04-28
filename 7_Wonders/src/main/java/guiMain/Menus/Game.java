@@ -40,11 +40,12 @@ public class Game extends Menu {
 			/*Set wonder to correct values*/
 		}
 		this.gameManager = new GameManager(players);
+		this.gameManager.dealInitialTurnCards();
 	}
 
 	@Override
 	public void initialize() {
-		this.clearButtons();
+		this.clearInteractables();
 		createBoardsForEachPlayer();
 		setUpExitButton();
 		setUpTradingButtons();
@@ -74,9 +75,9 @@ public class Game extends Menu {
 		}
 	}
 
-	private void setUpCardSlots() {
+	private void setUpCardSlots() {		
 		this.handManager = new HandManager();
-		this.handManager.rotatePlayers(this.gameManager.getPlayer(0));
+		this.handManager.drawCurrentPlayerCards(this.gameManager.getCurrentPlayer());
 		for (int i = 0; i < this.handManager.getPlayerHandSize(); i++) {
 			this.addInteractable(this.handManager.getCardHolder(i));
 		}
@@ -116,7 +117,15 @@ public class Game extends Menu {
 	public void onClick(Interactable clicked) {
 		if (clicked.getClass().equals(CardHolder.class)) {
 			((CardHolder) clicked).activate(this.gameManager);
-			RotateBoards();
+			rotateBoards();
+			/* update the cards after rotation */
+			for(Interactable toRemove: this.handManager.getCurrentPlayerHand()){
+				this.removeInteractable(toRemove);
+			}
+			this.handManager.drawCurrentPlayerCards(this.gameManager.getCurrentPlayer());
+			for (int i = 0; i < this.handManager.getPlayerHandSize(); i++) {
+				this.addInteractable(this.handManager.getCardHolder(i));
+			}
 		} else if (clicked.getValue().equals("Exit")) {
 			System.exit(0);
 		} else {
@@ -126,18 +135,12 @@ public class Game extends Menu {
 		}
 	}
 
-	public void RotateBoards() {
-		/*
-		 * TODO: Talk to them about their rotations. Possibly one rotate method.
-		 * Also, fix the train wreck some how
-		 */
+	public void rotateBoards() {
 		this.gameManager.rotateClockwise();
-
 		ArrayList<Player> players = this.gameManager.getPlayers();
 		Player nextPlayer = this.gameManager.getNextPlayer();
 		int totalNumberOfPlayers = this.gameManager.getNumPlayers();
 		int nextPlayerIndex = players.indexOf(nextPlayer);
-
 		for (int i = 0; i < players.size(); i++) {
 			boards.get(i).changePlayer(players.get((totalNumberOfPlayers + nextPlayerIndex - i) % totalNumberOfPlayers));
 		}
