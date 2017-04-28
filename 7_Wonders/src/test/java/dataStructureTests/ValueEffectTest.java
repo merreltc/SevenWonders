@@ -3,11 +3,14 @@ package dataStructureTests;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 
+import java.util.HashMap;
+
 import org.junit.Test;
 
 import dataStructures.Effect;
 import dataStructures.Effect.Direction;
 import dataStructures.Effect.EffectType;
+import dataStructures.EntityEffect.Science;
 import dataStructures.ValueEffect;
 import dataStructures.ValueEffect.AffectingEntity;
 import dataStructures.ValueEffect.Value;
@@ -177,6 +180,30 @@ public class ValueEffectTest {
 	}
 	
 	@Test
+	public void test5CommerceValueNoneEffect(){
+		Effect effect = new ValueEffect(EffectType.VALUE, Value.COMMERCE, AffectingEntity.NONE, 5);
+		
+		assertEquals(EffectType.VALUE, effect.getEffectType());
+		assertEquals(Direction.SELF, effect.getDirection());
+		assertEquals(5, ((ValueEffect) effect).getValueAmount());
+		assertEquals(Value.COMMERCE, ((ValueEffect) effect).getValue());
+		assertEquals(ValueType.COIN, ((ValueEffect) effect).getValueType());
+		assertEquals(AffectingEntity.NONE, ((ValueEffect) effect).getAffectingEntity());
+	}
+	
+	@Test(expected=IllegalArgumentException.class)
+	public void testInvalidCommerceValueNoneEffect0(){
+		new ValueEffect(EffectType.VALUE, Value.COMMERCE, AffectingEntity.NONE, 0);
+		fail();
+	}
+	
+	@Test(expected=IllegalArgumentException.class)
+	public void testInvalidCommerceValueNoneEffectNeg1(){
+		new ValueEffect(EffectType.VALUE, Value.COMMERCE, AffectingEntity.NONE, -1);
+		fail();
+	}
+	
+	@Test
 	public void test1CommerceValueNeighborsEffect(){
 		Effect effect = new ValueEffect(EffectType.VALUE, Value.COMMERCE, AffectingEntity.MANUFACTUREDGOODS, Direction.NEIGHBORS, 1);
 		
@@ -258,5 +285,21 @@ public class ValueEffectTest {
 		assertEquals(Value.GUILD, ((ValueEffect) effect).getValue());
 		assertEquals(ValueType.VICTORYPOINT, ((ValueEffect) effect).getValueType());
 		assertEquals(AffectingEntity.WONDERLEVEL, ((ValueEffect) effect).getAffectingEntity());
+	}
+	
+	@Test
+	public void testThreeValueAffectingEntityEffect () {
+		HashMap<Enum, Integer> affectingEntities = new HashMap<Enum, Integer>();
+		affectingEntities.put(AffectingEntity.RAWRESOURCES, 1);
+		affectingEntities.put(AffectingEntity.MANUFACTUREDGOODS, 1);
+		affectingEntities.put(AffectingEntity.GUILD, 1);
+		
+		Effect effect = new ValueEffect(EffectType.VALUE, Value.GUILD, affectingEntities);
+		
+		assertEquals(EffectType.VALUE, effect.getEffectType());
+		assertEquals(Direction.SELF, effect.getDirection());
+		assertEquals(Value.GUILD, ((ValueEffect) effect).getValue());
+		assertEquals(ValueType.VICTORYPOINT, ((ValueEffect) effect).getValueType());
+		assertEquals(affectingEntities, ((ValueEffect) effect).getAffectingEntities());
 	}
 }

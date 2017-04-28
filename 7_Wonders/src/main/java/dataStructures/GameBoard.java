@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 public class GameBoard {
 	private ArrayList<Player> players = new ArrayList<Player>();
+	private Deck currentDeck;
 
 	private int numPlayers;
 
@@ -11,12 +12,13 @@ public class GameBoard {
 	private int nextPlayerIndex;
 	private int previousPlayerIndex;
 
-	public GameBoard(ArrayList<Player> players) {
+	public GameBoard(ArrayList<Player> players, Deck deck) {
 		this.numPlayers = players.size();
 		this.currentPlayerIndex = 0;
 		this.nextPlayerIndex = 1;
 		this.previousPlayerIndex = this.numPlayers - 1;
 		this.players = players;
+		this.currentDeck = deck;
 	}
 
 	public int getNumPlayers() {
@@ -78,5 +80,9 @@ public class GameBoard {
 
 	public int getPreviousPlayerIndex() {
 		return this.previousPlayerIndex;
+	}
+
+	public Deck getDeck() {
+		return this.currentDeck;
 	}
 }

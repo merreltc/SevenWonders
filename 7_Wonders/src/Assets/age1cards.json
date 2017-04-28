@@ -1,77 +1,85 @@
-[{
+{ "age1": [{
 	"cardName": "Lumber Yard",
-	"minNumPlayers": 3,
-	"cardType": "RAWRESOURCE",
+	"frequencyByNumPlayers": [3, 4],
+	"cardType": "RAWMATERIAL",
 	"Cost": {
 				"CostType": "NONE"
 			},
 	"Effect": {
-				"Effect": "ENTITY",
+				"EffectType": "ENTITY",
 				"EntityType": "RESOURCE",
 				"entitiesAndAmounts": [{
 										"Resource": "LUMBER",
 										"entityAmount": 1
 									  }]
-			  }
+			  },
+	"Next": "None",
+	"Previous": "None"
 },
 {
 	"cardName": "Stone Pit",
-	"minNumPlayers": 3,
-	"cardType": "RAWRESOURCE",
+	"frequencyByNumPlayers": [3, 5],
+	"cardType": "RAWMATERIAL",
 	"Cost": {
 				"CostType": "NONE"
 			},
 	"Effect": {
-				"Effect": "ENTITY",
+				"EffectType": "ENTITY",
 				"EntityType": "RESOURCE",
 				"entitiesAndAmounts": [{
 										"Resource": "STONE",
 										"entityAmount": 1
 									  }]
-			  }
+			  },
+	"Next": "None",
+	"Previous": "None"
 },
 {
 	"cardName": "Clay Pool",
-	"minNumPlayers": 3,
-	"cardType": "RAWRESOURCE",
+	"frequencyByNumPlayers": [3, 5],
+	"cardType": "RAWMATERIAL",
 	"Cost": {
 				"CostType": "NONE"
 			},
 	"Effect": {
-				"Effect": "ENTITY",
+				"EffectType": "ENTITY",
 				"EntityType": "RESOURCE",
 				"entitiesAndAmounts": [{
 										"Resource": "CLAY",
 										"entityAmount": 1
 									  }]
-			  }
+			  },
+	"Next": "None",
+	"Previous": "None"
 },
 {
 	"cardName": "Ore Vein",
-	"minNumPlayers": 3,
-	"cardType": "RAWRESOURCE",
+	"frequencyByNumPlayers": [3, 4],
+	"cardType": "RAWMATERIAL",
 	"Cost": {
 				"CostType": "NONE"
 			},
 	"Effect": {
-				"Effect": "ENTITY",
+				"EffectType": "ENTITY",
 				"EntityType": "RESOURCE",
 				"entitiesAndAmounts": [{
 										"Resource": "ORE",
 										"entityAmount": 1
 									  }]
-			  }
+			  },
+	"Next": "None",
+	"Previous": "None"
 },
 {
 	"cardName": "Tree Farm",
-	"minNumPlayers": 6,
-	"cardType": "RAWRESOURCE",
+	"frequencyByNumPlayers": [6],
+	"cardType": "RAWMATERIAL",
 	"Cost": {
 				"CostType": "COIN",
 				"coinCost": 1
 			},
 	"Effect": {
-				"Effect": "ENTITY",
+				"EffectType": "ENTITY",
 				"EntityType": "RESOURCE",
 				"entitiesAndAmounts": [{
 										"Resource": "LUMBER",
@@ -81,18 +89,20 @@
 										"Resource": "CLAY",
 										"entityAmount": 1
 									  }]
-			  }
+			  },
+	"Next": "None",
+	"Previous": "None"
 },
 {
 	"cardName": "Excavation",
-	"minNumPlayers": 4,
-	"cardType": "RAWRESOURCE",
+	"frequencyByNumPlayers": [4],
+	"cardType": "RAWMATERIAL",
 	"Cost": {
 				"CostType": "COIN",
 				"coinCost": 1
 			},
 	"Effect": {
-				"Effect": "ENTITY",
+				"EffectType": "ENTITY",
 				"EntityType": "RESOURCE",
 				"entitiesAndAmounts": [{
 										"Resource": "STONE",
@@ -102,18 +112,20 @@
 										"Resource": "CLAY",
 										"entityAmount": 1
 									  }]
-			  }
+			  },
+	"Next": "None",
+	"Previous": "None"
 },
 {
 	"cardName": "Clay Pit",
-	"minNumPlayers": 3,
-	"cardType": "RAWRESOURCE",
+	"frequencyByNumPlayers": [3],
+	"cardType": "RAWMATERIAL",
 	"Cost": {
 				"CostType": "COIN",
 				"coinCost": 1
 			},
 	"Effect": {
-				"Effect": "ENTITY",
+				"EffectType": "ENTITY",
 				"EntityType": "RESOURCE",
 				"entitiesAndAmounts": [{
 										"Resource": "CLAY",
@@ -123,18 +135,20 @@
 										"Resource": "ORE",
 										"entityAmount": 1
 									  }]
-			  }
+			  },
+	"Next": "None",
+	"Previous": "None"
 },
 {
 	"cardName": "Timber Yard",
-	"minNumPlayers": 3,
-	"cardType": "RAWRESOURCE",
+	"frequencyByNumPlayers": [3],
+	"cardType": "RAWMATERIAL",
 	"Cost": {
 				"CostType": "COIN",
 				"coinCost": 1
 			},
 	"Effect": {
-				"Effect": "ENTITY",
+				"EffectType": "ENTITY",
 				"EntityType": "RESOURCE",
 				"entitiesAndAmounts": [{
 										"Resource": "STONE",
@@ -144,18 +158,20 @@
 										"Resource": "LUMBER",
 										"entityAmount": 1
 									  }]
-			  }
+			  },
+	"Next": "None",
+	"Previous": "None"
 },
 {
 	"cardName": "Forest Cave",
-	"minNumPlayers": 5,
-	"cardType": "RAWRESOURCE",
+	"frequencyByNumPlayers": [5],
+	"cardType": "RAWMATERIAL",
 	"Cost": {
 				"CostType": "COIN",
 				"coinCost": 1
 			},
 	"Effect": {
-				"Effect": "ENTITY",
+				"EffectType": "ENTITY",
 				"EntityType": "RESOURCE",
 				"entitiesAndAmounts": [{
 										"Resource": "LUMBER",
@@ -165,18 +181,20 @@
 										"Resource": "ORE",
 										"entityAmount": 1
 									  }]
-			  }
+			  },
+	"Next": "None",
+	"Previous": "None"
 },			
 {
 	"cardName": "Mine",
-	"minNumPlayers": 6,
-	"cardType": "RAWRESOURCE",
+	"frequencyByNumPlayers": [6],
+	"cardType": "RAWMATERIAL",
 	"Cost": {
 				"CostType": "COIN",
 				"coinCost": 1
 			},
 	"Effect": {
-				"Effect": "ENTITY",
+				"EffectType": "ENTITY",
 				"EntityType": "RESOURCE",
 				"entitiesAndAmounts": [{
 										"Resource": "ORE",
@@ -186,55 +204,63 @@
 										"Resource": "STONE",
 										"entityAmount": 1
 									  }]
-			  }
+			  },
+	"Next": "None",
+	"Previous": "None"
 },			
 {
 	"cardName": "Loom",
-	"minNumPlayers": 3,
+	"frequencyByNumPlayers": [3, 6],
 	"cardType": "MANUFACTUREDGOOD",
 	"Cost": {
 				"CostType": "NONE"
 			},
 	"Effect": {
-				"Effect": "ENTITY",
+				"EffectType": "ENTITY",
 				"EntityType": "MANUFACTUREDGOOD",
 				"entitiesAndAmounts": [{
-										"GOOD": "LOOM",
+										"Good": "LOOM",
 										"entityAmount": 1
 									  }]
-			  }
+			  },
+	"Next": "None",
+	"Previous": "None"
 },			
 {
 	"cardName": "Glassworks",
-	"minNumPlayers": 3,
+	"frequencyByNumPlayers": [3, 6],
 	"cardType": "MANUFACTUREDGOOD",
 	"Cost": {
 				"CostType": "NONE"
 			},
 	"Effect": {
-				"Effect": "ENTITY",
+				"EffectType": "ENTITY",
 				"EntityType": "MANUFACTUREDGOOD",
 				"entitiesAndAmounts": [{
-										"GOOD": "GLASS",
+										"Good": "GLASS",
 										"entityAmount": 1
 									  }]
-			  }
+			  },
+	"Next": "None",
+	"Previous": "None"
 },			
 {
 	"cardName": "Press",
-	"minNumPlayers": 3,
+	"frequencyByNumPlayers": [3, 6],
 	"cardType": "MANUFACTUREDGOOD",
 	"Cost": {
 				"CostType": "NONE"
 			},
 	"Effect": {
-				"Effect": "ENTITY",
+				"EffectType": "ENTITY",
 				"EntityType": "MANUFACTUREDGOOD",
 				"entitiesAndAmounts": [{
-										"GOOD": "PRESS",
+										"Good": "PRESS",
 										"entityAmount": 1
 									  }]
-			  }
+			  },
+	"Next": "None",
+	"Previous": "None"
 },			
 {
 	"cardName": "Pawnshop",
@@ -242,31 +268,35 @@
 	"Cost": {
 				"CostType": "NONE"
 			},
-	"minNumPlayers": 4,
+	"frequencyByNumPlayers": [4, 7],
 	"Effect": {
-				"Effect": "VALUE",
+				"EffectType": "VALUE",
 				"Value": "VICTORYPOINTS",
 				"AffectingEntities": "NONE",
 				"valueAmount": 3
-			  }
+			  },
+	"Next": "None",
+	"Previous": "None"
 },			
 {
 	"cardName": "Baths",
 	"cardType": "CIVILIANSTRUCTURE",
 	"Cost": {
 				"CostType": "RESOURCE",
-				"Cost": [{
+				"cost": [{
 							"Resource": "STONE",
 							"amount": 1
 						}]
 			},
-	"minNumPlayers": 3,
+	"frequencyByNumPlayers": [3, 7],
 	"Effect": {
-				"Effect": "VALUE",
+				"EffectType": "VALUE",
 				"Value": "VICTORYPOINTS",
 				"AffectingEntities": "NONE",
 				"valueAmount": 3
-			  }
+			  },
+	"Next": "Aqueduct",
+	"Previous": "None"
 },			
 {
 	"cardName": "Alter",
@@ -274,13 +304,15 @@
 	"Cost": {
 				"CostType": "NONE"
 			},
-	"minNumPlayers": 3,
+	"frequencyByNumPlayers": [3, 5],
 	"Effect": {
-				"Effect": "VALUE",
+				"EffectType": "VALUE",
 				"Value": "VICTORYPOINTS",
 				"AffectingEntities": "NONE",
 				"valueAmount": 2
-			  }
+			  },
+	"Next": "Temple",
+	"Previous": "None"
 },			
 {
 	"cardName": "Theater",
@@ -288,13 +320,15 @@
 	"Cost": {
 				"CostType": "NONE"
 			},
-	"minNumPlayers": 3,
+	"frequencyByNumPlayers": [3, 6],
 	"Effect": {
-				"Effect": "VALUE",
+				"EffectType": "VALUE",
 				"Value": "VICTORYPOINTS",
 				"AffectingEntities": "NONE",
 				"valueAmount": 2
-			  }
+			  },
+	"Next": "Statue",
+	"Previous": "None"
 },			
 {
 	"cardName": "Tavern",
@@ -302,13 +336,15 @@
 	"Cost": {
 				"CostType": "NONE"
 			},
-	"minNumPlayers": 4,
+	"frequencyByNumPlayers": [4, 5, 7],
 	"Effect": {
-				"Effect": "VALUE",
+				"EffectType": "VALUE",
 				"Value": "COMMERCE",
 				"AffectingEntities": "NONE",
 				"valueAmount": 5
-			  }
+			  },
+	"Next": "None",
+	"Previous": "None"
 },
 {
 	"cardName": "East Trading Post",
@@ -316,14 +352,16 @@
 	"Cost": {
 				"CostType": "NONE"
 			},
-	"minNumPlayers": 3,
+	"frequencyByNumPlayers": [3, 7],
 	"Effect": {
-				"Effect": "VALUE",
+				"EffectType": "VALUE",
 				"Value": "COMMERCE",
 				"AffectingEntities": "RAWRESOURCES",
 				"Direction": "RIGHT",
 				"valueAmount": 1
-			  }
+			  },
+	"Next": "Forum",
+	"Previous": "None"
 },			
 {
 	"cardName": "West Trading Post",
@@ -331,14 +369,16 @@
 	"Cost": {
 				"CostType": "NONE"
 			},
-	"minNumPlayers": 3,
+	"frequencyByNumPlayers": [3, 7],
 	"Effect": {
-				"Effect": "VALUE",
+				"EffectType": "VALUE",
 				"Value": "COMMERCE",
 				"AffectingEntities": "RAWRESOURCES",
 				"Direction": "LEFT",
 				"valueAmount": 1
-			  }
+			  },
+	"Next": "Forum",
+	"Previous": "None"
 },			
 {
 	"cardName": "MARKETPLACE",
@@ -346,14 +386,16 @@
 	"Cost": {
 				"CostType": "NONE"
 			},
-	"minNumPlayers": 3,
+	"frequencyByNumPlayers": [3, 6],
 	"Effect": {
-				"Effect": "VALUE",
+				"EffectType": "VALUE",
 				"Value": "COMMERCE",
 				"AffectingEntities": "MANUFACTUREDGOODS",
 				"Direction": "NEIGHBORS",
 				"valueAmount": 1
-			  }
+			  },
+	"Next": "Caravansery",
+	"Previous": "None"
 },			
 {
 	"cardName": "Stockade",
@@ -365,13 +407,15 @@
 							"amount": 1
 						}]
 			},
-	"minNumPlayers": 3,
+	"frequencyByNumPlayers": [3, 7],
 	"Effect": {
-				"Effect": "VALUE",
+				"EffectType": "VALUE",
 				"Value": "MILITARY",
 				"AffectingEntities": "NONE",
 				"valueAmount": 1
-			  }
+			  },
+	"Next": "None",
+	"Previous": "None"
 },
 {
 	"cardName": "Barracks",
@@ -383,13 +427,15 @@
 							"amount": 1
 						}]
 			},
-	"minNumPlayers": 3,
+	"frequencyByNumPlayers": [3, 5],
 	"Effect": {
-				"Effect": "VALUE",
+				"EffectType": "VALUE",
 				"Value": "MILITARY",
 				"AffectingEntities": "NONE",
 				"valueAmount": 1
-			  }
+			  },
+	"Next": "None",
+	"Previous": "None"
 },
 {
 	"cardName": "Guard Tower",
@@ -401,13 +447,15 @@
 							"amount": 1
 						}]
 			},
-	"minNumPlayers": 3,
+	"frequencyByNumPlayers": [3, 4],
 	"Effect": {
-				"Effect": "VALUE",
+				"EffectType": "VALUE",
 				"Value": "MILITARY",
 				"AffectingEntities": "NONE",
 				"valueAmount": 1
-			  }
+			  },
+	"Next": "None",
+	"Previous": "None"
 },
 {
 	"cardName": "Apothecary",
@@ -419,15 +467,17 @@
 							"amount": 1
 						}]
 			},
-	"minNumPlayers": 3,
+	"frequencyByNumPlayers": [3, 5],
 	"Effect": {
-				"Effect": "ENTITY",
+				"EffectType": "ENTITY",
 				"EntityType": "SCIENCE",
 				"entitiesAndAmounts": [{
 										"Science": "PROTRACTOR",
 										"entityAmount": 1
 									  }]
-			  }
+			  },
+	"Next": "Stables/Dispensary",
+	"Previous": "None"
 },
 {
 	"cardName": "Workshop",
@@ -439,15 +489,17 @@
 							"amount": 1
 						}]
 			},
-	"minNumPlayers": 3,
+	"frequencyByNumPlayers": [3, 7],
 	"Effect": {
-				"Effect": "ENTITY",
+				"EffectType": "ENTITY",
 				"EntityType": "SCIENCE",
 				"entitiesAndAmounts": [{
 										"Science": "WHEEL",
 										"entityAmount": 1
 									  }]
-			  }
+			  },
+	"Next": "Archery Range/Laboratory",
+	"Previous": "None"
 },
 {
 	"cardName": "Scriptorium",
@@ -459,13 +511,16 @@
 							"amount": 1
 						}]
 			},
-	"minNumPlayers": 3,
+	"frequencyByNumPlayers": [3, 4],
 	"Effect": {
-				"Effect": "ENTITY",
+				"EffectType": "ENTITY",
 				"EntityType": "SCIENCE",
 				"entitiesAndAmounts": [{
 										"Science": "TABLET",
 										"entityAmount": 1
 									  }]
-			  }
+			  },
+	"Next": "Courthouse/Library",
+	"Previous": "None"
 }]
+}
