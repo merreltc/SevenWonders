@@ -31,8 +31,7 @@ public class RenderImage {
 		catch (IOException e) {
 				System.err.println("Cannot load image:" + name);
 		}
-		// TODO: Solve the returning null issue.
-		return null;
+		return new BufferedImage(0, 0, 0);
 	}
 
 }
