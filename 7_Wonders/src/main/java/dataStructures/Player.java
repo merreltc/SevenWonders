@@ -1,5 +1,7 @@
 package dataStructures;
 
+import java.util.ArrayList;
+
 import exceptions.InsufficientFundsException;
 
 public class Player {
@@ -9,10 +11,9 @@ public class Player {
 	private int numOfValue1Coins = 3;
 	private int numOfValue3Coins = 0;
 	private int conflictTotal = 0;
-
-	public Player() {
-
-	}
+	
+	private ArrayList<Card> currentHand = new ArrayList<Card>();
+	private ArrayList<Card> storagePile = new ArrayList<Card>();
 
 	public Player(String playerName) {
 		this.name = playerName;
@@ -136,5 +137,21 @@ public class Player {
 
 	public int getConflictTotal() {
 		return this.conflictTotal;
+	}
+
+	public ArrayList<Card> getCurrentHand() {
+		return this.currentHand;
+	}
+
+	public void setCurrentHand(ArrayList<Card> currentHand) {
+		this.currentHand = currentHand;
+	}
+
+	public ArrayList<Card> getStoragePile() {
+		return this.storagePile;
+	}
+
+	public void setStoragePile(ArrayList<Card> storagePile) {
+		this.storagePile = storagePile;
 	}
 }

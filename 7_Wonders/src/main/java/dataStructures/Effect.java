@@ -1,67 +1,30 @@
 package dataStructures;
 
-import java.util.HashMap;
-
 public class Effect {
+	private EffectType effectType = EffectType.NONE;
+	private Direction direction = Direction.SELF;
 	
 	public enum EffectType {
-		NONE
-		
+		NONE, ENTITY, VALUE, MULTIVALUE
 	}
-	
-	public enum ScienceType {
-		NONE
-		
-	}
-	
-	public enum AffectedEntityType {
-		NONE
-		
-	}
-	
+
 	public enum Direction {
-		NONE
-		
+		SELF, RIGHT, LEFT, ALL, NEIGHBORS
+	}
+
+	public Effect(EffectType effectType) {
+		this.effectType = effectType;
 	}
 
 	public EffectType getEffectType() {
-		return EffectType.NONE;
+		return this.effectType;
 	}
 
-	public HashMap<Object, Object> getResources() {
-		return new HashMap<Object, Object>();
+	public Direction getDirection() {
+		return this.direction;
 	}
-
-	public ScienceType getScienceType() {
-		return ScienceType.NONE;
+	
+	public void setDirection(Direction direction) {
+		this.direction = direction;
 	}
-
-	public int getConflictToken() {
-		return 0;
-	}
-
-	public int getVictoryPoints() {
-		return 0;
-	}
-
-	public int getCoinTotal() {
-		return 0;
-	}
-
-	public AffectedEntityType getAffectedEntityType() {
-		return AffectedEntityType.NONE;
-	}
-
-	public HashMap<Object, Object> getCommerceResources() {
-		return new HashMap<Object, Object>();
-	}
-
-	public int getCommerceValue() {
-		return 0;
-	}
-
-	public Direction getCommerceDirection() {
-		return Direction.NONE;
-	}
-
 }

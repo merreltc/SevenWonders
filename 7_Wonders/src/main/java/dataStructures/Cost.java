@@ -2,29 +2,29 @@ package dataStructures;
 
 import java.util.HashMap;
 
-import dataStructures.Card.ResourceType;
-import dataStructures.Cost.CostType;
-
-
 public class Cost {
 	private int coinCost = 0;
 	private CostType type = CostType.NONE;
-	private HashMap<ResourceType, Integer> resourceCost = new HashMap<ResourceType, Integer>();
-	
-	public enum CostType{
-		NONE, COIN, RESOURCE
+	private HashMap<Enum, Integer> cost = new HashMap<Enum, Integer>();
+
+	public enum CostType {
+		NONE, COIN, RESOURCE, GOOD, MULTITYPE
 	}
-	
-	public enum ResourceType {
-		LOOM, ORE, LUMBER
+
+	public enum Resource {
+		ORE, LUMBER, STONE, CLAY
 	}
-	
+
+	public enum Good {
+		LOOM, GLASS, PAPER
+	}
+
 	public Cost() {
 	}
-	
-	public Cost(CostType type, HashMap<ResourceType, Integer> resourceCost) {
+
+	public Cost(CostType type, HashMap<Enum, Integer> cost) {
 		this.type = type;
-		this.resourceCost = resourceCost;
+		this.cost = cost;
 	}
 
 	public Cost(CostType type, int coinCost) {
@@ -36,8 +36,8 @@ public class Cost {
 		return this.type;
 	}
 
-	public HashMap<ResourceType, Integer> getResourceCost() {
-		return this.resourceCost;
+	public HashMap<Enum, Integer> getCost() {
+		return this.cost;
 	}
 
 	public int getCoinCost() {

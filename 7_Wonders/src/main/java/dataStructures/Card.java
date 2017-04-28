@@ -1,88 +1,93 @@
 package dataStructures;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
-import dataStructures.Card.ResourceType;
+import dataStructures.Card.CardType;
+import dataStructures.Cost.CostType;
+import dataStructures.Effect.EffectType;
 
 public class Card {
 	private String name = "Default Card";
-	private int minNumPlayers = 3;
+	private ArrayList<Integer> frequencyByNumPlayers;
+	private static final int GUILD_NO_FREQUENCY = -1;
+	
 	private CardType type = CardType.DEFAULT;
-	private Cost cost = Cost.NONE;
-	private Effect effect = Effect.NONE;
+	private Cost cost;
+	private Effect effect;
+	
+	private String previousStructure = "None";
+	private String nextStructure = "None";
 
 	public enum CardType {
 		DEFAULT, RAWMATERIAL, MANUFACTUREDGOOD, CIVILIANSTRUCTURE, 
 		SCIENTIFICSTRUCTURE, COMMERCIALSTRUCTURE, MILITARYSTRUCTURE, GUILD
 	}
 
-	public enum Cost {
-		NONE, RESOURCE, COIN
-	}
-
 	public enum ResourceType {
 		LOOM, ORE, LUMBER
 	}
 
-	public enum Effect {
-		NONE, RESOURCE, MULTI, SCIENCE, COMMERCIAL, VICTORYPOINTS, CONFLICTTOKENS
-	}
-
-	public Card() {
-	}
-
-	public Card(String name, int minNumPlayers, CardType type, Cost cost, Effect effect) {
+	public Card(String name, ArrayList<Integer> frequencyByNumPlayers, CardType type, Cost cost, Effect effect, String previousStructure,
+			String nextStructure) {
 		this.name = name;
-		this.minNumPlayers = minNumPlayers;
+		this.frequencyByNumPlayers = frequencyByNumPlayers;
+		this.type = type;
+		this.cost = cost;
+		this.effect = effect;
+		this.previousStructure = previousStructure;
+		this.nextStructure = nextStructure;
+	}
+
+	public Card(String name, CardType type, Cost cost, Effect effect) {
+		this.name = name;
+		this.frequencyByNumPlayers = new ArrayList<Integer>();
+		this.frequencyByNumPlayers.add(GUILD_NO_FREQUENCY);
 		this.type = type;
 		this.cost = cost;
 		this.effect = effect;
 	}
 
+	public String toString(){
+		String value = "name: " + this.name + System.lineSeparator() + "minFrequencyByNumPlayers: "
+				+ this.frequencyByNumPlayers.get(0) + System.lineSeparator() + "costType: "
+				+ this.getCostType().toString() + System.lineSeparator() + "effectType: "
+				+ this.getEffectType().toString();
+		return value;
+	}
 	public String getName() {
 		return this.name;
 	}
 
-	public int getMinNumPlayers() {
-		return this.minNumPlayers;
+	public ArrayList<Integer> getFrequencyByNumPlayers() {
+		return this.frequencyByNumPlayers;
 	}
 
 	public CardType getCardType() {
 		return this.type;
 	}
 
-	public Cost getCostType() {
-		return this.cost;
+	public CostType getCostType() {
+		return this.cost.getType();
 	}
 
-	public Effect getEffectType() {
+	public EffectType getEffectType() {
+		return this.effect.getEffectType();
+	}
+
+	public HashMap<Enum, Integer> getCost() {
+		return this.cost.getCost();
+	}
+
+	public Effect getEffect() {
 		return this.effect;
 	}
 
-	public int getCoinCost() {
-		if (this.cost == Cost.COIN) {
-			return 1;
-		}
-		return 0;
+	public String getPreviousStructureName() {
+		return this.previousStructure;
 	}
 
-	public HashMap<ResourceType, Integer> getResourceCost() {
-		if (this.cost == Cost.RESOURCE) {
-			HashMap<ResourceType, Integer> resourceCost = new HashMap<ResourceType, Integer>();
-
-			resourceCost.put(ResourceType.LOOM, 1);
-			resourceCost.put(ResourceType.ORE, 1);
-			resourceCost.put(ResourceType.LUMBER, 1);
-			return resourceCost;
-		}
-
-		return new HashMap<ResourceType, Integer>();
-	}
-
-	public HashMap<ResourceType, Integer> getEffect() {
-		HashMap<ResourceType, Integer> effect = new HashMap<ResourceType, Integer>();
-
-		effect.put(ResourceType.LUMBER, 2);
-		return effect;
+	public String getNextStructureName() {
+		return this.nextStructure;
 	}
 }

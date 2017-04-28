@@ -1,0 +1,526 @@
+{ "age1": [{
+	"cardName": "Lumber Yard",
+	"frequencyByNumPlayers": [3, 4],
+	"cardType": "RAWMATERIAL",
+	"Cost": {
+				"CostType": "NONE"
+			},
+	"Effect": {
+				"EffectType": "ENTITY",
+				"EntityType": "RESOURCE",
+				"entitiesAndAmounts": [{
+										"Resource": "LUMBER",
+										"entityAmount": 1
+									  }]
+			  },
+	"Next": "None",
+	"Previous": "None"
+},
+{
+	"cardName": "Stone Pit",
+	"frequencyByNumPlayers": [3, 5],
+	"cardType": "RAWMATERIAL",
+	"Cost": {
+				"CostType": "NONE"
+			},
+	"Effect": {
+				"EffectType": "ENTITY",
+				"EntityType": "RESOURCE",
+				"entitiesAndAmounts": [{
+										"Resource": "STONE",
+										"entityAmount": 1
+									  }]
+			  },
+	"Next": "None",
+	"Previous": "None"
+},
+{
+	"cardName": "Clay Pool",
+	"frequencyByNumPlayers": [3, 5],
+	"cardType": "RAWMATERIAL",
+	"Cost": {
+				"CostType": "NONE"
+			},
+	"Effect": {
+				"EffectType": "ENTITY",
+				"EntityType": "RESOURCE",
+				"entitiesAndAmounts": [{
+										"Resource": "CLAY",
+										"entityAmount": 1
+									  }]
+			  },
+	"Next": "None",
+	"Previous": "None"
+},
+{
+	"cardName": "Ore Vein",
+	"frequencyByNumPlayers": [3, 4],
+	"cardType": "RAWMATERIAL",
+	"Cost": {
+				"CostType": "NONE"
+			},
+	"Effect": {
+				"EffectType": "ENTITY",
+				"EntityType": "RESOURCE",
+				"entitiesAndAmounts": [{
+										"Resource": "ORE",
+										"entityAmount": 1
+									  }]
+			  },
+	"Next": "None",
+	"Previous": "None"
+},
+{
+	"cardName": "Tree Farm",
+	"frequencyByNumPlayers": [6],
+	"cardType": "RAWMATERIAL",
+	"Cost": {
+				"CostType": "COIN",
+				"coinCost": 1
+			},
+	"Effect": {
+				"EffectType": "ENTITY",
+				"EntityType": "RESOURCE",
+				"entitiesAndAmounts": [{
+										"Resource": "LUMBER",
+										"entityAmount": 1
+									  },
+									  {
+										"Resource": "CLAY",
+										"entityAmount": 1
+									  }]
+			  },
+	"Next": "None",
+	"Previous": "None"
+},
+{
+	"cardName": "Excavation",
+	"frequencyByNumPlayers": [4],
+	"cardType": "RAWMATERIAL",
+	"Cost": {
+				"CostType": "COIN",
+				"coinCost": 1
+			},
+	"Effect": {
+				"EffectType": "ENTITY",
+				"EntityType": "RESOURCE",
+				"entitiesAndAmounts": [{
+										"Resource": "STONE",
+										"entityAmount": 1
+									  },
+									  {
+										"Resource": "CLAY",
+										"entityAmount": 1
+									  }]
+			  },
+	"Next": "None",
+	"Previous": "None"
+},
+{
+	"cardName": "Clay Pit",
+	"frequencyByNumPlayers": [3],
+	"cardType": "RAWMATERIAL",
+	"Cost": {
+				"CostType": "COIN",
+				"coinCost": 1
+			},
+	"Effect": {
+				"EffectType": "ENTITY",
+				"EntityType": "RESOURCE",
+				"entitiesAndAmounts": [{
+										"Resource": "CLAY",
+										"entityAmount": 1
+									  },
+									  {
+										"Resource": "ORE",
+										"entityAmount": 1
+									  }]
+			  },
+	"Next": "None",
+	"Previous": "None"
+},
+{
+	"cardName": "Timber Yard",
+	"frequencyByNumPlayers": [3],
+	"cardType": "RAWMATERIAL",
+	"Cost": {
+				"CostType": "COIN",
+				"coinCost": 1
+			},
+	"Effect": {
+				"EffectType": "ENTITY",
+				"EntityType": "RESOURCE",
+				"entitiesAndAmounts": [{
+										"Resource": "STONE",
+										"entityAmount": 1
+									  },
+									  {
+										"Resource": "LUMBER",
+										"entityAmount": 1
+									  }]
+			  },
+	"Next": "None",
+	"Previous": "None"
+},
+{
+	"cardName": "Forest Cave",
+	"frequencyByNumPlayers": [5],
+	"cardType": "RAWMATERIAL",
+	"Cost": {
+				"CostType": "COIN",
+				"coinCost": 1
+			},
+	"Effect": {
+				"EffectType": "ENTITY",
+				"EntityType": "RESOURCE",
+				"entitiesAndAmounts": [{
+										"Resource": "LUMBER",
+										"entityAmount": 1
+									  },
+									  {
+										"Resource": "ORE",
+										"entityAmount": 1
+									  }]
+			  },
+	"Next": "None",
+	"Previous": "None"
+},			
+{
+	"cardName": "Mine",
+	"frequencyByNumPlayers": [6],
+	"cardType": "RAWMATERIAL",
+	"Cost": {
+				"CostType": "COIN",
+				"coinCost": 1
+			},
+	"Effect": {
+				"EffectType": "ENTITY",
+				"EntityType": "RESOURCE",
+				"entitiesAndAmounts": [{
+										"Resource": "ORE",
+										"entityAmount": 1
+									  },
+									  {
+										"Resource": "STONE",
+										"entityAmount": 1
+									  }]
+			  },
+	"Next": "None",
+	"Previous": "None"
+},			
+{
+	"cardName": "Loom",
+	"frequencyByNumPlayers": [3, 6],
+	"cardType": "MANUFACTUREDGOOD",
+	"Cost": {
+				"CostType": "NONE"
+			},
+	"Effect": {
+				"EffectType": "ENTITY",
+				"EntityType": "MANUFACTUREDGOOD",
+				"entitiesAndAmounts": [{
+										"Good": "LOOM",
+										"entityAmount": 1
+									  }]
+			  },
+	"Next": "None",
+	"Previous": "None"
+},			
+{
+	"cardName": "Glassworks",
+	"frequencyByNumPlayers": [3, 6],
+	"cardType": "MANUFACTUREDGOOD",
+	"Cost": {
+				"CostType": "NONE"
+			},
+	"Effect": {
+				"EffectType": "ENTITY",
+				"EntityType": "MANUFACTUREDGOOD",
+				"entitiesAndAmounts": [{
+										"Good": "GLASS",
+										"entityAmount": 1
+									  }]
+			  },
+	"Next": "None",
+	"Previous": "None"
+},			
+{
+	"cardName": "Press",
+	"frequencyByNumPlayers": [3, 6],
+	"cardType": "MANUFACTUREDGOOD",
+	"Cost": {
+				"CostType": "NONE"
+			},
+	"Effect": {
+				"EffectType": "ENTITY",
+				"EntityType": "MANUFACTUREDGOOD",
+				"entitiesAndAmounts": [{
+										"Good": "PRESS",
+										"entityAmount": 1
+									  }]
+			  },
+	"Next": "None",
+	"Previous": "None"
+},			
+{
+	"cardName": "Pawnshop",
+	"cardType": "CIVILIANSTRUCTURE",
+	"Cost": {
+				"CostType": "NONE"
+			},
+	"frequencyByNumPlayers": [4, 7],
+	"Effect": {
+				"EffectType": "VALUE",
+				"Value": "VICTORYPOINTS",
+				"AffectingEntities": "NONE",
+				"valueAmount": 3
+			  },
+	"Next": "None",
+	"Previous": "None"
+},			
+{
+	"cardName": "Baths",
+	"cardType": "CIVILIANSTRUCTURE",
+	"Cost": {
+				"CostType": "RESOURCE",
+				"cost": [{
+							"Resource": "STONE",
+							"amount": 1
+						}]
+			},
+	"frequencyByNumPlayers": [3, 7],
+	"Effect": {
+				"EffectType": "VALUE",
+				"Value": "VICTORYPOINTS",
+				"AffectingEntities": "NONE",
+				"valueAmount": 3
+			  },
+	"Next": "Aqueduct",
+	"Previous": "None"
+},			
+{
+	"cardName": "Alter",
+	"cardType": "CIVILIANSTRUCTURE",
+	"Cost": {
+				"CostType": "NONE"
+			},
+	"frequencyByNumPlayers": [3, 5],
+	"Effect": {
+				"EffectType": "VALUE",
+				"Value": "VICTORYPOINTS",
+				"AffectingEntities": "NONE",
+				"valueAmount": 2
+			  },
+	"Next": "Temple",
+	"Previous": "None"
+},			
+{
+	"cardName": "Theater",
+	"cardType": "CIVILIANSTRUCTURE",
+	"Cost": {
+				"CostType": "NONE"
+			},
+	"frequencyByNumPlayers": [3, 6],
+	"Effect": {
+				"EffectType": "VALUE",
+				"Value": "VICTORYPOINTS",
+				"AffectingEntities": "NONE",
+				"valueAmount": 2
+			  },
+	"Next": "Statue",
+	"Previous": "None"
+},			
+{
+	"cardName": "Tavern",
+	"cardType": "COMMERCIALSTRUCTURE",
+	"Cost": {
+				"CostType": "NONE"
+			},
+	"frequencyByNumPlayers": [4, 5, 7],
+	"Effect": {
+				"EffectType": "VALUE",
+				"Value": "COMMERCE",
+				"AffectingEntities": "NONE",
+				"valueAmount": 5
+			  },
+	"Next": "None",
+	"Previous": "None"
+},
+{
+	"cardName": "East Trading Post",
+	"cardType": "COMMERCIALSTRUCTURE",
+	"Cost": {
+				"CostType": "NONE"
+			},
+	"frequencyByNumPlayers": [3, 7],
+	"Effect": {
+				"EffectType": "VALUE",
+				"Value": "COMMERCE",
+				"AffectingEntities": "RAWRESOURCES",
+				"Direction": "RIGHT",
+				"valueAmount": 1
+			  },
+	"Next": "Forum",
+	"Previous": "None"
+},			
+{
+	"cardName": "West Trading Post",
+	"cardType": "COMMERCIALSTRUCTURE",
+	"Cost": {
+				"CostType": "NONE"
+			},
+	"frequencyByNumPlayers": [3, 7],
+	"Effect": {
+				"EffectType": "VALUE",
+				"Value": "COMMERCE",
+				"AffectingEntities": "RAWRESOURCES",
+				"Direction": "LEFT",
+				"valueAmount": 1
+			  },
+	"Next": "Forum",
+	"Previous": "None"
+},			
+{
+	"cardName": "MARKETPLACE",
+	"cardType": "COMMERCIALSTRUCTURE",
+	"Cost": {
+				"CostType": "NONE"
+			},
+	"frequencyByNumPlayers": [3, 6],
+	"Effect": {
+				"EffectType": "VALUE",
+				"Value": "COMMERCE",
+				"AffectingEntities": "MANUFACTUREDGOODS",
+				"Direction": "NEIGHBORS",
+				"valueAmount": 1
+			  },
+	"Next": "Caravansery",
+	"Previous": "None"
+},			
+{
+	"cardName": "Stockade",
+	"cardType": "MILITARYSTRUCTURE",
+	"Cost": {
+				"CostType": "RESOURCE",
+				"cost": [{
+							"Resource": "LUMBER",
+							"amount": 1
+						}]
+			},
+	"frequencyByNumPlayers": [3, 7],
+	"Effect": {
+				"EffectType": "VALUE",
+				"Value": "MILITARY",
+				"AffectingEntities": "NONE",
+				"valueAmount": 1
+			  },
+	"Next": "None",
+	"Previous": "None"
+},
+{
+	"cardName": "Barracks",
+	"cardType": "MILITARYSTRUCTURE",
+	"Cost": {
+				"CostType": "RESOURCE",
+				"cost": [{
+							"Resource": "ORE",
+							"amount": 1
+						}]
+			},
+	"frequencyByNumPlayers": [3, 5],
+	"Effect": {
+				"EffectType": "VALUE",
+				"Value": "MILITARY",
+				"AffectingEntities": "NONE",
+				"valueAmount": 1
+			  },
+	"Next": "None",
+	"Previous": "None"
+},
+{
+	"cardName": "Guard Tower",
+	"cardType": "MILITARYSTRUCTURE",
+	"Cost": {
+				"CostType": "RESOURCE",
+				"cost": [{
+							"Resource": "CLAY",
+							"amount": 1
+						}]
+			},
+	"frequencyByNumPlayers": [3, 4],
+	"Effect": {
+				"EffectType": "VALUE",
+				"Value": "MILITARY",
+				"AffectingEntities": "NONE",
+				"valueAmount": 1
+			  },
+	"Next": "None",
+	"Previous": "None"
+},
+{
+	"cardName": "Apothecary",
+	"cardType": "SCIENTIFICSTRUCTURE",
+	"Cost": {
+				"CostType": "GOOD",
+				"cost": [{
+							"Good": "LOOM",
+							"amount": 1
+						}]
+			},
+	"frequencyByNumPlayers": [3, 5],
+	"Effect": {
+				"EffectType": "ENTITY",
+				"EntityType": "SCIENCE",
+				"entitiesAndAmounts": [{
+										"Science": "PROTRACTOR",
+										"entityAmount": 1
+									  }]
+			  },
+	"Next": "Stables/Dispensary",
+	"Previous": "None"
+},
+{
+	"cardName": "Workshop",
+	"cardType": "SCIENTIFICSTRUCTURE",
+	"Cost": {
+				"CostType": "GOOD",
+				"cost": [{
+							"Good": "GLASS",
+							"amount": 1
+						}]
+			},
+	"frequencyByNumPlayers": [3, 7],
+	"Effect": {
+				"EffectType": "ENTITY",
+				"EntityType": "SCIENCE",
+				"entitiesAndAmounts": [{
+										"Science": "WHEEL",
+										"entityAmount": 1
+									  }]
+			  },
+	"Next": "Archery Range/Laboratory",
+	"Previous": "None"
+},
+{
+	"cardName": "Scriptorium",
+	"cardType": "SCIENTIFICSTRUCTURE",
+	"Cost": {
+				"CostType": "GOOD",
+				"cost": [{
+							"Good": "PRESS",
+							"amount": 1
+						}]
+			},
+	"frequencyByNumPlayers": [3, 4],
+	"Effect": {
+				"EffectType": "ENTITY",
+				"EntityType": "SCIENCE",
+				"entitiesAndAmounts": [{
+										"Science": "TABLET",
+										"entityAmount": 1
+									  }]
+			  },
+	"Next": "Courthouse/Library",
+	"Previous": "None"
+}]
+}

@@ -3,8 +3,11 @@ package backend;
 import java.util.ArrayList;
 
 import backend.RotateHandler.Direction;
+import dataStructures.Card;
+import dataStructures.Deck;
 import dataStructures.GameBoard;
 import dataStructures.Player;
+import dataStructures.Deck.Age;
 
 /**
  * Controls the actions of the game and delegates those responsibilities to
@@ -22,9 +25,15 @@ public class GameManager {
 
 	public void setUpGame(ArrayList<String> playerNames) {
 		ArrayList<Player> players = SetUpHandler.setUpHandler.setUpAndReturnPlayers(playerNames);
-		this.board = new GameBoard(players);
+		Deck deck = SetUpDeckHandler.setUpDeckHandler.createDeck(Age.AGE1, playerNames.size());
+
+		this.board = new GameBoard(players, deck);
 		this.rotateHandler = new RotateHandler(this.board);
 		this.tradeHandler = new TradeHandler(this.board);
+	}
+	
+	public void dealInitialTurnCards() {
+		TurnHandler.turnHandler.dealInitialTurnCards(this.getPlayers(), this.getNumPlayers(), this.board.getDeck());
 	}
 
 	public void trade(Player from, Player to, int valueToTrade) {

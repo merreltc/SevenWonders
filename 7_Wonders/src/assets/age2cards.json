@@ -1,0 +1,525 @@
+{ "age2": [{
+	"cardName": "Sawmill",
+	"frequencyByNumPlayers": [3, 4],
+	"cardType": "RAWMATERIAL",
+	"Cost": {
+				"CostType": "COIN",
+				"coinCost": 1
+			},
+	"Effect": {
+				"EffectType": "ENTITY",
+				"EntityType": "RESOURCE",
+				"entitiesAndAmounts": [{
+										"Resource": "LUMBER",
+										"entityAmount": 2
+									  }]
+			  },
+	"Next": "None",
+	"Previous": "None"
+},
+{
+	"cardName": "Quarry",
+	"frequencyByNumPlayers": [3, 4],
+	"cardType": "RAWMATERIAL",
+	"Cost": {
+				"CostType": "COIN",
+				"coinCost": 1
+			},
+	"Effect": {
+				"EffectType": "ENTITY",
+				"EntityType": "RESOURCE",
+				"entitiesAndAmounts": [{
+										"Resource": "STONE",
+										"entityAmount": 2
+									  }]
+			  },
+	"Next": "None",
+	"Previous": "None"
+},
+{
+	"cardName": "Brickyard",
+	"frequencyByNumPlayers": [3, 4],
+	"cardType": "RAWMATERIAL",
+	"Cost": {
+				"CostType": "COIN",
+				"coinCost": 1
+			},
+	"Effect": {
+				"EffectType": "ENTITY",
+				"EntityType": "RESOURCE",
+				"entitiesAndAmounts": [{
+										"Resource": "CLAY",
+										"entityAmount": 2
+									  }]
+			  },
+	"Next": "None",
+	"Previous": "None"
+},
+{
+	"cardName": "Foundry",
+	"frequencyByNumPlayers": [3, 4],
+	"cardType": "RAWMATERIAL",
+	"Cost": {
+				"CostType": "COIN",
+				"coinCost": 1
+			},
+	"Effect": {
+				"EffectType": "ENTITY",
+				"EntityType": "RESOURCE",
+				"entitiesAndAmounts": [{
+										"Resource": "ORE",
+										"entityAmount": 2
+									  }]
+			  },
+	"Next": "None",
+	"Previous": "None"
+},
+{
+	"cardName": "Loom",
+	"frequencyByNumPlayers": [3, 5],
+	"cardType": "MANUFACTUREDGOOD",
+	"Cost": {
+				"CostType": "NONE"
+			},
+	"Effect": {
+				"EffectType": "ENTITY",
+				"EntityType": "MANUFACTUREDGOOD",
+				"entitiesAndAmounts": [{
+										"Good": "LOOM",
+										"entityAmount": 1
+									  }]
+			  },
+	"Next": "None",
+	"Previous": "None"
+},			
+{
+	"cardName": "Glassworks",
+	"frequencyByNumPlayers": [3, 5],
+	"cardType": "MANUFACTUREDGOOD",
+	"Cost": {
+				"CostType": "NONE"
+			},
+	"Effect": {
+				"EffectType": "ENTITY",
+				"EntityType": "MANUFACTUREDGOOD",
+				"entitiesAndAmounts": [{
+										"Good": "GLASS",
+										"entityAmount": 1
+									  }]
+			  },
+	"Next": "None",
+	"Previous": "None"
+},			
+{
+	"cardName": "Press",
+	"frequencyByNumPlayers": [3, 5],
+	"cardType": "MANUFACTUREDGOOD",
+	"Cost": {
+				"CostType": "NONE"
+			},
+	"Effect": {
+				"EffectType": "ENTITY",
+				"EntityType": "MANUFACTUREDGOOD",
+				"entitiesAndAmounts": [{
+										"Good": "PRESS",
+										"entityAmount": 1
+									  }]
+			  },
+	"Next": "None",
+	"Previous": "None"
+},		
+{
+	"cardName": "Aqueduct",
+	"cardType": "CIVILIANSTRUCTURE",
+	"Cost": {
+				"CostType": "RESOURCE",
+				"cost": [{
+							"Resource": "STONE",
+							"amount": 3
+						}]
+			},
+	"frequencyByNumPlayers": [3, 7],
+	"Effect": {
+				"EffectType": "VALUE",
+				"Value": "VICTORYPOINTS",
+				"AffectingEntities": "NONE",
+				"valueAmount": 5
+			  },
+	"Next": "None",
+	"Previous": "Baths"
+},			
+{
+	"cardName": "Temple",
+	"cardType": "CIVILIANSTRUCTURE",
+	"Cost": {
+				"CostType": "MULTITYPE",
+				"cost": [{
+							"Resource": "LUMBER",
+							"amount": 1
+						},
+						{
+							"Resource": "CLAY",
+							"amount": 1
+						},
+						{
+							"Good": "GLASS",
+							"amount": 1
+						}]
+			},
+	"frequencyByNumPlayers": [3, 6],
+	"Effect": {
+				"EffectType": "VALUE",
+				"Value": "VICTORYPOINTS",
+				"AffectingEntities": "NONE",
+				"valueAmount": 3
+			  },
+	"Next": "Pantheon",
+	"Previous": "Alter"
+},			
+{
+	"cardName": "Statue",
+	"cardType": "CIVILIANSTRUCTURE",
+	"Cost": {
+				"CostType": "RESOURCE",
+				"cost": [{
+							"Resource": "LUMBER",
+							"amount": 1
+						},
+						{
+							"Resource": "CLAY",
+							"amount": 2
+						}]
+			},
+	"frequencyByNumPlayers": [3, 7],
+	"Effect": {
+				"EffectType": "VALUE",
+				"Value": "VICTORYPOINTS",
+				"AffectingEntities": "NONE",
+				"valueAmount": 4
+			  },
+	"Next": "Gardens",
+	"Previous": "Theater"
+},
+{
+	"cardName": "Forum",
+	"cardType": "COMMERCIALSTRUCTURE",
+	"Cost": {
+				"CostType": "RESOURCE",
+				"cost": [{
+							"Resource": "CLAY",
+							"amount": 2
+						}]
+			},
+	"frequencyByNumPlayers": [3, 6, 7],
+	"Effect": {
+				"EffectType": "ENTITY",
+				"EntityType": "MANUFACTUREDGOOD",
+				"entitiesAndAmounts": [{
+										"Good": "LOOM",
+										"entityAmount": 1
+									  },
+									  {
+										"Good": "GLASS",
+										"entityAmount": 1
+									  },
+									  {
+										"Good": "PRESS",
+										"entityAmount": 1
+									  }]
+			  },
+	"Next": "Haven",
+	"Previous": "Trading Post"
+},			
+{
+	"cardName": "Caravansery",
+	"cardType": "COMMERCIALSTRUCTURE",
+	"Cost": {
+				"CostType": "RESOURCE",
+				"cost": [{
+							"Resource": "LUMBER",
+							"amount": 2
+						}]
+			},
+	"frequencyByNumPlayers": [3, 5, 6],
+	"Effect": {
+				"EffectType": "ENTITY",
+				"EntityType": "RESOURCE",
+				"entitiesAndAmounts": [{
+										"Resource": "LUMBER",
+										"entityAmount": 1
+									  },
+									  {
+										"Resource": "CLAY",
+										"entityAmount": 1
+									  },
+									  {
+										"Resource": "ORE",
+										"entityAmount": 1
+									  },
+									  {
+										"Resource": "STONE",
+										"entityAmount": 1
+									  }]
+			  },
+	"Next": "Lighthouse",
+	"Previous": "Marketplace"
+},			
+{
+	"cardName": "Vineyard",
+	"cardType": "COMMERCIALSTRUCTURE",
+	"Cost": {
+				"CostType": "NONE"
+			},
+	"frequencyByNumPlayers": [3, 6],
+	"Effect": {
+				"EffectType": "VALUE",
+				"Value": "COMMERCE",
+				"AffectingEntities": "RAWRESOURCES",
+				"Direction": "ALL",
+				"valueAmount": 1
+			  },
+	"Next": "None",
+	"Previous": "None"
+},			
+{
+	"cardName": "Bazar",
+	"cardType": "COMMERCIALSTRUCTURE",
+	"Cost": {
+				"CostType": "NONE"
+			},
+	"frequencyByNumPlayers": [4, 7],
+	"Effect": {
+				"EffectType": "VALUE",
+				"Value": "COMMERCE",
+				"AffectingEntities": "MANUFACTUREDGOODS",
+				"Direction": "ALL",
+				"valueAmount": 2
+			  },
+	"Next": "None",
+	"Previous": "None"
+},
+{
+	"cardName": "Walls",
+	"cardType": "MILITARYSTRUCTURE",
+	"Cost": {
+				"CostType": "RESOURCE",
+				"cost": [{
+							"Resource": "STONE",
+							"amount": 3
+						}]
+			},
+	"frequencyByNumPlayers": [3, 7],
+	"Effect": {
+				"EffectType": "VALUE",
+				"Value": "MILITARY",
+				"AffectingEntities": "NONE",
+				"valueAmount": 2
+			  },
+	"Next": "Fortifications",
+	"Previous": "None"
+},
+{
+	"cardName": "Training Ground",
+	"cardType": "MILITARYSTRUCTURE",
+	"Cost": {
+				"CostType": "RESOURCE",
+				"cost": [{
+							"Resource": "LUMBER",
+							"amount": 1
+						},
+						{
+							"Resource": "ORE",
+							"amount": 2
+						}]
+			},
+	"frequencyByNumPlayers": [4, 6, 7],
+	"Effect": {
+				"EffectType": "VALUE",
+				"Value": "MILITARY",
+				"AffectingEntities": "NONE",
+				"valueAmount": 2
+			  },
+	"Next": "Circus",
+	"Previous": "None"
+},
+{
+	"cardName": "Stables",
+	"cardType": "MILITARYSTRUCTURE",
+	"Cost": {
+				"CostType": "RESOURCE",
+				"cost": [{
+							"Resource": "LUMBER",
+							"amount": 1
+						},
+						{
+							"Resource": "ORE",
+							"amount": 1
+						},
+						{
+							"Resource": "CLAY",
+							"amount": 1
+						}]
+			},
+	"frequencyByNumPlayers": [3, 5],
+	"Effect": {
+				"EffectType": "VALUE",
+				"Value": "MILITARY",
+				"AffectingEntities": "NONE",
+				"valueAmount": 2
+			  },
+	"Next": "None",
+	"Previous": "Apothecary"
+},
+{
+	"cardName": "Archery Range",
+	"cardType": "MILITARYSTRUCTURE",
+	"Cost": {
+				"CostType": "RESOURCE",
+				"cost": [{
+							"Resource": "LUMBER",
+							"amount": 2
+						},
+						{
+							"Resource": "ORE",
+							"amount": 1
+						}]
+			},
+	"frequencyByNumPlayers": [3, 6],
+	"Effect": {
+				"EffectType": "VALUE",
+				"Value": "MILITARY",
+				"AffectingEntities": "NONE",
+				"valueAmount": 2
+			  },
+	"Next": "None",
+	"Previous": "Workshop"
+},
+{
+	"cardName": "Dispensary",
+	"cardType": "SCIENTIFICSTRUCTURE",
+	"Cost": {
+				"CostType": "MULTITYPE",
+				"cost": [{
+							"Resource": "ORE",
+							"amount": 2
+						},
+						{
+							"Good": "GLASS",
+							"amount": 1
+						}]
+			},
+	"frequencyByNumPlayers": [3, 4],
+	"Effect": {
+				"EffectType": "ENTITY",
+				"EntityType": "SCIENCE",
+				"entitiesAndAmounts": [{
+										"Science": "PROTRACTOR",
+										"entityAmount": 1
+									  }]
+			  },
+	"Next": "Arena/Lodge",
+	"Previous": "Apothecary"
+},
+{
+	"cardName": "Laboratory",
+	"cardType": "SCIENTIFICSTRUCTURE",
+	"Cost": {
+				"CostType": "MULTITYPE",
+				"cost": [{
+							"Resource": "LUMBER",
+							"amount": 2
+						},
+						{
+							"Good": "PRESS",
+							"amount": 1
+						}]
+			},
+	"frequencyByNumPlayers": [3, 5],
+	"Effect": {
+				"EffectType": "ENTITY",
+				"EntityType": "SCIENCE",
+				"entitiesAndAmounts": [{
+										"Science": "WHEEL",
+										"entityAmount": 1
+									  }]
+			  },
+	"Next": "Siege Workshop/Observatory",
+	"Previous": "Workshop"
+},
+{
+	"cardName": "Library",
+	"cardType": "SCIENTIFICSTRUCTURE",
+	"Cost": {
+				"CostType": "MULTITYPE",
+				"cost": [{
+							"Resource": "STONE",
+							"amount": 2
+						},
+						{
+							"Good": "LOOM",
+							"amount": 1
+						}]
+			},
+	"frequencyByNumPlayers": [3, 6],
+	"Effect": {
+				"EffectType": "ENTITY",
+				"EntityType": "SCIENCE",
+				"entitiesAndAmounts": [{
+										"Science": "TABLET",
+										"entityAmount": 1
+									  }]
+			  },
+	"Next": "Senate/University",
+	"Previous": "Scriptorium"
+},
+{
+	"cardName": "School",
+	"cardType": "SCIENTIFICSTRUCTURE",
+	"Cost": {
+				"CostType": "MULTITYPE",
+				"cost": [{
+							"Resource": "LUMBER",
+							"amount": 1
+						},
+						{
+							"Good": "PRESS",
+							"amount": 1
+						}]
+			},
+	"frequencyByNumPlayers": [3, 7],
+	"Effect": {
+				"EffectType": "ENTITY",
+				"EntityType": "SCIENCE",
+				"entitiesAndAmounts": [{
+										"Science": "TABLET",
+										"entityAmount": 1
+									  }]
+			  },
+	"Next": "Academy/Study",
+	"Previous": "None"
+},
+{
+	"cardName": "Courthouse",
+	"cardType": "CIVILIANSTRUCTURE",
+	"Cost": {
+				"CostType": "MULTIVALUE",
+				"cost": [{
+							"Good": "LOOM",
+							"amount": 1
+						},
+						{
+							"Resource": "CLAY",
+							"amount": 2
+						}]
+			},
+	"frequencyByNumPlayers": [3, 5],
+	"Effect": {
+				"EffectType": "VALUE",
+				"Value": "VICTORYPOINTS",
+				"AffectingEntities": "NONE",
+				"valueAmount": 4
+			  },
+	"Next": "None",
+	"Previous": "Scriptorium"
+}]
+}

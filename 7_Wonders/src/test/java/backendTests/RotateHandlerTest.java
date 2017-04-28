@@ -7,9 +7,13 @@ import java.util.ArrayList;
 import org.junit.Test;
 
 import backend.RotateHandler;
+import backend.SetUpDeckHandler;
 import backend.RotateHandler.Direction;
+import dataStructures.Card;
+import dataStructures.Deck;
 import dataStructures.GameBoard;
 import dataStructures.Player;
+import dataStructures.Deck.Age;
 
 public class RotateHandlerTest {
 
@@ -20,7 +24,10 @@ public class RotateHandlerTest {
 		players.add(new Player("Captain America"));
 		players.add(new Player("Black Widow"));
 
-		GameBoard board = new GameBoard(players);
+		ArrayList<Card> cards = SetUpDeckHandler.setUpDeckHandler.createCards(Age.AGE1, 3);
+		Deck deck = new Deck(Age.AGE1, cards);
+
+		GameBoard board = new GameBoard(players, deck);
 		RotateHandler rotateHandler = new RotateHandler(board);
 		
 		rotateHandler.changeRotateDirectionAndResetPositions(Direction.CLOCKWISE);
@@ -41,7 +48,10 @@ public class RotateHandlerTest {
 		players.add(new Player("Spider Man"));
 		players.add(new Player("Thor"));
 
-		GameBoard board = new GameBoard(players);
+		ArrayList<Card> cards = SetUpDeckHandler.setUpDeckHandler.createCards(Age.AGE1, 3);
+		Deck deck = new Deck(Age.AGE1, cards);
+
+		GameBoard board = new GameBoard(players, deck);
 		RotateHandler rotateHandler = new RotateHandler(board);
 		
 		rotateHandler.changeRotateDirectionAndResetPositions(Direction.CLOCKWISE);
@@ -60,7 +70,10 @@ public class RotateHandlerTest {
 		players.add(new Player("Hulk"));
 		players.add(new Player("Iron Man"));
 
-		GameBoard board = new GameBoard(players);
+		ArrayList<Card> cards = SetUpDeckHandler.setUpDeckHandler.createCards(Age.AGE1, 3);
+		Deck deck = new Deck(Age.AGE1, cards);
+
+		GameBoard board = new GameBoard(players, deck);
 		RotateHandler rotateHandler = new RotateHandler(board);
 		
 		rotateHandler.rotateClockwise();
@@ -81,7 +94,10 @@ public class RotateHandlerTest {
 		players.add(new Player("Captain America"));
 		players.add(new Player("Black Widow"));
 
-		GameBoard board = new GameBoard(players);
+		ArrayList<Card> cards = SetUpDeckHandler.setUpDeckHandler.createCards(Age.AGE1, 3);
+		Deck deck = new Deck(Age.AGE1, cards);
+
+		GameBoard board = new GameBoard(players, deck);
 		RotateHandler rotateHandler = new RotateHandler(board);
 		
 		rotateHandler.rotateClockwise();
@@ -100,7 +116,10 @@ public class RotateHandlerTest {
 		players.add(new Player("Spider Man"));
 		players.add(new Player("Thor"));
 
-		GameBoard board = new GameBoard(players);
+		ArrayList<Card> cards = SetUpDeckHandler.setUpDeckHandler.createCards(Age.AGE1, 3);
+		Deck deck = new Deck(Age.AGE1, cards);
+
+		GameBoard board = new GameBoard(players, deck);
 		RotateHandler rotateHandler = new RotateHandler(board);
 		rotateHandler.rotateClockwise();
 		
@@ -116,7 +135,10 @@ public class RotateHandlerTest {
 		players.add(new Player("Hulk"));
 		players.add(new Player("Iron Man"));
 
-		GameBoard board = new GameBoard(players);
+		ArrayList<Card> cards = SetUpDeckHandler.setUpDeckHandler.createCards(Age.AGE1, 3);
+		Deck deck = new Deck(Age.AGE1, cards);
+
+		GameBoard board = new GameBoard(players, deck);
 		RotateHandler rotateHandler = new RotateHandler(board);
 		rotateHandler.rotateClockwise();
 		rotateHandler.rotateClockwise();
@@ -133,7 +155,10 @@ public class RotateHandlerTest {
 		players.add(new Player("Hulk"));
 		players.add(new Player("Iron Man"));
 
-		GameBoard board = new GameBoard(players);
+		ArrayList<Card> cards = SetUpDeckHandler.setUpDeckHandler.createCards(Age.AGE1, 3);
+		Deck deck = new Deck(Age.AGE1, cards);
+
+		GameBoard board = new GameBoard(players, deck);
 		RotateHandler rotateHandler = new RotateHandler(board);
 
 		for (int i = 0; i < 10; i++) {
@@ -150,7 +175,10 @@ public class RotateHandlerTest {
 		players.add(new Player("Captain America"));
 		players.add(new Player("Black Widow"));
 
-		GameBoard board = new GameBoard(players);
+		ArrayList<Card> cards = SetUpDeckHandler.setUpDeckHandler.createCards(Age.AGE1, 3);
+		Deck deck = new Deck(Age.AGE1, cards);
+
+		GameBoard board = new GameBoard(players, deck);
 		RotateHandler rotateHandler = new RotateHandler(board);
 		
 		rotateHandler.changeRotateDirectionAndResetPositions(Direction.COUNTERCLOCKWISE);
@@ -170,7 +198,10 @@ public class RotateHandlerTest {
 		players.add(new Player("Spider Man"));
 		players.add(new Player("Thor"));
 
-		GameBoard board = new GameBoard(players);
+		ArrayList<Card> cards = SetUpDeckHandler.setUpDeckHandler.createCards(Age.AGE1, 3);
+		Deck deck = new Deck(Age.AGE1, cards);
+
+		GameBoard board = new GameBoard(players, deck);
 		RotateHandler rotateHandler = new RotateHandler(board);
 		
 		rotateHandler.changeRotateDirectionAndResetPositions(Direction.COUNTERCLOCKWISE);
@@ -188,7 +219,10 @@ public class RotateHandlerTest {
 		players.add(new Player("Hulk"));
 		players.add(new Player("Iron Man"));
 
-		GameBoard board = new GameBoard(players);
+		ArrayList<Card> cards = SetUpDeckHandler.setUpDeckHandler.createCards(Age.AGE1, 3);
+		Deck deck = new Deck(Age.AGE1, cards);
+
+		GameBoard board = new GameBoard(players, deck);
 		RotateHandler rotateHandler = new RotateHandler(board);
 		
 		rotateHandler.changeRotateDirectionAndResetPositions(Direction.COUNTERCLOCKWISE);
@@ -207,7 +241,10 @@ public class RotateHandlerTest {
 		players.add(new Player("Hulk"));
 		players.add(new Player("Iron Man"));
 
-		GameBoard board = new GameBoard(players);
+		ArrayList<Card> cards = SetUpDeckHandler.setUpDeckHandler.createCards(Age.AGE1, 3);
+		Deck deck = new Deck(Age.AGE1, cards);
+
+		GameBoard board = new GameBoard(players, deck);
 		RotateHandler rotateHandler = new RotateHandler(board);
 		
 		rotateHandler.changeRotateDirectionAndResetPositions(Direction.COUNTERCLOCKWISE);
