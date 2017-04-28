@@ -20,7 +20,7 @@ public class MainMenu extends Menu{
 
 	@Override
 	public void initialize() {
-		this.clearButtons();
+		this.clearInteractables();
 		Interactable startGame = new Button(Constants.StartButtonPosition, Constants.StartButtonBounds, "Start");
 		this.addInteractable(startGame);
 	}
