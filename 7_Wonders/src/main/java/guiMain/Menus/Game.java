@@ -3,6 +3,7 @@ package guiMain.Menus;
 import java.awt.Graphics;
 import java.awt.Point;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import javax.swing.JOptionPane;
 
@@ -24,10 +25,19 @@ public class Game extends Menu {
 	private HandManager handManager;
 
 	public Game(int numOfPlayers) {
+		setUpPlayers(numOfPlayers);
+	}
+
+	private void setUpPlayers(int numOfPlayers) {
 		ArrayList<String> players = new ArrayList<String>();
-		for(int i = 0; i < numOfPlayers; i++) {
+		ArrayList<Object> wonders = new ArrayList<>(Arrays.asList("Halikarnassos", "Gizah", "Byzantium", "Alexandria",
+				"Petra", "Ephesos", "Olympia", "Rhodos", "Babylon"));
+		for (int i = 0; i < numOfPlayers; i++) {
 			String name = Message.inputPlayerNameMessage(i);
 			players.add(name);
+			String wonder = Message.dropDownWonderSelectionMessage(wonders.toArray());
+			wonders.remove(wonder);
+			/*Set wonder to correct values*/
 		}
 		this.gameManager = new GameManager(players);
 	}
@@ -44,11 +54,12 @@ public class Game extends Menu {
 	@Override
 	public void draw(Graphics graphics) {
 		for (int i = 0; i < boards.size(); i++) {
-			/* This will always draw the current players board last (on top) */
-			int currentPlayerIndex = this.gameManager.getGameBoard().getCurrentPlayerIndex();
-			boards.get((currentPlayerIndex + i + 2) % this.gameManager.getNumPlayers()).draw(graphics);
+			/*
+			 * This will draw current Players board last, in order to be on top
+			 */
+			boards.get((i + 2) % boards.size()).draw(graphics);
 		}
-		
+
 		for (Interactable button : this.getInteractables()) {
 			button.draw(graphics);
 		}
@@ -56,12 +67,13 @@ public class Game extends Menu {
 
 	private void createBoardsForEachPlayer() {
 		int numOfPlayers = this.gameManager.getNumPlayers();
-		for (int i = -1; i < numOfPlayers-1; i++) {
-			PlayerBoard board = new PlayerBoard(i, numOfPlayers, this.gameManager.getPlayer((numOfPlayers + i) % numOfPlayers));
+		for (int i = -1; i < numOfPlayers - 1; i++) {
+			PlayerBoard board = new PlayerBoard(i, numOfPlayers,
+					this.gameManager.getPlayer((numOfPlayers + i) % numOfPlayers));
 			boards.add(board);
 		}
 	}
-	
+
 	private void setUpCardSlots() {
 		this.handManager = new HandManager();
 		this.handManager.rotatePlayers(this.gameManager.getPlayer(0));
@@ -71,8 +83,7 @@ public class Game extends Menu {
 	}
 
 	private void setUpExitButton() {
-		Button exitButton = new Button(Constants.ExitButtonPosition, Constants.ExitButtonBounds,
-				"Exit");
+		Button exitButton = new Button(Constants.ExitButtonPosition, Constants.ExitButtonBounds, "Exit");
 		this.addInteractable(exitButton);
 	}
 
@@ -80,23 +91,25 @@ public class Game extends Menu {
 		for (int i = 0; i < 4; i++) {
 			makeLeftButton(i);
 			makeRightButton(i);
-		}	
+		}
 	}
-	
+
 	private void makeLeftButton(int i) {
 		Point buttonPosition = new Point(Constants.TradeLeftBaseButtonPoint.x,
 				Constants.TradeLeftBaseButtonPoint.y + Constants.TradeButtonYOffet * i);
-		Button leftTradeButton = new Button(buttonPosition, Constants.TradeButtonBounds, "Left-" + Constants.ResourceTypes[i]);
+		Button leftTradeButton = new Button(buttonPosition, Constants.TradeButtonBounds,
+				"Left-" + Constants.ResourceTypes[i]);
 		leftTradeButton.hide();
 		this.addInteractable(leftTradeButton);
 	}
-	
+
 	private void makeRightButton(int i) {
 		Point buttonPosition = new Point(Constants.TradeRightBaseButtonPoint.x,
 				Constants.TradeRightBaseButtonPoint.y + Constants.TradeButtonYOffet * i);
-		Button rightTradeButton =  new Button(buttonPosition, Constants.TradeButtonBounds, "Right-" + Constants.ResourceTypes[i]);
+		Button rightTradeButton = new Button(buttonPosition, Constants.TradeButtonBounds,
+				"Right-" + Constants.ResourceTypes[i]);
 		rightTradeButton.hide();
-		this.addInteractable(rightTradeButton);	
+		this.addInteractable(rightTradeButton);
 	}
 
 	@Override
@@ -112,10 +125,21 @@ public class Game extends Menu {
 			tradeHandler.trade(splitValue);
 		}
 	}
-	
-	public void RotateBoards(){
-		for (int i = 0; i < this.boards.size(); i++){
-			this.boards.get(i).rotatePlayers();
+
+	public void RotateBoards() {
+		/*
+		 * TODO: Talk to them about their rotations. Possibly one rotate method.
+		 * Also, fix the train wreck some how
+		 */
+		this.gameManager.rotateClockwise();
+
+		ArrayList<Player> players = this.gameManager.getPlayers();
+		Player nextPlayer = this.gameManager.getNextPlayer();
+		int totalNumberOfPlayers = this.gameManager.getNumPlayers();
+		int nextPlayerIndex = players.indexOf(nextPlayer);
+
+		for (int i = 0; i < players.size(); i++) {
+			boards.get(i).changePlayer(players.get((totalNumberOfPlayers + nextPlayerIndex - i) % totalNumberOfPlayers));
 		}
 	}
 }
