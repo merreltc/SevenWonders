@@ -7,7 +7,6 @@ import dataStructures.Deck;
 import dataStructures.Player;
 
 public class TurnHandler {
-	public static TurnHandler turnHandler = new TurnHandler();
 
 	public void dealInitialTurnCards(ArrayList<Player> players, int numPlayers, Deck deck) {
 		for (Player player: players) {
