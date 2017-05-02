@@ -8,6 +8,8 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import backend.GameManager;
+import backend.SetUpDeckHandler;
+import backend.SetUpHandler;
 import backend.TurnHandler;
 import dataStructures.Card;
 import dataStructures.Deck;
@@ -21,12 +23,12 @@ public class TurnHandlerTest {
 		playerNames.add("Wolverine");
 		playerNames.add("Captain America");
 		playerNames.add("Black Widow");
-		GameManager manager = new GameManager(playerNames);
+		GameManager manager = new GameManager(playerNames, new SetUpHandler(), new SetUpDeckHandler(), new TurnHandler());
 		
 		Deck deck = manager.getGameBoard().getDeck();
 		int expectedDeckSize = deck.getNumCards() - 9;
 		ArrayList<Player> players = manager.getPlayers();
-		TurnHandler.turnHandler.dealInitialTurnCards(players, manager.getNumPlayers(), deck);
+		new TurnHandler().dealInitialTurnCards(players, manager.getNumPlayers(), deck);
 		
 		for (Player player: players){
 			assertEquals(3, player.getCurrentHand().size());
@@ -45,13 +47,13 @@ public class TurnHandlerTest {
 		playerNames.add("Iron Man");
 		playerNames.add("Spider Man");
 		playerNames.add("Thor");
-		GameManager manager = new GameManager(playerNames);
+		GameManager manager = new GameManager(playerNames, new SetUpHandler(), new SetUpDeckHandler(), new TurnHandler());
 		
 		Deck deck = manager.getGameBoard().getDeck();
 		
 		int expectedDeckSize = deck.getNumCards() - 49;
 		ArrayList<Player> players = manager.getPlayers();
-		TurnHandler.turnHandler.dealInitialTurnCards(players, manager.getNumPlayers(), deck);
+		new TurnHandler().dealInitialTurnCards(players, manager.getNumPlayers(), deck);
 		
 		for (Player player: players){
 			assertEquals(7, player.getCurrentHand().size());
@@ -69,13 +71,13 @@ public class TurnHandlerTest {
 		playerNames.add("Hulk");
 		playerNames.add("Iron Man");
 
-		GameManager manager = new GameManager(playerNames);
+		GameManager manager = new GameManager(playerNames, new SetUpHandler(), new SetUpDeckHandler(), new TurnHandler());
 		
 		Deck deck = manager.getGameBoard().getDeck();
 		
 		int expectedDeckSize = deck.getNumCards() - 25;
 		ArrayList<Player> players = manager.getPlayers();
-		TurnHandler.turnHandler.dealInitialTurnCards(players, manager.getNumPlayers(), deck);
+		new TurnHandler().dealInitialTurnCards(players, manager.getNumPlayers(), deck);
 		
 		for (Player player: players){
 			assertEquals(5, player.getCurrentHand().size());

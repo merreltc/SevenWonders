@@ -19,7 +19,8 @@ public class DeckHandlerTest {
 	@Test
 	public void testShuffleDeck() {
 		Collections collection = EasyMock.createStrictMock(Collections.class);
-		ArrayList<Card> cards = SetUpDeckHandler.setUpDeckHandler.createCards(Age.AGE1, 3);
+		SetUpDeckHandler setUpDeckHandler = new SetUpDeckHandler();
+		ArrayList<Card> cards = setUpDeckHandler.createCards(Age.AGE1, 3);
 		Collections.shuffle(cards);
 		
 		EasyMock.replay(collection);
@@ -32,7 +33,8 @@ public class DeckHandlerTest {
 
 	@Test
 	public void testDrawCard() {
-		ArrayList<Card> cards = SetUpDeckHandler.setUpDeckHandler.createCards(Age.AGE1, 3);
+		SetUpDeckHandler setUpDeckHandler = new SetUpDeckHandler();
+		ArrayList<Card> cards = setUpDeckHandler.createCards(Age.AGE1, 3);
 		Deck age1 = new Deck(Age.AGE1, cards);
 		DeckHandler.deckHandler.shuffleDeck(age1);
 		Card expectedReturn = age1.getCard(0);
