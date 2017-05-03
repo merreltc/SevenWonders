@@ -4,10 +4,11 @@ import java.util.ArrayList;
 
 import dataStructures.GameBoard;
 import dataStructures.Player;
+import dataStructures.Wonder;
 
 public class SetUpHandler {
 
-	public ArrayList<Player> setUpAndReturnPlayers(ArrayList<String> playerNames) {
+	public ArrayList<Player> setUpAndReturnPlayers(ArrayList<String> playerNames, ArrayList<Wonder> wonders) {
 		validatePlayerNum(playerNames.size());
 		return createPlayers(playerNames);
 	}

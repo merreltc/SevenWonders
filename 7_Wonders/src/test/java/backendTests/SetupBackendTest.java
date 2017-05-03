@@ -14,6 +14,16 @@ import dataStructures.Player;
 import dataStructures.Wonder;
 
 public class SetupBackendTest {
+	private ArrayList<Wonder> wonders;
+	
+	@Before
+	public void setUp() {
+		Wonder wonder = EasyMock.mock(Wonder.class);
+		EasyMock.replay(wonder);
+		
+		wonders = new ArrayList<Wonder>(Arrays.asList(wonder,wonder,wonder,wonder, wonder, wonder, wonder));
+		
+	}
 
 	@Test
 	public void testValidPlayerNum() {
@@ -61,7 +71,7 @@ public class SetupBackendTest {
 		playerNames.add("Black Widow");
 		
 		SetUpHandler setUpHandler = new SetUpHandler();
-		ArrayList<Player> players = setUpHandler.setUpAndReturnPlayers(playerNames);
+		ArrayList<Player> players = setUpHandler.setUpAndReturnPlayers(playerNames, wonders);
 		
 		for (int i = 0; i<players.size(); i++){
 			assertEquals(playerNames.get(i), players.get(i).getName());
@@ -80,7 +90,7 @@ public class SetupBackendTest {
 		playerNames.add("Thor");
 		
 		SetUpHandler setUpHandler = new SetUpHandler();
-		ArrayList<Player> players = setUpHandler.setUpAndReturnPlayers(playerNames);
+		ArrayList<Player> players = setUpHandler.setUpAndReturnPlayers(playerNames, wonders);
 		
 		for (int i = 0; i<players.size(); i++){
 			assertEquals(playerNames.get(i), players.get(i).getName());
@@ -92,7 +102,7 @@ public class SetupBackendTest {
 		ArrayList<String> playerNames = new ArrayList<String>();
 		
 		SetUpHandler setUpHandler = new SetUpHandler();
-		setUpHandler.setUpAndReturnPlayers(playerNames);
+		setUpHandler.setUpAndReturnPlayers(playerNames, wonders);
 		fail();
 	}
 	
@@ -109,7 +119,7 @@ public class SetupBackendTest {
 		playerNames.add("Ultron");
 		
 		SetUpHandler setUpHandler = new SetUpHandler();
-		setUpHandler.setUpAndReturnPlayers(playerNames);
+		setUpHandler.setUpAndReturnPlayers(playerNames, wonders);
 		fail();
 	}
 	
@@ -164,12 +174,9 @@ public class SetupBackendTest {
 
 	@Test
 	public void testCreatePlayerArrayWithWonders(){
-		Wonder wonder = EasyMock.mock(Wonder.class);
-		EasyMock.replay(wonder);
-		ArrayList<Wonder> wonders = new ArrayList<Wonder>(Arrays.asList(wonder,wonder,wonder,wonder));
-		ArrayList<String> playerNames = new ArrayList<String>(Arrays.asList("Player1","Player2","Player3","Player4"));
+		ArrayList<String> playerNames = new ArrayList<String>(Arrays.asList("Player1","Player2","Player3","Player4", "Player5", "PLayer6", "Player7"));
 		SetUpHandler setUpHandler = new SetUpHandler();
-		ArrayList<Player> players = setUpHandler.createPlayers(playerNames,wonders);
+		ArrayList<Player> players = setUpHandler.setUpAndReturnPlayers(playerNames, wonders);
 	}
 
 }
