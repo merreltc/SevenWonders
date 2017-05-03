@@ -10,7 +10,7 @@ public class SetUpHandler {
 
 	public ArrayList<Player> setUpAndReturnPlayers(ArrayList<String> playerNames, ArrayList<Wonder> wonders) {
 		validatePlayerNum(playerNames.size());
-		return createPlayers(playerNames);
+		return createPlayers(playerNames, wonders);
 	}
 
 	public boolean validatePlayerNum(int num) {
@@ -21,11 +21,11 @@ public class SetUpHandler {
 		return true;
 	}
 
-	public ArrayList<Player> createPlayers(ArrayList<String> playerNames) {
+	public ArrayList<Player> createPlayers(ArrayList<String> playerNames, ArrayList<Wonder> wonders) {
 		ArrayList<Player> players = new ArrayList<Player>();
 		
 		for(int i = 0; i < playerNames.size(); i++){
-			players.add(new Player(playerNames.get(i)));
+			players.add(new Player(playerNames.get(i), wonders.get(i)));
 		}
 		
 		return players;

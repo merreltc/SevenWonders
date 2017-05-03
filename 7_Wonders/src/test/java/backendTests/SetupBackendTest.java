@@ -132,7 +132,7 @@ public class SetupBackendTest {
 		playerNames.add("Black Widow");
 		
 		SetUpHandler setUpHandler = new SetUpHandler();
-		ArrayList<Player> players = setUpHandler.createPlayers(playerNames);
+		ArrayList<Player> players = setUpHandler.createPlayers(playerNames, wonders);
 		
 		for (int i = 0; i<players.size(); i++){
 			assertEquals(playerNames.get(i), players.get(i).getName());
@@ -147,7 +147,7 @@ public class SetupBackendTest {
 		playerNames.add("Black Widow");
 		
 		SetUpHandler setUpHandler = new SetUpHandler();
-		ArrayList<Player> players = setUpHandler.createPlayers(playerNames);
+		ArrayList<Player> players = setUpHandler.createPlayers(playerNames, wonders);
 		
 		for (int i = 0; i<players.size(); i++){
 			assertEquals(playerNames.get(i), players.get(i).getName());
@@ -166,7 +166,7 @@ public class SetupBackendTest {
 		playerNames.add("Thor");
 		
 		SetUpHandler setUpHandler = new SetUpHandler();
-		ArrayList<Player> players = setUpHandler.createPlayers(playerNames);
+		ArrayList<Player> players = setUpHandler.createPlayers(playerNames, wonders);
 		
 		for (int i = 0; i<players.size(); i++){
 			assertEquals(playerNames.get(i), players.get(i).getName());
