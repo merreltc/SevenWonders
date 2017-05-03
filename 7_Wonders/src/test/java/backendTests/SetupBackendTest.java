@@ -198,5 +198,15 @@ public class SetupBackendTest {
 
 		fail();
 	}
+	
+	@Test
+	public void testMoreWondersThanPLayers() {
+		ArrayList<String> playerNames = new ArrayList<String>(
+				Arrays.asList("Player1", "Player2", "Player3", "Player4"));
+		SetUpHandler setUpHandler = new SetUpHandler();
+		ArrayList<Player> players = setUpHandler.setUpAndReturnPlayers(playerNames, wonders);
+
+		assertEquals("The Hanging Gardens of Babylon", players.get(0).getWonder().getName());
+	}
 
 }
