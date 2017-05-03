@@ -338,7 +338,7 @@ public class PlayerTest {
 	@Test
 	public void testSetCurrectHand() {
 		Player player = new Player("Jane Doe");
-		ArrayList<Card> deckCards = SetUpDeckHandler.setUpDeckHandler.createCards(Age.AGE1, 3);
+		ArrayList<Card> deckCards = new SetUpDeckHandler().createCards(Age.AGE1, 3);
 		
 		ArrayList<Card> playerCards = new ArrayList<Card>();
 		playerCards.add(deckCards.get(0));
@@ -364,7 +364,7 @@ public class PlayerTest {
 	@Test
 	public void testSetStoragePileHand() {
 		Player player = new Player("Jane Doe");
-		ArrayList<Card> deckCards = SetUpDeckHandler.setUpDeckHandler.createCards(Age.AGE1, 3);
+		ArrayList<Card> deckCards = new SetUpDeckHandler().createCards(Age.AGE1, 3);
 		
 		ArrayList<Card> playerCards = new ArrayList<Card>();
 		playerCards.add(deckCards.get(0));

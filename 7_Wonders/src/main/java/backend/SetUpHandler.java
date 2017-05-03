@@ -6,8 +6,6 @@ import dataStructures.GameBoard;
 import dataStructures.Player;
 
 public class SetUpHandler {
-	
-	public static SetUpHandler setUpHandler = new SetUpHandler();
 
 	public ArrayList<Player> setUpAndReturnPlayers(ArrayList<String> playerNames) {
 		validatePlayerNum(playerNames.size());

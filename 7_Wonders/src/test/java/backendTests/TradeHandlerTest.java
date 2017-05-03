@@ -125,7 +125,7 @@ public class TradeHandlerTest {
 		players.add(player2);
 		players.add(new Player("Jane Doe"));
 		
-		ArrayList<Card> cards = SetUpDeckHandler.setUpDeckHandler.createCards(Age.AGE1, 3);
+		ArrayList<Card> cards = new SetUpDeckHandler().createCards(Age.AGE1, 3);
 		Deck deck = new Deck(Age.AGE1, cards);
 
 		GameBoard board = new GameBoard(players, deck);
@@ -154,7 +154,7 @@ public class TradeHandlerTest {
 		players.add(player2);
 		players.add(new Player("Jane Doe"));
 		
-		ArrayList<Card> cards = SetUpDeckHandler.setUpDeckHandler.createCards(Age.AGE1, 3);
+		ArrayList<Card> cards = new SetUpDeckHandler().createCards(Age.AGE1, 3);
 		Deck deck = new Deck(Age.AGE1, cards);
 
 		GameBoard board = new GameBoard(players, deck);
@@ -183,7 +183,7 @@ public class TradeHandlerTest {
 		players.add(player2);
 		players.add(new Player("Jane Doe"));
 		
-		ArrayList<Card> cards = SetUpDeckHandler.setUpDeckHandler.createCards(Age.AGE1, 3);
+		ArrayList<Card> cards = new SetUpDeckHandler().createCards(Age.AGE1, 3);
 		Deck deck = new Deck(Age.AGE1, cards);
 
 		GameBoard board = new GameBoard(players, deck);
@@ -212,7 +212,7 @@ public class TradeHandlerTest {
 		players.add(player2);
 		players.add(new Player("Jane Doe"));
 		
-		ArrayList<Card> cards = SetUpDeckHandler.setUpDeckHandler.createCards(Age.AGE1, 3);
+		ArrayList<Card> cards = new SetUpDeckHandler().createCards(Age.AGE1, 3);
 		Deck deck = new Deck(Age.AGE1, cards);
 
 		GameBoard board = new GameBoard(players, deck);
@@ -239,7 +239,7 @@ public class TradeHandlerTest {
 		players.add(player2);
 		players.add(new Player("Jane Doe"));
 		
-		ArrayList<Card> cards = SetUpDeckHandler.setUpDeckHandler.createCards(Age.AGE1, 3);
+		ArrayList<Card> cards = new SetUpDeckHandler().createCards(Age.AGE1, 3);
 		Deck deck = new Deck(Age.AGE1, cards);
 
 		GameBoard board = new GameBoard(players, deck);
@@ -268,7 +268,7 @@ public class TradeHandlerTest {
 		players.add(player2);
 		players.add(new Player("Jane Doe"));
 		
-		ArrayList<Card> cards = SetUpDeckHandler.setUpDeckHandler.createCards(Age.AGE1, 3);
+		ArrayList<Card> cards = new SetUpDeckHandler().createCards(Age.AGE1, 3);
 		Deck deck = new Deck(Age.AGE1, cards);
 
 		GameBoard board = new GameBoard(players, deck);
@@ -294,7 +294,7 @@ public class TradeHandlerTest {
 		players.add(new Player("Hulk"));
 		players.add(new Player("Iron Man"));
 
-		ArrayList<Card> cards = SetUpDeckHandler.setUpDeckHandler.createCards(Age.AGE1, 3);
+		ArrayList<Card> cards = new SetUpDeckHandler().createCards(Age.AGE1, 3);
 		Deck deck = new Deck(Age.AGE1, cards);
 
 		GameBoard board = new GameBoard(players, deck);
@@ -315,7 +315,7 @@ public class TradeHandlerTest {
 		players.add(new Player("Hulk"));
 		players.add(new Player("Iron Man"));
 
-		ArrayList<Card> cards = SetUpDeckHandler.setUpDeckHandler.createCards(Age.AGE1, 3);
+		ArrayList<Card> cards = new SetUpDeckHandler().createCards(Age.AGE1, 3);
 		Deck deck = new Deck(Age.AGE1, cards);
 
 		GameBoard board = new GameBoard(players, deck);
@@ -335,7 +335,7 @@ public class TradeHandlerTest {
 		players.add(new Player("Hulk"));
 		players.add(new Player("Iron Man"));
 
-		ArrayList<Card> cards = SetUpDeckHandler.setUpDeckHandler.createCards(Age.AGE1, 3);
+		ArrayList<Card> cards = new SetUpDeckHandler().createCards(Age.AGE1, 3);
 		Deck deck = new Deck(Age.AGE1, cards);
 
 		GameBoard board = new GameBoard(players, deck);

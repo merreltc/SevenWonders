@@ -30,7 +30,6 @@ import json.JSONException;
 import json.JSONObject;
 
 public class SetUpDeckHandler {
-	public static SetUpDeckHandler setUpDeckHandler = new SetUpDeckHandler();
 	
 	public Deck createDeck(Age age, int numPlayers){
 		ArrayList<Card> cards = createCards(age, numPlayers);

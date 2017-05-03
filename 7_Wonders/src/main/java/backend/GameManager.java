@@ -16,16 +16,28 @@ import dataStructures.Deck.Age;
  */
 public class GameManager {
 	private GameBoard board;
+	private SetUpHandler setUpHandler;
+	private SetUpDeckHandler setUpDeckHandler;
+	private TurnHandler turnHandler;
+	
 	private RotateHandler rotateHandler;
 	private TradeHandler tradeHandler;
 
+	
 	public GameManager(ArrayList<String> playerNames) {
-		setUpGame(playerNames);
+		this(playerNames, new SetUpHandler(), new SetUpDeckHandler(), new TurnHandler());
+	}
+	
+	public GameManager(ArrayList<String> playerNames, SetUpHandler setUpHandler, SetUpDeckHandler setUpDeckHandler, TurnHandler turnHandler){
+		this.setUpHandler = setUpHandler;
+		this.setUpDeckHandler = setUpDeckHandler;
+		this.turnHandler = turnHandler;
+		setUpGame(playerNames);	
 	}
 
 	public void setUpGame(ArrayList<String> playerNames) {
-		ArrayList<Player> players = SetUpHandler.setUpHandler.setUpAndReturnPlayers(playerNames);
-		Deck deck = SetUpDeckHandler.setUpDeckHandler.createDeck(Age.AGE1, playerNames.size());
+		ArrayList<Player> players = this.setUpHandler.setUpAndReturnPlayers(playerNames);
+		Deck deck = this.setUpDeckHandler.createDeck(Age.AGE1, playerNames.size());
 
 		this.board = new GameBoard(players, deck);
 		this.rotateHandler = new RotateHandler(this.board);
@@ -33,7 +45,7 @@ public class GameManager {
 	}
 	
 	public void dealInitialTurnCards() {
-		TurnHandler.turnHandler.dealInitialTurnCards(this.getPlayers(), this.getNumPlayers(), this.board.getDeck());
+		this.turnHandler.dealInitialTurnCards(this.getPlayers(), this.getNumPlayers(), this.board.getDeck());
 	}
 
 	public void trade(Player from, Player to, int valueToTrade) {

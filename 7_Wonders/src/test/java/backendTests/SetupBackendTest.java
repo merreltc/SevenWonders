@@ -12,33 +12,29 @@ import backend.SetUpHandler;
 import dataStructures.Player;
 
 public class SetupBackendTest {
-	
-	@After public void setUp() { 
-		SetUpHandler.setUpHandler = new SetUpHandler();
-	}
 
 	@Test
 	public void testValidPlayerNum() {
-		assertTrue(SetUpHandler.setUpHandler.validatePlayerNum(3));
-		assertTrue(SetUpHandler.setUpHandler.validatePlayerNum(7));
+		assertTrue(new SetUpHandler().validatePlayerNum(3));
+		assertTrue(new SetUpHandler().validatePlayerNum(7));
 	}
 	
 	@Test(expected = IllegalArgumentException.class)
 	public void testInvalidPlayerNum2() {
-		SetUpHandler.setUpHandler.validatePlayerNum(2);
+		new SetUpHandler().validatePlayerNum(2);
 		fail();
 	}
 	
 	@Test(expected = IllegalArgumentException.class)
 	public void testInvalidPlayerNum8() {
-		SetUpHandler.setUpHandler.validatePlayerNum(8);
+		new SetUpHandler().validatePlayerNum(8);
 		fail();
 	}
 	
 	@Test
 	public void testInvalidPlayerNum2ErrorMessage() {	
 		try{
-			SetUpHandler.setUpHandler.validatePlayerNum(2);
+			new SetUpHandler().validatePlayerNum(2);
 		} catch (IllegalArgumentException error){
 			String message = "Cannot play with 2 players";
 			assertEquals(message, error.getMessage());
@@ -48,7 +44,7 @@ public class SetupBackendTest {
 	@Test
 	public void testInvalidPlayerNum8ErrorMessage() {
 		try{
-			SetUpHandler.setUpHandler.validatePlayerNum(8);
+			new SetUpHandler().validatePlayerNum(8);
 		} catch (IllegalArgumentException error){
 			String message = "Cannot play with 8 players";
 			assertEquals(message, error.getMessage());
@@ -62,14 +58,12 @@ public class SetupBackendTest {
 		playerNames.add("Captain America");
 		playerNames.add("Black Widow");
 		
-		SetUpHandler.setUpHandler = EasyMock.mock(SetUpHandler.class);
-		ArrayList<Player> players = (ArrayList<Player>) EasyMock.mock(ArrayList.class);
-		EasyMock.expect(SetUpHandler.setUpHandler.setUpAndReturnPlayers(playerNames)).andReturn(players);
+		SetUpHandler setUpHandler = new SetUpHandler();
+		ArrayList<Player> players = setUpHandler.setUpAndReturnPlayers(playerNames);
 		
-		EasyMock.replay(players, SetUpHandler.setUpHandler);
-		SetUpHandler.setUpHandler.setUpAndReturnPlayers(playerNames);
-		
-		EasyMock.verify(players, SetUpHandler.setUpHandler);
+		for (int i = 0; i<players.size(); i++){
+			assertEquals(playerNames.get(i), players.get(i).getName());
+		}
 	}
 	
 	@Test
@@ -83,29 +77,21 @@ public class SetupBackendTest {
 		playerNames.add("Spider Man");
 		playerNames.add("Thor");
 		
-		SetUpHandler.setUpHandler = EasyMock.mock(SetUpHandler.class);
-		ArrayList<Player> players = (ArrayList<Player>) EasyMock.mock(ArrayList.class);
-		EasyMock.expect(SetUpHandler.setUpHandler.setUpAndReturnPlayers(playerNames)).andReturn(players);
+		SetUpHandler setUpHandler = new SetUpHandler();
+		ArrayList<Player> players = setUpHandler.setUpAndReturnPlayers(playerNames);
 		
-		EasyMock.replay(players, SetUpHandler.setUpHandler);
-		SetUpHandler.setUpHandler.setUpAndReturnPlayers(playerNames);
-		
-		EasyMock.verify(players, SetUpHandler.setUpHandler);
+		for (int i = 0; i<players.size(); i++){
+			assertEquals(playerNames.get(i), players.get(i).getName());
+		}
 	}
 	
 	@Test(expected = IllegalArgumentException.class)
 	public void testSetUpReturnsPlayerNamesZero() {
 		ArrayList<String> playerNames = new ArrayList<String>();
 		
-		SetUpHandler.setUpHandler = EasyMock.mock(SetUpHandler.class);
-		ArrayList<Player> players = (ArrayList<Player>) EasyMock.mock(ArrayList.class);
-		EasyMock.expect(SetUpHandler.setUpHandler.setUpAndReturnPlayers(playerNames)).andThrow(new IllegalArgumentException());
-		EasyMock.expect(SetUpHandler.setUpHandler.validatePlayerNum(0)).andThrow(new IllegalArgumentException());
-		
-		EasyMock.replay(players, SetUpHandler.setUpHandler);
-		SetUpHandler.setUpHandler.setUpAndReturnPlayers(playerNames);
-		
-		EasyMock.verify(players, SetUpHandler.setUpHandler);
+		SetUpHandler setUpHandler = new SetUpHandler();
+		setUpHandler.setUpAndReturnPlayers(playerNames);
+		fail();
 	}
 	
 	@Test(expected = IllegalArgumentException.class)
@@ -120,15 +106,9 @@ public class SetupBackendTest {
 		playerNames.add("Thor");
 		playerNames.add("Ultron");
 		
-		SetUpHandler.setUpHandler = EasyMock.mock(SetUpHandler.class);
-		ArrayList<Player> players = (ArrayList<Player>) EasyMock.mock(ArrayList.class);
-		EasyMock.expect(SetUpHandler.setUpHandler.setUpAndReturnPlayers(playerNames)).andThrow(new IllegalArgumentException());
-		EasyMock.expect(SetUpHandler.setUpHandler.validatePlayerNum(7)).andThrow(new IllegalArgumentException());
-		
-		EasyMock.replay(players, SetUpHandler.setUpHandler);
-		SetUpHandler.setUpHandler.setUpAndReturnPlayers(playerNames);
-		
-		EasyMock.verify(players, SetUpHandler.setUpHandler);
+		SetUpHandler setUpHandler = new SetUpHandler();
+		setUpHandler.setUpAndReturnPlayers(playerNames);
+		fail();
 	}
 	
 	@Test
@@ -138,15 +118,12 @@ public class SetupBackendTest {
 		playerNames.add("Captain America");
 		playerNames.add("Black Widow");
 		
-		SetUpHandler.setUpHandler = EasyMock.mock(SetUpHandler.class);
-		ArrayList<Player> players = (ArrayList<Player>) EasyMock.mock(ArrayList.class);
-		EasyMock.expect(SetUpHandler.setUpHandler.createPlayers(playerNames)).andReturn(players);
-
-		EasyMock.replay(players, SetUpHandler.setUpHandler);
+		SetUpHandler setUpHandler = new SetUpHandler();
+		ArrayList<Player> players = setUpHandler.createPlayers(playerNames);
 		
-		SetUpHandler.setUpHandler.createPlayers(playerNames);
-		
-		EasyMock.verify(players, SetUpHandler.setUpHandler);
+		for (int i = 0; i<players.size(); i++){
+			assertEquals(playerNames.get(i), players.get(i).getName());
+		}
 	}
 	
 	@Test
@@ -156,9 +133,10 @@ public class SetupBackendTest {
 		playerNames.add("Captain America");
 		playerNames.add("Black Widow");
 		
-		ArrayList<Player> players = SetUpHandler.setUpHandler.setUpAndReturnPlayers(playerNames);
+		SetUpHandler setUpHandler = new SetUpHandler();
+		ArrayList<Player> players = setUpHandler.createPlayers(playerNames);
 		
-		for(int i = 0; i < playerNames.size(); i++) {
+		for (int i = 0; i<players.size(); i++){
 			assertEquals(playerNames.get(i), players.get(i).getName());
 		}
 	}
@@ -174,10 +152,10 @@ public class SetupBackendTest {
 		playerNames.add("Spider Man");
 		playerNames.add("Thor");
 		
-		ArrayList<Player> players = SetUpHandler.setUpHandler.setUpAndReturnPlayers(playerNames);
+		SetUpHandler setUpHandler = new SetUpHandler();
+		ArrayList<Player> players = setUpHandler.createPlayers(playerNames);
 		
-		
-		for(int i = 0; i < playerNames.size(); i++) {
+		for (int i = 0; i<players.size(); i++){
 			assertEquals(playerNames.get(i), players.get(i).getName());
 		}
 	}
