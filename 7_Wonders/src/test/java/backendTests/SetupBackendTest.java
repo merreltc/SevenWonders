@@ -2,6 +2,7 @@ package backendTests;
 import static org.junit.Assert.*;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import org.easymock.EasyMock;
 import org.junit.After;
@@ -10,6 +11,7 @@ import org.junit.Test;
 
 import backend.SetUpHandler;
 import dataStructures.Player;
+import dataStructures.Wonder;
 
 public class SetupBackendTest {
 
@@ -160,5 +162,14 @@ public class SetupBackendTest {
 		}
 	}
 
+	@Test
+	public void testCreatePlayerArrayWithWonders(){
+		Wonder wonder = EasyMock.mock(Wonder.class);
+		EasyMock.replay(wonder);
+		ArrayList<Wonder> wonders = new ArrayList<Wonder>(Arrays.asList(wonder,wonder,wonder,wonder));
+		ArrayList<String> playerNames = new ArrayList<String>(Arrays.asList("Player1","Player2","Player3","Player4"));
+		SetUpHandler setUpHandler = new SetUpHandler();
+		ArrayList<Player> players = setUpHandler.createPlayers(playerNames,wonders);
+	}
 
 }
