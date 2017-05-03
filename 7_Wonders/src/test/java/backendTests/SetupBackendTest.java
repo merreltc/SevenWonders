@@ -19,6 +19,7 @@ public class SetupBackendTest {
 	@Before
 	public void setUp() {
 		Wonder wonder = EasyMock.mock(Wonder.class);
+		EasyMock.expect(wonder.getName()).andReturn("The Hanging Gardens of Babylon");
 		EasyMock.replay(wonder);
 		
 		wonders = new ArrayList<Wonder>(Arrays.asList(wonder,wonder,wonder,wonder, wonder, wonder, wonder));
@@ -177,6 +178,8 @@ public class SetupBackendTest {
 		ArrayList<String> playerNames = new ArrayList<String>(Arrays.asList("Player1","Player2","Player3","Player4", "Player5", "PLayer6", "Player7"));
 		SetUpHandler setUpHandler = new SetUpHandler();
 		ArrayList<Player> players = setUpHandler.setUpAndReturnPlayers(playerNames, wonders);
+		
+		assertEquals("The Hanging Gardens of Babylon", players.get(0).getWonder().getName());
 	}
 
 }
