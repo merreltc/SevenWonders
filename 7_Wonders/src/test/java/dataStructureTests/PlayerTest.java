@@ -399,5 +399,11 @@ public class PlayerTest {
 		EasyMock.replay(wonder);
 		Assert.assertEquals("The Lighthouse of Alexandria", player.getWonder().getName());
 	}
+	
+	@Test
+	public void testGetWonderFromPlayerWithoutWonderConstructor(){
+		Player player = new Player("Jane Doe");
+		Assert.assertEquals("The Lighthouse of Alexandria", player.getWonder().getName());
+	}
 
 }
