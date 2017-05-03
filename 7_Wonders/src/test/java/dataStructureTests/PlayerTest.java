@@ -6,12 +6,14 @@ import static org.junit.Assert.fail;
 
 import java.util.ArrayList;
 
+import org.easymock.EasyMock;
 import org.junit.Test;
 
 import backend.SetUpDeckHandler;
 import dataStructures.Card;
 import dataStructures.Deck.Age;
 import dataStructures.Player;
+import dataStructures.Wonder;
 import exceptions.InsufficientFundsException;
 
 public class PlayerTest {
@@ -377,6 +379,13 @@ public class PlayerTest {
 		assertEquals(playerCards.get(0), player.getStoragePile().get(0));
 		assertEquals(playerCards.get(1), player.getStoragePile().get(1));
 		assertEquals(playerCards.get(2), player.getStoragePile().get(2));
+	}
+	
+	@Test
+	public void testCreatePlayerWithWonder(){
+		Wonder wonder = EasyMock.mock(Wonder.class);
+		EasyMock.expect(wonder.getName()).andReturn("Olympia");
+		Player player = new Player("Jane Doe", wonder);
 	}
 
 }
