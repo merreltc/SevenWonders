@@ -10,6 +10,7 @@ public class SetUpHandler {
 
 	public ArrayList<Player> setUpAndReturnPlayers(ArrayList<String> playerNames, ArrayList<Wonder> wonders) {
 		validatePlayerNum(playerNames.size());
+		validateWonderNum(playerNames.size(), wonders.size());
 		return createPlayers(playerNames, wonders);
 	}
 
@@ -18,6 +19,14 @@ public class SetUpHandler {
 			throw new IllegalArgumentException("Cannot play with " + num + " players");
 		}
 
+		return true;
+	}
+	
+	public boolean validateWonderNum(int numOfPlayers, int numOfWonders) {
+		if (numOfPlayers > numOfWonders) {
+			throw new IllegalArgumentException("Cannot have more Wonders than Players");
+		}
+		
 		return true;
 	}
 

@@ -194,7 +194,7 @@ public class SetupBackendTest {
 		ArrayList<String> playerNames = new ArrayList<String>(
 				Arrays.asList("Player1", "Player2", "Player3", "Player4", "Player5", "PLayer6", "Player7"));
 		SetUpHandler setUpHandler = new SetUpHandler();
-		ArrayList<Player> players = setUpHandler.setUpAndReturnPlayers(playerNames, wonders);
+		ArrayList<Player> players = setUpHandler.setUpAndReturnPlayers(playerNames, newWonders);
 
 		fail();
 	}
