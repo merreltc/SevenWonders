@@ -19,6 +19,7 @@ public class Player {
 
 	public Player(String playerName) {
 		this.name = playerName;
+		wonder = new Wonder('a', WonderType.LIGHTHOUSE);
 	}
 	
 	public Player(String playerName, Wonder wonder){
