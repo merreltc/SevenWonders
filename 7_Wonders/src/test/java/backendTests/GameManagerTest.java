@@ -20,6 +20,7 @@ import dataStructures.Deck;
 import dataStructures.GameBoard;
 import dataStructures.Player;
 import dataStructures.Wonder;
+import junit.framework.Assert;
 import dataStructures.Deck.Age;
 
 public class GameManagerTest {
@@ -29,6 +30,7 @@ public class GameManagerTest {
 	@Before
 	public void SetUp(){
 		Wonder wonder = EasyMock.mock(Wonder.class);
+		EasyMock.expect(wonder.getName()).andReturn("The Colossus of Rhodes");
 		EasyMock.replay(wonder);
 		wonders = new ArrayList<Wonder>(Arrays.asList(wonder,wonder,wonder,wonder));
 	}
@@ -345,5 +347,6 @@ public class GameManagerTest {
 		ArrayList<String> players = new ArrayList<String>(Arrays.asList("Player1", "Player2", "Player3","Player4"));
 		
 		GameManager game = new GameManager(players, wonders);
+		Assert.assertEquals("The Colossus of Rhodes", game.getPlayer(1).getWonder().getName());
 	}
 }
