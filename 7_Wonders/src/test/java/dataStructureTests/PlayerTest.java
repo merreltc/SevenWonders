@@ -15,6 +15,7 @@ import dataStructures.Deck.Age;
 import dataStructures.Player;
 import dataStructures.Wonder;
 import exceptions.InsufficientFundsException;
+import junit.framework.Assert;
 
 public class PlayerTest {
 
@@ -386,6 +387,8 @@ public class PlayerTest {
 		Wonder wonder = EasyMock.mock(Wonder.class);
 		EasyMock.expect(wonder.getName()).andReturn("Olympia");
 		Player player = new Player("Jane Doe", wonder);
+		EasyMock.replay(wonder);
+		Assert.assertEquals("Olympia", player.getWonder());
 	}
 
 }
