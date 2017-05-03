@@ -3,6 +3,7 @@ package backendTests;
 import static org.junit.Assert.*;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import org.easymock.EasyMock;
 import org.junit.After;
@@ -17,6 +18,7 @@ import dataStructures.Card;
 import dataStructures.Deck;
 import dataStructures.GameBoard;
 import dataStructures.Player;
+import dataStructures.Wonder;
 import dataStructures.Deck.Age;
 
 public class GameManagerTest {
@@ -321,5 +323,21 @@ public class GameManagerTest {
 		manager.dealInitialTurnCards();
 
 		EasyMock.verify(turnHandler);
+	}
+	
+	@Test
+	public void testCreatePlayersWithWonders(){
+		Wonder wonder = EasyMock.mock(Wonder.class);
+		EasyMock.expect(wonder.getName()).andReturn("The Lighthouse of Alexandria");
+		
+		Player player = EasyMock.mock(Player.class);
+		EasyMock.expect(player.getWonder()).andReturn(wonder);
+		
+		EasyMock.replay(wonder, player);
+		
+		ArrayList<Player> players = new ArrayList<Player>(Arrays.asList(player, player, player,player));
+		ArrayList<Wonder> wonders = new ArrayList<Wonder>(Arrays.asList(wonder,wonder,wonder,wonder));
+		
+		GameManager game = new GameManager(players, wonders);
 	}
 }
