@@ -18,6 +18,10 @@ public class Player {
 	public Player(String playerName) {
 		this.name = playerName;
 	}
+	
+	public Player(String playerName, Wonder wonder){
+		
+	}
 
 	public void addValue1(int numCoinsToAdd) {
 		validateNumCoinsToAdd(numCoinsToAdd, Chip.ChipType.ONE);
