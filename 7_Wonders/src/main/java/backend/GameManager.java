@@ -26,17 +26,17 @@ public class GameManager {
 
 	
 	public GameManager(ArrayList<String> playerNames, ArrayList<Wonder> playerWonders) {
-		this(playerNames, new SetUpHandler(), new SetUpDeckHandler(), new TurnHandler());
+		this(playerNames, new SetUpHandler(), new SetUpDeckHandler(), new TurnHandler(), playerWonders);
 	}
 	
-	public GameManager(ArrayList<String> playerNames, SetUpHandler setUpHandler, SetUpDeckHandler setUpDeckHandler, TurnHandler turnHandler){
+	public GameManager(ArrayList<String> playerNames, SetUpHandler setUpHandler, SetUpDeckHandler setUpDeckHandler, TurnHandler turnHandler,ArrayList<Wonder> playerWonders){
 		this.setUpHandler = setUpHandler;
 		this.setUpDeckHandler = setUpDeckHandler;
 		this.turnHandler = turnHandler;
-		setUpGame(playerNames);	
+		setUpGame(playerNames, playerWonders);	
 	}
 
-	public void setUpGame(ArrayList<String> playerNames) {
+	public void setUpGame(ArrayList<String> playerNames, ArrayList<Wonder> playerWonders) {
 		ArrayList<Player> players = this.setUpHandler.setUpAndReturnPlayers(playerNames);
 		Deck deck = this.setUpDeckHandler.createDeck(Age.AGE1, playerNames.size());
 
