@@ -7,6 +7,7 @@ import dataStructures.Card;
 import dataStructures.Deck;
 import dataStructures.GameBoard;
 import dataStructures.Player;
+import dataStructures.Wonder;
 import dataStructures.Deck.Age;
 
 /**
@@ -24,7 +25,7 @@ public class GameManager {
 	private TradeHandler tradeHandler;
 
 	
-	public GameManager(ArrayList<String> playerNames) {
+	public GameManager(ArrayList<String> playerNames, ArrayList<Wonder> playerWonders) {
 		this(playerNames, new SetUpHandler(), new SetUpDeckHandler(), new TurnHandler());
 	}
 	

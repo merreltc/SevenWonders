@@ -7,6 +7,7 @@ import java.util.Arrays;
 
 import org.easymock.EasyMock;
 import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 
 import backend.GameManager;
@@ -22,6 +23,15 @@ import dataStructures.Wonder;
 import dataStructures.Deck.Age;
 
 public class GameManagerTest {
+	
+	private ArrayList<Wonder> wonders;
+	
+	@Before
+	public void SetUp(){
+		Wonder wonder = EasyMock.mock(Wonder.class);
+		EasyMock.replay(wonder);
+		wonders = new ArrayList<Wonder>(Arrays.asList(wonder,wonder,wonder,wonder));
+	}
 
 	@Test
 	public void testSetUpGameBoardMinPlayers() {
@@ -29,7 +39,7 @@ public class GameManagerTest {
 		playerNames.add("Wolverine");
 		playerNames.add("Captain America");
 		playerNames.add("Black Widow");
-		GameManager manager = new GameManager(playerNames);
+		GameManager manager = new GameManager(playerNames, wonders);
 
 		assertEquals(3, manager.getNumPlayers());
 	}
@@ -44,7 +54,7 @@ public class GameManagerTest {
 		playerNames.add("Iron Man");
 		playerNames.add("Spider Man");
 		playerNames.add("Thor");
-		GameManager manager = new GameManager(playerNames);
+		GameManager manager = new GameManager(playerNames,wonders);
 
 		assertEquals(7, manager.getNumPlayers());
 	}
@@ -95,7 +105,7 @@ public class GameManagerTest {
 		playerNames.add("Wolverine");
 		playerNames.add("Captain America");
 		playerNames.add("Black Widow");
-		GameManager manager = new GameManager(playerNames);
+		GameManager manager = new GameManager(playerNames,wonders);
 
 		manager.trade(manager.getPlayer(0), manager.getPlayer(1), 3);
 
@@ -109,7 +119,7 @@ public class GameManagerTest {
 		playerNames.add("Wolverine");
 		playerNames.add("Captain America");
 		playerNames.add("Black Widow");
-		GameManager manager = new GameManager(playerNames);
+		GameManager manager = new GameManager(playerNames,wonders);
 
 		comparePlayerPositions(manager.getPlayers(), manager, 0, 1, 2);
 	}
@@ -125,7 +135,7 @@ public class GameManagerTest {
 		playerNames.add("Spider Man");
 		playerNames.add("Thor");
 
-		GameManager manager = new GameManager(playerNames);
+		GameManager manager = new GameManager(playerNames,wonders);
 
 		comparePlayerPositions(manager.getPlayers(), manager, 0, 1, 6);
 	}
@@ -137,7 +147,7 @@ public class GameManagerTest {
 		playerNames.add("Captain America");
 		playerNames.add("Black Widow");
 
-		GameManager manager = new GameManager(playerNames);
+		GameManager manager = new GameManager(playerNames,wonders);
 		manager.rotateClockwise();
 
 		comparePlayerPositions(manager.getPlayers(), manager, 1, 2, 0);
@@ -153,7 +163,7 @@ public class GameManagerTest {
 		playerNames.add("Iron Man");
 		playerNames.add("Spider Man");
 		playerNames.add("Thor");
-		GameManager manager = new GameManager(playerNames);
+		GameManager manager = new GameManager(playerNames,wonders);
 
 		manager.rotateClockwise();
 
@@ -169,7 +179,7 @@ public class GameManagerTest {
 		playerNames.add("Hulk");
 		playerNames.add("Iron Man");
 
-		GameManager manager = new GameManager(playerNames);
+		GameManager manager = new GameManager(playerNames,wonders);
 		manager.rotateClockwise();
 		manager.rotateClockwise();
 
@@ -185,7 +195,7 @@ public class GameManagerTest {
 		playerNames.add("Hulk");
 		playerNames.add("Iron Man");
 
-		GameManager manager = new GameManager(playerNames);
+		GameManager manager = new GameManager(playerNames,wonders);
 
 		for (int i = 0; i < 10; i++) {
 			manager.rotateClockwise();
@@ -205,7 +215,7 @@ public class GameManagerTest {
 		playerNames.add("Spider Man");
 		playerNames.add("Thor");
 
-		GameManager manager = new GameManager(playerNames);
+		GameManager manager = new GameManager(playerNames,wonders);
 
 		manager.changeRotateDirectionAndResetPositions(Direction.CLOCKWISE);
 		comparePlayerPositions(manager.getPlayers(), manager, 0, 1, 6);
@@ -220,8 +230,12 @@ public class GameManagerTest {
 		playerNames.add("Wolverine");
 		playerNames.add("Captain America");
 		playerNames.add("Black Widow");
+		
+		Wonder wonder = EasyMock.mock(Wonder.class);
+		EasyMock.replay(wonder);
+		ArrayList<Wonder> wonders = new ArrayList<Wonder>(Arrays.asList(wonder,wonder,wonder,wonder));
 
-		GameManager manager = new GameManager(playerNames);
+		GameManager manager = new GameManager(playerNames,wonders);
 
 		manager.changeRotateDirectionAndResetPositions(Direction.CLOCKWISE);
 		comparePlayerPositions(manager.getPlayers(), manager, 0, 1, 2);
@@ -237,7 +251,7 @@ public class GameManagerTest {
 		playerNames.add("Captain America");
 		playerNames.add("Black Widow");
 
-		GameManager manager = new GameManager(playerNames);
+		GameManager manager = new GameManager(playerNames, wonders);
 		manager.changeRotateDirectionAndResetPositions(Direction.COUNTERCLOCKWISE);
 		manager.rotateCounterClockwise();
 
@@ -255,7 +269,7 @@ public class GameManagerTest {
 		playerNames.add("Spider Man");
 		playerNames.add("Thor");
 
-		GameManager manager = new GameManager(playerNames);
+		GameManager manager = new GameManager(playerNames, wonders);
 		manager.changeRotateDirectionAndResetPositions(Direction.COUNTERCLOCKWISE);
 		manager.rotateCounterClockwise();
 
@@ -271,7 +285,7 @@ public class GameManagerTest {
 		playerNames.add("Hulk");
 		playerNames.add("Iron Man");
 
-		GameManager manager = new GameManager(playerNames);
+		GameManager manager = new GameManager(playerNames, wonders);
 		manager.changeRotateDirectionAndResetPositions(Direction.COUNTERCLOCKWISE);
 		manager.rotateCounterClockwise();
 		manager.rotateCounterClockwise();
@@ -288,7 +302,7 @@ public class GameManagerTest {
 		playerNames.add("Hulk");
 		playerNames.add("Iron Man");
 
-		GameManager manager = new GameManager(playerNames);
+		GameManager manager = new GameManager(playerNames, wonders);
 		manager.changeRotateDirectionAndResetPositions(Direction.COUNTERCLOCKWISE);
 
 		for (int i = 0; i < 10; i++) {
@@ -327,16 +341,8 @@ public class GameManagerTest {
 	
 	@Test
 	public void testCreatePlayersWithWonders(){
-		Wonder wonder = EasyMock.mock(Wonder.class);
-		EasyMock.expect(wonder.getName()).andReturn("The Lighthouse of Alexandria");
 		
-		Player player = EasyMock.mock(Player.class);
-		EasyMock.expect(player.getWonder()).andReturn(wonder);
-		
-		EasyMock.replay(wonder, player);
-		
-		ArrayList<Player> players = new ArrayList<Player>(Arrays.asList(player, player, player,player));
-		ArrayList<Wonder> wonders = new ArrayList<Wonder>(Arrays.asList(wonder,wonder,wonder,wonder));
+		ArrayList<String> players = new ArrayList<String>(Arrays.asList("Player1", "Player2", "Player3","Player4"));
 		
 		GameManager game = new GameManager(players, wonders);
 	}
