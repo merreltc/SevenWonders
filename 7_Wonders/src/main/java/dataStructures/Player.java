@@ -12,6 +12,7 @@ public class Player {
 	private int numOfValue1Coins = 3;
 	private int numOfValue3Coins = 0;
 	private int conflictTotal = 0;
+	private Wonder wonder;
 	
 	private ArrayList<Card> currentHand = new ArrayList<Card>();
 	private ArrayList<Card> storagePile = new ArrayList<Card>();
@@ -21,7 +22,8 @@ public class Player {
 	}
 	
 	public Player(String playerName, Wonder wonder){
-		
+		this.name = playerName;
+		this.wonder = wonder;
 	}
 
 	public void addValue1(int numCoinsToAdd) {
@@ -161,6 +163,6 @@ public class Player {
 	}
 	
 	public Wonder getWonder(){
-		return new Wonder('a', WonderType.STATUE);
+		return wonder;
 	}
 }
