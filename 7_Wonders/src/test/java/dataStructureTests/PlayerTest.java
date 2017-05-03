@@ -385,10 +385,10 @@ public class PlayerTest {
 	@Test
 	public void testCreatePlayerWithWonder(){
 		Wonder wonder = EasyMock.mock(Wonder.class);
-		EasyMock.expect(wonder.getName()).andReturn("Olympia");
+		EasyMock.expect(wonder.getName()).andReturn("The Statue of Zeus in Olympia");
 		Player player = new Player("Jane Doe", wonder);
 		EasyMock.replay(wonder);
-		Assert.assertEquals("Olympia", player.getWonder());
+		Assert.assertEquals("The Statue of Zeus in Olympia", player.getWonder().getName());
 	}
 
 }

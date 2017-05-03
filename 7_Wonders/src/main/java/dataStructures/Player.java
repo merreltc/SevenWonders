@@ -2,6 +2,7 @@ package dataStructures;
 
 import java.util.ArrayList;
 
+import dataStructures.Wonder.WonderType;
 import exceptions.InsufficientFundsException;
 
 public class Player {
@@ -157,5 +158,9 @@ public class Player {
 
 	public void setStoragePile(ArrayList<Card> storagePile) {
 		this.storagePile = storagePile;
+	}
+	
+	public Wonder getWonder(){
+		return new Wonder('a', WonderType.STATUE);
 	}
 }
