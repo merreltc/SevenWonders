@@ -9,18 +9,6 @@ public class EntityEffect extends Effect {
 	public enum EntityType {
 		RESOURCE, MANUFACTUREDGOOD, SCIENCE
 	}
-
-	public enum Resource {
-		LUMBER, CLAY, ORE, STONE
-	}
-
-	public enum Good {
-		LOOM, GLASS, PRESS
-	}
-
-	public enum Science {
-		PROTRACTOR, WHEEL, TABLET		
-	}
 	
 	public EntityEffect(EffectType effectType, EntityType entityType, HashMap<Enum, Integer> entitiesAndAmounts) {
 		super(effectType);

@@ -1,6 +1,7 @@
 package backendTests;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
 
 import java.util.ArrayList;
 
@@ -10,9 +11,11 @@ import backend.SetUpDeckHandler;
 import backend.TradeHandler;
 import dataStructures.Card;
 import dataStructures.Deck;
-import dataStructures.GameBoard;
-import dataStructures.Player;
 import dataStructures.Deck.Age;
+import dataStructures.GameBoard;
+import dataStructures.GeneralEnums.Good;
+import dataStructures.GeneralEnums.Resource;
+import dataStructures.Player;
 import exceptions.InsufficientFundsException;
 import exceptions.InvalidTradeException;
 
@@ -131,7 +134,7 @@ public class TradeHandlerTest {
 		GameBoard board = new GameBoard(players, deck);
 		TradeHandler tradeHandler = new TradeHandler(board);
 		
-		tradeHandler.tradeFromTo(player1, player2, 4);
+		tradeHandler.tradeCoinsFromTo(player1, player2, 4);
 
 		assertEquals(5, player1.getCoinTotal());
 		assertEquals(2, player1.getNumValue1Coins());
@@ -160,7 +163,7 @@ public class TradeHandlerTest {
 		GameBoard board = new GameBoard(players, deck);
 		TradeHandler tradeHandler = new TradeHandler(board);
 		
-		tradeHandler.tradeFromTo(player1, player2, 5);
+		tradeHandler.tradeCoinsFromTo(player1, player2, 5);
 
 		assertEquals(4, player1.getCoinTotal());
 		assertEquals(1, player1.getNumValue1Coins());
@@ -189,7 +192,7 @@ public class TradeHandlerTest {
 		GameBoard board = new GameBoard(players, deck);
 		TradeHandler tradeHandler = new TradeHandler(board);
 		
-		tradeHandler.tradeFromTo(player1, player2, 7);
+		tradeHandler.tradeCoinsFromTo(player1, player2, 7);
 
 		assertEquals(2, player1.getCoinTotal());
 		assertEquals(2, player1.getNumValue1Coins());
@@ -218,7 +221,7 @@ public class TradeHandlerTest {
 		GameBoard board = new GameBoard(players, deck);
 		TradeHandler tradeHandler = new TradeHandler(board);
 		
-		tradeHandler.tradeFromTo(player1, player2, 8);
+		tradeHandler.tradeCoinsFromTo(player1, player2, 8);
 
 		assertEquals(1, player1.getCoinTotal());
 		assertEquals(1, player1.getNumValue1Coins());
@@ -245,7 +248,7 @@ public class TradeHandlerTest {
 		GameBoard board = new GameBoard(players, deck);
 		TradeHandler tradeHandler = new TradeHandler(board);
 
-		tradeHandler.tradeFromTo(player1, player2, 3);
+		tradeHandler.tradeCoinsFromTo(player1, player2, 3);
 
 		assertEquals(0, player1.getCoinTotal());
 		assertEquals(0, player1.getNumValue1Coins());
@@ -274,7 +277,7 @@ public class TradeHandlerTest {
 		GameBoard board = new GameBoard(players, deck);
 		TradeHandler tradeHandler = new TradeHandler(board);
 		
-		tradeHandler.tradeFromTo(player1, player2, 6);
+		tradeHandler.tradeCoinsFromTo(player1, player2, 6);
 
 		assertEquals(0, player1.getCoinTotal());
 		assertEquals(0, player1.getNumValue1Coins());
@@ -300,7 +303,7 @@ public class TradeHandlerTest {
 		GameBoard board = new GameBoard(players, deck);
 		TradeHandler tradeHandler = new TradeHandler(board);
 		
-		tradeHandler.tradeFromTo(board.getCurrentPlayer(), board.getNextPlayer(), 3);
+		tradeHandler.tradeCoinsFromTo(board.getCurrentPlayer(), board.getNextPlayer(), 3);
 		assertEquals(0, board.getPlayerCoinTotal(board.getCurrentPlayerIndex()));
 		assertEquals(6, board.getPlayerCoinTotal(board.getNextPlayerIndex()));
 	}
@@ -321,7 +324,7 @@ public class TradeHandlerTest {
 		GameBoard board = new GameBoard(players, deck);
 		TradeHandler tradeHandler = new TradeHandler(board);
 		
-		tradeHandler.tradeFromTo(board.getCurrentPlayer(), board.getPreviousPlayer(), 3);
+		tradeHandler.tradeCoinsFromTo(board.getCurrentPlayer(), board.getPreviousPlayer(), 3);
 		assertEquals(0, board.getPlayerCoinTotal(board.getCurrentPlayerIndex()));
 		assertEquals(6, board.getPlayerCoinTotal(board.getPreviousPlayerIndex()));
 	}
@@ -341,7 +344,88 @@ public class TradeHandlerTest {
 		GameBoard board = new GameBoard(players, deck);
 		TradeHandler tradeHandler = new TradeHandler(board);
 		
-		tradeHandler.tradeFromTo(board.getCurrentPlayer(), board.getPlayer(2), 3);
+		tradeHandler.tradeCoinsFromTo(board.getCurrentPlayer(), board.getPlayer(2), 3);
 		fail();
+	}
+	
+	@Test
+	public void testValidTrade3CoinsForSingleLumberResource(){
+		ArrayList<Player> players = new ArrayList<Player>();
+		players.add(new Player("Wolverine"));
+		players.add(new Player("Captain America"));
+		players.add(new Player("Black Widow"));
+
+		ArrayList<Card> cards = new SetUpDeckHandler().createCards(Age.AGE1, 3);
+		Deck deck = new Deck(Age.AGE1, cards);
+		
+		GameBoard board = new GameBoard(players, deck);
+		TradeHandler tradeHandler = new TradeHandler(board);
+		
+		Player current = board.getCurrentPlayer();
+		Player next = board.getNextPlayer();
+		ArrayList<Card> storage = new ArrayList<Card>();
+		storage.add(deck.getCard(0));
+		storage.add(deck.getCard(1));
+		
+		next.setStoragePile(storage);
+		
+		tradeHandler.tradeFromToForEntity(current, next, Resource.LUMBER);
+		
+		assertEquals(0, current.getNumValue3Coins());
+		assertEquals(1, (int) current.getCurrentTrades().get(Resource.LUMBER));
+		assertEquals(6, next.getCoinTotal());
+	}
+	
+	@Test(expected = InvalidTradeException.class)
+	public void testInvalidTrade3CoinsForSingleLumberResource(){
+		ArrayList<Player> players = new ArrayList<Player>();
+		players.add(new Player("Wolverine"));
+		players.add(new Player("Captain America"));
+		players.add(new Player("Black Widow"));
+
+		ArrayList<Card> cards = new SetUpDeckHandler().createCards(Age.AGE1, 3);
+		Deck deck = new Deck(Age.AGE1, cards);
+		
+		GameBoard board = new GameBoard(players, deck);
+		TradeHandler tradeHandler = new TradeHandler(board);
+		
+		Player current = board.getCurrentPlayer();
+		Player next = board.getNextPlayer();
+		ArrayList<Card> storage = new ArrayList<Card>();
+		storage.add(deck.getCard(0));
+		storage.add(deck.getCard(1));
+		
+		next.setStoragePile(storage);
+		
+		tradeHandler.tradeFromToForEntity(current, next, Resource.ORE);
+		fail();
+	}
+	
+	@Test
+	public void testValidTrade3CoinsForSingleLoomGood(){
+		ArrayList<Player> players = new ArrayList<Player>();
+		players.add(new Player("Wolverine"));
+		players.add(new Player("Captain America"));
+		players.add(new Player("Black Widow"));
+
+		ArrayList<Card> cards = new SetUpDeckHandler().createCards(Age.AGE1, 3);
+		Deck deck = new Deck(Age.AGE1, cards);
+		
+		GameBoard board = new GameBoard(players, deck);
+		TradeHandler tradeHandler = new TradeHandler(board);
+		
+		Player current = board.getCurrentPlayer();
+		Player next = board.getNextPlayer();
+		ArrayList<Card> storage = new ArrayList<Card>();
+		storage.add(deck.getCard(7));
+		storage.add(deck.getCard(8));
+		
+		next.setStoragePile(storage);
+		
+		tradeHandler.tradeFromToForEntity(current, next, Good.GLASS);
+		
+		assertEquals(0, current.getNumValue3Coins());
+		assertEquals(1, (int) current.getCurrentTrades().get(Good.GLASS));
+		assertEquals(6, next.getCoinTotal());
 	}
 }

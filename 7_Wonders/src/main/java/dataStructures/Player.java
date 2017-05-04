@@ -1,7 +1,11 @@
 package dataStructures;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
+import dataStructures.Effect.EffectType;
+import dataStructures.GeneralEnums.Good;
+import dataStructures.GeneralEnums.Resource;
 import exceptions.InsufficientFundsException;
 
 public class Player {
@@ -14,6 +18,8 @@ public class Player {
 	
 	private ArrayList<Card> currentHand = new ArrayList<Card>();
 	private ArrayList<Card> storagePile = new ArrayList<Card>();
+	
+	private HashMap<Enum, Integer> currentTrades = new HashMap<Enum, Integer>();
 
 	public Player(String playerName) {
 		this.name = playerName;
@@ -153,5 +159,41 @@ public class Player {
 
 	public void setStoragePile(ArrayList<Card> storagePile) {
 		this.storagePile = storagePile;
+	}
+	
+	public boolean storagePileContainsEntity(Enum entity) {
+		for(Card storage: this.storagePile){
+			if(storage.getEffectType().equals(EffectType.ENTITY)){
+				EntityEffect effect = (EntityEffect) storage.getEffect();
+				if(effect.getEntities().containsKey(entity)){
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+
+	public HashMap<Enum, Integer> getCurrentTrades() {
+		return this.currentTrades;
+	}
+
+	public void addTradedValue(Enum trade) {
+		int value = 0;
+		if(this.currentTrades.containsKey(trade)){
+			value = (int) this.currentTrades.get(trade);
+		}
+		this.currentTrades.put(trade, value + 1);
+	}
+
+	public void removeCurrentTrades() {
+		this.currentTrades.clear();
+	}
+
+	public void addToStoragePile(Card card) {
+		this.storagePile.add(card);
+	}
+
+	public void removeFromCurrentHand(Card card) {
+		this.currentHand.remove(card);
 	}
 }

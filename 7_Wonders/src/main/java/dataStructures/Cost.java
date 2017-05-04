@@ -11,14 +11,6 @@ public class Cost {
 		NONE, COIN, RESOURCE, GOOD, MULTITYPE
 	}
 
-	public enum Resource {
-		ORE, LUMBER, STONE, CLAY
-	}
-
-	public enum Good {
-		LOOM, GLASS, PAPER
-	}
-
 	public Cost() {
 	}
 

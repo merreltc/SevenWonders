@@ -11,9 +11,9 @@ import dataStructures.Effect.Direction;
 import dataStructures.Effect.EffectType;
 import dataStructures.EntityEffect;
 import dataStructures.EntityEffect.EntityType;
-import dataStructures.EntityEffect.Good;
-import dataStructures.EntityEffect.Resource;
-import dataStructures.EntityEffect.Science;
+import dataStructures.GeneralEnums.Good;
+import dataStructures.GeneralEnums.Resource;
+import dataStructures.GeneralEnums.Science;
 
 public class EntityEffectTest {
 	

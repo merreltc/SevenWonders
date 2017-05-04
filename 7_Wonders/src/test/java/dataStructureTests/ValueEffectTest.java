@@ -10,7 +10,6 @@ import org.junit.Test;
 import dataStructures.Effect;
 import dataStructures.Effect.Direction;
 import dataStructures.Effect.EffectType;
-import dataStructures.EntityEffect.Science;
 import dataStructures.ValueEffect;
 import dataStructures.ValueEffect.AffectingEntity;
 import dataStructures.ValueEffect.Value;

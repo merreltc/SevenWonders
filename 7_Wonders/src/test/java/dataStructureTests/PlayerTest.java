@@ -1,16 +1,17 @@
 package dataStructureTests;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
+import static org.junit.Assert.*;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import org.junit.Test;
 
 import backend.SetUpDeckHandler;
 import dataStructures.Card;
 import dataStructures.Deck.Age;
+import dataStructures.GeneralEnums.Good;
+import dataStructures.GeneralEnums.Resource;
 import dataStructures.Player;
 import exceptions.InsufficientFundsException;
 
@@ -377,6 +378,122 @@ public class PlayerTest {
 		assertEquals(playerCards.get(0), player.getStoragePile().get(0));
 		assertEquals(playerCards.get(1), player.getStoragePile().get(1));
 		assertEquals(playerCards.get(2), player.getStoragePile().get(2));
+	}
+	
+	@Test
+	public void testStoragePileContainsResource() {
+		Player player = new Player("Jane Doe");
+		ArrayList<Card> deckCards = new SetUpDeckHandler().createCards(Age.AGE1, 3);
+		
+		ArrayList<Card> playerCards = new ArrayList<Card>();
+		playerCards.add(deckCards.get(0));
+		playerCards.add(deckCards.get(1));
+		playerCards.add(deckCards.get(2));
+		
+		player.setStoragePile(playerCards);
+		
+		assertTrue(player.storagePileContainsEntity(Resource.LUMBER));
+	}
+	
+	@Test
+	public void testDefaultCurrentTrades() {
+		Player player = new Player("Jane Doe");
+		
+		assertTrue(player.getCurrentTrades().isEmpty());
+		assertEquals(HashMap.class, player.getCurrentTrades().getClass());
+	}
+	
+	@Test
+	public void testAddTraded() {
+		Player player = new Player("Jane Doe");
+		
+		player.addTradedValue(Resource.LUMBER);
+		assertFalse(player.getCurrentTrades().isEmpty());
+		assertTrue(player.getCurrentTrades().containsKey(Resource.LUMBER));
+		assertEquals(1, (int) player.getCurrentTrades().get(Resource.LUMBER));
+	}
+	
+	@Test
+	public void testAddMultipleSameTraded() {
+		Player player = new Player("Jane Doe");
+		
+		player.addTradedValue(Resource.LUMBER);
+		player.addTradedValue(Resource.LUMBER);
+		assertFalse(player.getCurrentTrades().isEmpty());
+		assertTrue(player.getCurrentTrades().containsKey(Resource.LUMBER));
+		assertEquals(2, (int) player.getCurrentTrades().get(Resource.LUMBER));
+	}
+	
+	@Test
+	public void testAddMultipleDifferentTraded() {
+		Player player = new Player("Jane Doe");
+		
+		player.addTradedValue(Resource.LUMBER);
+		player.addTradedValue(Good.LOOM);
+		assertFalse(player.getCurrentTrades().isEmpty());
+		assertTrue(player.getCurrentTrades().containsKey(Resource.LUMBER));
+		assertEquals(1, (int) player.getCurrentTrades().get(Resource.LUMBER));
+		assertEquals(1, (int) player.getCurrentTrades().get(Good.LOOM));
+	}
+	
+	@Test
+	public void testRemoveCurrentTrades() {
+		Player player = new Player("Jane Doe");
+		
+		player.addTradedValue(Resource.LUMBER);
+		player.addTradedValue(Good.LOOM);
+		player.removeCurrentTrades();
+		assertTrue(player.getCurrentTrades().isEmpty());
+		assertEquals(HashMap.class, player.getCurrentTrades().getClass());
+	}
+	
+	@Test
+	public void testStoragePileContainsGood() {
+		Player player = new Player("Jane Doe");
+		ArrayList<Card> deckCards = new SetUpDeckHandler().createCards(Age.AGE1, 3);
+		
+		ArrayList<Card> playerCards = new ArrayList<Card>();
+		playerCards.add(deckCards.get(6));
+		playerCards.add(deckCards.get(7));
+		playerCards.add(deckCards.get(8));
+		
+		player.setStoragePile(playerCards);
+		
+		assertTrue(player.storagePileContainsEntity(Good.GLASS));
+	}
+	
+	@Test
+	public void testAddToStoragePile(){
+		Player player = new Player("Jane Doe");
+		ArrayList<Card> deckCards = new SetUpDeckHandler().createCards(Age.AGE1, 3);
+		
+		ArrayList<Card> playerCards = new ArrayList<Card>();
+		playerCards.add(deckCards.get(0));
+		playerCards.add(deckCards.get(1));
+		playerCards.add(deckCards.get(2));
+		
+		player.setStoragePile(playerCards);
+		
+		player.addToStoragePile(deckCards.get(3));
+		assertEquals(4, player.getStoragePile().size());
+		assertEquals(deckCards.get(3), player.getStoragePile().get(3));
+	}
+	
+	@Test
+	public void testRemoveFromCurrentHand(){
+		Player player = new Player("Jane Doe");
+		ArrayList<Card> deckCards = new SetUpDeckHandler().createCards(Age.AGE1, 3);
+		
+		ArrayList<Card> playerCards = new ArrayList<Card>();
+		playerCards.add(deckCards.get(0));
+		playerCards.add(deckCards.get(1));
+		playerCards.add(deckCards.get(2));
+		
+		player.setCurrentHand(playerCards);
+		
+		player.removeFromCurrentHand(deckCards.get(1));
+		assertEquals(2, player.getCurrentHand().size());
+		assertFalse(player.getCurrentHand().contains(deckCards.get(1)));
 	}
 
 }
