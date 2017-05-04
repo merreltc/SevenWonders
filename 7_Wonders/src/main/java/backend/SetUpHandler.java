@@ -1,17 +1,16 @@
 package backend;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
-import dataStructures.GameBoard;
 import dataStructures.Player;
 import dataStructures.Wonder;
 
 public class SetUpHandler {
 
-	public ArrayList<Player> setUpAndReturnPlayers(ArrayList<String> playerNames, ArrayList<Wonder> wonders) {
-		validatePlayerNum(playerNames.size());
-		validateWonderNum(playerNames.size(), wonders.size());
-		return createPlayers(playerNames, wonders);
+	public ArrayList<Player> setUpAndReturnPlayers(HashMap<String, Wonder.WonderType> playerNamesAndWonders) {
+		validatePlayerNum(playerNamesAndWonders.size());
+		return createPlayers(playerNamesAndWonders);
 	}
 
 	public boolean validatePlayerNum(int num) {
@@ -21,20 +20,12 @@ public class SetUpHandler {
 
 		return true;
 	}
-	
-	public boolean validateWonderNum(int numOfPlayers, int numOfWonders) {
-		if (numOfPlayers > numOfWonders) {
-			throw new IllegalArgumentException("Cannot have more Wonders than Players");
-		}
-		
-		return true;
-	}
 
-	public ArrayList<Player> createPlayers(ArrayList<String> playerNames, ArrayList<Wonder> wonders) {
+	public ArrayList<Player> createPlayers(HashMap<String, Wonder.WonderType> playerNamesAndWonders) {
 		ArrayList<Player> players = new ArrayList<Player>();
 		
-		for(int i = 0; i < playerNames.size(); i++){
-			players.add(new Player(playerNames.get(i), wonders.get(i)));
+		for(String playerName : playerNamesAndWonders.keySet()) {
+			players.add(new Player(playerName, playerNamesAndWonders.get(playerName)));
 		}
 		
 		return players;
