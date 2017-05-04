@@ -13,12 +13,14 @@ import backend.PlayerTurnHandler;
 import backend.RotateHandler.Direction;
 import backend.SetUpDeckHandler;
 import backend.SetUpHandler;
+import backend.TradeHandler;
 import backend.TurnHandler;
 import dataStructures.Card;
 import dataStructures.Deck;
 import dataStructures.GameBoard;
 import dataStructures.Player;
 import dataStructures.Deck.Age;
+import dataStructures.GeneralEnums.Resource;
 
 public class GameManagerTest {
 
@@ -343,5 +345,29 @@ public class GameManagerTest {
 		manager.buildStructure(card);
 
 		EasyMock.verify(playerTurnHandler);
+	}
+	
+	@Test
+	public void testTradeFromToForResource() {
+		ArrayList<String> playerNames = new ArrayList<String>();
+		playerNames.add("Wolverine");
+		playerNames.add("Captain America");
+		playerNames.add("Black Widow");
+
+		GameManager manager = new GameManager(playerNames, new SetUpHandler(), new SetUpDeckHandler(), new TurnHandler(), new PlayerTurnHandler());
+		
+		ArrayList<Card> storage = new ArrayList<Card>();
+		Deck deck = manager.getGameBoard().getDeck();
+		storage.add(deck.getCard(0));
+		storage.add(deck.getCard(1));
+		
+		manager.getNextPlayer().setStoragePile(storage);
+		manager.tradeForEntity(manager.getCurrentPlayer(), manager.getNextPlayer(), Resource.LUMBER);
+		
+		Player current = manager.getCurrentPlayer();
+		Player next = manager.getNextPlayer();
+		
+		assertEquals(1, (int) current.getCurrentTrades().get(Resource.LUMBER));
+		assertEquals(6, next.getCoinTotal());
 	}
 }

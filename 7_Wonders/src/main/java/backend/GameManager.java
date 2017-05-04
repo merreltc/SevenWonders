@@ -6,6 +6,7 @@ import backend.RotateHandler.Direction;
 import dataStructures.Card;
 import dataStructures.Deck;
 import dataStructures.GameBoard;
+import dataStructures.GeneralEnums.Resource;
 import dataStructures.Player;
 import dataStructures.Deck.Age;
 
@@ -52,6 +53,10 @@ public class GameManager {
 
 	public void trade(Player from, Player to, int valueToTrade) {
 		tradeHandler.tradeCoinsFromTo(from, to, valueToTrade);
+	}
+	
+	public void tradeForEntity(Player from, Player to, Resource entity) {
+		this.tradeHandler.tradeFromToForEntity(from, to, entity);
 	}
 	
 	public void buildStructure(Card card) {
