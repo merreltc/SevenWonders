@@ -18,31 +18,35 @@ public class PlayerTurnHandler {
 			int coinCost = card.getCost().get(CostType.COIN);
 			current.removeTotalCoins(coinCost);
 		}else if (card.getCostType() == CostType.RESOURCE){
-			HashMap<Enum, Integer> cost = card.getCost();
-			ArrayList<Card> storage = current.getStoragePile();
-			
-			for(Enum key: cost.keySet()){
-				boolean costfound = false;
-				
-				for(Card sCards: storage){
-					if(sCards.getEffectType() == EffectType.ENTITY){
-						EntityEffect effect = (EntityEffect) sCards.getEffect();
-						
-						if(effect.getEntities().containsKey(key)){
-							costfound = true;
-							break;
-						}
-					}
-				}
-				
-				if(!costfound){
-					throw new InsufficientFundsException("Player doesn't not have the required items to build the structure");
-				}
-			}
+			validatePlayerHasResourcesForCard(current, card);
 		}
 		
 		current.addToStoragePile(card);
 		current.removeFromCurrentHand(card);
+	}
+
+	private void validatePlayerHasResourcesForCard(Player current, Card card) {
+		HashMap<Enum, Integer> cost = card.getCost();
+		ArrayList<Card> storage = current.getStoragePile();
+		
+		for(Enum key: cost.keySet()){
+			boolean costfound = false;
+			
+			for(Card sCards: storage){
+				if(sCards.getEffectType() == EffectType.ENTITY){
+					EntityEffect effect = (EntityEffect) sCards.getEffect();
+					
+					if(effect.getEntities().containsKey(key)){
+						costfound = true;
+						break;
+					}
+				}
+			}
+			
+			if(!costfound){
+				throw new InsufficientFundsException("Player doesn't not have the required items to build the structure");
+			}
+		}
 	}
 
 }
