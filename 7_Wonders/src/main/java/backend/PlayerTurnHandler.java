@@ -33,6 +33,7 @@ public class PlayerTurnHandler {
 		
 		for(Enum key: cost.keySet()){
 			boolean costfound = false;
+			int numcost = cost.get(key);
 			
 			for(Card sCards: storage){
 				if(sCards.getEffectType() == EffectType.ENTITY){
@@ -40,12 +41,13 @@ public class PlayerTurnHandler {
 					
 					if(effect.getEntities().containsKey(key)){
 						costfound = true;
+						numcost -= effect.getEntities().get(key);
 						break;
 					}
 				}
 			}
 			
-			if(!costfound){
+			if(!costfound || numcost > 0){
 				throw new InsufficientFundsException("Player doesn't not have the required items to build the structure");
 			}
 		}
