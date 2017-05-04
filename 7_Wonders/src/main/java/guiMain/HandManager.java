@@ -30,7 +30,7 @@ public class HandManager {
 		}
 	}
 
-	public void drawCurrentPlayerCards(Player player) {
+	public void drawCurrentPlayerCards(Player player, RenderImage renderer) {
 		this.playerHand.clear();
 		this.currentPlayer = player;
 		ArrayList<Card> currentHand = player.getCurrentHand();
@@ -41,7 +41,7 @@ public class HandManager {
 			Interactable cardHolder = new CardHolder(handPosition, handBounds, i + "");
 			Card card = currentHand.get(i);
 			((CardHolder) cardHolder).giveCard(card);
-			cardHolder.addImage(RenderImage.getImage(card.getName()));
+			cardHolder.addImage(renderer.getImage(card.getName()));
 			this.playerHand.add(cardHolder);
 		}
 	}

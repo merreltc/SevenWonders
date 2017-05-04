@@ -17,6 +17,7 @@ import guiMain.GuiTradeHelper;
 import guiMain.HandManager;
 import guiMain.Message;
 import guiMain.PlayerBoard;
+import guiMain.RenderImage;
 import guiMain.Interactables.Button;
 import guiMain.Interactables.CardHolder;
 import guiMain.Interactables.Interactable;
@@ -25,9 +26,11 @@ public class Game extends Menu {
 	private ArrayList<PlayerBoard> boards = new ArrayList<>();
 	private GameManager gameManager;
 	private HandManager handManager;
+	private RenderImage renderer;
 
-	public Game(int numOfPlayers) {
+	public Game(int numOfPlayers, RenderImage renderer) {
 		setUpPlayers(numOfPlayers);
+		this.renderer = renderer;
 	}
 
 	private void setUpPlayers(int numOfPlayers) {
@@ -88,14 +91,14 @@ public class Game extends Menu {
 		int numOfPlayers = this.gameManager.getNumPlayers();
 		for (int i = -1; i < numOfPlayers - 1; i++) {
 			PlayerBoard board = new PlayerBoard(i, numOfPlayers,
-					this.gameManager.getPlayer((numOfPlayers + i) % numOfPlayers));
+					this.gameManager.getPlayer((numOfPlayers + i) % numOfPlayers),renderer);
 			boards.add(board);
 		}
 	}
 
 	private void setUpCardSlots() {		
 		this.handManager = new HandManager();
-		this.handManager.drawCurrentPlayerCards(this.gameManager.getCurrentPlayer());
+		this.handManager.drawCurrentPlayerCards(this.gameManager.getCurrentPlayer(),renderer);
 		for (int i = 0; i < this.handManager.getPlayerHandSize(); i++) {
 			this.addInteractable(this.handManager.getCardHolder(i));
 		}
@@ -140,7 +143,7 @@ public class Game extends Menu {
 			for(Interactable toRemove: this.handManager.getCurrentPlayerHand()){
 				this.removeInteractable(toRemove);
 			}
-			this.handManager.drawCurrentPlayerCards(this.gameManager.getCurrentPlayer());
+			this.handManager.drawCurrentPlayerCards(this.gameManager.getCurrentPlayer(),renderer);
 			for (int i = 0; i < this.handManager.getPlayerHandSize(); i++) {
 				this.addInteractable(this.handManager.getCardHolder(i));
 			}
