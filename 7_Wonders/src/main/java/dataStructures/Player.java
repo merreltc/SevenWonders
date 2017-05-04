@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import dataStructures.Effect.EffectType;
+import dataStructures.GeneralEnums.Good;
 import dataStructures.GeneralEnums.Resource;
 import exceptions.InsufficientFundsException;
 
@@ -186,5 +187,17 @@ public class Player {
 
 	public void removeCurrentTrades() {
 		this.currentTrades.clear();
+	}
+
+	public boolean storagePileContainsGood(Good good) {
+		for(Card storage: this.storagePile){
+			if(storage.getEffectType().equals(EffectType.ENTITY)){
+				EntityEffect effect = (EntityEffect) storage.getEffect();
+				if(effect.getEntities().containsKey(good)){
+					return true;
+				}
+			}
+		}
+		return false;
 	}
 }

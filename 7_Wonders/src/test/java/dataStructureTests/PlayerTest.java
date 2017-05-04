@@ -446,5 +446,20 @@ public class PlayerTest {
 		assertTrue(player.getCurrentTrades().isEmpty());
 		assertEquals(HashMap.class, player.getCurrentTrades().getClass());
 	}
+	
+	@Test
+	public void testStoragePileContainsGood() {
+		Player player = new Player("Jane Doe");
+		ArrayList<Card> deckCards = new SetUpDeckHandler().createCards(Age.AGE1, 3);
+		
+		ArrayList<Card> playerCards = new ArrayList<Card>();
+		playerCards.add(deckCards.get(6));
+		playerCards.add(deckCards.get(7));
+		playerCards.add(deckCards.get(8));
+		
+		player.setStoragePile(playerCards);
+		
+		assertTrue(player.storagePileContainsGood(Good.GLASS));
+	}
 
 }
