@@ -305,4 +305,34 @@ public class PlayerTurnHandlerTest {
 		playerTurnHandler.buildStructure(current, current.getCurrentHand().get(0));
 		fail();
 	}
+	
+	@Test
+	public void testDiscardSelectedCard() {
+		ArrayList<Player> players = new ArrayList<Player>();
+		players.add(new Player("Wolverine"));
+		players.add(new Player("Captain America"));
+		players.add(new Player("Black Widow"));
+		
+		ArrayList<Card> cards = new SetUpDeckHandler().createCards(Age.AGE2, 3);
+		Deck deck = new Deck(Age.AGE2, cards);
+		
+		GameBoard board = new GameBoard(players, deck);
+		
+		Player current = board.getCurrentPlayer();
+		ArrayList<Card> currentHand = new ArrayList<Card>();
+		
+		Card discarded = deck.getCard(3);
+		currentHand.add(discarded); //foundry
+		currentHand.add(deck.getCard(6)); //press
+		currentHand.add(deck.getCard(18)); //Dispensary
+		current.setCurrentHand(currentHand);
+		
+		PlayerTurnHandler playerTurnHandler = new PlayerTurnHandler();
+		playerTurnHandler.discardSelectedCard(current, discarded, board);
+		
+		assertEquals(1, board.getDiscardPile().size());
+		assertTrue(board.getDiscardPile().contains(discarded));
+		assertEquals(2, current.getCurrentHand().size());
+		assertFalse(current.getCurrentHand().contains(discarded));
+	}
 }

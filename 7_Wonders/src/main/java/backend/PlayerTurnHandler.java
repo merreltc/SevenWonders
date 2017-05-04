@@ -8,6 +8,7 @@ import dataStructures.Cost.CostType;
 import dataStructures.Effect;
 import dataStructures.Effect.EffectType;
 import dataStructures.EntityEffect;
+import dataStructures.GameBoard;
 import dataStructures.Player;
 import exceptions.InsufficientFundsException;
 
@@ -49,6 +50,11 @@ public class PlayerTurnHandler {
 				throw new InsufficientFundsException("Player doesn't not have the required items to build the structure");
 			}
 		}
+	}
+
+	public void discardSelectedCard(Player player, Card card, GameBoard board) {
+		board.addToDiscardPile(card);
+		player.removeFromCurrentHand(card);
 	}
 
 }
