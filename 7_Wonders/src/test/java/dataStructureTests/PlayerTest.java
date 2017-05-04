@@ -411,5 +411,16 @@ public class PlayerTest {
 		assertTrue(player.getCurrentTrades().containsKey(Resource.LUMBER));
 		assertEquals(1, (int) player.getCurrentTrades().get(Resource.LUMBER));
 	}
+	
+	@Test
+	public void testAddMultipleSameTraded() {
+		Player player = new Player("Jane Doe");
+		
+		player.addTradedValue(Resource.LUMBER);
+		player.addTradedValue(Resource.LUMBER);
+		assertFalse(player.getCurrentTrades().isEmpty());
+		assertTrue(player.getCurrentTrades().containsKey(Resource.LUMBER));
+		assertEquals(2, (int) player.getCurrentTrades().get(Resource.LUMBER));
+	}
 
 }
