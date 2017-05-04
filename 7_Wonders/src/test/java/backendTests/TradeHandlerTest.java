@@ -374,4 +374,29 @@ public class TradeHandlerTest {
 		assertEquals(1, (int) current.getCurrentTrades().get(Resource.LUMBER));
 		assertEquals(6, next.getCoinTotal());
 	}
+	
+	@Test(expected = InvalidTradeException.class)
+	public void testInvalidTrade3CoinsForSingleLumberResource(){
+		ArrayList<Player> players = new ArrayList<Player>();
+		players.add(new Player("Wolverine"));
+		players.add(new Player("Captain America"));
+		players.add(new Player("Black Widow"));
+
+		ArrayList<Card> cards = new SetUpDeckHandler().createCards(Age.AGE1, 3);
+		Deck deck = new Deck(Age.AGE1, cards);
+		
+		GameBoard board = new GameBoard(players, deck);
+		TradeHandler tradeHandler = new TradeHandler(board);
+		
+		Player current = board.getCurrentPlayer();
+		Player next = board.getNextPlayer();
+		ArrayList<Card> storage = new ArrayList<Card>();
+		storage.add(deck.getCard(0));
+		storage.add(deck.getCard(1));
+		
+		next.setStoragePile(storage);
+		
+		tradeHandler.tradeFromToForResource(current, next, Resource.ORE);
+		fail();
+	}
 }

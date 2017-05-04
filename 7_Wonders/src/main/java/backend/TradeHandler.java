@@ -64,6 +64,8 @@ public class TradeHandler {
 		if(to.storagePileContainsResource(resource)){
 			this.tradeCoinsFromTo(from, to, 3);
 			from.addTradedValue(resource);
+		}else{
+			throw new InvalidTradeException("Player doesn't have the resource for trading");
 		}
 	}
 }
