@@ -26,7 +26,7 @@ import guiMain.Menus.Menu;
 import guiMain.Menus.PlayerSelect;
 
 public class GuiMainMenu extends JPanel implements ActionListener {
-	
+
 	private Menu current;
 	private JFrame frame;
 	private Timer timer;
@@ -60,7 +60,7 @@ public class GuiMainMenu extends JPanel implements ActionListener {
 	@Override
 	public void paintComponent(Graphics graphics) {
 		graphics.setColor(Color.RED);
-		
+
 		RenderImage.draw(graphics, image, 0, 0, Constants.FrameWidth, Constants.FrameHeight);
 		this.current.draw(graphics);
 	}
@@ -84,7 +84,7 @@ public class GuiMainMenu extends JPanel implements ActionListener {
 	}
 
 	public void switchMenu(MenuType menu) {
-		
+
 		switch (menu) {
 		case MainMenu:
 			this.current = new MainMenu();
@@ -95,13 +95,12 @@ public class GuiMainMenu extends JPanel implements ActionListener {
 		case Game:
 			this.current = new Game(this.numOfPlayers);
 			break;
-		}	
+		}
 		this.current.initialize();
 	}
 
 	public ArrayList<Interactable> getActiveButtons() {
 		return this.current.getInteractables();
-		
 	}
 
 	public JFrame getFrame() {
@@ -113,7 +112,7 @@ public class GuiMainMenu extends JPanel implements ActionListener {
 	}
 
 	public static void main(String[] args) {
-		GuiMainMenu menu = new GuiMainMenu();
+		new GuiMainMenu();
 	}
 
 }

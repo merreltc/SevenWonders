@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import dataStructures.Effect.EffectType;
-import dataStructures.GeneralEnums.Good;
-import dataStructures.GeneralEnums.Resource;
 import exceptions.InsufficientFundsException;
 
 public class Player {
@@ -15,14 +13,17 @@ public class Player {
 	private int numOfValue1Coins = 3;
 	private int numOfValue3Coins = 0;
 	private int conflictTotal = 0;
+	private Wonder wonder;
 	
 	private ArrayList<Card> currentHand = new ArrayList<Card>();
 	private ArrayList<Card> storagePile = new ArrayList<Card>();
 	
 	private HashMap<Enum, Integer> currentTrades = new HashMap<Enum, Integer>();
 
-	public Player(String playerName) {
+	
+	public Player(String playerName, Wonder.WonderType wonder){
 		this.name = playerName;
+		this.wonder = new Wonder('A', wonder);
 	}
 
 	public void addValue1(int numCoinsToAdd) {
@@ -195,5 +196,9 @@ public class Player {
 
 	public void removeFromCurrentHand(Card card) {
 		this.currentHand.remove(card);
+	}
+
+	public Wonder getWonder(){
+		return wonder;
 	}
 }

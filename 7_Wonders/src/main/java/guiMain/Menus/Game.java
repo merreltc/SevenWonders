@@ -4,11 +4,13 @@ import java.awt.Graphics;
 import java.awt.Point;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 
 import javax.swing.JOptionPane;
 
 import backend.GameManager;
 import dataStructures.Player;
+import dataStructures.Wonder;
 import exceptions.InsufficientFundsException;
 import guiDataStructures.Constants;
 import guiMain.GuiTradeHelper;
@@ -29,17 +31,20 @@ public class Game extends Menu {
 	}
 
 	private void setUpPlayers(int numOfPlayers) {
-		ArrayList<String> players = new ArrayList<String>();
-		ArrayList<Object> wonders = new ArrayList<>(Arrays.asList("Halikarnassos", "Gizah", "Byzantium", "Alexandria",
-				"Petra", "Ephesos", "Olympia", "Rhodos", "Babylon"));
+		HashMap<String, Wonder.WonderType> playersAndWonders = new HashMap<String, Wonder.WonderType>();
+		ArrayList<Wonder.WonderType> wonders = new ArrayList<Wonder.WonderType>(
+				Arrays.asList(Wonder.WonderType.COLOSSUS, Wonder.WonderType.GARDENS, Wonder.WonderType.LIGHTHOUSE, 
+					Wonder.WonderType.MAUSOLEUM, Wonder.WonderType.PYRAMIDS, Wonder.WonderType.STATUE, Wonder.WonderType.TEMPLE));
+		
 		for (int i = 0; i < numOfPlayers; i++) {
 			String name = Message.inputPlayerNameMessage(i);
-			players.add(name);
-			String wonder = Message.dropDownWonderSelectionMessage(wonders.toArray());
+			Wonder.WonderType wonder = Message.dropDownWonderSelectionMessage((Wonder.WonderType[]) wonders.toArray());
+			playersAndWonders.put(name, wonder);
 			wonders.remove(wonder);
 			/*Set wonder to correct values*/
 		}
-		this.gameManager = new GameManager(players);
+		
+		this.gameManager = new GameManager(playersAndWonders);
 		this.gameManager.dealInitialTurnCards();
 	}
 

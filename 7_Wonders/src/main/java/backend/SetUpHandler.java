@@ -1,15 +1,16 @@
 package backend;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
-import dataStructures.GameBoard;
 import dataStructures.Player;
+import dataStructures.Wonder;
 
 public class SetUpHandler {
 
-	public ArrayList<Player> setUpAndReturnPlayers(ArrayList<String> playerNames) {
-		validatePlayerNum(playerNames.size());
-		return createPlayers(playerNames);
+	public ArrayList<Player> setUpAndReturnPlayers(HashMap<String, Wonder.WonderType> playerNamesAndWonders) {
+		validatePlayerNum(playerNamesAndWonders.size());
+		return createPlayers(playerNamesAndWonders);
 	}
 
 	public boolean validatePlayerNum(int num) {
@@ -20,11 +21,11 @@ public class SetUpHandler {
 		return true;
 	}
 
-	public ArrayList<Player> createPlayers(ArrayList<String> playerNames) {
+	public ArrayList<Player> createPlayers(HashMap<String, Wonder.WonderType> playerNamesAndWonders) {
 		ArrayList<Player> players = new ArrayList<Player>();
 		
-		for(int i = 0; i < playerNames.size(); i++){
-			players.add(new Player(playerNames.get(i)));
+		for(String playerName : playerNamesAndWonders.keySet()) {
+			players.add(new Player(playerName, playerNamesAndWonders.get(playerName)));
 		}
 		
 		return players;

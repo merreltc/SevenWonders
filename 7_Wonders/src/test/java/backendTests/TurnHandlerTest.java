@@ -3,6 +3,7 @@ package backendTests;
 import static org.junit.Assert.assertEquals;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -14,15 +15,16 @@ import backend.TurnHandler;
 import dataStructures.Card;
 import dataStructures.Deck;
 import dataStructures.Player;
+import dataStructures.Wonder;
 
 public class TurnHandlerTest {
 
 	@Test
 	public void testDealInitialCards3Players() {
-		ArrayList<String> playerNames = new ArrayList<String>();
-		playerNames.add("Wolverine");
-		playerNames.add("Captain America");
-		playerNames.add("Black Widow");
+		HashMap<String, Wonder.WonderType> playerNames = new HashMap<String, Wonder.WonderType>();
+		playerNames.put("Wolverine", Wonder.WonderType.COLOSSUS);
+		playerNames.put("Captain America",Wonder.WonderType.LIGHTHOUSE);
+		playerNames.put("Black Widow",Wonder.WonderType.TEMPLE);
 		GameManager manager = new GameManager(playerNames, new SetUpHandler(), new SetUpDeckHandler(), new TurnHandler());
 		
 		Deck deck = manager.getGameBoard().getDeck();
@@ -39,14 +41,14 @@ public class TurnHandlerTest {
 	
 	@Test
 	public void testDealInitialCards7Players() {
-		ArrayList<String> playerNames = new ArrayList<String>();
-		playerNames.add("Wolverine");
-		playerNames.add("Captain America");
-		playerNames.add("Black Widow");
-		playerNames.add("Hulk");
-		playerNames.add("Iron Man");
-		playerNames.add("Spider Man");
-		playerNames.add("Thor");
+		HashMap<String, Wonder.WonderType> playerNames = new HashMap<String, Wonder.WonderType>();
+		playerNames.put("Wolverine", Wonder.WonderType.COLOSSUS);
+		playerNames.put("Captain America",Wonder.WonderType.LIGHTHOUSE);
+		playerNames.put("Black Widow",Wonder.WonderType.TEMPLE);
+		playerNames.put("Hulk", Wonder.WonderType.STATUE);
+		playerNames.put("Iron Man",Wonder.WonderType.PYRAMIDS);
+		playerNames.put("Spider Man", Wonder.WonderType.GARDENS);
+		playerNames.put("Thor", Wonder.WonderType.MAUSOLEUM);
 		GameManager manager = new GameManager(playerNames, new SetUpHandler(), new SetUpDeckHandler(), new TurnHandler());
 		
 		Deck deck = manager.getGameBoard().getDeck();
@@ -64,12 +66,12 @@ public class TurnHandlerTest {
 	
 	@Test
 	public void testDealInitialCards5PlayersNotSame() {
-		ArrayList<String> playerNames = new ArrayList<String>();
-		playerNames.add("Wolverine");
-		playerNames.add("Captain America");
-		playerNames.add("Black Widow");
-		playerNames.add("Hulk");
-		playerNames.add("Iron Man");
+		HashMap<String, Wonder.WonderType> playerNames = new HashMap<String, Wonder.WonderType>();
+		playerNames.put("Wolverine", Wonder.WonderType.COLOSSUS);
+		playerNames.put("Captain America",Wonder.WonderType.LIGHTHOUSE);
+		playerNames.put("Black Widow",Wonder.WonderType.TEMPLE);
+		playerNames.put("Hulk", Wonder.WonderType.STATUE);
+		playerNames.put("Iron Man",Wonder.WonderType.PYRAMIDS);
 
 		GameManager manager = new GameManager(playerNames, new SetUpHandler(), new SetUpDeckHandler(), new TurnHandler());
 		

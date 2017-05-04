@@ -4,6 +4,7 @@ import java.awt.Graphics;
 
 import javax.swing.JOptionPane;
 
+import dataStructures.Wonder;
 import guiDataStructures.Constants;
 
 public class Message {
@@ -20,9 +21,13 @@ public class Message {
 		return name;
 	}
 
-	public static String dropDownWonderSelectionMessage(Object[] wonders) {
-		String result = (String) JOptionPane.showInputDialog(null, "Choose your Wonder", "Wonder Selector", JOptionPane.PLAIN_MESSAGE, null,
-				wonders, wonders[0]);
-		return result;
+	public static Wonder.WonderType dropDownWonderSelectionMessage(Wonder.WonderType[] wonders) {
+		return (Wonder.WonderType) JOptionPane.showInputDialog(null,
+				"Choose your Wonder",
+				"Wonder Selector",
+				JOptionPane.PLAIN_MESSAGE,
+				null,
+				wonders,
+				wonders[0]);
 	}
 }

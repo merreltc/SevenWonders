@@ -11,6 +11,7 @@ import dataStructures.Card;
 import dataStructures.Deck;
 import dataStructures.GameBoard;
 import dataStructures.Player;
+import dataStructures.Wonder.WonderType;
 import dataStructures.Deck.Age;
 
 public class GameBoardTests {
@@ -18,9 +19,9 @@ public class GameBoardTests {
 	@Test
 	public void testGameBoardGMinPlayers() {
 		ArrayList<Player> players = new ArrayList<Player>();
-		players.add(new Player("Jane Doe"));
-		players.add(new Player("Jane Doe"));
-		players.add(new Player("Jane Doe"));
+		players.add(new Player("Jane Doe", WonderType.COLOSSUS));
+		players.add(new Player("Jane Doe", WonderType.LIGHTHOUSE));
+		players.add(new Player("Jane Doe", WonderType.PYRAMIDS));
 
 		ArrayList<Card> cards = new SetUpDeckHandler().createCards(Age.AGE1, 3);
 		Deck deck = new Deck(Age.AGE1, cards);
@@ -33,13 +34,14 @@ public class GameBoardTests {
 	@Test
 	public void testGameBoardMaxPlayers() {
 		ArrayList<Player> players = new ArrayList<Player>();
-		players.add(new Player("Jane Doe"));
-		players.add(new Player("Jane Doe"));
-		players.add(new Player("Jane Doe"));
-		players.add(new Player("Jane Doe"));
-		players.add(new Player("Jane Doe"));
-		players.add(new Player("Jane Doe"));
-		players.add(new Player("Jane Doe"));
+		players.add(new Player("Jane Doe", WonderType.COLOSSUS));
+		players.add(new Player("Jane Doe", WonderType.LIGHTHOUSE));
+		players.add(new Player("Jane Doe", WonderType.PYRAMIDS));
+		players.add(new Player("Jane Doe", WonderType.TEMPLE));
+		players.add(new Player("Jane Doe", WonderType.MAUSOLEUM));
+		players.add(new Player("Jane Doe", WonderType.STATUE));
+		players.add(new Player("Jane Doe", WonderType.GARDENS));
+
 
 		ArrayList<Card> cards = new SetUpDeckHandler().createCards(Age.AGE1, 3);
 		Deck deck = new Deck(Age.AGE1, cards);
@@ -52,9 +54,9 @@ public class GameBoardTests {
 	@Test
 	public void testGameBoardGetPlayers() {
 		ArrayList<Player> players = new ArrayList<Player>();
-		players.add(new Player("Jane Doe"));
-		players.add(new Player("Jane Doe"));
-		players.add(new Player("Jane Doe"));
+		players.add(new Player("Jane Doe", WonderType.COLOSSUS));
+		players.add(new Player("Jane Doe", WonderType.LIGHTHOUSE));
+		players.add(new Player("Jane Doe", WonderType.PYRAMIDS));
 
 		ArrayList<Card> cards = new SetUpDeckHandler().createCards(Age.AGE1, 3);
 		Deck deck = new Deck(Age.AGE1, cards);
@@ -67,9 +69,9 @@ public class GameBoardTests {
 	@Test
 	public void testGameBoardGetPlayerByIndex() {
 		ArrayList<Player> players = new ArrayList<Player>();
-		players.add(new Player("Wolverine"));
-		players.add(new Player("Captain America"));
-		players.add(new Player("Black Widow"));
+		players.add(new Player("Wolverine", WonderType.COLOSSUS));
+		players.add(new Player("Captain America", WonderType.LIGHTHOUSE));
+		players.add(new Player("Black Widow", WonderType.PYRAMIDS));
 
 		ArrayList<Card> cards = new SetUpDeckHandler().createCards(Age.AGE1, 3);
 		Deck deck = new Deck(Age.AGE1, cards);
@@ -84,9 +86,9 @@ public class GameBoardTests {
 	@Test
 	public void testGameBoardGetPlayerCoinTotalOnStart() {
 		ArrayList<Player> players = new ArrayList<Player>();
-		players.add(new Player("Wolverine"));
-		players.add(new Player("Captain America"));
-		players.add(new Player("Black Widow"));
+		players.add(new Player("Wolverine", WonderType.COLOSSUS));
+		players.add(new Player("Captain America", WonderType.LIGHTHOUSE));
+		players.add(new Player("Black Widow", WonderType.PYRAMIDS));
 
 		ArrayList<Card> cards = new SetUpDeckHandler().createCards(Age.AGE1, 3);
 		Deck deck = new Deck(Age.AGE1, cards);
@@ -101,9 +103,9 @@ public class GameBoardTests {
 	@Test
 	public void testGetPlayerPositionsOnStartMin() {
 		ArrayList<Player> players = new ArrayList<Player>();
-		players.add(new Player("Wolverine"));
-		players.add(new Player("Captain America"));
-		players.add(new Player("Black Widow"));
+		players.add(new Player("Wolverine", WonderType.COLOSSUS));
+		players.add(new Player("Captain America", WonderType.LIGHTHOUSE));
+		players.add(new Player("Black Widow", WonderType.PYRAMIDS));
 
 		ArrayList<Card> cards = new SetUpDeckHandler().createCards(Age.AGE1, 3);
 		Deck deck = new Deck(Age.AGE1, cards);
@@ -116,13 +118,13 @@ public class GameBoardTests {
 	@Test
 	public void testGetPlayerPositionsOnStartMax() {
 		ArrayList<Player> players = new ArrayList<Player>();
-		players.add(new Player("Wolverine"));
-		players.add(new Player("Captain America"));
-		players.add(new Player("Black Widow"));
-		players.add(new Player("Hulk"));
-		players.add(new Player("Iron Man"));
-		players.add(new Player("Spider Man"));
-		players.add(new Player("Thor"));
+		players.add(new Player("Wolverine", WonderType.COLOSSUS));
+		players.add(new Player("Captain America", WonderType.LIGHTHOUSE));
+		players.add(new Player("Black Widow", WonderType.PYRAMIDS));
+		players.add(new Player("Hulk", WonderType.TEMPLE));
+		players.add(new Player("Iron Man", WonderType.MAUSOLEUM));
+		players.add(new Player("Spider Man", WonderType.STATUE));
+		players.add(new Player("Thor", WonderType.GARDENS));
 
 		ArrayList<Card> cards = new SetUpDeckHandler().createCards(Age.AGE1, 3);
 		Deck deck = new Deck(Age.AGE1, cards);
@@ -142,11 +144,11 @@ public class GameBoardTests {
 	@Test
 	public void testSetCurrentPlayerValid() {
 		ArrayList<Player> players = new ArrayList<Player>();
-		players.add(new Player("Wolverine"));
-		players.add(new Player("Captain America"));
-		players.add(new Player("Black Widow"));
-		players.add(new Player("Hulk"));
-		players.add(new Player("Iron Man"));
+		players.add(new Player("Wolverine", WonderType.COLOSSUS));
+		players.add(new Player("Captain America", WonderType.LIGHTHOUSE));
+		players.add(new Player("Black Widow", WonderType.PYRAMIDS));
+		players.add(new Player("Hulk", WonderType.TEMPLE));
+		players.add(new Player("Iron Man", WonderType.MAUSOLEUM));
 
 		ArrayList<Card> cards = new SetUpDeckHandler().createCards(Age.AGE1, 3);
 		Deck deck = new Deck(Age.AGE1, cards);
@@ -160,11 +162,11 @@ public class GameBoardTests {
 	@Test(expected = IllegalArgumentException.class)
 	public void testSetCurrentPlayerInvalidNeg1() {
 		ArrayList<Player> players = new ArrayList<Player>();
-		players.add(new Player("Wolverine"));
-		players.add(new Player("Captain America"));
-		players.add(new Player("Black Widow"));
-		players.add(new Player("Hulk"));
-		players.add(new Player("Iron Man"));
+		players.add(new Player("Wolverine", WonderType.COLOSSUS));
+		players.add(new Player("Captain America", WonderType.LIGHTHOUSE));
+		players.add(new Player("Black Widow", WonderType.PYRAMIDS));
+		players.add(new Player("Hulk", WonderType.TEMPLE));
+		players.add(new Player("Iron Man", WonderType.MAUSOLEUM));
 
 		ArrayList<Card> cards = new SetUpDeckHandler().createCards(Age.AGE1, 3);
 		Deck deck = new Deck(Age.AGE1, cards);
@@ -177,11 +179,11 @@ public class GameBoardTests {
 	@Test(expected = IllegalArgumentException.class)
 	public void testSetCurrentPlayerInvalidMaxPlus1() {
 		ArrayList<Player> players = new ArrayList<Player>();
-		players.add(new Player("Wolverine"));
-		players.add(new Player("Captain America"));
-		players.add(new Player("Black Widow"));
-		players.add(new Player("Hulk"));
-		players.add(new Player("Iron Man"));
+		players.add(new Player("Wolverine", WonderType.COLOSSUS));
+		players.add(new Player("Captain America", WonderType.LIGHTHOUSE));
+		players.add(new Player("Black Widow", WonderType.PYRAMIDS));
+		players.add(new Player("Hulk", WonderType.TEMPLE));
+		players.add(new Player("Iron Man", WonderType.MAUSOLEUM));
 
 		ArrayList<Card> cards = new SetUpDeckHandler().createCards(Age.AGE1, 3);
 		Deck deck = new Deck(Age.AGE1, cards);
@@ -194,11 +196,11 @@ public class GameBoardTests {
 	@Test
 	public void testSetNextPlayerValid() {
 		ArrayList<Player> players = new ArrayList<Player>();
-		players.add(new Player("Wolverine"));
-		players.add(new Player("Captain America"));
-		players.add(new Player("Black Widow"));
-		players.add(new Player("Hulk"));
-		players.add(new Player("Iron Man"));
+		players.add(new Player("Wolverine", WonderType.COLOSSUS));
+		players.add(new Player("Captain America", WonderType.LIGHTHOUSE));
+		players.add(new Player("Black Widow", WonderType.PYRAMIDS));
+		players.add(new Player("Hulk", WonderType.TEMPLE));
+		players.add(new Player("Iron Man", WonderType.MAUSOLEUM));
 
 		ArrayList<Card> cards = new SetUpDeckHandler().createCards(Age.AGE1, 3);
 		Deck deck = new Deck(Age.AGE1, cards);
@@ -212,11 +214,11 @@ public class GameBoardTests {
 	@Test(expected = IllegalArgumentException.class)
 	public void testSetNextPlayerInvalidNeg1() {
 		ArrayList<Player> players = new ArrayList<Player>();
-		players.add(new Player("Wolverine"));
-		players.add(new Player("Captain America"));
-		players.add(new Player("Black Widow"));
-		players.add(new Player("Hulk"));
-		players.add(new Player("Iron Man"));
+		players.add(new Player("Wolverine", WonderType.COLOSSUS));
+		players.add(new Player("Captain America", WonderType.LIGHTHOUSE));
+		players.add(new Player("Black Widow", WonderType.PYRAMIDS));
+		players.add(new Player("Hulk", WonderType.TEMPLE));
+		players.add(new Player("Iron Man", WonderType.MAUSOLEUM));
 
 		ArrayList<Card> cards = new SetUpDeckHandler().createCards(Age.AGE1, 3);
 		Deck deck = new Deck(Age.AGE1, cards);
@@ -229,11 +231,11 @@ public class GameBoardTests {
 	@Test(expected = IllegalArgumentException.class)
 	public void testSetNextPlayerInvalidMaxPlus1() {
 		ArrayList<Player> players = new ArrayList<Player>();
-		players.add(new Player("Wolverine"));
-		players.add(new Player("Captain America"));
-		players.add(new Player("Black Widow"));
-		players.add(new Player("Hulk"));
-		players.add(new Player("Iron Man"));
+		players.add(new Player("Wolverine", WonderType.COLOSSUS));
+		players.add(new Player("Captain America", WonderType.LIGHTHOUSE));
+		players.add(new Player("Black Widow", WonderType.PYRAMIDS));
+		players.add(new Player("Hulk", WonderType.TEMPLE));
+		players.add(new Player("Iron Man", WonderType.MAUSOLEUM));
 
 		ArrayList<Card> cards = new SetUpDeckHandler().createCards(Age.AGE1, 3);
 		Deck deck = new Deck(Age.AGE1, cards);
@@ -246,11 +248,11 @@ public class GameBoardTests {
 	@Test
 	public void testSetPreviousPlayerValid() {
 		ArrayList<Player> players = new ArrayList<Player>();
-		players.add(new Player("Wolverine"));
-		players.add(new Player("Captain America"));
-		players.add(new Player("Black Widow"));
-		players.add(new Player("Hulk"));
-		players.add(new Player("Iron Man"));
+		players.add(new Player("Wolverine", WonderType.COLOSSUS));
+		players.add(new Player("Captain America", WonderType.LIGHTHOUSE));
+		players.add(new Player("Black Widow", WonderType.PYRAMIDS));
+		players.add(new Player("Hulk", WonderType.TEMPLE));
+		players.add(new Player("Iron Man", WonderType.MAUSOLEUM));
 
 		ArrayList<Card> cards = new SetUpDeckHandler().createCards(Age.AGE1, 3);
 		Deck deck = new Deck(Age.AGE1, cards);
@@ -264,11 +266,11 @@ public class GameBoardTests {
 	@Test(expected = IllegalArgumentException.class)
 	public void testSetPreviousPlayerInvalidNeg1() {
 		ArrayList<Player> players = new ArrayList<Player>();
-		players.add(new Player("Wolverine"));
-		players.add(new Player("Captain America"));
-		players.add(new Player("Black Widow"));
-		players.add(new Player("Hulk"));
-		players.add(new Player("Iron Man"));
+		players.add(new Player("Wolverine", WonderType.COLOSSUS));
+		players.add(new Player("Captain America", WonderType.LIGHTHOUSE));
+		players.add(new Player("Black Widow", WonderType.PYRAMIDS));
+		players.add(new Player("Hulk", WonderType.TEMPLE));
+		players.add(new Player("Iron Man", WonderType.MAUSOLEUM));
 
 		ArrayList<Card> cards = new SetUpDeckHandler().createCards(Age.AGE1, 3);
 		Deck deck = new Deck(Age.AGE1, cards);
@@ -281,12 +283,12 @@ public class GameBoardTests {
 	@Test(expected = IllegalArgumentException.class)
 	public void testSetPreviousPlayerInvalidMaxPlus1() {
 		ArrayList<Player> players = new ArrayList<Player>();
-		players.add(new Player("Wolverine"));
-		players.add(new Player("Captain America"));
-		players.add(new Player("Black Widow"));
-		players.add(new Player("Hulk"));
-		players.add(new Player("Iron Man"));
-
+		players.add(new Player("Wolverine", WonderType.COLOSSUS));
+		players.add(new Player("Captain America", WonderType.LIGHTHOUSE));
+		players.add(new Player("Black Widow", WonderType.PYRAMIDS));
+		players.add(new Player("Hulk", WonderType.TEMPLE));
+		players.add(new Player("Iron Man", WonderType.MAUSOLEUM));
+		
 		ArrayList<Card> cards = new SetUpDeckHandler().createCards(Age.AGE1, 3);
 		Deck deck = new Deck(Age.AGE1, cards);
 
@@ -298,11 +300,11 @@ public class GameBoardTests {
 	@Test
 	public void testGetPlayerPositionIndexes(){
 		ArrayList<Player> players = new ArrayList<Player>();
-		players.add(new Player("Wolverine"));
-		players.add(new Player("Captain America"));
-		players.add(new Player("Black Widow"));
-		players.add(new Player("Hulk"));
-		players.add(new Player("Iron Man"));
+		players.add(new Player("Wolverine", WonderType.COLOSSUS));
+		players.add(new Player("Captain America", WonderType.LIGHTHOUSE));
+		players.add(new Player("Black Widow", WonderType.PYRAMIDS));
+		players.add(new Player("Hulk", WonderType.TEMPLE));
+		players.add(new Player("Iron Man", WonderType.MAUSOLEUM));
 		
 		ArrayList<Card> cards = new SetUpDeckHandler().createCards(Age.AGE1, 3);
 		Deck deck = new Deck(Age.AGE1, cards);
@@ -317,11 +319,11 @@ public class GameBoardTests {
 	@Test
 	public void testGetDeck() {
 		ArrayList<Player> players = new ArrayList<Player>();
-		players.add(new Player("Wolverine"));
-		players.add(new Player("Captain America"));
-		players.add(new Player("Black Widow"));
-		players.add(new Player("Hulk"));
-		players.add(new Player("Iron Man"));
+		players.add(new Player("Wolverine", WonderType.COLOSSUS));
+		players.add(new Player("Captain America", WonderType.LIGHTHOUSE));
+		players.add(new Player("Black Widow", WonderType.PYRAMIDS));
+		players.add(new Player("Hulk", WonderType.TEMPLE));
+		players.add(new Player("Iron Man", WonderType.MAUSOLEUM));
 		
 		ArrayList<Card> cards = new SetUpDeckHandler().createCards(Age.AGE1, 3);
 		Deck deck = new Deck(Age.AGE1, cards);
