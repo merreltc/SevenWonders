@@ -13,11 +13,12 @@ public class Player {
 	private int numOfValue1Coins = 3;
 	private int numOfValue3Coins = 0;
 	private int conflictTotal = 0;
+
 	private Wonder wonder;
-	
+
 	private ArrayList<Card> currentHand = new ArrayList<Card>();
 	private ArrayList<Card> storagePile = new ArrayList<Card>();
-	
+
 	private HashMap<Enum, Integer> currentTrades = new HashMap<Enum, Integer>();
 
 	
@@ -161,12 +162,12 @@ public class Player {
 	public void setStoragePile(ArrayList<Card> storagePile) {
 		this.storagePile = storagePile;
 	}
-	
+
 	public boolean storagePileContainsEntity(Enum entity) {
-		for(Card storage: this.storagePile){
-			if(storage.getEffectType().equals(EffectType.ENTITY)){
+		for (Card storage : this.storagePile) {
+			if (storage.getEffectType().equals(EffectType.ENTITY)) {
 				EntityEffect effect = (EntityEffect) storage.getEffect();
-				if(effect.getEntities().containsKey(entity)){
+				if (effect.getEntities().containsKey(entity)) {
 					return true;
 				}
 			}
@@ -180,7 +181,7 @@ public class Player {
 
 	public void addTradedValue(Enum trade) {
 		int value = 0;
-		if(this.currentTrades.containsKey(trade)){
+		if (this.currentTrades.containsKey(trade)) {
 			value = (int) this.currentTrades.get(trade);
 		}
 		this.currentTrades.put(trade, value + 1);
@@ -200,5 +201,18 @@ public class Player {
 
 	public Wonder getWonder(){
 		return wonder;
+	}
+
+	public void removeTotalCoins(int total) {
+		int numValue3CoinsToRemove = total / 3;
+		int numValue1CoinsToRemove = total % 3;
+
+		if (numValue3CoinsToRemove > this.numOfValue3Coins) {
+			numValue1CoinsToRemove += 3 * (numValue3CoinsToRemove - this.numOfValue3Coins);
+			numValue3CoinsToRemove = this.numOfValue3Coins;
+		}
+		
+		this.removeValue3(numValue3CoinsToRemove);
+		this.removeValue1(numValue1CoinsToRemove);
 	}
 }
