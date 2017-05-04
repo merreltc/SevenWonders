@@ -435,5 +435,16 @@ public class PlayerTest {
 		assertEquals(1, (int) player.getCurrentTrades().get(Resource.LUMBER));
 		assertEquals(1, (int) player.getCurrentTrades().get(Good.LOOM));
 	}
+	
+	@Test
+	public void testRemoveCurrentTrades() {
+		Player player = new Player("Jane Doe");
+		
+		player.addTradedValue(Resource.LUMBER);
+		player.addTradedValue(Good.LOOM);
+		player.removeCurrentTrades();
+		assertTrue(player.getCurrentTrades().isEmpty());
+		assertEquals(HashMap.class, player.getCurrentTrades().getClass());
+	}
 
 }

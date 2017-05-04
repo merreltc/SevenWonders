@@ -183,4 +183,8 @@ public class Player {
 		}
 		this.currentTrades.put(trade, value + 1);
 	}
+
+	public void removeCurrentTrades() {
+		this.currentTrades.clear();
+	}
 }
