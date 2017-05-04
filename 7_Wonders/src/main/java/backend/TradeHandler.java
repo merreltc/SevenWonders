@@ -60,10 +60,10 @@ public class TradeHandler {
 		to.addValue3(numCoinsToTrade);
 	}
 
-	public void tradeFromToForResource(Player from, Player to, Resource resource) {
-		if(to.storagePileContainsResource(resource)){
+	public void tradeFromToForEntity(Player from, Player to, Enum entity) {
+		if(to.storagePileContainsEntity(entity)){
 			this.tradeCoinsFromTo(from, to, 3);
-			from.addTradedValue(resource);
+			from.addTradedValue(entity);
 		}else{
 			throw new InvalidTradeException("Player doesn't have the resource for trading");
 		}

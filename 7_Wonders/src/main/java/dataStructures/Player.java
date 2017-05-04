@@ -160,12 +160,12 @@ public class Player {
 	public void setStoragePile(ArrayList<Card> storagePile) {
 		this.storagePile = storagePile;
 	}
-
-	public boolean storagePileContainsResource(Resource resource) {
+	
+	public boolean storagePileContainsEntity(Enum entity) {
 		for(Card storage: this.storagePile){
 			if(storage.getEffectType().equals(EffectType.ENTITY)){
 				EntityEffect effect = (EntityEffect) storage.getEffect();
-				if(effect.getEntities().containsKey(resource)){
+				if(effect.getEntities().containsKey(entity)){
 					return true;
 				}
 			}
@@ -187,17 +187,5 @@ public class Player {
 
 	public void removeCurrentTrades() {
 		this.currentTrades.clear();
-	}
-
-	public boolean storagePileContainsGood(Good good) {
-		for(Card storage: this.storagePile){
-			if(storage.getEffectType().equals(EffectType.ENTITY)){
-				EntityEffect effect = (EntityEffect) storage.getEffect();
-				if(effect.getEntities().containsKey(good)){
-					return true;
-				}
-			}
-		}
-		return false;
 	}
 }

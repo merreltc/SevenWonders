@@ -392,7 +392,7 @@ public class PlayerTest {
 		
 		player.setStoragePile(playerCards);
 		
-		assertTrue(player.storagePileContainsResource(Resource.LUMBER));
+		assertTrue(player.storagePileContainsEntity(Resource.LUMBER));
 	}
 	
 	@Test
@@ -459,7 +459,7 @@ public class PlayerTest {
 		
 		player.setStoragePile(playerCards);
 		
-		assertTrue(player.storagePileContainsGood(Good.GLASS));
+		assertTrue(player.storagePileContainsEntity(Good.GLASS));
 	}
 
 }
