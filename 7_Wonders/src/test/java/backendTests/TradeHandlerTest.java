@@ -13,6 +13,7 @@ import dataStructures.Card;
 import dataStructures.Deck;
 import dataStructures.Deck.Age;
 import dataStructures.GameBoard;
+import dataStructures.GeneralEnums.Good;
 import dataStructures.GeneralEnums.Resource;
 import dataStructures.Player;
 import exceptions.InsufficientFundsException;
@@ -368,7 +369,7 @@ public class TradeHandlerTest {
 		
 		next.setStoragePile(storage);
 		
-		tradeHandler.tradeFromToForResource(current, next, Resource.LUMBER);
+		tradeHandler.tradeFromToForEntity(current, next, Resource.LUMBER);
 		
 		assertEquals(0, current.getNumValue3Coins());
 		assertEquals(1, (int) current.getCurrentTrades().get(Resource.LUMBER));
@@ -396,7 +397,35 @@ public class TradeHandlerTest {
 		
 		next.setStoragePile(storage);
 		
-		tradeHandler.tradeFromToForResource(current, next, Resource.ORE);
+		tradeHandler.tradeFromToForEntity(current, next, Resource.ORE);
 		fail();
+	}
+	
+	@Test
+	public void testValidTrade3CoinsForSingleLoomGood(){
+		ArrayList<Player> players = new ArrayList<Player>();
+		players.add(new Player("Wolverine"));
+		players.add(new Player("Captain America"));
+		players.add(new Player("Black Widow"));
+
+		ArrayList<Card> cards = new SetUpDeckHandler().createCards(Age.AGE1, 3);
+		Deck deck = new Deck(Age.AGE1, cards);
+		
+		GameBoard board = new GameBoard(players, deck);
+		TradeHandler tradeHandler = new TradeHandler(board);
+		
+		Player current = board.getCurrentPlayer();
+		Player next = board.getNextPlayer();
+		ArrayList<Card> storage = new ArrayList<Card>();
+		storage.add(deck.getCard(7));
+		storage.add(deck.getCard(8));
+		
+		next.setStoragePile(storage);
+		
+		tradeHandler.tradeFromToForEntity(current, next, Good.GLASS);
+		
+		assertEquals(0, current.getNumValue3Coins());
+		assertEquals(1, (int) current.getCurrentTrades().get(Good.GLASS));
+		assertEquals(6, next.getCoinTotal());
 	}
 }
