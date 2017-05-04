@@ -175,4 +175,12 @@ public class Player {
 	public HashMap<Enum, Integer> getCurrentTrades() {
 		return this.currentTrades;
 	}
+
+	public void addTradedValue(Resource resource) {
+		int value = 0;
+		if(this.currentTrades.containsKey(resource)){
+			value = (int) this.currentTrades.get(resource);
+		}
+		this.currentTrades.put(resource, value + 1);
+	}
 }

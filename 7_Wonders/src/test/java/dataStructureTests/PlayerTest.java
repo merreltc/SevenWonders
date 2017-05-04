@@ -401,4 +401,15 @@ public class PlayerTest {
 		assertTrue(player.getCurrentTrades().isEmpty());
 		assertEquals(HashMap.class, player.getCurrentTrades().getClass());
 	}
+	
+	@Test
+	public void testAddTraded() {
+		Player player = new Player("Jane Doe");
+		
+		player.addTradedValue(Resource.LUMBER);
+		assertFalse(player.getCurrentTrades().isEmpty());
+		assertTrue(player.getCurrentTrades().containsKey(Resource.LUMBER));
+		assertEquals(1, (int) player.getCurrentTrades().get(Resource.LUMBER));
+	}
+
 }
