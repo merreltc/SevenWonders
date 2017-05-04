@@ -1,10 +1,9 @@
 package dataStructureTests;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
+import static org.junit.Assert.*;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import org.junit.Test;
 
@@ -394,5 +393,12 @@ public class PlayerTest {
 		
 		assertTrue(player.storagePileContainsResource(Resource.LUMBER));
 	}
-
+	
+	@Test
+	public void testDefaultCurrentTrades() {
+		Player player = new Player("Jane Doe");
+		
+		assertTrue(player.getCurrentTrades().isEmpty());
+		assertEquals(HashMap.class, player.getCurrentTrades().getClass());
+	}
 }

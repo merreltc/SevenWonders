@@ -1,6 +1,7 @@
 package dataStructures;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import dataStructures.Effect.EffectType;
 import dataStructures.GeneralEnums.Resource;
@@ -16,6 +17,8 @@ public class Player {
 	
 	private ArrayList<Card> currentHand = new ArrayList<Card>();
 	private ArrayList<Card> storagePile = new ArrayList<Card>();
+	
+	private HashMap<Enum, Integer> currentTrades = new HashMap<Enum, Integer>();
 
 	public Player(String playerName) {
 		this.name = playerName;
@@ -167,5 +170,9 @@ public class Player {
 			}
 		}
 		return false;
+	}
+
+	public HashMap<Enum, Integer> getCurrentTrades() {
+		return this.currentTrades;
 	}
 }
