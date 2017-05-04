@@ -18,14 +18,16 @@ public class PlayerTurnHandler {
 			int coinCost = card.getCost().get(CostType.COIN);
 			current.removeTotalCoins(coinCost);
 		}else if (card.getCostType() == CostType.RESOURCE){
-			validatePlayerHasResourcesForCard(current, card);
+			validatePlayerHasEntityForCard(current, card);
+		}else if (card.getCostType() == CostType.GOOD){
+			validatePlayerHasEntityForCard(current, card);
 		}
 		
 		current.addToStoragePile(card);
 		current.removeFromCurrentHand(card);
 	}
 
-	private void validatePlayerHasResourcesForCard(Player current, Card card) {
+	private void validatePlayerHasEntityForCard(Player current, Card card) {
 		HashMap<Enum, Integer> cost = card.getCost();
 		ArrayList<Card> storage = current.getStoragePile();
 		

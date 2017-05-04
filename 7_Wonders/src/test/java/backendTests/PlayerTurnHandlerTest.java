@@ -158,4 +158,29 @@ public class PlayerTurnHandlerTest {
 		assertFalse(current.getCurrentHand().contains(deck.getCard(18)));
 		assertTrue(current.getStoragePile().contains(deck.getCard(18)));
 	}
+	
+	@Test(expected = InsufficientFundsException.class)
+	public void testInvalidBuildStructureGoodCost(){
+		ArrayList<Player> players = new ArrayList<Player>();
+		players.add(new Player("Wolverine"));
+		players.add(new Player("Captain America"));
+		players.add(new Player("Black Widow"));
+		
+		ArrayList<Card> cards = new SetUpDeckHandler().createCards(Age.AGE1, 3);
+		Deck deck = new Deck(Age.AGE1, cards);
+		
+		GameBoard board = new GameBoard(players, deck);
+		
+		Player current = board.getCurrentPlayer();
+		ArrayList<Card> currentHand = new ArrayList<Card>();
+		
+		currentHand.add(deck.getCard(0)); //lumber yard
+		currentHand.add(deck.getCard(18)); //baths
+		current.setCurrentHand(currentHand);
+		
+		PlayerTurnHandler playerTurnHandler = new PlayerTurnHandler();
+		playerTurnHandler.buildStructure(current, current.getCurrentHand().get(0));
+		playerTurnHandler.buildStructure(current, current.getCurrentHand().get(0));
+		fail();
+	}
 }
