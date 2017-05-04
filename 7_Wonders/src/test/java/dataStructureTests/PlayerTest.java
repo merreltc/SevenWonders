@@ -337,6 +337,15 @@ public class PlayerTest {
 		assertEquals(1, player.getNumValue1Coins());
 		assertEquals(1, player.getCoinTotal());
 	}
+	
+	@Test
+	public void testRemoveTotalCoinsEnoughValue1NotEnoughValue3(){
+		Player player = new Player("Jane Doe");
+		player.removeTotalCoins(3);
+		
+		assertEquals(0, player.getNumValue1Coins());
+		assertEquals(0, player.getCoinTotal());
+	}
 
 	@Test
 	public void testGetDefaultCurrentHand() {
