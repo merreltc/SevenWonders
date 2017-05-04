@@ -1,6 +1,6 @@
 package dataStructureTests;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 import java.util.HashMap;
 
@@ -8,8 +8,8 @@ import org.junit.Test;
 
 import dataStructures.Cost;
 import dataStructures.Cost.CostType;
-import dataStructures.Cost.Good;
-import dataStructures.Cost.Resource;
+import dataStructures.GeneralEnums.Good;
+import dataStructures.GeneralEnums.Resource;
 
 public class CostTest {
 

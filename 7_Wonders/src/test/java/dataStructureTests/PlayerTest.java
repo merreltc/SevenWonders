@@ -11,6 +11,7 @@ import org.junit.Test;
 import backend.SetUpDeckHandler;
 import dataStructures.Card;
 import dataStructures.Deck.Age;
+import dataStructures.GeneralEnums.Resource;
 import dataStructures.Player;
 import exceptions.InsufficientFundsException;
 
@@ -377,6 +378,21 @@ public class PlayerTest {
 		assertEquals(playerCards.get(0), player.getStoragePile().get(0));
 		assertEquals(playerCards.get(1), player.getStoragePile().get(1));
 		assertEquals(playerCards.get(2), player.getStoragePile().get(2));
+	}
+	
+	@Test
+	public void testStoragePileContainsResource() {
+		Player player = new Player("Jane Doe");
+		ArrayList<Card> deckCards = new SetUpDeckHandler().createCards(Age.AGE1, 3);
+		
+		ArrayList<Card> playerCards = new ArrayList<Card>();
+		playerCards.add(deckCards.get(0));
+		playerCards.add(deckCards.get(1));
+		playerCards.add(deckCards.get(2));
+		
+		player.setStoragePile(playerCards);
+		
+		assertTrue(player.storagePileContainsResource(Resource.LUMBER));
 	}
 
 }

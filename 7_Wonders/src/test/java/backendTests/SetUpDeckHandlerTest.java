@@ -4,31 +4,29 @@ import static org.junit.Assert.assertEquals;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
-import java.io.Reader;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Set;
 
 import org.junit.Test;
 
 import backend.SetUpDeckHandler;
 import dataStructures.Card;
+import dataStructures.Card.CardType;
 import dataStructures.Cost;
 import dataStructures.Cost.CostType;
-import dataStructures.Deck.Age;
 import dataStructures.Deck;
+import dataStructures.Deck.Age;
 import dataStructures.Effect;
 import dataStructures.Effect.Direction;
 import dataStructures.Effect.EffectType;
 import dataStructures.EntityEffect;
-import dataStructures.MultiValueEffect;
 import dataStructures.EntityEffect.EntityType;
-import dataStructures.EntityEffect.Good;
-import dataStructures.EntityEffect.Resource;
-import dataStructures.EntityEffect.Science;
+import dataStructures.GeneralEnums.Good;
+import dataStructures.GeneralEnums.Resource;
+import dataStructures.GeneralEnums.Science;
+import dataStructures.MultiValueEffect;
 import dataStructures.ValueEffect;
-import dataStructures.Card.CardType;
 import dataStructures.ValueEffect.AffectingEntity;
 import dataStructures.ValueEffect.Value;
 import dataStructures.ValueEffect.ValueType;

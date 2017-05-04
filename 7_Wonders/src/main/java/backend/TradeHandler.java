@@ -1,6 +1,7 @@
 package backend;
 
 import dataStructures.GameBoard;
+import dataStructures.GeneralEnums.Resource;
 import dataStructures.Player;
 import exceptions.InvalidTradeException;
 
@@ -11,7 +12,7 @@ public class TradeHandler {
 		this.board = board;
 	}
 
-	public void tradeFromTo(Player from, Player to, int valueToTrade) {
+	public void tradeCoinsFromTo(Player from, Player to, int valueToTrade) {
 		if(to != this.board.getPreviousPlayer() && to != this.board.getNextPlayer()){
 			throw new InvalidTradeException("You cannot trade to this player");
 		}

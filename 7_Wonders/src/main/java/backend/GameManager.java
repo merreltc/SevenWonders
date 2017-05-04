@@ -49,7 +49,7 @@ public class GameManager {
 	}
 
 	public void trade(Player from, Player to, int valueToTrade) {
-		tradeHandler.tradeFromTo(from, to, valueToTrade);
+		tradeHandler.tradeCoinsFromTo(from, to, valueToTrade);
 	}
 
 	public void changeRotateDirectionAndResetPositions(Direction direction) {

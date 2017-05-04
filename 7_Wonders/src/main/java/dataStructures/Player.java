@@ -2,6 +2,8 @@ package dataStructures;
 
 import java.util.ArrayList;
 
+import dataStructures.Effect.EffectType;
+import dataStructures.GeneralEnums.Resource;
 import exceptions.InsufficientFundsException;
 
 public class Player {
@@ -153,5 +155,17 @@ public class Player {
 
 	public void setStoragePile(ArrayList<Card> storagePile) {
 		this.storagePile = storagePile;
+	}
+
+	public boolean storagePileContainsResource(Resource resource) {
+		for(Card storage: this.storagePile){
+			if(storage.getEffectType().equals(EffectType.ENTITY)){
+				EntityEffect effect = (EntityEffect) storage.getEffect();
+				if(effect.getEntities().containsKey(resource)){
+					return true;
+				}
+			}
+		}
+		return false;
 	}
 }

@@ -1,20 +1,21 @@
 package dataStructureTests;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+
 import java.util.HashMap;
-import java.util.HashSet;
 
 import org.easymock.EasyMock;
 import org.junit.Test;
 
 import dataStructures.Cost;
 import dataStructures.Cost.CostType;
-import dataStructures.Cost.Resource;
 import dataStructures.Effect;
 import dataStructures.Effect.Direction;
 import dataStructures.Effect.EffectType;
 import dataStructures.EntityEffect;
 import dataStructures.EntityEffect.EntityType;
+import dataStructures.GeneralEnums.Resource;
 import dataStructures.Level;
 import dataStructures.Level.Frequency;
 import dataStructures.MultiValueEffect;

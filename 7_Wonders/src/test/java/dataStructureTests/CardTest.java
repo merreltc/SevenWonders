@@ -1,6 +1,6 @@
 package dataStructureTests;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -10,11 +10,11 @@ import org.junit.Test;
 
 import dataStructures.Card;
 import dataStructures.Card.CardType;
-import dataStructures.Effect.EffectType;
-import dataStructures.EntityEffect.Resource;
 import dataStructures.Cost;
 import dataStructures.Cost.CostType;
 import dataStructures.Effect;
+import dataStructures.Effect.EffectType;
+import dataStructures.GeneralEnums.Resource;
 
 public class CardTest {
 

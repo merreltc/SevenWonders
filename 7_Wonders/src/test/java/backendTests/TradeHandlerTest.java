@@ -1,6 +1,7 @@
 package backendTests;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
 
 import java.util.ArrayList;
 
@@ -10,9 +11,10 @@ import backend.SetUpDeckHandler;
 import backend.TradeHandler;
 import dataStructures.Card;
 import dataStructures.Deck;
-import dataStructures.GameBoard;
-import dataStructures.Player;
 import dataStructures.Deck.Age;
+import dataStructures.GameBoard;
+import dataStructures.GeneralEnums.Resource;
+import dataStructures.Player;
 import exceptions.InsufficientFundsException;
 import exceptions.InvalidTradeException;
 
@@ -131,7 +133,7 @@ public class TradeHandlerTest {
 		GameBoard board = new GameBoard(players, deck);
 		TradeHandler tradeHandler = new TradeHandler(board);
 		
-		tradeHandler.tradeFromTo(player1, player2, 4);
+		tradeHandler.tradeCoinsFromTo(player1, player2, 4);
 
 		assertEquals(5, player1.getCoinTotal());
 		assertEquals(2, player1.getNumValue1Coins());
@@ -160,7 +162,7 @@ public class TradeHandlerTest {
 		GameBoard board = new GameBoard(players, deck);
 		TradeHandler tradeHandler = new TradeHandler(board);
 		
-		tradeHandler.tradeFromTo(player1, player2, 5);
+		tradeHandler.tradeCoinsFromTo(player1, player2, 5);
 
 		assertEquals(4, player1.getCoinTotal());
 		assertEquals(1, player1.getNumValue1Coins());
@@ -189,7 +191,7 @@ public class TradeHandlerTest {
 		GameBoard board = new GameBoard(players, deck);
 		TradeHandler tradeHandler = new TradeHandler(board);
 		
-		tradeHandler.tradeFromTo(player1, player2, 7);
+		tradeHandler.tradeCoinsFromTo(player1, player2, 7);
 
 		assertEquals(2, player1.getCoinTotal());
 		assertEquals(2, player1.getNumValue1Coins());
@@ -218,7 +220,7 @@ public class TradeHandlerTest {
 		GameBoard board = new GameBoard(players, deck);
 		TradeHandler tradeHandler = new TradeHandler(board);
 		
-		tradeHandler.tradeFromTo(player1, player2, 8);
+		tradeHandler.tradeCoinsFromTo(player1, player2, 8);
 
 		assertEquals(1, player1.getCoinTotal());
 		assertEquals(1, player1.getNumValue1Coins());
@@ -245,7 +247,7 @@ public class TradeHandlerTest {
 		GameBoard board = new GameBoard(players, deck);
 		TradeHandler tradeHandler = new TradeHandler(board);
 
-		tradeHandler.tradeFromTo(player1, player2, 3);
+		tradeHandler.tradeCoinsFromTo(player1, player2, 3);
 
 		assertEquals(0, player1.getCoinTotal());
 		assertEquals(0, player1.getNumValue1Coins());
@@ -274,7 +276,7 @@ public class TradeHandlerTest {
 		GameBoard board = new GameBoard(players, deck);
 		TradeHandler tradeHandler = new TradeHandler(board);
 		
-		tradeHandler.tradeFromTo(player1, player2, 6);
+		tradeHandler.tradeCoinsFromTo(player1, player2, 6);
 
 		assertEquals(0, player1.getCoinTotal());
 		assertEquals(0, player1.getNumValue1Coins());
@@ -300,7 +302,7 @@ public class TradeHandlerTest {
 		GameBoard board = new GameBoard(players, deck);
 		TradeHandler tradeHandler = new TradeHandler(board);
 		
-		tradeHandler.tradeFromTo(board.getCurrentPlayer(), board.getNextPlayer(), 3);
+		tradeHandler.tradeCoinsFromTo(board.getCurrentPlayer(), board.getNextPlayer(), 3);
 		assertEquals(0, board.getPlayerCoinTotal(board.getCurrentPlayerIndex()));
 		assertEquals(6, board.getPlayerCoinTotal(board.getNextPlayerIndex()));
 	}
@@ -321,7 +323,7 @@ public class TradeHandlerTest {
 		GameBoard board = new GameBoard(players, deck);
 		TradeHandler tradeHandler = new TradeHandler(board);
 		
-		tradeHandler.tradeFromTo(board.getCurrentPlayer(), board.getPreviousPlayer(), 3);
+		tradeHandler.tradeCoinsFromTo(board.getCurrentPlayer(), board.getPreviousPlayer(), 3);
 		assertEquals(0, board.getPlayerCoinTotal(board.getCurrentPlayerIndex()));
 		assertEquals(6, board.getPlayerCoinTotal(board.getPreviousPlayerIndex()));
 	}
@@ -341,7 +343,7 @@ public class TradeHandlerTest {
 		GameBoard board = new GameBoard(players, deck);
 		TradeHandler tradeHandler = new TradeHandler(board);
 		
-		tradeHandler.tradeFromTo(board.getCurrentPlayer(), board.getPlayer(2), 3);
+		tradeHandler.tradeCoinsFromTo(board.getCurrentPlayer(), board.getPlayer(2), 3);
 		fail();
 	}
 }

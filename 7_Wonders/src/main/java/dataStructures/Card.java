@@ -24,10 +24,6 @@ public class Card {
 		SCIENTIFICSTRUCTURE, COMMERCIALSTRUCTURE, MILITARYSTRUCTURE, GUILD
 	}
 
-	public enum ResourceType {
-		LOOM, ORE, LUMBER
-	}
-
 	public Card(String name, ArrayList<Integer> frequencyByNumPlayers, CardType type, Cost cost, Effect effect, String previousStructure,
 			String nextStructure) {
 		this.name = name;
