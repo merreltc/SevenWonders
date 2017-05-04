@@ -10,6 +10,7 @@ import org.junit.Test;
 import backend.SetUpDeckHandler;
 import dataStructures.Card;
 import dataStructures.Deck.Age;
+import dataStructures.GeneralEnums.Good;
 import dataStructures.GeneralEnums.Resource;
 import dataStructures.Player;
 import exceptions.InsufficientFundsException;
@@ -421,6 +422,18 @@ public class PlayerTest {
 		assertFalse(player.getCurrentTrades().isEmpty());
 		assertTrue(player.getCurrentTrades().containsKey(Resource.LUMBER));
 		assertEquals(2, (int) player.getCurrentTrades().get(Resource.LUMBER));
+	}
+	
+	@Test
+	public void testAddMultipleDifferentTraded() {
+		Player player = new Player("Jane Doe");
+		
+		player.addTradedValue(Resource.LUMBER);
+		player.addTradedValue(Good.LOOM);
+		assertFalse(player.getCurrentTrades().isEmpty());
+		assertTrue(player.getCurrentTrades().containsKey(Resource.LUMBER));
+		assertEquals(1, (int) player.getCurrentTrades().get(Resource.LUMBER));
+		assertEquals(1, (int) player.getCurrentTrades().get(Good.LOOM));
 	}
 
 }

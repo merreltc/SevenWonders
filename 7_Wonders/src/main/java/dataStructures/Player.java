@@ -176,11 +176,11 @@ public class Player {
 		return this.currentTrades;
 	}
 
-	public void addTradedValue(Resource resource) {
+	public void addTradedValue(Enum trade) {
 		int value = 0;
-		if(this.currentTrades.containsKey(resource)){
-			value = (int) this.currentTrades.get(resource);
+		if(this.currentTrades.containsKey(trade)){
+			value = (int) this.currentTrades.get(trade);
 		}
-		this.currentTrades.put(resource, value + 1);
+		this.currentTrades.put(trade, value + 1);
 	}
 }
