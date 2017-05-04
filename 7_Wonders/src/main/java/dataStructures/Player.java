@@ -196,4 +196,12 @@ public class Player {
 	public void removeFromCurrentHand(Card card) {
 		this.currentHand.remove(card);
 	}
+
+	public void removeTotalCoins(int total) {
+		int numValue3CoinsToRemove = total / 3;
+		int numValue1CoinsToRemove = total % 3;
+		
+		this.removeValue3(numValue3CoinsToRemove);
+		this.removeValue1(numValue1CoinsToRemove);
+	}
 }

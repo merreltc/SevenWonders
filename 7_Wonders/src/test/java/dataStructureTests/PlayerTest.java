@@ -328,6 +328,15 @@ public class PlayerTest {
 			assertEquals(message, error.getMessage());
 		}
 	}
+	
+	@Test
+	public void testRemoveTotalCoins(){
+		Player player = new Player("Jane Doe");
+		player.removeTotalCoins(2);
+		
+		assertEquals(1, player.getNumValue1Coins());
+		assertEquals(1, player.getCoinTotal());
+	}
 
 	@Test
 	public void testGetDefaultCurrentHand() {
