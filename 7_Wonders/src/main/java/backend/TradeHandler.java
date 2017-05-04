@@ -59,4 +59,11 @@ public class TradeHandler {
 		from.removeValue3(numCoinsToTrade);
 		to.addValue3(numCoinsToTrade);
 	}
+
+	public void tradeFromToForResource(Player from, Player to, Resource resource) {
+		if(to.storagePileContainsResource(resource)){
+			this.tradeCoinsFromTo(from, to, 3);
+			from.addTradedValue(resource);
+		}
+	}
 }
