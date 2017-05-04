@@ -16,15 +16,10 @@ public class Player {
 	
 	private ArrayList<Card> currentHand = new ArrayList<Card>();
 	private ArrayList<Card> storagePile = new ArrayList<Card>();
-
-	public Player(String playerName) {
-		this.name = playerName;
-		wonder = new Wonder('a', WonderType.LIGHTHOUSE);
-	}
 	
-	public Player(String playerName, Wonder wonder){
+	public Player(String playerName, Wonder.WonderType wonder){
 		this.name = playerName;
-		this.wonder = wonder;
+		this.wonder = new Wonder('A', wonder);
 	}
 
 	public void addValue1(int numCoinsToAdd) {
