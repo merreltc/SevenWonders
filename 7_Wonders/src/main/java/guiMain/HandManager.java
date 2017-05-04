@@ -9,7 +9,6 @@ import backend.GameManager;
 import dataStructures.Card;
 import dataStructures.Cost;
 import dataStructures.Cost.CostType;
-import dataStructures.Cost.Good;
 import dataStructures.Effect;
 import dataStructures.EntityEffect;
 import dataStructures.EntityEffect.EntityType;
