@@ -13,6 +13,7 @@ import dataStructures.Card;
 import dataStructures.Deck;
 import dataStructures.GameBoard;
 import dataStructures.Player;
+import exceptions.InsufficientFundsException;
 import dataStructures.Deck.Age;
 
 public class PlayerTurnHandlerTest {
@@ -88,9 +89,8 @@ public class PlayerTurnHandlerTest {
 		Player current = board.getCurrentPlayer();
 		ArrayList<Card> currentHand = new ArrayList<Card>();
 		
-		currentHand.add(deck.getCard(0)); //lumber yard
+		currentHand.add(deck.getCard(1)); //Stone pit
 		currentHand.add(deck.getCard(9)); //baths
-		System.out.println(deck.getCard(9).toString());
 		current.setCurrentHand(currentHand);
 		
 		PlayerTurnHandler playerTurnHandler = new PlayerTurnHandler();
@@ -101,5 +101,30 @@ public class PlayerTurnHandlerTest {
 		assertEquals(0, current.getCurrentHand().size());
 		assertFalse(current.getCurrentHand().contains(deck.getCard(9)));
 		assertTrue(current.getStoragePile().contains(deck.getCard(9)));
+	}
+	
+	@Test(expected = InsufficientFundsException.class)
+	public void testInvalidBuildStructureResourceCost(){
+		ArrayList<Player> players = new ArrayList<Player>();
+		players.add(new Player("Wolverine"));
+		players.add(new Player("Captain America"));
+		players.add(new Player("Black Widow"));
+		
+		ArrayList<Card> cards = new SetUpDeckHandler().createCards(Age.AGE1, 3);
+		Deck deck = new Deck(Age.AGE1, cards);
+		
+		GameBoard board = new GameBoard(players, deck);
+		
+		Player current = board.getCurrentPlayer();
+		ArrayList<Card> currentHand = new ArrayList<Card>();
+		
+		currentHand.add(deck.getCard(0)); //lumber yard
+		currentHand.add(deck.getCard(9)); //baths
+		current.setCurrentHand(currentHand);
+		
+		PlayerTurnHandler playerTurnHandler = new PlayerTurnHandler();
+		playerTurnHandler.buildStructure(current, current.getCurrentHand().get(0));
+		playerTurnHandler.buildStructure(current, current.getCurrentHand().get(0));
+		fail();
 	}
 }
