@@ -461,5 +461,22 @@ public class PlayerTest {
 		
 		assertTrue(player.storagePileContainsEntity(Good.GLASS));
 	}
+	
+	@Test
+	public void testAddToStoragePile(){
+		Player player = new Player("Jane Doe");
+		ArrayList<Card> deckCards = new SetUpDeckHandler().createCards(Age.AGE1, 3);
+		
+		ArrayList<Card> playerCards = new ArrayList<Card>();
+		playerCards.add(deckCards.get(0));
+		playerCards.add(deckCards.get(1));
+		playerCards.add(deckCards.get(2));
+		
+		player.setStoragePile(playerCards);
+		
+		player.addToStoragePile(deckCards.get(3));
+		assertEquals(4, player.getStoragePile().size());
+		assertEquals(deckCards.get(3), player.getStoragePile().get(3));
+	}
 
 }

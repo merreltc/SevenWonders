@@ -188,4 +188,8 @@ public class Player {
 	public void removeCurrentTrades() {
 		this.currentTrades.clear();
 	}
+
+	public void addToStoragePile(Card card) {
+		this.storagePile.add(card);
+	}
 }
