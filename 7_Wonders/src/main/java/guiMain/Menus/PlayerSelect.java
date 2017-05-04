@@ -11,6 +11,12 @@ import guiMain.Interactables.Button;
 import guiMain.Interactables.Interactable;
 
 public class PlayerSelect extends Menu{
+	
+	public RenderImage renderer;
+	
+	public PlayerSelect(RenderImage renderer){
+		this.renderer = renderer;
+	}
 
 	@Override
 	public void draw(Graphics graphics) {
@@ -29,7 +35,7 @@ public class PlayerSelect extends Menu{
 		for (int i = 3; i <= 7; i++) {
 			Button startGame = new Button(new Point(400 + 250 * (i - 3), 400), Constants.PlayerSelectButtonBounds,
 					i + "");
-			Image image = RenderImage.getImage(i + "");
+			Image image = this.renderer.getImage(i + "");
 			startGame.addImage(image);
 			this.addInteractable(startGame);
 		}

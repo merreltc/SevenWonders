@@ -17,16 +17,18 @@ public class PlayerBoard {
 	private int playerPosition;
 	private int backPlayerStartingBoardPositionX;
 	
+	RenderImage renderer;
 	Image WonderImage;
 	
 	private Player player;
 
-	public PlayerBoard(int startingPosition, int totalNumberOfPlayers, Player player) {
+	public PlayerBoard(int startingPosition, int totalNumberOfPlayers, Player player, RenderImage renderer) {
+		this.renderer = renderer;
 		backPlayerStartingBoardPositionX = Constants.FrameWidth / 2 - Constants.FrameWidthModifier
 				- ((totalNumberOfPlayers - 1) * Constants.BackPlayerBoardWidth) / 2;
 		this.playerPosition = startingPosition;
 		this.player = player;
-		this.WonderImage = RenderImage.getImage(player.getWonder().getName());
+		this.WonderImage = renderer.getImage(player.getWonder().getName());
 	}
 
 	public void draw(Graphics graphics) {
@@ -80,6 +82,6 @@ public class PlayerBoard {
 	
 	public void changePlayer(Player player){
 		this.player = player;
-		this.WonderImage = RenderImage.getImage(player.getWonder().getName());
+		this.WonderImage = renderer.getImage(player.getWonder().getName());
 	}
 }
