@@ -55,7 +55,7 @@ public class GameManager {
 		tradeHandler.tradeCoinsFromTo(from, to, valueToTrade);
 	}
 	
-	public void tradeForEntity(Player from, Player to, Resource entity) {
+	public void tradeForEntity(Player from, Player to, Enum entity) {
 		this.tradeHandler.tradeFromToForEntity(from, to, entity);
 	}
 	

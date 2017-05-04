@@ -20,6 +20,7 @@ import dataStructures.Deck;
 import dataStructures.GameBoard;
 import dataStructures.Player;
 import dataStructures.Deck.Age;
+import dataStructures.GeneralEnums.Good;
 import dataStructures.GeneralEnums.Resource;
 
 public class GameManagerTest {
@@ -368,6 +369,30 @@ public class GameManagerTest {
 		Player next = manager.getNextPlayer();
 		
 		assertEquals(1, (int) current.getCurrentTrades().get(Resource.LUMBER));
+		assertEquals(6, next.getCoinTotal());
+	}
+	
+	@Test
+	public void testTradeFromToForGood() {
+		ArrayList<String> playerNames = new ArrayList<String>();
+		playerNames.add("Wolverine");
+		playerNames.add("Captain America");
+		playerNames.add("Black Widow");
+
+		GameManager manager = new GameManager(playerNames, new SetUpHandler(), new SetUpDeckHandler(), new TurnHandler(), new PlayerTurnHandler());
+		
+		ArrayList<Card> storage = new ArrayList<Card>();
+		Deck deck = manager.getGameBoard().getDeck();
+		storage.add(deck.getCard(7));
+		storage.add(deck.getCard(8));
+		
+		manager.getNextPlayer().setStoragePile(storage);
+		manager.tradeForEntity(manager.getCurrentPlayer(), manager.getNextPlayer(), Good.GLASS);
+		
+		Player current = manager.getCurrentPlayer();
+		Player next = manager.getNextPlayer();
+		
+		assertEquals(1, (int) current.getCurrentTrades().get(Good.GLASS));
 		assertEquals(6, next.getCoinTotal());
 	}
 }
