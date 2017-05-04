@@ -8,9 +8,9 @@ import dataStructures.Wonder;
 
 public class SetUpHandler {
 
-	public ArrayList<Player> setUpAndReturnPlayers(HashMap<String, Wonder.WonderType> playerNamesAndWonders) {
-		validatePlayerNum(playerNamesAndWonders.size());
-		return createPlayers(playerNamesAndWonders);
+	public ArrayList<Player> setUpAndReturnPlayers(ArrayList<String> playerNames, ArrayList<Wonder.WonderType> wonders) {
+		validatePlayerNum(playerNames.size());
+		return createPlayers(playerNames, wonders);
 	}
 
 	public boolean validatePlayerNum(int num) {
@@ -21,11 +21,11 @@ public class SetUpHandler {
 		return true;
 	}
 
-	public ArrayList<Player> createPlayers(HashMap<String, Wonder.WonderType> playerNamesAndWonders) {
+	public ArrayList<Player> createPlayers(ArrayList<String> playerNames, ArrayList<Wonder.WonderType> wonders) {
 		ArrayList<Player> players = new ArrayList<Player>();
 		
-		for(String playerName : playerNamesAndWonders.keySet()) {
-			players.add(new Player(playerName, playerNamesAndWonders.get(playerName)));
+		for(int i = 0; i < playerNames.size();i++) {
+			players.add(new Player(playerNames.get(i), wonders.get(i)));
 		}
 		
 		return players;

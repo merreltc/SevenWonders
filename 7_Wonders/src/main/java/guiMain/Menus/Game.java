@@ -34,21 +34,23 @@ public class Game extends Menu {
 	}
 
 	private void setUpPlayers(int numOfPlayers) {
-		HashMap<String, Wonder.WonderType> playersAndWonders = new HashMap<String, Wonder.WonderType>();
+		ArrayList<String> playerNames = new ArrayList<String>();
+		ArrayList<Wonder.WonderType> wonders = new ArrayList<Wonder.WonderType>();
 		
-		HashMap<String, Wonder.WonderType> wonders = getWonderMap();
+		HashMap<String, Wonder.WonderType> wonderMap = getWonderMap();
 		
 		for (int i = 0; i < numOfPlayers; i++) {
 			String name = Message.inputPlayerNameMessage(i);
-			String wonder = Message.dropDownWonderSelectionMessage(wonders.keySet().toArray());
+			String wonder = Message.dropDownWonderSelectionMessage(wonderMap.keySet().toArray());
 			
-			playersAndWonders.put(name, wonders.get(wonder));
-			wonders.remove(wonder);
-			wonders.keySet().remove(wonder);
+			playerNames.add(name);
+			wonders.add(wonderMap.get(wonder));
+			wonderMap.remove(wonder);
+			wonderMap.keySet().remove(wonder);
 			/*Set wonder to correct values*/
 		}
 		
-		this.gameManager = new GameManager(playersAndWonders);
+		this.gameManager = new GameManager(playerNames, wonders);
 		this.gameManager.dealInitialTurnCards();
 	}
 
@@ -91,7 +93,7 @@ public class Game extends Menu {
 		int numOfPlayers = this.gameManager.getNumPlayers();
 		for (int i = -1; i < numOfPlayers - 1; i++) {
 			PlayerBoard board = new PlayerBoard(i, numOfPlayers,
-					this.gameManager.getPlayer((numOfPlayers + i) % numOfPlayers),renderer);
+					this.gameManager.getPlayer((2*numOfPlayers - i) % numOfPlayers),renderer);
 			boards.add(board);
 		}
 	}

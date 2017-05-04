@@ -16,11 +16,14 @@ public class GuiTradeHelper {
 	public void trade(String[] splitValue) {
 		Player tradeTo;
 		Player tradeFrom = this.gameManager.getCurrentPlayer();
+		int currentIndex = this.gameManager.getPlayers().indexOf(tradeFrom);
 		
 		if (splitValue[0].equals("Right")) {
-			tradeTo = this.gameManager.getNextPlayer();
+			int offsetRight = (currentIndex - 1 + this.gameManager.getNumPlayers());
+			tradeTo = this.gameManager.getPlayer(offsetRight%this.gameManager.getNumPlayers());
 		} else {
-			tradeTo = this.gameManager.getPreviousPlayer();
+			int offsetLeft = (currentIndex + 1 + this.gameManager.getNumPlayers());
+			tradeTo = this.gameManager.getPlayer(offsetLeft%this.gameManager.getNumPlayers());
 		}
 
 		try {
