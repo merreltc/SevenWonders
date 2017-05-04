@@ -13,7 +13,7 @@ public class TurnHandler {
 			ArrayList<Card> currentHand = new ArrayList<Card>();
 			
 			for(int i = 0; i < numPlayers; i++){
-				Card toAdd = DeckHandler.deckHandler.drawCard(deck);
+				Card toAdd = DeckHandler.drawCard(deck);
 				currentHand.add(toAdd);
 			}
 			

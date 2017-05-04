@@ -12,23 +12,14 @@ import dataStructures.GeneralEnums.Good;
 import dataStructures.GeneralEnums.Resource;
 
 public class CostTest {
-
-	@Test
-	public void testDefaultCost() {
-		Cost cost = new Cost();
-		
-		assertEquals(CostType.NONE, cost.getType());
-		assertEquals(0, cost.getCost().size());
-		assertEquals(0, cost.getCoinCost());
-	}
 	
 	@Test
 	public void testValueCost() {
 		Cost cost = new Cost(CostType.COIN, 1);
 		
 		assertEquals(CostType.COIN, cost.getType());
-		assertEquals(0, cost.getCost().size());
-		assertEquals(1, cost.getCoinCost());
+		assertEquals(1, cost.getCost().size());
+		assertEquals(1,(int) cost.getCost().get(CostType.COIN));
 	}
 	
 	@Test
@@ -43,7 +34,6 @@ public class CostTest {
 		
 		assertEquals(CostType.GOOD, cost.getType());
 		assertEquals(expectedCost.get(Good.LOOM), cost.getCost().get(Good.LOOM));
-		assertEquals(0, cost.getCoinCost());
 	}
 	
 	@Test
@@ -62,7 +52,6 @@ public class CostTest {
 		assertEquals(CostType.RESOURCE, cost.getType());
 		assertEquals(expectedCost.get(Resource.ORE), cost.getCost().get(Resource.ORE));
 		assertEquals(expectedCost.get(Resource.LUMBER), cost.getCost().get(Resource.LUMBER));
-		assertEquals(0, cost.getCoinCost());
 	}
 	
 	@Test
@@ -81,7 +70,6 @@ public class CostTest {
 		assertEquals(CostType.MULTITYPE, cost.getType());
 		assertEquals(expectedCost.get(Resource.STONE), cost.getCost().get(Resource.STONE));
 		assertEquals(expectedCost.get(Good.GLASS), cost.getCost().get(Good.GLASS));
-		assertEquals(0, cost.getCoinCost());
 	}
 	
 	@Test
@@ -115,6 +103,5 @@ public class CostTest {
 		assertEquals(expectedCost.get(Good.LOOM), cost.getCost().get(Good.LOOM));
 		assertEquals(expectedCost.get(Good.PAPER), cost.getCost().get(Good.PAPER));
 		assertEquals(expectedCost.get(Good.GLASS), cost.getCost().get(Good.GLASS));
-		assertEquals(0, cost.getCoinCost());
 	}
 }

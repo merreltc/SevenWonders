@@ -1,10 +1,6 @@
 package dataStructures;
 
 public class GeneralEnums {
-	public enum CostType {
-		NONE, COIN, RESOURCE, GOOD, MULTITYPE
-	}
-
 	public enum Resource {
 		ORE, LUMBER, STONE, CLAY
 	}
