@@ -27,21 +27,21 @@ public class GameManager {
 	private TradeHandler tradeHandler;
 
 	
-	public GameManager(HashMap<String, Wonder.WonderType> playerNamesAndWonders) {
-		this(playerNamesAndWonders, new SetUpHandler(), new SetUpDeckHandler(), new TurnHandler());
+	public GameManager(ArrayList<String> playerNames, ArrayList<Wonder.WonderType> wonders) {
+		this(playerNames, wonders, new SetUpHandler(), new SetUpDeckHandler(), new TurnHandler());
 	}
 	
-	public GameManager(HashMap<String, Wonder.WonderType> playerNamesAndWonders, SetUpHandler setUpHandler,
+	public GameManager(ArrayList<String> playerNames, ArrayList<Wonder.WonderType> wonders, SetUpHandler setUpHandler,
 			SetUpDeckHandler setUpDeckHandler, TurnHandler turnHandler){
 		this.setUpHandler = setUpHandler;
 		this.setUpDeckHandler = setUpDeckHandler;
 		this.turnHandler = turnHandler;
-		setUpGame(playerNamesAndWonders);	
+		setUpGame(playerNames, wonders);	
 	}
 
-	public void setUpGame(HashMap<String, Wonder.WonderType> playerNamesAndWonders) {
-		ArrayList<Player> players = this.setUpHandler.setUpAndReturnPlayers(playerNamesAndWonders);
-		Deck deck = this.setUpDeckHandler.createDeck(Age.AGE1, playerNamesAndWonders.size());
+	public void setUpGame(ArrayList<String> playerNames, ArrayList<Wonder.WonderType> wonders) {
+		ArrayList<Player> players = this.setUpHandler.setUpAndReturnPlayers(playerNames,wonders);
+		Deck deck = this.setUpDeckHandler.createDeck(Age.AGE1, playerNames.size());
 
 		this.board = new GameBoard(players, deck);
 		this.rotateHandler = new RotateHandler(this.board);

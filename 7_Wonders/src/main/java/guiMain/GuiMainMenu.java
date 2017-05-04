@@ -41,6 +41,7 @@ public class GuiMainMenu extends JPanel implements ActionListener {
 		this.frame.setTitle("Seven Wonders");
 		this.frame.setResizable(false);
 		this.frame.add(this);
+		this.frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		MenuMouseListener menuMouse = new MenuMouseListener(this);
 		this.frame.addMouseListener(menuMouse);
 		image = renderer.getImage("Background");
