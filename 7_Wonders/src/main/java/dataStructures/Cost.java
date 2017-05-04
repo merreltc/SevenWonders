@@ -11,9 +11,6 @@ public class Cost {
 		NONE, COIN, RESOURCE, GOOD, MULTITYPE
 	}
 
-	public Cost() {
-	}
-
 	public Cost(CostType type, HashMap<Enum, Integer> cost) {
 		this.type = type;
 		this.cost = cost;
@@ -21,7 +18,7 @@ public class Cost {
 
 	public Cost(CostType type, int coinCost) {
 		this.type = type;
-		this.coinCost = coinCost;
+		this.cost.put(CostType.COIN, coinCost);
 	}
 
 	public CostType getType() {
@@ -31,9 +28,4 @@ public class Cost {
 	public HashMap<Enum, Integer> getCost() {
 		return this.cost;
 	}
-
-	public int getCoinCost() {
-		return this.coinCost;
-	}
-
 }
