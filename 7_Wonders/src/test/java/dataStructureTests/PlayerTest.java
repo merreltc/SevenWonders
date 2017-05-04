@@ -478,5 +478,22 @@ public class PlayerTest {
 		assertEquals(4, player.getStoragePile().size());
 		assertEquals(deckCards.get(3), player.getStoragePile().get(3));
 	}
+	
+	@Test
+	public void testRemoveFromCurrentHand(){
+		Player player = new Player("Jane Doe");
+		ArrayList<Card> deckCards = new SetUpDeckHandler().createCards(Age.AGE1, 3);
+		
+		ArrayList<Card> playerCards = new ArrayList<Card>();
+		playerCards.add(deckCards.get(0));
+		playerCards.add(deckCards.get(1));
+		playerCards.add(deckCards.get(2));
+		
+		player.setCurrentHand(playerCards);
+		
+		player.removeFromCurrentHand(deckCards.get(1));
+		assertEquals(2, player.getCurrentHand().size());
+		assertFalse(player.getCurrentHand().contains(deckCards.get(1)));
+	}
 
 }

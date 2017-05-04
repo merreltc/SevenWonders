@@ -192,4 +192,8 @@ public class Player {
 	public void addToStoragePile(Card card) {
 		this.storagePile.add(card);
 	}
+
+	public void removeFromCurrentHand(Card card) {
+		this.currentHand.remove(card);
+	}
 }
