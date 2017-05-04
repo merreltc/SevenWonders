@@ -21,6 +21,8 @@ public class PlayerTurnHandler {
 			validatePlayerHasEntityForCard(current, card);
 		}else if (card.getCostType() == CostType.GOOD){
 			validatePlayerHasEntityForCard(current, card);
+		}else if (card.getCostType() == CostType.MULTITYPE){
+			validatePlayerHasEntityForCard(current, card);
 		}
 		
 		current.addToStoragePile(card);

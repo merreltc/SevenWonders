@@ -261,9 +261,9 @@ public class PlayerTurnHandlerTest {
 		
 		currentHand.add(deck.getCard(3)); //foundry
 		currentHand.add(deck.getCard(5)); //glassworks
-		currentHand.add(deck.getCard(18)); //Dispensary
+		currentHand.add(deck.getCard(16)); //Dispensary
 		current.setCurrentHand(currentHand);
-		
+	
 		PlayerTurnHandler playerTurnHandler = new PlayerTurnHandler();
 		playerTurnHandler.buildStructure(current, current.getCurrentHand().get(0));
 		playerTurnHandler.buildStructure(current, current.getCurrentHand().get(0));
@@ -275,7 +275,34 @@ public class PlayerTurnHandlerTest {
 		assertTrue(current.getStoragePile().contains(deck.getCard(3)));
 		assertFalse(current.getCurrentHand().contains(deck.getCard(5)));
 		assertTrue(current.getStoragePile().contains(deck.getCard(5)));
-		assertFalse(current.getCurrentHand().contains(deck.getCard(18)));
-		assertTrue(current.getStoragePile().contains(deck.getCard(18)));
+		assertFalse(current.getCurrentHand().contains(deck.getCard(16)));
+		assertTrue(current.getStoragePile().contains(deck.getCard(16)));
+	}
+	
+	@Test(expected = InsufficientFundsException.class)
+	public void testInvalidBuildStructureMultiEntityCost(){
+		ArrayList<Player> players = new ArrayList<Player>();
+		players.add(new Player("Wolverine"));
+		players.add(new Player("Captain America"));
+		players.add(new Player("Black Widow"));
+		
+		ArrayList<Card> cards = new SetUpDeckHandler().createCards(Age.AGE2, 3);
+		Deck deck = new Deck(Age.AGE2, cards);
+		
+		GameBoard board = new GameBoard(players, deck);
+		
+		Player current = board.getCurrentPlayer();
+		ArrayList<Card> currentHand = new ArrayList<Card>();
+		
+		currentHand.add(deck.getCard(3)); //foundry
+		currentHand.add(deck.getCard(6)); //press
+		currentHand.add(deck.getCard(18)); //Dispensary
+		current.setCurrentHand(currentHand);
+		
+		PlayerTurnHandler playerTurnHandler = new PlayerTurnHandler();
+		playerTurnHandler.buildStructure(current, current.getCurrentHand().get(0));
+		playerTurnHandler.buildStructure(current, current.getCurrentHand().get(0));
+		playerTurnHandler.buildStructure(current, current.getCurrentHand().get(0));
+		fail();
 	}
 }
