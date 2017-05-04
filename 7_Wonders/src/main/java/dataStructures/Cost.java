@@ -3,7 +3,6 @@ package dataStructures;
 import java.util.HashMap;
 
 public class Cost {
-	private int coinCost = 0;
 	private CostType type = CostType.NONE;
 	private HashMap<Enum, Integer> cost = new HashMap<Enum, Integer>();
 
