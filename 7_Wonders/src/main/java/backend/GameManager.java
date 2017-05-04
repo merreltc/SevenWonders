@@ -1,6 +1,8 @@
 package backend;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Set;
 
 import backend.RotateHandler.Direction;
 import dataStructures.Card;
@@ -25,20 +27,21 @@ public class GameManager {
 	private TradeHandler tradeHandler;
 
 	
-	public GameManager(ArrayList<String> playerNames, ArrayList<Wonder> playerWonders) {
-		this(playerNames, new SetUpHandler(), new SetUpDeckHandler(), new TurnHandler(), playerWonders);
+	public GameManager(HashMap<String, Wonder.WonderType> playerNamesAndWonders) {
+		this(playerNamesAndWonders, new SetUpHandler(), new SetUpDeckHandler(), new TurnHandler());
 	}
 	
-	public GameManager(ArrayList<String> playerNames, SetUpHandler setUpHandler, SetUpDeckHandler setUpDeckHandler, TurnHandler turnHandler,ArrayList<Wonder> playerWonders){
+	public GameManager(HashMap<String, Wonder.WonderType> playerNamesAndWonders, SetUpHandler setUpHandler,
+			SetUpDeckHandler setUpDeckHandler, TurnHandler turnHandler){
 		this.setUpHandler = setUpHandler;
 		this.setUpDeckHandler = setUpDeckHandler;
 		this.turnHandler = turnHandler;
-		setUpGame(playerNames, playerWonders);	
+		setUpGame(playerNamesAndWonders);	
 	}
 
-	public void setUpGame(ArrayList<String> playerNames, ArrayList<Wonder> playerWonders) {
-		ArrayList<Player> players = this.setUpHandler.setUpAndReturnPlayers(playerNames);
-		Deck deck = this.setUpDeckHandler.createDeck(Age.AGE1, playerNames.size());
+	public void setUpGame(HashMap<String, Wonder.WonderType> playerNamesAndWonders) {
+		ArrayList<Player> players = this.setUpHandler.setUpAndReturnPlayers(playerNamesAndWonders);
+		Deck deck = this.setUpDeckHandler.createDeck(Age.AGE1, playerNamesAndWonders.size());
 
 		this.board = new GameBoard(players, deck);
 		this.rotateHandler = new RotateHandler(this.board);
