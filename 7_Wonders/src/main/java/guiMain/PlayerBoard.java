@@ -3,6 +3,7 @@ package guiMain;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
+import java.awt.Image;
 import java.awt.Point;
 
 import dataStructures.Player;
@@ -11,9 +12,12 @@ import guiDataStructures.Constants;
 public class PlayerBoard {
 	private Point position;
 	private Point sizePoint;
+
 	/* zero index is the current player, next player is last */
 	private int playerPosition;
 	private int backPlayerStartingBoardPositionX;
+	
+	Image WonderImage;
 	
 	private Player player;
 
@@ -22,6 +26,7 @@ public class PlayerBoard {
 				- ((totalNumberOfPlayers - 1) * Constants.BackPlayerBoardWidth) / 2;
 		this.playerPosition = startingPosition;
 		this.player = player;
+		this.WonderImage = RenderImage.getImage(player.getWonder().getName());
 	}
 
 	public void draw(Graphics graphics) {
@@ -52,8 +57,9 @@ public class PlayerBoard {
 	}
 
 	public void drawBoard(Graphics graphics) {
-		graphics.setColor(Color.GREEN);
-		graphics.fillRect(this.position.x, this.position.y, this.sizePoint.x, this.sizePoint.y);
+		//graphics.setColor(Color.GREEN);
+		//graphics.fillRect(this.position.x, this.position.y, this.sizePoint.x, this.sizePoint.y);
+		RenderImage.draw(graphics, WonderImage, this.position.x, this.position.y, this.sizePoint.x, this.sizePoint.y);
 		graphics.setFont(new Font("Courier New", Font.BOLD, 30));
 		graphics.setColor(Color.RED);
 		graphics.drawString(this.player.getName(), position.x + sizePoint.x / 2 - 20,
@@ -74,5 +80,6 @@ public class PlayerBoard {
 	
 	public void changePlayer(Player player){
 		this.player = player;
+		this.WonderImage = RenderImage.getImage(player.getWonder().getName());
 	}
 }
