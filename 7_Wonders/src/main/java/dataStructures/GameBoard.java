@@ -85,4 +85,8 @@ public class GameBoard {
 	public Deck getDeck() {
 		return this.currentDeck;
 	}
+
+	public ArrayList<Card> getDiscardPile() {
+		return new ArrayList<Card>();
+	}
 }

@@ -329,4 +329,21 @@ public class GameBoardTests {
 		GameBoard board = new GameBoard(players, deck);
 		assertEquals(deck, board.getDeck());
 	}
+	
+	@Test
+	public void testGetDefaultDiscardPile(){
+		ArrayList<Player> players = new ArrayList<Player>();
+		players.add(new Player("Wolverine"));
+		players.add(new Player("Captain America"));
+		players.add(new Player("Black Widow"));
+		players.add(new Player("Hulk"));
+		players.add(new Player("Iron Man"));
+		
+		ArrayList<Card> cards = new SetUpDeckHandler().createCards(Age.AGE1, 3);
+		Deck deck = new Deck(Age.AGE1, cards);
+
+		GameBoard board = new GameBoard(players, deck);
+		assertTrue(board.getDiscardPile().isEmpty());
+		assertEquals(ArrayList.class, board.getDiscardPile().getClass());
+	}
 }
