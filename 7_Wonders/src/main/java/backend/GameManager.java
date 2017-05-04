@@ -22,16 +22,18 @@ public class GameManager {
 	
 	private RotateHandler rotateHandler;
 	private TradeHandler tradeHandler;
+	private PlayerTurnHandler playerTurnHandler;
 
 	
 	public GameManager(ArrayList<String> playerNames) {
-		this(playerNames, new SetUpHandler(), new SetUpDeckHandler(), new TurnHandler());
+		this(playerNames, new SetUpHandler(), new SetUpDeckHandler(), new TurnHandler(), new PlayerTurnHandler());
 	}
 	
-	public GameManager(ArrayList<String> playerNames, SetUpHandler setUpHandler, SetUpDeckHandler setUpDeckHandler, TurnHandler turnHandler){
+	public GameManager(ArrayList<String> playerNames, SetUpHandler setUpHandler, SetUpDeckHandler setUpDeckHandler, TurnHandler turnHandler, PlayerTurnHandler playerTurnHandler){
 		this.setUpHandler = setUpHandler;
 		this.setUpDeckHandler = setUpDeckHandler;
 		this.turnHandler = turnHandler;
+		this.playerTurnHandler = playerTurnHandler;
 		setUpGame(playerNames);	
 	}
 
@@ -50,6 +52,10 @@ public class GameManager {
 
 	public void trade(Player from, Player to, int valueToTrade) {
 		tradeHandler.tradeCoinsFromTo(from, to, valueToTrade);
+	}
+	
+	public void buildStructure(Card card) {
+		this.playerTurnHandler.buildStructure(getCurrentPlayer(), card);
 	}
 
 	public void changeRotateDirectionAndResetPositions(Direction direction) {

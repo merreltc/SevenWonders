@@ -9,6 +9,7 @@ import org.junit.After;
 import org.junit.Test;
 
 import backend.GameManager;
+import backend.PlayerTurnHandler;
 import backend.RotateHandler.Direction;
 import backend.SetUpDeckHandler;
 import backend.SetUpHandler;
@@ -60,7 +61,7 @@ public class GameManagerTest {
 		playerNames.add("Captain America");
 		playerNames.add("Black Widow");
 
-		new GameManager(playerNames, new SetUpHandler(), setUpDeckHandler, new TurnHandler());
+		new GameManager(playerNames, new SetUpHandler(), setUpDeckHandler, new TurnHandler(), new PlayerTurnHandler());
 
 		EasyMock.verify(setUpDeckHandler);
 	}
@@ -82,7 +83,7 @@ public class GameManagerTest {
 		playerNames.add("Spider Man");
 		playerNames.add("Thor");
 
-		new GameManager(playerNames, new SetUpHandler(), setUpDeckHandler, new TurnHandler());
+		new GameManager(playerNames, new SetUpHandler(), setUpDeckHandler, new TurnHandler(), new PlayerTurnHandler());
 
 		EasyMock.verify(setUpDeckHandler);
 	}
@@ -312,7 +313,7 @@ public class GameManagerTest {
 		playerNames.add("Captain America");
 		playerNames.add("Black Widow");
 
-		GameManager manager = new GameManager(playerNames, new SetUpHandler(), new SetUpDeckHandler(), turnHandler);
+		GameManager manager = new GameManager(playerNames, new SetUpHandler(), new SetUpDeckHandler(), turnHandler, new PlayerTurnHandler());
 		turnHandler.dealInitialTurnCards(manager.getPlayers(), manager.getNumPlayers(),
 				manager.getGameBoard().getDeck());
 
@@ -321,5 +322,26 @@ public class GameManagerTest {
 		manager.dealInitialTurnCards();
 
 		EasyMock.verify(turnHandler);
+	}
+	
+	@Test
+	public void testBuildStructure() {
+		PlayerTurnHandler playerTurnHandler = EasyMock.createMock(PlayerTurnHandler.class);
+
+		ArrayList<String> playerNames = new ArrayList<String>();
+		playerNames.add("Wolverine");
+		playerNames.add("Captain America");
+		playerNames.add("Black Widow");
+
+		GameManager manager = new GameManager(playerNames, new SetUpHandler(), new SetUpDeckHandler(), new TurnHandler(), playerTurnHandler);
+		manager.dealInitialTurnCards();
+		Card card = manager.getCurrentPlayer().getCurrentHand().get(0);
+		playerTurnHandler.buildStructure(manager.getCurrentPlayer(), card);
+
+		EasyMock.replay(playerTurnHandler);
+
+		manager.buildStructure(card);
+
+		EasyMock.verify(playerTurnHandler);
 	}
 }

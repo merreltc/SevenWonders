@@ -8,6 +8,7 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import backend.GameManager;
+import backend.PlayerTurnHandler;
 import backend.SetUpDeckHandler;
 import backend.SetUpHandler;
 import backend.TurnHandler;
@@ -23,7 +24,7 @@ public class TurnHandlerTest {
 		playerNames.add("Wolverine");
 		playerNames.add("Captain America");
 		playerNames.add("Black Widow");
-		GameManager manager = new GameManager(playerNames, new SetUpHandler(), new SetUpDeckHandler(), new TurnHandler());
+		GameManager manager = new GameManager(playerNames, new SetUpHandler(), new SetUpDeckHandler(), new TurnHandler(), new PlayerTurnHandler());
 		
 		Deck deck = manager.getGameBoard().getDeck();
 		int expectedDeckSize = deck.getNumCards() - 9;
@@ -47,7 +48,7 @@ public class TurnHandlerTest {
 		playerNames.add("Iron Man");
 		playerNames.add("Spider Man");
 		playerNames.add("Thor");
-		GameManager manager = new GameManager(playerNames, new SetUpHandler(), new SetUpDeckHandler(), new TurnHandler());
+		GameManager manager = new GameManager(playerNames, new SetUpHandler(), new SetUpDeckHandler(), new TurnHandler(), new PlayerTurnHandler());
 		
 		Deck deck = manager.getGameBoard().getDeck();
 		
@@ -71,7 +72,7 @@ public class TurnHandlerTest {
 		playerNames.add("Hulk");
 		playerNames.add("Iron Man");
 
-		GameManager manager = new GameManager(playerNames, new SetUpHandler(), new SetUpDeckHandler(), new TurnHandler());
+		GameManager manager = new GameManager(playerNames, new SetUpHandler(), new SetUpDeckHandler(), new TurnHandler(), new PlayerTurnHandler());
 		
 		Deck deck = manager.getGameBoard().getDeck();
 		
