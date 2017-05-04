@@ -68,7 +68,7 @@ public class PlayerBoard {
 
 	public void drawCoinAndWarTokens(Graphics graphics) {
 		graphics.drawString(this.player.getCoinTotal() + "", position.x + sizePoint.x - 30, position.y + 25);
-		graphics.drawString("1", position.x + sizePoint.x - 30, position.y + 65);
+		graphics.drawString(this.player.getConflictTotal() + "", position.x + sizePoint.x - 30, position.y + 65);
 	}
 
 	public void drawResources(Graphics graphics) {
