@@ -21,8 +21,8 @@ public class Message {
 		return name;
 	}
 
-	public static Wonder.WonderType dropDownWonderSelectionMessage(Wonder.WonderType[] wonders) {
-		return (Wonder.WonderType) JOptionPane.showInputDialog(null,
+	public static String dropDownWonderSelectionMessage(Object[] wonders) {
+		return (String) JOptionPane.showInputDialog(null,
 				"Choose your Wonder",
 				"Wonder Selector",
 				JOptionPane.PLAIN_MESSAGE,

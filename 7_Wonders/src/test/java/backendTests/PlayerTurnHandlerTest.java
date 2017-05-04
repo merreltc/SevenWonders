@@ -14,15 +14,16 @@ import dataStructures.Deck;
 import dataStructures.GameBoard;
 import dataStructures.Player;
 import dataStructures.Deck.Age;
+import dataStructures.Wonder.WonderType;
 
 public class PlayerTurnHandlerTest {
 
 	@Test
 	public void testBuildStructureNoCost(){
 		ArrayList<Player> players = new ArrayList<Player>();
-		players.add(new Player("Wolverine"));
-		players.add(new Player("Captain America"));
-		players.add(new Player("Black Widow"));
+		players.add(new Player("Wolverine", WonderType.COLOSSUS));
+		players.add(new Player("Captain America", WonderType.LIGHTHOUSE));
+		players.add(new Player("Black Widow", WonderType.PYRAMIDS));
 		
 		ArrayList<Card> cards = new SetUpDeckHandler().createCards(Age.AGE1, 3);
 		Deck deck = new Deck(Age.AGE1, cards);

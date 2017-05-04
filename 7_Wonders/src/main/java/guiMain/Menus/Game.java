@@ -32,20 +32,33 @@ public class Game extends Menu {
 
 	private void setUpPlayers(int numOfPlayers) {
 		HashMap<String, Wonder.WonderType> playersAndWonders = new HashMap<String, Wonder.WonderType>();
-		ArrayList<Wonder.WonderType> wonders = new ArrayList<Wonder.WonderType>(
-				Arrays.asList(Wonder.WonderType.COLOSSUS, Wonder.WonderType.GARDENS, Wonder.WonderType.LIGHTHOUSE, 
-					Wonder.WonderType.MAUSOLEUM, Wonder.WonderType.PYRAMIDS, Wonder.WonderType.STATUE, Wonder.WonderType.TEMPLE));
+		
+		HashMap<String, Wonder.WonderType> wonders = getWonderMap();
 		
 		for (int i = 0; i < numOfPlayers; i++) {
 			String name = Message.inputPlayerNameMessage(i);
-			Wonder.WonderType wonder = Message.dropDownWonderSelectionMessage((Wonder.WonderType[]) wonders.toArray());
-			playersAndWonders.put(name, wonder);
+			String wonder = Message.dropDownWonderSelectionMessage(wonders.keySet().toArray());
+			
+			playersAndWonders.put(name, wonders.get(wonder));
 			wonders.remove(wonder);
+			wonders.keySet().remove(wonder);
 			/*Set wonder to correct values*/
 		}
 		
 		this.gameManager = new GameManager(playersAndWonders);
 		this.gameManager.dealInitialTurnCards();
+	}
+
+	private HashMap<String, Wonder.WonderType> getWonderMap() {
+		HashMap<String, Wonder.WonderType> wonders = new HashMap<String, Wonder.WonderType>();
+		wonders.put(Wonder.getWonderNameByType(Wonder.WonderType.COLOSSUS), Wonder.WonderType.COLOSSUS);
+		wonders.put(Wonder.getWonderNameByType(Wonder.WonderType.TEMPLE), Wonder.WonderType.TEMPLE);
+		wonders.put(Wonder.getWonderNameByType(Wonder.WonderType.GARDENS), Wonder.WonderType.GARDENS);
+		wonders.put(Wonder.getWonderNameByType(Wonder.WonderType.PYRAMIDS), Wonder.WonderType.PYRAMIDS);
+		wonders.put(Wonder.getWonderNameByType(Wonder.WonderType.LIGHTHOUSE), Wonder.WonderType.LIGHTHOUSE);
+		wonders.put(Wonder.getWonderNameByType(Wonder.WonderType.MAUSOLEUM), Wonder.WonderType.MAUSOLEUM);
+		wonders.put(Wonder.getWonderNameByType(Wonder.WonderType.STATUE), Wonder.WonderType.STATUE);
+		return wonders;
 	}
 
 	@Override
