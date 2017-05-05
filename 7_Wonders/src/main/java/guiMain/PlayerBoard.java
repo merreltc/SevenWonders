@@ -16,7 +16,7 @@ import dataStructures.Player;
 import guiDataStructures.Constants;
 
 public class PlayerBoard {
-	int wood = 0;
+	int lumber = 0;
 	int ore = 0;
 	int stone = 0;
 	int clay = 0;
@@ -89,7 +89,7 @@ public class PlayerBoard {
 
 	public void drawResources(Graphics graphics) {
 		
-		graphics.drawString("Wood: " + this.wood, position.x + 10, position.y + 25);
+		graphics.drawString("Lumber: " + this.lumber, position.x + 10, position.y + 25);
 		graphics.drawString("Ore: " + this.ore, position.x + 10, position.y + 65);
 		graphics.drawString("Stone: " + this.stone, position.x + 10, position.y + 105);
 		graphics.drawString("Clay: " + this.clay, position.x + 10, position.y + 145);
@@ -103,7 +103,7 @@ public class PlayerBoard {
 	
 	public void recalculateResources(){
 		ArrayList<Card> storagePile = player.getStoragePile();
-		wood = 0;
+		lumber = 0;
 		ore = 0;
 		stone = 0;
 		clay = 0;
@@ -122,7 +122,7 @@ public class PlayerBoard {
 	private void sumEntities(EntityEffect effect) {
 		for (Enum entity : effect.getEntities().keySet()){
 			if (entity == Resource.LUMBER){
-				wood++;
+				lumber++;
 			}else if (entity == Resource.CLAY){
 				clay++;
 			}else if (entity == Resource.ORE){
