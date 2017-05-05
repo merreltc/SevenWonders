@@ -2,13 +2,16 @@ package dataStructures;
 
 import java.util.ArrayList;
 
+import exceptions.InsufficientFundsException;
+
 public class GameBoard {
 	private ArrayList<Player> players = new ArrayList<Player>();
 	private ArrayList<Card> discardPile = new ArrayList<Card>();
 	private Deck currentDeck;
 
 	private int numPlayers;
-	private int totalValue1CoinsLeft = 46;
+	private int totalValue1CoinsInBank = 46;
+	private int totalValue3CoinsInBank = 24;
 
 	private int currentPlayerIndex;
 	private int nextPlayerIndex;
@@ -16,7 +19,7 @@ public class GameBoard {
 
 	public GameBoard(ArrayList<Player> players, Deck deck) {
 		this.numPlayers = players.size();
-		this.totalValue1CoinsLeft -= 3 * this.numPlayers;
+		this.totalValue1CoinsInBank -= 3 * this.numPlayers;
 		this.currentPlayerIndex = 0;
 		this.nextPlayerIndex = 1;
 		this.previousPlayerIndex = this.numPlayers - 1;
@@ -72,6 +75,20 @@ public class GameBoard {
 			throw new IllegalArgumentException("Invalid player index: " + index);
 		}
 	}
+	
+	public void addToDiscardPile(Card toTest) {
+		this.discardPile.add(toTest);
+	}
+
+	
+	public boolean makeChangeForValue3Coins(Player active, int numCoinsWanted) {
+		int numValue1CoinsToRemove = numCoinsWanted * 3;
+		active.removeValue1(numValue1CoinsToRemove);
+		this.totalValue3CoinsInBank -= numCoinsWanted;
+		this.totalValue1CoinsInBank += numValue1CoinsToRemove;
+		active.addValue3(numCoinsWanted);
+		return true;
+	}
 
 	public int getCurrentPlayerIndex() {
 		return this.currentPlayerIndex;
@@ -93,15 +110,11 @@ public class GameBoard {
 		return this.discardPile;
 	}
 
-	public void addToDiscardPile(Card toTest) {
-		this.discardPile.add(toTest);
+	public int getTotalValue1CoinsInBank() {
+		return this.totalValue1CoinsInBank;
 	}
 
-	public int getTotalValue1CoinsLeft() {
-		return this.totalValue1CoinsLeft;
-	}
-
-	public int getTotalValue3CoinsLeft() {
-		return 24;
+	public int getTotalValue3CoinsInBank() {
+		return this.totalValue3CoinsInBank;
 	}
 }

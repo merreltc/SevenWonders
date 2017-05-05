@@ -379,7 +379,7 @@ public class GameBoardTests {
 		Deck deck = new Deck(Age.AGE1, cards);
 
 		GameBoard board = new GameBoard(players, deck);
-		assertEquals(37, board.getTotalValue1CoinsLeft());
+		assertEquals(37, board.getTotalValue1CoinsInBank());
 	}
 	
 	@Test
@@ -397,7 +397,7 @@ public class GameBoardTests {
 		Deck deck = new Deck(Age.AGE1, cards);
 
 		GameBoard board = new GameBoard(players, deck);
-		assertEquals(25, board.getTotalValue1CoinsLeft());
+		assertEquals(25, board.getTotalValue1CoinsInBank());
 	}
 	
 	@Test
@@ -411,6 +411,25 @@ public class GameBoardTests {
 		Deck deck = new Deck(Age.AGE1, cards);
 
 		GameBoard board = new GameBoard(players, deck);
-		assertEquals(24, board.getTotalValue3CoinsLeft());
+		assertEquals(24, board.getTotalValue3CoinsInBank());
+	}
+	
+	@Test
+	public void testMakeChangeForValue3Coins(){
+		ArrayList<Player> players = new ArrayList<Player>();
+		players.add(new Player("Wolverine", WonderType.COLOSSUS));
+		players.add(new Player("Captain America", WonderType.LIGHTHOUSE));
+		players.add(new Player("Black Widow", WonderType.PYRAMIDS));
+
+		ArrayList<Card> cards = new SetUpDeckHandler().createCards(Age.AGE1, 3);
+		Deck deck = new Deck(Age.AGE1, cards);
+
+		GameBoard board = new GameBoard(players, deck);
+		Player active = players.get(0);
+		assertTrue(board.makeChangeForValue3Coins(active, 1));
+		assertEquals(0, active.getNumValue1Coins());
+		assertEquals(1, active.getNumValue3Coins());
+		assertEquals(40, board.getTotalValue1CoinsInBank());
+		assertEquals(23, board.getTotalValue3CoinsInBank());
 	}
 }
