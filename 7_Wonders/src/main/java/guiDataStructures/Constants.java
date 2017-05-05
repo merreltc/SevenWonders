@@ -68,5 +68,5 @@ public class Constants {
 	public static final int PlayerHandLeftMostCardPositionY = CurrentPlayerBoardPositionY + CurrentPlayerBoardHeight - CardHeight;
 
 	/* For Game Class */
-	public static final String[] ResourceTypes = new String[] { "Stone", "Wood", "Ore", "Clay" };
+	public static final String[] ResourceTypes = new String[] { "Lumber", "Ore", "Stone", "Clay" };
 }
