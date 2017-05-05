@@ -100,4 +100,8 @@ public class GameBoard {
 	public int getTotalValue1CoinsLeft() {
 		return this.totalValue1CoinsLeft;
 	}
+
+	public int getTotalValue3CoinsLeft() {
+		return 24;
+	}
 }

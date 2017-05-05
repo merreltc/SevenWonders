@@ -399,4 +399,18 @@ public class GameBoardTests {
 		GameBoard board = new GameBoard(players, deck);
 		assertEquals(25, board.getTotalValue1CoinsLeft());
 	}
+	
+	@Test
+	public void testGetTotalValue3CoinsLeft3Players(){
+		ArrayList<Player> players = new ArrayList<Player>();
+		players.add(new Player("Wolverine", WonderType.COLOSSUS));
+		players.add(new Player("Captain America", WonderType.LIGHTHOUSE));
+		players.add(new Player("Black Widow", WonderType.PYRAMIDS));
+
+		ArrayList<Card> cards = new SetUpDeckHandler().createCards(Age.AGE1, 3);
+		Deck deck = new Deck(Age.AGE1, cards);
+
+		GameBoard board = new GameBoard(players, deck);
+		assertEquals(24, board.getTotalValue3CoinsLeft());
+	}
 }
