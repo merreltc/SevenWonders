@@ -3,6 +3,7 @@ package guiMain;
 import java.util.ArrayList;
 
 import backend.GameManager;
+import dataStructures.GeneralEnums.Resource;
 import dataStructures.Player;
 import exceptions.InsufficientFundsException;
 
@@ -14,6 +15,8 @@ public class GuiTradeHelper {
 	}
 
 	public void trade(String[] splitValue) {
+		String resource = splitValue[1];
+		Enum resourceEnum = translateStringToEnum(resource);
 		Player tradeTo;
 		Player tradeFrom = this.gameManager.getCurrentPlayer();
 		int currentIndex = this.gameManager.getPlayers().indexOf(tradeFrom);
@@ -27,10 +30,22 @@ public class GuiTradeHelper {
 		}
 
 		try {
-			this.gameManager.trade(tradeFrom, tradeTo, 3);
-		} catch (InsufficientFundsException e) {
+			this.gameManager.tradeForEntity(tradeFrom, tradeTo, resourceEnum);
+		} catch (Exception e) {
 			Message.showMessage(e.getMessage());
 		}
+	}
+	
+	private Enum translateStringToEnum(String resource){
+		if (resource.equals("Wood")){
+			return Resource.LUMBER;
+		}else if (resource.equals("Stone")){
+			return Resource.STONE;
+		}else if (resource.equals("Ore")){
+			return Resource.ORE;
+		}
+		return Resource.CLAY;
+		
 	}
 
 }

@@ -36,20 +36,20 @@ public class Game extends Menu {
 	private void setUpPlayers(int numOfPlayers) {
 		ArrayList<String> playerNames = new ArrayList<String>();
 		ArrayList<Wonder.WonderType> wonders = new ArrayList<Wonder.WonderType>();
-		
+
 		HashMap<String, Wonder.WonderType> wonderMap = getWonderMap();
-		
+
 		for (int i = 0; i < numOfPlayers; i++) {
 			String name = Message.inputPlayerNameMessage(i);
 			String wonder = Message.dropDownWonderSelectionMessage(wonderMap.keySet().toArray());
-			
+
 			playerNames.add(name);
 			wonders.add(wonderMap.get(wonder));
 			wonderMap.remove(wonder);
 			wonderMap.keySet().remove(wonder);
-			/*Set wonder to correct values*/
+			/* Set wonder to correct values */
 		}
-		
+
 		this.gameManager = new GameManager(playerNames, wonders);
 		this.gameManager.dealInitialTurnCards();
 	}
@@ -93,14 +93,14 @@ public class Game extends Menu {
 		int numOfPlayers = this.gameManager.getNumPlayers();
 		for (int i = -1; i < numOfPlayers - 1; i++) {
 			PlayerBoard board = new PlayerBoard(i, numOfPlayers,
-					this.gameManager.getPlayer((2*numOfPlayers - i) % numOfPlayers),renderer);
+					this.gameManager.getPlayer((2 * numOfPlayers - i) % numOfPlayers), renderer);
 			boards.add(board);
 		}
 	}
 
-	private void setUpCardSlots() {		
+	private void setUpCardSlots() {
 		this.handManager = new HandManager();
-		this.handManager.drawCurrentPlayerCards(this.gameManager.getCurrentPlayer(),renderer);
+		this.handManager.drawCurrentPlayerCards(this.gameManager.getCurrentPlayer(), renderer);
 		for (int i = 0; i < this.handManager.getPlayerHandSize(); i++) {
 			this.addInteractable(this.handManager.getCardHolder(i));
 		}
@@ -139,15 +139,24 @@ public class Game extends Menu {
 	@Override
 	public void onClick(Interactable clicked) {
 		if (clicked.getClass().equals(CardHolder.class)) {
-			((CardHolder) clicked).activate(this.gameManager);
-			rotateBoards();
-			/* update the cards after rotation */
-			for(Interactable toRemove: this.handManager.getCurrentPlayerHand()){
-				this.removeInteractable(toRemove);
-			}
-			this.handManager.drawCurrentPlayerCards(this.gameManager.getCurrentPlayer(),renderer);
-			for (int i = 0; i < this.handManager.getPlayerHandSize(); i++) {
-				this.addInteractable(this.handManager.getCardHolder(i));
+			String[] buttons = new String[] { "Build Structure", "Build Wonder", "Discard" };
+			int val = JOptionPane.showOptionDialog(null, "Choose Play Type", "Play Card",
+					JOptionPane.INFORMATION_MESSAGE, 0, null, buttons, buttons[0]);
+			try {
+				if (val == 0) {
+					((CardHolder) clicked).activate(this.gameManager);
+				}
+				rotateBoards();
+				/* update the cards after rotation */
+				for (Interactable toRemove : this.handManager.getCurrentPlayerHand()) {
+					this.removeInteractable(toRemove);
+				}
+				this.handManager.drawCurrentPlayerCards(this.gameManager.getCurrentPlayer(), renderer);
+				for (int i = 0; i < this.handManager.getPlayerHandSize(); i++) {
+					this.addInteractable(this.handManager.getCardHolder(i));
+				}
+			} catch (Exception e) {
+				Message.showMessage(e.getMessage());
 			}
 		} else if (clicked.getValue().equals("Exit")) {
 			System.exit(0);
@@ -165,7 +174,8 @@ public class Game extends Menu {
 		int totalNumberOfPlayers = this.gameManager.getNumPlayers();
 		int nextPlayerIndex = players.indexOf(nextPlayer);
 		for (int i = 0; i < players.size(); i++) {
-			boards.get(i).changePlayer(players.get((totalNumberOfPlayers + nextPlayerIndex - i) % totalNumberOfPlayers));
+			boards.get(i)
+					.changePlayer(players.get((totalNumberOfPlayers + nextPlayerIndex - i) % totalNumberOfPlayers));
 		}
 	}
 }

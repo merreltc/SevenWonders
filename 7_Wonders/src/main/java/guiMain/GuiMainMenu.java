@@ -27,7 +27,6 @@ public class GuiMainMenu extends JPanel implements ActionListener {
 	private Integer numOfPlayers;
 	private Image image;
 	private RenderImage renderer = new RenderImage();
-	private boolean update = true;
 
 	public enum MenuType {
 		MainMenu, PlayerSelect, Game
@@ -51,10 +50,7 @@ public class GuiMainMenu extends JPanel implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
-		if (update){
-			repaint();
-			update = false;
-		}
+		repaint();
 	}
 
 	@Override
@@ -66,7 +62,6 @@ public class GuiMainMenu extends JPanel implements ActionListener {
 	}
 
 	public void onClick(Interactable clicked) {
-		update = true;
 		String text = clicked.getValue();
 		String classString = current.getClass().getName();
 		String currentMenu = classString.substring(14);
@@ -97,7 +92,6 @@ public class GuiMainMenu extends JPanel implements ActionListener {
 			this.current = new Game(this.numOfPlayers,this.renderer);
 			break;
 		}
-		update = true;
 		this.current.initialize();
 	}
 
