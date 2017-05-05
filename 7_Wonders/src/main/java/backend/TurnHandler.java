@@ -7,8 +7,11 @@ import dataStructures.Deck;
 import dataStructures.Player;
 
 public class TurnHandler {
+	public int numPlayersUntilPass;
 
 	public void dealInitialTurnCards(ArrayList<Player> players, int numPlayers, Deck deck) {
+		this.numPlayersUntilPass = players.size() - 1;
+		
 		for (Player player: players) {
 			ArrayList<Card> currentHand = new ArrayList<Card>();
 			
@@ -19,5 +22,9 @@ public class TurnHandler {
 			
 			player.setCurrentHand(currentHand);
 		}
+	}
+
+	public int getNumPlayersUntilPass() {
+		return this.numPlayersUntilPass;
 	}
 }

@@ -13,6 +13,7 @@ import dataStructures.Card;
 import dataStructures.Deck;
 import dataStructures.GameBoard;
 import dataStructures.Player;
+import dataStructures.Wonder.WonderType;
 import dataStructures.Deck.Age;
 
 public class RotateHandlerTest {
@@ -20,9 +21,9 @@ public class RotateHandlerTest {
 	@Test
 	public void testChangeRotateDirectionAndResetPositionsMin() {
 		ArrayList<Player> players = new ArrayList<Player>();
-		players.add(new Player("Wolverine"));
-		players.add(new Player("Captain America"));
-		players.add(new Player("Black Widow"));
+		players.add(new Player("Wolverine", WonderType.COLOSSUS));
+		players.add(new Player("Captain America", WonderType.LIGHTHOUSE));
+		players.add(new Player("Black Widow", WonderType.PYRAMIDS));
 
 		ArrayList<Card> cards = new SetUpDeckHandler().createCards(Age.AGE1, 3);
 		Deck deck = new Deck(Age.AGE1, cards);
@@ -40,13 +41,13 @@ public class RotateHandlerTest {
 	@Test
 	public void testChangeRotateDirectionAndResetPositionsMax() {
 		ArrayList<Player> players = new ArrayList<Player>();
-		players.add(new Player("Wolverine"));
-		players.add(new Player("Captain America"));
-		players.add(new Player("Black Widow"));
-		players.add(new Player("Hulk"));
-		players.add(new Player("Iron Man"));
-		players.add(new Player("Spider Man"));
-		players.add(new Player("Thor"));
+		players.add(new Player("Wolverine", WonderType.COLOSSUS));
+		players.add(new Player("Captain America", WonderType.LIGHTHOUSE));
+		players.add(new Player("Black Widow", WonderType.PYRAMIDS));
+		players.add(new Player("Hulk", WonderType.TEMPLE));
+		players.add(new Player("Iron Man", WonderType.MAUSOLEUM));
+		players.add(new Player("Spider Man", WonderType.STATUE));
+		players.add(new Player("Thor", WonderType.GARDENS));
 
 		ArrayList<Card> cards = new SetUpDeckHandler().createCards(Age.AGE1, 3);
 		Deck deck = new Deck(Age.AGE1, cards);
@@ -64,11 +65,11 @@ public class RotateHandlerTest {
 	@Test
 	public void testChangeRotateDirectionAndResetPositionsAfterOppositeRotate() {
 		ArrayList<Player> players = new ArrayList<Player>();
-		players.add(new Player("Wolverine"));
-		players.add(new Player("Captain America"));
-		players.add(new Player("Black Widow"));
-		players.add(new Player("Hulk"));
-		players.add(new Player("Iron Man"));
+		players.add(new Player("Wolverine", WonderType.COLOSSUS));
+		players.add(new Player("Captain America", WonderType.LIGHTHOUSE));
+		players.add(new Player("Black Widow", WonderType.PYRAMIDS));
+		players.add(new Player("Hulk", WonderType.TEMPLE));
+		players.add(new Player("Iron Man", WonderType.MAUSOLEUM));
 
 		ArrayList<Card> cards = new SetUpDeckHandler().createCards(Age.AGE1, 3);
 		Deck deck = new Deck(Age.AGE1, cards);
@@ -90,9 +91,9 @@ public class RotateHandlerTest {
 	@Test
 	public void testGetPlayerPositionsOnRotateClockwiseMin() {
 		ArrayList<Player> players = new ArrayList<Player>();
-		players.add(new Player("Wolverine"));
-		players.add(new Player("Captain America"));
-		players.add(new Player("Black Widow"));
+		players.add(new Player("Wolverine", WonderType.COLOSSUS));
+		players.add(new Player("Captain America", WonderType.LIGHTHOUSE));
+		players.add(new Player("Black Widow", WonderType.PYRAMIDS));
 
 		ArrayList<Card> cards = new SetUpDeckHandler().createCards(Age.AGE1, 3);
 		Deck deck = new Deck(Age.AGE1, cards);
@@ -108,13 +109,13 @@ public class RotateHandlerTest {
 	@Test
 	public void testGetPlayerPositionsOnRotateClockwiseMax() {
 		ArrayList<Player> players = new ArrayList<Player>();
-		players.add(new Player("Wolverine"));
-		players.add(new Player("Captain America"));
-		players.add(new Player("Black Widow"));
-		players.add(new Player("Hulk"));
-		players.add(new Player("Iron Man"));
-		players.add(new Player("Spider Man"));
-		players.add(new Player("Thor"));
+		players.add(new Player("Wolverine", WonderType.COLOSSUS));
+		players.add(new Player("Captain America", WonderType.LIGHTHOUSE));
+		players.add(new Player("Black Widow", WonderType.PYRAMIDS));
+		players.add(new Player("Hulk", WonderType.TEMPLE));
+		players.add(new Player("Iron Man", WonderType.MAUSOLEUM));
+		players.add(new Player("Spider Man", WonderType.STATUE));
+		players.add(new Player("Thor", WonderType.GARDENS));
 
 		ArrayList<Card> cards = new SetUpDeckHandler().createCards(Age.AGE1, 3);
 		Deck deck = new Deck(Age.AGE1, cards);
@@ -129,11 +130,11 @@ public class RotateHandlerTest {
 	@Test
 	public void testGetPlayerPositionsOnRotateClockwiseTwice() {
 		ArrayList<Player> players = new ArrayList<Player>();
-		players.add(new Player("Wolverine"));
-		players.add(new Player("Captain America"));
-		players.add(new Player("Black Widow"));
-		players.add(new Player("Hulk"));
-		players.add(new Player("Iron Man"));
+		players.add(new Player("Wolverine", WonderType.COLOSSUS));
+		players.add(new Player("Captain America", WonderType.LIGHTHOUSE));
+		players.add(new Player("Black Widow", WonderType.PYRAMIDS));
+		players.add(new Player("Hulk", WonderType.TEMPLE));
+		players.add(new Player("Iron Man", WonderType.MAUSOLEUM));
 
 		ArrayList<Card> cards = new SetUpDeckHandler().createCards(Age.AGE1, 3);
 		Deck deck = new Deck(Age.AGE1, cards);
@@ -149,11 +150,11 @@ public class RotateHandlerTest {
 	@Test
 	public void testGetPlayerPositionsOnRotateClockwiseMany() {
 		ArrayList<Player> players = new ArrayList<Player>();
-		players.add(new Player("Wolverine"));
-		players.add(new Player("Captain America"));
-		players.add(new Player("Black Widow"));
-		players.add(new Player("Hulk"));
-		players.add(new Player("Iron Man"));
+		players.add(new Player("Wolverine", WonderType.COLOSSUS));
+		players.add(new Player("Captain America", WonderType.LIGHTHOUSE));
+		players.add(new Player("Black Widow", WonderType.PYRAMIDS));
+		players.add(new Player("Hulk", WonderType.TEMPLE));
+		players.add(new Player("Iron Man", WonderType.MAUSOLEUM));
 
 		ArrayList<Card> cards = new SetUpDeckHandler().createCards(Age.AGE1, 3);
 		Deck deck = new Deck(Age.AGE1, cards);
@@ -171,9 +172,9 @@ public class RotateHandlerTest {
 	@Test
 	public void testGetPlayerPositionsOnRotateCounterClockwiseMin() {
 		ArrayList<Player> players = new ArrayList<Player>();
-		players.add(new Player("Wolverine"));
-		players.add(new Player("Captain America"));
-		players.add(new Player("Black Widow"));
+		players.add(new Player("Wolverine", WonderType.COLOSSUS));
+		players.add(new Player("Captain America", WonderType.LIGHTHOUSE));
+		players.add(new Player("Black Widow", WonderType.PYRAMIDS));
 		
 		ArrayList<Card> cards = new SetUpDeckHandler().createCards(Age.AGE1, 3);
 		Deck deck = new Deck(Age.AGE1, cards);
@@ -190,13 +191,13 @@ public class RotateHandlerTest {
 	@Test
 	public void testGetPlayerPositionsOnRotateCounterClockwiseMax() {
 		ArrayList<Player> players = new ArrayList<Player>();
-		players.add(new Player("Wolverine"));
-		players.add(new Player("Captain America"));
-		players.add(new Player("Black Widow"));
-		players.add(new Player("Hulk"));
-		players.add(new Player("Iron Man"));
-		players.add(new Player("Spider Man"));
-		players.add(new Player("Thor"));
+		players.add(new Player("Wolverine", WonderType.COLOSSUS));
+		players.add(new Player("Captain America", WonderType.LIGHTHOUSE));
+		players.add(new Player("Black Widow", WonderType.PYRAMIDS));
+		players.add(new Player("Hulk", WonderType.TEMPLE));
+		players.add(new Player("Iron Man", WonderType.MAUSOLEUM));
+		players.add(new Player("Spider Man", WonderType.STATUE));
+		players.add(new Player("Thor", WonderType.GARDENS));
 
 		ArrayList<Card> cards = new SetUpDeckHandler().createCards(Age.AGE1, 3);
 		Deck deck = new Deck(Age.AGE1, cards);
@@ -213,11 +214,11 @@ public class RotateHandlerTest {
 	@Test
 	public void testGetPlayerPositionsOnRotateCounterClockwiseTwice() {
 		ArrayList<Player> players = new ArrayList<Player>();
-		players.add(new Player("Wolverine"));
-		players.add(new Player("Captain America"));
-		players.add(new Player("Black Widow"));
-		players.add(new Player("Hulk"));
-		players.add(new Player("Iron Man"));
+		players.add(new Player("Wolverine", WonderType.COLOSSUS));
+		players.add(new Player("Captain America", WonderType.LIGHTHOUSE));
+		players.add(new Player("Black Widow", WonderType.PYRAMIDS));
+		players.add(new Player("Hulk", WonderType.TEMPLE));
+		players.add(new Player("Iron Man", WonderType.MAUSOLEUM));
 
 		ArrayList<Card> cards = new SetUpDeckHandler().createCards(Age.AGE1, 3);
 		Deck deck = new Deck(Age.AGE1, cards);
@@ -235,11 +236,11 @@ public class RotateHandlerTest {
 	@Test
 	public void testGetPlayerPositionsOnRotateCounterClockwiseMany() {
 		ArrayList<Player> players = new ArrayList<Player>();
-		players.add(new Player("Wolverine"));
-		players.add(new Player("Captain America"));
-		players.add(new Player("Black Widow"));
-		players.add(new Player("Hulk"));
-		players.add(new Player("Iron Man"));
+		players.add(new Player("Wolverine", WonderType.COLOSSUS));
+		players.add(new Player("Captain America", WonderType.LIGHTHOUSE));
+		players.add(new Player("Black Widow", WonderType.PYRAMIDS));
+		players.add(new Player("Hulk", WonderType.TEMPLE));
+		players.add(new Player("Iron Man", WonderType.MAUSOLEUM));
 
 		ArrayList<Card> cards = new SetUpDeckHandler().createCards(Age.AGE1, 3);
 		Deck deck = new Deck(Age.AGE1, cards);

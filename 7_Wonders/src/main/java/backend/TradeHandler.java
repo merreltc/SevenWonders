@@ -65,7 +65,7 @@ public class TradeHandler {
 			this.tradeCoinsFromTo(from, to, 3);
 			from.addTradedValue(entity);
 		}else{
-			throw new InvalidTradeException("Player doesn't have the resource for trading");
+			throw new InvalidTradeException("Player doesn't have the resource for trading: " + entity.toString());
 		}
 	}
 }
