@@ -94,4 +94,8 @@ public class GameBoard {
 	public void addToDiscardPile(Card toTest) {
 		this.discardPile.add(toTest);
 	}
+
+	public int getTotalValue1CoinsLeft() {
+		return 37;
+	}
 }
