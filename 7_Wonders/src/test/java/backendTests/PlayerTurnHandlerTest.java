@@ -332,6 +332,7 @@ public class PlayerTurnHandlerTest {
 		playerTurnHandler.discardSelectedCard(current, discarded, board);
 		
 		assertEquals(1, board.getDiscardPile().size());
+		assertEquals(6, current.getCoinTotal());
 		assertTrue(board.getDiscardPile().contains(discarded));
 		assertEquals(2, current.getCurrentHand().size());
 		assertFalse(current.getCurrentHand().contains(discarded));

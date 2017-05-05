@@ -8,6 +8,7 @@ public class GameBoard {
 	private Deck currentDeck;
 
 	private int numPlayers;
+	private int totalValue1CoinsLeft = 46;
 
 	private int currentPlayerIndex;
 	private int nextPlayerIndex;
@@ -15,6 +16,7 @@ public class GameBoard {
 
 	public GameBoard(ArrayList<Player> players, Deck deck) {
 		this.numPlayers = players.size();
+		this.totalValue1CoinsLeft -= 3 * this.numPlayers;
 		this.currentPlayerIndex = 0;
 		this.nextPlayerIndex = 1;
 		this.previousPlayerIndex = this.numPlayers - 1;
@@ -96,6 +98,6 @@ public class GameBoard {
 	}
 
 	public int getTotalValue1CoinsLeft() {
-		return 37;
+		return this.totalValue1CoinsLeft;
 	}
 }

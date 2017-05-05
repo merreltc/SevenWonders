@@ -381,4 +381,22 @@ public class GameBoardTests {
 		GameBoard board = new GameBoard(players, deck);
 		assertEquals(37, board.getTotalValue1CoinsLeft());
 	}
+	
+	@Test
+	public void testGetTotalValue1CoinsLeft7Players(){
+		ArrayList<Player> players = new ArrayList<Player>();
+		players.add(new Player("Wolverine", WonderType.COLOSSUS));
+		players.add(new Player("Captain America", WonderType.LIGHTHOUSE));
+		players.add(new Player("Black Widow", WonderType.PYRAMIDS));
+		players.add(new Player("Hulk", WonderType.TEMPLE));
+		players.add(new Player("Iron Man", WonderType.MAUSOLEUM));
+		players.add(new Player("Spider Man", WonderType.STATUE));
+		players.add(new Player("Thor", WonderType.GARDENS));
+
+		ArrayList<Card> cards = new SetUpDeckHandler().createCards(Age.AGE1, 7);
+		Deck deck = new Deck(Age.AGE1, cards);
+
+		GameBoard board = new GameBoard(players, deck);
+		assertEquals(25, board.getTotalValue1CoinsLeft());
+	}
 }
