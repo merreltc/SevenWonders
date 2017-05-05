@@ -101,4 +101,23 @@ public class TurnHandlerTest {
 
 		assertEquals(expectedDeckSize, deck.getCards().size());
 	}
+	
+	@Test
+	public void testGetNumPlayersUntilPass3Players(){
+		ArrayList<String> playerNames = new ArrayList<String>(
+				Arrays.asList("Wolverine", "Captain America", "Black Widow"));
+		ArrayList<WonderType> wonders = new ArrayList<WonderType>(
+				Arrays.asList(WonderType.COLOSSUS, WonderType.LIGHTHOUSE, WonderType.TEMPLE));
+
+		GameManager manager = new GameManager(playerNames, wonders, new SetUpHandler(), new SetUpDeckHandler(),
+				new TurnHandler(), new PlayerTurnHandler());
+
+		Deck deck = manager.getGameBoard().getDeck();
+		ArrayList<Player> players = manager.getPlayers();
+		TurnHandler turnHandler = new TurnHandler();
+		turnHandler.dealInitialTurnCards(players, manager.getNumPlayers(), deck);
+		
+		assertEquals(2, turnHandler.getNumPlayersUntilPass());
+	}
+
 }
