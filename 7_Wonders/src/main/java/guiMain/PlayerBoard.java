@@ -90,9 +90,15 @@ public class PlayerBoard {
 	public void drawResources(Graphics graphics) {
 		
 		graphics.drawString("Wood: " + this.wood, position.x + 10, position.y + 25);
-		graphics.drawString("Ore" + this.ore, position.x + 10, position.y + 65);
-		graphics.drawString("Stone" + this.stone, position.x + 10, position.y + 105);
-		graphics.drawString("Clay" + this.clay, position.x + 10, position.y + 145);
+		graphics.drawString("Ore: " + this.ore, position.x + 10, position.y + 65);
+		graphics.drawString("Stone: " + this.stone, position.x + 10, position.y + 105);
+		graphics.drawString("Clay: " + this.clay, position.x + 10, position.y + 145);
+	}
+	
+	public void changePlayer(Player player){
+		this.player = player;
+		this.WonderImage = renderer.getImage(player.getWonder().getName());
+		recalculateResources();
 	}
 	
 	public void recalculateResources(){
@@ -108,30 +114,28 @@ public class PlayerBoard {
 			Card card = storagePile.get(i);
 			if (card.getEffectType() == Effect.EffectType.ENTITY) {
 				EntityEffect effect = (EntityEffect) card.getEffect();
-				for (Enum entity : effect.getEntities().keySet()){
-					if (entity == Resource.LUMBER){
-						wood++;
-					}else if (entity == Resource.CLAY){
-						clay++;
-					}else if (entity == Resource.ORE){
-						ore++;
-					}else if (entity == Resource.STONE){
-						stone++;
-					}else if (entity == Good.LOOM){
-						loom++;
-					}else if (entity == Good.GLASS){
-						glass++;
-					}else if (entity == Good.PRESS){
-						press++;
-					}
-				}
+				sumEntities(effect);
 			}
 		}
 	}
-	
-	public void changePlayer(Player player){
-		this.player = player;
-		this.WonderImage = renderer.getImage(player.getWonder().getName());
-		recalculateResources();
+
+	private void sumEntities(EntityEffect effect) {
+		for (Enum entity : effect.getEntities().keySet()){
+			if (entity == Resource.LUMBER){
+				wood++;
+			}else if (entity == Resource.CLAY){
+				clay++;
+			}else if (entity == Resource.ORE){
+				ore++;
+			}else if (entity == Resource.STONE){
+				stone++;
+			}else if (entity == Good.LOOM){
+				loom++;
+			}else if (entity == Good.GLASS){
+				glass++;
+			}else if (entity == Good.PRESS){
+				press++;
+			}
+		}
 	}
 }
