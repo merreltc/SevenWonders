@@ -21,25 +21,13 @@ public class Wonder {
 	}
 
 	public Wonder(char side, WonderType type, int numLevels) {
-		setUpTypeMap();
 		this.type = type;
-		this.name = wonders.get(type);
+		this.name = getWonderNameByType(type);
 		this.side = side;
 		validateNumLevels(type, numLevels);
 		this.numLevels = numLevels;
 	}
-
-	private void setUpTypeMap() {
-		this.wonders = new HashMap<WonderType, String>();
-		wonders.put(WonderType.COLOSSUS, "The Colossus of Rhodes");
-		wonders.put(WonderType.LIGHTHOUSE, "The Lighthouse of Alexandria");
-		wonders.put(WonderType.TEMPLE, "The Temple of Artemis in Ephesus");
-		wonders.put(WonderType.GARDENS, "The Hanging Gardens of Babylon");
-		wonders.put(WonderType.STATUE, "The Statue of Zeus in Olympia");
-		wonders.put(WonderType.MAUSOLEUM, "The Mausoleum of Halicarnassus");
-		wonders.put(WonderType.PYRAMIDS, "The Pyramids of Giza");
-	}
-
+	
 	private void validateNumLevels(WonderType type, int numLevels) {
 		if (this.side == 'A') {
 			validateNumLevelsSideA(numLevels);
@@ -93,6 +81,27 @@ public class Wonder {
 
 	public int getNumLevels() {
 		return this.numLevels;
+	}
+	
+	public static String getWonderNameByType(Wonder.WonderType wonder) {
+		switch (wonder) {
+		case COLOSSUS:
+			return "The Colossus of Rhodes";
+		case LIGHTHOUSE:
+			return "The Lighthouse of Alexandria";
+		case TEMPLE:
+			return "The Temple of Artemis in Ephesus";
+		case GARDENS:
+			return "The Hanging Gardens of Babylon";
+		case STATUE:
+			return "The Statue of Zeus in Olympia";
+		case MAUSOLEUM:
+			return "The Mausoleum of Halicarnassus";
+		case PYRAMIDS:
+			return "The Pyramids of Giza";
+		default:
+			throw new IllegalArgumentException("Bad Wonder Type");
+		}
 	}
 
 }

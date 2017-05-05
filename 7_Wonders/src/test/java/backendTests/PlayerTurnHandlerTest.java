@@ -15,15 +15,16 @@ import dataStructures.GameBoard;
 import dataStructures.Player;
 import exceptions.InsufficientFundsException;
 import dataStructures.Deck.Age;
+import dataStructures.Wonder.WonderType;
 
 public class PlayerTurnHandlerTest {
 
 	@Test
 	public void testBuildStructureNoCost(){
 		ArrayList<Player> players = new ArrayList<Player>();
-		players.add(new Player("Wolverine"));
-		players.add(new Player("Captain America"));
-		players.add(new Player("Black Widow"));
+		players.add(new Player("Wolverine", WonderType.COLOSSUS));
+		players.add(new Player("Captain America", WonderType.LIGHTHOUSE));
+		players.add(new Player("Black Widow", WonderType.PYRAMIDS));
 		
 		ArrayList<Card> cards = new SetUpDeckHandler().createCards(Age.AGE1, 3);
 		Deck deck = new Deck(Age.AGE1, cards);
@@ -48,9 +49,9 @@ public class PlayerTurnHandlerTest {
 	@Test
 	public void testBuildStructureCoinCost(){
 		ArrayList<Player> players = new ArrayList<Player>();
-		players.add(new Player("Wolverine"));
-		players.add(new Player("Captain America"));
-		players.add(new Player("Black Widow"));
+		players.add(new Player("Wolverine", WonderType.COLOSSUS));
+		players.add(new Player("Captain America", WonderType.LIGHTHOUSE));
+		players.add(new Player("Black Widow", WonderType.PYRAMIDS));
 		
 		ArrayList<Card> cards = new SetUpDeckHandler().createCards(Age.AGE1, 3);
 		Deck deck = new Deck(Age.AGE1, cards);
@@ -77,9 +78,9 @@ public class PlayerTurnHandlerTest {
 	@Test
 	public void testValidBuildStructureResourceCost(){
 		ArrayList<Player> players = new ArrayList<Player>();
-		players.add(new Player("Wolverine"));
-		players.add(new Player("Captain America"));
-		players.add(new Player("Black Widow"));
+		players.add(new Player("Wolverine", WonderType.COLOSSUS));
+		players.add(new Player("Captain America", WonderType.LIGHTHOUSE));
+		players.add(new Player("Black Widow", WonderType.PYRAMIDS));
 		
 		ArrayList<Card> cards = new SetUpDeckHandler().createCards(Age.AGE1, 3);
 		Deck deck = new Deck(Age.AGE1, cards);
@@ -106,9 +107,9 @@ public class PlayerTurnHandlerTest {
 	@Test(expected = InsufficientFundsException.class)
 	public void testInvalidBuildStructureResourceCost(){
 		ArrayList<Player> players = new ArrayList<Player>();
-		players.add(new Player("Wolverine"));
-		players.add(new Player("Captain America"));
-		players.add(new Player("Black Widow"));
+		players.add(new Player("Wolverine", WonderType.COLOSSUS));
+		players.add(new Player("Captain America", WonderType.LIGHTHOUSE));
+		players.add(new Player("Black Widow", WonderType.PYRAMIDS));
 		
 		ArrayList<Card> cards = new SetUpDeckHandler().createCards(Age.AGE1, 3);
 		Deck deck = new Deck(Age.AGE1, cards);
@@ -131,9 +132,9 @@ public class PlayerTurnHandlerTest {
 	@Test
 	public void testValidBuildStructureEntityCost(){
 		ArrayList<Player> players = new ArrayList<Player>();
-		players.add(new Player("Wolverine"));
-		players.add(new Player("Captain America"));
-		players.add(new Player("Black Widow"));
+		players.add(new Player("Wolverine", WonderType.COLOSSUS));
+		players.add(new Player("Captain America", WonderType.LIGHTHOUSE));
+		players.add(new Player("Black Widow", WonderType.PYRAMIDS));
 		
 		ArrayList<Card> cards = new SetUpDeckHandler().createCards(Age.AGE1, 3);
 		Deck deck = new Deck(Age.AGE1, cards);
@@ -162,9 +163,9 @@ public class PlayerTurnHandlerTest {
 	@Test(expected = InsufficientFundsException.class)
 	public void testInvalidBuildStructureGoodCost(){
 		ArrayList<Player> players = new ArrayList<Player>();
-		players.add(new Player("Wolverine"));
-		players.add(new Player("Captain America"));
-		players.add(new Player("Black Widow"));
+		players.add(new Player("Wolverine", WonderType.COLOSSUS));
+		players.add(new Player("Captain America", WonderType.LIGHTHOUSE));
+		players.add(new Player("Black Widow", WonderType.PYRAMIDS));
 		
 		ArrayList<Card> cards = new SetUpDeckHandler().createCards(Age.AGE1, 3);
 		Deck deck = new Deck(Age.AGE1, cards);
@@ -187,9 +188,9 @@ public class PlayerTurnHandlerTest {
 	@Test
 	public void testValidBuildStructure2ResourceCost(){
 		ArrayList<Player> players = new ArrayList<Player>();
-		players.add(new Player("Wolverine"));
-		players.add(new Player("Captain America"));
-		players.add(new Player("Black Widow"));
+		players.add(new Player("Wolverine", WonderType.COLOSSUS));
+		players.add(new Player("Captain America", WonderType.LIGHTHOUSE));
+		players.add(new Player("Black Widow", WonderType.PYRAMIDS));
 		
 		ArrayList<Card> cards = new SetUpDeckHandler().createCards(Age.AGE2, 3);
 		Deck deck = new Deck(Age.AGE2, cards);
@@ -222,9 +223,9 @@ public class PlayerTurnHandlerTest {
 	@Test(expected = InsufficientFundsException.class)
 	public void testInalidBuildStructure2ResourceCost(){
 		ArrayList<Player> players = new ArrayList<Player>();
-		players.add(new Player("Wolverine"));
-		players.add(new Player("Captain America"));
-		players.add(new Player("Black Widow"));
+		players.add(new Player("Wolverine", WonderType.COLOSSUS));
+		players.add(new Player("Captain America", WonderType.LIGHTHOUSE));
+		players.add(new Player("Black Widow", WonderType.PYRAMIDS));
 		
 		ArrayList<Card> cards = new SetUpDeckHandler().createCards(Age.AGE2, 3);
 		Deck deck = new Deck(Age.AGE2, cards);
@@ -247,9 +248,9 @@ public class PlayerTurnHandlerTest {
 	@Test
 	public void testValidBuildStructureMultiEntityCost(){
 		ArrayList<Player> players = new ArrayList<Player>();
-		players.add(new Player("Wolverine"));
-		players.add(new Player("Captain America"));
-		players.add(new Player("Black Widow"));
+		players.add(new Player("Wolverine", WonderType.COLOSSUS));
+		players.add(new Player("Captain America", WonderType.LIGHTHOUSE));
+		players.add(new Player("Black Widow", WonderType.PYRAMIDS));
 		
 		ArrayList<Card> cards = new SetUpDeckHandler().createCards(Age.AGE2, 3);
 		Deck deck = new Deck(Age.AGE2, cards);
@@ -282,9 +283,9 @@ public class PlayerTurnHandlerTest {
 	@Test(expected = InsufficientFundsException.class)
 	public void testInvalidBuildStructureMultiEntityCost(){
 		ArrayList<Player> players = new ArrayList<Player>();
-		players.add(new Player("Wolverine"));
-		players.add(new Player("Captain America"));
-		players.add(new Player("Black Widow"));
+		players.add(new Player("Wolverine", WonderType.COLOSSUS));
+		players.add(new Player("Captain America", WonderType.LIGHTHOUSE));
+		players.add(new Player("Black Widow", WonderType.PYRAMIDS));
 		
 		ArrayList<Card> cards = new SetUpDeckHandler().createCards(Age.AGE2, 3);
 		Deck deck = new Deck(Age.AGE2, cards);
@@ -309,9 +310,9 @@ public class PlayerTurnHandlerTest {
 	@Test
 	public void testDiscardSelectedCard() {
 		ArrayList<Player> players = new ArrayList<Player>();
-		players.add(new Player("Wolverine"));
-		players.add(new Player("Captain America"));
-		players.add(new Player("Black Widow"));
+		players.add(new Player("Wolverine", WonderType.COLOSSUS));
+		players.add(new Player("Captain America", WonderType.LIGHTHOUSE));
+		players.add(new Player("Black Widow", WonderType.PYRAMIDS));
 		
 		ArrayList<Card> cards = new SetUpDeckHandler().createCards(Age.AGE2, 3);
 		Deck deck = new Deck(Age.AGE2, cards);
