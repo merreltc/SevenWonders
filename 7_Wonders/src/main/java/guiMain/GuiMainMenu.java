@@ -6,6 +6,8 @@ import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.Locale;
+import java.util.ResourceBundle;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -27,6 +29,7 @@ public class GuiMainMenu extends JPanel implements ActionListener {
 	private Integer numOfPlayers;
 	private Image image;
 	private RenderImage renderer = new RenderImage();
+	ResourceBundle messages = ResourceBundle.getBundle("message", Locale.getDefault());
 
 	public enum MenuType {
 		MainMenu, PlayerSelect, Game
@@ -37,7 +40,7 @@ public class GuiMainMenu extends JPanel implements ActionListener {
 		this.frame = new JFrame();
 		this.frame.setSize(Constants.FrameWidth, Constants.FrameHeight);
 		this.frame.setVisible(true);
-		this.frame.setTitle("Seven Wonders");
+		this.frame.setTitle(this.messages.getString("sevenWonders"));
 		this.frame.setResizable(false);
 		this.frame.add(this);
 		this.frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);

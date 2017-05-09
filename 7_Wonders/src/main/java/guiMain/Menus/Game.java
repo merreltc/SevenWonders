@@ -5,6 +5,8 @@ import java.awt.Point;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.Locale;
+import java.util.ResourceBundle;
 
 import javax.swing.JOptionPane;
 
@@ -27,6 +29,7 @@ public class Game extends Menu {
 	private GameManager gameManager;
 	private HandManager handManager;
 	private RenderImage renderer;
+	ResourceBundle messages = ResourceBundle.getBundle("message", Locale.getDefault());
 
 	public Game(int numOfPlayers, RenderImage renderer) {
 		setUpPlayers(numOfPlayers);
@@ -107,7 +110,7 @@ public class Game extends Menu {
 	}
 
 	private void setUpExitButton() {
-		Button exitButton = new Button(Constants.ExitButtonPosition, Constants.ExitButtonBounds, "Exit");
+		Button exitButton = new Button(Constants.ExitButtonPosition, Constants.ExitButtonBounds, this.messages.getString("exit"));
 		this.addInteractable(exitButton);
 	}
 
@@ -139,8 +142,8 @@ public class Game extends Menu {
 	@Override
 	public void onClick(Interactable clicked) {
 		if (clicked.getClass().equals(CardHolder.class)) {
-			String[] buttons = new String[] { "Build Structure", "Build Wonder", "Discard" };
-			int val = JOptionPane.showOptionDialog(null, "Choose Play Type", "Play Card",
+			String[] buttons = new String[] { this.messages.getString("buildStructure"), this.messages.getString("buildWonder"), this.messages.getString("discard") };
+			int val = JOptionPane.showOptionDialog(null, this.messages.getString("choosePlayType"), this.messages.getString("playCard"),
 					JOptionPane.INFORMATION_MESSAGE, 0, null, buttons, buttons[0]);
 			try {
 				if (val == 0) {
@@ -158,7 +161,7 @@ public class Game extends Menu {
 			} catch (Exception e) {
 				Message.showMessage(e.getMessage());
 			}
-		} else if (clicked.getValue().equals("Exit")) {
+		} else if (clicked.getValue().equals(this.messages.getString("exit"))) {
 			System.exit(0);
 		} else {
 			String[] splitValue = clicked.getValue().split("-");

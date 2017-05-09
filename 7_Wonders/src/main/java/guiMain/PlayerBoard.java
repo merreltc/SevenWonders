@@ -5,7 +5,10 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Point;
+import java.text.MessageFormat;
 import java.util.ArrayList;
+import java.util.Locale;
+import java.util.ResourceBundle;
 
 import dataStructures.GeneralEnums.*;
 
@@ -35,6 +38,8 @@ public class PlayerBoard {
 	Image WonderImage;
 	
 	private Player player;
+	
+	ResourceBundle messages = ResourceBundle.getBundle("message", Locale.getDefault());
 
 	public PlayerBoard(int startingPosition, int totalNumberOfPlayers, Player player, RenderImage renderer) {
 		this.renderer = renderer;
@@ -73,10 +78,8 @@ public class PlayerBoard {
 	}
 
 	public void drawBoard(Graphics graphics) {
-		//graphics.setColor(Color.GREEN);
-		//graphics.fillRect(this.position.x, this.position.y, this.sizePoint.x, this.sizePoint.y);
 		RenderImage.draw(graphics, WonderImage, this.position.x, this.position.y, this.sizePoint.x, this.sizePoint.y);
-		graphics.setFont(new Font("Courier New", Font.BOLD, 30));
+		graphics.setFont(Constants.ResourceFont);
 		graphics.setColor(Color.RED);
 		graphics.drawString(this.player.getName(), position.x + sizePoint.x / 2 - 20,
 				position.y + Constants.PlayerNameYOffset);
@@ -89,10 +92,24 @@ public class PlayerBoard {
 
 	public void drawResources(Graphics graphics) {
 		
-		graphics.drawString("Lumber: " + this.lumber, position.x + 10, position.y + 25);
-		graphics.drawString("Ore: " + this.ore, position.x + 10, position.y + 65);
-		graphics.drawString("Stone: " + this.stone, position.x + 10, position.y + 105);
-		graphics.drawString("Clay: " + this.clay, position.x + 10, position.y + 145);
+		Object[] lumberArgs = {this.lumber};
+		Object[] oreArgs = {this.ore};
+		Object[] stoneArgs = {this.stone};
+		Object[] clayArgs = {this.clay};
+		MessageFormat format = new MessageFormat("");
+		format.setLocale(Locale.getDefault());
+		
+		format.applyPattern(messages.getString("resourceLumberTemplate"));
+		graphics.drawString(format.format(lumberArgs), position.x + 10, position.y + 25);
+		
+		format.applyPattern(messages.getString("resourceOreTemplate"));
+		graphics.drawString(format.format(oreArgs), position.x + 10, position.y + 65);
+		
+		format.applyPattern(messages.getString("resourceStoneTemplate"));
+		graphics.drawString(format.format(stoneArgs), position.x + 10, position.y + 105);
+		
+		format.applyPattern(messages.getString("resourceClayTemplate"));
+		graphics.drawString(format.format(clayArgs), position.x + 10, position.y + 145);
 	}
 	
 	public void changePlayer(Player player){
