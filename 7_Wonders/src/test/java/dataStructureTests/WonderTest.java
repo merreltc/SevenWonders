@@ -180,19 +180,37 @@ public class WonderTest {
 	
 	@Test
 	public void testGetWonderNameByTypeValid() {
-		String name = Wonder.getWonderNameByType(WonderType.COLOSSUS);
+		String name = Wonder.getNameByType(WonderType.COLOSSUS);
 		assertEquals("The Colossus of Rhodes", name);
-		name = Wonder.getWonderNameByType(WonderType.GARDENS);
+		name = Wonder.getNameByType(WonderType.GARDENS);
 		assertEquals("The Hanging Gardens of Babylon", name);
-		name = Wonder.getWonderNameByType(WonderType.LIGHTHOUSE);
+		name = Wonder.getNameByType(WonderType.LIGHTHOUSE);
 		assertEquals("The Lighthouse of Alexandria", name);
-		name = Wonder.getWonderNameByType(WonderType.MAUSOLEUM);
+		name = Wonder.getNameByType(WonderType.MAUSOLEUM);
 		assertEquals("The Mausoleum of Halicarnassus", name);
-		name = Wonder.getWonderNameByType(WonderType.PYRAMIDS);
+		name = Wonder.getNameByType(WonderType.PYRAMIDS);
 		assertEquals("The Pyramids of Giza", name);
-		name = Wonder.getWonderNameByType(WonderType.STATUE);
+		name = Wonder.getNameByType(WonderType.STATUE);
 		assertEquals("The Statue of Zeus in Olympia", name);
-		name = Wonder.getWonderNameByType(WonderType.TEMPLE);
+		name = Wonder.getNameByType(WonderType.TEMPLE);
 		assertEquals("The Temple of Artemis in Ephesus", name);		
+	}
+	
+	@Test
+	public void testGetShortNameByTypeValid() {
+		String name = Wonder.getShortNameByType(WonderType.COLOSSUS);
+		assertEquals("Colossus", name);
+		name = Wonder.getShortNameByType(WonderType.GARDENS);
+		assertEquals("Hanging Gardens", name);
+		name = Wonder.getShortNameByType(WonderType.LIGHTHOUSE);
+		assertEquals("Lighthouse", name);
+		name = Wonder.getShortNameByType(WonderType.MAUSOLEUM);
+		assertEquals("Mausoleum", name);
+		name = Wonder.getShortNameByType(WonderType.PYRAMIDS);
+		assertEquals("Pyramids", name);
+		name = Wonder.getShortNameByType(WonderType.STATUE);
+		assertEquals("Statue of Zeus", name);
+		name = Wonder.getShortNameByType(WonderType.TEMPLE);
+		assertEquals("Temple of Artemis", name);		
 	}
 }

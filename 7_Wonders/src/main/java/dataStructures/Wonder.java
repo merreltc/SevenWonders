@@ -22,7 +22,7 @@ public class Wonder {
 
 	public Wonder(char side, WonderType type, int numLevels) {
 		this.type = type;
-		this.name = getWonderNameByType(type);
+		this.name = getNameByType(type);
 		this.side = side;
 		validateNumLevels(type, numLevels);
 		this.numLevels = numLevels;
@@ -83,7 +83,7 @@ public class Wonder {
 		return this.numLevels;
 	}
 	
-	public static String getWonderNameByType(Wonder.WonderType wonder) {
+	public static String getNameByType(Wonder.WonderType wonder) {
 		switch (wonder) {
 		case COLOSSUS:
 			return "The Colossus of Rhodes";
@@ -103,5 +103,25 @@ public class Wonder {
 			throw new IllegalArgumentException("Bad Wonder Type");
 		}
 	}
-
+	
+	public static String getShortNameByType(Wonder.WonderType wonder) {
+		switch (wonder) {
+		case COLOSSUS:
+			return "Colossus";
+		case LIGHTHOUSE:
+			return "Lighthouse";
+		case TEMPLE:
+			return "Temple of Artemis";
+		case GARDENS:
+			return "Hanging Gardens";
+		case STATUE:
+			return "Statue of Zeus";
+		case MAUSOLEUM:
+			return "Mausoleum";
+		case PYRAMIDS:
+			return "Pyramids";
+		default:
+			throw new IllegalArgumentException("Bad Wonder Type");
+		}
+	}
 }
