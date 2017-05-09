@@ -10,15 +10,19 @@ import dataStructures.Wonder.WonderType;
 public class SetUpHandler {
 
 	public ArrayList<Player> setUpAndReturnPlayers(HashMap<String, Wonder.WonderType> playerNamesAndWonders) {
-		int count = 0;
+		HashMap<Wonder.WonderType, Integer> wonderCounts = new HashMap<Wonder.WonderType, Integer>();
 		for(String name : playerNamesAndWonders.keySet()) {
-			if(playerNamesAndWonders.get(name) == Wonder.WonderType.COLOSSUS) {
-				count++;
-			}
-			if(count > 1) {
-				throw new IllegalArgumentException("Cannot assign wonder (Colossus) to multiple players");
+			Wonder.WonderType type = playerNamesAndWonders.get(name);
+			int currCount = wonderCounts.containsKey(type) ? wonderCounts.get(type) : 0;
+			wonderCounts.put(type, currCount + 1);
+		}
+		
+		for(Wonder.WonderType type : wonderCounts.keySet()) {
+			if(wonderCounts.get(type) > 1) {
+				throw new IllegalArgumentException("Cannot assign wonder(s) to multiple players");
 			}
 		}
+		
 		validatePlayerNum(playerNamesAndWonders.size());
 		return createPlayers(playerNamesAndWonders);
 	}
