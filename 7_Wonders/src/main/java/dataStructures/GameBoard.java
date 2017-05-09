@@ -82,6 +82,9 @@ public class GameBoard {
 
 	
 	public boolean makeChangeForValue3Coins(Player active, int numCoinsWanted) {
+		if(numCoinsWanted > this.totalValue3CoinsInBank){
+			throw new InsufficientFundsException("Not enough value 3 coins left in bank");
+		}
 		int numValue1CoinsToRemove = numCoinsWanted * 3;
 		active.removeValue1(numValue1CoinsToRemove);
 		this.totalValue3CoinsInBank -= numCoinsWanted;
