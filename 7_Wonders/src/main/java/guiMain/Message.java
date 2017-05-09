@@ -25,7 +25,8 @@ public class Message {
 		
 		String name = JOptionPane.showInputDialog(format.format(messageArgs));
 		if (name == null || name.equals("")) {
-			name = "Player " + (i + 1);
+			format.applyPattern(messages.getString("defaultPlayerTemplate"));
+			name = format.format(messageArgs);
 		}
 		return name;
 	}
