@@ -80,6 +80,15 @@ public class GameBoard {
 		this.discardPile.add(toTest);
 	}
 
+	public boolean makeChangeForValue1Coins(Player active, int numCoinsWanted) {
+		int numValue3CoinsToRemove = numCoinsWanted / 3;
+		active.removeValue3(numValue3CoinsToRemove);
+		this.totalValue3CoinsInBank -= numValue3CoinsToRemove;
+		this.totalValue1CoinsInBank += numCoinsWanted;
+		active.addValue1(numCoinsWanted);
+		
+		return true;
+	}
 	
 	public boolean makeChangeForValue3Coins(Player active, int numCoinsWanted) {
 		if(numCoinsWanted > this.totalValue3CoinsInBank){
