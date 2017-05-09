@@ -61,6 +61,10 @@ public class Constants {
 	public static final Point TradeRightBaseButtonPoint = new Point(NextPlayerBoardPositionX - 5, NextPlayerBoardPositionY + 5);
 
 	public static final int TradeButtonYOffet = TradeButtonBounds.y + 20;
+	
+	public static final int ResourcerViewerButtonYOffset = 50;
+	
+	public static final Point ResourceViewerButtonBounds = new Point(150,50);
 
 	public static final int CardHeight = 258;
 	public static final int CardWidth = 150;

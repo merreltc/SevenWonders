@@ -30,6 +30,7 @@ public class Game extends Menu {
 	private HandManager handManager;
 	private RenderImage renderer;
 	ResourceBundle messages = ResourceBundle.getBundle("message", Locale.getDefault());
+	ResourceViewer resource = new ResourceViewer();
 
 	public Game(int numOfPlayers, RenderImage renderer) {
 		setUpPlayers(numOfPlayers);
@@ -76,6 +77,7 @@ public class Game extends Menu {
 		setUpExitButton();
 		setUpTradingButtons();
 		setUpCardSlots();
+		
 	}
 
 	@Override
@@ -86,10 +88,12 @@ public class Game extends Menu {
 			 */
 			boards.get((i + 2) % boards.size()).draw(graphics);
 		}
-
+        
 		for (Interactable button : this.getInteractables()) {
 			button.draw(graphics);
 		}
+		
+		this.resource.draw(graphics);
 	}
 
 	private void createBoardsForEachPlayer() {
@@ -97,6 +101,7 @@ public class Game extends Menu {
 		for (int i = -1; i < numOfPlayers - 1; i++) {
 			PlayerBoard board = new PlayerBoard(i, numOfPlayers,
 					this.gameManager.getPlayer((2 * numOfPlayers - i) % numOfPlayers), renderer);
+			this.addInteractable(board.generateResourceButton());
 			boards.add(board);
 		}
 	}
@@ -141,6 +146,9 @@ public class Game extends Menu {
 
 	@Override
 	public void onClick(Interactable clicked) {
+		if (this.resource.isActive()){
+			this.resource.closeMenu();
+		}
 		if (clicked.getClass().equals(CardHolder.class)) {
 			String[] buttons = new String[] { this.messages.getString("buildStructure"), this.messages.getString("buildWonder"), this.messages.getString("discard") };
 			int val = JOptionPane.showOptionDialog(null, this.messages.getString("choosePlayType"), this.messages.getString("playCard"),
@@ -163,11 +171,19 @@ public class Game extends Menu {
 			}
 		} else if (clicked.getValue().equals(this.messages.getString("exit"))) {
 			System.exit(0);
+		} else if (clicked.getValue().codePointAt(0) >= 48 || clicked.getValue().codePointAt(0) <= 57){
+			int playerNum = codePointToInt(clicked.getValue().codePointAt(0));
+			int locOfCurrentPlayer = this.gameManager.getPlayers().indexOf(this.gameManager.getCurrentPlayer());
+			this.resource.openMenu(this.gameManager.getPlayer(locOfCurrentPlayer + playerNum));
 		} else {
 			String[] splitValue = clicked.getValue().split("-");
 			GuiTradeHelper tradeHandler = new GuiTradeHelper(this.gameManager);
 			tradeHandler.trade(splitValue);
 		}
+	}
+	
+	private int codePointToInt(int val){
+		return val - 48;
 	}
 
 	public void rotateBoards() {
