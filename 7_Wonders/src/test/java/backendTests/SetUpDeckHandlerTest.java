@@ -23,7 +23,7 @@ import dataStructures.Effect.EffectType;
 import dataStructures.EntityEffect;
 import dataStructures.EntityEffect.EntityType;
 import dataStructures.GeneralEnums.Good;
-import dataStructures.GeneralEnums.Resource;
+import dataStructures.GeneralEnums.RawResource;
 import dataStructures.GeneralEnums.Science;
 import dataStructures.MultiValueEffect;
 import dataStructures.ValueEffect;
@@ -115,7 +115,7 @@ public class SetUpDeckHandlerTest {
 		assertEquals(CostType.COIN, card.getCostType());
 		assertEquals(EffectType.ENTITY, effect.getEffectType());
 		assertEquals(EntityType.RESOURCE, effect.getEntityType());
-		assertEquals(2, (int) entitiesAndAmounts.get(Resource.LUMBER));
+		assertEquals(2, (int) entitiesAndAmounts.get(RawResource.LUMBER));
 		assertEquals("None", card.getNextStructureName());
 		assertEquals("None", card.getPreviousStructureName());
 	}
@@ -161,7 +161,7 @@ public class SetUpDeckHandlerTest {
 		assertEquals(Value.VICTORYPOINTS, effect.getValue());
 		assertEquals(ValueType.VICTORYPOINT, effect.getValueType());
 		assertEquals(AffectingEntity.NONE, effect.getAffectingEntity());
-		assertEquals(3, (int) costs.get(Resource.STONE));
+		assertEquals(3, (int) costs.get(RawResource.STONE));
 		assertEquals(5, effect.getValueAmount());
 		assertEquals("None", card.getNextStructureName());
 		assertEquals("Baths", card.getPreviousStructureName());
@@ -182,8 +182,8 @@ public class SetUpDeckHandlerTest {
 		assertEquals("Haven", card.getName());
 		assertEquals(CostType.MULTITYPE, card.getCostType());
 		assertEquals(1, (int) costs.get(Good.LOOM));
-		assertEquals(1, (int) costs.get(Resource.LUMBER));
-		assertEquals(1, (int) costs.get(Resource.ORE));
+		assertEquals(1, (int) costs.get(RawResource.LUMBER));
+		assertEquals(1, (int) costs.get(RawResource.ORE));
 
 		MultiValueEffect effect = (MultiValueEffect) card.getEffect();
 		HashMap<Enum, Integer> effects = effect.getValues();
@@ -217,7 +217,7 @@ public class SetUpDeckHandlerTest {
 		assertEquals(Value.VICTORYPOINTS, effect.getValue());
 		assertEquals(ValueType.VICTORYPOINT, effect.getValueType());
 		assertEquals(AffectingEntity.NONE, effect.getAffectingEntity());
-		assertEquals(3, (int) costs.get(Resource.STONE));
+		assertEquals(3, (int) costs.get(RawResource.STONE));
 		assertEquals(5, effect.getValueAmount());
 		assertEquals("None", card.getNextStructureName());
 		assertEquals("Baths", card.getPreviousStructureName());
@@ -232,7 +232,7 @@ public class SetUpDeckHandlerTest {
 		assertEquals(Value.VICTORYPOINTS, effect2.getValue());
 		assertEquals(ValueType.VICTORYPOINT, effect2.getValueType());
 		assertEquals(AffectingEntity.NONE, effect2.getAffectingEntity());
-		assertEquals(3, (int) costs2.get(Resource.STONE));
+		assertEquals(3, (int) costs2.get(RawResource.STONE));
 		assertEquals(5, effect2.getValueAmount());
 		assertEquals("None", card2.getNextStructureName());
 		assertEquals("Baths", card2.getPreviousStructureName());
@@ -314,7 +314,7 @@ public class SetUpDeckHandlerTest {
 					entitiesAndAmounts.put(good, entityAmount);
 				} else {
 					entityAmount = entityToAdd.getInt("entityAmount");
-					Resource resource = Resource.valueOf(entityToAdd.getString(entityType));
+					RawResource resource = RawResource.valueOf(entityToAdd.getString(entityType));
 					entitiesAndAmounts.put(resource, entityAmount);
 				}
 			}
@@ -408,7 +408,7 @@ public class SetUpDeckHandlerTest {
 				type = costValueObj.getString("Resource");
 
 				int amount = costValueObj.getInt("amount");
-				Resource costResource = Resource.valueOf(type);
+				RawResource costResource = RawResource.valueOf(type);
 
 				givenCosts.put(costResource, amount);
 			} catch (JSONException exception) {
@@ -436,7 +436,7 @@ public class SetUpDeckHandlerTest {
 			int amount = resource.getInt("amount");
 
 			if (resourceTypeKey.equals("Resource")) {
-				Resource costResource = Resource.valueOf(costTypeValue);
+				RawResource costResource = RawResource.valueOf(costTypeValue);
 				givenCosts.put(costResource, amount);
 			} else {
 				Good costGood = Good.valueOf(costTypeValue);

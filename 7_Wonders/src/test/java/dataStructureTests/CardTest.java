@@ -14,7 +14,7 @@ import dataStructures.Cost;
 import dataStructures.Cost.CostType;
 import dataStructures.Effect;
 import dataStructures.Effect.EffectType;
-import dataStructures.GeneralEnums.Resource;
+import dataStructures.GeneralEnums.RawResource;
 
 public class CardTest {
 
@@ -28,12 +28,12 @@ public class CardTest {
 		Effect effect = EasyMock.createStrictMock(Effect.class);
 
 		HashMap<Enum, Integer> expected = new HashMap<Enum, Integer>();
-		expected.put(Resource.LUMBER, 2);
+		expected.put(RawResource.LUMBER, 2);
 
 		EasyMock.expect(cost.getType()).andReturn(CostType.NONE);
 
 		HashMap<Enum, Integer> expectedEntities = new HashMap<Enum, Integer>();
-		expectedEntities.put(Resource.LUMBER, 2);
+		expectedEntities.put(RawResource.LUMBER, 2);
 
 		EasyMock.expect(effect.getEffectType()).andReturn(Effect.EffectType.ENTITY);
 
@@ -60,7 +60,7 @@ public class CardTest {
 		Effect effect = EasyMock.createStrictMock(Effect.class);
 
 		HashMap<Enum, Integer> expected = new HashMap<Enum, Integer>();
-		expected.put(Resource.LUMBER, 2);
+		expected.put(RawResource.LUMBER, 2);
 
 		EasyMock.expect(cost.getType()).andReturn(CostType.NONE);
 		EasyMock.expect(effect.getEffectType()).andReturn(Effect.EffectType.ENTITY);
@@ -88,7 +88,7 @@ public class CardTest {
 		Effect effect = EasyMock.createStrictMock(Effect.class);
 
 		HashMap<Enum, Integer> expected = new HashMap<Enum, Integer>();
-		expected.put(Resource.LUMBER, 2);
+		expected.put(RawResource.LUMBER, 2);
 
 		EasyMock.expect(cost.getType()).andReturn(CostType.RESOURCE);
 		EasyMock.expect(effect.getEffectType()).andReturn(Effect.EffectType.MULTIVALUE);
@@ -115,7 +115,7 @@ public class CardTest {
 		Effect effect = EasyMock.createStrictMock(Effect.class);
 
 		HashMap<Enum, Integer> expected = new HashMap<Enum, Integer>();
-		expected.put(Resource.LUMBER, 2);
+		expected.put(RawResource.LUMBER, 2);
 
 		EasyMock.expect(cost.getType()).andReturn(CostType.RESOURCE);
 		EasyMock.expect(effect.getEffectType()).andReturn(Effect.EffectType.VALUE);
@@ -143,7 +143,7 @@ public class CardTest {
 		Effect effect = EasyMock.createStrictMock(Effect.class);
 
 		HashMap<Enum, Integer> expected = new HashMap<Enum, Integer>();
-		expected.put(Resource.LUMBER, 2);
+		expected.put(RawResource.LUMBER, 2);
 
 		EasyMock.expect(cost.getType()).andReturn(CostType.RESOURCE);
 		EasyMock.expect(effect.getEffectType()).andReturn(Effect.EffectType.ENTITY);
@@ -171,7 +171,7 @@ public class CardTest {
 		Effect effect = EasyMock.createStrictMock(Effect.class);
 
 		HashMap<Enum, Integer> expected = new HashMap<Enum, Integer>();
-		expected.put(Resource.LUMBER, 2);
+		expected.put(RawResource.LUMBER, 2);
 
 		EasyMock.expect(cost.getType()).andReturn(CostType.RESOURCE);
 		EasyMock.expect(effect.getEffectType()).andReturn(Effect.EffectType.VALUE);
@@ -199,7 +199,7 @@ public class CardTest {
 		Effect effect = EasyMock.createStrictMock(Effect.class);
 
 		HashMap<Enum, Integer> expected = new HashMap<Enum, Integer>();
-		expected.put(Resource.LUMBER, 2);
+		expected.put(RawResource.LUMBER, 2);
 
 		EasyMock.expect(cost.getType()).andReturn(CostType.RESOURCE);
 		EasyMock.expect(effect.getEffectType()).andReturn(Effect.EffectType.VALUE);
@@ -223,7 +223,7 @@ public class CardTest {
 		Effect effect = EasyMock.createStrictMock(Effect.class);
 
 		HashMap<Enum, Integer> expectedCost = new HashMap<Enum, Integer>();
-		expectedCost.put(Resource.LUMBER, 2);
+		expectedCost.put(RawResource.LUMBER, 2);
 
 		EasyMock.expect(cost.getType()).andReturn(CostType.RESOURCE);
 		EasyMock.expect(effect.getEffectType()).andReturn(Effect.EffectType.VALUE);
@@ -249,7 +249,7 @@ public class CardTest {
 		Effect effect = EasyMock.createStrictMock(Effect.class);
 
 		HashMap<Enum, Integer> expected = new HashMap<Enum, Integer>();
-		expected.put(Resource.LUMBER, 2);
+		expected.put(RawResource.LUMBER, 2);
 
 		EasyMock.replay(cost, effect);
 
@@ -269,7 +269,7 @@ public class CardTest {
 		Effect effect = EasyMock.createStrictMock(Effect.class);
 
 		HashMap<Enum, Integer> expected = new HashMap<Enum, Integer>();
-		expected.put(Resource.LUMBER, 2);
+		expected.put(RawResource.LUMBER, 2);
 
 		EasyMock.expect(cost.getCost()).andReturn(expected);
 		EasyMock.replay(cost);

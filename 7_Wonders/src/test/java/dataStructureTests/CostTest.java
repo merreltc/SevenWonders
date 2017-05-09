@@ -9,7 +9,7 @@ import org.junit.Test;
 import dataStructures.Cost;
 import dataStructures.Cost.CostType;
 import dataStructures.GeneralEnums.Good;
-import dataStructures.GeneralEnums.Resource;
+import dataStructures.GeneralEnums.RawResource;
 
 public class CostTest {
 
@@ -51,17 +51,17 @@ public class CostTest {
 		HashMap<Enum, Integer> expectedCost = new HashMap<Enum, Integer>();
 		HashMap<Enum, Integer> actualCost = new HashMap<Enum, Integer>();
 		
-		expectedCost.put(Resource.ORE, 1);
-		expectedCost.put(Resource.LUMBER, 3);
+		expectedCost.put(RawResource.ORE, 1);
+		expectedCost.put(RawResource.LUMBER, 3);
 		
-		actualCost.put(Resource.ORE, 1);
-		actualCost.put(Resource.LUMBER, 3);
+		actualCost.put(RawResource.ORE, 1);
+		actualCost.put(RawResource.LUMBER, 3);
 		
 		Cost cost = new Cost(CostType.RESOURCE, actualCost);
 		
 		assertEquals(CostType.RESOURCE, cost.getType());
-		assertEquals(expectedCost.get(Resource.ORE), cost.getCost().get(Resource.ORE));
-		assertEquals(expectedCost.get(Resource.LUMBER), cost.getCost().get(Resource.LUMBER));
+		assertEquals(expectedCost.get(RawResource.ORE), cost.getCost().get(RawResource.ORE));
+		assertEquals(expectedCost.get(RawResource.LUMBER), cost.getCost().get(RawResource.LUMBER));
 		assertEquals(0, cost.getCoinCost());
 	}
 	
@@ -70,16 +70,16 @@ public class CostTest {
 		HashMap<Enum, Integer> expectedCost = new HashMap<Enum, Integer>();
 		HashMap<Enum, Integer> actualCost = new HashMap<Enum, Integer>();
 		
-		expectedCost.put(Resource.STONE, 3);
+		expectedCost.put(RawResource.STONE, 3);
 		expectedCost.put(Good.GLASS, 1);
 		
-		actualCost.put(Resource.STONE, 3);
+		actualCost.put(RawResource.STONE, 3);
 		actualCost.put(Good.GLASS, 1);
 		
 		Cost cost = new Cost(CostType.MULTITYPE, actualCost);
 		
 		assertEquals(CostType.MULTITYPE, cost.getType());
-		assertEquals(expectedCost.get(Resource.STONE), cost.getCost().get(Resource.STONE));
+		assertEquals(expectedCost.get(RawResource.STONE), cost.getCost().get(RawResource.STONE));
 		assertEquals(expectedCost.get(Good.GLASS), cost.getCost().get(Good.GLASS));
 		assertEquals(0, cost.getCoinCost());
 	}
@@ -89,31 +89,31 @@ public class CostTest {
 		HashMap<Enum, Integer> expectedCost = new HashMap<Enum, Integer>();
 		HashMap<Enum, Integer> actualCost = new HashMap<Enum, Integer>();
 		
-		expectedCost.put(Resource.STONE, 1);
-		expectedCost.put(Resource.ORE, 1);
-		expectedCost.put(Resource.CLAY, 1);
-		expectedCost.put(Resource.LUMBER, 1);
+		expectedCost.put(RawResource.STONE, 1);
+		expectedCost.put(RawResource.ORE, 1);
+		expectedCost.put(RawResource.CLAY, 1);
+		expectedCost.put(RawResource.LUMBER, 1);
 		expectedCost.put(Good.LOOM, 1);
-		expectedCost.put(Good.PAPER, 1);
+		expectedCost.put(Good.PRESS, 1);
 		expectedCost.put(Good.GLASS, 1);
 		
-		actualCost.put(Resource.STONE, 1);
-		actualCost.put(Resource.ORE, 1);
-		actualCost.put(Resource.CLAY, 1);
-		actualCost.put(Resource.LUMBER, 1);
+		actualCost.put(RawResource.STONE, 1);
+		actualCost.put(RawResource.ORE, 1);
+		actualCost.put(RawResource.CLAY, 1);
+		actualCost.put(RawResource.LUMBER, 1);
 		actualCost.put(Good.LOOM, 1);
-		actualCost.put(Good.PAPER, 1);
+		actualCost.put(Good.PRESS, 1);
 		actualCost.put(Good.GLASS, 1);
 		
 		Cost cost = new Cost(CostType.MULTITYPE, actualCost);
 		
 		assertEquals(CostType.MULTITYPE, cost.getType());
-		assertEquals(expectedCost.get(Resource.STONE), cost.getCost().get(Resource.STONE));
-		assertEquals(expectedCost.get(Resource.ORE), cost.getCost().get(Resource.ORE));
-		assertEquals(expectedCost.get(Resource.CLAY), cost.getCost().get(Resource.CLAY));
-		assertEquals(expectedCost.get(Resource.LUMBER), cost.getCost().get(Resource.LUMBER));
+		assertEquals(expectedCost.get(RawResource.STONE), cost.getCost().get(RawResource.STONE));
+		assertEquals(expectedCost.get(RawResource.ORE), cost.getCost().get(RawResource.ORE));
+		assertEquals(expectedCost.get(RawResource.CLAY), cost.getCost().get(RawResource.CLAY));
+		assertEquals(expectedCost.get(RawResource.LUMBER), cost.getCost().get(RawResource.LUMBER));
 		assertEquals(expectedCost.get(Good.LOOM), cost.getCost().get(Good.LOOM));
-		assertEquals(expectedCost.get(Good.PAPER), cost.getCost().get(Good.PAPER));
+		assertEquals(expectedCost.get(Good.PRESS), cost.getCost().get(Good.PRESS));
 		assertEquals(expectedCost.get(Good.GLASS), cost.getCost().get(Good.GLASS));
 		assertEquals(0, cost.getCoinCost());
 	}

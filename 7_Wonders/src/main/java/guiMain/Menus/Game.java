@@ -51,13 +51,13 @@ public class Game extends Menu {
 
 	private HashMap<String, Wonder.WonderType> getWonderMap() {
 		HashMap<String, Wonder.WonderType> wonders = new HashMap<String, Wonder.WonderType>();
-		wonders.put(Wonder.getWonderNameByType(Wonder.WonderType.COLOSSUS), Wonder.WonderType.COLOSSUS);
-		wonders.put(Wonder.getWonderNameByType(Wonder.WonderType.TEMPLE), Wonder.WonderType.TEMPLE);
-		wonders.put(Wonder.getWonderNameByType(Wonder.WonderType.GARDENS), Wonder.WonderType.GARDENS);
-		wonders.put(Wonder.getWonderNameByType(Wonder.WonderType.PYRAMIDS), Wonder.WonderType.PYRAMIDS);
-		wonders.put(Wonder.getWonderNameByType(Wonder.WonderType.LIGHTHOUSE), Wonder.WonderType.LIGHTHOUSE);
-		wonders.put(Wonder.getWonderNameByType(Wonder.WonderType.MAUSOLEUM), Wonder.WonderType.MAUSOLEUM);
-		wonders.put(Wonder.getWonderNameByType(Wonder.WonderType.STATUE), Wonder.WonderType.STATUE);
+		wonders.put(Wonder.getNameByType(Wonder.WonderType.COLOSSUS), Wonder.WonderType.COLOSSUS);
+		wonders.put(Wonder.getNameByType(Wonder.WonderType.TEMPLE), Wonder.WonderType.TEMPLE);
+		wonders.put(Wonder.getNameByType(Wonder.WonderType.GARDENS), Wonder.WonderType.GARDENS);
+		wonders.put(Wonder.getNameByType(Wonder.WonderType.PYRAMIDS), Wonder.WonderType.PYRAMIDS);
+		wonders.put(Wonder.getNameByType(Wonder.WonderType.LIGHTHOUSE), Wonder.WonderType.LIGHTHOUSE);
+		wonders.put(Wonder.getNameByType(Wonder.WonderType.MAUSOLEUM), Wonder.WonderType.MAUSOLEUM);
+		wonders.put(Wonder.getNameByType(Wonder.WonderType.STATUE), Wonder.WonderType.STATUE);
 		return wonders;
 	}
 

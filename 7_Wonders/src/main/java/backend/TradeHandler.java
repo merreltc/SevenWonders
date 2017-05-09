@@ -1,7 +1,7 @@
 package backend;
 
 import dataStructures.GameBoard;
-import dataStructures.GeneralEnums.Resource;
+import dataStructures.GeneralEnums.RawResource;
 import dataStructures.Player;
 import exceptions.InvalidTradeException;
 
