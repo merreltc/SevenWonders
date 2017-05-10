@@ -347,4 +347,20 @@ public class GameManagerTest {
 		assertEquals(1, (int) current.getCurrentTrades().get(Good.GLASS));
 		assertEquals(6, next.getCoinTotal());
 	}
+	
+	@Test
+	public void testMakeChangeForValue1Coins(){
+		ArrayList<String> playerNames = new ArrayList<String>(Arrays.asList("Wolverine", "Captain America", "Black Widow"));
+		ArrayList<WonderType> wonders = new ArrayList<WonderType>(Arrays.asList( WonderType.COLOSSUS, WonderType.LIGHTHOUSE, WonderType.TEMPLE));
+
+		GameManager manager = new GameManager(playerNames, wonders, new SetUpHandler(), new SetUpDeckHandler(), new TurnHandler(), new PlayerTurnHandler());
+		GameBoard board = manager.getGameBoard();
+		manager.getCurrentPlayer().addValue3(1);
+		
+		assertTrue(manager.makeChangeForValue1Coins(3));
+		assertEquals(6, manager.getCurrentPlayer().getNumValue1Coins());
+		assertEquals(0, manager.getCurrentPlayer().getNumValue3Coins());
+		assertEquals(34, manager.getGameBoard().getTotalValue1CoinsInBank());
+		assertEquals(25, manager.getGameBoard().getTotalValue3CoinsInBank());
+	}
 }

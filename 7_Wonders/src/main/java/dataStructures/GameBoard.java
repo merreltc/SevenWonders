@@ -94,8 +94,8 @@ public class GameBoard {
 
 		int numValue3CoinsToRemove = numCoinsWanted / 3;
 		active.removeValue3(numValue3CoinsToRemove);
-		this.totalValue3CoinsInBank -= numValue3CoinsToRemove;
-		this.totalValue1CoinsInBank += numCoinsWanted;
+		this.totalValue3CoinsInBank += numValue3CoinsToRemove;
+		this.totalValue1CoinsInBank -= numCoinsWanted;
 		active.addValue1(numCoinsWanted);
 
 		return true;

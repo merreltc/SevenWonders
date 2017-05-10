@@ -457,8 +457,8 @@ public class GameBoardTests {
 		assertTrue(board.makeChangeForValue1Coins(active, 3));
 		assertEquals(6, active.getNumValue1Coins());
 		assertEquals(0, active.getNumValue3Coins());
-		assertEquals(40, board.getTotalValue1CoinsInBank());
-		assertEquals(23, board.getTotalValue3CoinsInBank());
+		assertEquals(34, board.getTotalValue1CoinsInBank());
+		assertEquals(25, board.getTotalValue3CoinsInBank());
 	}
 	
 	@Test
