@@ -115,10 +115,12 @@ public class GameBoard {
 	}
 
 	public void giveNumCoins(Player player, int numCoinsToGet) {
-		this.totalValue3CoinsInBank--;
-		this.totalValue1CoinsInBank -= 2;
-		player.addValue3(1);
-		player.addValue1(2);
+		int numValue3 = numCoinsToGet / 3;
+		int numValue1 = numCoinsToGet % 3;
+		this.totalValue3CoinsInBank -= numValue3;
+		this.totalValue1CoinsInBank -= numValue1;
+		player.addValue3(numValue3);
+		player.addValue1(numValue1);
 	}
 	
 	public int getCurrentPlayerIndex() {
