@@ -522,4 +522,24 @@ public class GameBoardTests {
 			assertEquals("Not enough value 3 coins left in bank", e.getMessage());
 		}
 	}
+	
+	@Test
+	public void testGiveNumCoins5(){
+		ArrayList<Player> players = new ArrayList<Player>();
+		players.add(new Player("Wolverine", WonderType.COLOSSUS));
+		players.add(new Player("Captain America", WonderType.LIGHTHOUSE));
+		players.add(new Player("Black Widow", WonderType.PYRAMIDS));
+
+		ArrayList<Card> cards = new SetUpDeckHandler().createCards(Age.AGE1, 3);
+		Deck deck = new Deck(Age.AGE1, cards);
+
+		GameBoard board = new GameBoard(players, deck);
+		Player active = players.get(0);
+		
+		board.giveNumCoins(active, 5);
+		
+		assertEquals(8, active.getCoinTotal());
+		assertEquals(23, board.getTotalValue3CoinsInBank());
+		assertEquals(35, board.getTotalValue1CoinsInBank());
+	}
 }
