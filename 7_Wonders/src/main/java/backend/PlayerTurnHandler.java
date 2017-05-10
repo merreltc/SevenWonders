@@ -53,7 +53,7 @@ public class PlayerTurnHandler {
 	}
 
 	public void discardSelectedCard(Player player, Card card, GameBoard board) {
-		board.addToDiscardPile(card);
+		board.addToDiscardPile(player, card);
 		player.removeFromCurrentHand(card);
 	}
 

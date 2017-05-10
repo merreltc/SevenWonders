@@ -76,8 +76,9 @@ public class GameBoard {
 		}
 	}
 	
-	public void addToDiscardPile(Card toTest) {
+	public void addToDiscardPile(Player active, Card toTest) {
 		this.discardPile.add(toTest);
+		active.addValue3(1);
 	}
 
 	public boolean makeChangeForValue1Coins(Player active, int numCoinsWanted) {

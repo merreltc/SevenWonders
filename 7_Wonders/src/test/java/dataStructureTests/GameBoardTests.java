@@ -364,7 +364,9 @@ public class GameBoardTests {
 
 		GameBoard board = new GameBoard(players, deck);
 		Card toTest = deck.getCard(0);
-		board.addToDiscardPile(toTest);
+		board.addToDiscardPile(players.get(0), toTest);
+		
+		assertEquals(1, players.get(0).getNumValue3Coins());
 		assertFalse(board.getDiscardPile().isEmpty());
 		assertEquals(toTest, board.getDiscardPile().get(0));
 	}
