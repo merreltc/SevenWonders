@@ -81,7 +81,7 @@ public class GameBoard {
 
 		if (this.totalValue3CoinsInBank-- > 0) {
 			active.addValue3(1);
-		}else {
+		} else {
 			this.totalValue1CoinsInBank--;
 			active.addValue1(3);
 		}
@@ -105,7 +105,7 @@ public class GameBoard {
 		if (numCoinsWanted > this.totalValue3CoinsInBank) {
 			throw new InsufficientFundsException("Not enough value 3 coins left in bank");
 		}
-		
+
 		int numValue1CoinsToRemove = numCoinsWanted * 3;
 		active.removeValue1(numValue1CoinsToRemove);
 		this.totalValue3CoinsInBank -= numCoinsWanted;
@@ -117,12 +117,20 @@ public class GameBoard {
 	public void giveNumCoins(Player player, int numCoinsToGet) {
 		int numValue3 = numCoinsToGet / 3;
 		int numValue1 = numCoinsToGet % 3;
-		this.totalValue3CoinsInBank -= numValue3;
+
+		if (numValue3 > this.totalValue3CoinsInBank) {
+			int numValue3Left = numValue3 - this.totalValue3CoinsInBank;
+			numValue3 = this.totalValue3CoinsInBank;
+			this.totalValue3CoinsInBank = 0;
+			numValue1 += numValue3Left * 3;
+		} else {
+			this.totalValue3CoinsInBank -= numValue3;
+		}
 		this.totalValue1CoinsInBank -= numValue1;
 		player.addValue3(numValue3);
 		player.addValue1(numValue1);
 	}
-	
+
 	public int getCurrentPlayerIndex() {
 		return this.currentPlayerIndex;
 	}
