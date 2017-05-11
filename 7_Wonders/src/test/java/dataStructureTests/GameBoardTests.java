@@ -4,6 +4,7 @@ import static org.junit.Assert.*;
 
 import java.util.ArrayList;
 
+import org.easymock.EasyMock;
 import org.junit.Test;
 
 import backend.SetUpDeckHandler;
@@ -582,5 +583,17 @@ public class GameBoardTests {
 		assertEquals(13, active.getCoinTotal());
 		assertEquals(0, board.getTotalValue3CoinsInBank());
 		assertEquals(27, board.getTotalValue1CoinsInBank());
+	}
+	
+	@Test
+	public void testEndAgeDiscard(){
+		ArrayList<Player> players = new ArrayList<Player>();
+		Card toDiscard = EasyMock.mock(Card.class);
+		Deck deck = EasyMock.mock(Deck.class);
+
+		GameBoard board = new GameBoard(players, deck);
+		
+		board.discardEndOfAgeCard(toDiscard);
+		assertTrue(board.getDiscardPile().contains(toDiscard));
 	}
 }

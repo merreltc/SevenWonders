@@ -158,4 +158,8 @@ public class GameBoard {
 	public int getTotalValue3CoinsInBank() {
 		return this.totalValue3CoinsInBank;
 	}
+
+	public void discardEndOfAgeCard(Card toDiscard) {
+		this.discardPile.add(toDiscard);
+	}
 }
