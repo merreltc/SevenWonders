@@ -40,18 +40,24 @@ public class PlayerTurnHandler {
 	private void validatePlayerHasEntitiesForCard(Player current, Card card) {
 		HashMap<Enum, Integer> cost = card.getCost();
 		ArrayList<Card> storage = current.getStoragePile();
+		ArrayList<Card> usedEntities = new ArrayList<Card>();
 		
 		for(Enum key: cost.keySet()){
 			boolean costfound = false;
 			int numcost = cost.get(key);
 			
 			for(Card sCards: storage){
+				if(usedEntities.contains(sCards)){
+					continue;
+				}
+				
 				if(sCards.getEffectType() == EffectType.ENTITY){
 					EntityEffect effect = (EntityEffect) sCards.getEffect();
 					
 					if(effect.getEntities().containsKey(key)){
 						costfound = true;
 						numcost -= effect.getEntities().get(key);
+						usedEntities.add(sCards);
 						
 						if(numcost <= 0){
 							break;

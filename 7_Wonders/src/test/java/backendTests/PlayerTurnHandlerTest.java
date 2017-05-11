@@ -205,7 +205,7 @@ public class PlayerTurnHandlerTest {
 		ArrayList<Card> currentHand = new ArrayList<Card>();
 		
 		currentHand.add(deck.getCard(0)); //sawmill
-		currentHand.add(deck.getCard(2)); //brickyard
+		currentHand.add(deck.getCard(3)); //quarry
 		currentHand.add(deck.getCard(9)); //statue
 		current.setCurrentHand(currentHand);
 		
@@ -218,8 +218,8 @@ public class PlayerTurnHandlerTest {
 		assertEquals(0, current.getCurrentHand().size());
 		assertFalse(current.getCurrentHand().contains(deck.getCard(0)));
 		assertTrue(current.getStoragePile().contains(deck.getCard(0)));
-		assertFalse(current.getCurrentHand().contains(deck.getCard(2)));
-		assertTrue(current.getStoragePile().contains(deck.getCard(2)));
+		assertFalse(current.getCurrentHand().contains(deck.getCard(3)));
+		assertTrue(current.getStoragePile().contains(deck.getCard(3)));
 		assertFalse(current.getCurrentHand().contains(deck.getCard(9)));
 		assertTrue(current.getStoragePile().contains(deck.getCard(9)));
 	}
@@ -405,5 +405,42 @@ public class PlayerTurnHandlerTest {
 		playerTurnHandler.buildStructure(current, walls);
 		
 		assertEquals(2, current.getNumShields());
+	}
+	
+	@Test(expected = InsufficientFundsException.class)
+	public void testBuildStructureNotEnoughResourcesCanOnlyUseOneOrOther(){
+		ArrayList<Player> players = new ArrayList<Player>();
+		players.add(new Player("Wolverine", WonderType.COLOSSUS));
+		players.add(new Player("Captain America", WonderType.LIGHTHOUSE));
+		players.add(new Player("Black Widow", WonderType.PYRAMIDS));
+		players.add(new Player("Hulk", WonderType.TEMPLE));
+		players.add(new Player("Iron Man", WonderType.MAUSOLEUM));
+		
+		ArrayList<Card> cards1 = new SetUpDeckHandler().createCards(Age.AGE1, 5);
+		Deck deck1 = new Deck(Age.AGE1, cards1);
+		
+		ArrayList<Card> cards = new SetUpDeckHandler().createCards(Age.AGE2, 5);
+		Deck deck = new Deck(Age.AGE2, cards);
+		
+		GameBoard board = new GameBoard(players, deck);
+		
+		Player current = board.getCurrentPlayer();
+		ArrayList<Card> currentHand = new ArrayList<Card>();
+		
+		Card ore = deck1.getCard(7);
+		Card forest = deck1.getCard(11);
+		Card statue = deck.getCard(16);
+		
+		currentHand.add(forest);
+		currentHand.add(ore);
+		currentHand.add(statue);
+		
+		current.setCurrentHand(currentHand);
+		
+		PlayerTurnHandler playerTurnHandler = new PlayerTurnHandler();
+		playerTurnHandler.buildStructure(current, ore);
+		playerTurnHandler.buildStructure(current, forest);
+		playerTurnHandler.buildStructure(current, statue);
+		fail();
 	}
 }
