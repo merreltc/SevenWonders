@@ -52,7 +52,10 @@ public class PlayerTurnHandler {
 					if(effect.getEntities().containsKey(key)){
 						costfound = true;
 						numcost -= effect.getEntities().get(key);
-						break;
+						
+						if(numcost <= 0){
+							break;
+						}
 					}
 				}
 			}
