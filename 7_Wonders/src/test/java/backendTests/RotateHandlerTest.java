@@ -340,4 +340,26 @@ public class RotateHandlerTest {
 			assertEquals(expectedHands.get(i), players.get(i).getCurrentHand());
 		}
 	}
+	
+	@Test
+	public void testRotateCurrentHandsCounterClockwise3Players() {
+		ArrayList<String> playerNames = new ArrayList<String>(Arrays.asList("Wolverine", "Captain America", "Black Widow"));
+		ArrayList<WonderType> wonders = new ArrayList<WonderType>(Arrays.asList( WonderType.COLOSSUS, WonderType.LIGHTHOUSE, WonderType.TEMPLE));
+
+		GameManager manager = new GameManager(playerNames, wonders, new SetUpHandler(), new SetUpDeckHandler(), new TurnHandler(), new PlayerTurnHandler());
+		manager.dealInitialTurnCards();
+		ArrayList<Player> players = manager.getPlayers();
+		ArrayList<ArrayList<Card>> expectedHands = new ArrayList<ArrayList<Card>>();
+		
+		expectedHands.add(players.get(1).getCurrentHand());
+		expectedHands.add(players.get(2).getCurrentHand());
+		expectedHands.add(players.get(0).getCurrentHand());
+		
+		RotateHandler rotateHandler = new RotateHandler(manager.getGameBoard());
+		rotateHandler.rotateCurrentHands(players, Direction.COUNTERCLOCKWISE);
+		
+		for(int i = 0; i < 3; i++){
+			assertEquals(expectedHands.get(i), players.get(i).getCurrentHand());
+		}
+	}
 }
