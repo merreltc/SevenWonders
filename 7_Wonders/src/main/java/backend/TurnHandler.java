@@ -31,4 +31,8 @@ public class TurnHandler {
 	public void setNumPlayersUntilPass(int num) {
 		this.numPlayersUntilPass = num;
 	}
+
+	public int getNumTurnsTilEndOfAge() {
+		return 1;
+	}
 }
