@@ -6,7 +6,7 @@ import java.util.HashMap;
 import dataStructures.Player;
 import dataStructures.Wonder;
 
-public class SetUpHandler {
+public class SetUpPlayerHandler {
 
 	public ArrayList<Player> setUpAndReturnPlayers(ArrayList<String> playerNames, ArrayList<Wonder.WonderType> wonders) {
 //		HashMap<Wonder.WonderType, Integer> wonderCounts = new HashMap<Wonder.WonderType, Integer>();

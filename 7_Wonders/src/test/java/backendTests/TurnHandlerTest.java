@@ -12,7 +12,7 @@ import org.junit.Test;
 import backend.GameManager;
 import backend.PlayerTurnHandler;
 import backend.SetUpDeckHandler;
-import backend.SetUpHandler;
+import backend.SetUpPlayerHandler;
 import backend.TurnHandler;
 import dataStructures.Card;
 import dataStructures.Deck;
@@ -29,7 +29,7 @@ public class TurnHandlerTest {
 		ArrayList<WonderType> wonders = new ArrayList<WonderType>(
 				Arrays.asList(WonderType.COLOSSUS, WonderType.LIGHTHOUSE, WonderType.TEMPLE));
 
-		GameManager manager = new GameManager(playerNames, wonders, new SetUpHandler(), new SetUpDeckHandler(),
+		GameManager manager = new GameManager(playerNames, wonders, new SetUpPlayerHandler(), new SetUpDeckHandler(),
 				new TurnHandler(), new PlayerTurnHandler());
 
 		Deck deck = manager.getGameBoard().getDeck();
@@ -52,7 +52,7 @@ public class TurnHandlerTest {
 				Arrays.asList(WonderType.COLOSSUS, WonderType.LIGHTHOUSE, WonderType.TEMPLE, WonderType.STATUE,
 						WonderType.MAUSOLEUM, WonderType.GARDENS, WonderType.PYRAMIDS));
 
-		GameManager manager = new GameManager(playerNames, wonders, new SetUpHandler(), new SetUpDeckHandler(),
+		GameManager manager = new GameManager(playerNames, wonders, new SetUpPlayerHandler(), new SetUpDeckHandler(),
 				new TurnHandler(), new PlayerTurnHandler());
 
 		Deck deck = manager.getGameBoard().getDeck();
@@ -75,7 +75,7 @@ public class TurnHandlerTest {
 		ArrayList<WonderType> wonders = new ArrayList<WonderType>(Arrays.asList(WonderType.COLOSSUS,
 				WonderType.LIGHTHOUSE, WonderType.TEMPLE, WonderType.STATUE, WonderType.MAUSOLEUM));
 
-		GameManager manager = new GameManager(playerNames, wonders, new SetUpHandler(), new SetUpDeckHandler(),
+		GameManager manager = new GameManager(playerNames, wonders, new SetUpPlayerHandler(), new SetUpDeckHandler(),
 				new TurnHandler(), new PlayerTurnHandler());
 
 		Deck deck = manager.getGameBoard().getDeck();
@@ -109,7 +109,7 @@ public class TurnHandlerTest {
 		ArrayList<WonderType> wonders = new ArrayList<WonderType>(
 				Arrays.asList(WonderType.COLOSSUS, WonderType.LIGHTHOUSE, WonderType.TEMPLE));
 
-		GameManager manager = new GameManager(playerNames, wonders, new SetUpHandler(), new SetUpDeckHandler(),
+		GameManager manager = new GameManager(playerNames, wonders, new SetUpPlayerHandler(), new SetUpDeckHandler(),
 				new TurnHandler(), new PlayerTurnHandler());
 
 		Deck deck = manager.getGameBoard().getDeck();

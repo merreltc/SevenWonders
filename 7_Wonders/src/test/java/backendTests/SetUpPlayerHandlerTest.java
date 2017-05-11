@@ -12,34 +12,34 @@ import java.util.Set;
 import org.junit.Test;
 
 import backend.GameManager;
-import backend.SetUpHandler;
+import backend.SetUpPlayerHandler;
 import dataStructures.Player;
 import dataStructures.Wonder.WonderType;
 
-public class SetUpHandlerTest {
+public class SetUpPlayerHandlerTest {
 
 	@Test
 	public void testValidPlayerNum() {
-		assertTrue(new SetUpHandler().validatePlayerNum(3));
-		assertTrue(new SetUpHandler().validatePlayerNum(7));
+		assertTrue(new SetUpPlayerHandler().validatePlayerNum(3));
+		assertTrue(new SetUpPlayerHandler().validatePlayerNum(7));
 	}
 
 	@Test(expected = IllegalArgumentException.class)
 	public void testInvalidPlayerNum2() {
-		new SetUpHandler().validatePlayerNum(2);
+		new SetUpPlayerHandler().validatePlayerNum(2);
 		fail();
 	}
 
 	@Test(expected = IllegalArgumentException.class)
 	public void testInvalidPlayerNum8() {
-		new SetUpHandler().validatePlayerNum(8);
+		new SetUpPlayerHandler().validatePlayerNum(8);
 		fail();
 	}
 
 	@Test
 	public void testInvalidPlayerNum2ErrorMessage() {
 		try {
-			new SetUpHandler().validatePlayerNum(2);
+			new SetUpPlayerHandler().validatePlayerNum(2);
 		} catch (IllegalArgumentException error) {
 			String message = "Cannot play with 2 players";
 			assertEquals(message, error.getMessage());
@@ -49,7 +49,7 @@ public class SetUpHandlerTest {
 	@Test
 	public void testInvalidPlayerNum8ErrorMessage() {
 		try {
-			new SetUpHandler().validatePlayerNum(8);
+			new SetUpPlayerHandler().validatePlayerNum(8);
 		} catch (IllegalArgumentException error) {
 			String message = "Cannot play with 8 players";
 			assertEquals(message, error.getMessage());
@@ -84,7 +84,7 @@ public class SetUpHandlerTest {
 
 		GameManager manager = new GameManager(playerNames, wonders);
 
-		SetUpHandler setUpHandler = new SetUpHandler();
+		SetUpPlayerHandler setUpHandler = new SetUpPlayerHandler();
 		setUpHandler.setUpAndReturnPlayers(playerNames, wonders);
 		fail();
 	}
@@ -97,13 +97,13 @@ public class SetUpHandlerTest {
 				Arrays.asList(WonderType.COLOSSUS, WonderType.LIGHTHOUSE, WonderType.TEMPLE, WonderType.STATUE,
 						WonderType.MAUSOLEUM, WonderType.GARDENS, WonderType.PYRAMIDS, WonderType.PYRAMIDS));
 
-		SetUpHandler setUpHandler = new SetUpHandler();
+		SetUpPlayerHandler setUpHandler = new SetUpPlayerHandler();
 		setUpHandler.setUpAndReturnPlayers(playerNames, wonders);
 		fail();
 	}
 
 	private void verifyPlayersAndWonders(ArrayList<String> playerNames, ArrayList<WonderType> wonders) {
-		SetUpHandler setUpHandler = new SetUpHandler();
+		SetUpPlayerHandler setUpHandler = new SetUpPlayerHandler();
 		ArrayList<Player> players = setUpHandler.createPlayers(playerNames, wonders);
 
 		for (int i = 0; i < playerNames.size(); i++) {

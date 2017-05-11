@@ -7,9 +7,9 @@ import java.util.HashMap;
 import org.junit.Test;
 
 import dataStructures.Effect;
+import dataStructures.MultiValueEffect;
 import dataStructures.Effect.Direction;
 import dataStructures.Effect.EffectType;
-import dataStructures.MultiValueEffect;
 import dataStructures.ValueEffect.AffectingEntity;
 import dataStructures.ValueEffect.Value;
 import dataStructures.ValueEffect.ValueType;

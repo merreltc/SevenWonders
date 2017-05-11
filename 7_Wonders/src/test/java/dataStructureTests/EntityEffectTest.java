@@ -7,9 +7,9 @@ import java.util.HashMap;
 import org.junit.Test;
 
 import dataStructures.Effect;
+import dataStructures.EntityEffect;
 import dataStructures.Effect.Direction;
 import dataStructures.Effect.EffectType;
-import dataStructures.EntityEffect;
 import dataStructures.EntityEffect.EntityType;
 import dataStructures.GeneralEnums.Good;
 import dataStructures.GeneralEnums.RawResource;

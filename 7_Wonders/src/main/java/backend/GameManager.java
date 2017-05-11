@@ -19,7 +19,7 @@ import dataStructures.Deck.Age;
  */
 public class GameManager {
 	private GameBoard board;
-	private SetUpHandler setUpHandler;
+	private SetUpPlayerHandler setUpHandler;
 	private SetUpDeckHandler setUpDeckHandler;
 	private TurnHandler turnHandler;
 	
@@ -29,10 +29,10 @@ public class GameManager {
 
 	
 	public GameManager(ArrayList<String> playerNames, ArrayList<Wonder.WonderType> wonders) {
-		this(playerNames, wonders, new SetUpHandler(), new SetUpDeckHandler(), new TurnHandler(), new PlayerTurnHandler());
+		this(playerNames, wonders, new SetUpPlayerHandler(), new SetUpDeckHandler(), new TurnHandler(), new PlayerTurnHandler());
 	}
 	
-	public GameManager(ArrayList<String> playerNames, ArrayList<Wonder.WonderType> wonders, SetUpHandler setUpHandler,
+	public GameManager(ArrayList<String> playerNames, ArrayList<Wonder.WonderType> wonders, SetUpPlayerHandler setUpHandler,
 			SetUpDeckHandler setUpDeckHandler, TurnHandler turnHandler, PlayerTurnHandler playerTurnHandler){
 		this.setUpHandler = setUpHandler;
 		this.setUpDeckHandler = setUpDeckHandler;
