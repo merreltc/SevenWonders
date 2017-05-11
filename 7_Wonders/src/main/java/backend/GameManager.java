@@ -77,6 +77,14 @@ public class GameManager {
 	public void rotateCounterClockwise() {
 		this.rotateHandler.rotateCounterClockwise();
 	}
+	
+	public boolean makeChangeForValue1Coins(int numCoinsToGet) {
+		return this.board.makeChangeForValue1Coins(getCurrentPlayer(), numCoinsToGet);
+	}
+
+	public void discardSelectedCard(Card card) {
+		this.playerTurnHandler.discardSelectedCard(getCurrentPlayer(), card, this.board);
+	}
 
 	public int getNumPlayers() {
 		return this.board.getNumPlayers();
@@ -108,9 +116,5 @@ public class GameManager {
 
 	public Player getPreviousPlayer() {
 		return this.board.getPreviousPlayer();
-	}
-
-	public boolean makeChangeForValue1Coins(int numCoinsToGet) {
-		return this.board.makeChangeForValue1Coins(getCurrentPlayer(), numCoinsToGet);
 	}
 }

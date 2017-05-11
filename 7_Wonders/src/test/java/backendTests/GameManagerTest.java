@@ -378,4 +378,22 @@ public class GameManagerTest {
 		assertEquals(40, board.getTotalValue1CoinsInBank());
 		assertEquals(23, board.getTotalValue3CoinsInBank());
 	}
+	
+	@Test
+	public void testDiscardSelectedCard(){
+		ArrayList<String> playerNames = new ArrayList<String>(Arrays.asList("Wolverine", "Captain America", "Black Widow"));
+		ArrayList<WonderType> wonders = new ArrayList<WonderType>(Arrays.asList( WonderType.COLOSSUS, WonderType.LIGHTHOUSE, WonderType.TEMPLE));
+		
+		PlayerTurnHandler playerTurnHandler = EasyMock.mock(PlayerTurnHandler.class);
+
+		GameManager manager = new GameManager(playerNames, wonders, new SetUpHandler(), new SetUpDeckHandler(), new TurnHandler(), playerTurnHandler);
+		playerTurnHandler.discardSelectedCard(manager.getCurrentPlayer(), manager.getGameBoard().getDeck().getCard(0), manager.getGameBoard());
+		
+		EasyMock.replay(playerTurnHandler);
+		
+		manager.dealInitialTurnCards();
+		manager.discardSelectedCard(manager.getCurrentPlayer().getCurrentHand().get(0));
+		
+		EasyMock.verify(playerTurnHandler);
+	}
 }
