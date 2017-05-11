@@ -4,6 +4,8 @@ import static org.junit.Assert.*;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Set;
 
 import org.easymock.EasyMock;
 import org.junit.Test;
@@ -14,11 +16,18 @@ import backend.SetUpDeckHandler;
 import backend.SetUpHandler;
 import backend.TurnHandler;
 import dataStructures.Card;
+import dataStructures.Cost;
+import dataStructures.Cost.CostType;
 import dataStructures.Deck;
+import dataStructures.EntityEffect;
 import dataStructures.GameBoard;
 import dataStructures.Player;
+import dataStructures.ValueEffect;
 import exceptions.InsufficientFundsException;
 import dataStructures.Deck.Age;
+import dataStructures.Effect.EffectType;
+import dataStructures.GeneralEnums.Resource;
+import dataStructures.ValueEffect.ValueType;
 import dataStructures.Wonder.WonderType;
 
 public class PlayerTurnHandlerTest {
@@ -472,5 +481,53 @@ public class PlayerTurnHandlerTest {
 		playerTurnHandler.buildStructure(current, baths);
 		
 		assertEquals(3, current.getNumVictoryPoints());
+	}
+	
+	@Test
+	public void testBuildStructureAddTwoVictoryPointsMockedVersion(){
+		Player player = EasyMock.mock(Player.class);
+		Card cardToBuild = EasyMock.mock(Card.class);
+		HashMap<Enum, Integer> cost = new HashMap<Enum, Integer>();
+		HashMap<Enum, Integer> entities = new HashMap<Enum, Integer>();
+		
+		cost.put(Resource.STONE, 1);
+		entities.put(Resource.STONE, 1);
+		
+		ArrayList<Card> storage = new ArrayList<Card>();
+		Card cardInStorage = EasyMock.mock(Card.class);
+		storage.add(cardInStorage);
+		
+
+		EasyMock.expect(cardToBuild.getCostType()).andReturn(CostType.RESOURCE);
+		EasyMock.expect(cardToBuild.getCostType()).andReturn(CostType.RESOURCE);
+		EasyMock.expect(cardToBuild.getEffectType()).andReturn(EffectType.VALUE);
+		EasyMock.expect(cardToBuild.getCost()).andReturn(cost);
+		EasyMock.expect(player.getStoragePile()).andReturn(storage);
+		EntityEffect entityEffect = EasyMock.mock(EntityEffect.class);
+		
+		for(Card sCards: storage){
+			EasyMock.expect(sCards.getEffectType()).andReturn(EffectType.ENTITY);
+			
+			EasyMock.expect(sCards.getEffect()).andReturn(entityEffect);
+			EasyMock.expect(entityEffect.getEntities()).andReturn(entities);
+			EasyMock.expect(entityEffect.getEntities()).andReturn(entities);
+		}
+		
+		ValueEffect effect = EasyMock.mock(ValueEffect.class);
+		EasyMock.expect(cardToBuild.getEffect()).andReturn(effect);
+		
+		EasyMock.expect(effect.getValueType()).andReturn(ValueType.VICTORYPOINT);
+		EasyMock.expect(effect.getValueAmount()).andReturn(Integer.valueOf(3));
+		player.addNumVictoryPoints(3);
+		player.addToStoragePile(cardToBuild);
+		player.removeFromCurrentHand(cardToBuild);
+		
+		EasyMock.replay(player, cardToBuild, cardInStorage, entityEffect, effect);
+		
+		PlayerTurnHandler playerTurnHandler = new PlayerTurnHandler();
+		playerTurnHandler.buildStructure(player, cardToBuild);
+		
+		EasyMock.verify(player, cardToBuild, cardInStorage, entityEffect, effect);
+		
 	}
 }
