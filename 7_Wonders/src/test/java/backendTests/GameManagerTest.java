@@ -396,4 +396,25 @@ public class GameManagerTest {
 		
 		EasyMock.verify(playerTurnHandler);
 	}
+	
+	@Test
+	public void testEndCurrentPlayerTurn() {
+		ArrayList<String> playerNames = new ArrayList<String>(Arrays.asList("Wolverine", "Captain America", "Black Widow"));
+		ArrayList<WonderType> wonders = new ArrayList<WonderType>(Arrays.asList( WonderType.COLOSSUS, WonderType.LIGHTHOUSE, WonderType.TEMPLE));
+		
+		TurnHandler turnHandler = EasyMock.mock(TurnHandler.class);
+		GameManager manager = new GameManager(playerNames, wonders, new SetUpHandler(), new SetUpDeckHandler(), turnHandler, new PlayerTurnHandler());
+		
+		EasyMock.expect(turnHandler.getNumPlayersUntilPass()).andReturn(2);
+		
+		EasyMock.replay(turnHandler);
+		Player expectedNewCurrentPlayer = manager.getNextPlayer();
+		Player expectedNewPreviousPlayer = manager.getCurrentPlayer();
+		
+		manager.endCurrentPlayerTurn();
+		assertEquals(expectedNewCurrentPlayer, manager.getCurrentPlayer());
+		assertEquals(expectedNewPreviousPlayer, manager.getPreviousPlayer());
+		
+		EasyMock.verify(turnHandler);
+	}
 }

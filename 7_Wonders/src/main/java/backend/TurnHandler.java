@@ -7,7 +7,7 @@ import dataStructures.Deck;
 import dataStructures.Player;
 
 public class TurnHandler {
-	public int numPlayersUntilPass;
+	private int numPlayersUntilPass;
 
 	public void dealInitialTurnCards(ArrayList<Player> players, int numPlayers, Deck deck) {
 		this.numPlayersUntilPass = players.size() - 1;

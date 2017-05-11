@@ -85,6 +85,11 @@ public class GameManager {
 	public void discardSelectedCard(Card card) {
 		this.playerTurnHandler.discardSelectedCard(getCurrentPlayer(), card, this.board);
 	}
+	
+	public void endCurrentPlayerTurn() {
+		this.turnHandler.getNumPlayersUntilPass();
+		this.rotateClockwise();
+	}
 
 	public int getNumPlayers() {
 		return this.board.getNumPlayers();
