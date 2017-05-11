@@ -443,4 +443,34 @@ public class PlayerTurnHandlerTest {
 		playerTurnHandler.buildStructure(current, statue);
 		fail();
 	}
+	
+	@Test
+	public void testBuildStructureAddTwoVictoryPoints(){
+		ArrayList<Player> players = new ArrayList<Player>();
+		players.add(new Player("Wolverine", WonderType.COLOSSUS));
+		players.add(new Player("Captain America", WonderType.LIGHTHOUSE));
+		players.add(new Player("Black Widow", WonderType.PYRAMIDS));
+		
+		ArrayList<Card> cards = new SetUpDeckHandler().createCards(Age.AGE1, 3);
+		Deck deck = new Deck(Age.AGE1, cards);
+		
+		GameBoard board = new GameBoard(players, deck);
+		
+		Player current = board.getCurrentPlayer();
+		ArrayList<Card> currentHand = new ArrayList<Card>();
+		
+		Card stone = deck.getCard(1);
+		Card baths = deck.getCard(9);
+		
+		currentHand.add(stone);
+		currentHand.add(baths);
+		
+		current.setCurrentHand(currentHand);
+		
+		PlayerTurnHandler playerTurnHandler = new PlayerTurnHandler();
+		playerTurnHandler.buildStructure(current, stone);
+		playerTurnHandler.buildStructure(current, baths);
+		
+		assertEquals(3, current.getNumVictoryPoints());
+	}
 }
