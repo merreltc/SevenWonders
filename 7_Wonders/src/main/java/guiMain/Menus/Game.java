@@ -174,7 +174,7 @@ public class Game extends Menu {
 			} else {
 				System.exit(0);
 			}
-		} else if (clicked.getValue().codePointAt(0) >= 48 || clicked.getValue().codePointAt(0) <= 57) {
+		} else if (clicked.getValue().codePointAt(0) >= 48 && clicked.getValue().codePointAt(0) <= 57) {
 			int playerNum = codePointToInt(clicked.getValue().codePointAt(0));
 			int locOfCurrentPlayer = this.gameManager.getPlayers().indexOf(this.gameManager.getCurrentPlayer());
 			this.resource.openMenu(this.gameManager.getPlayer(locOfCurrentPlayer + playerNum));
