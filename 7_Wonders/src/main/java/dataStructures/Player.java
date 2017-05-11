@@ -215,4 +215,8 @@ public class Player {
 		this.removeValue3(numValue3CoinsToRemove);
 		this.removeValue1(numValue1CoinsToRemove);
 	}
+
+	public int getNumShields() {
+		return 0;
+	}
 }

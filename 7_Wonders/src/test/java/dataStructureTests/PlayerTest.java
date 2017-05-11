@@ -538,4 +538,10 @@ public class PlayerTest {
 		Player player = new Player("Jane Doe", wonder.getType());
 		assertEquals("The Lighthouse of Alexandria", player.getWonder().getName());
 	}
+	
+	@Test
+	public void testGetDefaultNumShields() {
+		Player player = new Player("Jane Doe", WonderType.COLOSSUS);
+		assertEquals(0, player.getNumShields());
+	}
 }
