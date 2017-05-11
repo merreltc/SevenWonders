@@ -544,4 +544,11 @@ public class PlayerTest {
 		Player player = new Player("Jane Doe", WonderType.COLOSSUS);
 		assertEquals(0, player.getNumShields());
 	}
+	
+	@Test
+	public void testAdd2Shields() {
+		Player player = new Player("Jane Doe", WonderType.COLOSSUS);
+		player.addNumShields(2);
+		assertEquals(2, player.getNumShields());
+	}
 }

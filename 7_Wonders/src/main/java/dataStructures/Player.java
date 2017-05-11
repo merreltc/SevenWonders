@@ -13,6 +13,7 @@ public class Player {
 	private int numOfValue1Coins = 3;
 	private int numOfValue3Coins = 0;
 	private int conflictTotal = 0;
+	private int numShields = 0;
 
 	private Wonder wonder;
 
@@ -217,6 +218,10 @@ public class Player {
 	}
 
 	public int getNumShields() {
-		return 0;
+		return this.numShields;
+	}
+
+	public void addNumShields(int numShields) {
+		this.numShields += numShields;
 	}
 }
