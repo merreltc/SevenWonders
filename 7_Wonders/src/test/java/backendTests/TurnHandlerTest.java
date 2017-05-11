@@ -33,12 +33,12 @@ public class TurnHandlerTest {
 				new TurnHandler(), new PlayerTurnHandler());
 
 		Deck deck = manager.getGameBoard().getDeck();
-		int expectedDeckSize = deck.getNumCards() - 9;
+		int expectedDeckSize = deck.getNumCards() - 21;
 		ArrayList<Player> players = manager.getPlayers();
 		new TurnHandler().dealInitialTurnCards(players, manager.getNumPlayers(), deck);
 
 		for (Player player : players) {
-			assertEquals(3, player.getCurrentHand().size());
+			assertEquals(7, player.getCurrentHand().size());
 		}
 
 		assertEquals(expectedDeckSize, deck.getCards().size());
@@ -80,12 +80,12 @@ public class TurnHandlerTest {
 
 		Deck deck = manager.getGameBoard().getDeck();
 
-		int expectedDeckSize = deck.getNumCards() - 25;
+		int expectedDeckSize = deck.getNumCards() - 35;
 		ArrayList<Player> players = manager.getPlayers();
 		new TurnHandler().dealInitialTurnCards(players, manager.getNumPlayers(), deck);
 
 		for (Player player : players) {
-			assertEquals(5, player.getCurrentHand().size());
+			assertEquals(7, player.getCurrentHand().size());
 		}
 
 		Player captain = players.get(1);
