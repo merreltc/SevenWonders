@@ -26,6 +26,8 @@ public class GameManager {
 	private RotateHandler rotateHandler;
 	private TradeHandler tradeHandler;
 	private PlayerTurnHandler playerTurnHandler;
+	
+	private Direction currentDirection = Direction.CLOCKWISE;
 
 	
 	public GameManager(ArrayList<String> playerNames, ArrayList<Wonder.WonderType> wonders) {
@@ -68,6 +70,7 @@ public class GameManager {
 
 	public void changeRotateDirectionAndResetPositions(Direction direction) {
 		this.rotateHandler.changeRotateDirectionAndResetPositions(direction);
+		this.currentDirection = direction;
 	}
 
 	public void rotateClockwise() {
@@ -87,7 +90,11 @@ public class GameManager {
 	}
 	
 	public void endCurrentPlayerTurn() {
-		this.turnHandler.getNumPlayersUntilPass();
+		if(this.turnHandler.getNumPlayersUntilPass() == 0){
+			this.turnHandler.setNumPlayersUntilPass(this.getNumPlayers() - 1);
+			this.rotateHandler.rotateCurrentHands(getPlayers(), this.currentDirection);
+		}
+		
 		this.rotateClockwise();
 	}
 
