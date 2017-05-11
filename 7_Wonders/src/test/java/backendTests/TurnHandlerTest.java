@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 
+import org.easymock.EasyMock;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -146,6 +147,21 @@ public class TurnHandlerTest {
 		turnHandler.dealInitialTurnCards(players, manager.getNumPlayers(), deck);
 
 		assertEquals(1, turnHandler.getNumTurnsTilEndOfAge());
+	}
+	
+	@Test
+	public void testGetNumPlayersUntilPass6Players() {
+		ArrayList<Player> players = EasyMock.partialMockBuilder(ArrayList.class).addMockedMethod("size").createMock();
+		Deck deck = EasyMock.mock(Deck.class);
+		
+		EasyMock.expect(players.size()).andReturn(5);
+		
+		EasyMock.replay(players);
+		TurnHandler turnHandler = new TurnHandler();
+		turnHandler.dealInitialTurnCards(players, 5, deck);
+
+		EasyMock.verify(players);
+		assertEquals(3, turnHandler.getNumTurnsTilEndOfAge());
 	}
 	
 	@Test

@@ -12,6 +12,7 @@ public class TurnHandler {
 
 	public void dealInitialTurnCards(ArrayList<Player> players, int numPlayers, Deck deck) {
 		this.numPlayersUntilPass = players.size() - 1;
+		this.numTurnsTilEndOfAge = this.numPlayersUntilPass - 1;
 		
 		for (Player player: players) {
 			ArrayList<Card> currentHand = new ArrayList<Card>();
