@@ -3,11 +3,16 @@ package backendTests;
 import static org.junit.Assert.*;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import org.junit.Test;
 
+import backend.GameManager;
+import backend.PlayerTurnHandler;
 import backend.RotateHandler;
 import backend.SetUpDeckHandler;
+import backend.SetUpHandler;
+import backend.TurnHandler;
 import backend.RotateHandler.Direction;
 import dataStructures.Card;
 import dataStructures.Deck;
@@ -262,5 +267,31 @@ public class RotateHandlerTest {
 		assertEquals(players.get(currIndex), board.getCurrentPlayer());
 		assertEquals(players.get(nextIndex), board.getNextPlayer());
 		assertEquals(players.get(previousIndex), board.getPreviousPlayer());
+	}
+	
+	@Test
+	public void testRotateCurrentHandsClockwise() {
+		ArrayList<String> playerNames = new ArrayList<String>(Arrays.asList("Wolverine", "Captain America", "Black Widow", "Hulk", "Iron Man"));
+		ArrayList<WonderType> wonders = new ArrayList<WonderType>(Arrays.asList( WonderType.COLOSSUS, WonderType.LIGHTHOUSE, WonderType.TEMPLE, WonderType.STATUE, WonderType.MAUSOLEUM
+				));
+
+		GameManager manager = new GameManager(playerNames, wonders, new SetUpHandler(), new SetUpDeckHandler(), new TurnHandler(), new PlayerTurnHandler());
+		manager.dealInitialTurnCards();
+		ArrayList<Player> players = manager.getPlayers();
+		ArrayList<ArrayList<Card>> expectedHands = new ArrayList<ArrayList<Card>>();
+		
+		expectedHands.add(players.get(4).getCurrentHand());
+		expectedHands.add(players.get(0).getCurrentHand());
+		expectedHands.add(players.get(1).getCurrentHand());
+		expectedHands.add(players.get(2).getCurrentHand());
+		expectedHands.add(players.get(3).getCurrentHand());
+		
+		RotateHandler rotateHandler = new RotateHandler(manager.getGameBoard());
+		rotateHandler.rotateCurrentHands(players);
+		
+		for(int i = 0; i< 5; i++){
+			assertEquals(expectedHands.get(i), players.get(i).getCurrentHand());
+		}
+		
 	}
 }

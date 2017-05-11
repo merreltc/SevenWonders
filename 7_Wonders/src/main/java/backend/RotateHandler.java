@@ -1,6 +1,10 @@
 package backend;
 
+import java.util.ArrayList;
+
+import dataStructures.Card;
 import dataStructures.GameBoard;
+import dataStructures.Player;
 
 public class RotateHandler {
 	private GameBoard board;
@@ -66,5 +70,15 @@ public class RotateHandler {
 	private void setCurrentAndPreviousPlayers() {
 		this.board.setPreviousPlayer(this.board.getCurrentPlayerIndex());
 		this.board.setCurrentPlayer(this.board.getNextPlayerIndex());
+	}
+
+	public void rotateCurrentHands(ArrayList<Player> players) {
+		ArrayList<Card> previousPlayerHand = players.get(players.size() - 1).getCurrentHand();
+		
+		for(int i = 0; i<players.size(); i++){
+			ArrayList<Card> newPreviousPlayerHand = players.get(i).getCurrentHand();
+			players.get(i).setCurrentHand(previousPlayerHand);
+			previousPlayerHand = newPreviousPlayerHand;
+		}
 	}
 }
