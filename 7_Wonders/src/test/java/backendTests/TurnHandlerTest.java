@@ -147,4 +147,13 @@ public class TurnHandlerTest {
 
 		assertEquals(1, turnHandler.getNumTurnsTilEndOfAge());
 	}
+	
+	@Test
+	public void testSetNumTurnsTilEndOfAge() {
+		TurnHandler turnHandler = new TurnHandler();
+		
+		turnHandler.setNumTurnsTilEndOfAge(5);
+		
+		assertEquals(5, turnHandler.getNumTurnsTilEndOfAge());
+	}
 }

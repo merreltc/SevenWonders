@@ -8,6 +8,7 @@ import dataStructures.Player;
 
 public class TurnHandler {
 	private int numPlayersUntilPass;
+	private int numTurnsTilEndOfAge = 1;
 
 	public void dealInitialTurnCards(ArrayList<Player> players, int numPlayers, Deck deck) {
 		this.numPlayersUntilPass = players.size() - 1;
@@ -33,6 +34,10 @@ public class TurnHandler {
 	}
 
 	public int getNumTurnsTilEndOfAge() {
-		return 1;
+		return this.numTurnsTilEndOfAge;
+	}
+
+	public void setNumTurnsTilEndOfAge(int num) {
+		this.numTurnsTilEndOfAge = num;
 	}
 }
