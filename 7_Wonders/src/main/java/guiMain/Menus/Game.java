@@ -77,7 +77,7 @@ public class Game extends Menu {
 		setUpExitButton();
 		setUpTradingButtons();
 		setUpCardSlots();
-		
+
 	}
 
 	@Override
@@ -88,11 +88,11 @@ public class Game extends Menu {
 			 */
 			boards.get((i + 2) % boards.size()).draw(graphics);
 		}
-        
+
 		for (Interactable button : this.getInteractables()) {
 			button.draw(graphics);
 		}
-		
+
 		this.resource.draw(graphics);
 	}
 
@@ -115,7 +115,8 @@ public class Game extends Menu {
 	}
 
 	private void setUpExitButton() {
-		Button exitButton = new Button(Constants.ExitButtonPosition, Constants.ExitButtonBounds, this.messages.getString("exit"));
+		Button exitButton = new Button(Constants.ExitButtonPosition, Constants.ExitButtonBounds,
+				this.messages.getString("exit"));
 		this.addInteractable(exitButton);
 	}
 
@@ -146,13 +147,11 @@ public class Game extends Menu {
 
 	@Override
 	public void onClick(Interactable clicked) {
-		if (this.resource.isActive()){
-			this.resource.closeMenu();
-		}
 		if (clicked.getClass().equals(CardHolder.class)) {
-			String[] buttons = new String[] { this.messages.getString("buildStructure"), this.messages.getString("buildWonder"), this.messages.getString("discard") };
-			int val = JOptionPane.showOptionDialog(null, this.messages.getString("choosePlayType"), this.messages.getString("playCard"),
-					JOptionPane.INFORMATION_MESSAGE, 0, null, buttons, buttons[0]);
+			String[] buttons = new String[] { this.messages.getString("buildStructure"),
+					this.messages.getString("buildWonder"), this.messages.getString("discard") };
+			int val = JOptionPane.showOptionDialog(null, this.messages.getString("choosePlayType"),
+					this.messages.getString("playCard"), JOptionPane.INFORMATION_MESSAGE, 0, null, buttons, buttons[0]);
 			try {
 				if (val == 0) {
 					((CardHolder) clicked).activate(this.gameManager);
@@ -170,8 +169,12 @@ public class Game extends Menu {
 				Message.showMessage(e.getMessage());
 			}
 		} else if (clicked.getValue().equals(this.messages.getString("exit"))) {
-			System.exit(0);
-		} else if (clicked.getValue().codePointAt(0) >= 48 || clicked.getValue().codePointAt(0) <= 57){
+			if (this.resource.isActive()) {
+				this.resource.closeMenu();
+			} else {
+				System.exit(0);
+			}
+		} else if (clicked.getValue().codePointAt(0) >= 48 || clicked.getValue().codePointAt(0) <= 57) {
 			int playerNum = codePointToInt(clicked.getValue().codePointAt(0));
 			int locOfCurrentPlayer = this.gameManager.getPlayers().indexOf(this.gameManager.getCurrentPlayer());
 			this.resource.openMenu(this.gameManager.getPlayer(locOfCurrentPlayer + playerNum));
@@ -181,8 +184,8 @@ public class Game extends Menu {
 			tradeHandler.trade(splitValue);
 		}
 	}
-	
-	private int codePointToInt(int val){
+
+	private int codePointToInt(int val) {
 		return val - 48;
 	}
 
