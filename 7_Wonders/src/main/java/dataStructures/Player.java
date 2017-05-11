@@ -224,4 +224,8 @@ public class Player {
 	public void addNumShields(int numShields) {
 		this.numShields += numShields;
 	}
+
+	public int getNumVictoryPoints() {
+		return 0;
+	}
 }

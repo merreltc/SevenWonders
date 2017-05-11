@@ -551,4 +551,10 @@ public class PlayerTest {
 		player.addNumShields(2);
 		assertEquals(2, player.getNumShields());
 	}
+	
+	@Test
+	public void testGetDefaultNumVictoryPoints() {
+		Player player = new Player("Jane Doe", WonderType.COLOSSUS);
+		assertEquals(0, player.getNumVictoryPoints());
+	}
 }
