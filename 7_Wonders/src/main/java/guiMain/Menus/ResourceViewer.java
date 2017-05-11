@@ -15,6 +15,9 @@ public class ResourceViewer extends Menu {
 
 	private Player player;
 	private boolean shouldDraw = false;
+	
+	//Card.getCardEffectType() - enum to cast to
+	//Card.getEffect() - effects of the card
 
 	@Override
 	public void draw(Graphics graphics) {
