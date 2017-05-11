@@ -3,11 +3,15 @@ package backendTests;
 import static org.junit.Assert.*;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
+import org.easymock.EasyMock;
 import org.junit.Test;
 
+import backend.GameManager;
 import backend.PlayerTurnHandler;
 import backend.SetUpDeckHandler;
+import backend.SetUpHandler;
 import backend.TurnHandler;
 import dataStructures.Card;
 import dataStructures.Deck;
@@ -336,5 +340,34 @@ public class PlayerTurnHandlerTest {
 		assertTrue(board.getDiscardPile().contains(discarded));
 		assertEquals(2, current.getCurrentHand().size());
 		assertFalse(current.getCurrentHand().contains(discarded));
+	}
+	
+	@Test
+	public void testBuildStructureAddOneShield(){
+		ArrayList<Player> players = new ArrayList<Player>();
+		players.add(new Player("Wolverine", WonderType.COLOSSUS));
+		players.add(new Player("Captain America", WonderType.LIGHTHOUSE));
+		players.add(new Player("Black Widow", WonderType.PYRAMIDS));
+		
+		ArrayList<Card> cards = new SetUpDeckHandler().createCards(Age.AGE1, 3);
+		Deck deck = new Deck(Age.AGE1, cards);
+		
+		GameBoard board = new GameBoard(players, deck);
+		
+		Player current = board.getCurrentPlayer();
+		ArrayList<Card> currentHand = new ArrayList<Card>();
+		
+		Card lumber = deck.getCard(0);
+		Card stockade = deck.getCard(15);
+		currentHand.add(lumber); //lumber yard
+		currentHand.add(stockade); //stockade
+		
+		current.setCurrentHand(currentHand);
+		
+		PlayerTurnHandler playerTurnHandler = new PlayerTurnHandler();
+		playerTurnHandler.buildStructure(current, lumber);
+		playerTurnHandler.buildStructure(current, stockade);
+		
+		assertEquals(1, current.getNumShields());
 	}
 }

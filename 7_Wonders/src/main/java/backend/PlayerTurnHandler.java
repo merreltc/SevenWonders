@@ -10,6 +10,7 @@ import dataStructures.Effect.EffectType;
 import dataStructures.EntityEffect;
 import dataStructures.GameBoard;
 import dataStructures.Player;
+import dataStructures.ValueEffect;
 import exceptions.InsufficientFundsException;
 
 public class PlayerTurnHandler {
@@ -20,6 +21,16 @@ public class PlayerTurnHandler {
 			current.removeTotalCoins(coinCost);
 		}else if (card.getCostType() != CostType.NONE){
 			validatePlayerHasEntitiesForCard(current, card);
+		}
+		
+		if(card.getEffectType() == EffectType.VALUE){
+			ValueEffect effect = (ValueEffect) card.getEffect();
+			
+			switch (effect.getValue()){
+				default:
+					current.addNumShields(effect.getValueAmount());
+					break;
+			}
 		}
 		
 		current.addToStoragePile(card);
