@@ -76,4 +76,9 @@ public class Constants {
 
 	/* For Game Class */
 	public static final String[] ResourceTypes = new String[] { "Lumber", "Ore", "Stone", "Clay" };
+	
+	/* For ResourceViewer Class */
+	public static final String[] ResourceImages = new String[] { "clay", "lumber", "ore", "stone", "glass", "loom symbol", "papyrus", "coin", "one shield", "victory points", "manufactured", "resource", "science"};
+	public static final int RESOURCE_IMAGE_HEIGHT = 30;
+	public static final int RESOURCE_IMAGE_WIDTH = 30;
 }
