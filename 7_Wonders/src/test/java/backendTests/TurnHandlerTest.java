@@ -101,9 +101,9 @@ public class TurnHandlerTest {
 
 		assertEquals(expectedDeckSize, deck.getCards().size());
 	}
-	
+
 	@Test
-	public void testGetNumPlayersUntilPass3Players(){
+	public void testGetNumPlayersUntilPass3Players() {
 		ArrayList<String> playerNames = new ArrayList<String>(
 				Arrays.asList("Wolverine", "Captain America", "Black Widow"));
 		ArrayList<WonderType> wonders = new ArrayList<WonderType>(
@@ -116,6 +116,15 @@ public class TurnHandlerTest {
 		ArrayList<Player> players = manager.getPlayers();
 		TurnHandler turnHandler = new TurnHandler();
 		turnHandler.dealInitialTurnCards(players, manager.getNumPlayers(), deck);
+
+		assertEquals(2, turnHandler.getNumPlayersUntilPass());
+	}
+
+	@Test
+	public void testSetNumPlayersUntilPass() {
+		TurnHandler turnHandler = new TurnHandler();
+		
+		turnHandler.setNumPlayersUntilPass(2);
 		
 		assertEquals(2, turnHandler.getNumPlayersUntilPass());
 	}

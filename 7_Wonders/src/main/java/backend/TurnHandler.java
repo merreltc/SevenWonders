@@ -27,4 +27,8 @@ public class TurnHandler {
 	public int getNumPlayersUntilPass() {
 		return this.numPlayersUntilPass;
 	}
+
+	public void setNumPlayersUntilPass(int num) {
+		this.numPlayersUntilPass = num;
+	}
 }
