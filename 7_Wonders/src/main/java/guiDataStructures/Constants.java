@@ -81,4 +81,16 @@ public class Constants {
 	public static final String[] ResourceImages = new String[] { "clay", "lumber", "ore", "stone", "glass", "loom symbol", "papyrus", "coin", "one shield", "victory points", "manufactured", "resource", "science"};
 	public static final int RESOURCE_IMAGE_HEIGHT = 30;
 	public static final int RESOURCE_IMAGE_WIDTH = 30;
+	public static final Font RESOURCE_VIEWER_FONT = new Font("MS Song", Font.BOLD, 30);
+	public static final int NUM_OF_COLUMNS = 13;
+	public static final int RESOURCE_VIEWER_ROW_HEIGHT = 40;
+	public static final int RESOURCE_VIEWER_ROW_X = 50;
+	public static final int RESOURCE_VIEWER_ROW_BASE_Y = 100;
+	public static final int RESOURCE_VIEWER_TEXT_X_OFFSET = 80;
+	public static final int RESOURCE_VIEWER_TEXT_Y_OFFSET = 30;
+	public static final int RESOURCE_VIEWER_ROW_WIDTH = FrameWidth - 100;
+	public static final int RESOURCE_VIEWER_FIRST_CELL_WIDTH = 250;
+	public static final int RESOURCE_VIEWER_CELL_WIDTH = (RESOURCE_VIEWER_ROW_WIDTH - RESOURCE_VIEWER_FIRST_CELL_WIDTH) / NUM_OF_COLUMNS;
+
+
 }
