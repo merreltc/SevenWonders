@@ -19,6 +19,7 @@ import dataStructures.Deck;
 import dataStructures.Player;
 import dataStructures.Wonder;
 import dataStructures.Wonder.WonderType;
+import guiDataStructures.PlayerInformationHolder;
 
 public class TurnHandlerTest {
 
@@ -29,7 +30,7 @@ public class TurnHandlerTest {
 		ArrayList<WonderType> wonders = new ArrayList<WonderType>(
 				Arrays.asList(WonderType.COLOSSUS, WonderType.LIGHTHOUSE, WonderType.TEMPLE));
 
-		GameManager manager = new GameManager(playerNames, wonders, new SetUpHandler(), new SetUpDeckHandler(),
+		GameManager manager = new GameManager(compileHolderObjects(playerNames, wonders), new SetUpHandler(), new SetUpDeckHandler(),
 				new TurnHandler(), new PlayerTurnHandler());
 
 		Deck deck = manager.getGameBoard().getDeck();
@@ -52,7 +53,7 @@ public class TurnHandlerTest {
 				Arrays.asList(WonderType.COLOSSUS, WonderType.LIGHTHOUSE, WonderType.TEMPLE, WonderType.STATUE,
 						WonderType.MAUSOLEUM, WonderType.GARDENS, WonderType.PYRAMIDS));
 
-		GameManager manager = new GameManager(playerNames, wonders, new SetUpHandler(), new SetUpDeckHandler(),
+		GameManager manager = new GameManager(compileHolderObjects(playerNames, wonders), new SetUpHandler(), new SetUpDeckHandler(),
 				new TurnHandler(), new PlayerTurnHandler());
 
 		Deck deck = manager.getGameBoard().getDeck();
@@ -75,7 +76,7 @@ public class TurnHandlerTest {
 		ArrayList<WonderType> wonders = new ArrayList<WonderType>(Arrays.asList(WonderType.COLOSSUS,
 				WonderType.LIGHTHOUSE, WonderType.TEMPLE, WonderType.STATUE, WonderType.MAUSOLEUM));
 
-		GameManager manager = new GameManager(playerNames, wonders, new SetUpHandler(), new SetUpDeckHandler(),
+		GameManager manager = new GameManager(compileHolderObjects(playerNames, wonders), new SetUpHandler(), new SetUpDeckHandler(),
 				new TurnHandler(), new PlayerTurnHandler());
 
 		Deck deck = manager.getGameBoard().getDeck();
@@ -109,7 +110,7 @@ public class TurnHandlerTest {
 		ArrayList<WonderType> wonders = new ArrayList<WonderType>(
 				Arrays.asList(WonderType.COLOSSUS, WonderType.LIGHTHOUSE, WonderType.TEMPLE));
 
-		GameManager manager = new GameManager(playerNames, wonders, new SetUpHandler(), new SetUpDeckHandler(),
+		GameManager manager = new GameManager(compileHolderObjects(playerNames, wonders), new SetUpHandler(), new SetUpDeckHandler(),
 				new TurnHandler(), new PlayerTurnHandler());
 
 		Deck deck = manager.getGameBoard().getDeck();
@@ -118,5 +119,15 @@ public class TurnHandlerTest {
 		turnHandler.dealInitialTurnCards(players, manager.getNumPlayers(), deck);
 		
 		assertEquals(2, turnHandler.getNumPlayersUntilPass());
+	}
+	
+	private ArrayList<PlayerInformationHolder> compileHolderObjects(ArrayList<String> playerNames, ArrayList<WonderType> wonders){
+		ArrayList<PlayerInformationHolder> holders = new ArrayList<PlayerInformationHolder>();
+		
+		for (int i = 0; i < playerNames.size(); i++){
+			PlayerInformationHolder currentHolder = new PlayerInformationHolder(playerNames.get(i), wonders.get(i), 'a');
+			holders.add(currentHolder);
+		}
+		return holders;
 	}
 }
