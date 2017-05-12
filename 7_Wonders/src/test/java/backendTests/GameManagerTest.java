@@ -86,6 +86,15 @@ public class GameManagerTest {
 
 		EasyMock.verify(setUpDeckHandler);
 	}
+	
+	@Test
+	public void testGetDefaultDirection(){
+		ArrayList<String> playerNames = new ArrayList<String>(Arrays.asList("Wolverine", "Captain America", "Black Widow"));
+		ArrayList<WonderType> wonders = new ArrayList<WonderType>(Arrays.asList( WonderType.COLOSSUS, WonderType.LIGHTHOUSE, WonderType.TEMPLE));
+		
+		GameManager manager = new GameManager(compileHolderObjects(playerNames, wonders));
+		assertEquals(Direction.CLOCKWISE, manager.getDirection());
+	}
 
 	@Test
 	public void testTrade() {

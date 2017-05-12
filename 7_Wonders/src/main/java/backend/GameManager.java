@@ -152,4 +152,8 @@ public class GameManager {
 	public Player getPreviousPlayer() {
 		return this.board.getPreviousPlayer();
 	}
+
+	public Direction getDirection() {
+		return Direction.CLOCKWISE;
+	}
 }
