@@ -13,6 +13,8 @@ public class Player {
 	private int numOfValue1Coins = 3;
 	private int numOfValue3Coins = 0;
 	private int conflictTotal = 0;
+	private int numShields = 0;
+	private int numVictoryPoints;
 
 	private Wonder wonder;
 
@@ -21,7 +23,6 @@ public class Player {
 
 	private HashMap<Enum, Integer> currentTrades = new HashMap<Enum, Integer>();
 
-	
 	public Player(String playerName, Wonder.WonderType wonder){
 		this.name = playerName;
 		this.wonder = new Wonder('A', wonder);
@@ -214,5 +215,21 @@ public class Player {
 		
 		this.removeValue3(numValue3CoinsToRemove);
 		this.removeValue1(numValue1CoinsToRemove);
+	}
+
+	public int getNumShields() {
+		return this.numShields;
+	}
+
+	public void addNumShields(int numShields) {
+		this.numShields += numShields;
+	}
+
+	public int getNumVictoryPoints() {
+		return this.numVictoryPoints;
+	}
+
+	public void addNumVictoryPoints(int numPoints) {
+		this.numVictoryPoints += numPoints;
 	}
 }

@@ -13,6 +13,7 @@ import org.junit.Test;
 import backend.SetUpHandler;
 import dataStructures.Player;
 import dataStructures.Wonder.WonderType;
+import guiDataStructures.PlayerInformationHolder;
 
 public class SetupBackendTest {
 
@@ -62,7 +63,7 @@ public class SetupBackendTest {
 				Arrays.asList(WonderType.COLOSSUS, WonderType.LIGHTHOUSE, WonderType.TEMPLE));
 
 		SetUpHandler setUpHandler = new SetUpHandler();
-		ArrayList<Player> players = setUpHandler.setUpAndReturnPlayers(playerNames, wonders);
+		ArrayList<Player> players = setUpHandler.setUpAndReturnPlayers(compileHolderObjects(playerNames, wonders));
 
 		for (int i = 0; i < players.size(); i++) {
 			assertEquals(playerNames.get(i), players.get(i).getName());
@@ -78,7 +79,7 @@ public class SetupBackendTest {
 						WonderType.MAUSOLEUM, WonderType.GARDENS, WonderType.PYRAMIDS));
 
 		SetUpHandler setUpHandler = new SetUpHandler();
-		ArrayList<Player> players = setUpHandler.setUpAndReturnPlayers(playerNames, wonders);
+		ArrayList<Player> players = setUpHandler.setUpAndReturnPlayers(compileHolderObjects(playerNames, wonders));
 
 		for (int i = 0; i < players.size(); i++) {
 			assertEquals(playerNames.get(i), players.get(i).getName());
@@ -91,7 +92,7 @@ public class SetupBackendTest {
 		ArrayList<WonderType> wonders = new ArrayList<WonderType>();
 
 		SetUpHandler setUpHandler = new SetUpHandler();
-		setUpHandler.setUpAndReturnPlayers(playerNames, wonders);
+		setUpHandler.setUpAndReturnPlayers(compileHolderObjects(playerNames, wonders));
 		fail();
 	}
 
@@ -104,7 +105,7 @@ public class SetupBackendTest {
 						WonderType.MAUSOLEUM, WonderType.GARDENS, WonderType.PYRAMIDS, WonderType.PYRAMIDS));
 
 		SetUpHandler setUpHandler = new SetUpHandler();
-		setUpHandler.setUpAndReturnPlayers(playerNames, wonders);
+		setUpHandler.setUpAndReturnPlayers(compileHolderObjects(playerNames, wonders));
 		fail();
 	}
 
@@ -116,7 +117,7 @@ public class SetupBackendTest {
 				Arrays.asList(WonderType.COLOSSUS, WonderType.LIGHTHOUSE, WonderType.TEMPLE));
 
 		SetUpHandler setUpHandler = new SetUpHandler();
-		ArrayList<Player> players = setUpHandler.createPlayers(playerNames, wonders);
+		ArrayList<Player> players = setUpHandler.createPlayers(compileHolderObjects(playerNames, wonders));
 
 		for (int i = 0; i < players.size(); i++) {
 			assertEquals(playerNames.get(i), players.get(i).getName());
@@ -131,7 +132,7 @@ public class SetupBackendTest {
 				Arrays.asList(WonderType.COLOSSUS, WonderType.LIGHTHOUSE, WonderType.TEMPLE));
 
 		SetUpHandler setUpHandler = new SetUpHandler();
-		ArrayList<Player> players = setUpHandler.createPlayers(playerNames, wonders);
+		ArrayList<Player> players = setUpHandler.createPlayers(compileHolderObjects(playerNames, wonders));
 
 		for (int i = 0; i < players.size(); i++) {
 			assertEquals(playerNames.get(i), players.get(i).getName());
@@ -147,10 +148,20 @@ public class SetupBackendTest {
 						WonderType.MAUSOLEUM, WonderType.GARDENS, WonderType.PYRAMIDS));
 
 		SetUpHandler setUpHandler = new SetUpHandler();
-		ArrayList<Player> players = setUpHandler.createPlayers(playerNames, wonders);
+		ArrayList<Player> players = setUpHandler.createPlayers(compileHolderObjects(playerNames, wonders));
 
 		for (int i = 0; i < players.size(); i++) {
 			assertEquals(playerNames.get(i), players.get(i).getName());
 		}
+	}
+	
+	private ArrayList<PlayerInformationHolder> compileHolderObjects(ArrayList<String> playerNames, ArrayList<WonderType> wonders){
+		ArrayList<PlayerInformationHolder> holders = new ArrayList<PlayerInformationHolder>();
+		
+		for (int i = 0; i < playerNames.size(); i++){
+			PlayerInformationHolder currentHolder = new PlayerInformationHolder(playerNames.get(i), wonders.get(i), 'a');
+			holders.add(currentHolder);
+		}
+		return holders;
 	}
 }

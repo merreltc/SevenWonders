@@ -12,7 +12,7 @@ import dataStructures.Effect.EffectType;
 import dataStructures.EntityEffect;
 import dataStructures.EntityEffect.EntityType;
 import dataStructures.GeneralEnums.Good;
-import dataStructures.GeneralEnums.Resource;
+import dataStructures.GeneralEnums.RawResource;
 import dataStructures.GeneralEnums.Science;
 
 public class EntityEffectTest {
@@ -20,7 +20,7 @@ public class EntityEffectTest {
 	@Test
 	public void test1LumberEntityEffect() {
 		HashMap<Enum, Integer> resourcesAndAmount = new HashMap<Enum, Integer>();
-		resourcesAndAmount.put(Resource.LUMBER, 1);
+		resourcesAndAmount.put(RawResource.LUMBER, 1);
 		
 		Effect effect = new EntityEffect(EffectType.ENTITY, EntityType.RESOURCE, resourcesAndAmount);
 
@@ -33,7 +33,7 @@ public class EntityEffectTest {
 	@Test
 	public void test2LumberEntityEffect() {
 		HashMap<Enum, Integer> resourcesAndAmount = new HashMap<Enum, Integer>();
-		resourcesAndAmount.put(Resource.LUMBER, 2);
+		resourcesAndAmount.put(RawResource.LUMBER, 2);
 		
 		Effect effect = new EntityEffect(EffectType.ENTITY, EntityType.RESOURCE, resourcesAndAmount);
 
@@ -46,7 +46,7 @@ public class EntityEffectTest {
 	@Test
 	public void test1ClayEntityEffect() {
 		HashMap<Enum, Integer> resourcesAndAmount = new HashMap<Enum, Integer>();
-		resourcesAndAmount.put(Resource.CLAY, 1);
+		resourcesAndAmount.put(RawResource.CLAY, 1);
 		
 		Effect effect = new EntityEffect(EffectType.ENTITY, EntityType.RESOURCE, resourcesAndAmount);
 
@@ -59,7 +59,7 @@ public class EntityEffectTest {
 	@Test
 	public void test2ClayEntityEffect() {
 		HashMap<Enum, Integer> resourcesAndAmount = new HashMap<Enum, Integer>();
-		resourcesAndAmount.put(Resource.CLAY, 2);
+		resourcesAndAmount.put(RawResource.CLAY, 2);
 		
 		Effect effect = new EntityEffect(EffectType.ENTITY, EntityType.RESOURCE, resourcesAndAmount);
 
@@ -72,7 +72,7 @@ public class EntityEffectTest {
 	@Test
 	public void test1OreEntityEffect() {
 		HashMap<Enum, Integer> resourcesAndAmount = new HashMap<Enum, Integer>();
-		resourcesAndAmount.put(Resource.ORE, 1);
+		resourcesAndAmount.put(RawResource.ORE, 1);
 		
 		Effect effect = new EntityEffect(EffectType.ENTITY, EntityType.RESOURCE, resourcesAndAmount);
 
@@ -85,7 +85,7 @@ public class EntityEffectTest {
 	@Test
 	public void test2OreEntityEffect() {
 		HashMap<Enum, Integer> resourcesAndAmount = new HashMap<Enum, Integer>();
-		resourcesAndAmount.put(Resource.ORE, 2);
+		resourcesAndAmount.put(RawResource.ORE, 2);
 		
 		Effect effect = new EntityEffect(EffectType.ENTITY, EntityType.RESOURCE, resourcesAndAmount);
 
@@ -99,7 +99,7 @@ public class EntityEffectTest {
 	@Test
 	public void test1StoneEntityEffect() {
 		HashMap<Enum, Integer> resourcesAndAmount = new HashMap<Enum, Integer>();
-		resourcesAndAmount.put(Resource.STONE, 1);
+		resourcesAndAmount.put(RawResource.STONE, 1);
 		
 		Effect effect = new EntityEffect(EffectType.ENTITY, EntityType.RESOURCE, resourcesAndAmount);
 
@@ -112,7 +112,7 @@ public class EntityEffectTest {
 	@Test
 	public void test2StoneEntityEffect() {
 		HashMap<Enum, Integer> resourcesAndAmount = new HashMap<Enum, Integer>();
-		resourcesAndAmount.put(Resource.STONE, 2);
+		resourcesAndAmount.put(RawResource.STONE, 2);
 		
 		Effect effect = new EntityEffect(EffectType.ENTITY, EntityType.RESOURCE, resourcesAndAmount);
 
@@ -125,8 +125,8 @@ public class EntityEffectTest {
 	@Test
 	public void testLumberClayEntityEffect() {
 		HashMap<Enum, Integer> resourcesAndAmount = new HashMap<Enum, Integer>();
-		resourcesAndAmount.put(Resource.LUMBER, 1);
-		resourcesAndAmount.put(Resource.CLAY, 1);
+		resourcesAndAmount.put(RawResource.LUMBER, 1);
+		resourcesAndAmount.put(RawResource.CLAY, 1);
 		
 		Effect effect = new EntityEffect(EffectType.ENTITY, EntityType.RESOURCE, resourcesAndAmount);
 
@@ -139,8 +139,8 @@ public class EntityEffectTest {
 	@Test
 	public void testStoneClayEntityEffect() {
 		HashMap<Enum, Integer> resourcesAndAmount = new HashMap<Enum, Integer>();
-		resourcesAndAmount.put(Resource.STONE, 1);
-		resourcesAndAmount.put(Resource.CLAY, 1);
+		resourcesAndAmount.put(RawResource.STONE, 1);
+		resourcesAndAmount.put(RawResource.CLAY, 1);
 		
 		Effect effect = new EntityEffect(EffectType.ENTITY, EntityType.RESOURCE, resourcesAndAmount);
 
@@ -153,8 +153,8 @@ public class EntityEffectTest {
 	@Test
 	public void testClayOreEntityEffect() {
 		HashMap<Enum, Integer> resourcesAndAmount = new HashMap<Enum, Integer>();
-		resourcesAndAmount.put(Resource.CLAY, 1);
-		resourcesAndAmount.put(Resource.ORE, 1);
+		resourcesAndAmount.put(RawResource.CLAY, 1);
+		resourcesAndAmount.put(RawResource.ORE, 1);
 		
 		Effect effect = new EntityEffect(EffectType.ENTITY, EntityType.RESOURCE, resourcesAndAmount);
 
@@ -167,8 +167,8 @@ public class EntityEffectTest {
 	@Test
 	public void testStoneLumberEntityEffect() {
 		HashMap<Enum, Integer> resourcesAndAmount = new HashMap<Enum, Integer>();
-		resourcesAndAmount.put(Resource.STONE, 1);
-		resourcesAndAmount.put(Resource.LUMBER, 1);
+		resourcesAndAmount.put(RawResource.STONE, 1);
+		resourcesAndAmount.put(RawResource.LUMBER, 1);
 		
 		Effect effect = new EntityEffect(EffectType.ENTITY, EntityType.RESOURCE, resourcesAndAmount);
 
@@ -181,8 +181,8 @@ public class EntityEffectTest {
 	@Test
 	public void testLumberOreEntityEffect() {
 		HashMap<Enum, Integer> resourcesAndAmount = new HashMap<Enum, Integer>();
-		resourcesAndAmount.put(Resource.LUMBER, 1);
-		resourcesAndAmount.put(Resource.ORE, 1);
+		resourcesAndAmount.put(RawResource.LUMBER, 1);
+		resourcesAndAmount.put(RawResource.ORE, 1);
 		
 		Effect effect = new EntityEffect(EffectType.ENTITY, EntityType.RESOURCE, resourcesAndAmount);
 
@@ -195,8 +195,8 @@ public class EntityEffectTest {
 	@Test
 	public void testOreStoneEntityEffect() {
 		HashMap<Enum, Integer> resourcesAndAmount = new HashMap<Enum, Integer>();
-		resourcesAndAmount.put(Resource.ORE, 1);
-		resourcesAndAmount.put(Resource.STONE, 1);
+		resourcesAndAmount.put(RawResource.ORE, 1);
+		resourcesAndAmount.put(RawResource.STONE, 1);
 		
 		Effect effect = new EntityEffect(EffectType.ENTITY, EntityType.RESOURCE, resourcesAndAmount);
 
@@ -209,10 +209,10 @@ public class EntityEffectTest {
 	@Test
 	public void testAllResourcesEntityEffect() {
 		HashMap<Enum, Integer> resourcesAndAmount = new HashMap<Enum, Integer>();
-		resourcesAndAmount.put(Resource.LUMBER, 1);
-		resourcesAndAmount.put(Resource.CLAY, 1);
-		resourcesAndAmount.put(Resource.ORE, 1);
-		resourcesAndAmount.put(Resource.STONE, 1);
+		resourcesAndAmount.put(RawResource.LUMBER, 1);
+		resourcesAndAmount.put(RawResource.CLAY, 1);
+		resourcesAndAmount.put(RawResource.ORE, 1);
+		resourcesAndAmount.put(RawResource.STONE, 1);
 		
 		Effect effect = new EntityEffect(EffectType.ENTITY, EntityType.RESOURCE, resourcesAndAmount);
 

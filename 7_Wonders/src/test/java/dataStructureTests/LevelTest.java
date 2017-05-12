@@ -15,6 +15,8 @@ import dataStructures.Effect.Direction;
 import dataStructures.Effect.EffectType;
 import dataStructures.EntityEffect;
 import dataStructures.EntityEffect.EntityType;
+import dataStructures.GeneralEnums.RawResource;
+import dataStructures.EntityEffect.EntityType;
 import dataStructures.GeneralEnums.Resource;
 import dataStructures.Level;
 import dataStructures.Level.Frequency;
@@ -62,7 +64,7 @@ public class LevelTest {
 		Effect effect = EasyMock.createStrictMock(Effect.class);
 		
 		HashMap<Enum, Integer> expected = new HashMap<Enum, Integer>();
-		expected.put(Resource.LUMBER, 2);
+		expected.put(RawResource.LUMBER, 2);
 
 		EasyMock.expect(cost.getType()).andReturn(CostType.RESOURCE);
 		EasyMock.expect(cost.getCost()).andReturn(expected);
@@ -84,7 +86,7 @@ public class LevelTest {
 		EntityEffect effect = EasyMock.createStrictMock(EntityEffect.class);
 		
 		HashMap<Enum, Integer> expectedEntities = new HashMap<Enum, Integer>();
-		expectedEntities.put(Resource.LUMBER, 2);
+		expectedEntities.put(RawResource.LUMBER, 2);
 
 		EasyMock.expect(effect.getEffectType()).andReturn(EffectType.ENTITY);
 		EasyMock.expect(effect.getDirection()).andReturn(Direction.SELF);
@@ -200,7 +202,7 @@ public class LevelTest {
 		Effect onceImmediate = EasyMock.createStrictMock(Effect.class);
 		Effect onceAge = EasyMock.createStrictMock(Effect.class);
 		Effect endOfGame = EasyMock.createStrictMock(Effect.class);
-		
+
 		EasyMock.replay(cost,endOfTurn,everyTurn,sixthTurn,onceImmediate,onceAge,endOfGame);
 		
 		int priority = 1;
@@ -217,7 +219,7 @@ public class LevelTest {
 		assertEquals(Frequency.ONCEIMMEDIATE, level4.getFrequency());
 		assertEquals(Frequency.ONCEAGE, level5.getFrequency());
 		assertEquals(Frequency.ENDOFGAME, level6.getFrequency());
-		
+
 		EasyMock.verify(cost,endOfTurn,everyTurn,sixthTurn,onceImmediate,onceAge,endOfGame);
 	}
 	
@@ -229,7 +231,7 @@ public class LevelTest {
 		HashMap<Effect, Frequency> effects = new HashMap<Effect, Frequency>();
 		effects.put(endOfTurn, Frequency.ENDOFTURN);
 		effects.put(everyTurn, Frequency.EVERYTURN);
-		
+
 		EasyMock.replay(cost,endOfTurn,everyTurn);
 		
 		int priority = 1;

@@ -415,7 +415,7 @@ public class PlayerTest {
 		
 		player.setStoragePile(playerCards);
 		
-		assertTrue(player.storagePileContainsEntity(Resource.LUMBER));
+		assertTrue(player.storagePileContainsEntity(RawResource.LUMBER));
 	}
 	
 	@Test
@@ -430,32 +430,32 @@ public class PlayerTest {
 	public void testAddTraded() {
 		Player player = new Player("Jane Doe", WonderType.COLOSSUS);
 		
-		player.addTradedValue(Resource.LUMBER);
+		player.addTradedValue(RawResource.LUMBER);
 		assertFalse(player.getCurrentTrades().isEmpty());
-		assertTrue(player.getCurrentTrades().containsKey(Resource.LUMBER));
-		assertEquals(1, (int) player.getCurrentTrades().get(Resource.LUMBER));
+		assertTrue(player.getCurrentTrades().containsKey(RawResource.LUMBER));
+		assertEquals(1, (int) player.getCurrentTrades().get(RawResource.LUMBER));
 	}
 	
 	@Test
 	public void testAddMultipleSameTraded() {
 		Player player = new Player("Jane Doe", WonderType.COLOSSUS);
 		
-		player.addTradedValue(Resource.LUMBER);
-		player.addTradedValue(Resource.LUMBER);
+		player.addTradedValue(RawResource.LUMBER);
+		player.addTradedValue(RawResource.LUMBER);
 		assertFalse(player.getCurrentTrades().isEmpty());
-		assertTrue(player.getCurrentTrades().containsKey(Resource.LUMBER));
-		assertEquals(2, (int) player.getCurrentTrades().get(Resource.LUMBER));
+		assertTrue(player.getCurrentTrades().containsKey(RawResource.LUMBER));
+		assertEquals(2, (int) player.getCurrentTrades().get(RawResource.LUMBER));
 	}
 	
 	@Test
 	public void testAddMultipleDifferentTraded() {
 		Player player = new Player("Jane Doe", WonderType.COLOSSUS);
 		
-		player.addTradedValue(Resource.LUMBER);
+		player.addTradedValue(RawResource.LUMBER);
 		player.addTradedValue(Good.LOOM);
 		assertFalse(player.getCurrentTrades().isEmpty());
-		assertTrue(player.getCurrentTrades().containsKey(Resource.LUMBER));
-		assertEquals(1, (int) player.getCurrentTrades().get(Resource.LUMBER));
+		assertTrue(player.getCurrentTrades().containsKey(RawResource.LUMBER));
+		assertEquals(1, (int) player.getCurrentTrades().get(RawResource.LUMBER));
 		assertEquals(1, (int) player.getCurrentTrades().get(Good.LOOM));
 	}
 	
@@ -463,7 +463,7 @@ public class PlayerTest {
 	public void testRemoveCurrentTrades() {
 		Player player = new Player("Jane Doe", WonderType.COLOSSUS);
 		
-		player.addTradedValue(Resource.LUMBER);
+		player.addTradedValue(RawResource.LUMBER);
 		player.addTradedValue(Good.LOOM);
 		player.removeCurrentTrades();
 		assertTrue(player.getCurrentTrades().isEmpty());
@@ -537,5 +537,31 @@ public class PlayerTest {
 		EasyMock.replay(wonder);
 		Player player = new Player("Jane Doe", wonder.getType());
 		assertEquals("The Lighthouse of Alexandria", player.getWonder().getName());
+	}
+	
+	@Test
+	public void testGetDefaultNumShields() {
+		Player player = new Player("Jane Doe", WonderType.COLOSSUS);
+		assertEquals(0, player.getNumShields());
+	}
+	
+	@Test
+	public void testAdd2Shields() {
+		Player player = new Player("Jane Doe", WonderType.COLOSSUS);
+		player.addNumShields(2);
+		assertEquals(2, player.getNumShields());
+	}
+	
+	@Test
+	public void testGetDefaultNumVictoryPoints() {
+		Player player = new Player("Jane Doe", WonderType.COLOSSUS);
+		assertEquals(0, player.getNumVictoryPoints());
+	}
+	
+	@Test
+	public void testAdd2VictoryPoints() {
+		Player player = new Player("Jane Doe", WonderType.COLOSSUS);
+		player.addNumVictoryPoints(2);
+		assertEquals(2, player.getNumVictoryPoints());
 	}
 }

@@ -3,7 +3,6 @@ package guiMain.Menus;
 import java.awt.Graphics;
 import java.awt.Point;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.ResourceBundle;
@@ -13,8 +12,8 @@ import javax.swing.JOptionPane;
 import backend.GameManager;
 import dataStructures.Player;
 import dataStructures.Wonder;
-import exceptions.InsufficientFundsException;
 import guiDataStructures.Constants;
+import guiDataStructures.PlayerInformationHolder;
 import guiMain.GuiTradeHelper;
 import guiMain.HandManager;
 import guiMain.Message;
@@ -38,35 +37,34 @@ public class Game extends Menu {
 	}
 
 	private void setUpPlayers(int numOfPlayers) {
-		ArrayList<String> playerNames = new ArrayList<String>();
-		ArrayList<Wonder.WonderType> wonders = new ArrayList<Wonder.WonderType>();
-
+		ArrayList<PlayerInformationHolder> players = new ArrayList<PlayerInformationHolder>();
+	
 		HashMap<String, Wonder.WonderType> wonderMap = getWonderMap();
 
 		for (int i = 0; i < numOfPlayers; i++) {
 			String name = Message.inputPlayerNameMessage(i);
 			String wonder = Message.dropDownWonderSelectionMessage(wonderMap.keySet().toArray());
 
-			playerNames.add(name);
-			wonders.add(wonderMap.get(wonder));
+			PlayerInformationHolder holder = new PlayerInformationHolder(name, wonderMap.get(wonder), 'a');
+			players.add(holder);
 			wonderMap.remove(wonder);
 			wonderMap.keySet().remove(wonder);
 			/* Set wonder to correct values */
 		}
 
-		this.gameManager = new GameManager(playerNames, wonders);
+		this.gameManager = new GameManager(players);
 		this.gameManager.dealInitialTurnCards();
 	}
 
 	private HashMap<String, Wonder.WonderType> getWonderMap() {
 		HashMap<String, Wonder.WonderType> wonders = new HashMap<String, Wonder.WonderType>();
-		wonders.put(Wonder.getWonderNameByType(Wonder.WonderType.COLOSSUS), Wonder.WonderType.COLOSSUS);
-		wonders.put(Wonder.getWonderNameByType(Wonder.WonderType.TEMPLE), Wonder.WonderType.TEMPLE);
-		wonders.put(Wonder.getWonderNameByType(Wonder.WonderType.GARDENS), Wonder.WonderType.GARDENS);
-		wonders.put(Wonder.getWonderNameByType(Wonder.WonderType.PYRAMIDS), Wonder.WonderType.PYRAMIDS);
-		wonders.put(Wonder.getWonderNameByType(Wonder.WonderType.LIGHTHOUSE), Wonder.WonderType.LIGHTHOUSE);
-		wonders.put(Wonder.getWonderNameByType(Wonder.WonderType.MAUSOLEUM), Wonder.WonderType.MAUSOLEUM);
-		wonders.put(Wonder.getWonderNameByType(Wonder.WonderType.STATUE), Wonder.WonderType.STATUE);
+		wonders.put(Wonder.getNameByType(Wonder.WonderType.COLOSSUS), Wonder.WonderType.COLOSSUS);
+		wonders.put(Wonder.getNameByType(Wonder.WonderType.TEMPLE), Wonder.WonderType.TEMPLE);
+		wonders.put(Wonder.getNameByType(Wonder.WonderType.GARDENS), Wonder.WonderType.GARDENS);
+		wonders.put(Wonder.getNameByType(Wonder.WonderType.PYRAMIDS), Wonder.WonderType.PYRAMIDS);
+		wonders.put(Wonder.getNameByType(Wonder.WonderType.LIGHTHOUSE), Wonder.WonderType.LIGHTHOUSE);
+		wonders.put(Wonder.getNameByType(Wonder.WonderType.MAUSOLEUM), Wonder.WonderType.MAUSOLEUM);
+		wonders.put(Wonder.getNameByType(Wonder.WonderType.STATUE), Wonder.WonderType.STATUE);
 		return wonders;
 	}
 

@@ -18,7 +18,7 @@ import dataStructures.Effect.EffectType;
 import dataStructures.EntityEffect;
 import dataStructures.EntityEffect.EntityType;
 import dataStructures.GeneralEnums.Good;
-import dataStructures.GeneralEnums.Resource;
+import dataStructures.GeneralEnums.RawResource;
 import dataStructures.GeneralEnums.Science;
 import dataStructures.MultiValueEffect;
 import dataStructures.ValueEffect;
@@ -154,7 +154,7 @@ public class SetUpDeckHandler {
 				type = costValueObj.getString("Resource");
 
 				int amount = costValueObj.getInt("amount");
-				Resource costResource = Resource.valueOf(type);
+				RawResource costResource = RawResource.valueOf(type);
 
 				givenCosts.put(costResource, amount);
 			} catch (JSONException exception) {
@@ -182,7 +182,7 @@ public class SetUpDeckHandler {
 			int amount = resource.getInt("amount");
 
 			if (resourceTypeKey.equals("Resource")) {
-				Resource costResource = Resource.valueOf(costTypeValue);
+				RawResource costResource = RawResource.valueOf(costTypeValue);
 				givenCosts.put(costResource, amount);
 			} else {
 				Good costGood = Good.valueOf(costTypeValue);
@@ -285,7 +285,7 @@ public class SetUpDeckHandler {
 				entitiesAndAmounts.put(good, entityAmount);
 			} else {
 				entityAmount = entityToAdd.getInt("entityAmount");
-				Resource resource = Resource.valueOf(entityToAdd.getString(entityType));
+				RawResource resource = RawResource.valueOf(entityToAdd.getString(entityType));
 				entitiesAndAmounts.put(resource, entityAmount);
 			}
 		}

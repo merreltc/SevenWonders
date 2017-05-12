@@ -15,8 +15,9 @@ import org.junit.Test;
 import backend.GameManager;
 import backend.SetUpHandler;
 import dataStructures.Player;
-import dataStructures.Wonder;
 import dataStructures.Wonder.WonderType;
+import guiDataStructures.PlayerInformationHolder;
+import dataStructures.Wonder;
 
 public class SetUpHandlerTest {
 
@@ -84,10 +85,10 @@ public class SetUpHandlerTest {
 		ArrayList<String> playerNames = new ArrayList<String>();
 		ArrayList<WonderType> wonders = new ArrayList<WonderType>();
 
-		GameManager manager = new GameManager(playerNames, wonders);
+		GameManager manager = new GameManager(compileHolderObjects(playerNames, wonders));
 
 		SetUpHandler setUpHandler = new SetUpHandler();
-		setUpHandler.setUpAndReturnPlayers(playerNames, wonders);
+		setUpHandler.setUpAndReturnPlayers(compileHolderObjects(playerNames, wonders));
 		fail();
 	}
 
@@ -100,18 +101,29 @@ public class SetUpHandlerTest {
 						WonderType.MAUSOLEUM, WonderType.GARDENS, WonderType.PYRAMIDS, WonderType.PYRAMIDS));
 
 		SetUpHandler setUpHandler = new SetUpHandler();
-		setUpHandler.setUpAndReturnPlayers(playerNames, wonders);
+		setUpHandler.setUpAndReturnPlayers(compileHolderObjects(playerNames, wonders));
 		fail();
 	}
 
 	private void verifyPlayersAndWonders(ArrayList<String> playerNames, ArrayList<WonderType> wonders) {
 		SetUpHandler setUpHandler = new SetUpHandler();
-		ArrayList<Player> players = setUpHandler.createPlayers(playerNames, wonders);
+		ArrayList<Player> players = setUpHandler.createPlayers(compileHolderObjects(playerNames, wonders));
 
 		for (int i = 0; i < playerNames.size(); i++) {
 			String name = players.get(i).getName();
 			assertTrue(playerNames.contains(name));
+
 			assertEquals(wonders.get(i), players.get(i).getWonder().getType());
 		}
+	}
+	
+	private ArrayList<PlayerInformationHolder> compileHolderObjects(ArrayList<String> playerNames, ArrayList<WonderType> wonders){
+		ArrayList<PlayerInformationHolder> holders = new ArrayList<PlayerInformationHolder>();
+		
+		for (int i = 0; i < playerNames.size(); i++){
+			PlayerInformationHolder currentHolder = new PlayerInformationHolder(playerNames.get(i), wonders.get(i), 'a');
+			holders.add(currentHolder);
+		}
+		return holders;
 	}
 }

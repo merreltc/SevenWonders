@@ -370,10 +370,10 @@ public class TradeHandlerTest {
 		
 		next.setStoragePile(storage);
 		
-		tradeHandler.tradeFromToForEntity(current, next, Resource.LUMBER);
+		tradeHandler.tradeFromToForEntity(current, next, RawResource.LUMBER);
 		
 		assertEquals(0, current.getNumValue3Coins());
-		assertEquals(1, (int) current.getCurrentTrades().get(Resource.LUMBER));
+		assertEquals(1, (int) current.getCurrentTrades().get(RawResource.LUMBER));
 		assertEquals(6, next.getCoinTotal());
 	}
 	
@@ -398,7 +398,7 @@ public class TradeHandlerTest {
 		
 		next.setStoragePile(storage);
 		
-		tradeHandler.tradeFromToForEntity(current, next, Resource.ORE);
+		tradeHandler.tradeFromToForEntity(current, next, RawResource.ORE);
 		fail();
 	}
 	
