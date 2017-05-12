@@ -15,6 +15,22 @@ Cards are passed left-right-left over the three ages, so you need to keep an eye
 
 Though the box of earlier editions is listed as being for 3–7 players, there is an official 2-player variant included in the instructions."
 
+Instructions to Run:
+
+Configuring the Build Path:
+1. right click on 7_Wonders
+2. select Build Path / Configure Build Path
+3. Select Source in the tabs
+4. Select Add Folder
+5. Navigate to src/org and select the check box next to org
+6. Hit ok, apply and then ok
+
+Running the project:
+1. Open the 7_Wonders Package
+2. Open src/main/java
+3. Open GuiMain
+4. Select and run the GuiMainMenu class
+
 Contents
 - 1 Wonder board - 1 Courtesan token
 - 1 Wonder card - 1 rulebook
