@@ -14,15 +14,18 @@ public class Constants {
 	public static final Point StartButtonPosition = new Point(850, 400);
 	public static final Point StartButtonBounds = new Point(200, 100);
 
-	public static final Font TitleFont = new Font("Courier New", Font.BOLD, 66);
+	public static final Font TitleFont = new Font("MS Song", Font.BOLD, 66);
 	public static final Color TitleColor = Color.yellow;
+	
+	public static final Font ButtonFont = new Font("MS Song", Font.BOLD, 50);
+	public static final Font ResourceFont = new Font("MS Song", Font.BOLD, 30);
 
 	public static final Point MainMenuTitlePosition = new Point(740, 100);
 
 	public static final Point PlayerSelectButtonBounds = new Point(150, 100);
 	public static final Point PlayerSelectTitlePosition = new Point(500, 280);
 
-	public static final Font ErrorFont = new Font("Courier New", Font.BOLD, 35);
+	public static final Font ErrorFont = new Font("MS Song", Font.BOLD, 35);
 	public static final Point ErrorMessagePosition = new Point(550, 400);
 
 	public static final Point ExitButtonBounds = new Point(200, 80);
@@ -58,6 +61,10 @@ public class Constants {
 	public static final Point TradeRightBaseButtonPoint = new Point(NextPlayerBoardPositionX - 5, NextPlayerBoardPositionY + 5);
 
 	public static final int TradeButtonYOffet = TradeButtonBounds.y + 20;
+	
+	public static final int ResourcerViewerButtonYOffset = 50;
+	
+	public static final Point ResourceViewerButtonBounds = new Point(150,50);
 
 	public static final int CardHeight = 258;
 	public static final int CardWidth = 150;

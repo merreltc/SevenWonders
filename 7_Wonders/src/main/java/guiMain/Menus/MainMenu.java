@@ -2,12 +2,16 @@ package guiMain.Menus;
 
 import java.awt.Graphics;
 import java.util.ArrayList;
+import java.util.Locale;
+import java.util.ResourceBundle;
 
 import guiDataStructures.Constants;
 import guiMain.Interactables.Button;
 import guiMain.Interactables.Interactable;
 
 public class MainMenu extends Menu{
+	
+	ResourceBundle messages = ResourceBundle.getBundle("message", Locale.getDefault());
 
 	public void draw(Graphics graphics) {
 		graphics.setFont(Constants.TitleFont);
@@ -21,7 +25,7 @@ public class MainMenu extends Menu{
 	@Override
 	public void initialize() {
 		this.clearInteractables();
-		Interactable startGame = new Button(Constants.StartButtonPosition, Constants.StartButtonBounds, "Start");
+		Interactable startGame = new Button(Constants.StartButtonPosition, Constants.StartButtonBounds, this.messages.getString("start"));
 		this.addInteractable(startGame);
 	}
 
