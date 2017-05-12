@@ -118,7 +118,12 @@ public class GameManager {
 		}
 
 		this.turnHandler.setNumPlayersUntilPass(playersUntilPass - 1);
-		this.rotateClockwise();
+		
+		if(this.currentDirection == Direction.CLOCKWISE){
+			this.rotateClockwise();
+		}else{
+			this.rotateCounterClockwise();
+		}
 		return message;
 	}
 

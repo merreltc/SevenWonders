@@ -499,8 +499,8 @@ public class GameManagerTest {
 		ArrayList<Card> cards2 = new SetUpDeckHandler().createCards(Age.AGE2, 3);
 		Deck deck2 = new Deck(Age.AGE2, cards2);
 
-		GameManager manager = new GameManager(compileHolderObjects(playerNames, wonders), new SetUpHandler(), new SetUpDeckHandler(),
-				turnHandler, new PlayerTurnHandler());
+		GameManager manager = EasyMock.partialMockBuilder(GameManager.class).withConstructor(compileHolderObjects(playerNames, wonders), new SetUpHandler(), new SetUpDeckHandler(),
+				turnHandler, new PlayerTurnHandler()).addMockedMethod("rotateCounterClockwise").createMock();
 		manager.dealInitialTurnCards();
 
 		ArrayList<Card> previousCurrentCards = manager.getCurrentPlayer().getCurrentHand();
@@ -514,8 +514,9 @@ public class GameManagerTest {
 		mockExpectTurnHandlerCalls(turnHandler, 4);
 
 		turnHandler.dealInitialTurnCards(manager.getPlayers(), 3, deck2);
-
-		EasyMock.replay(turnHandler);
+		manager.rotateCounterClockwise();
+		
+		EasyMock.replay(turnHandler, manager);
 
 		for (int numCalls = 0; numCalls < 17; numCalls++) {
 			manager.endCurrentPlayerTurn();
@@ -526,8 +527,8 @@ public class GameManagerTest {
 		assertEquals(Direction.COUNTERCLOCKWISE, manager.getDirection());
 		assertFalse(manager.getCurrentPlayer().getCurrentHand().equals(previousCurrentCards));
 		assertEquals(Age.AGE2, manager.getGameBoard().getDeck().getAge());
-
-		EasyMock.verify(turnHandler);
+		
+		EasyMock.verify(turnHandler, manager);
 	}
 	
 	@Test
