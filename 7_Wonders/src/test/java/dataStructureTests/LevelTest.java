@@ -15,7 +15,7 @@ import dataStructures.Effect.Direction;
 import dataStructures.Effect.EffectType;
 import dataStructures.EntityEffect;
 import dataStructures.EntityEffect.EntityType;
-import dataStructures.GeneralEnums.Resource;
+import dataStructures.GeneralEnums.RawResource;
 import dataStructures.Level;
 import dataStructures.Level.Frequency;
 import dataStructures.MultiValueEffect;
@@ -62,7 +62,7 @@ public class LevelTest {
 		Effect effect = EasyMock.createStrictMock(Effect.class);
 		
 		HashMap<Enum, Integer> expected = new HashMap<Enum, Integer>();
-		expected.put(Resource.LUMBER, 2);
+		expected.put(RawResource.LUMBER, 2);
 
 		EasyMock.expect(cost.getType()).andReturn(CostType.RESOURCE);
 		EasyMock.expect(cost.getCost()).andReturn(expected);
@@ -84,7 +84,7 @@ public class LevelTest {
 		EntityEffect effect = EasyMock.createStrictMock(EntityEffect.class);
 		
 		HashMap<Enum, Integer> expectedEntities = new HashMap<Enum, Integer>();
-		expectedEntities.put(Resource.LUMBER, 2);
+		expectedEntities.put(RawResource.LUMBER, 2);
 
 		EasyMock.expect(effect.getEffectType()).andReturn(EffectType.ENTITY);
 		EasyMock.expect(effect.getDirection()).andReturn(Direction.SELF);
@@ -241,7 +241,7 @@ public class LevelTest {
 			boolean validFreq = (freq == Frequency.ENDOFTURN || freq == Frequency.EVERYTURN);
 			assertTrue(validFreq);
 		}
-		
+
 		EasyMock.verify(cost,endOfTurn,everyTurn);
 	}
 }

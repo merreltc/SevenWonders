@@ -18,7 +18,7 @@ public class Message {
 
 	public static String inputPlayerNameMessage(int i) {
 		ResourceBundle messages = ResourceBundle.getBundle("message", Locale.getDefault());
-		Object[] messageArgs = {new Integer(i)};
+		Object[] messageArgs = {new Integer(i+1)};
 		MessageFormat format = new MessageFormat("");
 		format.setLocale(Locale.getDefault());
 		format.applyPattern(messages.getString("playerNameTemplate"));
