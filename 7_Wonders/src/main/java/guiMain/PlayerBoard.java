@@ -41,7 +41,7 @@ public class PlayerBoard {
 
 	private Player player;
 
-	ResourceBundle messages = ResourceBundle.getBundle("message", Locale.getDefault());
+	ResourceBundle messages = Translate.getNewResourceBundle();
 
 	public PlayerBoard(int startingPosition, int totalNumberOfPlayers, Player player, RenderImage renderer) {
 		this.renderer = renderer;
@@ -110,25 +110,10 @@ public class PlayerBoard {
 	}
 
 	public void drawResources(Graphics graphics) {
-
-		Object[] lumberArgs = { this.lumber };
-		Object[] oreArgs = { this.ore };
-		Object[] stoneArgs = { this.stone };
-		Object[] clayArgs = { this.clay };
-		MessageFormat format = new MessageFormat("");
-		format.setLocale(Locale.getDefault());
-
-		format.applyPattern(messages.getString("resourceLumberTemplate"));
-		graphics.drawString(format.format(lumberArgs), position.x + 10, position.y + 25);
-
-		format.applyPattern(messages.getString("resourceOreTemplate"));
-		graphics.drawString(format.format(oreArgs), position.x + 10, position.y + 65);
-
-		format.applyPattern(messages.getString("resourceStoneTemplate"));
-		graphics.drawString(format.format(stoneArgs), position.x + 10, position.y + 105);
-
-		format.applyPattern(messages.getString("resourceClayTemplate"));
-		graphics.drawString(format.format(clayArgs), position.x + 10, position.y + 145);
+		graphics.drawString(Translate.prepareStringTemplateWithIntArg(this.lumber, "resourceLumberTemplate", messages), position.x + 10, position.y + 25);
+		graphics.drawString(Translate.prepareStringTemplateWithIntArg(this.ore, "resourceOreTemplate", messages), position.x + 10, position.y + 65);
+		graphics.drawString(Translate.prepareStringTemplateWithIntArg(this.stone, "resourceStoneTemplate", messages), position.x + 10, position.y + 105);
+		graphics.drawString(Translate.prepareStringTemplateWithIntArg(this.clay, "resourceClayTemplate", messages), position.x + 10, position.y + 145);
 	}
 
 	public void changePlayer(Player player) {
@@ -174,5 +159,4 @@ public class PlayerBoard {
 			}
 		}
 	}
-
 }

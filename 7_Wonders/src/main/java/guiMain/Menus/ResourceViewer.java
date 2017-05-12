@@ -20,13 +20,14 @@ import dataStructures.Player;
 import dataStructures.ValueEffect;
 import guiDataStructures.Constants;
 import guiMain.RenderImage;
+import guiMain.Translate;
 
 public class ResourceViewer extends Menu {
 
 	private Player player;
 	private RenderImage renderer = new RenderImage();
 	private boolean shouldDraw = false;
-	ResourceBundle messages = ResourceBundle.getBundle("message", Locale.getDefault());
+	private ResourceBundle messages = Translate.getNewResourceBundle();
 
 	@Override
 	public void draw(Graphics graphics) {
@@ -95,7 +96,7 @@ public class ResourceViewer extends Menu {
 		Card card = cards.get(row - 1);
 		int[] values = zeroArray(Constants.NUM_OF_COLUMNS);
 		// int[] values = getRowValues(card);
-		graphics.drawString(messages.getString(card.getName().replaceAll(" ", "")), Constants.RESOURCE_VIEWER_ROW_X + Constants.RESOURCE_VIEWER_CELL_WIDTH / 3,
+		graphics.drawString(messages.getString(Translate.prepareNoSpaceString(card.getName())), Constants.RESOURCE_VIEWER_ROW_X + Constants.RESOURCE_VIEWER_CELL_WIDTH / 3,
 				y);
 		for (int i = 0; i < values.length; i++) {
 			graphics.drawString(values[i] + "",

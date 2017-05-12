@@ -10,16 +10,23 @@ public class Translate {
 		return ResourceBundle.getBundle("message", Locale.getDefault());
 	}
 	
-	public static String prepareString(String str){
+	public static String prepareNoSpaceString(String str){
 		return str.replaceAll(" ", "");
 	}
 	
-	public static MessageFormat prepareArgFormat(int val, String template, ResourceBundle messages){
+	public static String prepareStringTemplateWithIntArg(int val, String template, ResourceBundle messages){
 		Object[] messageArgs = {new Integer(val)};
 		MessageFormat format = new MessageFormat("");
 		format.setLocale(Locale.getDefault());
 		format.applyPattern(messages.getString(template));
-		return format;
+		return format.format(messageArgs);
 	}
-
+	
+	public static String prepareStringTemplateWithStringArg(String arg, String template, ResourceBundle messages){
+		Object[] messageArgs = {arg};
+		MessageFormat format = new MessageFormat("");
+		format.setLocale(Locale.getDefault());
+		format.applyPattern(messages.getString(template));
+		return format.format(messageArgs);
+	}
 }
