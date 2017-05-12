@@ -1,20 +1,19 @@
 package backendTests;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Set;
 
-import org.easymock.EasyMock;
-import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
 
+import backend.GameManager;
 import backend.SetUpHandler;
 import dataStructures.Player;
-import dataStructures.Wonder;
 import dataStructures.Wonder.WonderType;
 
 public class SetUpHandlerTest {
@@ -59,123 +58,58 @@ public class SetUpHandlerTest {
 
 	@Test
 	public void testCreatePlayersMin() {
-		HashMap<String, WonderType> playerNamesAndWonders = new HashMap<String, WonderType>();
-		playerNamesAndWonders.put("Wolverine", WonderType.COLOSSUS);
-		playerNamesAndWonders.put("Captain America", WonderType.LIGHTHOUSE);
-		playerNamesAndWonders.put("Black Widow", WonderType.TEMPLE);
+		ArrayList<String> playerNames = new ArrayList<String>(
+				Arrays.asList("Wolverine", "Captain America", "Black Widow"));
+		ArrayList<WonderType> wonders = new ArrayList<WonderType>(
+				Arrays.asList(WonderType.COLOSSUS, WonderType.LIGHTHOUSE, WonderType.TEMPLE));
 
-		verifyPlayersAndWonders(playerNamesAndWonders);
+		verifyPlayersAndWonders(playerNames, wonders);
 	}
 
 	@Test
 	public void testCreatePlayersMax() {
-		HashMap<String, WonderType> playerNamesAndWonders = new HashMap<String, WonderType>();
-		playerNamesAndWonders.put("Wolverine", WonderType.COLOSSUS);
-		playerNamesAndWonders.put("Captain America", WonderType.LIGHTHOUSE);
-		playerNamesAndWonders.put("Black Widow", WonderType.TEMPLE);
-		playerNamesAndWonders.put("Hulk", WonderType.STATUE);
-		playerNamesAndWonders.put("Iron Man", WonderType.MAUSOLEUM);
-		playerNamesAndWonders.put("Spider Man", WonderType.GARDENS);
-		playerNamesAndWonders.put("Thor", WonderType.PYRAMIDS);
+		ArrayList<String> playerNames = new ArrayList<String>(
+				Arrays.asList("Wolverine", "Captain America", "Black Widow", "Hulk", "Iron Man", "Spider Man", "Thor"));
+		ArrayList<WonderType> wonders = new ArrayList<WonderType>(
+				Arrays.asList(WonderType.COLOSSUS, WonderType.LIGHTHOUSE, WonderType.TEMPLE, WonderType.STATUE,
+						WonderType.MAUSOLEUM, WonderType.GARDENS, WonderType.PYRAMIDS));
 
-		verifyPlayersAndWonders(playerNamesAndWonders);
+		verifyPlayersAndWonders(playerNames, wonders);
 	}
 
 	@Test(expected = IllegalArgumentException.class)
 	public void testCreatePlayersZero() {
-		HashMap<String, WonderType> playerNamesAndWonders = new HashMap<String, WonderType>();
+		ArrayList<String> playerNames = new ArrayList<String>();
+		ArrayList<WonderType> wonders = new ArrayList<WonderType>();
+
+		GameManager manager = new GameManager(playerNames, wonders);
 
 		SetUpHandler setUpHandler = new SetUpHandler();
-		setUpHandler.setUpAndReturnPlayers(playerNamesAndWonders);
+		setUpHandler.setUpAndReturnPlayers(playerNames, wonders);
 		fail();
 	}
 
 	@Test(expected = IllegalArgumentException.class)
 	public void testCreatePlayersTooMany() {
-		HashMap<String, WonderType> playerNamesAndWonders = new HashMap<String, WonderType>();
-		playerNamesAndWonders.put("Wolverine", WonderType.COLOSSUS);
-		playerNamesAndWonders.put("Captain America", WonderType.LIGHTHOUSE);
-		playerNamesAndWonders.put("Black Widow", WonderType.TEMPLE);
-		playerNamesAndWonders.put("Hulk", WonderType.STATUE);
-		playerNamesAndWonders.put("Iron Man", WonderType.MAUSOLEUM);
-		playerNamesAndWonders.put("Spider Man", WonderType.GARDENS);
-		playerNamesAndWonders.put("Thor", WonderType.PYRAMIDS);
-		playerNamesAndWonders.put("Ultron", WonderType.COLOSSUS);
+		ArrayList<String> playerNames = new ArrayList<String>(
+				Arrays.asList("Wolverine", "Captain America", "Black Widow", "Hulk", "Iron Man", "Spider Man", "Thor", "Ultron"));
+		ArrayList<WonderType> wonders = new ArrayList<WonderType>(
+				Arrays.asList(WonderType.COLOSSUS, WonderType.LIGHTHOUSE, WonderType.TEMPLE, WonderType.STATUE,
+						WonderType.MAUSOLEUM, WonderType.GARDENS, WonderType.PYRAMIDS, WonderType.PYRAMIDS));
 
 		SetUpHandler setUpHandler = new SetUpHandler();
-		setUpHandler.setUpAndReturnPlayers(playerNamesAndWonders);
+		setUpHandler.setUpAndReturnPlayers(playerNames, wonders);
 		fail();
 	}
 
-	@Test
-	public void testDuplicateWonders1Duplicate5() {
-		HashMap<String, WonderType> playerNamesAndWonders = new HashMap<String, WonderType>();
-		playerNamesAndWonders.put("Wolverine", WonderType.COLOSSUS);
-		playerNamesAndWonders.put("Captain America", WonderType.COLOSSUS);
-		playerNamesAndWonders.put("Black Widow", WonderType.COLOSSUS);
-		playerNamesAndWonders.put("Hulk", WonderType.COLOSSUS);
-		playerNamesAndWonders.put("Iron Man", WonderType.COLOSSUS);
-
+	private void verifyPlayersAndWonders(ArrayList<String> playerNames, ArrayList<WonderType> wonders) {
 		SetUpHandler setUpHandler = new SetUpHandler();
-		try {
-			setUpHandler.setUpAndReturnPlayers(playerNamesAndWonders);
-			fail();
-		} catch (IllegalArgumentException e) {
-			assertEquals("Cannot assign wonder(s) to multiple players", e.getMessage());
-		}
-	}
+		ArrayList<Player> players = setUpHandler.createPlayers(playerNames, wonders);
 
-	@Test(expected = IllegalArgumentException.class)
-	public void testDuplicateWonders1Duplicate4() {
-		HashMap<String, WonderType> playerNamesAndWonders = new HashMap<String, WonderType>();
-		playerNamesAndWonders.put("Wolverine", WonderType.MAUSOLEUM);
-		playerNamesAndWonders.put("Captain America", WonderType.MAUSOLEUM);
-		playerNamesAndWonders.put("Black Widow", WonderType.MAUSOLEUM);
-		playerNamesAndWonders.put("Hulk", WonderType.MAUSOLEUM);
-		playerNamesAndWonders.put("Iron Man", WonderType.GARDENS);
-
-		SetUpHandler setUpHandler = new SetUpHandler();
-		setUpHandler.setUpAndReturnPlayers(playerNamesAndWonders);
-		fail();
-	}
-	
-	@Test(expected = IllegalArgumentException.class)
-	public void testDuplicateWonders2Duplicates2_2() {
-		HashMap<String, WonderType> playerNamesAndWonders = new HashMap<String, WonderType>();
-		playerNamesAndWonders.put("Wolverine", WonderType.STATUE);
-		playerNamesAndWonders.put("Captain America", WonderType.STATUE);
-		playerNamesAndWonders.put("Black Widow", WonderType.LIGHTHOUSE);
-		playerNamesAndWonders.put("Hulk", WonderType.LIGHTHOUSE);
-		playerNamesAndWonders.put("Iron Man", WonderType.TEMPLE);
-
-		SetUpHandler setUpHandler = new SetUpHandler();
-		setUpHandler.setUpAndReturnPlayers(playerNamesAndWonders);
-		fail();
-	}
-	
-	@Test(expected = IllegalArgumentException.class)
-	public void testDuplicateWonders2Duplicates2_3() {
-		HashMap<String, WonderType> playerNamesAndWonders = new HashMap<String, WonderType>();
-		playerNamesAndWonders.put("Wolverine", WonderType.PYRAMIDS);
-		playerNamesAndWonders.put("Captain America", WonderType.PYRAMIDS);
-		playerNamesAndWonders.put("Black Widow", WonderType.TEMPLE);
-		playerNamesAndWonders.put("Hulk", WonderType.TEMPLE);
-		playerNamesAndWonders.put("Iron Man", WonderType.TEMPLE);
-
-		SetUpHandler setUpHandler = new SetUpHandler();
-		setUpHandler.setUpAndReturnPlayers(playerNamesAndWonders);
-		fail();
-	}
-
-	private void verifyPlayersAndWonders(HashMap<String, WonderType> playerNamesAndWonders) {
-		Set<String> names = playerNamesAndWonders.keySet();
-		SetUpHandler setUpHandler = new SetUpHandler();
-		ArrayList<Player> players = setUpHandler.createPlayers(playerNamesAndWonders);
-
-		for (Player player : players) {
-			String name = player.getName();
-			assertTrue(names.contains(name));
-			assertEquals(playerNamesAndWonders.get(name), player.getWonder().getType());
+		for (int i = 0; i < playerNames.size(); i++) {
+			String name = players.get(i).getName();
+			assertTrue(playerNames.contains(name));
+			assertEquals(wonders.get(i), players.get(i).getWonder().getType());
 		}
 	}
 }

@@ -6,6 +6,7 @@ import java.awt.Point;
 
 import backend.GameManager;
 import dataStructures.Card;
+import guiMain.Message;
 
 public class CardHolder extends Interactable{
 
@@ -25,7 +26,7 @@ public class CardHolder extends Interactable{
 	}
 	
 	public void activate(GameManager gameManager){
-		/*TODO: Change to play card*/
+			gameManager.buildStructure(card);
 
 	}
 

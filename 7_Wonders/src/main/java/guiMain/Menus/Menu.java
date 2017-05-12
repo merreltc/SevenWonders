@@ -10,7 +10,6 @@ import guiMain.Interactables.Interactable;
 public abstract class Menu {
 	
 	private ArrayList<Interactable> interactables = new ArrayList<>();
-	public Lock lock = new ReentrantLock();
 
 	public abstract void draw(Graphics graphics);
 	
@@ -21,21 +20,15 @@ public abstract class Menu {
 	}
 	
 	public void addInteractable(Interactable button){
-		lock.lock();
 		this.interactables.add(button);
-		lock.unlock();
 	}
 	
 	public void removeInteractable(Interactable toRemove){
-		lock.lock();
 		this.interactables.remove(toRemove);
-		lock.unlock();
 	}
 	
 	public void clearInteractables() {
-		lock.lock();
 		this.interactables.clear();
-		lock.unlock();
 	}
 	
 	public void onClick(Interactable clicked) {

@@ -1,22 +1,22 @@
 package backend;
 
 import dataStructures.GameBoard;
-import dataStructures.GeneralEnums.RawResource;
+import dataStructures.GeneralEnums.Resource;
 import dataStructures.Player;
 import exceptions.InvalidTradeException;
 
 public class TradeHandler {
 	private GameBoard board;
-	
+
 	public TradeHandler(GameBoard board) {
 		this.board = board;
 	}
 
 	public void tradeCoinsFromTo(Player from, Player to, int valueToTrade) {
-		if(to != this.board.getPreviousPlayer() && to != this.board.getNextPlayer()){
+		if (to != this.board.getPreviousPlayer() && to != this.board.getNextPlayer()) {
 			throw new InvalidTradeException("You cannot trade to this player");
 		}
-		
+
 		// player's number of value 3 coins is calculated first because
 		// they have precedence over number of value 1 coins
 		int numValue3Coins = getNumValue3Coins(from, valueToTrade);
@@ -61,11 +61,11 @@ public class TradeHandler {
 	}
 
 	public void tradeFromToForEntity(Player from, Player to, Enum entity) {
-		if(to.storagePileContainsEntity(entity)){
+		if (to.storagePileContainsEntity(entity)) {
 			this.tradeCoinsFromTo(from, to, 3);
 			from.addTradedValue(entity);
-		}else{
-			throw new InvalidTradeException("Player doesn't have the resource for trading");
+		} else {
+			throw new InvalidTradeException("Player doesn't have the resource for trading: " + entity.toString());
 		}
 	}
 }

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 public class GameBoard {
 	private ArrayList<Player> players = new ArrayList<Player>();
+	private ArrayList<Card> discardPile = new ArrayList<Card>();
 	private Deck currentDeck;
 
 	private int numPlayers;
@@ -84,5 +85,13 @@ public class GameBoard {
 
 	public Deck getDeck() {
 		return this.currentDeck;
+	}
+
+	public ArrayList<Card> getDiscardPile() {
+		return this.discardPile;
+	}
+
+	public void addToDiscardPile(Card toTest) {
+		this.discardPile.add(toTest);
 	}
 }

@@ -95,7 +95,7 @@ public class SetUpDeckHandlerTest {
 		Card temple = actual.get(8);
 		assertEquals("Temple", temple.getName());
 		assertEquals("Pantheon", temple.getNextStructureName());
-		assertEquals("Alter", temple.getPreviousStructureName());
+		assertEquals("Altar", temple.getPreviousStructureName());
 	}
 
 	@Test

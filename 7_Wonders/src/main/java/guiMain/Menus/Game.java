@@ -3,7 +3,6 @@ package guiMain.Menus;
 import java.awt.Graphics;
 import java.awt.Point;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 
 import javax.swing.JOptionPane;
@@ -11,12 +10,12 @@ import javax.swing.JOptionPane;
 import backend.GameManager;
 import dataStructures.Player;
 import dataStructures.Wonder;
-import exceptions.InsufficientFundsException;
 import guiDataStructures.Constants;
 import guiMain.GuiTradeHelper;
 import guiMain.HandManager;
 import guiMain.Message;
 import guiMain.PlayerBoard;
+import guiMain.RenderImage;
 import guiMain.Interactables.Button;
 import guiMain.Interactables.CardHolder;
 import guiMain.Interactables.Interactable;
@@ -25,27 +24,31 @@ public class Game extends Menu {
 	private ArrayList<PlayerBoard> boards = new ArrayList<>();
 	private GameManager gameManager;
 	private HandManager handManager;
+	private RenderImage renderer;
 
-	public Game(int numOfPlayers) {
+	public Game(int numOfPlayers, RenderImage renderer) {
 		setUpPlayers(numOfPlayers);
+		this.renderer = renderer;
 	}
 
 	private void setUpPlayers(int numOfPlayers) {
-		HashMap<String, Wonder.WonderType> playersAndWonders = new HashMap<String, Wonder.WonderType>();
-		
-		HashMap<String, Wonder.WonderType> wonders = getWonderMap();
-		
+		ArrayList<String> playerNames = new ArrayList<String>();
+		ArrayList<Wonder.WonderType> wonders = new ArrayList<Wonder.WonderType>();
+
+		HashMap<String, Wonder.WonderType> wonderMap = getWonderMap();
+
 		for (int i = 0; i < numOfPlayers; i++) {
 			String name = Message.inputPlayerNameMessage(i);
-			String wonder = Message.dropDownWonderSelectionMessage(wonders.keySet().toArray());
-			
-			playersAndWonders.put(name, wonders.get(wonder));
-			wonders.remove(wonder);
-			wonders.keySet().remove(wonder);
-			/*Set wonder to correct values*/
+			String wonder = Message.dropDownWonderSelectionMessage(wonderMap.keySet().toArray());
+
+			playerNames.add(name);
+			wonders.add(wonderMap.get(wonder));
+			wonderMap.remove(wonder);
+			wonderMap.keySet().remove(wonder);
+			/* Set wonder to correct values */
 		}
-		
-		this.gameManager = new GameManager(playersAndWonders);
+
+		this.gameManager = new GameManager(playerNames, wonders);
 		this.gameManager.dealInitialTurnCards();
 	}
 
@@ -88,14 +91,14 @@ public class Game extends Menu {
 		int numOfPlayers = this.gameManager.getNumPlayers();
 		for (int i = -1; i < numOfPlayers - 1; i++) {
 			PlayerBoard board = new PlayerBoard(i, numOfPlayers,
-					this.gameManager.getPlayer((numOfPlayers + i) % numOfPlayers));
+					this.gameManager.getPlayer((2 * numOfPlayers - i) % numOfPlayers), renderer);
 			boards.add(board);
 		}
 	}
 
-	private void setUpCardSlots() {		
+	private void setUpCardSlots() {
 		this.handManager = new HandManager();
-		this.handManager.drawCurrentPlayerCards(this.gameManager.getCurrentPlayer());
+		this.handManager.drawCurrentPlayerCards(this.gameManager.getCurrentPlayer(), renderer);
 		for (int i = 0; i < this.handManager.getPlayerHandSize(); i++) {
 			this.addInteractable(this.handManager.getCardHolder(i));
 		}
@@ -134,15 +137,24 @@ public class Game extends Menu {
 	@Override
 	public void onClick(Interactable clicked) {
 		if (clicked.getClass().equals(CardHolder.class)) {
-			((CardHolder) clicked).activate(this.gameManager);
-			rotateBoards();
-			/* update the cards after rotation */
-			for(Interactable toRemove: this.handManager.getCurrentPlayerHand()){
-				this.removeInteractable(toRemove);
-			}
-			this.handManager.drawCurrentPlayerCards(this.gameManager.getCurrentPlayer());
-			for (int i = 0; i < this.handManager.getPlayerHandSize(); i++) {
-				this.addInteractable(this.handManager.getCardHolder(i));
+			String[] buttons = new String[] { "Build Structure", "Build Wonder", "Discard" };
+			int val = JOptionPane.showOptionDialog(null, "Choose Play Type", "Play Card",
+					JOptionPane.INFORMATION_MESSAGE, 0, null, buttons, buttons[0]);
+			try {
+				if (val == 0) {
+					((CardHolder) clicked).activate(this.gameManager);
+				}
+				rotateBoards();
+				/* update the cards after rotation */
+				for (Interactable toRemove : this.handManager.getCurrentPlayerHand()) {
+					this.removeInteractable(toRemove);
+				}
+				this.handManager.drawCurrentPlayerCards(this.gameManager.getCurrentPlayer(), renderer);
+				for (int i = 0; i < this.handManager.getPlayerHandSize(); i++) {
+					this.addInteractable(this.handManager.getCardHolder(i));
+				}
+			} catch (Exception e) {
+				Message.showMessage(e.getMessage());
 			}
 		} else if (clicked.getValue().equals("Exit")) {
 			System.exit(0);
@@ -160,7 +172,8 @@ public class Game extends Menu {
 		int totalNumberOfPlayers = this.gameManager.getNumPlayers();
 		int nextPlayerIndex = players.indexOf(nextPlayer);
 		for (int i = 0; i < players.size(); i++) {
-			boards.get(i).changePlayer(players.get((totalNumberOfPlayers + nextPlayerIndex - i) % totalNumberOfPlayers));
+			boards.get(i)
+					.changePlayer(players.get((totalNumberOfPlayers + nextPlayerIndex - i) % totalNumberOfPlayers));
 		}
 	}
 }

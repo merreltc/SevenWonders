@@ -333,6 +333,24 @@ public class PlayerTest {
 			assertEquals(message, error.getMessage());
 		}
 	}
+	
+	@Test
+	public void testRemoveTotalCoins(){
+		Player player = new Player("Jane Doe", WonderType.COLOSSUS);
+		player.removeTotalCoins(2);
+		
+		assertEquals(1, player.getNumValue1Coins());
+		assertEquals(1, player.getCoinTotal());
+	}
+	
+	@Test
+	public void testRemoveTotalCoinsEnoughValue1NotEnoughValue3(){
+		Player player = new Player("Jane Doe", WonderType.COLOSSUS);
+		player.removeTotalCoins(3);
+		
+		assertEquals(0, player.getNumValue1Coins());
+		assertEquals(0, player.getCoinTotal());
+	}
 
 	@Test
 	public void testGetDefaultCurrentHand() {

@@ -201,7 +201,7 @@ public class LevelTest {
 		Effect onceAge = EasyMock.createStrictMock(Effect.class);
 		Effect endOfGame = EasyMock.createStrictMock(Effect.class);
 		
-		EasyMock.replay();
+		EasyMock.replay(cost,endOfTurn,everyTurn,sixthTurn,onceImmediate,onceAge,endOfGame);
 		
 		int priority = 1;
 		Level level1 = new Level(priority, cost, endOfTurn, Frequency.ENDOFTURN);
@@ -218,7 +218,7 @@ public class LevelTest {
 		assertEquals(Frequency.ONCEAGE, level5.getFrequency());
 		assertEquals(Frequency.ENDOFGAME, level6.getFrequency());
 		
-		EasyMock.verify();
+		EasyMock.verify(cost,endOfTurn,everyTurn,sixthTurn,onceImmediate,onceAge,endOfGame);
 	}
 	
 	@Test
@@ -230,7 +230,7 @@ public class LevelTest {
 		effects.put(endOfTurn, Frequency.ENDOFTURN);
 		effects.put(everyTurn, Frequency.EVERYTURN);
 		
-		EasyMock.replay();
+		EasyMock.replay(cost,endOfTurn,everyTurn);
 		
 		int priority = 1;
 		Level level1 = new Level(priority, cost, effects);
@@ -241,7 +241,7 @@ public class LevelTest {
 			boolean validFreq = (freq == Frequency.ENDOFTURN || freq == Frequency.EVERYTURN);
 			assertTrue(validFreq);
 		}
-		
-		EasyMock.verify();
+
+		EasyMock.verify(cost,endOfTurn,everyTurn);
 	}
 }
