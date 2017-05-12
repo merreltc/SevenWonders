@@ -15,6 +15,7 @@ import org.junit.Test;
 import backend.GameManager;
 import backend.SetUpPlayerHandler;
 import dataStructures.Player;
+import dataStructures.Wonder;
 import dataStructures.Wonder.WonderType;
 
 public class SetUpPlayerHandlerTest {
@@ -113,11 +114,11 @@ public class SetUpPlayerHandlerTest {
 	}
 	
 	@Test(expected = IllegalArgumentException.class)
-	public void testDuplicateWondersSingleDuplication() {
+	public void testDuplicateWonders() {
 		ArrayList<String> playerNames = new ArrayList<String>(
 				Arrays.asList("Wolverine", "Captain America", "Black Widow"));
 		ArrayList<WonderType> wonders = new ArrayList<WonderType>(
-				Arrays.asList(WonderType.COLOSSUS, WonderType.COLOSSUS, WonderType.TEMPLE));
+				Arrays.asList(WonderType.COLOSSUS, WonderType.COLOSSUS, WonderType.COLOSSUS));
 
 		SetUpPlayerHandler setUpHandler = new SetUpPlayerHandler();
 		setUpHandler.setUpAndReturnPlayers(playerNames, wonders);
