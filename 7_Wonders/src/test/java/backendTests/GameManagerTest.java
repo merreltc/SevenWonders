@@ -1,14 +1,11 @@
 package backendTests;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
 
 import org.easymock.EasyMock;
-import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
 
 import backend.GameManager;
@@ -19,12 +16,12 @@ import backend.SetUpHandler;
 import backend.TurnHandler;
 import dataStructures.Card;
 import dataStructures.Deck;
-import dataStructures.GameBoard;
+import dataStructures.Deck.Age;
 import dataStructures.GeneralEnums.Good;
+import dataStructures.GeneralEnums.RawResource;
 import dataStructures.GeneralEnums.Resource;
 import dataStructures.Player;
 import dataStructures.Wonder;
-import dataStructures.Deck.Age;
 import dataStructures.Wonder.WonderType;
 
 public class GameManagerTest {
@@ -317,12 +314,12 @@ public class GameManagerTest {
 		storage.add(deck.getCard(1));
 		
 		manager.getNextPlayer().setStoragePile(storage);
-		manager.tradeForEntity(manager.getCurrentPlayer(), manager.getNextPlayer(), Resource.LUMBER);
+		manager.tradeForEntity(manager.getCurrentPlayer(), manager.getNextPlayer(), RawResource.LUMBER);
 		
 		Player current = manager.getCurrentPlayer();
 		Player next = manager.getNextPlayer();
 		
-		assertEquals(1, (int) current.getCurrentTrades().get(Resource.LUMBER));
+		assertEquals(1, (int) current.getCurrentTrades().get(RawResource.LUMBER));
 		assertEquals(6, next.getCoinTotal());
 	}
 	

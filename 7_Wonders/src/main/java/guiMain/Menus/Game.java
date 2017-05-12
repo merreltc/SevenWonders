@@ -3,15 +3,15 @@ package guiMain.Menus;
 import java.awt.Graphics;
 import java.awt.Point;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
+import java.util.Locale;
+import java.util.ResourceBundle;
 
 import javax.swing.JOptionPane;
 
 import backend.GameManager;
 import dataStructures.Player;
 import dataStructures.Wonder;
-import exceptions.InsufficientFundsException;
 import guiDataStructures.Constants;
 import guiMain.GuiTradeHelper;
 import guiMain.HandManager;
@@ -27,6 +27,8 @@ public class Game extends Menu {
 	private GameManager gameManager;
 	private HandManager handManager;
 	private RenderImage renderer;
+	ResourceBundle messages = ResourceBundle.getBundle("message", Locale.getDefault());
+	ResourceViewer resource = new ResourceViewer();
 
 	public Game(int numOfPlayers, RenderImage renderer) {
 		setUpPlayers(numOfPlayers);
@@ -56,13 +58,13 @@ public class Game extends Menu {
 
 	private HashMap<String, Wonder.WonderType> getWonderMap() {
 		HashMap<String, Wonder.WonderType> wonders = new HashMap<String, Wonder.WonderType>();
-		wonders.put(Wonder.getWonderNameByType(Wonder.WonderType.COLOSSUS), Wonder.WonderType.COLOSSUS);
-		wonders.put(Wonder.getWonderNameByType(Wonder.WonderType.TEMPLE), Wonder.WonderType.TEMPLE);
-		wonders.put(Wonder.getWonderNameByType(Wonder.WonderType.GARDENS), Wonder.WonderType.GARDENS);
-		wonders.put(Wonder.getWonderNameByType(Wonder.WonderType.PYRAMIDS), Wonder.WonderType.PYRAMIDS);
-		wonders.put(Wonder.getWonderNameByType(Wonder.WonderType.LIGHTHOUSE), Wonder.WonderType.LIGHTHOUSE);
-		wonders.put(Wonder.getWonderNameByType(Wonder.WonderType.MAUSOLEUM), Wonder.WonderType.MAUSOLEUM);
-		wonders.put(Wonder.getWonderNameByType(Wonder.WonderType.STATUE), Wonder.WonderType.STATUE);
+		wonders.put(Wonder.getNameByType(Wonder.WonderType.COLOSSUS), Wonder.WonderType.COLOSSUS);
+		wonders.put(Wonder.getNameByType(Wonder.WonderType.TEMPLE), Wonder.WonderType.TEMPLE);
+		wonders.put(Wonder.getNameByType(Wonder.WonderType.GARDENS), Wonder.WonderType.GARDENS);
+		wonders.put(Wonder.getNameByType(Wonder.WonderType.PYRAMIDS), Wonder.WonderType.PYRAMIDS);
+		wonders.put(Wonder.getNameByType(Wonder.WonderType.LIGHTHOUSE), Wonder.WonderType.LIGHTHOUSE);
+		wonders.put(Wonder.getNameByType(Wonder.WonderType.MAUSOLEUM), Wonder.WonderType.MAUSOLEUM);
+		wonders.put(Wonder.getNameByType(Wonder.WonderType.STATUE), Wonder.WonderType.STATUE);
 		return wonders;
 	}
 
@@ -73,6 +75,7 @@ public class Game extends Menu {
 		setUpExitButton();
 		setUpTradingButtons();
 		setUpCardSlots();
+
 	}
 
 	@Override
@@ -87,6 +90,8 @@ public class Game extends Menu {
 		for (Interactable button : this.getInteractables()) {
 			button.draw(graphics);
 		}
+
+		this.resource.draw(graphics);
 	}
 
 	private void createBoardsForEachPlayer() {
@@ -94,6 +99,7 @@ public class Game extends Menu {
 		for (int i = -1; i < numOfPlayers - 1; i++) {
 			PlayerBoard board = new PlayerBoard(i, numOfPlayers,
 					this.gameManager.getPlayer((2 * numOfPlayers - i) % numOfPlayers), renderer);
+			this.addInteractable(board.generateResourceButton());
 			boards.add(board);
 		}
 	}
@@ -107,7 +113,8 @@ public class Game extends Menu {
 	}
 
 	private void setUpExitButton() {
-		Button exitButton = new Button(Constants.ExitButtonPosition, Constants.ExitButtonBounds, "Exit");
+		Button exitButton = new Button(Constants.ExitButtonPosition, Constants.ExitButtonBounds,
+				this.messages.getString("exit"));
 		this.addInteractable(exitButton);
 	}
 
@@ -139,9 +146,10 @@ public class Game extends Menu {
 	@Override
 	public void onClick(Interactable clicked) {
 		if (clicked.getClass().equals(CardHolder.class)) {
-			String[] buttons = new String[] { "Build Structure", "Build Wonder", "Discard" };
-			int val = JOptionPane.showOptionDialog(null, "Choose Play Type", "Play Card",
-					JOptionPane.INFORMATION_MESSAGE, 0, null, buttons, buttons[0]);
+			String[] buttons = new String[] { this.messages.getString("buildStructure"),
+					this.messages.getString("buildWonder"), this.messages.getString("discard") };
+			int val = JOptionPane.showOptionDialog(null, this.messages.getString("choosePlayType"),
+					this.messages.getString("playCard"), JOptionPane.INFORMATION_MESSAGE, 0, null, buttons, buttons[0]);
 			try {
 				if (val == 0) {
 					((CardHolder) clicked).activate(this.gameManager);
@@ -158,13 +166,25 @@ public class Game extends Menu {
 			} catch (Exception e) {
 				Message.showMessage(e.getMessage());
 			}
-		} else if (clicked.getValue().equals("Exit")) {
-			System.exit(0);
+		} else if (clicked.getValue().equals(this.messages.getString("exit"))) {
+			if (this.resource.isActive()) {
+				this.resource.closeMenu();
+			} else {
+				System.exit(0);
+			}
+		} else if (clicked.getValue().codePointAt(0) >= 48 && clicked.getValue().codePointAt(0) <= 57) {
+			int playerNum = codePointToInt(clicked.getValue().codePointAt(0));
+			int locOfCurrentPlayer = this.gameManager.getPlayers().indexOf(this.gameManager.getCurrentPlayer());
+			this.resource.openMenu(this.gameManager.getPlayer(locOfCurrentPlayer + playerNum));
 		} else {
 			String[] splitValue = clicked.getValue().split("-");
 			GuiTradeHelper tradeHandler = new GuiTradeHelper(this.gameManager);
 			tradeHandler.trade(splitValue);
 		}
+	}
+
+	private int codePointToInt(int val) {
+		return val - 48;
 	}
 
 	public void rotateBoards() {

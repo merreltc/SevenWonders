@@ -7,6 +7,7 @@ import java.awt.Image;
 import java.awt.Point;
 import java.awt.geom.Point2D;
 
+import guiDataStructures.Constants;
 import guiMain.RenderImage;
 
 public abstract class Interactable {
@@ -40,7 +41,7 @@ public abstract class Interactable {
 			graphics.fillRect(this.positionPoint.x, this.positionPoint.y, this.boundPoint.x, this.boundPoint.y);
 			if (showValue) {
 				graphics.setColor(textColor);
-				graphics.setFont(new Font("Courier New", Font.BOLD, 50));
+				graphics.setFont(Constants.ButtonFont);
 				graphics.drawString(value, positionPoint.x + 10, positionPoint.y + this.boundPoint.y - 10);
 			}
 		} else {

@@ -1,16 +1,13 @@
 package dataStructures;
 
-import java.util.HashMap;
-import java.util.HashSet;
-
-import dataStructures.Wonder.WonderType;
+import dataStructures.GeneralEnums.Resource;
 
 public class Wonder {
 	private WonderType type;
 	private String name;
+	private Resource resource;
 	private char side;
 	private int numLevels;
-	private HashMap<WonderType, String> wonders;
 
 	public enum WonderType {
 		COLOSSUS, LIGHTHOUSE, TEMPLE, GARDENS, STATUE, MAUSOLEUM, PYRAMIDS
@@ -22,7 +19,8 @@ public class Wonder {
 
 	public Wonder(char side, WonderType type, int numLevels) {
 		this.type = type;
-		this.name = getWonderNameByType(type);
+		this.name = getNameByType(type);
+		this.resource = getResourceByType(type);
 		this.side = side;
 		validateNumLevels(type, numLevels);
 		this.numLevels = numLevels;
@@ -74,6 +72,10 @@ public class Wonder {
 	public String getName() {
 		return this.name;
 	}
+	
+	public Resource getResource() {
+		return this.resource;
+	}
 
 	public char getSide() {
 		return this.side;
@@ -83,7 +85,7 @@ public class Wonder {
 		return this.numLevels;
 	}
 	
-	public static String getWonderNameByType(Wonder.WonderType wonder) {
+	public static String getNameByType(Wonder.WonderType wonder) {
 		switch (wonder) {
 		case COLOSSUS:
 			return "The Colossus of Rhodes";
@@ -103,5 +105,46 @@ public class Wonder {
 			throw new IllegalArgumentException("Bad Wonder Type");
 		}
 	}
-
+	
+	public static String getShortNameByType(Wonder.WonderType wonder) {
+		switch (wonder) {
+		case COLOSSUS:
+			return "Colossus";
+		case LIGHTHOUSE:
+			return "Lighthouse";
+		case TEMPLE:
+			return "Temple of Artemis";
+		case GARDENS:
+			return "Hanging Gardens";
+		case STATUE:
+			return "Statue of Zeus";
+		case MAUSOLEUM:
+			return "Mausoleum";
+		case PYRAMIDS:
+			return "Pyramids";
+		default:
+			throw new IllegalArgumentException("Bad Wonder Type");
+		}
+	}
+	
+	public static Resource getResourceByType(WonderType type) {
+		switch (type) {
+		case COLOSSUS:
+			return Resource.ORE;
+		case LIGHTHOUSE:
+			return Resource.GLASS;
+		case TEMPLE:
+			return Resource.PRESS;
+		case GARDENS:
+			return Resource.CLAY;
+		case STATUE:
+			return Resource.LUMBER;
+		case MAUSOLEUM:
+			return Resource.LOOM;
+		case PYRAMIDS:
+			return Resource.STONE;
+		default:
+			throw new IllegalArgumentException("Bad Wonder Type");
+		}
+	}
 }

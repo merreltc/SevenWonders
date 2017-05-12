@@ -14,15 +14,18 @@ public class Constants {
 	public static final Point StartButtonPosition = new Point(850, 400);
 	public static final Point StartButtonBounds = new Point(200, 100);
 
-	public static final Font TitleFont = new Font("Courier New", Font.BOLD, 66);
+	public static final Font TitleFont = new Font("MS Song", Font.BOLD, 66);
 	public static final Color TitleColor = Color.yellow;
+	
+	public static final Font ButtonFont = new Font("MS Song", Font.BOLD, 50);
+	public static final Font ResourceFont = new Font("MS Song", Font.BOLD, 30);
 
 	public static final Point MainMenuTitlePosition = new Point(740, 100);
 
 	public static final Point PlayerSelectButtonBounds = new Point(150, 100);
 	public static final Point PlayerSelectTitlePosition = new Point(500, 280);
 
-	public static final Font ErrorFont = new Font("Courier New", Font.BOLD, 35);
+	public static final Font ErrorFont = new Font("MS Song", Font.BOLD, 35);
 	public static final Point ErrorMessagePosition = new Point(550, 400);
 
 	public static final Point ExitButtonBounds = new Point(200, 80);
@@ -58,6 +61,10 @@ public class Constants {
 	public static final Point TradeRightBaseButtonPoint = new Point(NextPlayerBoardPositionX - 5, NextPlayerBoardPositionY + 5);
 
 	public static final int TradeButtonYOffet = TradeButtonBounds.y + 20;
+	
+	public static final int ResourcerViewerButtonYOffset = 50;
+	
+	public static final Point ResourceViewerButtonBounds = new Point(150,50);
 
 	public static final int CardHeight = 258;
 	public static final int CardWidth = 150;
@@ -68,5 +75,22 @@ public class Constants {
 	public static final int PlayerHandLeftMostCardPositionY = CurrentPlayerBoardPositionY + CurrentPlayerBoardHeight - CardHeight;
 
 	/* For Game Class */
-	public static final String[] ResourceTypes = new String[] { "Stone", "Wood", "Ore", "Clay" };
+	public static final String[] ResourceTypes = new String[] { "Lumber", "Ore", "Stone", "Clay" };
+	
+	/* For ResourceViewer Class */
+	public static final String[] ResourceImages = new String[] { "clay", "lumber", "ore", "stone", "glass", "loom symbol", "papyrus", "coin", "one shield", "victory points", "manufactured", "resource", "science"};
+	public static final int RESOURCE_IMAGE_HEIGHT = 30;
+	public static final int RESOURCE_IMAGE_WIDTH = 30;
+	public static final Font RESOURCE_VIEWER_FONT = new Font("MS Song", Font.BOLD, 30);
+	public static final int NUM_OF_COLUMNS = 13;
+	public static final int RESOURCE_VIEWER_ROW_HEIGHT = 40;
+	public static final int RESOURCE_VIEWER_ROW_X = 50;
+	public static final int RESOURCE_VIEWER_ROW_BASE_Y = 100;
+	public static final int RESOURCE_VIEWER_TEXT_X_OFFSET = 80;
+	public static final int RESOURCE_VIEWER_TEXT_Y_OFFSET = 30;
+	public static final int RESOURCE_VIEWER_ROW_WIDTH = FrameWidth - 100;
+	public static final int RESOURCE_VIEWER_FIRST_CELL_WIDTH = 250;
+	public static final int RESOURCE_VIEWER_CELL_WIDTH = (RESOURCE_VIEWER_ROW_WIDTH - RESOURCE_VIEWER_FIRST_CELL_WIDTH) / NUM_OF_COLUMNS;
+
+
 }

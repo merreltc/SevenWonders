@@ -37,7 +37,7 @@ public class GuiTradeHelper {
 	}
 	
 	private Enum translateStringToEnum(String resource){
-		if (resource.equals("Wood")){
+		if (resource.equals("Lumber")){
 			return Resource.LUMBER;
 		}else if (resource.equals("Stone")){
 			return Resource.STONE;
