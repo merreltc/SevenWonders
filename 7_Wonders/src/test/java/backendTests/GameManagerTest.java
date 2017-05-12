@@ -434,7 +434,7 @@ public class GameManagerTest {
 		Player expectedNewCurrentPlayer = manager.getNextPlayer();
 		Player expectedNewPreviousPlayer = manager.getCurrentPlayer();
 
-		manager.endCurrentPlayerTurn();
+		assertEquals("", manager.endCurrentPlayerTurn());
 		assertEquals(expectedNewCurrentPlayer, manager.getCurrentPlayer());
 		assertEquals(expectedNewPreviousPlayer, manager.getPreviousPlayer());
 
@@ -463,9 +463,9 @@ public class GameManagerTest {
 		Player expectedNewCurrentPlayer = manager.getCurrentPlayer();
 		ArrayList<Card> expectedNewCurrentHand = manager.getPreviousPlayer().getCurrentHand();
 
-		manager.endCurrentPlayerTurn();
-		manager.endCurrentPlayerTurn();
-		manager.endCurrentPlayerTurn();
+		assertEquals("", manager.endCurrentPlayerTurn());
+		assertEquals("", manager.endCurrentPlayerTurn());
+		assertEquals("End of current rotation.  Switching Player hands.", manager.endCurrentPlayerTurn());
 
 		assertEquals(expectedNewCurrentPlayer, manager.getCurrentPlayer());
 		assertEquals(expectedNewCurrentHand, manager.getCurrentPlayer().getCurrentHand());
@@ -504,13 +504,60 @@ public class GameManagerTest {
 
 		EasyMock.replay(turnHandler);
 
-		for (int numCalls = 0; numCalls < 18; numCalls++) {
+		for (int numCalls = 0; numCalls < 17; numCalls++) {
 			manager.endCurrentPlayerTurn();
 		}
 
+		assertEquals("This is the end of the Age.  Finalizing Points", manager.endCurrentPlayerTurn());
 		assertEquals(7, manager.getCurrentPlayer().getCurrentHand().size());
 		assertFalse(manager.getCurrentPlayer().getCurrentHand().equals(previousCurrentCards));
 		assertEquals(Age.AGE2, manager.getGameBoard().getDeck().getAge());
+
+		EasyMock.verify(turnHandler);
+	}
+	
+	@Test
+	public void testEndPlayerTurnEndsCurrentAgeTo3() {
+		ArrayList<String> playerNames = new ArrayList<String>(
+				Arrays.asList("Wolverine", "Captain America", "Black Widow"));
+		ArrayList<WonderType> wonders = new ArrayList<WonderType>(
+				Arrays.asList(WonderType.COLOSSUS, WonderType.LIGHTHOUSE, WonderType.TEMPLE));
+
+		TurnHandler turnHandler = EasyMock.partialMockBuilder(TurnHandler.class)
+				.addMockedMethod("getNumPlayersUntilPass").addMockedMethod("setNumPlayersUntilPass").createMock();
+
+		ArrayList<Card> cards2 = new SetUpDeckHandler().createCards(Age.AGE2, 3);
+		Deck deck2 = new Deck(Age.AGE2, cards2);
+		ArrayList<Card> cards3 = new SetUpDeckHandler().createCards(Age.AGE3, 3);
+		Deck deck3 = new Deck(Age.AGE3, cards3);
+
+		GameManager manager = new GameManager(compileHolderObjects(playerNames, wonders), new SetUpHandler(), new SetUpDeckHandler(),
+				turnHandler, new PlayerTurnHandler());
+		manager.getGameBoard().setDeck(deck2);
+		manager.dealInitialTurnCards();
+
+		ArrayList<Card> previousCurrentCards = manager.getCurrentPlayer().getCurrentHand();
+
+		assertEquals(7, manager.getCurrentPlayer().getCurrentHand().size());
+
+		for (int calls = 4; calls >= 0; calls--) {
+			mockExpectTurnHandlerCalls(turnHandler, calls);
+		}
+
+		mockExpectTurnHandlerCalls(turnHandler, 4);
+
+		turnHandler.dealInitialTurnCards(manager.getPlayers(), 3, deck3);
+
+		EasyMock.replay(turnHandler);
+
+		for (int numCalls = 0; numCalls < 17; numCalls++) {
+			manager.endCurrentPlayerTurn();
+		}
+
+		assertEquals("This is the end of the Age.  Finalizing Points", manager.endCurrentPlayerTurn());
+		assertEquals(7, manager.getCurrentPlayer().getCurrentHand().size());
+		assertFalse(manager.getCurrentPlayer().getCurrentHand().equals(previousCurrentCards));
+		assertEquals(Age.AGE3, manager.getGameBoard().getDeck().getAge());
 
 		EasyMock.verify(turnHandler);
 	}

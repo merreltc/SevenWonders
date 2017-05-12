@@ -24,24 +24,24 @@ public class GameManager {
 	private SetUpHandler setUpHandler;
 	private SetUpDeckHandler setUpDeckHandler;
 	private TurnHandler turnHandler;
-	
+
 	private RotateHandler rotateHandler;
 	private TradeHandler tradeHandler;
 	private PlayerTurnHandler playerTurnHandler;
 
 	private Direction currentDirection = Direction.CLOCKWISE;
-	
+
 	public GameManager(ArrayList<PlayerInformationHolder> holder) {
 		this(holder, new SetUpHandler(), new SetUpDeckHandler(), new TurnHandler(), new PlayerTurnHandler());
 	}
-	
+
 	public GameManager(ArrayList<PlayerInformationHolder> holder, SetUpHandler setUpHandler,
-			SetUpDeckHandler setUpDeckHandler, TurnHandler turnHandler, PlayerTurnHandler playerTurnHandler){
+			SetUpDeckHandler setUpDeckHandler, TurnHandler turnHandler, PlayerTurnHandler playerTurnHandler) {
 		this.setUpHandler = setUpHandler;
 		this.setUpDeckHandler = setUpDeckHandler;
 		this.turnHandler = turnHandler;
 		this.playerTurnHandler = playerTurnHandler;
-		setUpGame(holder);	
+		setUpGame(holder);
 	}
 
 	public void setUpGame(ArrayList<PlayerInformationHolder> holder) {
@@ -52,7 +52,7 @@ public class GameManager {
 		this.rotateHandler = new RotateHandler(this.board);
 		this.tradeHandler = new TradeHandler(this.board);
 	}
-	
+
 	public void dealInitialTurnCards() {
 		this.turnHandler.dealInitialTurnCards(this.getPlayers(), this.getNumPlayers(), this.board.getDeck());
 	}
@@ -95,10 +95,15 @@ public class GameManager {
 		int playersUntilPass = this.turnHandler.getNumPlayersUntilPass();
 		if (playersUntilPass == 0) {
 			int turnsTilEnd = this.turnHandler.getNumTurnsTilEndOfAge();
-			
-			
+
 			if (turnsTilEnd == 0) {
-				Deck newDeck = this.setUpDeckHandler.createDeck(Age.AGE2, getNumPlayers());
+				Deck newDeck;
+				if (this.board.getDeck().getAge() == Age.AGE1) {
+					newDeck = this.setUpDeckHandler.createDeck(Age.AGE2, getNumPlayers());
+				}else{
+					newDeck = this.setUpDeckHandler.createDeck(Age.AGE3, getNumPlayers());
+				}
+				
 				this.board.setDeck(newDeck);
 				this.turnHandler.dealInitialTurnCards(this.getPlayers(), this.getNumPlayers(), this.board.getDeck());
 				message = "This is the end of the Age.  Finalizing Points";
@@ -107,7 +112,7 @@ public class GameManager {
 				this.turnHandler.setNumTurnsTilEndOfAge(turnsTilEnd - 1);
 				message = "End of current rotation.  Switching Player hands.";
 			}
-			
+
 			playersUntilPass = 3;
 		}
 
