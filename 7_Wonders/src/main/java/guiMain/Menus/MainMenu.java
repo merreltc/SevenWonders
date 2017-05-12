@@ -6,12 +6,13 @@ import java.util.Locale;
 import java.util.ResourceBundle;
 
 import guiDataStructures.Constants;
+import guiMain.Translate;
 import guiMain.Interactables.Button;
 import guiMain.Interactables.Interactable;
 
 public class MainMenu extends Menu{
 	
-	ResourceBundle messages = ResourceBundle.getBundle("message", Locale.getDefault());
+	ResourceBundle messages = Translate.getNewResourceBundle();
 
 	public void draw(Graphics graphics) {
 		graphics.setFont(Constants.TitleFont);
