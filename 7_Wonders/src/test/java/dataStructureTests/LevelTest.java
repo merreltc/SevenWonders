@@ -16,6 +16,8 @@ import dataStructures.Effect.EffectType;
 import dataStructures.EntityEffect;
 import dataStructures.EntityEffect.EntityType;
 import dataStructures.GeneralEnums.RawResource;
+import dataStructures.EntityEffect.EntityType;
+import dataStructures.GeneralEnums.Resource;
 import dataStructures.Level;
 import dataStructures.Level.Frequency;
 import dataStructures.MultiValueEffect;
@@ -200,7 +202,7 @@ public class LevelTest {
 		Effect onceImmediate = EasyMock.createStrictMock(Effect.class);
 		Effect onceAge = EasyMock.createStrictMock(Effect.class);
 		Effect endOfGame = EasyMock.createStrictMock(Effect.class);
-		
+
 		EasyMock.replay(cost,endOfTurn,everyTurn,sixthTurn,onceImmediate,onceAge,endOfGame);
 		
 		int priority = 1;
@@ -217,7 +219,7 @@ public class LevelTest {
 		assertEquals(Frequency.ONCEIMMEDIATE, level4.getFrequency());
 		assertEquals(Frequency.ONCEAGE, level5.getFrequency());
 		assertEquals(Frequency.ENDOFGAME, level6.getFrequency());
-		
+
 		EasyMock.verify(cost,endOfTurn,everyTurn,sixthTurn,onceImmediate,onceAge,endOfGame);
 	}
 	
@@ -229,7 +231,7 @@ public class LevelTest {
 		HashMap<Effect, Frequency> effects = new HashMap<Effect, Frequency>();
 		effects.put(endOfTurn, Frequency.ENDOFTURN);
 		effects.put(everyTurn, Frequency.EVERYTURN);
-		
+
 		EasyMock.replay(cost,endOfTurn,everyTurn);
 		
 		int priority = 1;
@@ -241,7 +243,7 @@ public class LevelTest {
 			boolean validFreq = (freq == Frequency.ENDOFTURN || freq == Frequency.EVERYTURN);
 			assertTrue(validFreq);
 		}
-
+		
 		EasyMock.verify(cost,endOfTurn,everyTurn);
 	}
 }

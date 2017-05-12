@@ -1,14 +1,15 @@
 package backendTests;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
+import static org.junit.Assert.*;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Set;
 
+import org.easymock.EasyMock;
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 
 import backend.GameManager;
@@ -16,6 +17,7 @@ import backend.SetUpHandler;
 import dataStructures.Player;
 import dataStructures.Wonder.WonderType;
 import guiDataStructures.PlayerInformationHolder;
+import dataStructures.Wonder;
 
 public class SetUpHandlerTest {
 
@@ -110,6 +112,7 @@ public class SetUpHandlerTest {
 		for (int i = 0; i < playerNames.size(); i++) {
 			String name = players.get(i).getName();
 			assertTrue(playerNames.contains(name));
+
 			assertEquals(wonders.get(i), players.get(i).getWonder().getType());
 		}
 	}
