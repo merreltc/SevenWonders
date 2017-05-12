@@ -9,6 +9,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Set;
 
+import org.easymock.EasyMock;
 import org.junit.Test;
 
 import backend.GameManager;
@@ -82,8 +83,6 @@ public class SetUpPlayerHandlerTest {
 		ArrayList<String> playerNames = new ArrayList<String>();
 		ArrayList<WonderType> wonders = new ArrayList<WonderType>();
 
-		GameManager manager = new GameManager(playerNames, wonders);
-
 		SetUpPlayerHandler setUpHandler = new SetUpPlayerHandler();
 		setUpHandler.setUpAndReturnPlayers(playerNames, wonders);
 		fail();
@@ -111,5 +110,17 @@ public class SetUpPlayerHandlerTest {
 			assertTrue(playerNames.contains(name));
 			assertEquals(wonders.get(i), players.get(i).getWonder().getType());
 		}
+	}
+	
+	@Test(expected = IllegalArgumentException.class)
+	public void testDuplicateWondersSingleDuplication() {
+		ArrayList<String> playerNames = new ArrayList<String>(
+				Arrays.asList("Wolverine", "Captain America", "Black Widow"));
+		ArrayList<WonderType> wonders = new ArrayList<WonderType>(
+				Arrays.asList(WonderType.COLOSSUS, WonderType.COLOSSUS, WonderType.TEMPLE));
+
+		SetUpPlayerHandler setUpHandler = new SetUpPlayerHandler();
+		setUpHandler.setUpAndReturnPlayers(playerNames, wonders);
+		fail();
 	}
 }
