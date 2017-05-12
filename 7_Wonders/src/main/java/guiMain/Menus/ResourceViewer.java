@@ -8,6 +8,8 @@ import java.awt.Graphics2D;
 import java.awt.Image;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Locale;
+import java.util.ResourceBundle;
 
 import dataStructures.Card;
 import dataStructures.Effect;
@@ -24,6 +26,7 @@ public class ResourceViewer extends Menu {
 	private Player player;
 	private RenderImage renderer = new RenderImage();
 	private boolean shouldDraw = false;
+	ResourceBundle messages = ResourceBundle.getBundle("message", Locale.getDefault());
 
 	@Override
 	public void draw(Graphics graphics) {
@@ -59,7 +62,7 @@ public class ResourceViewer extends Menu {
 	private void drawTitleRow(int y, Graphics graphics) {
 		graphics.drawRect(Constants.RESOURCE_VIEWER_ROW_X, y, Constants.RESOURCE_VIEWER_FIRST_CELL_WIDTH,
 				Constants.RESOURCE_VIEWER_ROW_HEIGHT);
-		graphics.drawString("Card", Constants.RESOURCE_VIEWER_ROW_X + Constants.RESOURCE_VIEWER_TEXT_X_OFFSET,
+		graphics.drawString(messages.getString("card"), Constants.RESOURCE_VIEWER_ROW_X + Constants.RESOURCE_VIEWER_TEXT_X_OFFSET,
 				y + Constants.RESOURCE_VIEWER_TEXT_Y_OFFSET);
 		for (int i = 0; i < Constants.NUM_OF_COLUMNS; i++) {
 			int x = (Constants.RESOURCE_VIEWER_ROW_X + Constants.RESOURCE_VIEWER_FIRST_CELL_WIDTH)
@@ -92,7 +95,7 @@ public class ResourceViewer extends Menu {
 		Card card = cards.get(row - 1);
 		int[] values = zeroArray(Constants.NUM_OF_COLUMNS);
 		// int[] values = getRowValues(card);
-		graphics.drawString(card.getName(), Constants.RESOURCE_VIEWER_ROW_X + Constants.RESOURCE_VIEWER_CELL_WIDTH / 3,
+		graphics.drawString(messages.getString(card.getName().replaceAll(" ", "")), Constants.RESOURCE_VIEWER_ROW_X + Constants.RESOURCE_VIEWER_CELL_WIDTH / 3,
 				y);
 		for (int i = 0; i < values.length; i++) {
 			graphics.drawString(values[i] + "",
