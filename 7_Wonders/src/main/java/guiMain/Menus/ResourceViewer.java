@@ -186,6 +186,7 @@ public class ResourceViewer extends Menu {
 					effectArray[3] = effectList.get(entity);
 				}
 			}
+			break;
 		case SCIENCE:
 			for (Enum entity : effectList.keySet()){
 				if (entity == Science.PROTRACTOR){
@@ -196,6 +197,7 @@ public class ResourceViewer extends Menu {
 					effectArray[7] = effectList.get(entity);
 				}
 			}
+			break;
 		}
 		return effectArray;
 	}

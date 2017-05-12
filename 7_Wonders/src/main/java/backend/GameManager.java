@@ -90,12 +90,13 @@ public class GameManager {
 		this.playerTurnHandler.discardSelectedCard(getCurrentPlayer(), card, this.board);
 	}
 
-	public void endCurrentPlayerTurn() {
+	public String endCurrentPlayerTurn() {
+		String message = "";
 		int playersUntilPass = this.turnHandler.getNumPlayersUntilPass();
 		if (playersUntilPass == 0) {
 			int turnsTilEnd = this.turnHandler.getNumTurnsTilEndOfAge();
 			
-			String message = "";
+			
 			if (turnsTilEnd == 0) {
 				Deck newDeck = this.setUpDeckHandler.createDeck(Age.AGE2, getNumPlayers());
 				this.board.setDeck(newDeck);
@@ -106,13 +107,13 @@ public class GameManager {
 				this.turnHandler.setNumTurnsTilEndOfAge(turnsTilEnd - 1);
 				message = "End of current rotation.  Switching Player hands.";
 			}
-			Message.showMessage(message);
 			
 			playersUntilPass = 3;
 		}
 
 		this.turnHandler.setNumPlayersUntilPass(playersUntilPass - 1);
 		this.rotateClockwise();
+		return message;
 	}
 
 	public int getNumPlayers() {
