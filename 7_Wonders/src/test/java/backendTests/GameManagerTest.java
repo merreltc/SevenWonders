@@ -192,9 +192,13 @@ public class GameManagerTest {
 
 		manager.changeRotateDirectionAndResetPositions(Direction.CLOCKWISE);
 		comparePlayerPositions(manager.getPlayers(), manager, 0, 1, 6);
+		
+		assertEquals(Direction.CLOCKWISE, manager.getDirection());
 
 		manager.changeRotateDirectionAndResetPositions(Direction.COUNTERCLOCKWISE);
 		comparePlayerPositions(manager.getPlayers(), manager, 0, 6, 1);
+		
+		assertEquals(Direction.COUNTERCLOCKWISE, manager.getDirection());
 	}
 
 	@Test
@@ -519,6 +523,7 @@ public class GameManagerTest {
 
 		assertEquals("This is the end of the Age.  Finalizing Points", manager.endCurrentPlayerTurn());
 		assertEquals(7, manager.getCurrentPlayer().getCurrentHand().size());
+		assertEquals(Direction.COUNTERCLOCKWISE, manager.getDirection());
 		assertFalse(manager.getCurrentPlayer().getCurrentHand().equals(previousCurrentCards));
 		assertEquals(Age.AGE2, manager.getGameBoard().getDeck().getAge());
 

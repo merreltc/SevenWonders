@@ -100,6 +100,7 @@ public class GameManager {
 				Deck newDeck;
 				if (this.board.getDeck().getAge() == Age.AGE1) {
 					newDeck = this.setUpDeckHandler.createDeck(Age.AGE2, getNumPlayers());
+					this.currentDirection = Direction.COUNTERCLOCKWISE;
 				}else{
 					newDeck = this.setUpDeckHandler.createDeck(Age.AGE3, getNumPlayers());
 				}
@@ -154,6 +155,6 @@ public class GameManager {
 	}
 
 	public Direction getDirection() {
-		return Direction.CLOCKWISE;
+		return this.currentDirection;
 	}
 }
