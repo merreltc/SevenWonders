@@ -156,7 +156,10 @@ public class Game extends Menu {
 				}else if (val == 2){
 					((CardHolder) clicked).discard(this.gameManager);
 				}
-				gameManager.endCurrentPlayerTurn();
+				String message = gameManager.endCurrentPlayerTurn();
+				if (!message.equals("")){
+					Message.showMessage(message);
+				}
 				redrawBoards();
 				/* update the cards after rotation */
 				for (Interactable toRemove : this.handManager.getCurrentPlayerHand()) {
