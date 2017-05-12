@@ -92,11 +92,10 @@ public class ValueEffect extends Effect {
 	public ValueType getValueType() {
 		switch (this.value) {
 		case VICTORYPOINTS:
+		case GUILD:
 			return ValueType.VICTORYPOINT;
 		case COMMERCE:
 			return ValueType.COIN;
-		case GUILD:
-			return ValueType.VICTORYPOINT;
 		default:
 			return ValueType.CONFLICTTOKEN;
 		}

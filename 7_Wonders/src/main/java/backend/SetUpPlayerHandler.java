@@ -39,8 +39,7 @@ public class SetUpPlayerHandler {
 			}
 		}
 	}
-
-
+	
 	public boolean validatePlayerNum(int num) {
 		if (num < 3 || num > 7) {
 			throw new IllegalArgumentException("Cannot play with " + num + " players");
