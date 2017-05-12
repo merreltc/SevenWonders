@@ -4,6 +4,8 @@ import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Point;
 import java.util.ArrayList;
+import java.util.Locale;
+import java.util.ResourceBundle;
 
 import guiDataStructures.Constants;
 import guiMain.RenderImage;
@@ -13,6 +15,7 @@ import guiMain.Interactables.Interactable;
 public class PlayerSelect extends Menu{
 	
 	public RenderImage renderer;
+	ResourceBundle messages = ResourceBundle.getBundle("message", Locale.getDefault());
 	
 	public PlayerSelect(RenderImage renderer){
 		this.renderer = renderer;
@@ -25,7 +28,7 @@ public class PlayerSelect extends Menu{
 		}
 		graphics.setFont(Constants.TitleFont);
 		graphics.setColor(Constants.TitleColor);
-		graphics.drawString("Choose number of players", Constants.PlayerSelectTitlePosition.x,
+		graphics.drawString(this.messages.getString("chooseNumberOfPlayers"), Constants.PlayerSelectTitlePosition.x,
 				Constants.PlayerSelectTitlePosition.y);
 	}
 
