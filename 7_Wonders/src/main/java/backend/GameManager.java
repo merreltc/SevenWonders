@@ -10,6 +10,7 @@ import dataStructures.Deck;
 import dataStructures.GameBoard;
 import dataStructures.Player;
 import dataStructures.Wonder;
+import guiDataStructures.PlayerInformationHolder;
 import dataStructures.Deck.Age;
 
 /**
@@ -28,22 +29,22 @@ public class GameManager {
 	private PlayerTurnHandler playerTurnHandler;
 
 	
-	public GameManager(ArrayList<String> playerNames, ArrayList<Wonder.WonderType> wonders) {
-		this(playerNames, wonders, new SetUpHandler(), new SetUpDeckHandler(), new TurnHandler(), new PlayerTurnHandler());
+	public GameManager(ArrayList<PlayerInformationHolder> holder) {
+		this(holder, new SetUpHandler(), new SetUpDeckHandler(), new TurnHandler(), new PlayerTurnHandler());
 	}
 	
-	public GameManager(ArrayList<String> playerNames, ArrayList<Wonder.WonderType> wonders, SetUpHandler setUpHandler,
+	public GameManager(ArrayList<PlayerInformationHolder> holder, SetUpHandler setUpHandler,
 			SetUpDeckHandler setUpDeckHandler, TurnHandler turnHandler, PlayerTurnHandler playerTurnHandler){
 		this.setUpHandler = setUpHandler;
 		this.setUpDeckHandler = setUpDeckHandler;
 		this.turnHandler = turnHandler;
 		this.playerTurnHandler = playerTurnHandler;
-		setUpGame(playerNames, wonders);	
+		setUpGame(holder);	
 	}
 
-	public void setUpGame(ArrayList<String> playerNames, ArrayList<Wonder.WonderType> wonders) {
-		ArrayList<Player> players = this.setUpHandler.setUpAndReturnPlayers(playerNames,wonders);
-		Deck deck = this.setUpDeckHandler.createDeck(Age.AGE1, playerNames.size());
+	public void setUpGame(ArrayList<PlayerInformationHolder> holder) {
+		ArrayList<Player> players = this.setUpHandler.setUpAndReturnPlayers(holder);
+		Deck deck = this.setUpDeckHandler.createDeck(Age.AGE1, holder.size());
 
 		this.board = new GameBoard(players, deck);
 		this.rotateHandler = new RotateHandler(this.board);

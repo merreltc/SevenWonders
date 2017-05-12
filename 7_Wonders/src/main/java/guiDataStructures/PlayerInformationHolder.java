@@ -5,8 +5,14 @@ import dataStructures.Wonder.WonderType;
 
 public class PlayerInformationHolder {
 
-	public Player player;
+	public String playerName;
 	public WonderType wonderType;
 	public char side;
+	
+	public PlayerInformationHolder(String playerName, WonderType wonderType, char side){
+		this.playerName = playerName;
+		this.wonderType = wonderType;
+		this.side = side;
+	}
 	
 }
