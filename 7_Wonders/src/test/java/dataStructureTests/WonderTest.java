@@ -56,7 +56,7 @@ public class WonderTest {
 	
 	@Test
 	public void testBasicsSideB2Levels() {
-		Wonder wonder = new Wonder('B', WonderType.COLOSSUS, 2);
+		Wonder wonder = new Wonder('B', WonderType.COLOSSUS);
 		
 		assertEquals('B', wonder.getSide());
 		assertEquals(2, wonder.getNumLevels());
@@ -65,7 +65,7 @@ public class WonderTest {
 	
 	@Test
 	public void testBasicsSideB3Levels() {
-		Wonder wonder = new Wonder('B', WonderType.TEMPLE, 3);
+		Wonder wonder = new Wonder('B', WonderType.TEMPLE);
 		
 		assertEquals('B', wonder.getSide());
 		assertEquals(3, wonder.getNumLevels());
@@ -74,126 +74,11 @@ public class WonderTest {
 	
 	@Test
 	public void testBasicsSideB4Levels() {
-		Wonder wonder = new Wonder('B', WonderType.PYRAMIDS, 4);
+		Wonder wonder = new Wonder('B', WonderType.PYRAMIDS);
 		
 		assertEquals('B', wonder.getSide());
 		assertEquals(4, wonder.getNumLevels());
 		assertEquals("The Pyramids of Giza", wonder.getName());
-	}
-	
-	@Test(expected = IllegalArgumentException.class)
-	public void testInvalidNumLevelsNeg1SideA() {
-		new Wonder('A', WonderType.MAUSOLEUM, -1);
-	}
-	
-	@Test(expected = IllegalArgumentException.class)
-	public void testInvalidNumLevelsNeg1SideB() {
-		new Wonder('B', WonderType.MAUSOLEUM, -1);
-	}
-	
-	@Test(expected = IllegalArgumentException.class)
-	public void testInvalidNumLevels1SideA() {
-		new Wonder('A', WonderType.MAUSOLEUM, 1);
-	}
-	
-	@Test(expected = IllegalArgumentException.class)
-	public void testInvalidNumLevels1SideB() {
-		new Wonder('B', WonderType.MAUSOLEUM, 1);
-	}
-	
-	@Test(expected = IllegalArgumentException.class)
-	public void testInvalidNumLevels5SideA() {
-		new Wonder('A', WonderType.MAUSOLEUM, 5);
-	}
-	
-	@Test(expected = IllegalArgumentException.class)
-	public void testInvalidNumLevels5SideB() {
-		new Wonder('B', WonderType.MAUSOLEUM, 5);
-	}
-	
-	@Test(expected = IllegalArgumentException.class)
-	public void testInvalidNumLevels2SideA() {
-		new Wonder('A', WonderType.MAUSOLEUM, 2);
-	}
-	
-	@Test(expected = IllegalArgumentException.class)
-	public void testInvalidNumLevels4SideA() {
-		new Wonder('A', WonderType.MAUSOLEUM, 4);
-	}
-	
-	@Test(expected = IllegalArgumentException.class)
-	public void testInvalidNumLevels6SideB() {
-		new Wonder('B', WonderType.MAUSOLEUM, 6);
-	}
-	
-	@Test(expected = IllegalArgumentException.class)
-	public void testInvalidNumLevels1SideBColossus() {
-		new Wonder('B', WonderType.COLOSSUS, 1);
-	}
-	
-	@Test(expected = IllegalArgumentException.class)
-	public void testInvalidNumLevels3SideBColossus() {
-		new Wonder('B', WonderType.COLOSSUS, 3);
-	}
-	
-	@Test(expected = IllegalArgumentException.class)
-	public void testInvalidNumLevels2SideBLighthouse() {
-		new Wonder('B', WonderType.LIGHTHOUSE, 2);
-	}
-	
-	@Test(expected = IllegalArgumentException.class)
-	public void testInvalidNumLevels4SideBLighthouse() {
-		new Wonder('B', WonderType.LIGHTHOUSE, 4);
-	}
-	
-	@Test(expected = IllegalArgumentException.class)
-	public void testInvalidNumLevels2SideBTemple() {
-		new Wonder('B', WonderType.TEMPLE, 2);
-	}
-	
-	@Test(expected = IllegalArgumentException.class)
-	public void testInvalidNumLevels4SideBTemple() {
-		new Wonder('B', WonderType.TEMPLE, 4);
-	}
-	
-	@Test(expected = IllegalArgumentException.class)
-	public void testInvalidNumLevels2SideBGardens() {
-		new Wonder('B', WonderType.GARDENS, 2);
-	}
-	
-	@Test(expected = IllegalArgumentException.class)
-	public void testInvalidNumLevels4SideBGardens() {
-		new Wonder('B', WonderType.GARDENS, 4);
-	}
-	
-	@Test(expected = IllegalArgumentException.class)
-	public void testInvalidNumLevels2SideBStatue() {
-		new Wonder('B', WonderType.STATUE, 2);
-	}
-	
-	@Test(expected = IllegalArgumentException.class)
-	public void testInvalidNumLevels4SideBStatue() {
-		new Wonder('B', WonderType.STATUE, 4);
-	}
-	
-	@Test(expected = IllegalArgumentException.class)
-	public void testInvalidNumLevels2SideBMausoleum() {
-		new Wonder('B', WonderType.MAUSOLEUM, 2);
-	}
-	
-	@Test(expected = IllegalArgumentException.class)
-	public void testInvalidNumLevels4SideBMausoleum() {
-		new Wonder('B', WonderType.MAUSOLEUM, 4);
-	}
-	
-	@Test(expected = IllegalArgumentException.class)
-	public void testInvalidNumLevels3SideBPyramids() {
-		new Wonder('B', WonderType.PYRAMIDS, 3);
-	}
-	
-	@Test(expected = IllegalArgumentException.class)
-	public void testInvalidNumLevels5SideBPyramids() {
-		new Wonder('B', WonderType.PYRAMIDS, 5);
 	}
 	
 	@Test
