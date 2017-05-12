@@ -11,6 +11,7 @@ import dataStructures.GameBoard;
 import dataStructures.Player;
 import dataStructures.Wonder;
 import guiDataStructures.PlayerInformationHolder;
+import guiMain.Message;
 import dataStructures.Deck.Age;
 
 /**
@@ -94,13 +95,18 @@ public class GameManager {
 		if (playersUntilPass == 0) {
 			int turnsTilEnd = this.turnHandler.getNumTurnsTilEndOfAge();
 			
+			String message = "";
 			if (turnsTilEnd == 0) {
 				Deck newDeck = this.setUpDeckHandler.createDeck(Age.AGE2, getNumPlayers());
 				this.board.setDeck(newDeck);
+				this.turnHandler.dealInitialTurnCards(this.getPlayers(), this.getNumPlayers(), this.board.getDeck());
+				message = "This is the end of the Age.  Finalizing Points";
 			} else {
 				this.rotateHandler.rotateCurrentHands(getPlayers(), this.currentDirection);
 				this.turnHandler.setNumTurnsTilEndOfAge(turnsTilEnd - 1);
+				message = "End of current rotation.  Switching Player hands.";
 			}
+			Message.showMessage(message);
 			
 			playersUntilPass = 3;
 		}

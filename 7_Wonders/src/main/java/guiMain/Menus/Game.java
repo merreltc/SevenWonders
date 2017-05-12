@@ -153,8 +153,11 @@ public class Game extends Menu {
 			try {
 				if (val == 0) {
 					((CardHolder) clicked).activate(this.gameManager);
+				}else if (val == 2){
+					((CardHolder) clicked).discard(this.gameManager);
 				}
-				rotateBoards();
+				gameManager.endCurrentPlayerTurn();
+				redrawBoards();
 				/* update the cards after rotation */
 				for (Interactable toRemove : this.handManager.getCurrentPlayerHand()) {
 					this.removeInteractable(toRemove);
@@ -163,6 +166,7 @@ public class Game extends Menu {
 				for (int i = 0; i < this.handManager.getPlayerHandSize(); i++) {
 					this.addInteractable(this.handManager.getCardHolder(i));
 				}
+				
 			} catch (Exception e) {
 				Message.showMessage(e.getMessage());
 			}
@@ -175,7 +179,7 @@ public class Game extends Menu {
 		} else if (clicked.getValue().codePointAt(0) >= 48 && clicked.getValue().codePointAt(0) <= 57) {
 			int playerNum = codePointToInt(clicked.getValue().codePointAt(0));
 			int locOfCurrentPlayer = this.gameManager.getPlayers().indexOf(this.gameManager.getCurrentPlayer());
-			this.resource.openMenu(this.gameManager.getPlayer(locOfCurrentPlayer + playerNum));
+			this.resource.openMenu(this.gameManager.getPlayer((locOfCurrentPlayer + playerNum)%this.gameManager.getNumPlayers()));
 		} else {
 			String[] splitValue = clicked.getValue().split("-");
 			GuiTradeHelper tradeHandler = new GuiTradeHelper(this.gameManager);
@@ -187,8 +191,7 @@ public class Game extends Menu {
 		return val - 48;
 	}
 
-	public void rotateBoards() {
-		this.gameManager.rotateClockwise();
+	public void redrawBoards() {
 		ArrayList<Player> players = this.gameManager.getPlayers();
 		Player nextPlayer = this.gameManager.getNextPlayer();
 		int totalNumberOfPlayers = this.gameManager.getNumPlayers();
