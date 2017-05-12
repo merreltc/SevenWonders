@@ -12,7 +12,7 @@ public class Wonder {
 	private Resource resource;
 	private char side;
 	private int numLevels;
-	private static ResourceBundle messages = Translate.getNewResourceBundle();
+	private ResourceBundle messages = Translate.getNewResourceBundle();
 
 	public enum WonderType {
 		COLOSSUS, LIGHTHOUSE, TEMPLE, GARDENS, STATUE, MAUSOLEUM, PYRAMIDS
