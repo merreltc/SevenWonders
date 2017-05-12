@@ -1,5 +1,8 @@
 package dataStructures;
 
+import java.util.Locale;
+import java.util.ResourceBundle;
+
 import dataStructures.GeneralEnums.Resource;
 
 public class Wonder {
@@ -8,6 +11,7 @@ public class Wonder {
 	private Resource resource;
 	private char side;
 	private int numLevels;
+	ResourceBundle messages = ResourceBundle.getBundle("message", Locale.getDefault());
 
 	public enum WonderType {
 		COLOSSUS, LIGHTHOUSE, TEMPLE, GARDENS, STATUE, MAUSOLEUM, PYRAMIDS
@@ -88,7 +92,7 @@ public class Wonder {
 	public static String getNameByType(Wonder.WonderType wonder) {
 		switch (wonder) {
 		case COLOSSUS:
-			return "The Colossus of Rhodes";
+			return  "The Colossus of Rhodes";
 		case LIGHTHOUSE:
 			return "The Lighthouse of Alexandria";
 		case TEMPLE:
@@ -146,5 +150,10 @@ public class Wonder {
 		default:
 			throw new IllegalArgumentException("Bad Wonder Type");
 		}
+	}
+	
+	private String prepareString(String str){
+		return str.replaceAll(" ", "");
+		
 	}
 }
