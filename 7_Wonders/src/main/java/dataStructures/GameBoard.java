@@ -162,4 +162,8 @@ public class GameBoard {
 	public void discardEndOfAgeCard(Card toDiscard) {
 		this.discardPile.add(toDiscard);
 	}
+
+	public void setDeck(Deck deck) {
+		this.currentDeck = deck;
+	}
 }

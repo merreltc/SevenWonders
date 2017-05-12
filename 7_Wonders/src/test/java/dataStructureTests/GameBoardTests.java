@@ -596,4 +596,20 @@ public class GameBoardTests {
 		board.discardEndOfAgeCard(toDiscard);
 		assertTrue(board.getDiscardPile().contains(toDiscard));
 	}
+	
+	@Test
+	public void testSetDeck(){
+		ArrayList<Card> cards1 = new ArrayList<Card>();
+		ArrayList<Card> cards2 = new ArrayList<Card>();
+		ArrayList<Player> players = new ArrayList<Player>();
+
+		Deck deck = new Deck(Age.AGE1, cards1);
+		GameBoard board = new GameBoard(players, deck);
+		
+		assertEquals(deck, board.getDeck());
+		Deck deck2 = new Deck(Age.AGE2, cards2);
+		board.setDeck(deck2);
+		assertNotEquals(deck, board.getDeck());
+		assertEquals(deck2, board.getDeck());
+	}
 }
