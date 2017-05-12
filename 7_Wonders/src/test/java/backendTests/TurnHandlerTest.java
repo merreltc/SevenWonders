@@ -161,7 +161,7 @@ public class TurnHandlerTest {
 		turnHandler.dealInitialTurnCards(players, 5, deck);
 
 		EasyMock.verify(players);
-		assertEquals(3, turnHandler.getNumTurnsTilEndOfAge());
+		assertEquals(5, turnHandler.getNumTurnsTilEndOfAge());
 	}
 	
 	@Test
