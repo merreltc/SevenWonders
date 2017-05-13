@@ -213,7 +213,7 @@ Cards are passed left-right-left over the three ages, so you need to keep an eye
 ## Scope
 **What is the scope of inspection (every file in codebase, every file touched on feature branch, or something else)?**  
 * Code reviews go through only classes that a feature touches
-* During programming, we will review the classes that we are working on
+* During programming, we will review the classes that we are working on. This includes any classes that the programmer did not write, but that they recognize require change that would improve the quality of the code.
 
 **Will each person look at the files in consideration or will files be delegated to team members?**  
 * Code reviews will be conducted by the full team  
