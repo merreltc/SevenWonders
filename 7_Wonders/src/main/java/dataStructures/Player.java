@@ -232,4 +232,8 @@ public class Player {
 	public void addNumVictoryPoints(int numPoints) {
 		this.numVictoryPoints += numPoints;
 	}
+
+	public int getNumConflictTokens() {
+		return 0;
+	}
 }

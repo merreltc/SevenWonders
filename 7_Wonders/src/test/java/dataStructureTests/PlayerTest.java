@@ -564,4 +564,10 @@ public class PlayerTest {
 		player.addNumVictoryPoints(2);
 		assertEquals(2, player.getNumVictoryPoints());
 	}
+	
+	@Test
+	public void testDefaultGetNumConflictTokens(){
+		Player player = new Player("Jane Doe", WonderType.COLOSSUS);
+		assertEquals(0, player.getNumConflictTokens());
+	}
 }
