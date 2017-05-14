@@ -107,12 +107,12 @@ Cards are passed left-right-left over the three ages, so you need to keep an eye
 - [ ] Military Shields
 - [ ] Conflict Tokens
 - [ ] Victory Points
-- [ ] Entities (Raw Resources, Manufactured Goods, Science)
+- [x] Entities (Raw Resources, Manufactured Goods, Science)
 
 ## Process of Turn
 1. Choose card from temporary hand
 2. Action
--  [ ] Build the Structure
+-  [x] Build the Structure
 -  [ ] Build the Next Level of Wonder
 -  [x] Discard for 3 Coins
     -  Discarded cards create a Discard Pile
@@ -123,10 +123,10 @@ Cards are passed left-right-left over the three ages, so you need to keep an eye
 
 ## Building the Structure
 - [x] If a structure has a resource cost, the player must have sufficient resources in their stockpile or purchase them from neighbors (see "Commerce and Trading")
-- [ ] If a structure has a coin cost, the player must pay that cost to the bank
+- [x] If a structure has a coin cost, the player must pay that cost to the bank
 - [ ] If player owns a previous structure, they may build their chosen structure for free
 - [ ] Identical structures cannot be built by the same player
-- [ ] At the end of a rotation, all player's built structures are revealed
+- [x] At the end of a rotation, all player's built structures are revealed
 
 ## Building the Next Level of Wonder
 - [ ] Player must have the resources required for the next level of the Wonder (not the structure) in order to build
