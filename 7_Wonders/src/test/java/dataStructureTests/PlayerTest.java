@@ -578,4 +578,16 @@ public class PlayerTest {
 		player.setStoragePile(storage);
 		Assert.assertTrue(player.storagePileContainsCardByName("Loom"));
 	}
+	
+	@Test
+	public void testStoragePileContainsCardByNameFails(){
+		Player player = new Player("Jane Doe", WonderType.COLOSSUS);
+		Card card = EasyMock.mock(Card.class);
+		EasyMock.expect(card.getName()).andReturn("Loom");
+		EasyMock.replay(card);
+		ArrayList<Card> storage = new ArrayList<Card>();
+		storage.add(card);
+		player.setStoragePile(storage);
+		Assert.assertFalse(player.storagePileContainsCardByName("Press"));
+	}
 }
