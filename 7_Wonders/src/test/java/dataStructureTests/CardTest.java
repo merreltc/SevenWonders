@@ -11,8 +11,8 @@ import org.junit.Test;
 import dataStructures.Card;
 import dataStructures.Card.CardType;
 import dataStructures.Cost;
-import dataStructures.Cost.CostType;
 import dataStructures.Effect;
+import dataStructures.Cost.CostType;
 import dataStructures.Effect.EffectType;
 import dataStructures.GeneralEnums.RawResource;
 

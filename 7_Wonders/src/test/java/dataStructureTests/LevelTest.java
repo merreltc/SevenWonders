@@ -9,19 +9,17 @@ import org.easymock.EasyMock;
 import org.junit.Test;
 
 import dataStructures.Cost;
-import dataStructures.Cost.CostType;
 import dataStructures.Effect;
+import dataStructures.EntityEffect;
+import dataStructures.Cost.CostType;
 import dataStructures.Effect.Direction;
 import dataStructures.Effect.EffectType;
-import dataStructures.EntityEffect;
 import dataStructures.EntityEffect.EntityType;
 import dataStructures.GeneralEnums.RawResource;
-import dataStructures.EntityEffect.EntityType;
-import dataStructures.GeneralEnums.Resource;
 import dataStructures.Level;
-import dataStructures.Level.Frequency;
 import dataStructures.MultiValueEffect;
 import dataStructures.ValueEffect;
+import dataStructures.Level.Frequency;
 import dataStructures.ValueEffect.AffectingEntity;
 import dataStructures.ValueEffect.Value;
 import dataStructures.ValueEffect.ValueType;
@@ -62,7 +60,7 @@ public class LevelTest {
 	public void testCost() {
 		Cost cost = EasyMock.createStrictMock(Cost.class);
 		Effect effect = EasyMock.createStrictMock(Effect.class);
-		
+
 		HashMap<Enum, Integer> expected = new HashMap<Enum, Integer>();
 		expected.put(RawResource.LUMBER, 2);
 

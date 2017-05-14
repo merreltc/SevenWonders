@@ -13,7 +13,7 @@ import org.junit.Test;
 import backend.GameManager;
 import backend.PlayerTurnHandler;
 import backend.SetUpDeckHandler;
-import backend.SetUpHandler;
+import backend.SetUpPlayerHandler;
 import backend.TurnHandler;
 import dataStructures.Card;
 import dataStructures.Cost;
