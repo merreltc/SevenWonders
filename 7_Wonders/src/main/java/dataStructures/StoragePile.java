@@ -3,9 +3,10 @@ package dataStructures;
 import java.util.ArrayList;
 
 public class StoragePile{
+	private ArrayList<Card> commercePile = new ArrayList<Card>();
 
 	public ArrayList<Card> getCommercePile() {
-		return new ArrayList<Card>();
+		return this.commercePile;
 	}
 
 	public ArrayList<Card> getSciencePile() {
@@ -18,5 +19,9 @@ public class StoragePile{
 
 	public ArrayList<Card> getImmediateEffectPile() {
 		return new ArrayList<Card>();
+	}
+
+	public void addToCommercePile(Card card) {
+		this.commercePile.add(card);
 	}
 }
