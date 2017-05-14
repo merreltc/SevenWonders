@@ -626,12 +626,19 @@ public class PlayerTest {
 		Assert.assertEquals(28, player.getCoinTotal());
 	}
 
-	
 	@Test
 	public void testAddValue5ConflictTokens(){
 		Player player = new Player("Jane Doe", WonderType.COLOSSUS);
 		player.addValue5(3, Chip.ChipType.CONFLICTTOKEN);
 		Assert.assertEquals(3, player.getNumValue5ConflictTokens());
 		Assert.assertEquals(15, player.getConflictTotal());
+	}
+	
+	@Test
+	public void testAddValue5ConflictTokens2(){
+		Player player = new Player("Jane Doe", WonderType.COLOSSUS);
+		player.addValue5(5, Chip.ChipType.CONFLICTTOKEN);
+		Assert.assertEquals(5, player.getNumValue5ConflictTokens());
+		Assert.assertEquals(25, player.getConflictTotal());
 	}
 }

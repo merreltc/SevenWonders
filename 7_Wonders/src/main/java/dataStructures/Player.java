@@ -70,8 +70,8 @@ public class Player {
 			this.playerChips.numOfValue5Coins += numChipsToAdd;
 			this.playerChips.coinTotal += 5 * numChipsToAdd;
 		}else {
-			this.playerChips.numOfValue5ConflictTokens = numChipsToAdd;
-			this.playerChips.conflictTotal = 5 * numChipsToAdd;
+			this.playerChips.numOfValue5ConflictTokens += numChipsToAdd;
+			this.playerChips.conflictTotal += 5 * numChipsToAdd;
 		}
 	}
 	
