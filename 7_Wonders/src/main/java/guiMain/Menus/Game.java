@@ -146,33 +146,7 @@ public class Game extends Menu {
 	@Override
 	public void onClick(Interactable clicked) {
 		if (clicked.getClass().equals(CardHolder.class)) {
-			String[] buttons = new String[] { this.messages.getString("buildStructure"),
-					this.messages.getString("buildWonder"), this.messages.getString("discard") };
-			int val = JOptionPane.showOptionDialog(null, this.messages.getString("choosePlayType"),
-					this.messages.getString("playCard"), JOptionPane.INFORMATION_MESSAGE, 0, null, buttons, buttons[0]);
-			try {
-				if (val == 0) {
-					((CardHolder) clicked).activate(this.gameManager);
-				}else if (val == 2){
-					((CardHolder) clicked).discard(this.gameManager);
-				}
-				String message = gameManager.endCurrentPlayerTurn();
-				if (!message.equals("")){
-					Message.showMessage(message);
-				}
-				redrawBoards();
-				/* update the cards after rotation */
-				for (Interactable toRemove : this.handManager.getCurrentPlayerHand()) {
-					this.removeInteractable(toRemove);
-				}
-				this.handManager.drawCurrentPlayerCards(this.gameManager.getCurrentPlayer(), renderer);
-				for (int i = 0; i < this.handManager.getPlayerHandSize(); i++) {
-					this.addInteractable(this.handManager.getCardHolder(i));
-				}
-				
-			} catch (Exception e) {
-				Message.showMessage(e.getMessage());
-			}
+			this.attemptPlayCard((CardHolder) clicked);
 		} else if (clicked.getValue().equals(this.messages.getString("exit"))) {
 			if (this.resource.isActive()) {
 				this.resource.closeMenu();
@@ -187,6 +161,36 @@ public class Game extends Menu {
 			String[] splitValue = clicked.getValue().split("-");
 			GuiTradeHelper tradeHandler = new GuiTradeHelper(this.gameManager);
 			tradeHandler.trade(splitValue);
+		}
+	}
+	
+	private void attemptPlayCard(CardHolder clicked){
+		String[] buttons = new String[] { this.messages.getString("buildStructure"),
+				this.messages.getString("buildWonder"), this.messages.getString("discard") };
+		int val = JOptionPane.showOptionDialog(null, this.messages.getString("choosePlayType"),
+				this.messages.getString("playCard"), JOptionPane.INFORMATION_MESSAGE, 0, null, buttons, buttons[0]);
+		try {
+			if (val == 0) {
+				clicked.activate(this.gameManager);
+			}else if (val == 2){
+				 clicked.discard(this.gameManager);
+			}
+			String message = gameManager.endCurrentPlayerTurn();
+			if (!message.equals("")){
+				Message.showMessage(message);
+			}
+			redrawBoards();
+			/* update the cards after rotation */
+			for (Interactable toRemove : this.handManager.getCurrentPlayerHand()) {
+				this.removeInteractable(toRemove);
+			}
+			this.handManager.drawCurrentPlayerCards(this.gameManager.getCurrentPlayer(), renderer);
+			for (int i = 0; i < this.handManager.getPlayerHandSize(); i++) {
+				this.addInteractable(this.handManager.getCardHolder(i));
+			}
+			
+		} catch (Exception e) {
+			Message.showMessage(e.getMessage());
 		}
 	}
 
