@@ -1,5 +1,23 @@
 # Seven Wonders - Java-based board game
 
+## Requirements Left to Cover (Delete as completed)
+Key: **\*** - Do not delete. Run/Verify immediately before deadline  
+**Current Grade: D**  
+**For a C**  
+- 100% mutation and basis path coverage of all non-GUI, non-enum code\*
+- All tests pass and capture their stated intent (don’t delete failing tests)\*
+- Locale: **Select** and Support one non-English locale
+    - Full support for non-English locale
+
+**For a B**  
+- Code meets quality standards\*
+- Definition of done in involves appropriate course techniques\*
+- Rules are explicitly linked to done-ness (Issues, Merge Requests, test cases, etc)
+
+**For an A**  
+- Code meets Martin’s quality standards\*
+- Appropriate automation to verify code meets quality standards\*
+
 ## Description of Game
 "You are the leader of one of the 7 great cities of the Ancient World. Gather resources, develop commercial routes, and affirm your military supremacy.
 Build your city and erect an architectural wonder which will transcend future times.
@@ -48,8 +66,8 @@ Cards are passed left-right-left over the three ages, so you need to keep an eye
 - [ ] Details for left/right neighbors
 - [ ] Minimal details for non-neighboring players
 
-
 ## Set Up
+- [ ] Language is chosen: English or Chinese
 - [ ] Game mode is chosen (Easy or Normal)
     - Easy Mode: all players receive side A
     - Normal Mode: players can receive side A or B of a Wonder
@@ -67,24 +85,32 @@ Cards are passed left-right-left over the three ages, so you need to keep an eye
 - [x] Age I and II decks do not have Guild cards
 
 ## Cards
-### *Raw Resource*
-### *Manufactured Good*
-### *Science*
-#### Rules
-- [ ] End Game Victory Points are equal to number of identical symbols^2 + (7 * number of sets of 3 different symbols)
+- [ ] Name and type of structure/resource (See "Card Types")
+- [ ] Cost of building the structure
+- [ ] The effect caused by building the structure
+- [ ] Previous structures that allow this structure to be built for free
+- [ ] Future structures that can be built free is this card has already been built
 
-### *Commercial Structure*
-### *Civilian Structure*
-### *Military Structure*
-### *Guild*
-#### Rules
-- [ ] Number of guild cards in the game is equal to the number of players + 2 and is kept a secret from players
-- [ ] At the end of the game, players scores are affected by the Guild cards
+### Card Types
+- Raw Resource: (Brown) Produce raw materials (lumber, stone, ore, clay)
+- Manufacture Good: (Grey) Produce displayed products (loom, glass, press)
+- Science: (Green) Award victory points at end game based on collected symbols (wheel, protractor, tablet)
+    - Rules:
+        - [ ] End game victory points are equal to number of identical symbols^2 + (7 * number of sets of 3 different symbols)
+
+- Civilian Structure: (Blue) Provide victory points
+- Commercial Structure: (Yellow) Provide advantages during commercial transactions (See "Commerce and Trading")
+- Military Structure: (Red) Builds military strength for wars (See "War")
+- Guild: (Purple) Provide end game victory points based on certain criteria
+    - Rules:
+        - [ ] Number of guild cards in the game is equal to the number of players + 2 and is kept a secret from players
+        - [ ] At the end of the game, players scores are affected by the Guild cards
 
 ## Commerce and Trading
 - [x] In order to trade or build anything, player must have appropriate resources or coins in their stockpile at the beginning of the turn
 - [x] Players can only trade with neighboring cities
 - [ ] Trading a neighboring city is initially 2 coins per resource and only allows players to use that resource, not take it from their neighbors
+    - [ ] Some Commercial Structure (yellow) cards allow players to trade for certain materials for 1 coin after being built
 - [ ] On a single turn, players may trade for multiple resources from both neighboring cities
 - [ ] Traded resources are only available to the player during the turn they are bought
 - [ ] Only resources produced through the city/Wonder or a neighbors raw resource or manufactured good cards can be traded
@@ -116,6 +142,7 @@ Cards are passed left-right-left over the three ages, so you need to keep an eye
 -  [ ] Build the Next Level of Wonder
 -  [x] Discard for 3 Coins
     -  Discarded cards create a Discard Pile
+    -  A card can always be chosen for discard, even if the player does not have enough resources to build it
 3. Pass temporary hand to next player
 - [x] Temporary hand is passed to next player (excluding chosen card)
 - [x] Pass direction is determined by Age (I: left, II: right, III: left)
@@ -136,13 +163,66 @@ Cards are passed left-right-left over the three ages, so you need to keep an eye
 - [ ] The wonder does not need to be built in order for a player to win
 
 ### Wonders
-- [ ] *The Colossus of Rhodes*
-- [ ] *The Lighthouse of Alexandria*
-- [ ] *The Hanging Gardens of Babylon*
-- [ ] *The Pyramids of Giza*
-- [ ] *The Mausoleum of Halicarnassus*
-- [ ] *The Statue of Zeus in Olympia*
-- [ ] *The Temple of Artemis in Ephesus*
+- Wonders provide players 1 of the resource specified in the top left corner
+- Side A always has 3 levels
+    - The first level is worth +3 Victory Points
+    - The second level is determined by the Wonder
+    - The third level is worth +7 Victory Points
+- Number of levels and the effects for each level vary by Wonder on side B
+- The cost of building each level varies from side A to B and from Wonder to Wonder
+- *The Colossus of Rhodes*
+    - Resource: Ore
+    - Side A, Level 2: 2 Shields
+    - Side B:
+        - Level 1: 1 Shield, 3 Victory Points, 3 Coins (from bank)
+        - Level 2: 1 Shield, 4 Victory Points, 4 Coins (from bank)
+- *The Lighthouse of Alexandria*
+    - Resource: Glass
+    - Side A, Level 2: Resource of choice from 4 raw materials (lumber, stone, ore, clay) **every turn**
+    - Side B:
+        - Level 1: (See "Side A, Level 2")
+        - Level 2: Resource of choice from 3 manufactured goods (loom, glass, press) **every turn**
+        - Level 3: 7 Victory Points
+- *The Temple of Artemis in Ephesus*
+    - Resource: Press
+    - Side A, Level 2: 9 Coins (from bank) **immediately following the building of this level**
+    - Side B:
+        - Level 1: 2 Victory Points, 4 Coins (from bank)
+        - Level 2: 3 Victory Points, 4 Coins (from bank)
+        - Level 3: 5 Victory Points, 4 Coins (from bank)
+- *The Hanging Gardens of Babylon*
+    - Resource: Clay
+    - Side A, Level 2: Science symbol of choice from 2 types (wheel, protractor, tablet) at the **end of the game**
+    - Side B:
+        - Level 1: 3 Victory Points
+        - Level 2: Optional ability to play seventh card instead of discarding **on sixth turn**
+            - This card can be built (See "Building the Structure"), used to build level 3 (See "Building the Next Level of Wonder"), or discarded for 3 coins from the bank
+        - Level 3: (See "Side A, Level 2")
+- *The Statue of Zeus in Olympia*
+    - Resource: Lumber
+    - Side A, Level 2: Build structure for free **once per age**
+    - Side B:
+        - Level 1: Allows player to purchase raw materials (lumber, stone, ore, clay) from either neighbor for 1 coin
+            - Same effect as both Eastern and Western Trading Posts (Commercial Structures)
+            - Both trading posts can still be built, but the effect is not cumulative
+        - Level 2: 5 Victory Points
+        - Level 3: Allows player to "copy" a Guild (purple) card from **one** of their two neighbors at the **end of the game**
+            - This ability has no effect on the player who owns the copied Guild
+- *The Mausoleum of Halicarnassus*
+    - Resource: Loom
+    - Side A, Level 2: At the **end of turn when this level is built,** choose one structure from all discarded cards since beginning of game and build for free
+    - Side B:
+        - Level 1: 2 Victory Points, (See "Side A, Level 2")
+        - Level 2: 1 Victory Point, (See "Side A, Level 2")
+        - Level 3: (See "Side A, Level 2")
+- *The Pyramids of Giza*
+    - Resource: Stone
+    - Side A, Level 2: 5 Victory Points
+    - Side B:
+        - Level 1: 3 Victory Points
+        - Level 2: 5 Victory Points
+        - Level 3: 5 Victory Points
+        - Level 4: 7 Victory Points
 
 ## End Game and Victory
 - [ ] After the war of Age III, a score card displaying total Victory Points for each player is displayed
