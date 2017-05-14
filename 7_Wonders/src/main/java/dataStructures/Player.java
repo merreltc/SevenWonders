@@ -64,7 +64,7 @@ public class Player {
 	
 	public void addValue5(int numChipsToAdd, ChipType chipType) {
 		validateNumChipsToAdd(numChipsToAdd, Chip.ChipValue.FIVE);
-		this.playerChips.numOfValue5Coins = numChipsToAdd;
+		this.playerChips.numOfValue5Coins += numChipsToAdd;
 	}
 	
 	public void addValueNeg1(int numChipsToAdd, ChipType chipType) {
@@ -108,6 +108,8 @@ public class Player {
 		}
 	}
 
+	
+	//Add second input for chips
 	public void removeValue1(int numCoinsToRemove) {
 		validateNumCoinsToRemove(numCoinsToRemove, Chip.ChipValue.ONE);
 

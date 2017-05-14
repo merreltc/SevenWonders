@@ -616,4 +616,11 @@ public class PlayerTest {
 		player.addValue5(3, Chip.ChipType.COIN);
 		Assert.assertEquals(3, player.getNumValue5Coins());
 	}
+	
+	@Test
+	public void testAddValue5Coins2(){
+		Player player = new Player("Jane Doe", WonderType.COLOSSUS);
+		player.addValue5(5, Chip.ChipType.COIN);
+		Assert.assertEquals(5, player.getNumValue5Coins());
+	}
 }
