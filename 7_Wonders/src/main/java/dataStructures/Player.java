@@ -24,6 +24,7 @@ public class Player {
 	private class PlayerChips {
 		protected int numOfValue1Coins = 3;
 		protected int numOfValue3Coins = 0;
+		protected int numOfValue5Coins = 0;
 		protected int numOfValue1ConflictTokens = 0;
 		protected int numOfValue3ConflictTokens = 0;
 		protected int conflictTotal = 0;
@@ -61,6 +62,11 @@ public class Player {
 		}
 	}
 	
+	public void addValue5(int numChipsToAdd, ChipType chipType) {
+		validateNumChipsToAdd(numChipsToAdd, Chip.ChipValue.FIVE);
+		this.playerChips.numOfValue5Coins = numChipsToAdd;
+	}
+	
 	public void addValueNeg1(int numChipsToAdd, ChipType chipType) {
 		if(chipType == ChipType.COIN){
 			throw new IllegalArgumentException("Cannot have a negative 1 coin value");
@@ -84,6 +90,10 @@ public class Player {
 		case THREE:
 			max = 24;
 			chipType = "3";
+			break;
+		case FIVE:
+			max = 15;
+			chipType = "5";
 			break;
 		case NEG1:
 			max = 21;
@@ -176,6 +186,10 @@ public class Player {
 
 	public int getNumValue3Coins() {
 		return this.playerChips.numOfValue3Coins;
+	}
+	
+	public int getNumValue5Coins() {
+		return this.playerChips.numOfValue5Coins;
 	}
 
 	public int getConflictTotal() {

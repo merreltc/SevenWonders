@@ -20,6 +20,7 @@ import dataStructures.Player;
 import dataStructures.Wonder;
 import dataStructures.Wonder.WonderType;
 import exceptions.InsufficientFundsException;
+import junit.framework.Assert;
 
 public class PlayerTest {
 
@@ -607,5 +608,12 @@ public class PlayerTest {
 		} catch (IllegalArgumentException error) {
 			assertEquals("Cannot have a negative 1 coin value", error.getMessage());
 		}
+	}
+	
+	@Test
+	public void testAddValue5Coins(){
+		Player player = new Player("Jane Doe", WonderType.COLOSSUS);
+		player.addValue5(3, Chip.ChipType.COIN);
+		Assert.assertEquals(3, player.getNumValue5Coins());
 	}
 }
