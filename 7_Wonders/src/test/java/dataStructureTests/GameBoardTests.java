@@ -455,7 +455,7 @@ public class GameBoardTests {
 
 		GameBoard board = new GameBoard(players, deck);
 		Player active = players.get(0);
-		active.addValue3(1);
+		active.addValue3(1, Chip.ChipType.COIN);
 		assertTrue(board.makeChangeForValue1Coins(active, 3));
 		assertEquals(6, active.getNumValue1Coins());
 		assertEquals(0, active.getNumValue3Coins());
@@ -475,7 +475,7 @@ public class GameBoardTests {
 
 		GameBoard board = new GameBoard(players, deck);
 		Player active = players.get(0);
-		active.addValue3(14);
+		active.addValue3(14, Chip.ChipType.COIN);
 		
 		try{
 			board.makeChangeForValue1Coins(active, 42);

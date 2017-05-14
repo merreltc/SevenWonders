@@ -20,14 +20,15 @@ public class Player {
 
 	private HashMap<Enum, Integer> currentTrades = new HashMap<Enum, Integer>();
 	private PlayerChips playerChips = new PlayerChips();
-	
-	private class PlayerChips{
+
+	private class PlayerChips {
 		protected int numOfValue1Coins = 3;
 		protected int numOfValue3Coins = 0;
 		protected int numOfValue1ConflictTokens = 0;
+		protected int numOfValue3ConflictTokens = 0;
 		protected int conflictTotal = 0;
 		protected int coinTotal = 3;
-		
+
 	}
 
 	public Player(String playerName, Wonder.WonderType wonder) {
@@ -41,16 +42,22 @@ public class Player {
 		if (chipType == ChipType.COIN) {
 			this.playerChips.coinTotal += numChipsToAdd;
 			this.playerChips.numOfValue1Coins += numChipsToAdd;
-		}else{
+		} else {
+			this.playerChips.conflictTotal += numChipsToAdd;
 			this.playerChips.numOfValue1ConflictTokens += numChipsToAdd;
 		}
 	}
 
-	public void addValue3(int numCoinsToAdd) {
-		validateNumChipsToAdd(numCoinsToAdd, Chip.ChipValue.THREE);
-
-		this.playerChips.coinTotal += 3 * numCoinsToAdd;
-		this.playerChips.numOfValue3Coins += numCoinsToAdd;
+	public void addValue3(int numChipsToAdd, ChipType chipType) {
+		validateNumChipsToAdd(numChipsToAdd, Chip.ChipValue.THREE);
+		
+		if (chipType == ChipType.COIN) {
+			this.playerChips.coinTotal += 3 * numChipsToAdd;
+			this.playerChips.numOfValue3Coins += numChipsToAdd;
+		} else {
+			this.playerChips.conflictTotal += 3 * numChipsToAdd;
+			this.playerChips.numOfValue3ConflictTokens += numChipsToAdd;
+		}
 	}
 
 	private void validateNumChipsToAdd(int numCoins, Chip.ChipValue type) {
@@ -244,7 +251,11 @@ public class Player {
 		this.numVictoryPoints += numPoints;
 	}
 
-	public int getNumConflictTokens() {
+	public int getNumValue1ConflictTokens() {
 		return this.playerChips.numOfValue1ConflictTokens;
+	}
+
+	public int getNumValue3ConflictTokens() {
+		return 1;
 	}
 }

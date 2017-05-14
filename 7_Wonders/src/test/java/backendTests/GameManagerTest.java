@@ -15,6 +15,7 @@ import backend.SetUpDeckHandler;
 import backend.SetUpHandler;
 import backend.TurnHandler;
 import dataStructures.Card;
+import dataStructures.Chip;
 import dataStructures.Deck;
 import dataStructures.Deck.Age;
 import dataStructures.GameBoard;
@@ -380,7 +381,7 @@ public class GameManagerTest {
 		GameManager manager = new GameManager(compileHolderObjects(playerNames, wonders), new SetUpHandler(), new SetUpDeckHandler(),
 				new TurnHandler(), new PlayerTurnHandler());
 		GameBoard board = manager.getGameBoard();
-		manager.getCurrentPlayer().addValue3(1);
+		manager.getCurrentPlayer().addValue3(1, Chip.ChipType.COIN);
 
 		assertTrue(manager.makeChangeForValue1Coins(3));
 		assertEquals(6, manager.getCurrentPlayer().getNumValue1Coins());

@@ -68,7 +68,7 @@ public class PlayerTest {
 		String name = "Sandman";
 		Player player = new Player(name, WonderType.COLOSSUS);
 		player.addValue1(2, Chip.ChipType.COIN);
-		player.addValue3(1);
+		player.addValue3(1, Chip.ChipType.COIN);
 
 		assertEquals("Name: Sandman\nCoin Total: 8", player.toString());
 	}
@@ -90,11 +90,11 @@ public class PlayerTest {
 	public void testAddValue3Coins() {
 		Player player = new Player("Jane Doe", WonderType.COLOSSUS);
 
-		player.addValue3(1);
+		player.addValue3(1, Chip.ChipType.COIN);
 		assertEquals(6, player.getCoinTotal());
 		assertEquals(1, player.getNumValue3Coins());
 
-		player.addValue3(3);
+		player.addValue3(3, Chip.ChipType.COIN);
 		assertEquals(15, player.getCoinTotal());
 		assertEquals(4, player.getNumValue3Coins());
 	}
@@ -119,7 +119,7 @@ public class PlayerTest {
 	public void testAddInvalidNumValue3CoinsNeg1() {
 		Player player = new Player("Jane Doe", WonderType.COLOSSUS);
 
-		player.addValue3(-1);
+		player.addValue3(-1, Chip.ChipType.COIN);
 		fail();
 	}
 
@@ -127,7 +127,7 @@ public class PlayerTest {
 	public void testAddInvalidNumValue3Coins25() {
 		Player player = new Player("Jane Doe", WonderType.COLOSSUS);
 
-		player.addValue3(25);
+		player.addValue3(25, Chip.ChipType.COIN);
 		fail();
 	}
 
@@ -148,7 +148,7 @@ public class PlayerTest {
 	public void testRemoveValidNumValue3Coins() {
 		Player player = new Player("Jane Doe", WonderType.COLOSSUS);
 
-		player.addValue3(1);
+		player.addValue3(1, Chip.ChipType.COIN);
 		player.removeValue3(1);
 		assertEquals(3, player.getCoinTotal());
 		assertEquals(0, player.getNumValue3Coins());
@@ -159,7 +159,7 @@ public class PlayerTest {
 		Player player = new Player("Jane Doe", WonderType.COLOSSUS);
 
 		player.addValue1(5, Chip.ChipType.COIN);
-		player.addValue3(3);
+		player.addValue3(3, Chip.ChipType.COIN);
 
 		player.removeValue1(2);
 		player.removeValue3(2);
@@ -230,7 +230,7 @@ public class PlayerTest {
 		Player player = new Player("Jane Doe", WonderType.COLOSSUS);
 
 		try {
-			player.addValue3(-1);
+			player.addValue3(-1, Chip.ChipType.COIN);
 		} catch (IllegalArgumentException error) {
 			String message = "Cannot add -1 value 3 coins";
 			assertEquals(message, error.getMessage());
@@ -569,13 +569,23 @@ public class PlayerTest {
 	@Test
 	public void testDefaultGetNumConflictTokens(){
 		Player player = new Player("Jane Doe", WonderType.COLOSSUS);
-		assertEquals(0, player.getNumConflictTokens());
+		assertEquals(0, player.getNumValue1ConflictTokens());
 	}
 	
 	@Test
 	public void testAdd1Value1ConflictTokens(){
 		Player player = new Player("Jane Doe", WonderType.COLOSSUS);
 		player.addValue1(1, Chip.ChipType.CONFLICTTOKEN);
-		assertEquals(1, player.getNumConflictTokens());
+		assertEquals(1, player.getNumValue1ConflictTokens());
+		assertEquals(1, player.getConflictTotal());
+	}
+	
+	@Test
+	public void testAddValue3ConflictTokens(){
+		Player player = new Player("Jane Doe", WonderType.COLOSSUS);
+		player.addValue3(1, Chip.ChipType.CONFLICTTOKEN);
+		assertEquals(1, player.getNumValue3ConflictTokens());
+		assertEquals(0, player.getNumValue3Coins());
+		assertEquals(3, player.getConflictTotal());
 	}
 }

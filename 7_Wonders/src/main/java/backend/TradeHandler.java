@@ -58,7 +58,7 @@ public class TradeHandler {
 
 	public static void tradeFromToValue3(Player from, Player to, int numCoinsToTrade) {
 		from.removeValue3(numCoinsToTrade);
-		to.addValue3(numCoinsToTrade);
+		to.addValue3(numCoinsToTrade, Chip.ChipType.COIN);
 	}
 
 	public void tradeFromToForEntity(Player from, Player to, Enum entity) {
