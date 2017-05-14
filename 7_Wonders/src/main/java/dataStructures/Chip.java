@@ -9,7 +9,7 @@ public abstract class Chip {
 	}
 	
 	public enum ChipValue {
-		ONE, THREE
+		ONE, THREE, NEG1
 	}
 	
 	private int value;

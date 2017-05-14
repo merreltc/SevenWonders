@@ -208,7 +208,7 @@ public class PlayerTest {
 		try {
 			player.addValue1(-1, Chip.ChipType.COIN);
 		} catch (IllegalArgumentException error) {
-			String message = "Cannot add -1 value 1 coins";
+			String message = "Cannot add -1 value 1 chips";
 			assertEquals(message, error.getMessage());
 		}
 	}
@@ -220,7 +220,7 @@ public class PlayerTest {
 		try {
 			player.addValue1(47, Chip.ChipType.COIN);
 		} catch (IllegalArgumentException error) {
-			String message = "Cannot add 47 value 1 coins";
+			String message = "Cannot add 47 value 1 chips";
 			assertEquals(message, error.getMessage());
 		}
 	}
@@ -232,7 +232,7 @@ public class PlayerTest {
 		try {
 			player.addValue3(-1, Chip.ChipType.COIN);
 		} catch (IllegalArgumentException error) {
-			String message = "Cannot add -1 value 3 coins";
+			String message = "Cannot add -1 value 3 chips";
 			assertEquals(message, error.getMessage());
 		}
 	}
@@ -587,5 +587,14 @@ public class PlayerTest {
 		assertEquals(1, player.getNumValue3ConflictTokens());
 		assertEquals(0, player.getNumValue3Coins());
 		assertEquals(3, player.getConflictTotal());
+	}
+	
+	@Test
+	public void testAddValueNegConflictTokens(){
+		Player player = new Player("Jane Doe", WonderType.COLOSSUS);
+		player.addValueNeg1(1, Chip.ChipType.CONFLICTTOKEN);
+		assertEquals(1, player.getNumValueNeg1ConflictTokens());
+		assertEquals(0, player.getNumValue3ConflictTokens());
+		assertEquals(-1, player.getConflictTotal());
 	}
 }

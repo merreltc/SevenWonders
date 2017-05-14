@@ -28,6 +28,7 @@ public class Player {
 		protected int numOfValue3ConflictTokens = 0;
 		protected int conflictTotal = 0;
 		protected int coinTotal = 3;
+		public int numOfValueNeg3ConflictTokens = 0;
 
 	}
 
@@ -59,26 +60,37 @@ public class Player {
 			this.playerChips.numOfValue3ConflictTokens += numChipsToAdd;
 		}
 	}
+	
+	public void addValueNeg1(int numChipsToAdd, ChipType chipType) {
+		validateNumChipsToAdd(numChipsToAdd, Chip.ChipValue.NEG1);
+		
+		this.playerChips.conflictTotal += (-1) * numChipsToAdd;
+		this.playerChips.numOfValueNeg3ConflictTokens  += numChipsToAdd;
+	}
 
-	private void validateNumChipsToAdd(int numCoins, Chip.ChipValue type) {
+	private void validateNumChipsToAdd(int numChips, Chip.ChipValue type) {
 		int max;
-		String coinType;
+		String chipType;
 
 		switch (type) {
 		case ONE:
 			max = 46;
-			coinType = "1";
+			chipType = "1";
 			break;
 		case THREE:
 			max = 24;
-			coinType = "3";
+			chipType = "3";
+			break;
+		case NEG1:
+			max = 21;
+			chipType = "-1";
 			break;
 		default:
 			throw new IllegalArgumentException("Bad CoinType");
 		}
 
-		if (numCoins <= -1 || numCoins > max) {
-			throw new IllegalArgumentException("Cannot add " + numCoins + " value " + coinType + " coins");
+		if (numChips <= -1 || numChips > max) {
+			throw new IllegalArgumentException("Cannot add " + numChips + " value " + chipType + " chips");
 		}
 	}
 
@@ -256,6 +268,10 @@ public class Player {
 	}
 
 	public int getNumValue3ConflictTokens() {
+		return this.playerChips.numOfValue3ConflictTokens;
+	}
+
+	public int getNumValueNeg1ConflictTokens() {
 		return 1;
 	}
 }
