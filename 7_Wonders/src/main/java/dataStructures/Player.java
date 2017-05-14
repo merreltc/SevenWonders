@@ -62,6 +62,10 @@ public class Player {
 	}
 	
 	public void addValueNeg1(int numChipsToAdd, ChipType chipType) {
+		if(chipType == ChipType.COIN){
+			throw new IllegalArgumentException("Cannot have a negative 1 coin value");
+		}
+		
 		validateNumChipsToAdd(numChipsToAdd, Chip.ChipValue.NEG1);
 		
 		this.playerChips.conflictTotal += (-1) * numChipsToAdd;

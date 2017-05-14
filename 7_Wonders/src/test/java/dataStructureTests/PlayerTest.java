@@ -334,21 +334,21 @@ public class PlayerTest {
 			assertEquals(message, error.getMessage());
 		}
 	}
-	
+
 	@Test
-	public void testRemoveTotalCoins(){
+	public void testRemoveTotalCoins() {
 		Player player = new Player("Jane Doe", WonderType.COLOSSUS);
 		player.removeTotalCoins(2);
-		
+
 		assertEquals(1, player.getNumValue1Coins());
 		assertEquals(1, player.getCoinTotal());
 	}
-	
+
 	@Test
-	public void testRemoveTotalCoinsEnoughValue1NotEnoughValue3(){
+	public void testRemoveTotalCoinsEnoughValue1NotEnoughValue3() {
 		Player player = new Player("Jane Doe", WonderType.COLOSSUS);
 		player.removeTotalCoins(3);
-		
+
 		assertEquals(0, player.getNumValue1Coins());
 		assertEquals(0, player.getCoinTotal());
 	}
@@ -356,48 +356,48 @@ public class PlayerTest {
 	@Test
 	public void testGetDefaultCurrentHand() {
 		Player player = new Player("Jane Doe", WonderType.COLOSSUS);
-		
+
 		assertTrue(player.getCurrentHand().isEmpty());
 	}
-	
+
 	@Test
 	public void testSetCurrectHand() {
 		Player player = new Player("Jane Doe", WonderType.COLOSSUS);
 		ArrayList<Card> deckCards = new SetUpDeckHandler().createCards(Age.AGE1, 3);
-		
+
 		ArrayList<Card> playerCards = new ArrayList<Card>();
 		playerCards.add(deckCards.get(0));
 		playerCards.add(deckCards.get(1));
 		playerCards.add(deckCards.get(2));
-		
+
 		player.setCurrentHand(playerCards);
-		
+
 		assertEquals(playerCards, player.getCurrentHand());
 		assertEquals(playerCards.get(0), player.getCurrentHand().get(0));
 		assertEquals(playerCards.get(1), player.getCurrentHand().get(1));
 		assertEquals(playerCards.get(2), player.getCurrentHand().get(2));
 	}
-	
+
 	@Test
 	public void testGetDefaultStoragePileHand() {
 		Player player = new Player("Jane Doe", WonderType.COLOSSUS);
-		
+
 		assertTrue(player.getStoragePile().isEmpty());
 		assertEquals(ArrayList.class, player.getStoragePile().getClass());
 	}
-	
+
 	@Test
 	public void testSetStoragePileHand() {
 		Player player = new Player("Jane Doe", WonderType.COLOSSUS);
 		ArrayList<Card> deckCards = new SetUpDeckHandler().createCards(Age.AGE1, 3);
-		
+
 		ArrayList<Card> playerCards = new ArrayList<Card>();
 		playerCards.add(deckCards.get(0));
 		playerCards.add(deckCards.get(1));
 		playerCards.add(deckCards.get(2));
-		
+
 		player.setStoragePile(playerCards);
-		
+
 		assertEquals(playerCards, player.getStoragePile());
 		assertEquals(playerCards.get(0), player.getStoragePile().get(0));
 		assertEquals(playerCards.get(1), player.getStoragePile().get(1));
@@ -408,50 +408,50 @@ public class PlayerTest {
 	public void testStoragePileContainsResource() {
 		Player player = new Player("Jane Doe", WonderType.COLOSSUS);
 		ArrayList<Card> deckCards = new SetUpDeckHandler().createCards(Age.AGE1, 3);
-		
+
 		ArrayList<Card> playerCards = new ArrayList<Card>();
 		playerCards.add(deckCards.get(0));
 		playerCards.add(deckCards.get(1));
 		playerCards.add(deckCards.get(2));
-		
+
 		player.setStoragePile(playerCards);
-		
+
 		assertTrue(player.storagePileContainsEntity(RawResource.LUMBER));
 	}
-	
+
 	@Test
 	public void testDefaultCurrentTrades() {
 		Player player = new Player("Jane Doe", WonderType.COLOSSUS);
-		
+
 		assertTrue(player.getCurrentTrades().isEmpty());
 		assertEquals(HashMap.class, player.getCurrentTrades().getClass());
 	}
-	
+
 	@Test
 	public void testAddTraded() {
 		Player player = new Player("Jane Doe", WonderType.COLOSSUS);
-		
+
 		player.addTradedValue(RawResource.LUMBER);
 		assertFalse(player.getCurrentTrades().isEmpty());
 		assertTrue(player.getCurrentTrades().containsKey(RawResource.LUMBER));
 		assertEquals(1, (int) player.getCurrentTrades().get(RawResource.LUMBER));
 	}
-	
+
 	@Test
 	public void testAddMultipleSameTraded() {
 		Player player = new Player("Jane Doe", WonderType.COLOSSUS);
-		
+
 		player.addTradedValue(RawResource.LUMBER);
 		player.addTradedValue(RawResource.LUMBER);
 		assertFalse(player.getCurrentTrades().isEmpty());
 		assertTrue(player.getCurrentTrades().containsKey(RawResource.LUMBER));
 		assertEquals(2, (int) player.getCurrentTrades().get(RawResource.LUMBER));
 	}
-	
+
 	@Test
 	public void testAddMultipleDifferentTraded() {
 		Player player = new Player("Jane Doe", WonderType.COLOSSUS);
-		
+
 		player.addTradedValue(RawResource.LUMBER);
 		player.addTradedValue(Good.LOOM);
 		assertFalse(player.getCurrentTrades().isEmpty());
@@ -459,69 +459,69 @@ public class PlayerTest {
 		assertEquals(1, (int) player.getCurrentTrades().get(RawResource.LUMBER));
 		assertEquals(1, (int) player.getCurrentTrades().get(Good.LOOM));
 	}
-	
+
 	@Test
 	public void testRemoveCurrentTrades() {
 		Player player = new Player("Jane Doe", WonderType.COLOSSUS);
-		
+
 		player.addTradedValue(RawResource.LUMBER);
 		player.addTradedValue(Good.LOOM);
 		player.removeCurrentTrades();
 		assertTrue(player.getCurrentTrades().isEmpty());
 		assertEquals(HashMap.class, player.getCurrentTrades().getClass());
 	}
-	
+
 	@Test
 	public void testStoragePileContainsGood() {
 		Player player = new Player("Jane Doe", WonderType.COLOSSUS);
 		ArrayList<Card> deckCards = new SetUpDeckHandler().createCards(Age.AGE1, 3);
-		
+
 		ArrayList<Card> playerCards = new ArrayList<Card>();
 		playerCards.add(deckCards.get(6));
 		playerCards.add(deckCards.get(7));
 		playerCards.add(deckCards.get(8));
-		
+
 		player.setStoragePile(playerCards);
-		
+
 		assertTrue(player.storagePileContainsEntity(Good.GLASS));
 	}
-	
+
 	@Test
-	public void testAddToStoragePile(){
+	public void testAddToStoragePile() {
 		Player player = new Player("Jane Doe", WonderType.COLOSSUS);
 		ArrayList<Card> deckCards = new SetUpDeckHandler().createCards(Age.AGE1, 3);
-		
+
 		ArrayList<Card> playerCards = new ArrayList<Card>();
 		playerCards.add(deckCards.get(0));
 		playerCards.add(deckCards.get(1));
 		playerCards.add(deckCards.get(2));
-		
+
 		player.setStoragePile(playerCards);
-		
+
 		player.addToStoragePile(deckCards.get(3));
 		assertEquals(4, player.getStoragePile().size());
 		assertEquals(deckCards.get(3), player.getStoragePile().get(3));
 	}
-	
+
 	@Test
-	public void testRemoveFromCurrentHand(){
+	public void testRemoveFromCurrentHand() {
 		Player player = new Player("Jane Doe", WonderType.COLOSSUS);
 		ArrayList<Card> deckCards = new SetUpDeckHandler().createCards(Age.AGE1, 3);
-		
+
 		ArrayList<Card> playerCards = new ArrayList<Card>();
 		playerCards.add(deckCards.get(0));
 		playerCards.add(deckCards.get(1));
 		playerCards.add(deckCards.get(2));
-		
+
 		player.setCurrentHand(playerCards);
-		
+
 		player.removeFromCurrentHand(deckCards.get(1));
 		assertEquals(2, player.getCurrentHand().size());
 		assertFalse(player.getCurrentHand().contains(deckCards.get(1)));
 	}
-	
+
 	@Test
-	public void testCreatePlayerWithWonder(){
+	public void testCreatePlayerWithWonder() {
 		Wonder wonder = EasyMock.mock(Wonder.class);
 		EasyMock.expect(wonder.getType()).andReturn(WonderType.STATUE);
 		EasyMock.expect(wonder.getName()).andReturn("The Statue of Zeus in Olympia");
@@ -529,9 +529,9 @@ public class PlayerTest {
 		Player player = new Player("Jane Doe", wonder.getType());
 		assertEquals("The Statue of Zeus in Olympia", player.getWonder().getName());
 	}
-	
+
 	@Test
-	public void testCreatePlayerWithWonder2(){
+	public void testCreatePlayerWithWonder2() {
 		Wonder wonder = EasyMock.mock(Wonder.class);
 		EasyMock.expect(wonder.getType()).andReturn(WonderType.LIGHTHOUSE);
 		EasyMock.expect(wonder.getName()).andReturn("The Lighthouse of Alexandria");
@@ -539,62 +539,73 @@ public class PlayerTest {
 		Player player = new Player("Jane Doe", wonder.getType());
 		assertEquals("The Lighthouse of Alexandria", player.getWonder().getName());
 	}
-	
+
 	@Test
 	public void testGetDefaultNumShields() {
 		Player player = new Player("Jane Doe", WonderType.COLOSSUS);
 		assertEquals(0, player.getNumShields());
 	}
-	
+
 	@Test
 	public void testAdd2Shields() {
 		Player player = new Player("Jane Doe", WonderType.COLOSSUS);
 		player.addNumShields(2);
 		assertEquals(2, player.getNumShields());
 	}
-	
+
 	@Test
 	public void testGetDefaultNumVictoryPoints() {
 		Player player = new Player("Jane Doe", WonderType.COLOSSUS);
 		assertEquals(0, player.getNumVictoryPoints());
 	}
-	
+
 	@Test
 	public void testAdd2VictoryPoints() {
 		Player player = new Player("Jane Doe", WonderType.COLOSSUS);
 		player.addNumVictoryPoints(2);
 		assertEquals(2, player.getNumVictoryPoints());
 	}
-	
+
 	@Test
-	public void testDefaultGetNumConflictTokens(){
+	public void testDefaultGetNumConflictTokens() {
 		Player player = new Player("Jane Doe", WonderType.COLOSSUS);
 		assertEquals(0, player.getNumValue1ConflictTokens());
 	}
-	
+
 	@Test
-	public void testAdd1Value1ConflictTokens(){
+	public void testAdd1Value1ConflictTokens() {
 		Player player = new Player("Jane Doe", WonderType.COLOSSUS);
 		player.addValue1(1, Chip.ChipType.CONFLICTTOKEN);
 		assertEquals(1, player.getNumValue1ConflictTokens());
 		assertEquals(1, player.getConflictTotal());
 	}
-	
+
 	@Test
-	public void testAddValue3ConflictTokens(){
+	public void testAddValue3ConflictTokens() {
 		Player player = new Player("Jane Doe", WonderType.COLOSSUS);
 		player.addValue3(1, Chip.ChipType.CONFLICTTOKEN);
 		assertEquals(1, player.getNumValue3ConflictTokens());
 		assertEquals(0, player.getNumValue3Coins());
 		assertEquals(3, player.getConflictTotal());
 	}
-	
+
 	@Test
-	public void testAddValueNegConflictTokens(){
+	public void testAddValueNegConflictTokens() {
 		Player player = new Player("Jane Doe", WonderType.COLOSSUS);
 		player.addValueNeg1(1, Chip.ChipType.CONFLICTTOKEN);
 		assertEquals(1, player.getNumValueNeg1ConflictTokens());
 		assertEquals(0, player.getNumValue3ConflictTokens());
 		assertEquals(-1, player.getConflictTotal());
+	}
+
+	@Test
+	public void testAddInvalidNeg1CoinsErrorMessage() {
+		Player player = new Player("Jane Doe", WonderType.COLOSSUS);
+		try {
+			player.addValueNeg1(1, Chip.ChipType.COIN);
+			fail();
+		} catch (IllegalArgumentException error) {
+			assertEquals("Cannot have a negative 1 coin value", error.getMessage());
+		}
 	}
 }
