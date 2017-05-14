@@ -8,26 +8,27 @@ import java.awt.Graphics2D;
 import java.awt.Image;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Locale;
-import java.util.ResourceBundle;
 
 import dataStructures.Card;
 import dataStructures.Effect;
 import dataStructures.Effect.EffectType;
 import dataStructures.EntityEffect;
+import dataStructures.EntityEffect.EntityType;
+import dataStructures.GeneralEnums.Good;
+import dataStructures.GeneralEnums.RawResource;
+import dataStructures.GeneralEnums.Resource;
+import dataStructures.GeneralEnums.Science;
 import dataStructures.MultiValueEffect;
 import dataStructures.Player;
 import dataStructures.ValueEffect;
 import guiDataStructures.Constants;
 import guiMain.RenderImage;
-import guiMain.Translate;
 
 public class ResourceViewer extends Menu {
 
 	private Player player;
 	private RenderImage renderer = new RenderImage();
 	private boolean shouldDraw = false;
-	private ResourceBundle messages = Translate.getNewResourceBundle();
 
 	@Override
 	public void draw(Graphics graphics) {
@@ -39,16 +40,46 @@ public class ResourceViewer extends Menu {
 
 			int gridRows = this.player.getStoragePile().size() + 1;
 			drawGrid(gridRows, graphics);
+			
+			draw1CoinBox(graphics);
+			drawShieldBox(graphics);
 
 			graphics.setColor(startingColor);
 			graphics.setFont(startingFont);
 		}
 	}
+	
+	private void drawShieldBox(Graphics graphics) {
+		graphics.setColor(new Color(50, 50, 50, 150));
+		graphics.drawRect(Constants.RESOURCE_VIEWER_SHIELD_X, Constants.RESOURCE_VIEWER_SHIELD_Y,
+				Constants.RESOURCE_VIEWER_CELL_WIDTH, Constants.RESOURCE_VIEWER_ROW_HEIGHT);
+		graphics.drawRect(Constants.RESOURCE_VIEWER_SHIELD_X,
+				Constants.RESOURCE_VIEWER_SHIELD_Y + Constants.RESOURCE_VIEWER_ROW_HEIGHT,
+				Constants.RESOURCE_VIEWER_CELL_WIDTH, Constants.RESOURCE_VIEWER_ROW_HEIGHT);
+		Image image = this.renderer.getImage("one shield");
+		RenderImage.draw(graphics, image, Constants.RESOURCE_VIEWER_SHIELD_X + Constants.RESOURCE_VIEWER_CELL_WIDTH/3, Constants.RESOURCE_VIEWER_SHIELD_Y + 5
+				, Constants.RESOURCE_IMAGE_WIDTH, Constants.RESOURCE_IMAGE_HEIGHT);
+		graphics.drawString(player.getNumShields() + "", Constants.RESOURCE_VIEWER_SHIELD_X + Constants.RESOURCE_VIEWER_TEXT_X_OFFSET, Constants.RESOURCE_VIEWER_SHIELD_Y + Constants.RESOURCE_VIEWER_TEXT_Y_OFFSET + Constants.RESOURCE_VIEWER_ROW_HEIGHT);
+	}
+
+	private void draw1CoinBox(Graphics graphics) {
+		graphics.setColor(new Color(50, 50, 50, 150));
+		graphics.drawRect(Constants.RESOURCE_VIEWER_ONE_COIN_X, Constants.RESOURCE_VIEWER_ONE_COIN_Y,
+				Constants.RESOURCE_VIEWER_CELL_WIDTH, Constants.RESOURCE_VIEWER_ROW_HEIGHT);
+		graphics.drawRect(Constants.RESOURCE_VIEWER_ONE_COIN_X,
+				Constants.RESOURCE_VIEWER_ONE_COIN_Y + Constants.RESOURCE_VIEWER_ROW_HEIGHT,
+				Constants.RESOURCE_VIEWER_CELL_WIDTH, Constants.RESOURCE_VIEWER_ROW_HEIGHT);
+		Image image = this.renderer.getImage("coin");
+		RenderImage.draw(graphics, image, Constants.RESOURCE_VIEWER_ONE_COIN_X + Constants.RESOURCE_VIEWER_CELL_WIDTH/3, Constants.RESOURCE_VIEWER_ONE_COIN_Y + 5
+				, Constants.RESOURCE_IMAGE_WIDTH, Constants.RESOURCE_IMAGE_HEIGHT);
+		graphics.drawString(player.getCoinTotal() + "", Constants.RESOURCE_VIEWER_ONE_COIN_X + Constants.RESOURCE_VIEWER_TEXT_X_OFFSET, Constants.RESOURCE_VIEWER_ONE_COIN_Y + Constants.RESOURCE_VIEWER_TEXT_Y_OFFSET + Constants.RESOURCE_VIEWER_ROW_HEIGHT);
+	}
 
 	private void drawGrid(int rows, Graphics graphics) {
 		graphics.setColor(new Color(254, 254, 254, 150));
+		int rowOffset = rows > 3 ? rows : 3;
 		graphics.fillRect(Constants.RESOURCE_VIEWER_ROW_X, Constants.RESOURCE_VIEWER_ROW_BASE_Y,
-				Constants.FrameWidth - 100, Constants.RESOURCE_VIEWER_ROW_HEIGHT * rows);
+				Constants.RESOURCE_VIEWER_ROW_WIDTH, Constants.RESOURCE_VIEWER_ROW_HEIGHT * rowOffset);
 		graphics.setColor(new Color(50, 50, 50, 150));
 		((Graphics2D) graphics).setStroke(new BasicStroke(10));
 		for (int i = 0; i < rows; i++) {
@@ -63,7 +94,7 @@ public class ResourceViewer extends Menu {
 	private void drawTitleRow(int y, Graphics graphics) {
 		graphics.drawRect(Constants.RESOURCE_VIEWER_ROW_X, y, Constants.RESOURCE_VIEWER_FIRST_CELL_WIDTH,
 				Constants.RESOURCE_VIEWER_ROW_HEIGHT);
-		graphics.drawString(messages.getString("card"), Constants.RESOURCE_VIEWER_ROW_X + Constants.RESOURCE_VIEWER_TEXT_X_OFFSET,
+		graphics.drawString("Card", Constants.RESOURCE_VIEWER_ROW_X + Constants.RESOURCE_VIEWER_TEXT_X_OFFSET,
 				y + Constants.RESOURCE_VIEWER_TEXT_Y_OFFSET);
 		for (int i = 0; i < Constants.NUM_OF_COLUMNS; i++) {
 			int x = (Constants.RESOURCE_VIEWER_ROW_X + Constants.RESOURCE_VIEWER_FIRST_CELL_WIDTH)
@@ -94,9 +125,8 @@ public class ResourceViewer extends Menu {
 		}
 		y += Constants.RESOURCE_VIEWER_TEXT_Y_OFFSET;
 		Card card = cards.get(row - 1);
-		int[] values = zeroArray(Constants.NUM_OF_COLUMNS);
-		// int[] values = getRowValues(card);
-		graphics.drawString(messages.getString(Translate.prepareNoSpaceString(card.getName())), Constants.RESOURCE_VIEWER_ROW_X + Constants.RESOURCE_VIEWER_CELL_WIDTH / 3,
+		int[] values = getRowValues(card);
+		graphics.drawString(card.getName(), Constants.RESOURCE_VIEWER_ROW_X + Constants.RESOURCE_VIEWER_CELL_WIDTH / 3,
 				y);
 		for (int i = 0; i < values.length; i++) {
 			graphics.drawString(values[i] + "",
@@ -104,7 +134,6 @@ public class ResourceViewer extends Menu {
 							+ Constants.RESOURCE_VIEWER_CELL_WIDTH / 2) + i * Constants.RESOURCE_VIEWER_CELL_WIDTH,
 					y);
 		}
-		// TODO: get all of the effects of cards
 	}
 
 	private int[] getRowValues(Card card) {
@@ -113,10 +142,6 @@ public class ResourceViewer extends Menu {
 		switch (cardEffectType) {
 		case ENTITY:
 			values = populateEntityValues(card);
-			break;
-
-		case VALUE:
-			values = populateValueValues(card);
 			break;
 
 		case MULTIVALUE:
@@ -131,35 +156,48 @@ public class ResourceViewer extends Menu {
 		int[] effectArray = zeroArray(Constants.NUM_OF_COLUMNS);
 		return effectArray;
 	}
-
-	private int[] populateValueValues(Card card) {
-		ValueEffect cardEntityEffect = (ValueEffect) card.getEffect();
-		HashMap<Enum, Integer> effectList = cardEntityEffect.getAffectingEntities();
-		int[] effectArray = zeroArray(Constants.NUM_OF_COLUMNS);
-		if (effectList.containsKey(ValueEffect.ValueType.COIN)) {
-			effectArray[7] = effectList.get(ValueEffect.ValueType.COIN);
-		}
-		if (effectList.containsKey(ValueEffect.ValueType.CONFLICTTOKEN)) {
-			effectArray[8] = effectList.get(ValueEffect.ValueType.CONFLICTTOKEN);
-		}
-		if (effectList.containsKey(ValueEffect.ValueType.VICTORYPOINT)) {
-			effectArray[9] = effectList.get(ValueEffect.ValueType.VICTORYPOINT);
-		}
-		return effectArray;
-	}
-
+	
 	private int[] populateEntityValues(Card card) {
 		EntityEffect cardEntityEffect = (EntityEffect) card.getEffect();
+		EntityType cardType = cardEntityEffect.getEntityType();
 		HashMap<Enum, Integer> effectList = cardEntityEffect.getEntities();
 		int[] effectArray = zeroArray(Constants.NUM_OF_COLUMNS);
-		if (effectList.containsKey(EntityEffect.EntityType.MANUFACTUREDGOOD)) {
-			effectArray[10] = effectList.get(EntityEffect.EntityType.MANUFACTUREDGOOD);
-		}
-		if (effectList.containsKey(EntityEffect.EntityType.RESOURCE)) {
-			effectArray[11] = effectList.get(EntityEffect.EntityType.RESOURCE);
-		}
-		if (effectList.containsKey(EntityEffect.EntityType.SCIENCE)) {
-			effectArray[12] = effectList.get(EntityEffect.EntityType.SCIENCE);
+		switch (cardType){
+		case MANUFACTUREDGOOD:
+			for (Enum entity : effectList.keySet()){
+				if (entity == Good.GLASS){
+					effectArray[4] = effectList.get(entity);
+				}else if (entity == Good.LOOM){
+					effectArray[5] = effectList.get(entity);
+				}else {
+					effectArray[6] = effectList.get(entity);
+				}
+			}
+			break;
+		case RESOURCE:
+			for (Enum entity : effectList.keySet()){
+				if (entity == RawResource.CLAY){
+					effectArray[0] = effectList.get(entity);
+				}else if (entity == RawResource.LUMBER){
+					effectArray[1] = effectList.get(entity);
+				}else if (entity == RawResource.ORE){
+					effectArray[2] = effectList.get(entity);
+				}else {
+					effectArray[3] = effectList.get(entity);
+				}
+			}
+			break;
+		case SCIENCE:
+			for (Enum entity : effectList.keySet()){
+				if (entity == Science.PROTRACTOR){
+					effectArray[9] = effectList.get(entity);
+				}else if (entity == Science.TABLET){
+					effectArray[8] = effectList.get(entity);
+				}else {
+					effectArray[7] = effectList.get(entity);
+				}
+			}
+			break;
 		}
 		return effectArray;
 	}

@@ -1,10 +1,6 @@
 package dataStructures;
 
-import java.util.Locale;
-import java.util.ResourceBundle;
-
 import dataStructures.GeneralEnums.Resource;
-import guiMain.Translate;
 
 public class Wonder {
 	private WonderType type;
@@ -12,7 +8,6 @@ public class Wonder {
 	private Resource resource;
 	private char side;
 	private int numLevels;
-	private ResourceBundle messages = Translate.getNewResourceBundle();
 
 	public enum WonderType {
 		COLOSSUS, LIGHTHOUSE, TEMPLE, GARDENS, STATUE, MAUSOLEUM, PYRAMIDS

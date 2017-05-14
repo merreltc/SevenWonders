@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 
+import org.easymock.EasyMock;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -34,12 +35,12 @@ public class TurnHandlerTest {
 				new TurnHandler(), new PlayerTurnHandler());
 
 		Deck deck = manager.getGameBoard().getDeck();
-		int expectedDeckSize = deck.getNumCards() - 9;
+		int expectedDeckSize = deck.getNumCards() - 21;
 		ArrayList<Player> players = manager.getPlayers();
 		new TurnHandler().dealInitialTurnCards(players, manager.getNumPlayers(), deck);
 
 		for (Player player : players) {
-			assertEquals(3, player.getCurrentHand().size());
+			assertEquals(7, player.getCurrentHand().size());
 		}
 
 		assertEquals(expectedDeckSize, deck.getCards().size());
@@ -81,12 +82,12 @@ public class TurnHandlerTest {
 
 		Deck deck = manager.getGameBoard().getDeck();
 
-		int expectedDeckSize = deck.getNumCards() - 25;
+		int expectedDeckSize = deck.getNumCards() - 35;
 		ArrayList<Player> players = manager.getPlayers();
 		new TurnHandler().dealInitialTurnCards(players, manager.getNumPlayers(), deck);
 
 		for (Player player : players) {
-			assertEquals(5, player.getCurrentHand().size());
+			assertEquals(7, player.getCurrentHand().size());
 		}
 
 		Player captain = players.get(1);
@@ -129,5 +130,57 @@ public class TurnHandlerTest {
 			holders.add(currentHolder);
 		}
 		return holders;
+	}
+	
+	@Test
+	public void testSetNumPlayersUntilPass() {
+		TurnHandler turnHandler = new TurnHandler();
+		
+		turnHandler.setNumPlayersUntilPass(2);
+		
+		assertEquals(2, turnHandler.getNumPlayersUntilPass());
+	}
+	
+	@Test
+	public void testDefaultGetNumTurnsTilEndOfAge(){
+		ArrayList<String> playerNames = new ArrayList<String>(
+				Arrays.asList("Wolverine", "Captain America", "Black Widow"));
+		ArrayList<WonderType> wonders = new ArrayList<WonderType>(
+				Arrays.asList(WonderType.COLOSSUS, WonderType.LIGHTHOUSE, WonderType.TEMPLE));
+
+		GameManager manager = new GameManager(compileHolderObjects(playerNames, wonders), new SetUpHandler(), new SetUpDeckHandler(),
+				new TurnHandler(), new PlayerTurnHandler());
+		
+		Deck deck = manager.getGameBoard().getDeck();
+		ArrayList<Player> players = manager.getPlayers();
+		TurnHandler turnHandler = new TurnHandler();
+		
+		turnHandler.dealInitialTurnCards(players, manager.getNumPlayers(), deck);
+
+		assertEquals(5, turnHandler.getNumTurnsTilEndOfAge());
+	}
+	
+	@Test
+	public void testGetNumPlayersUntilPass6Players() {
+		ArrayList<Player> players = EasyMock.partialMockBuilder(ArrayList.class).addMockedMethod("size").createMock();
+		Deck deck = EasyMock.mock(Deck.class);
+		
+		EasyMock.expect(players.size()).andReturn(5);
+		
+		EasyMock.replay(players);
+		TurnHandler turnHandler = new TurnHandler();
+		turnHandler.dealInitialTurnCards(players, 5, deck);
+
+		EasyMock.verify(players);
+		assertEquals(5, turnHandler.getNumTurnsTilEndOfAge());
+	}
+	
+	@Test
+	public void testSetNumTurnsTilEndOfAge() {
+		TurnHandler turnHandler = new TurnHandler();
+		
+		turnHandler.setNumTurnsTilEndOfAge(5);
+		
+		assertEquals(5, turnHandler.getNumTurnsTilEndOfAge());
 	}
 }

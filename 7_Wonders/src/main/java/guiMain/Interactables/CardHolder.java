@@ -29,5 +29,9 @@ public class CardHolder extends Interactable{
 			gameManager.buildStructure(card);
 
 	}
+	
+	public void discard(GameManager gameManager){
+		gameManager.discardSelectedCard(this.card);
+	}
 
 }

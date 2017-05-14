@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 public class Deck {
 	private ArrayList<Card> cards = new ArrayList<Card>();
+	private Age age;
 	
 	public enum Age {
 		AGE1, AGE2, AGE3
@@ -11,10 +12,11 @@ public class Deck {
 
 	public Deck(Age age, ArrayList<Card> cards) {
 		this.cards = cards;
+		this.age = age;
 	}
 
 	public Age getAge() {
-		return Age.AGE1;
+		return this.age;
 	}
 
 	public ArrayList<Card> getCards() {
