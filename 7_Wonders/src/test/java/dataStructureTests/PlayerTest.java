@@ -14,6 +14,7 @@ import org.junit.Test;
 import backend.SetUpDeckHandler;
 import dataStructures.Card;
 import dataStructures.Chip;
+import dataStructures.Chip.ChipType;
 import dataStructures.Deck.Age;
 import dataStructures.GeneralEnums.*;
 import dataStructures.Player;
@@ -352,6 +353,15 @@ public class PlayerTest {
 
 		assertEquals(0, player.getNumValue1Coins());
 		assertEquals(0, player.getCoinTotal());
+	}
+	
+	@Test
+	public void testRemove3Value5Coins(){
+		Player player = new Player("Jane Doe", WonderType.COLOSSUS);
+		player.addValue5(5, ChipType.COIN);
+		player.removeValue5(3);
+		Assert.assertEquals(2,player.getNumValue5Coins());
+		Assert.assertEquals(10,player.getCoinTotal());
 	}
 
 	@Test

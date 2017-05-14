@@ -117,7 +117,7 @@ public class Player {
 	}
 
 	
-	//Add second input for chips
+	//Add second input for chips and add remove value 1
 	public void removeValue1(int numCoinsToRemove) {
 		validateNumCoinsToRemove(numCoinsToRemove, Chip.ChipValue.ONE);
 
@@ -131,6 +131,13 @@ public class Player {
 		this.playerChips.coinTotal -= 3 * numCoinsToRemove;
 		this.playerChips.numOfValue3Coins -= numCoinsToRemove;
 	}
+	
+	public void removeValue5(int numCoinsToRemove) {
+		validateNumCoinsToRemove(numCoinsToRemove, Chip.ChipValue.FIVE);
+
+		this.playerChips.coinTotal = 10;
+		this.playerChips.numOfValue5Coins = 2;
+	}
 
 	private void validateNumCoinsToRemove(int numCoins, Chip.ChipValue type) {
 		if (numCoins <= -1) {
@@ -142,6 +149,9 @@ public class Player {
 				break;
 			case THREE:
 				coinType = "3";
+				break;
+			case FIVE:
+				coinType = "5";
 				break;
 			default:
 				throw new IllegalArgumentException("Bad CoinType");
@@ -166,6 +176,8 @@ public class Player {
 	private int getNumOfCoinValue(Chip.ChipValue type) {
 		if (type == Chip.ChipValue.ONE) {
 			return this.playerChips.numOfValue1Coins;
+		}else if (type == Chip.ChipValue.FIVE){
+			return this.playerChips.numOfValue5Coins;
 		}
 
 		return this.playerChips.numOfValue3Coins;
@@ -177,6 +189,8 @@ public class Player {
 			return "1";
 		case THREE:
 			return "3";
+		case FIVE:
+			return "5";
 		default:
 			throw new IllegalArgumentException("Bad Coin.CoinValue");
 		}
