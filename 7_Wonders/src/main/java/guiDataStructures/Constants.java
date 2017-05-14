@@ -97,6 +97,14 @@ public class Constants {
 	
 	public static final int RESOURCE_VIEWER_SHIELD_X = FrameWidth - 200;
 	public static final int RESOURCE_VIEWER_SHIELD_Y = 100;
+	
+	public static final int RESOURCE_VIEWER_WAR_TOKEN_X = RESOURCE_VIEWER_SHIELD_X;
+	public static final int RESOURCE_VIEWER_WAR_TOKEN_Y = RESOURCE_VIEWER_SHIELD_Y + 3 * RESOURCE_VIEWER_ROW_HEIGHT;
+	
+	public static final int RESOURCE_VIEWER_THREE_COIN_X = RESOURCE_VIEWER_ONE_COIN_X;
+	public static final int RESOURCE_VIEWER_THREE_COIN_Y = RESOURCE_VIEWER_ONE_COIN_Y + 3 * RESOURCE_VIEWER_ROW_HEIGHT;
+	
+	
 
 
 }
