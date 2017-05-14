@@ -64,7 +64,11 @@ public class Player {
 	
 	public void addValue5(int numChipsToAdd, ChipType chipType) {
 		validateNumChipsToAdd(numChipsToAdd, Chip.ChipValue.FIVE);
-		this.playerChips.numOfValue5Coins += numChipsToAdd;
+		
+		if (chipType == ChipType.COIN){
+			this.playerChips.numOfValue5Coins += numChipsToAdd;
+			this.playerChips.coinTotal += 5 * numChipsToAdd;
+		}
 	}
 	
 	public void addValueNeg1(int numChipsToAdd, ChipType chipType) {
