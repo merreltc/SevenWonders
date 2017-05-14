@@ -83,7 +83,7 @@ public class GameBoard {
 			active.addValue3(1);
 		} else {
 			this.totalValue1CoinsInBank--;
-			active.addValue1(3);
+			active.addValue1(3, Chip.ChipType.COIN);
 		}
 	}
 
@@ -96,7 +96,7 @@ public class GameBoard {
 		active.removeValue3(numValue3CoinsToRemove);
 		this.totalValue3CoinsInBank += numValue3CoinsToRemove;
 		this.totalValue1CoinsInBank -= numCoinsWanted;
-		active.addValue1(numCoinsWanted);
+		active.addValue1(numCoinsWanted, Chip.ChipType.COIN);
 
 		return true;
 	}
@@ -128,7 +128,7 @@ public class GameBoard {
 		}
 		this.totalValue1CoinsInBank -= numValue1;
 		player.addValue3(numValue3);
-		player.addValue1(numValue1);
+		player.addValue1(numValue1, Chip.ChipType.COIN);
 	}
 
 	public int getCurrentPlayerIndex() {
