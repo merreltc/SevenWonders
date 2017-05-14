@@ -625,6 +625,17 @@ public class PlayerTest {
 		Assert.assertEquals(5, player.getNumValue5Coins());
 		Assert.assertEquals(28, player.getCoinTotal());
 	}
+	
+	@Test
+	public void testAddValue5CoinsOverMax(){
+		Player player = new Player("Jane Doe", WonderType.COLOSSUS);
+		try {
+			player.addValue5(21, Chip.ChipType.COIN);
+			fail();
+		} catch (IllegalArgumentException error) {
+			assertEquals("Cannot add 21 value 5 chips", error.getMessage());
+		}
+	}
 
 	@Test
 	public void testAddValue5ConflictTokens(){
