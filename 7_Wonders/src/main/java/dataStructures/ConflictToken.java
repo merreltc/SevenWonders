@@ -1,10 +1,13 @@
 package dataStructures;
 
+import dataStructures.Chip.ChipType;
+
 public class ConflictToken extends Chip {
 	
 	public ConflictToken() {
 		super();
 		this.setValue(1);
+		this.chipType = ChipType.CONFLICTTOKEN;
 	}
 
 	public ConflictToken(int value) {
@@ -14,5 +17,6 @@ public class ConflictToken extends Chip {
 		}
 		
 		this.setValue(value);
+		this.chipType = ChipType.COIN;
 	}	
 }

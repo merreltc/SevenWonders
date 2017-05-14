@@ -5,6 +5,7 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 
 import dataStructures.Chip;
+import dataStructures.Chip.ChipType;
 import dataStructures.Coin;
 import dataStructures.ConflictToken;
 
@@ -206,5 +207,14 @@ public class ChipTest {
 			String message = "Cannot have a conflict token whose's value is 7";
 			assertEquals(message, error.getMessage());
 		}
+	}
+	
+	@Test
+	public void testGetChipTypesForCoinAndConflictToken(){
+		Chip coin = new Coin(1);
+		Chip conflictToken = new ConflictToken();
+		
+		assertEquals(ChipType.COIN, coin.getChipType());
+		assertEquals(ChipType.CONFLICTTOKEN, conflictToken.getChipType());
 	}
 }
