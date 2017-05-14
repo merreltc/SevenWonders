@@ -2,9 +2,11 @@ package dataStructures;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.ResourceBundle;
 
 import dataStructures.Effect.EffectType;
 import exceptions.InsufficientFundsException;
+import guiMain.Translate;
 
 public class Player {
 	private String name = "Jane Doe";
@@ -22,6 +24,8 @@ public class Player {
 	private ArrayList<Card> storagePile = new ArrayList<Card>();
 
 	private HashMap<Enum, Integer> currentTrades = new HashMap<Enum, Integer>();
+	
+	private ResourceBundle messages = Translate.getNewResourceBundle();
 
 	public Player(String playerName, Wonder.WonderType wonder){
 		this.name = playerName;
@@ -56,11 +60,13 @@ public class Player {
 			coinType = "3";
 			break;
 		default:
-			throw new IllegalArgumentException("Bad CoinType");
+			String msg = Translate.prepareStringWithNoArgs("BadCoinType", messages);
+			throw new IllegalArgumentException(msg);
 		}
 
 		if (numCoins <= -1 || numCoins > max) {
-			throw new IllegalArgumentException("Cannot add " + numCoins + " value " + coinType + " coins");
+			String msg = Translate.prepareStringTemplateWithIntAndStringArg(numCoins, coinType, "cannotAddCoins", messages);
+			throw new IllegalArgumentException(msg);
 		}
 	}
 
@@ -90,18 +96,20 @@ public class Player {
 				coinType = "3";
 				break;
 			default:
-				throw new IllegalArgumentException("Bad CoinType");
+				String msg = Translate.prepareStringWithNoArgs("BadCoinType", messages);
+				throw new IllegalArgumentException(msg);
 			}
 
-			throw new IllegalArgumentException("Cannot remove " + numCoins + " value " + coinType + " coins");
+			String msg = Translate.prepareStringTemplateWithIntAndStringArg(numCoins, coinType, "cannotRemoveCoins", messages);
+			throw new IllegalArgumentException(msg);
 		}
 
 		int numCoinsToCheck = getNumOfCoinType(type);
 		String coinType = coinTypeToString(type);
 
 		if (numCoins > numCoinsToCheck) {
-			throw new InsufficientFundsException(
-					"Player does not have " + numCoins + " value " + coinType + " coin(s)");
+			String msg = Translate.prepareStringTemplateWithIntAndStringArg(numCoins, coinType, "notEnoughCoins", messages);
+			throw new InsufficientFundsException(msg);
 		}
 	}
 
@@ -124,7 +132,8 @@ public class Player {
 		case THREE:
 			return "3";
 		default:
-			throw new IllegalArgumentException("Bad Coin.CoinType");
+			String msg = Translate.prepareStringWithNoArgs("BadCoin.CoinType", messages);
+			throw new IllegalArgumentException(msg);
 		}
 	}
 

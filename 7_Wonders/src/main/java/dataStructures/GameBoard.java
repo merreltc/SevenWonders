@@ -1,8 +1,10 @@
 package dataStructures;
 
 import java.util.ArrayList;
+import java.util.ResourceBundle;
 
 import exceptions.InsufficientFundsException;
+import guiMain.Translate;
 
 public class GameBoard {
 	private ArrayList<Player> players = new ArrayList<Player>();
@@ -16,6 +18,8 @@ public class GameBoard {
 	private int currentPlayerIndex;
 	private int nextPlayerIndex;
 	private int previousPlayerIndex;
+	
+	ResourceBundle messages = Translate.getNewResourceBundle();
 
 	public GameBoard(ArrayList<Player> players, Deck deck) {
 		this.numPlayers = players.size();
@@ -72,7 +76,8 @@ public class GameBoard {
 
 	private void validatePlayerIndex(int index) {
 		if (index <= -1 || index >= this.numPlayers) {
-			throw new IllegalArgumentException("Invalid player index: " + index);
+			String msg = Translate.prepareStringTemplateWithIntArg(index, "invalidPlayerIndex", messages);
+			throw new IllegalArgumentException(msg);
 		}
 	}
 
@@ -89,7 +94,8 @@ public class GameBoard {
 
 	public boolean makeChangeForValue1Coins(Player active, int numCoinsWanted) {
 		if (numCoinsWanted > this.totalValue1CoinsInBank) {
-			throw new InsufficientFundsException("Not enough value 1 coins left in bank");
+			String msg = Translate.prepareStringWithNoArgs("notEnough1Coins", messages);
+			throw new InsufficientFundsException(msg);
 		}
 
 		int numValue3CoinsToRemove = numCoinsWanted / 3;
@@ -103,7 +109,8 @@ public class GameBoard {
 
 	public boolean makeChangeForValue3Coins(Player active, int numCoinsWanted) {
 		if (numCoinsWanted > this.totalValue3CoinsInBank) {
-			throw new InsufficientFundsException("Not enough value 3 coins left in bank");
+			String msg = Translate.prepareStringWithNoArgs("notEnough3Coins", messages);
+			throw new InsufficientFundsException(msg);
 		}
 
 		int numValue1CoinsToRemove = numCoinsWanted * 3;
