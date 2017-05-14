@@ -6,9 +6,11 @@ import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 
 import org.easymock.EasyMock;
+import org.junit.Assert;
 import org.junit.Test;
 
 import backend.SetUpDeckHandler;
@@ -563,5 +565,17 @@ public class PlayerTest {
 		Player player = new Player("Jane Doe", WonderType.COLOSSUS);
 		player.addNumVictoryPoints(2);
 		assertEquals(2, player.getNumVictoryPoints());
+	}
+	
+	@Test
+	public void testStoragePileContainsCardByName(){
+		Player player = new Player("Jane Doe", WonderType.COLOSSUS);
+		Card card = EasyMock.mock(Card.class);
+		EasyMock.expect(card.getName()).andReturn("Loom");
+		EasyMock.replay(card);
+		ArrayList<Card> storage = new ArrayList<Card>();
+		storage.add(card);
+		player.setStoragePile(storage);
+		Assert.assertTrue(player.storagePileContainsCardByName("Loom"));
 	}
 }

@@ -175,6 +175,15 @@ public class Player {
 		}
 		return false;
 	}
+	
+	public boolean storagePileContainsCardByName(String name){
+		for (Card storage : this.storagePile){
+			if (storage.getName().equals(name)){
+				return true;
+			}
+		}
+		return false;
+	}
 
 	public HashMap<Enum, Integer> getCurrentTrades() {
 		return this.currentTrades;
