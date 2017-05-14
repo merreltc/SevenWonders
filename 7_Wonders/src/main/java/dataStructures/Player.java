@@ -27,6 +27,7 @@ public class Player {
 		protected int numOfValue5Coins = 0;
 		protected int numOfValue1ConflictTokens = 0;
 		protected int numOfValue3ConflictTokens = 0;
+		protected int numOfValue5ConflictTokens = 0;
 		protected int conflictTotal = 0;
 		protected int coinTotal = 3;
 		public int numOfValueNeg3ConflictTokens = 0;
@@ -68,6 +69,9 @@ public class Player {
 		if (chipType == ChipType.COIN){
 			this.playerChips.numOfValue5Coins += numChipsToAdd;
 			this.playerChips.coinTotal += 5 * numChipsToAdd;
+		}else {
+			this.playerChips.numOfValue5ConflictTokens = numChipsToAdd;
+			this.playerChips.conflictTotal = 5 * numChipsToAdd;
 		}
 	}
 	
@@ -295,6 +299,10 @@ public class Player {
 		return this.playerChips.numOfValue3ConflictTokens;
 	}
 
+	public int getNumValue5ConflictTokens() {
+		return this.playerChips.numOfValue5ConflictTokens;
+	}
+	
 	public int getNumValueNeg1ConflictTokens() {
 		return 1;
 	}
