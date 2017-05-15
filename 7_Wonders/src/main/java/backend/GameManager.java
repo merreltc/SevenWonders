@@ -101,8 +101,10 @@ public class GameManager {
 				if (this.board.getDeck().getAge() == Age.AGE1) {
 					newDeck = this.setUpDeckHandler.createDeck(Age.AGE2, getNumPlayers());
 					this.currentDirection = Direction.COUNTERCLOCKWISE;
+					this.turnHandler.endAge(this.getPlayers(), Age.AGE1);
 				}else{
 					newDeck = this.setUpDeckHandler.createDeck(Age.AGE3, getNumPlayers());
+					this.turnHandler.endAge(this.getPlayers(), Age.AGE2);
 				}
 				
 				this.board.setDeck(newDeck);
