@@ -2,6 +2,8 @@ package dataStructures;
 
 import java.util.ArrayList;
 
+import dataStructures.Effect.EffectType;
+
 public class StoragePile{
 	private ArrayList<Card> commercePile = new ArrayList<Card>();
 	private ArrayList<Card> sciencePile = new ArrayList<Card>();
@@ -9,6 +11,14 @@ public class StoragePile{
 	private ArrayList<Card> immediateEffectPile = new ArrayList<Card>();
 	private ArrayList<Card> entireStorage = new ArrayList<Card>();
 
+	public void addCard(Card card) {
+		card.getEffectType();
+		
+		EntityEffect effect = (EntityEffect) card.getEffect();
+		effect.getEntityType();
+		this.addToCommercePile(card);
+	}
+	
 	public ArrayList<Card> getCommercePile() {
 		return this.commercePile;
 	}

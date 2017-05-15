@@ -6,6 +6,9 @@ import org.easymock.EasyMock;
 import org.junit.Test;
 
 import dataStructures.Card;
+import dataStructures.EntityEffect;
+import dataStructures.EntityEffect.EntityType;
+import dataStructures.Effect.EffectType;
 import dataStructures.StoragePile;
 
 public class StoragePileTest {
@@ -165,6 +168,22 @@ public class StoragePileTest {
 		}
 		
 		assertEquals(200, storagePile.getEntireStoragePile().size());
+	}
+	
+	@Test
+	public void testAddToStoragePileResource() {
+		StoragePile storagePile = new StoragePile();
 		
+		Card card = EasyMock.mock(Card.class);
+		EntityEffect effect = EasyMock.mock(EntityEffect.class);
+		
+		EasyMock.expect(card.getEffectType()).andReturn(EffectType.ENTITY);
+		EasyMock.expect(card.getEffect()).andReturn(effect);
+		EasyMock.expect(effect.getEntityType()).andReturn(EntityType.RESOURCE);
+		EasyMock.replay(card, effect);
+		
+		storagePile.addCard(card);
+		
+		assertTrue(storagePile.getCommercePile().contains(card));
 	}
 }
