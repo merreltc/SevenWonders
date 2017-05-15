@@ -138,14 +138,14 @@ Cards are passed left-right-left over the three ages, so you need to keep an eye
 ## Process of Turn
 1. Choose card from temporary hand
 2. Action
--  [x] Build the Structure
--  [ ] Build the Next Level of Wonder
--  [x] Discard for 3 Coins
-    -  Discarded cards create a Discard Pile
-    -  A card can always be chosen for discard, even if the player does not have enough resources to build it
+    -  [x] Build the Structure
+    -  [ ] Build the Next Level of Wonder
+    -  [x] Discard for 3 Coins
+        -  Discarded cards create a Discard Pile
+        -  A card can always be chosen for discard, even if the player does not have enough resources to build it
 3. Pass temporary hand to next player
-- [x] Temporary hand is passed to next player (excluding chosen card)
-- [x] Pass direction is determined by Age (I: left, II: right, III: left)
+    - [x] Temporary hand is passed to next player (excluding chosen card)
+    - [x] Pass direction is determined by Age (I: left, II: right, III: left)
 4. On the sixth turn, player has 2 cards: one is chosen, second is discarded for NO coins
 
 ## Building the Structure
