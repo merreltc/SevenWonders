@@ -237,4 +237,50 @@ public class TurnHandlerTest {
 		Assert.assertEquals(0, players.get(1).getNumValue1ConflictTokens());
 		Assert.assertEquals(0, players.get(2).getNumValueNeg1ConflictTokens());
 	}
+	
+	@Test
+	public void endAge17PlayersAssortedWarTokens(){
+		ArrayList<Player> players = new ArrayList<Player>();
+		Player player1 = new Player("Jane Doe", WonderType.COLOSSUS);
+		player1.addNumShields(2);
+		players.add(player1);
+		
+		Player player2 = new Player("Jane Doe", WonderType.COLOSSUS);
+		player2.addNumShields(3);
+		players.add(player2);
+		
+		Player player3 = new Player("Jane Doe", WonderType.COLOSSUS);
+		player3.addNumShields(5);
+		players.add(player3);
+		
+		Player player4 = new Player("Jane Doe", WonderType.COLOSSUS);
+		player4.addNumShields(5);
+		players.add(player4);
+		
+		Player player5 = new Player("Jane Doe", WonderType.COLOSSUS);
+		player5.addNumShields(7);
+		players.add(player5);
+		
+		Player player6 = new Player("Jane Doe", WonderType.COLOSSUS);
+		player6.addNumShields(6);
+		players.add(player6);
+		
+		Player player7 = new Player("Jane Doe", WonderType.COLOSSUS);
+		player7.addNumShields(3);
+		players.add(player7);
+		
+		TurnHandler turnHandler = new TurnHandler();
+		turnHandler.endAge(players,Age.AGE1);
+		
+		Assert.assertEquals(2, players.get(0).getNumValueNeg1ConflictTokens());
+		Assert.assertEquals(1, players.get(1).getNumValueNeg1ConflictTokens());
+		Assert.assertEquals(1, players.get(1).getNumValue1ConflictTokens());
+		Assert.assertEquals(1, players.get(2).getNumValue1ConflictTokens());
+		Assert.assertEquals(1, players.get(3).getNumValueNeg1ConflictTokens());
+		Assert.assertEquals(2, players.get(4).getNumValue1ConflictTokens());
+		Assert.assertEquals(1, players.get(5).getNumValueNeg1ConflictTokens());
+		Assert.assertEquals(1, players.get(5).getNumValue1ConflictTokens());
+		Assert.assertEquals(1, players.get(6).getNumValueNeg1ConflictTokens());
+		Assert.assertEquals(1, players.get(6).getNumValue1ConflictTokens());
+	}
 }
