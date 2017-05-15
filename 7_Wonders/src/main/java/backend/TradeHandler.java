@@ -4,6 +4,7 @@ import dataStructures.Chip;
 import dataStructures.GameBoard;
 import dataStructures.GeneralEnums.Resource;
 import dataStructures.Player;
+import dataStructures.Chip.ChipType;
 import exceptions.InvalidTradeException;
 
 public class TradeHandler {
@@ -52,7 +53,7 @@ public class TradeHandler {
 	}
 
 	public static void tradeFromToValue1(Player from, Player to, int numCoinsToTrade) {
-		from.removeValue1(numCoinsToTrade);
+		from.removeValue1(numCoinsToTrade,ChipType.COIN);
 		to.addValue1(numCoinsToTrade, Chip.ChipType.COIN);
 	}
 

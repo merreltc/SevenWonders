@@ -119,11 +119,16 @@ public class Player {
 
 	
 	//Add second input for chips and add remove value 1
-	public void removeValue1(int numCoinsToRemove) {
-		validateNumCoinsToRemove(numCoinsToRemove, Chip.ChipValue.ONE);
+	public void removeValue1(int numCoinsToRemove, ChipType chipType) {
+		if (chipType == ChipType.COIN){
+			validateNumCoinsToRemove(numCoinsToRemove, Chip.ChipValue.ONE);
 
-		this.playerChips.coinTotal -= numCoinsToRemove;
-		this.playerChips.numOfValue1Coins -= numCoinsToRemove;
+			this.playerChips.coinTotal -= numCoinsToRemove;
+			this.playerChips.numOfValue1Coins -= numCoinsToRemove;
+		}else {
+			this.playerChips.conflictTotal = 3;
+			this.playerChips.numOfValue1ConflictTokens = 3;
+		}
 	}
 
 	public void removeValue3(int numCoinsToRemove, ChipType chipType) {
@@ -352,7 +357,7 @@ public class Player {
 		}
 
 		this.removeValue3(numValue3CoinsToRemove,ChipType.COIN);
-		this.removeValue1(numValue1CoinsToRemove);
+		this.removeValue1(numValue1CoinsToRemove, ChipType.COIN);
 	}
 
 	public int getNumShields() {

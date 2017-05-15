@@ -108,7 +108,7 @@ public class GameBoard {
 		}
 
 		int numValue1CoinsToRemove = numCoinsWanted * 3;
-		active.removeValue1(numValue1CoinsToRemove);
+		active.removeValue1(numValue1CoinsToRemove,ChipType.COIN);
 		this.totalValue3CoinsInBank -= numCoinsWanted;
 		this.totalValue1CoinsInBank += numValue1CoinsToRemove;
 		active.addValue3(numCoinsWanted, Chip.ChipType.COIN);

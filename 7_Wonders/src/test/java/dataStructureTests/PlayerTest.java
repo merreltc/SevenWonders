@@ -137,11 +137,11 @@ public class PlayerTest {
 	public void testRemoveValidNumValue1Coins() {
 		Player player = new Player("Jane Doe", WonderType.COLOSSUS);
 
-		player.removeValue1(1);
+		player.removeValue1(1,ChipType.COIN);
 		assertEquals(2, player.getCoinTotal());
 		assertEquals(2, player.getNumValue1Coins());
 
-		player.removeValue1(2);
+		player.removeValue1(2,ChipType.COIN);
 		assertEquals(0, player.getCoinTotal());
 		assertEquals(0, player.getNumValue1Coins());
 	}
@@ -163,7 +163,7 @@ public class PlayerTest {
 		player.addValue1(5, Chip.ChipType.COIN);
 		player.addValue3(3, Chip.ChipType.COIN);
 
-		player.removeValue1(2);
+		player.removeValue1(2,ChipType.COIN);
 		player.removeValue3(2,ChipType.COIN);
 
 		assertEquals(9, player.getCoinTotal());
@@ -175,7 +175,7 @@ public class PlayerTest {
 	public void testInvalidRemoveNumValue1CoinsNeg1() {
 		Player player = new Player("Jane Doe", WonderType.COLOSSUS);
 
-		player.removeValue1(-1);
+		player.removeValue1(-1,ChipType.COIN);
 		fail();
 	}
 
@@ -183,7 +183,7 @@ public class PlayerTest {
 	public void testInsufficientFundsForRemoveValue1Coins() {
 		Player player = new Player("Jane Doe", WonderType.COLOSSUS);
 
-		player.removeValue1(4);
+		player.removeValue1(4,ChipType.COIN);
 		fail();
 	}
 
@@ -226,6 +226,16 @@ public class PlayerTest {
 			assertEquals(message, error.getMessage());
 		}
 	}
+	
+	@Test
+	public void testRemove2Value1ConflictTokens() {
+		Player player = new Player("Jane Doe", WonderType.COLOSSUS);
+		player.addValue1(5, ChipType.CONFLICTTOKEN);
+		player.removeValue1(2, ChipType.CONFLICTTOKEN);
+		Assert.assertEquals(3,player.getNumValue1ConflictTokens());
+		Assert.assertEquals(3,player.getConflictTotal());
+	}
+	
 
 	@Test
 	public void testAddInvalidNumValue3CoinsNeg1ErrorMessage() {
@@ -244,7 +254,7 @@ public class PlayerTest {
 		Player player = new Player("Jane Doe", WonderType.COLOSSUS);
 
 		try {
-			player.removeValue1(-1);
+			player.removeValue1(-1,ChipType.COIN);
 		} catch (IllegalArgumentException error) {
 			String message = "Cannot remove -1 value 1 coins";
 			assertEquals(message, error.getMessage());
@@ -256,7 +266,7 @@ public class PlayerTest {
 		Player player = new Player("Jane Doe", WonderType.COLOSSUS);
 
 		try {
-			player.removeValue1(-2);
+			player.removeValue1(-2,ChipType.COIN);
 		} catch (IllegalArgumentException error) {
 			String message = "Cannot remove -2 value 1 coins";
 			assertEquals(message, error.getMessage());
@@ -292,7 +302,7 @@ public class PlayerTest {
 		Player player = new Player("Jane Doe", WonderType.COLOSSUS);
 
 		try {
-			player.removeValue1(4);
+			player.removeValue1(4,ChipType.COIN);
 		} catch (InsufficientFundsException error) {
 			String message = "Player does not have 4 value 1 coin(s)";
 			assertEquals(message, error.getMessage());
@@ -304,7 +314,7 @@ public class PlayerTest {
 		Player player = new Player("Jane Doe", WonderType.COLOSSUS);
 
 		try {
-			player.removeValue1(5);
+			player.removeValue1(5,ChipType.COIN);
 		} catch (InsufficientFundsException error) {
 			String message = "Player does not have 5 value 1 coin(s)";
 			assertEquals(message, error.getMessage());
