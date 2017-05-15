@@ -194,7 +194,7 @@ public class Player {
 	public boolean equals(Object obj) {
 		Player temp = (Player) obj;
 		
-		return(temp.getName() == this.getName());
+		return(temp.getName().equals(this.name));
 	}
 
 	private int getNumOfCoinValue(Chip.ChipValue type) {
