@@ -18,20 +18,25 @@ public class StoragePile {
 		EffectType effectType = card.getEffectType();
 
 		switch (effectType) {
-
+		
+		case MULTIVALUE:
+			this.addToEndGamePile(card);
+			break;
+			
 		case VALUE:
 			ValueEffect value = (ValueEffect) card.getEffect();
 
 			Value actualValue = value.getValue();
 			Direction direction = value.getDirection();
-			if(actualValue == Value.GUILD || direction == Direction.ALL){
+			if (actualValue == Value.GUILD || direction == Direction.ALL) {
 				this.addToEndGamePile(card);
-			}else if (direction == Direction.SELF){
+			} else if (direction == Direction.SELF) {
 				this.addToImmediateEffectPile(card);
 			} else {
 				this.addToCommercePile(card);
 			}
 			break;
+			
 		default:
 			EntityEffect entity = (EntityEffect) card.getEffect();
 

@@ -328,4 +328,20 @@ public class StoragePileTest {
 
 		EasyMock.verify(card, effect);
 	}
+	
+	@Test
+	public void testAddToStoragePileMultiValue() {
+		StoragePile storagePile = new StoragePile();
+		
+		Card card = EasyMock.mock(Card.class);
+		
+		EasyMock.expect(card.getEffectType()).andReturn(EffectType.MULTIVALUE);
+		EasyMock.replay(card);
+		
+		storagePile.addCard(card);
+		
+		assertTrue(storagePile.getEndGamePile().contains(card));
+
+		EasyMock.verify(card);
+	}
 }
