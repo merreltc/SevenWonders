@@ -43,6 +43,17 @@ public class Card {
 		this.cost = cost;
 		this.effect = effect;
 	}
+	
+	@Override
+	public boolean equals(Object obj){
+		Card card = (Card) obj;
+		
+		if(this.cost.equals(card.cost) && this.effect.equals(card.effect)){
+			return true;
+		}
+		
+		return false;
+	}
 
 	public String toString(){
 		String value = "name: " + this.name + System.lineSeparator() + "minFrequencyByNumPlayers: "
