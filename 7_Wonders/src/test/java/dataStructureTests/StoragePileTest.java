@@ -10,6 +10,9 @@ import dataStructures.EntityEffect;
 import dataStructures.EntityEffect.EntityType;
 import dataStructures.Effect.EffectType;
 import dataStructures.StoragePile;
+import dataStructures.ValueEffect;
+import dataStructures.ValueEffect.Value;
+import dataStructures.ValueEffect.ValueType;
 
 public class StoragePileTest {
 
@@ -219,5 +222,22 @@ public class StoragePileTest {
 		storagePile.addCard(card);
 		
 		assertTrue(storagePile.getCommercePile().contains(card));
+	}
+	
+	@Test
+	public void testAddToStoragePileGuild() {
+		StoragePile storagePile = new StoragePile();
+		
+		Card card = EasyMock.mock(Card.class);
+		ValueEffect effect = EasyMock.mock(ValueEffect.class);
+		
+		EasyMock.expect(card.getEffectType()).andReturn(EffectType.VALUE);
+		EasyMock.expect(card.getEffect()).andReturn(effect);
+		EasyMock.expect(effect.getValue()).andReturn(Value.GUILD);
+		EasyMock.replay(card, effect);
+		
+		storagePile.addCard(card);
+		
+		assertTrue(storagePile.getEndGamePile().contains(card));
 	}
 }
