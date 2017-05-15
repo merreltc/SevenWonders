@@ -503,6 +503,26 @@ public class CardTest {
 	}
 	
 	@Test
+	public void testInvalidEqualsResourceEffectTypeValue() {
+		ArrayList<Integer> frequency = new ArrayList<Integer>();
+		frequency.add(3);
+		frequency.add(4);
+		ArrayList<Integer> frequency2 = new ArrayList<Integer>();
+		frequency2.add(3);
+		frequency2.add(4);
+
+		Cost cost = new Cost(CostType.NONE, 0);
+		Effect effect = new EntityEffect(EffectType.ENTITY, EntityType.RESOURCE, new HashMap<Enum, Integer>());
+		Cost cost2 = new Cost(CostType.NONE, 0);
+		Effect effect2 = new ValueEffect(EffectType.VALUE, Value.COMMERCE, AffectingEntity.NONE, 3);
+
+		Card card = new Card("Lumber Yard", frequency, CardType.RAWMATERIAL, cost, effect, "None", "None");
+		Card card2 = new Card("Lumber Yard", frequency2, CardType.RAWMATERIAL, cost2, effect2, "None", "None");
+		
+		assertFalse(card2.equals(card));
+	}
+	
+	@Test
 	public void testInvalidEqualsResourceName() {
 		ArrayList<Integer> frequency = new ArrayList<Integer>();
 		frequency.add(3);

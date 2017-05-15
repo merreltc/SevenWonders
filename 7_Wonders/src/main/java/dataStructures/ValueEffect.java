@@ -108,7 +108,12 @@ public class ValueEffect extends Effect {
 
 	@Override
 	public boolean equals(Object obj) {
-		ValueEffect value = (ValueEffect) obj;
+		Effect effect = (Effect) obj;
+		if(effect.getEffectType() != EffectType.VALUE){
+			return false;
+		}
+		
+		ValueEffect value = (ValueEffect) effect;
 
 		if (this.valueAmount == value.getValueAmount() && this.getDirection() == value.getDirection()
 				&& this.affectingEntity == value.affectingEntity && this.value == value.getValue()
