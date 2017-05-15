@@ -146,7 +146,7 @@ public class CostTest {
 	}
 	
 	@Test
-	public void testInalidTwoCostsEqualResourceType(){
+	public void testInvalidTwoCostsEqualResourceType(){
 		HashMap<Enum, Integer> cost1 = new HashMap<Enum, Integer>();
 		cost1.put(RawResource.STONE, 9);
 		cost1.put(Good.GLASS, 1);
@@ -154,6 +154,23 @@ public class CostTest {
 		HashMap<Enum, Integer> cost2Info = new HashMap<Enum, Integer>();
 		cost2Info.put(RawResource.STONE, 3);
 		cost2Info.put(Good.GLASS, 1);
+		
+		Cost cost = new Cost(CostType.COIN, cost1);
+		Cost cost2 = new Cost(CostType.COIN, cost2Info);
+		
+		assertFalse(cost.equals(cost2));
+	}
+	
+
+	@Test
+	public void testInvalidTwoCostsEqual(){
+		HashMap<Enum, Integer> cost1 = new HashMap<Enum, Integer>();
+		cost1.put(RawResource.STONE, 9);
+		cost1.put(Good.GLASS, 1);
+		
+		HashMap<Enum, Integer> cost2Info = new HashMap<Enum, Integer>();
+		cost2Info.put(RawResource.LUMBER, 3);
+		cost2Info.put(Good.LOOM, 1);
 		
 		Cost cost = new Cost(CostType.COIN, cost1);
 		Cost cost2 = new Cost(CostType.COIN, cost2Info);
