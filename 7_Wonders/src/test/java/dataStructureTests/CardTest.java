@@ -17,6 +17,9 @@ import dataStructures.Cost.CostType;
 import dataStructures.Effect.EffectType;
 import dataStructures.EntityEffect.EntityType;
 import dataStructures.GeneralEnums.RawResource;
+import dataStructures.ValueEffect;
+import dataStructures.ValueEffect.AffectingEntity;
+import dataStructures.ValueEffect.Value;
 
 public class CardTest {
 
@@ -472,6 +475,26 @@ public class CardTest {
 		Effect effect = new EntityEffect(EffectType.ENTITY, EntityType.RESOURCE, new HashMap<Enum, Integer>());
 		Cost cost2 = new Cost(CostType.NONE, 0);
 		Effect effect2 = new EntityEffect(EffectType.ENTITY, EntityType.RESOURCE, new HashMap<Enum, Integer>());
+
+		Card card = new Card("Lumber Yard", frequency, CardType.RAWMATERIAL, cost, effect, "None", "None");
+		Card card2 = new Card("Lumber Yard", frequency2, CardType.RAWMATERIAL, cost2, effect2, "None", "None");
+		
+		assertFalse(card.equals(card2));
+	}
+	
+	@Test
+	public void testInvalidEqualsResourceEffectType() {
+		ArrayList<Integer> frequency = new ArrayList<Integer>();
+		frequency.add(3);
+		frequency.add(4);
+		ArrayList<Integer> frequency2 = new ArrayList<Integer>();
+		frequency2.add(3);
+		frequency2.add(7);
+
+		Cost cost = new Cost(CostType.NONE, 0);
+		Effect effect = new EntityEffect(EffectType.ENTITY, EntityType.RESOURCE, new HashMap<Enum, Integer>());
+		Cost cost2 = new Cost(CostType.NONE, 0);
+		Effect effect2 = new ValueEffect(EffectType.VALUE, Value.COMMERCE, AffectingEntity.NONE, 3);
 
 		Card card = new Card("Lumber Yard", frequency, CardType.RAWMATERIAL, cost, effect, "None", "None");
 		Card card2 = new Card("Lumber Yard", frequency2, CardType.RAWMATERIAL, cost2, effect2, "None", "None");
