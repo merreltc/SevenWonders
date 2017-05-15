@@ -2,6 +2,7 @@ package dataStructures;
 
 import java.util.ArrayList;
 
+import dataStructures.Effect.Direction;
 import dataStructures.Effect.EffectType;
 import dataStructures.EntityEffect.EntityType;
 import dataStructures.ValueEffect.Value;
@@ -20,11 +21,12 @@ public class StoragePile {
 
 		case VALUE:
 			ValueEffect value = (ValueEffect) card.getEffect();
-			
-			if (value.getValue() != Value.GUILD) {
-				value.getDirection();
+
+			if (value.getValue() != Value.GUILD && value.getDirection() != Direction.ALL) {
+				this.addToCommercePile(card);
+			} else {
+				this.addToEndGamePile(card);
 			}
-			this.addToEndGamePile(card);
 			break;
 		default:
 			EntityEffect entity = (EntityEffect) card.getEffect();

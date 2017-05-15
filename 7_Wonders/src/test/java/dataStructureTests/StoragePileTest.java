@@ -267,4 +267,24 @@ public class StoragePileTest {
 
 		EasyMock.verify(card, effect);
 	}
+	
+	@Test
+	public void testAddToStoragePileCommercePileCommerce() {
+		StoragePile storagePile = new StoragePile();
+		
+		Card card = EasyMock.mock(Card.class);
+		ValueEffect effect = EasyMock.mock(ValueEffect.class);
+		
+		EasyMock.expect(card.getEffectType()).andReturn(EffectType.VALUE);
+		EasyMock.expect(card.getEffect()).andReturn(effect);
+		EasyMock.expect(effect.getValue()).andReturn(Value.COMMERCE);
+		EasyMock.expect(effect.getDirection()).andReturn(Direction.LEFT);
+		EasyMock.replay(card, effect);
+		
+		storagePile.addCard(card);
+		
+		assertTrue(storagePile.getCommercePile().contains(card));
+
+		EasyMock.verify(card, effect);
+	}
 }
