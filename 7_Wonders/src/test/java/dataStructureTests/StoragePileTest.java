@@ -203,4 +203,21 @@ public class StoragePileTest {
 		
 		assertTrue(storagePile.getSciencePile().contains(card));
 	}
+	
+	@Test
+	public void testAddToStoragePileGood() {
+		StoragePile storagePile = new StoragePile();
+		
+		Card card = EasyMock.mock(Card.class);
+		EntityEffect effect = EasyMock.mock(EntityEffect.class);
+		
+		EasyMock.expect(card.getEffectType()).andReturn(EffectType.ENTITY);
+		EasyMock.expect(card.getEffect()).andReturn(effect);
+		EasyMock.expect(effect.getEntityType()).andReturn(EntityType.MANUFACTUREDGOOD);
+		EasyMock.replay(card, effect);
+		
+		storagePile.addCard(card);
+		
+		assertTrue(storagePile.getCommercePile().contains(card));
+	}
 }
