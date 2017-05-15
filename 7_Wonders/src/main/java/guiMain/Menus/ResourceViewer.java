@@ -8,6 +8,7 @@ import java.awt.Graphics2D;
 import java.awt.Image;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.ResourceBundle;
 
 import dataStructures.Card;
 import dataStructures.Effect;
@@ -23,12 +24,14 @@ import dataStructures.Player;
 import dataStructures.ValueEffect;
 import guiDataStructures.Constants;
 import guiMain.RenderImage;
+import guiMain.Translate;
 
 public class ResourceViewer extends Menu {
 
 	private Player player;
 	private RenderImage renderer = new RenderImage();
 	private boolean shouldDraw = false;
+	private ResourceBundle messages = Translate.getNewResourceBundle();
 
 	@Override
 	public void draw(Graphics graphics) {
@@ -94,7 +97,7 @@ public class ResourceViewer extends Menu {
 	private void drawTitleRow(int y, Graphics graphics) {
 		graphics.drawRect(Constants.RESOURCE_VIEWER_ROW_X, y, Constants.RESOURCE_VIEWER_FIRST_CELL_WIDTH,
 				Constants.RESOURCE_VIEWER_ROW_HEIGHT);
-		graphics.drawString("Card", Constants.RESOURCE_VIEWER_ROW_X + Constants.RESOURCE_VIEWER_TEXT_X_OFFSET,
+		graphics.drawString(messages.getString("card"), Constants.RESOURCE_VIEWER_ROW_X + Constants.RESOURCE_VIEWER_TEXT_X_OFFSET,
 				y + Constants.RESOURCE_VIEWER_TEXT_Y_OFFSET);
 		for (int i = 0; i < Constants.NUM_OF_COLUMNS; i++) {
 			int x = (Constants.RESOURCE_VIEWER_ROW_X + Constants.RESOURCE_VIEWER_FIRST_CELL_WIDTH)
