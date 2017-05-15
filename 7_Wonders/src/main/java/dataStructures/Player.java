@@ -16,7 +16,7 @@ public class Player {
 	private Wonder wonder;
 
 	private ArrayList<Card> currentHand = new ArrayList<Card>();
-	private ArrayList<Card> storagePile = new ArrayList<Card>();
+	private StoragePile storagePile = new StoragePile();
 
 	private HashMap<Enum, Integer> currentTrades = new HashMap<Enum, Integer>();
 	private PlayerChips playerChips = new PlayerChips();
@@ -191,15 +191,17 @@ public class Player {
 	}
 
 	public ArrayList<Card> getStoragePile() {
-		return this.storagePile;
+		return this.storagePile.getEntireStoragePile();
 	}
 
 	public void setStoragePile(ArrayList<Card> storagePile) {
-		this.storagePile = storagePile;
+		for(Card card: storagePile){
+			this.storagePile.addCard(card);
+		}
 	}
 
 	public boolean storagePileContainsEntity(Enum entity) {
-		for (Card storage : this.storagePile) {
+		for (Card storage : this.storagePile.getCommercePile()) {
 			if (storage.getEffectType().equals(EffectType.ENTITY)) {
 				EntityEffect effect = (EntityEffect) storage.getEffect();
 				if (effect.getEntities().containsKey(entity)) {
@@ -227,7 +229,7 @@ public class Player {
 	}
 
 	public void addToStoragePile(Card card) {
-		this.storagePile.add(card);
+		this.storagePile.addCard(card);
 	}
 
 	public void removeFromCurrentHand(Card card) {
