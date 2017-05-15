@@ -316,4 +316,12 @@ public class ValueEffectTest {
 		
 		assertFalse(effect.equals(effect2));
 	}
+	
+	@Test
+	public void testValueValueEffectEqualsCommerce(){
+		ValueEffect effect = new ValueEffect(EffectType.VALUE, Value.COMMERCE, AffectingEntity.RAWRESOURCES, Direction.RIGHT, 1);
+		ValueEffect effect2 = new ValueEffect(EffectType.VALUE, Value.COMMERCE, AffectingEntity.RAWRESOURCES, Direction.RIGHT, 1);
+		
+		assertTrue(effect.equals(effect2));
+	}
 }
