@@ -11,21 +11,20 @@ public class Card {
 	private String name = "Default Card";
 	private ArrayList<Integer> frequencyByNumPlayers;
 	private static final int GUILD_NO_FREQUENCY = -1;
-	
+
 	private CardType type = CardType.DEFAULT;
 	private Cost cost;
 	private Effect effect;
-	
+
 	private String previousStructure = "None";
 	private String nextStructure = "None";
 
 	public enum CardType {
-		DEFAULT, RAWMATERIAL, MANUFACTUREDGOOD, CIVILIANSTRUCTURE, 
-		SCIENTIFICSTRUCTURE, COMMERCIALSTRUCTURE, MILITARYSTRUCTURE, GUILD
+		DEFAULT, RAWMATERIAL, MANUFACTUREDGOOD, CIVILIANSTRUCTURE, SCIENTIFICSTRUCTURE, COMMERCIALSTRUCTURE, MILITARYSTRUCTURE, GUILD
 	}
 
-	public Card(String name, ArrayList<Integer> frequencyByNumPlayers, CardType type, Cost cost, Effect effect, String previousStructure,
-			String nextStructure) {
+	public Card(String name, ArrayList<Integer> frequencyByNumPlayers, CardType type, Cost cost, Effect effect,
+			String previousStructure, String nextStructure) {
 		this.name = name;
 		this.frequencyByNumPlayers = frequencyByNumPlayers;
 		this.type = type;
@@ -43,25 +42,27 @@ public class Card {
 		this.cost = cost;
 		this.effect = effect;
 	}
-	
+
 	@Override
-	public boolean equals(Object obj){
+	public boolean equals(Object obj) {
 		Card card = (Card) obj;
-		
-		if(this.cost.equals(card.cost) && this.effect.equals(card.effect)){
+
+		if (this.frequencyByNumPlayers.toString().equals(card.frequencyByNumPlayers.toString())
+				&& this.cost.equals(card.cost) && this.effect.equals(card.effect)) {
 			return true;
 		}
-		
+
 		return false;
 	}
 
-	public String toString(){
+	public String toString() {
 		String value = "name: " + this.name + System.lineSeparator() + "minFrequencyByNumPlayers: "
 				+ this.frequencyByNumPlayers.get(0) + System.lineSeparator() + "costType: "
 				+ this.getCostType().toString() + System.lineSeparator() + "effectType: "
 				+ this.getEffectType().toString();
 		return value;
 	}
+
 	public String getName() {
 		return this.name;
 	}
