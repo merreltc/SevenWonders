@@ -29,6 +29,7 @@ public class MultiValueEffect extends ValueEffect {
 		MultiValueEffect effect = (MultiValueEffect) obj;
 
 		if (this.getValue() == effect.getValue() && this.getDirection() == effect.getDirection()
+				&& this.getAffectingEntity() == effect.getAffectingEntity()
 				&& this.valuesAndAmounts.toString().equals(effect.getValues().toString())) {
 			return true;
 		}
