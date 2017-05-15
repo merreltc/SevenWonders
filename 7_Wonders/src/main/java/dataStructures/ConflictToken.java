@@ -1,6 +1,6 @@
 package dataStructures;
 
-import dataStructures.Chip.ChipType;
+import guiMain.Translate;
 
 public class ConflictToken extends Chip {
 	
@@ -13,7 +13,8 @@ public class ConflictToken extends Chip {
 	public ConflictToken(int value) {
 		super();
 		if(value <= -2 || (value % 2) == 0 || value >= 6){
-			throw new IllegalArgumentException("Cannot have a conflict token whose's value is " + value);
+			String msg = Translate.prepareStringTemplateWithIntArg(value, "improperConflictTokenValue", Translate.getNewResourceBundle());
+			throw new IllegalArgumentException(msg);
 		}
 		
 		this.setValue(value);

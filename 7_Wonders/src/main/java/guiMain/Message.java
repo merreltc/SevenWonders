@@ -15,6 +15,22 @@ public class Message {
 	public static void showMessage(String message) {
 		JOptionPane.showMessageDialog(null, message);
 	}
+	
+	public static String selectLanguageMessage() {
+		ResourceBundle messages = ResourceBundle.getBundle("message", Locale.getDefault());
+		String[] langs = {messages.getString("en_US"), messages.getString("zh_CN")};
+		String language = (String) JOptionPane.showInputDialog(null,
+				messages.getString("chooseYourLanguage"),
+				messages.getString("languageSelector"),
+				JOptionPane.PLAIN_MESSAGE,
+				null,
+				langs,
+				langs[0]);
+		if(language == null) {
+			language = " -" + Locale.getDefault().toString();
+		}
+		return language.split("-")[1];
+	}
 
 	public static String inputPlayerNameMessage(int i) {
 		ResourceBundle messages = Translate.getNewResourceBundle();

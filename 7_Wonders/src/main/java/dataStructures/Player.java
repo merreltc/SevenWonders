@@ -2,14 +2,17 @@ package dataStructures;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.ResourceBundle;
 
 import dataStructures.Chip.ChipType;
 import dataStructures.Chip.ChipValue;
 import dataStructures.Effect.EffectType;
 import exceptions.InsufficientFundsException;
+import guiMain.Translate;
 
 public class Player {
 	private String name = "Jane Doe";
+	private ResourceBundle messages = Translate.getNewResourceBundle();
 
 	private int numShields = 0;
 	private int numVictoryPoints = 0;
@@ -109,11 +112,13 @@ public class Player {
 			chipType = "-1";
 			break;
 		default:
-			throw new IllegalArgumentException("Bad CoinType");
+			String msg = Translate.prepareStringWithNoArgs("BadCoinType", messages);
+			throw new IllegalArgumentException(msg);
 		}
 
 		if (numChips <= -1 || numChips > max) {
-			throw new IllegalArgumentException("Cannot add " + numChips + " value " + chipType + " chips");
+			String msg = Translate.prepareStringTemplateWithIntAndStringArg(numChips, type, "cannotAddCoins", messages);
+			throw new IllegalArgumentException(msg);
 		}
 	}
 
@@ -172,18 +177,20 @@ public class Player {
 				coinType = "5";
 				break;
 			default:
-				throw new IllegalArgumentException("Bad CoinType");
+				String msg = Translate.prepareStringWithNoArgs("BadCoinType", messages);
+				throw new IllegalArgumentException(msg);
 			}
 
-			throw new IllegalArgumentException("Cannot remove " + numCoins + " value " + coinType + " coins");
+			String msg = Translate.prepareStringTemplateWithIntAndStringArg(numCoins, coinType, "cannotRemoveCoins", messages);
+			throw new IllegalArgumentException(msg);
 		}
 
 		int numCoinsToCheck = getNumOfCoinValue(type);
 		String coinType = coinTypeToString(type);
 
 		if (numCoins > numCoinsToCheck) {
-			throw new InsufficientFundsException(
-					"Player does not have " + numCoins + " value " + coinType + " coin(s)");
+			String msg = Translate.prepareStringTemplateWithIntAndStringArg(numCoins, coinType, "notEnoughCoins", messages);
+			throw new InsufficientFundsException(msg);
 		}
 	}
 

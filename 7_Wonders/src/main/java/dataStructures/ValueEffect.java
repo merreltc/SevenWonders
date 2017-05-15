@@ -4,6 +4,7 @@ import java.util.HashMap;
 
 import dataStructures.Effect.EffectType;
 import dataStructures.ValueEffect.Value;
+import guiMain.Translate;
 
 public class ValueEffect extends Effect {
 	private Value value;
@@ -65,17 +66,20 @@ public class ValueEffect extends Effect {
 		switch (value){
 		case VICTORYPOINTS:
 			if (valueAmount <= 0 || valueAmount >= 9){
-				throw new IllegalArgumentException("Cannot have valueAmount of " + valueAmount);
+				String msg = Translate.prepareStringTemplateWithIntArg(valueAmount, "improperValueAmount", Translate.getNewResourceBundle());
+				throw new IllegalArgumentException(msg);
 			}
 			break;
 		case COMMERCE:
 			if(valueAmount <= 0){
-				throw new IllegalArgumentException("Cannot have valueAmount of " + valueAmount);
+				String msg = Translate.prepareStringTemplateWithIntArg(valueAmount, "improperValueAmount", Translate.getNewResourceBundle());
+				throw new IllegalArgumentException(msg);
 			}
 			break;
 		default:
 			if (valueAmount <= -2 || valueAmount == 0 || valueAmount >= 4){
-				throw new IllegalArgumentException("Cannot have valueAmount of " + valueAmount);
+				String msg = Translate.prepareStringTemplateWithIntArg(valueAmount, "improperValueAmount", Translate.getNewResourceBundle());
+				throw new IllegalArgumentException(msg);
 			}
 			break;
 		}
@@ -92,10 +96,11 @@ public class ValueEffect extends Effect {
 	public ValueType getValueType() {
 		switch (this.value) {
 		case VICTORYPOINTS:
-		case GUILD:
 			return ValueType.VICTORYPOINT;
 		case COMMERCE:
 			return ValueType.COIN;
+		case GUILD:
+			return ValueType.VICTORYPOINT;
 		default:
 			return ValueType.CONFLICTTOKEN;
 		}
