@@ -359,7 +359,7 @@ public class PlayerTest {
 	public void testRemove3Value5Coins(){
 		Player player = new Player("Jane Doe", WonderType.COLOSSUS);
 		player.addValue5(5, ChipType.COIN);
-		player.removeValue5(3);
+		player.removeValue5(3,ChipType.COIN);
 		Assert.assertEquals(2,player.getNumValue5Coins());
 		Assert.assertEquals(13,player.getCoinTotal());
 	}
@@ -368,7 +368,7 @@ public class PlayerTest {
 	public void testRemove2Value5Coins(){
 		Player player = new Player("Jane Doe", WonderType.COLOSSUS);
 		player.addValue5(5, ChipType.COIN);
-		player.removeValue5(2);
+		player.removeValue5(2,ChipType.COIN);
 		Assert.assertEquals(3,player.getNumValue5Coins());
 		Assert.assertEquals(18,player.getCoinTotal());
 	}
@@ -378,11 +378,27 @@ public class PlayerTest {
 		Player player = new Player("Jane Doe", WonderType.COLOSSUS);
 		player.addValue5(5, ChipType.COIN);
 		try {
-			player.removeValue5(7);
+			player.removeValue5(7,ChipType.COIN);
 			fail();
 		}catch (Exception e){
 			Assert.assertEquals("Player does not have 7 value 5 coin(s)", e.getMessage());
 		}
+	}
+	
+	public void testRemove3Value5ConflictTokens(){
+		Player player = new Player("Jane Doe", WonderType.COLOSSUS);
+		player.addValue5(5, ChipType.CONFLICTTOKEN);
+		player.removeValue5(3, ChipType.CONFLICTTOKEN);
+		Assert.assertEquals(2,player.getNumValue5ConflictTokens());
+		Assert.assertEquals(10,player.getConflictTotal());
+	}
+	
+	public void testRemove2Value5ConflictTokens(){
+		Player player = new Player("Jane Doe", WonderType.COLOSSUS);
+		player.addValue5(5, ChipType.CONFLICTTOKEN);
+		player.removeValue5(3, ChipType.CONFLICTTOKEN);
+		Assert.assertEquals(3,player.getNumValue5ConflictTokens());
+		Assert.assertEquals(15,player.getConflictTotal());
 	}
 
 	@Test
