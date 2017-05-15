@@ -117,8 +117,7 @@ public class Player {
 		}
 
 		if (numChips <= -1 || numChips > max) {
-			String msg = Translate.prepareStringTemplateWithIntAndStringArg(numChips, type, "cannotAddCoins", messages);
-			throw new IllegalArgumentException(msg);
+			throw new IllegalArgumentException("Cannot add " + numChips + " value " + chipType + " chips");
 		}
 	}
 
