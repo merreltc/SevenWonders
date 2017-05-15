@@ -102,4 +102,17 @@ public class StoragePileTest {
 		assertFalse(storagePile.getEndGamePile().isEmpty());
 		assertEquals(50, storagePile.getEndGamePile().size());
 	}
+	
+	@Test
+	public void testAddToImmediateEffectPileManyCards() {
+		StoragePile storagePile = new StoragePile();
+		
+		for(int i = 0; i < 50; i++){
+			Card card = EasyMock.mock(Card.class);
+			storagePile.addToImmediateEffectPile(card);
+		}
+		
+		assertFalse(storagePile.getImmediateEffectPile().isEmpty());
+		assertEquals(50, storagePile.getImmediateEffectPile().size());
+	}
 }
