@@ -109,4 +109,11 @@ public class ValueEffect extends Effect {
 	public HashMap<Enum, Integer> getAffectingEntities() {
 		return this.affectingEntities;
 	}
+	
+	@Override
+	public boolean equals(Object obj){
+		ValueEffect value = (ValueEffect) obj;
+		
+		return true;
+	}
 }

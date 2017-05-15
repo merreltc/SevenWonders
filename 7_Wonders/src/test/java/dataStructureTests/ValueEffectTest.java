@@ -1,7 +1,6 @@
 package dataStructureTests;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.fail;
+import static org.junit.Assert.*;
 
 import java.util.HashMap;
 
@@ -300,5 +299,13 @@ public class ValueEffectTest {
 		assertEquals(Value.GUILD, ((ValueEffect) effect).getValue());
 		assertEquals(ValueType.VICTORYPOINT, ((ValueEffect) effect).getValueType());
 		assertEquals(affectingEntities, ((ValueEffect) effect).getAffectingEntities());
+	}
+	
+	@Test
+	public void testValidValueEffectEqualsNoAffectingentities() {
+		ValueEffect effect = new ValueEffect(EffectType.VALUE, Value.VICTORYPOINTS, AffectingEntity.NONE, 2);
+		ValueEffect effect2 = new ValueEffect(EffectType.VALUE, Value.VICTORYPOINTS, AffectingEntity.NONE, 2);
+		
+		assertTrue(effect.equals(effect2));
 	}
 }
