@@ -23,5 +23,12 @@ public class GuildEffectTest {
 		assertEquals(EffectType.GUILD, effect.getEffectType());
 	}
 
+	@Test
+	public void testNeighborsCommercialStructureGuildEffect() {
+		Effect effect = new GuildEffect(EffectType.GUILD, CardType.COMMERCIALSTRUCTURE, Direction.NEIGHBORS);
+		Assert.assertEquals(CardType.COMMERCIALSTRUCTURE, ((GuildEffect) effect).getObjectToLookFor());
+		Assert.assertEquals(Direction.NEIGHBORS, effect.getDirection());
+		assertEquals(EffectType.GUILD, effect.getEffectType());
+	}
 
 }
