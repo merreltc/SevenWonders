@@ -126,8 +126,8 @@ public class Player {
 			this.playerChips.coinTotal -= numCoinsToRemove;
 			this.playerChips.numOfValue1Coins -= numCoinsToRemove;
 		}else {
-			this.playerChips.conflictTotal = 3;
-			this.playerChips.numOfValue1ConflictTokens = 3;
+			this.playerChips.conflictTotal -= numCoinsToRemove;
+			this.playerChips.numOfValue1ConflictTokens -= numCoinsToRemove;
 		}
 	}
 
