@@ -348,4 +348,22 @@ public class ValueEffectTest {
 		
 		assertFalse(effect.equals(effect2));
 	}
+	
+	@Test
+	public void testValidValueEffectEqualsGuild(){
+		HashMap<Enum, Integer> affectingEntities = new HashMap<Enum, Integer>();
+		affectingEntities.put(AffectingEntity.RAWRESOURCES, 1);
+		affectingEntities.put(AffectingEntity.MANUFACTUREDGOODS, 1);
+		affectingEntities.put(AffectingEntity.GUILD, 1);
+		
+		ValueEffect effect = new ValueEffect(EffectType.VALUE, Value.GUILD, affectingEntities);
+		HashMap<Enum, Integer> affectingEntities2 = new HashMap<Enum, Integer>();
+		affectingEntities.put(AffectingEntity.RAWRESOURCES, 1);
+		affectingEntities.put(AffectingEntity.MANUFACTUREDGOODS, 1);
+		affectingEntities.put(AffectingEntity.GUILD, 1);
+		
+		ValueEffect effect2 = new ValueEffect(EffectType.VALUE, Value.GUILD, affectingEntities2);
+		
+		assertTrue(effect.equals(effect2));
+	}
 }
