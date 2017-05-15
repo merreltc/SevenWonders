@@ -11,10 +11,8 @@ import exceptions.InsufficientFundsException;
 
 public class Player {
 	private String name = "Jane Doe";
-
 	private int numShields = 0;
 	private int numVictoryPoints = 0;
-
 	private Wonder wonder;
 
 	private ArrayList<Card> currentHand = new ArrayList<Card>();
@@ -190,6 +188,13 @@ public class Player {
 
 	public String toString() {
 		return "Name: " + this.name + "\nCoin Total: " + this.getCoinTotal();
+	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		Player temp = (Player) obj;
+		
+		return(temp.getName() == this.getName());
 	}
 
 	private int getNumOfCoinValue(Chip.ChipValue type) {
