@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import dataStructures.Effect.EffectType;
 import dataStructures.EntityEffect.EntityType;
+import dataStructures.ValueEffect.Value;
 
 public class StoragePile {
 	private ArrayList<Card> commercePile = new ArrayList<Card>();
@@ -19,12 +20,15 @@ public class StoragePile {
 
 		case VALUE:
 			ValueEffect value = (ValueEffect) card.getEffect();
-			value.getValue();
+			
+			if (value.getValue() != Value.GUILD) {
+				value.getDirection();
+			}
 			this.addToEndGamePile(card);
 			break;
 		default:
 			EntityEffect entity = (EntityEffect) card.getEffect();
-			
+
 			if (entity.getEntityType() == EntityType.SCIENCE) {
 				this.addToSciencePile(card);
 			} else {
