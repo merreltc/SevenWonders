@@ -26,10 +26,15 @@ public class EntityEffect extends Effect {
 
 	@Override
 	public boolean equals(Object obj) {
-		EntityEffect effect = (EntityEffect) obj;
+		Effect effect = (Effect) obj;
+		if(effect.getEffectType() != EffectType.ENTITY){
+			return false;
+		}
+		
+		EntityEffect entity = (EntityEffect) effect;
 
-		if (this.entityType == effect.entityType
-				&& this.entitiesAndAmounts.toString().equals(effect.entitiesAndAmounts.toString())) {
+		if (this.entityType == entity.entityType
+				&& this.entitiesAndAmounts.toString().equals(entity.entitiesAndAmounts.toString())) {
 			return true;
 		}
 

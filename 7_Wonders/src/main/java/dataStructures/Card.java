@@ -48,7 +48,7 @@ public class Card {
 		Card card = (Card) obj;
 
 		if (this.frequencyByNumPlayers.toString().equals(card.frequencyByNumPlayers.toString())
-				&& this.cost.equals(card.cost) && this.effect.equals(card.effect)) {
+				&& this.cost.equals(card.cost) && this.effect.equals(card.effect) && this.name.equals(card.name)) {
 			return true;
 		}
 
