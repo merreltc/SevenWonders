@@ -375,7 +375,7 @@ public class TradeHandlerTest {
 		
 		assertEquals(0, current.getNumValue3Coins());
 		assertEquals(1, (int) current.getCurrentTrades().get(RawResource.LUMBER));
-		assertEquals(6, next.getCoinTotal());
+		assertEquals(5, next.getCoinTotal());
 	}
 	
 	@Test(expected = InvalidTradeException.class)
@@ -428,6 +428,6 @@ public class TradeHandlerTest {
 		
 		assertEquals(0, current.getNumValue3Coins());
 		assertEquals(1, (int) current.getCurrentTrades().get(Good.GLASS));
-		assertEquals(6, next.getCoinTotal());
+		assertEquals(5, next.getCoinTotal());
 	}
 }
