@@ -10,14 +10,14 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import backend.GameManager;
-import backend.PlayerTurnHandler;
-import backend.SetUpDeckHandler;
-import backend.SetUpPlayerHandler;
-import backend.TurnHandler;
-import dataStructures.Card;
-import dataStructures.Deck;
-import dataStructures.Player;
-import dataStructures.Wonder.WonderType;
+import backend.handlers.PlayerTurnHandler;
+import backend.handlers.SetUpDeckHandler;
+import backend.handlers.SetUpPlayerHandler;
+import backend.handlers.TurnHandler;
+import dataStructures.gameMaterials.Card;
+import dataStructures.gameMaterials.Deck;
+import dataStructures.gameMaterials.Wonder.WonderType;
+import dataStructures.playerData.Player;
 
 public class TurnHandlerTest {
 

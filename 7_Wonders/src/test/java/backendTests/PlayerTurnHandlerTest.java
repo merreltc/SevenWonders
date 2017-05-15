@@ -1,34 +1,31 @@
 package backendTests;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
-import java.util.Set;
 
 import org.easymock.EasyMock;
 import org.junit.Test;
 
-import backend.GameManager;
-import backend.PlayerTurnHandler;
-import backend.SetUpDeckHandler;
-import backend.SetUpPlayerHandler;
-import backend.TurnHandler;
-import dataStructures.Card;
-import dataStructures.Cost;
-import dataStructures.Cost.CostType;
-import dataStructures.Deck;
-import dataStructures.EntityEffect;
+import backend.handlers.PlayerTurnHandler;
+import backend.handlers.SetUpDeckHandler;
+import constants.GeneralEnums.CostType;
+import constants.GeneralEnums.Resource;
 import dataStructures.GameBoard;
-import dataStructures.Player;
-import dataStructures.ValueEffect;
+import dataStructures.gameMaterials.Card;
+import dataStructures.gameMaterials.Deck;
+import dataStructures.gameMaterials.Deck.Age;
+import dataStructures.gameMaterials.Effect.EffectType;
+import dataStructures.gameMaterials.EntityEffect;
+import dataStructures.gameMaterials.ValueEffect;
+import dataStructures.gameMaterials.ValueEffect.ValueType;
+import dataStructures.gameMaterials.Wonder.WonderType;
+import dataStructures.playerData.Player;
 import exceptions.InsufficientFundsException;
-import dataStructures.Deck.Age;
-import dataStructures.Effect.EffectType;
-import dataStructures.GeneralEnums.Resource;
-import dataStructures.ValueEffect.ValueType;
-import dataStructures.Wonder.WonderType;
 
 public class PlayerTurnHandlerTest {
 

@@ -4,10 +4,10 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-import dataStructures.Chip;
-import dataStructures.Chip.ChipType;
-import dataStructures.Coin;
-import dataStructures.ConflictToken;
+import dataStructures.playerData.Chip;
+import dataStructures.playerData.Coin;
+import dataStructures.playerData.ConflictToken;
+import dataStructures.playerData.Chip.ChipType;
 
 public class ChipTest {
 

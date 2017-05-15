@@ -2,12 +2,18 @@ package backend;
 
 import java.util.ArrayList;
 
-import backend.RotateHandler.Direction;
-import dataStructures.Card;
-import dataStructures.Deck;
-import dataStructures.Deck.Age;
+import backend.handlers.PlayerTurnHandler;
+import backend.handlers.RotateHandler;
+import backend.handlers.SetUpDeckHandler;
+import backend.handlers.SetUpPlayerHandler;
+import backend.handlers.TradeHandler;
+import backend.handlers.TurnHandler;
+import backend.handlers.RotateHandler.Direction;
 import dataStructures.GameBoard;
-import dataStructures.Player;
+import dataStructures.gameMaterials.Card;
+import dataStructures.gameMaterials.Deck;
+import dataStructures.gameMaterials.Deck.Age;
+import dataStructures.playerData.Player;
 
 /**
  * Controls the actions of the game and delegates those responsibilities to

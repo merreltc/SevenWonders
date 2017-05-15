@@ -7,12 +7,12 @@ import java.util.ArrayList;
 import org.easymock.EasyMock;
 import org.junit.Test;
 
-import dataStructures.Card;
-import dataStructures.Cost;
-import dataStructures.Deck;
-import dataStructures.Effect;
-import dataStructures.Card.CardType;
-import dataStructures.Deck.Age;
+import dataStructures.gameMaterials.Card;
+import dataStructures.gameMaterials.Cost;
+import dataStructures.gameMaterials.Deck;
+import dataStructures.gameMaterials.Effect;
+import dataStructures.gameMaterials.Card.CardType;
+import dataStructures.gameMaterials.Deck.Age;
 
 public class DeckTest {
 

@@ -8,13 +8,13 @@ import java.util.HashMap;
 import org.easymock.EasyMock;
 import org.junit.Test;
 
-import dataStructures.Card;
-import dataStructures.Card.CardType;
-import dataStructures.Cost;
-import dataStructures.Effect;
-import dataStructures.Cost.CostType;
-import dataStructures.Effect.EffectType;
-import dataStructures.GeneralEnums.RawResource;
+import constants.GeneralEnums.CostType;
+import constants.GeneralEnums.RawResource;
+import dataStructures.gameMaterials.Card;
+import dataStructures.gameMaterials.Card.CardType;
+import dataStructures.gameMaterials.Cost;
+import dataStructures.gameMaterials.Effect;
+import dataStructures.gameMaterials.Effect.EffectType;
 
 public class CardTest {
 

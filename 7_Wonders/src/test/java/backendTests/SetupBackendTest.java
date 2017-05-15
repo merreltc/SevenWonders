@@ -9,9 +9,9 @@ import java.util.Arrays;
 
 import org.junit.Test;
 
-import backend.SetUpPlayerHandler;
-import dataStructures.Player;
-import dataStructures.Wonder.WonderType;
+import backend.handlers.SetUpPlayerHandler;
+import dataStructures.gameMaterials.Wonder.WonderType;
+import dataStructures.playerData.Player;
 
 public class SetupBackendTest {
 

@@ -2,7 +2,11 @@ package dataStructures;
 
 import java.util.ArrayList;
 
-import dataStructures.Chip.ChipType;
+import dataStructures.gameMaterials.Card;
+import dataStructures.gameMaterials.Deck;
+import dataStructures.playerData.Chip;
+import dataStructures.playerData.Player;
+import dataStructures.playerData.Chip.ChipType;
 import exceptions.InsufficientFundsException;
 
 public class GameBoard {

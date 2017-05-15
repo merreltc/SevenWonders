@@ -7,16 +7,16 @@ import java.util.ArrayList;
 
 import org.junit.Test;
 
-import backend.SetUpDeckHandler;
-import backend.TradeHandler;
-import dataStructures.Card;
-import dataStructures.Chip;
-import dataStructures.Deck;
-import dataStructures.Deck.Age;
+import backend.handlers.SetUpDeckHandler;
+import backend.handlers.TradeHandler;
+import constants.GeneralEnums.*;
 import dataStructures.GameBoard;
-import dataStructures.GeneralEnums.*;
-import dataStructures.Player;
-import dataStructures.Wonder.WonderType;
+import dataStructures.gameMaterials.Card;
+import dataStructures.gameMaterials.Deck;
+import dataStructures.gameMaterials.Deck.Age;
+import dataStructures.gameMaterials.Wonder.WonderType;
+import dataStructures.playerData.Chip;
+import dataStructures.playerData.Player;
 import exceptions.InsufficientFundsException;
 import exceptions.InvalidTradeException;
 

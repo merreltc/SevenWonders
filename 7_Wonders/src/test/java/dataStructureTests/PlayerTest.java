@@ -11,15 +11,15 @@ import java.util.HashMap;
 import org.easymock.EasyMock;
 import org.junit.Test;
 
-import backend.SetUpDeckHandler;
-import dataStructures.Card;
-import dataStructures.Chip;
-import dataStructures.Chip.ChipType;
-import dataStructures.Deck.Age;
-import dataStructures.GeneralEnums.*;
-import dataStructures.Player;
-import dataStructures.Wonder;
-import dataStructures.Wonder.WonderType;
+import backend.handlers.SetUpDeckHandler;
+import constants.GeneralEnums.*;
+import dataStructures.gameMaterials.Card;
+import dataStructures.gameMaterials.Wonder;
+import dataStructures.gameMaterials.Deck.Age;
+import dataStructures.gameMaterials.Wonder.WonderType;
+import dataStructures.playerData.Chip;
+import dataStructures.playerData.Player;
+import dataStructures.playerData.Chip.ChipType;
 import exceptions.InsufficientFundsException;
 import junit.framework.Assert;
 

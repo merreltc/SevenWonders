@@ -11,21 +11,21 @@ import org.easymock.EasyMock;
 import org.junit.Test;
 
 import backend.GameManager;
-import backend.PlayerTurnHandler;
-import backend.RotateHandler.Direction;
-import backend.SetUpDeckHandler;
-import backend.SetUpPlayerHandler;
-import backend.TurnHandler;
-import dataStructures.Card;
-import dataStructures.Chip;
-import dataStructures.Deck;
-import dataStructures.Deck.Age;
+import backend.handlers.PlayerTurnHandler;
+import backend.handlers.SetUpDeckHandler;
+import backend.handlers.SetUpPlayerHandler;
+import backend.handlers.TurnHandler;
+import backend.handlers.RotateHandler.Direction;
+import constants.GeneralEnums.Good;
+import constants.GeneralEnums.RawResource;
 import dataStructures.GameBoard;
-import dataStructures.GeneralEnums.Good;
-import dataStructures.GeneralEnums.RawResource;
-import dataStructures.Player;
-import dataStructures.Wonder;
-import dataStructures.Wonder.WonderType;
+import dataStructures.gameMaterials.Card;
+import dataStructures.gameMaterials.Deck;
+import dataStructures.gameMaterials.Wonder;
+import dataStructures.gameMaterials.Deck.Age;
+import dataStructures.gameMaterials.Wonder.WonderType;
+import dataStructures.playerData.Chip;
+import dataStructures.playerData.Player;
 
 public class GameManagerTest {
 	

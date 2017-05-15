@@ -8,18 +8,18 @@ import java.util.Arrays;
 import org.junit.Test;
 
 import backend.GameManager;
-import backend.PlayerTurnHandler;
-import backend.RotateHandler;
-import backend.RotateHandler.Direction;
-import backend.SetUpDeckHandler;
-import backend.SetUpPlayerHandler;
-import backend.TurnHandler;
-import dataStructures.Card;
-import dataStructures.Deck;
-import dataStructures.Deck.Age;
+import backend.handlers.PlayerTurnHandler;
+import backend.handlers.RotateHandler;
+import backend.handlers.SetUpDeckHandler;
+import backend.handlers.SetUpPlayerHandler;
+import backend.handlers.TurnHandler;
+import backend.handlers.RotateHandler.Direction;
 import dataStructures.GameBoard;
-import dataStructures.Player;
-import dataStructures.Wonder.WonderType;
+import dataStructures.gameMaterials.Card;
+import dataStructures.gameMaterials.Deck;
+import dataStructures.gameMaterials.Deck.Age;
+import dataStructures.gameMaterials.Wonder.WonderType;
+import dataStructures.playerData.Player;
 
 public class RotateHandlerTest {
 

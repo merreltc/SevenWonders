@@ -5,8 +5,8 @@ import static org.junit.Assert.*;
 import org.easymock.EasyMock;
 import org.junit.Test;
 
-import backend.PlayerFactory;
-import dataStructures.Player;
+import backend.factories.PlayerFactory;
+import dataStructures.playerData.Player;
 import exceptions.NoMorePlayersException;
 
 public class PlayerFactoryTest {

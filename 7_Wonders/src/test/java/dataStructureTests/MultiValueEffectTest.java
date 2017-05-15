@@ -6,13 +6,13 @@ import java.util.HashMap;
 
 import org.junit.Test;
 
-import dataStructures.Effect;
-import dataStructures.MultiValueEffect;
-import dataStructures.Effect.Direction;
-import dataStructures.Effect.EffectType;
-import dataStructures.ValueEffect.AffectingEntity;
-import dataStructures.ValueEffect.Value;
-import dataStructures.ValueEffect.ValueType;
+import dataStructures.gameMaterials.Effect;
+import dataStructures.gameMaterials.MultiValueEffect;
+import dataStructures.gameMaterials.Effect.Direction;
+import dataStructures.gameMaterials.Effect.EffectType;
+import dataStructures.gameMaterials.ValueEffect.AffectingEntity;
+import dataStructures.gameMaterials.ValueEffect.Value;
+import dataStructures.gameMaterials.ValueEffect.ValueType;
 
 public class MultiValueEffectTest {
 	

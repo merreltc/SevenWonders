@@ -6,14 +6,14 @@ import java.util.HashMap;
 
 import org.junit.Test;
 
-import dataStructures.Effect;
-import dataStructures.EntityEffect;
-import dataStructures.Effect.Direction;
-import dataStructures.Effect.EffectType;
-import dataStructures.EntityEffect.EntityType;
-import dataStructures.GeneralEnums.Good;
-import dataStructures.GeneralEnums.RawResource;
-import dataStructures.GeneralEnums.Science;
+import constants.GeneralEnums.Good;
+import constants.GeneralEnums.RawResource;
+import constants.GeneralEnums.Science;
+import dataStructures.gameMaterials.Effect;
+import dataStructures.gameMaterials.EntityEffect;
+import dataStructures.gameMaterials.Effect.Direction;
+import dataStructures.gameMaterials.Effect.EffectType;
+import dataStructures.gameMaterials.EntityEffect.EntityType;
 
 public class EntityEffectTest {
 	

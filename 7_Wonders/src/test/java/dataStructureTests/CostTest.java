@@ -6,10 +6,10 @@ import java.util.HashMap;
 
 import org.junit.Test;
 
-import dataStructures.Cost;
-import dataStructures.Cost.CostType;
-import dataStructures.GeneralEnums.Good;
-import dataStructures.GeneralEnums.RawResource;
+import constants.GeneralEnums.CostType;
+import constants.GeneralEnums.Good;
+import constants.GeneralEnums.RawResource;
+import dataStructures.gameMaterials.Cost;
 
 public class CostTest {
 	

@@ -13,26 +13,26 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.junit.Test;
 
-import backend.SetUpDeckHandler;
-import dataStructures.Card;
-import dataStructures.Card.CardType;
-import dataStructures.Cost;
-import dataStructures.Cost.CostType;
-import dataStructures.Deck;
-import dataStructures.Deck.Age;
-import dataStructures.Effect;
-import dataStructures.Effect.Direction;
-import dataStructures.Effect.EffectType;
-import dataStructures.EntityEffect;
-import dataStructures.EntityEffect.EntityType;
-import dataStructures.GeneralEnums.Good;
-import dataStructures.GeneralEnums.RawResource;
-import dataStructures.GeneralEnums.Science;
-import dataStructures.MultiValueEffect;
-import dataStructures.ValueEffect;
-import dataStructures.ValueEffect.AffectingEntity;
-import dataStructures.ValueEffect.Value;
-import dataStructures.ValueEffect.ValueType;
+import backend.handlers.SetUpDeckHandler;
+import constants.GeneralEnums.CostType;
+import constants.GeneralEnums.Good;
+import constants.GeneralEnums.RawResource;
+import constants.GeneralEnums.Science;
+import dataStructures.gameMaterials.Card;
+import dataStructures.gameMaterials.Card.CardType;
+import dataStructures.gameMaterials.Cost;
+import dataStructures.gameMaterials.Deck;
+import dataStructures.gameMaterials.Deck.Age;
+import dataStructures.gameMaterials.Effect;
+import dataStructures.gameMaterials.Effect.Direction;
+import dataStructures.gameMaterials.Effect.EffectType;
+import dataStructures.gameMaterials.EntityEffect;
+import dataStructures.gameMaterials.EntityEffect.EntityType;
+import dataStructures.gameMaterials.MultiValueEffect;
+import dataStructures.gameMaterials.ValueEffect;
+import dataStructures.gameMaterials.ValueEffect.AffectingEntity;
+import dataStructures.gameMaterials.ValueEffect.Value;
+import dataStructures.gameMaterials.ValueEffect.ValueType;
 
 public class SetUpDeckHandlerTest {
 
