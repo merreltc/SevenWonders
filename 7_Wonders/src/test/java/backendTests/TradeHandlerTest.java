@@ -10,6 +10,7 @@ import org.junit.Test;
 import backend.SetUpDeckHandler;
 import backend.TradeHandler;
 import dataStructures.Card;
+import dataStructures.Chip;
 import dataStructures.Deck;
 import dataStructures.Deck.Age;
 import dataStructures.GameBoard;
@@ -63,7 +64,7 @@ public class TradeHandlerTest {
 		Player player1 = new Player("Jane Doe", WonderType.COLOSSUS);
 		Player player2 = new Player("Jane Doe", WonderType.COLOSSUS);
 
-		player1.addValue3(1);
+		player1.addValue3(1, Chip.ChipType.COIN);
 		TradeHandler.tradeFromToValue3(player1, player2, 1);
 
 		assertEquals(6, player2.getCoinTotal());
@@ -77,7 +78,7 @@ public class TradeHandlerTest {
 		Player player1 = new Player("Jane Doe", WonderType.COLOSSUS);
 		Player player2 = new Player("Jane Doe", WonderType.COLOSSUS);
 
-		player1.addValue3(3);
+		player1.addValue3(3, Chip.ChipType.COIN);
 		TradeHandler.tradeFromToValue3(player1, player2, 2);
 		TradeHandler.tradeFromToValue3(player1, player2, 1);
 
@@ -101,7 +102,7 @@ public class TradeHandlerTest {
 		Player player1 = new Player("Jane Doe", WonderType.COLOSSUS);
 		Player player2 = new Player("Jane Doe", WonderType.COLOSSUS);
 
-		player1.addValue3(3);
+		player1.addValue3(3, Chip.ChipType.COIN);
 
 		TradeHandler.tradeFromToValue3(player1, player2, 2);
 		TradeHandler.tradeFromToValue3(player2, player1, 1);
@@ -121,7 +122,7 @@ public class TradeHandlerTest {
 		Player player1 = new Player("Jane Doe", WonderType.COLOSSUS);
 		Player player2 = new Player("Jane Doe", WonderType.COLOSSUS);
 
-		player1.addValue3(2);
+		player1.addValue3(2, Chip.ChipType.COIN);
 
 		ArrayList<Player> players = new ArrayList<Player>();
 		players.add(player1);
@@ -150,7 +151,7 @@ public class TradeHandlerTest {
 		Player player1 = new Player("Jane Doe", WonderType.COLOSSUS);
 		Player player2 = new Player("Jane Doe", WonderType.COLOSSUS);
 
-		player1.addValue3(2);
+		player1.addValue3(2, Chip.ChipType.COIN);
 
 		ArrayList<Player> players = new ArrayList<Player>();
 		players.add(player1);
@@ -179,7 +180,7 @@ public class TradeHandlerTest {
 		Player player1 = new Player("Jane Doe", WonderType.COLOSSUS);
 		Player player2 = new Player("Jane Doe", WonderType.COLOSSUS);
 
-		player1.addValue3(2);
+		player1.addValue3(2, Chip.ChipType.COIN);
 
 		ArrayList<Player> players = new ArrayList<Player>();
 		players.add(player1);
@@ -208,7 +209,7 @@ public class TradeHandlerTest {
 		Player player1 = new Player("Jane Doe", WonderType.COLOSSUS);
 		Player player2 = new Player("Jane Doe", WonderType.COLOSSUS);
 
-		player1.addValue3(2);
+		player1.addValue3(2, Chip.ChipType.COIN);
 
 		ArrayList<Player> players = new ArrayList<Player>();
 		players.add(player1);
@@ -264,7 +265,7 @@ public class TradeHandlerTest {
 		Player player1 = new Player("Jane Doe", WonderType.COLOSSUS);
 		Player player2 = new Player("Jane Doe", WonderType.COLOSSUS);
 
-		player1.addValue3(1);
+		player1.addValue3(1, Chip.ChipType.COIN);
 
 		ArrayList<Player> players = new ArrayList<Player>();
 		players.add(player1);
@@ -374,7 +375,7 @@ public class TradeHandlerTest {
 		
 		assertEquals(0, current.getNumValue3Coins());
 		assertEquals(1, (int) current.getCurrentTrades().get(RawResource.LUMBER));
-		assertEquals(6, next.getCoinTotal());
+		assertEquals(5, next.getCoinTotal());
 	}
 	
 	@Test(expected = InvalidTradeException.class)
@@ -427,6 +428,6 @@ public class TradeHandlerTest {
 		
 		assertEquals(0, current.getNumValue3Coins());
 		assertEquals(1, (int) current.getCurrentTrades().get(Good.GLASS));
-		assertEquals(6, next.getCoinTotal());
+		assertEquals(5, next.getCoinTotal());
 	}
 }
