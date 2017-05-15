@@ -28,7 +28,7 @@ public class MultiValueEffect extends ValueEffect {
 	public boolean equals(Object obj) {
 		MultiValueEffect effect = (MultiValueEffect) obj;
 
-		if (this.getValue() == effect.getValue()
+		if (this.getValue() == effect.getValue() && this.getDirection() == effect.getDirection()
 				&& this.valuesAndAmounts.toString().equals(effect.getValues().toString())) {
 			return true;
 		}
