@@ -97,7 +97,7 @@ public class MultiValueEffectTest {
 	}
 	
 	@Test
-	public void testValidEqualsCommerce(){
+	public void testValidEqualsGuild(){
 		HashMap<Enum, Integer> valuesAndAmounts = new HashMap<Enum, Integer>();
 		valuesAndAmounts.put(ValueType.CONFLICTTOKEN, -1);
 		valuesAndAmounts.put(ValueType.VICTORYPOINT, 1);
@@ -108,5 +108,19 @@ public class MultiValueEffectTest {
 		MultiValueEffect effect2 = new MultiValueEffect(EffectType.MULTIVALUE, Value.GUILD, AffectingEntity.NONE, Direction.NEIGHBORS, valuesAndAmounts2);
 		
 		assertTrue(effect.equals(effect2));
+	}
+	
+	@Test
+	public void testInvalidEqualsCommerce(){
+		HashMap<Enum, Integer> valuesAndAmounts = new HashMap<Enum, Integer>();
+		valuesAndAmounts.put(ValueType.CONFLICTTOKEN, -1);
+		valuesAndAmounts.put(ValueType.VICTORYPOINT, 1);
+		MultiValueEffect effect = new MultiValueEffect(EffectType.MULTIVALUE, Value.COMMERCE, AffectingEntity.NONE, Direction.NEIGHBORS, valuesAndAmounts);
+		HashMap<Enum, Integer> valuesAndAmounts2 = new HashMap<Enum, Integer>();
+		valuesAndAmounts2.put(ValueType.CONFLICTTOKEN, -1);
+		valuesAndAmounts2.put(ValueType.VICTORYPOINT, 1);
+		MultiValueEffect effect2 = new MultiValueEffect(EffectType.MULTIVALUE, Value.GUILD, AffectingEntity.NONE, Direction.NEIGHBORS, valuesAndAmounts2);
+		
+		assertFalse(effect.equals(effect2));
 	}
 }
