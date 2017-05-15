@@ -245,6 +245,15 @@ public class PlayerTest {
 		Assert.assertEquals(2,player.getConflictTotal());
 	}
 	
+	@Test
+	public void testRemoveAllValue1ConflictTokens() {
+		Player player = new Player("Jane Doe", WonderType.COLOSSUS);
+		player.addValue1(5, ChipType.CONFLICTTOKEN);
+		player.removeValue1(5, ChipType.CONFLICTTOKEN);
+		Assert.assertEquals(0,player.getNumValue1ConflictTokens());
+		Assert.assertEquals(0,player.getConflictTotal());
+	}
+	
 
 	@Test
 	public void testAddInvalidNumValue3CoinsNeg1ErrorMessage() {
