@@ -372,6 +372,18 @@ public class PlayerTest {
 		Assert.assertEquals(3,player.getNumValue5Coins());
 		Assert.assertEquals(18,player.getCoinTotal());
 	}
+	
+	@Test
+	public void testRemoveInvalidAmountOfValue5Coins(){
+		Player player = new Player("Jane Doe", WonderType.COLOSSUS);
+		player.addValue5(5, ChipType.COIN);
+		try {
+			player.removeValue5(7);
+			fail();
+		}catch (Exception e){
+			Assert.assertEquals("Player does not have 7 value 5 coin(s)", e.getMessage());
+		}
+	}
 
 	@Test
 	public void testGetDefaultCurrentHand() {
