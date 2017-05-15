@@ -26,11 +26,16 @@ public class MultiValueEffect extends ValueEffect {
 
 	@Override
 	public boolean equals(Object obj) {
-		MultiValueEffect effect = (MultiValueEffect) obj;
+		Effect effect = (Effect) obj;
+		if(effect.getEffectType() != EffectType.MULTIVALUE){
+			return false;
+		}
+		
+		MultiValueEffect multi = (MultiValueEffect) effect;
 
-		if (this.getValue() == effect.getValue() && this.getDirection() == effect.getDirection()
-				&& this.getAffectingEntity() == effect.getAffectingEntity()
-				&& this.valuesAndAmounts.toString().equals(effect.getValues().toString())) {
+		if (this.getValue() == multi.getValue() && this.getDirection() == multi.getDirection()
+				&& this.getAffectingEntity() == multi.getAffectingEntity()
+				&& this.valuesAndAmounts.toString().equals(multi.getValues().toString())) {
 			return true;
 		}
 
