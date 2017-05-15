@@ -61,10 +61,10 @@ Cards are passed left-right-left over the three ages, so you need to keep an eye
 # Definition of "Done"
 ## Display
 ### Player Board
-- [ ] Overview of player statistics (see "Player Stats")
-- [ ] Detailed view of player statistics (see "Player Stats")
-- [ ] Details for left/right neighbors
-- [ ] Minimal details for non-neighboring players
+- [x] Overview of player statistics (see "Player Stats")
+- [x] Detailed view of player statistics (see "Player Stats")
+- [x] Details for left/right neighbors
+- [x] Minimal details for non-neighboring players
 
 ## Set Up
 - [ ] Language is chosen: English or Chinese
@@ -76,7 +76,7 @@ Cards are passed left-right-left over the three ages, so you need to keep an eye
 - [ ] Players are assigned random, unique wonders and sides
 - [x] Age I Deck is assembled based on number of players and shuffled
 - [x] Players are dealt equal number of cards
-- [ ] Each player begins with 3 value 1 coins
+- [x] Each player begins with 3 value 1 coins
 
 ## Decks
 - [x] Each age has a unique set of cards
@@ -85,11 +85,11 @@ Cards are passed left-right-left over the three ages, so you need to keep an eye
 - [x] Age I and II decks do not have Guild cards
 
 ## Cards
-- [ ] Name and type of structure/resource (See "Card Types")
-- [ ] Cost of building the structure
+- [x] Name and type of structure/resource (See "Card Types")
+- [x] Cost of building the structure
 - [ ] The effect caused by building the structure
-- [ ] Previous structures that allow this structure to be built for free
-- [ ] Future structures that can be built free is this card has already been built
+- [x] Previous structures that allow this structure to be built for free
+- [x] Future structures that can be built free is this card has already been built
 
 ### Card Types
 - Raw Resource: (Brown) Produce raw materials (lumber, stone, ore, clay)
@@ -111,11 +111,11 @@ Cards are passed left-right-left over the three ages, so you need to keep an eye
 - [x] Players can only trade with neighboring cities
 - [ ] Trading a neighboring city is initially 2 coins per resource and only allows players to use that resource, not take it from their neighbors
     - [ ] Some Commercial Structure (yellow) cards allow players to trade for certain materials for 1 coin after being built
-- [ ] On a single turn, players may trade for multiple resources from both neighboring cities
+- [x] On a single turn, players may trade for multiple resources from both neighboring cities
 - [ ] Traded resources are only available to the player during the turn they are bought
 - [ ] Only resources produced through the city/Wonder or a neighbors raw resource or manufactured good cards can be traded
 - [ ] Players are unable to purchase resources produced by commercial structures (or some Wonders)
-- [ ] Trade cannot be refused by neighboring cities
+- [x] Trade cannot be refused by neighboring cities
 
 ## War
 - [ ] At the end of an age (following sixth rotation), players go to war with BOTH neighboring cities
@@ -130,8 +130,8 @@ Cards are passed left-right-left over the three ages, so you need to keep an eye
 - [x] Name
 - [ ] Wonder and build level
 - [x] Value 1 and value 3 coins
-- [ ] Military Shields
-- [ ] Conflict Tokens
+- [x] Military Shields
+- [x] Conflict Tokens
 - [ ] Victory Points
 - [x] Entities (Raw Resources, Manufactured Goods, Science)
 
@@ -151,7 +151,7 @@ Cards are passed left-right-left over the three ages, so you need to keep an eye
 ## Building the Structure
 - [x] If a structure has a resource cost, the player must have sufficient resources in their stockpile or purchase them from neighbors (see "Commerce and Trading")
 - [x] If a structure has a coin cost, the player must pay that cost to the bank
-- [ ] If player owns a previous structure, they may build their chosen structure for free
+- [x] If player owns a previous structure, they may build their chosen structure for free
 - [ ] Identical structures cannot be built by the same player
 - [x] At the end of a rotation, all player's built structures are revealed
 
