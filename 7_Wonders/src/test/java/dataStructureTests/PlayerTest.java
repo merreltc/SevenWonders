@@ -254,6 +254,19 @@ public class PlayerTest {
 		Assert.assertEquals(0,player.getConflictTotal());
 	}
 	
+	@Test
+	public void testRemoveInvalidNumberOfValue1ConflictTokens() {
+		Player player = new Player("Jane Doe", WonderType.COLOSSUS);
+		player.addValue1(5, ChipType.CONFLICTTOKEN);
+		try{
+			player.removeValue1(6, ChipType.CONFLICTTOKEN);
+			fail();
+		}catch (Exception e){
+			Assert.assertEquals("Player does not have 6 value 1 token(s)", e.getMessage());
+		}
+		
+	}
+	
 
 	@Test
 	public void testAddInvalidNumValue3CoinsNeg1ErrorMessage() {
