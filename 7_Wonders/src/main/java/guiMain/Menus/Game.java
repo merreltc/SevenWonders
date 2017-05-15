@@ -4,7 +4,6 @@ import java.awt.Graphics;
 import java.awt.Point;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Locale;
 import java.util.ResourceBundle;
 
 import javax.swing.JOptionPane;
@@ -13,7 +12,6 @@ import backend.GameManager;
 import dataStructures.Player;
 import dataStructures.Wonder;
 import guiDataStructures.Constants;
-import guiDataStructures.PlayerInformationHolder;
 import guiMain.GuiTradeHelper;
 import guiMain.HandManager;
 import guiMain.Message;
@@ -33,28 +31,25 @@ public class Game extends Menu {
 	ResourceViewer resource = new ResourceViewer();
 
 	public Game(int numOfPlayers, RenderImage renderer) {
-		setUpPlayers(numOfPlayers);
+		initializeGameManager(numOfPlayers);
 		this.renderer = renderer;
 	}
 
-	private void setUpPlayers(int numOfPlayers) {
-		ArrayList<PlayerInformationHolder> players = new ArrayList<PlayerInformationHolder>();
-	
-		HashMap<String, Wonder.WonderType> wonderMap = getWonderMap();
+	private void initializeGameManager(int numOfPlayers) {
+		ArrayList<String> playerNames = setUpPlayers(numOfPlayers);
+		this.gameManager = new GameManager(playerNames);
+		this.gameManager.dealInitialTurnCards();
+	}
+
+	private ArrayList<String> setUpPlayers(int numOfPlayers) {
+		ArrayList<String> players = new ArrayList<String>();
 
 		for (int i = 0; i < numOfPlayers; i++) {
 			String name = Message.inputPlayerNameMessage(i);
-			String wonder = Message.dropDownWonderSelectionMessage(wonderMap.keySet().toArray());
-
-			PlayerInformationHolder holder = new PlayerInformationHolder(name, wonderMap.get(wonder), 'a');
-			players.add(holder);
-			wonderMap.remove(wonder);
-			wonderMap.keySet().remove(wonder);
-			/* Set wonder to correct values */
+			players.add(name);
 		}
 
-		this.gameManager = new GameManager(players);
-		this.gameManager.dealInitialTurnCards();
+		return players;
 	}
 
 	private HashMap<String, Wonder.WonderType> getWonderMap() {

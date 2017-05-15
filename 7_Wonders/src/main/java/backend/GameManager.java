@@ -1,18 +1,13 @@
 package backend;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Set;
 
 import backend.RotateHandler.Direction;
 import dataStructures.Card;
 import dataStructures.Deck;
+import dataStructures.Deck.Age;
 import dataStructures.GameBoard;
 import dataStructures.Player;
-import dataStructures.Wonder;
-import guiDataStructures.PlayerInformationHolder;
-import guiMain.Message;
-import dataStructures.Deck.Age;
 
 /**
  * Controls the actions of the game and delegates those responsibilities to
@@ -31,20 +26,20 @@ public class GameManager {
 
 	private Direction currentDirection = Direction.CLOCKWISE;
 
-	public GameManager(ArrayList<PlayerInformationHolder> holder) {
-		this(holder, new SetUpPlayerHandler(), new SetUpDeckHandler(), new TurnHandler(), new PlayerTurnHandler());
+	public GameManager(ArrayList<String> names) {
+		this(names, new SetUpPlayerHandler(), new SetUpDeckHandler(), new TurnHandler(), new PlayerTurnHandler());
 	}
 
-	public GameManager(ArrayList<PlayerInformationHolder> holder, SetUpPlayerHandler setUpPlayerHandler,
+	public GameManager(ArrayList<String> names, SetUpPlayerHandler setUpPlayerHandler,
 			SetUpDeckHandler setUpDeckHandler, TurnHandler turnHandler, PlayerTurnHandler playerTurnHandler) {
 		this.setUpPlayerHandler = setUpPlayerHandler;
 		this.setUpDeckHandler = setUpDeckHandler;
 		this.turnHandler = turnHandler;
 		this.playerTurnHandler = playerTurnHandler;
-		setUpGame(holder);
+		setUpGame(names);
 	}
 
-	public void setUpGame(ArrayList<PlayerInformationHolder> holder) {
+	public void setUpGame(ArrayList<String> holder) {
 		ArrayList<Player> players = this.setUpPlayerHandler.setUpAndReturnPlayers(holder);
 		Deck deck = this.setUpDeckHandler.createDeck(Age.AGE1, holder.size());
 

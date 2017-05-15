@@ -1,23 +1,18 @@
 package backendTests;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Set;
 
-import org.easymock.EasyMock;
-import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
 
 import backend.GameManager;
 import backend.SetUpPlayerHandler;
 import dataStructures.Player;
 import dataStructures.Wonder.WonderType;
-import guiDataStructures.PlayerInformationHolder;
-import dataStructures.Wonder;
 
 public class SetUpPlayerHandlerTest {
 
@@ -65,10 +60,10 @@ public class SetUpPlayerHandlerTest {
 		ArrayList<String> playerNames = new ArrayList<String>();
 		ArrayList<WonderType> wonders = new ArrayList<WonderType>();
 
-		GameManager manager = new GameManager(compileHolderObjects(playerNames, wonders));
+		GameManager manager = new GameManager(playerNames);
 
 		SetUpPlayerHandler setUpHandler = new SetUpPlayerHandler();
-		setUpHandler.setUpAndReturnPlayers(compileHolderObjects(playerNames, wonders));
+		setUpHandler.setUpAndReturnPlayers(playerNames);
 		fail();
 	}
 
@@ -81,13 +76,13 @@ public class SetUpPlayerHandlerTest {
 						WonderType.MAUSOLEUM, WonderType.GARDENS, WonderType.PYRAMIDS, WonderType.PYRAMIDS));
 
 		SetUpPlayerHandler setUpHandler = new SetUpPlayerHandler();
-		setUpHandler.setUpAndReturnPlayers(compileHolderObjects(playerNames, wonders));
+		setUpHandler.setUpAndReturnPlayers(playerNames);
 		fail();
 	}
 
 	private void verifyPlayersAndWonders(ArrayList<String> playerNames, ArrayList<WonderType> wonders) {
 		SetUpPlayerHandler setUpHandler = new SetUpPlayerHandler();
-		ArrayList<Player> players = setUpHandler.createPlayers(compileHolderObjects(playerNames, wonders));
+		ArrayList<Player> players = setUpHandler.createPlayers(playerNames);
 
 		for (int i = 0; i < playerNames.size(); i++) {
 			String name = players.get(i).getName();
@@ -95,15 +90,5 @@ public class SetUpPlayerHandlerTest {
 
 			assertEquals(wonders.get(i), players.get(i).getWonder().getType());
 		}
-	}
-	
-	private ArrayList<PlayerInformationHolder> compileHolderObjects(ArrayList<String> playerNames, ArrayList<WonderType> wonders){
-		ArrayList<PlayerInformationHolder> holders = new ArrayList<PlayerInformationHolder>();
-		
-		for (int i = 0; i < playerNames.size(); i++){
-			PlayerInformationHolder currentHolder = new PlayerInformationHolder(playerNames.get(i), wonders.get(i), 'a');
-			holders.add(currentHolder);
-		}
-		return holders;
 	}
 }

@@ -1,6 +1,8 @@
 package backendTests;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -21,11 +23,9 @@ import dataStructures.Deck.Age;
 import dataStructures.GameBoard;
 import dataStructures.GeneralEnums.Good;
 import dataStructures.GeneralEnums.RawResource;
-import dataStructures.GeneralEnums.Resource;
 import dataStructures.Player;
 import dataStructures.Wonder;
 import dataStructures.Wonder.WonderType;
-import guiDataStructures.PlayerInformationHolder;
 
 public class GameManagerTest {
 	
@@ -36,7 +36,7 @@ public class GameManagerTest {
 		ArrayList<String> playerNames = new ArrayList<String>(Arrays.asList("Wolverine", "Captain America", "Black Widow"));
 		ArrayList<WonderType> wonders = new ArrayList<WonderType>(Arrays.asList( WonderType.COLOSSUS, WonderType.LIGHTHOUSE, WonderType.TEMPLE));
 		
-		GameManager manager = new GameManager(compileHolderObjects(playerNames, wonders));
+		GameManager manager = new GameManager(playerNames);
 
 		assertEquals(3, manager.getNumPlayers());
 	}
@@ -48,7 +48,7 @@ public class GameManagerTest {
 		ArrayList<WonderType> wonders = new ArrayList<WonderType>(Arrays.asList( WonderType.COLOSSUS, WonderType.LIGHTHOUSE, WonderType.TEMPLE, WonderType.STATUE, WonderType.MAUSOLEUM
 				, WonderType.GARDENS, WonderType.PYRAMIDS));
 		
-		GameManager manager = new GameManager(compileHolderObjects(playerNames, wonders));
+		GameManager manager = new GameManager(playerNames);
 
 		assertEquals(7, manager.getNumPlayers());
 	}
@@ -65,8 +65,8 @@ public class GameManagerTest {
 		ArrayList<String> playerNames = new ArrayList<String>(Arrays.asList("Wolverine", "Captain America", "Black Widow"));
 		ArrayList<WonderType> wonders = new ArrayList<WonderType>(Arrays.asList( WonderType.COLOSSUS, WonderType.LIGHTHOUSE, WonderType.TEMPLE));
 		
-		GameManager manager = new GameManager(compileHolderObjects(playerNames, wonders));
-		new GameManager(compileHolderObjects(playerNames, wonders), new SetUpPlayerHandler(), setUpDeckHandler, new TurnHandler(), new PlayerTurnHandler());
+		GameManager manager = new GameManager(playerNames);
+		new GameManager(playerNames, new SetUpPlayerHandler(), setUpDeckHandler, new TurnHandler(), new PlayerTurnHandler());
 
 		EasyMock.verify(setUpDeckHandler);
 	}
@@ -83,7 +83,7 @@ public class GameManagerTest {
 		ArrayList<WonderType> wonders = new ArrayList<WonderType>(Arrays.asList( WonderType.COLOSSUS, WonderType.LIGHTHOUSE, WonderType.TEMPLE, WonderType.STATUE, WonderType.MAUSOLEUM
 				, WonderType.GARDENS, WonderType.PYRAMIDS));
 
-		new GameManager(compileHolderObjects(playerNames, wonders), new SetUpPlayerHandler(), setUpDeckHandler, new TurnHandler(), new PlayerTurnHandler());
+		new GameManager(playerNames, new SetUpPlayerHandler(), setUpDeckHandler, new TurnHandler(), new PlayerTurnHandler());
 
 		EasyMock.verify(setUpDeckHandler);
 	}
@@ -93,7 +93,7 @@ public class GameManagerTest {
 		ArrayList<String> playerNames = new ArrayList<String>(Arrays.asList("Wolverine", "Captain America", "Black Widow"));
 		ArrayList<WonderType> wonders = new ArrayList<WonderType>(Arrays.asList( WonderType.COLOSSUS, WonderType.LIGHTHOUSE, WonderType.TEMPLE));
 		
-		GameManager manager = new GameManager(compileHolderObjects(playerNames, wonders));
+		GameManager manager = new GameManager(playerNames);
 		assertEquals(Direction.CLOCKWISE, manager.getDirection());
 	}
 
@@ -102,7 +102,7 @@ public class GameManagerTest {
 		ArrayList<String> playerNames = new ArrayList<String>(Arrays.asList("Wolverine", "Captain America", "Black Widow"));
 		ArrayList<WonderType> wonders = new ArrayList<WonderType>(Arrays.asList( WonderType.COLOSSUS, WonderType.LIGHTHOUSE, WonderType.TEMPLE));
 		
-		GameManager manager = new GameManager(compileHolderObjects(playerNames, wonders));
+		GameManager manager = new GameManager(playerNames);
 
 		manager.trade(manager.getPlayer(0), manager.getPlayer(1), 3);
 
@@ -115,7 +115,7 @@ public class GameManagerTest {
 		ArrayList<String> playerNames = new ArrayList<String>(Arrays.asList("Wolverine", "Captain America", "Black Widow"));
 		ArrayList<WonderType> wonders = new ArrayList<WonderType>(Arrays.asList( WonderType.COLOSSUS, WonderType.LIGHTHOUSE, WonderType.TEMPLE));
 		
-		GameManager manager = new GameManager(compileHolderObjects(playerNames, wonders));
+		GameManager manager = new GameManager(playerNames);
 
 		comparePlayerPositions(manager.getPlayers(), manager, 0, 1, 2);
 	}
@@ -126,7 +126,7 @@ public class GameManagerTest {
 		ArrayList<WonderType> wonders = new ArrayList<WonderType>(Arrays.asList( WonderType.COLOSSUS, WonderType.LIGHTHOUSE, WonderType.TEMPLE, WonderType.STATUE, WonderType.MAUSOLEUM
 				, WonderType.GARDENS, WonderType.PYRAMIDS));
 		
-		GameManager manager = new GameManager(compileHolderObjects(playerNames, wonders));
+		GameManager manager = new GameManager(playerNames);
 
 		comparePlayerPositions(manager.getPlayers(), manager, 0, 1, 6);
 	}
@@ -136,7 +136,7 @@ public class GameManagerTest {
 		ArrayList<String> playerNames = new ArrayList<String>(Arrays.asList("Wolverine", "Captain America", "Black Widow"));
 		ArrayList<WonderType> wonders = new ArrayList<WonderType>(Arrays.asList( WonderType.COLOSSUS, WonderType.LIGHTHOUSE, WonderType.TEMPLE));
 		
-		GameManager manager = new GameManager(compileHolderObjects(playerNames, wonders));
+		GameManager manager = new GameManager(playerNames);
 		manager.rotateClockwise();
 
 		comparePlayerPositions(manager.getPlayers(), manager, 1, 2, 0);
@@ -148,7 +148,7 @@ public class GameManagerTest {
 		ArrayList<WonderType> wonders = new ArrayList<WonderType>(Arrays.asList( WonderType.COLOSSUS, WonderType.LIGHTHOUSE, WonderType.TEMPLE, WonderType.STATUE, WonderType.MAUSOLEUM
 				, WonderType.GARDENS, WonderType.PYRAMIDS));
 		
-		GameManager manager = new GameManager(compileHolderObjects(playerNames, wonders));
+		GameManager manager = new GameManager(playerNames);
 
 		manager.rotateClockwise();
 
@@ -161,7 +161,7 @@ public class GameManagerTest {
 		ArrayList<WonderType> wonders = new ArrayList<WonderType>(Arrays.asList( WonderType.COLOSSUS, WonderType.LIGHTHOUSE, WonderType.TEMPLE, WonderType.STATUE, WonderType.MAUSOLEUM
 				));
 		
-		GameManager manager = new GameManager(compileHolderObjects(playerNames, wonders));
+		GameManager manager = new GameManager(playerNames);
 		manager.rotateClockwise();
 		manager.rotateClockwise();
 
@@ -174,7 +174,7 @@ public class GameManagerTest {
 		ArrayList<WonderType> wonders = new ArrayList<WonderType>(Arrays.asList( WonderType.COLOSSUS, WonderType.LIGHTHOUSE, WonderType.TEMPLE, WonderType.STATUE, WonderType.MAUSOLEUM
 				));
 		
-		GameManager manager = new GameManager(compileHolderObjects(playerNames, wonders));
+		GameManager manager = new GameManager(playerNames);
 
 		for (int i = 0; i < 10; i++) {
 			manager.rotateClockwise();
@@ -189,7 +189,7 @@ public class GameManagerTest {
 		ArrayList<WonderType> wonders = new ArrayList<WonderType>(Arrays.asList( WonderType.COLOSSUS, WonderType.LIGHTHOUSE, WonderType.TEMPLE, WonderType.STATUE, WonderType.MAUSOLEUM
 				, WonderType.GARDENS, WonderType.PYRAMIDS));
 		
-		GameManager manager = new GameManager(compileHolderObjects(playerNames, wonders));
+		GameManager manager = new GameManager(playerNames);
 
 		manager.changeRotateDirectionAndResetPositions(Direction.CLOCKWISE);
 		comparePlayerPositions(manager.getPlayers(), manager, 0, 1, 6);
@@ -207,7 +207,7 @@ public class GameManagerTest {
 		ArrayList<String> playerNames = new ArrayList<String>(Arrays.asList("Wolverine", "Captain America", "Black Widow"));
 		ArrayList<WonderType> wonders = new ArrayList<WonderType>(Arrays.asList( WonderType.COLOSSUS, WonderType.LIGHTHOUSE, WonderType.TEMPLE));
 		
-		GameManager manager = new GameManager(compileHolderObjects(playerNames, wonders));
+		GameManager manager = new GameManager(playerNames);
 
 		manager.changeRotateDirectionAndResetPositions(Direction.CLOCKWISE);
 		comparePlayerPositions(manager.getPlayers(), manager, 0, 1, 2);
@@ -221,7 +221,7 @@ public class GameManagerTest {
 		ArrayList<String> playerNames = new ArrayList<String>(Arrays.asList("Wolverine", "Captain America", "Black Widow"));
 		ArrayList<WonderType> wonders = new ArrayList<WonderType>(Arrays.asList( WonderType.COLOSSUS, WonderType.LIGHTHOUSE, WonderType.TEMPLE));
 		
-		GameManager manager = new GameManager(compileHolderObjects(playerNames, wonders));
+		GameManager manager = new GameManager(playerNames);
 		manager.changeRotateDirectionAndResetPositions(Direction.COUNTERCLOCKWISE);
 		manager.rotateCounterClockwise();
 
@@ -234,7 +234,7 @@ public class GameManagerTest {
 		ArrayList<WonderType> wonders = new ArrayList<WonderType>(Arrays.asList( WonderType.COLOSSUS, WonderType.LIGHTHOUSE, WonderType.TEMPLE, WonderType.STATUE, WonderType.MAUSOLEUM
 				, WonderType.GARDENS, WonderType.PYRAMIDS));
 		
-		GameManager manager = new GameManager(compileHolderObjects(playerNames, wonders));
+		GameManager manager = new GameManager(playerNames);
 		manager.changeRotateDirectionAndResetPositions(Direction.COUNTERCLOCKWISE);
 		manager.rotateCounterClockwise();
 
@@ -247,7 +247,7 @@ public class GameManagerTest {
 		ArrayList<WonderType> wonders = new ArrayList<WonderType>(Arrays.asList( WonderType.COLOSSUS, WonderType.LIGHTHOUSE, WonderType.TEMPLE, WonderType.STATUE, WonderType.MAUSOLEUM
 				));
 		
-		GameManager manager = new GameManager(compileHolderObjects(playerNames, wonders));
+		GameManager manager = new GameManager(playerNames);
 		manager.changeRotateDirectionAndResetPositions(Direction.COUNTERCLOCKWISE);
 		manager.rotateCounterClockwise();
 		manager.rotateCounterClockwise();
@@ -261,7 +261,7 @@ public class GameManagerTest {
 		ArrayList<WonderType> wonders = new ArrayList<WonderType>(Arrays.asList( WonderType.COLOSSUS, WonderType.LIGHTHOUSE, WonderType.TEMPLE, WonderType.STATUE, WonderType.MAUSOLEUM
 				));
 		
-		GameManager manager = new GameManager(compileHolderObjects(playerNames, wonders));
+		GameManager manager = new GameManager(playerNames);
 		manager.changeRotateDirectionAndResetPositions(Direction.COUNTERCLOCKWISE);
 
 		for (int i = 0; i < 10; i++) {
@@ -286,7 +286,7 @@ public class GameManagerTest {
 		ArrayList<WonderType> wonders = new ArrayList<WonderType>(Arrays.asList( WonderType.COLOSSUS, WonderType.LIGHTHOUSE, WonderType.TEMPLE, WonderType.STATUE, WonderType.MAUSOLEUM
 				));
 
-		GameManager manager = new GameManager(compileHolderObjects(playerNames, wonders), new SetUpPlayerHandler(), new SetUpDeckHandler(), turnHandler, new PlayerTurnHandler());
+		GameManager manager = new GameManager(playerNames, new SetUpPlayerHandler(), new SetUpDeckHandler(), turnHandler, new PlayerTurnHandler());
 		turnHandler.dealInitialTurnCards(manager.getPlayers(), manager.getNumPlayers(),
 				manager.getGameBoard().getDeck());
 
@@ -305,7 +305,7 @@ public class GameManagerTest {
 		ArrayList<WonderType> wonders = new ArrayList<WonderType>(Arrays.asList( WonderType.COLOSSUS, WonderType.LIGHTHOUSE, WonderType.TEMPLE, WonderType.STATUE, WonderType.MAUSOLEUM
 				));
 
-		GameManager manager = new GameManager(compileHolderObjects(playerNames, wonders), new SetUpPlayerHandler(), new SetUpDeckHandler(), new TurnHandler(), playerTurnHandler);
+		GameManager manager = new GameManager(playerNames, new SetUpPlayerHandler(), new SetUpDeckHandler(), new TurnHandler(), playerTurnHandler);
 		manager.dealInitialTurnCards();
 		Card card = manager.getCurrentPlayer().getCurrentHand().get(0);
 		playerTurnHandler.buildStructure(manager.getCurrentPlayer(), card);
@@ -322,7 +322,7 @@ public class GameManagerTest {
 		ArrayList<String> playerNames = new ArrayList<String>(Arrays.asList("Wolverine", "Captain America", "Black Widow"));
 		ArrayList<WonderType> wonders = new ArrayList<WonderType>(Arrays.asList( WonderType.COLOSSUS, WonderType.LIGHTHOUSE, WonderType.TEMPLE));
 
-		GameManager manager = new GameManager(compileHolderObjects(playerNames, wonders), new SetUpPlayerHandler(), new SetUpDeckHandler(), new TurnHandler(), new PlayerTurnHandler());
+		GameManager manager = new GameManager(playerNames, new SetUpPlayerHandler(), new SetUpDeckHandler(), new TurnHandler(), new PlayerTurnHandler());
 		
 		ArrayList<Card> storage = new ArrayList<Card>();
 		Deck deck = manager.getGameBoard().getDeck();
@@ -344,7 +344,7 @@ public class GameManagerTest {
 		ArrayList<String> playerNames = new ArrayList<String>(Arrays.asList("Wolverine", "Captain America", "Black Widow"));
 		ArrayList<WonderType> wonders = new ArrayList<WonderType>(Arrays.asList( WonderType.COLOSSUS, WonderType.LIGHTHOUSE, WonderType.TEMPLE));
 
-		GameManager manager = new GameManager(compileHolderObjects(playerNames, wonders), new SetUpPlayerHandler(), new SetUpDeckHandler(), new TurnHandler(), new PlayerTurnHandler());
+		GameManager manager = new GameManager(playerNames, new SetUpPlayerHandler(), new SetUpDeckHandler(), new TurnHandler(), new PlayerTurnHandler());
 		
 		ArrayList<Card> storage = new ArrayList<Card>();
 		Deck deck = manager.getGameBoard().getDeck();
@@ -360,16 +360,6 @@ public class GameManagerTest {
 		assertEquals(1, (int) current.getCurrentTrades().get(Good.GLASS));
 		assertEquals(6, next.getCoinTotal());
 	}
-	
-	private ArrayList<PlayerInformationHolder> compileHolderObjects(ArrayList<String> playerNames, ArrayList<WonderType> wonders){
-		ArrayList<PlayerInformationHolder> holders = new ArrayList<PlayerInformationHolder>();
-		
-		for (int i = 0; i < playerNames.size(); i++){
-			PlayerInformationHolder currentHolder = new PlayerInformationHolder(playerNames.get(i), wonders.get(i), 'a');
-			holders.add(currentHolder);
-		}
-		return holders;
-	}
 
 	@Test
 	public void testMakeChangeForValue1Coins() {
@@ -378,7 +368,7 @@ public class GameManagerTest {
 		ArrayList<WonderType> wonders = new ArrayList<WonderType>(
 				Arrays.asList(WonderType.COLOSSUS, WonderType.LIGHTHOUSE, WonderType.TEMPLE));
 
-		GameManager manager = new GameManager(compileHolderObjects(playerNames, wonders), new SetUpPlayerHandler(), new SetUpDeckHandler(),
+		GameManager manager = new GameManager(playerNames, new SetUpPlayerHandler(), new SetUpDeckHandler(),
 				new TurnHandler(), new PlayerTurnHandler());
 		GameBoard board = manager.getGameBoard();
 		manager.getCurrentPlayer().addValue3(1, Chip.ChipType.COIN);
@@ -397,7 +387,7 @@ public class GameManagerTest {
 		ArrayList<WonderType> wonders = new ArrayList<WonderType>(
 				Arrays.asList(WonderType.COLOSSUS, WonderType.LIGHTHOUSE, WonderType.TEMPLE));
 
-		GameManager manager = new GameManager(compileHolderObjects(playerNames, wonders), new SetUpPlayerHandler(), new SetUpDeckHandler(),
+		GameManager manager = new GameManager(playerNames, new SetUpPlayerHandler(), new SetUpDeckHandler(),
 				new TurnHandler(), new PlayerTurnHandler());
 		GameBoard board = manager.getGameBoard();
 
@@ -417,7 +407,7 @@ public class GameManagerTest {
 
 		PlayerTurnHandler playerTurnHandler = EasyMock.mock(PlayerTurnHandler.class);
 
-		GameManager manager = new GameManager(compileHolderObjects(playerNames, wonders), new SetUpPlayerHandler(), new SetUpDeckHandler(),
+		GameManager manager = new GameManager(playerNames, new SetUpPlayerHandler(), new SetUpDeckHandler(),
 				new TurnHandler(), playerTurnHandler);
 		playerTurnHandler.discardSelectedCard(manager.getCurrentPlayer(), manager.getGameBoard().getDeck().getCard(0),
 				manager.getGameBoard());
@@ -438,7 +428,7 @@ public class GameManagerTest {
 				Arrays.asList(WonderType.COLOSSUS, WonderType.LIGHTHOUSE, WonderType.TEMPLE));
 
 		TurnHandler turnHandler = EasyMock.mock(TurnHandler.class);
-		GameManager manager = new GameManager(compileHolderObjects(playerNames, wonders), new SetUpPlayerHandler(), new SetUpDeckHandler(),
+		GameManager manager = new GameManager(playerNames, new SetUpPlayerHandler(), new SetUpDeckHandler(),
 				turnHandler, new PlayerTurnHandler());
 
 		EasyMock.expect(turnHandler.getNumPlayersUntilPass()).andReturn(2);
@@ -464,7 +454,7 @@ public class GameManagerTest {
 
 		TurnHandler turnHandler = EasyMock.partialMockBuilder(TurnHandler.class)
 				.addMockedMethod("getNumPlayersUntilPass").createMock();
-		GameManager manager = new GameManager(compileHolderObjects(playerNames, wonders), new SetUpPlayerHandler(), new SetUpDeckHandler(),
+		GameManager manager = new GameManager(playerNames, new SetUpPlayerHandler(), new SetUpDeckHandler(),
 				turnHandler, new PlayerTurnHandler());
 		manager.dealInitialTurnCards();
 
@@ -500,7 +490,7 @@ public class GameManagerTest {
 		ArrayList<Card> cards2 = new SetUpDeckHandler().createCards(Age.AGE2, 3);
 		Deck deck2 = new Deck(Age.AGE2, cards2);
 
-		GameManager manager = EasyMock.partialMockBuilder(GameManager.class).withConstructor(compileHolderObjects(playerNames, wonders), new SetUpPlayerHandler(), new SetUpDeckHandler(),
+		GameManager manager = EasyMock.partialMockBuilder(GameManager.class).withConstructor(playerNames, new SetUpPlayerHandler(), new SetUpDeckHandler(),
 				turnHandler, new PlayerTurnHandler()).addMockedMethod("rotateCounterClockwise").createMock();
 		manager.dealInitialTurnCards();
 
@@ -547,7 +537,7 @@ public class GameManagerTest {
 		ArrayList<Card> cards3 = new SetUpDeckHandler().createCards(Age.AGE3, 3);
 		Deck deck3 = new Deck(Age.AGE3, cards3);
 
-		GameManager manager = new GameManager(compileHolderObjects(playerNames, wonders), new SetUpPlayerHandler(), new SetUpDeckHandler(),
+		GameManager manager = new GameManager(playerNames, new SetUpPlayerHandler(), new SetUpDeckHandler(),
 				turnHandler, new PlayerTurnHandler());
 		manager.getGameBoard().setDeck(deck2);
 		manager.dealInitialTurnCards();

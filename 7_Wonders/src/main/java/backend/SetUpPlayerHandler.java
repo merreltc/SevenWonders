@@ -5,13 +5,26 @@ import java.util.HashMap;
 
 import dataStructures.Player;
 import dataStructures.Wonder;
-import guiDataStructures.PlayerInformationHolder;
 
 public class SetUpPlayerHandler {
+	private PlayerFactory playerFactory;
 	
-	public ArrayList<Player> setUpAndReturnPlayers(ArrayList<PlayerInformationHolder> holder) {
-		validatePlayerNum(holder.size());
-		return createPlayers(holder);
+	public SetUpPlayerHandler() {
+		this.playerFactory = new PlayerFactory();
+	}
+	
+	public ArrayList<Player> setUpAndReturnPlayers(ArrayList<String> playerNames) {
+		validatePlayerNum(playerNames.size());
+		return createPlayers(playerNames);
+	}
+	
+	public ArrayList<Player> createPlayers(ArrayList<String> playerNames) {
+		ArrayList<Player> players = new ArrayList<Player>();
+		for(String name : playerNames) {
+			Player temp = playerFactory.getPlayer(name);
+			players.add(temp);
+		}
+		return players;
 	}
 	
 	private HashMap<Wonder.WonderType, Integer> getWonderFrequencyMap(ArrayList<Wonder.WonderType> wonders) {
@@ -41,16 +54,5 @@ public class SetUpPlayerHandler {
 		}
 
 		return true;
-	}
-
-	public ArrayList<Player> createPlayers(ArrayList<PlayerInformationHolder> holder) {
-		ArrayList<Player> players = new ArrayList<Player>();
-		
-		for(int i = 0; i < holder.size();i++) {
-			PlayerInformationHolder currentHolder = holder.get(i);
-			players.add(new Player(currentHolder.playerName, currentHolder.wonderType));
-		}
-		
-		return players;
 	}
 }
