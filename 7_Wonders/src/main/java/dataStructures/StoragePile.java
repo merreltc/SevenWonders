@@ -5,6 +5,7 @@ import java.util.ArrayList;
 public class StoragePile{
 	private ArrayList<Card> commercePile = new ArrayList<Card>();
 	private ArrayList<Card> sciencePile = new ArrayList<Card>();
+	private ArrayList<Card> endGamePile = new ArrayList<Card>();
 
 	public ArrayList<Card> getCommercePile() {
 		return this.commercePile;
@@ -15,7 +16,7 @@ public class StoragePile{
 	}
 
 	public ArrayList<Card> getEndGamePile() {
-		return new ArrayList<Card>();
+		return this.endGamePile;
 	}
 
 	public ArrayList<Card> getImmediateEffectPile() {
@@ -28,5 +29,9 @@ public class StoragePile{
 
 	public void addToSciencePile(Card card) {
 		this.sciencePile.add(card);
+	}
+
+	public void addToEndGamePile(Card card) {
+		this.endGamePile.add(card);
 	}
 }
