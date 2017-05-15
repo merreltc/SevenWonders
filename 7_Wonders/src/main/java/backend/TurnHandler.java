@@ -29,9 +29,17 @@ public class TurnHandler {
 	}
 	
 	public void endAge(ArrayList<Player> players, Age age1) {
-		players.get(0).addValueNeg1(1, ChipType.CONFLICTTOKEN);
-		players.get(1).addValue1(1, ChipType.CONFLICTTOKEN);
-		players.get(2).addValueNeg1(1, ChipType.CONFLICTTOKEN);
+		for (int i = 0; i < players.size(); i++){
+			Player player1 = players.get(i);
+			Player player2 = players.get((i+1)%players.size());
+			if (player1.getNumShields() > player2.getNumShields()){
+				player1.addValue1(1, ChipType.CONFLICTTOKEN);
+				player2.addValueNeg1(1, ChipType.CONFLICTTOKEN);
+			}else if (player1.getNumShields() < player2.getNumShields()){
+				player2.addValue1(1, ChipType.CONFLICTTOKEN);
+				player1.addValueNeg1(1, ChipType.CONFLICTTOKEN);
+			}
+		}
 	}
 
 	public int getNumPlayersUntilPass() {
