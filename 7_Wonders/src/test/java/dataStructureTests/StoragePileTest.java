@@ -63,4 +63,17 @@ public class StoragePileTest {
 		assertTrue(storagePile.getSciencePile().isEmpty());
 		assertEquals(card, storagePile.getImmediateEffectPile().get(0));
 	}
+	
+	@Test
+	public void testAddToCommercePileManyCards() {
+		StoragePile storagePile = new StoragePile();
+		
+		for(int i = 0; i < 50; i++){
+			Card card = EasyMock.mock(Card.class);
+			storagePile.addToCommercePile(card);
+		}
+		
+		assertFalse(storagePile.getCommercePile().isEmpty());
+		assertEquals(50, storagePile.getCommercePile().size());
+	}
 }
