@@ -31,6 +31,7 @@ public class GuiTradeHelper {
 
 		try {
 			this.gameManager.tradeForEntity(tradeFrom, tradeTo, resourceEnum);
+			Message.showMessage("Trade Successful");
 		} catch (Exception e) {
 			Message.showMessage(e.getMessage());
 		}
