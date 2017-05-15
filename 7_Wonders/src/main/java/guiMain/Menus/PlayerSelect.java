@@ -8,6 +8,7 @@ import java.util.Locale;
 import java.util.ResourceBundle;
 
 import guiDataStructures.Constants;
+import guiMain.Message;
 import guiMain.RenderImage;
 import guiMain.Translate;
 import guiMain.Interactables.Button;
@@ -35,6 +36,7 @@ public class PlayerSelect extends Menu {
 
 	@Override
 	public void initialize() {
+		Message.SelectDifficulty();
 		this.clearInteractables();
 		for (int i = 3; i <= 7; i++) {
 			Button startGame = new Button(new Point(400 + 250 * (i - 3), 400), Constants.PlayerSelectButtonBounds,
