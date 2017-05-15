@@ -111,7 +111,7 @@ public class ValueEffect extends Effect {
 		ValueEffect value = (ValueEffect) obj;
 
 		if (this.valueAmount == value.getValueAmount() && this.getDirection() == value.getDirection()
-				&& this.affectingEntity == value.affectingEntity) {
+				&& this.affectingEntity == value.affectingEntity && this.value == value.getValue()) {
 			return true;
 		}
 

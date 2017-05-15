@@ -340,4 +340,12 @@ public class ValueEffectTest {
 		
 		assertFalse(effect.equals(effect2));
 	}
+	
+	@Test
+	public void testInvalidValueEffectEqualsGuild(){
+		ValueEffect effect = new ValueEffect(EffectType.VALUE, Value.GUILD, AffectingEntity.RAWRESOURCES, Direction.RIGHT, 1);
+		ValueEffect effect2 = new ValueEffect(EffectType.VALUE, Value.COMMERCE, AffectingEntity.RAWRESOURCES, Direction.RIGHT, 1);
+		
+		assertFalse(effect.equals(effect2));
+	}
 }
