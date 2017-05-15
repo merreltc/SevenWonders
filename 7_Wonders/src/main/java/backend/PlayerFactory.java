@@ -9,11 +9,14 @@ public class PlayerFactory {
 
 	public Player getPlayer(String name) {
 		this.currNumPlayers++;
-		
-		if(this.currNumPlayers > 7) {
-			new NoMorePlayersException("Cannot create more than 8 players");
-		}
-		
+		validateNewPlayer();
 		return new Player(name, WonderType.COLOSSUS);
+	}
+
+	private void validateNewPlayer() {
+		PlayerFactory factory = new PlayerFactory();
+		if(this.currNumPlayers > 7) {
+			throw new NoMorePlayersException("You've created the maximum number of players");
+		}
 	}
 }
