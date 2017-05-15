@@ -6,6 +6,7 @@ public class StoragePile{
 	private ArrayList<Card> commercePile = new ArrayList<Card>();
 	private ArrayList<Card> sciencePile = new ArrayList<Card>();
 	private ArrayList<Card> endGamePile = new ArrayList<Card>();
+	private ArrayList<Card> immediateEffectPile = new ArrayList<Card>();
 
 	public ArrayList<Card> getCommercePile() {
 		return this.commercePile;
@@ -20,7 +21,7 @@ public class StoragePile{
 	}
 
 	public ArrayList<Card> getImmediateEffectPile() {
-		return new ArrayList<Card>();
+		return this.immediateEffectPile;
 	}
 
 	public void addToCommercePile(Card card) {
@@ -33,5 +34,9 @@ public class StoragePile{
 
 	public void addToEndGamePile(Card card) {
 		this.endGamePile.add(card);
+	}
+
+	public void addToImmediateEffectPile(Card card) {
+		this.immediateEffectPile.add(card);
 	}
 }
