@@ -133,8 +133,8 @@ public class Player {
 			this.playerChips.numOfValue3Coins -= numCoinsToRemove;
 		}else{
 			validateNumOfConflictTokensToRemove(numCoinsToRemove, Chip.ChipValue.THREE);
-			this.playerChips.conflictTotal = 9;
-			this.playerChips.numOfValue3ConflictTokens = 3;
+			this.playerChips.conflictTotal -= 3*numCoinsToRemove;
+			this.playerChips.numOfValue3ConflictTokens -= numCoinsToRemove;
 		}
 	}
 	
