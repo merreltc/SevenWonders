@@ -126,11 +126,16 @@ public class Player {
 		this.playerChips.numOfValue1Coins -= numCoinsToRemove;
 	}
 
-	public void removeValue3(int numCoinsToRemove) {
-		validateNumCoinsToRemove(numCoinsToRemove, Chip.ChipValue.THREE);
-
-		this.playerChips.coinTotal -= 3 * numCoinsToRemove;
-		this.playerChips.numOfValue3Coins -= numCoinsToRemove;
+	public void removeValue3(int numCoinsToRemove, ChipType chipType) {
+		if (chipType == ChipType.COIN){
+			validateNumCoinsToRemove(numCoinsToRemove, Chip.ChipValue.THREE);
+			this.playerChips.coinTotal -= 3 * numCoinsToRemove;
+			this.playerChips.numOfValue3Coins -= numCoinsToRemove;
+		}else{
+			validateNumOfConflictTokensToRemove(numCoinsToRemove, Chip.ChipValue.THREE);
+			this.playerChips.conflictTotal = 9;
+			this.playerChips.numOfValue3ConflictTokens = 3;
+		}
 	}
 	
 	public void removeValue5(int numChipsToRemove, ChipType chipType) {
@@ -346,7 +351,7 @@ public class Player {
 			numValue3CoinsToRemove = this.playerChips.numOfValue3Coins;
 		}
 
-		this.removeValue3(numValue3CoinsToRemove);
+		this.removeValue3(numValue3CoinsToRemove,ChipType.COIN);
 		this.removeValue1(numValue1CoinsToRemove);
 	}
 

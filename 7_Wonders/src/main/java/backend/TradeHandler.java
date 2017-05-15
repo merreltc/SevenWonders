@@ -57,7 +57,7 @@ public class TradeHandler {
 	}
 
 	public static void tradeFromToValue3(Player from, Player to, int numCoinsToTrade) {
-		from.removeValue3(numCoinsToTrade);
+		from.removeValue3(numCoinsToTrade, Chip.ChipType.COIN);
 		to.addValue3(numCoinsToTrade, Chip.ChipType.COIN);
 	}
 
