@@ -22,10 +22,14 @@ public class StoragePile {
 		case VALUE:
 			ValueEffect value = (ValueEffect) card.getEffect();
 
-			if (value.getValue() != Value.GUILD && value.getDirection() != Direction.ALL) {
-				this.addToCommercePile(card);
-			} else {
+			Value actualValue = value.getValue();
+			Direction direction = value.getDirection();
+			if(actualValue == Value.GUILD || direction == Direction.ALL){
 				this.addToEndGamePile(card);
+			}else if (direction == Direction.SELF){
+				this.addToImmediateEffectPile(card);
+			} else {
+				this.addToCommercePile(card);
 			}
 			break;
 		default:
