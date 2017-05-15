@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import org.easymock.EasyMock;
+import org.junit.Assert;
 import org.junit.Test;
 
 import backend.SetUpDeckHandler;
@@ -16,12 +17,14 @@ import dataStructures.Card;
 import dataStructures.Chip;
 import dataStructures.Chip.ChipType;
 import dataStructures.Deck.Age;
+import dataStructures.Effect.EffectType;
+import dataStructures.EntityEffect;
+import dataStructures.EntityEffect.EntityType;
 import dataStructures.GeneralEnums.*;
 import dataStructures.Player;
 import dataStructures.Wonder;
 import dataStructures.Wonder.WonderType;
 import exceptions.InsufficientFundsException;
-import junit.framework.Assert;
 
 public class PlayerTest {
 
@@ -232,8 +235,8 @@ public class PlayerTest {
 		Player player = new Player("Jane Doe", WonderType.COLOSSUS);
 		player.addValue1(5, ChipType.CONFLICTTOKEN);
 		player.removeValue1(2, ChipType.CONFLICTTOKEN);
-		Assert.assertEquals(3,player.getNumValue1ConflictTokens());
-		Assert.assertEquals(3,player.getConflictTotal());
+		assertEquals(3,player.getNumValue1ConflictTokens());
+		assertEquals(3,player.getConflictTotal());
 	}
 	
 	@Test
@@ -241,8 +244,8 @@ public class PlayerTest {
 		Player player = new Player("Jane Doe", WonderType.COLOSSUS);
 		player.addValue1(5, ChipType.CONFLICTTOKEN);
 		player.removeValue1(3, ChipType.CONFLICTTOKEN);
-		Assert.assertEquals(2,player.getNumValue1ConflictTokens());
-		Assert.assertEquals(2,player.getConflictTotal());
+		assertEquals(2,player.getNumValue1ConflictTokens());
+		assertEquals(2,player.getConflictTotal());
 	}
 	
 	@Test
@@ -250,8 +253,8 @@ public class PlayerTest {
 		Player player = new Player("Jane Doe", WonderType.COLOSSUS);
 		player.addValue1(5, ChipType.CONFLICTTOKEN);
 		player.removeValue1(5, ChipType.CONFLICTTOKEN);
-		Assert.assertEquals(0,player.getNumValue1ConflictTokens());
-		Assert.assertEquals(0,player.getConflictTotal());
+		assertEquals(0,player.getNumValue1ConflictTokens());
+		assertEquals(0,player.getConflictTotal());
 	}
 	
 	@Test
@@ -262,7 +265,7 @@ public class PlayerTest {
 			player.removeValue1(6, ChipType.CONFLICTTOKEN);
 			fail();
 		}catch (Exception e){
-			Assert.assertEquals("Player does not have 6 value 1 token(s)", e.getMessage());
+			assertEquals("Player does not have 6 value 1 token(s)", e.getMessage());
 		}
 		
 	}
@@ -383,8 +386,8 @@ public class PlayerTest {
 		Player player = new Player("Jane Doe", WonderType.COLOSSUS);
 		player.addValue3(5, ChipType.CONFLICTTOKEN);
 		player.removeValue3(2, ChipType.CONFLICTTOKEN);
-		Assert.assertEquals(3,player.getNumValue3ConflictTokens());
-		Assert.assertEquals(9,player.getConflictTotal());
+		assertEquals(3,player.getNumValue3ConflictTokens());
+		assertEquals(9,player.getConflictTotal());
 	}
 	
 	@Test
@@ -392,8 +395,8 @@ public class PlayerTest {
 		Player player = new Player("Jane Doe", WonderType.COLOSSUS);
 		player.addValue3(5, ChipType.CONFLICTTOKEN);
 		player.removeValue3(3, ChipType.CONFLICTTOKEN);
-		Assert.assertEquals(2,player.getNumValue3ConflictTokens());
-		Assert.assertEquals(6,player.getConflictTotal());
+		assertEquals(2,player.getNumValue3ConflictTokens());
+		assertEquals(6,player.getConflictTotal());
 	}
 	
 	@Test
@@ -401,8 +404,8 @@ public class PlayerTest {
 		Player player = new Player("Jane Doe", WonderType.COLOSSUS);
 		player.addValue3(5, ChipType.CONFLICTTOKEN);
 		player.removeValue3(5, ChipType.CONFLICTTOKEN);
-		Assert.assertEquals(0,player.getNumValue3ConflictTokens());
-		Assert.assertEquals(0,player.getConflictTotal());
+		assertEquals(0,player.getNumValue3ConflictTokens());
+		assertEquals(0,player.getConflictTotal());
 	}
 	
 	@Test
@@ -479,8 +482,8 @@ public class PlayerTest {
 		Player player = new Player("Jane Doe", WonderType.COLOSSUS);
 		player.addValue5(5, ChipType.CONFLICTTOKEN);
 		player.removeValue5(3, ChipType.CONFLICTTOKEN);
-		Assert.assertEquals(3,player.getNumValue5ConflictTokens());
-		Assert.assertEquals(15,player.getConflictTotal());
+		assertEquals(3,player.getNumValue5ConflictTokens());
+		assertEquals(15,player.getConflictTotal());
 	}
 	
 	@Test
@@ -568,6 +571,44 @@ public class PlayerTest {
 		player.setStoragePile(playerCards);
 
 		assertTrue(player.storagePileContainsEntity(RawResource.LUMBER));
+	}
+	
+	@Test
+	public void testStoragePileContainsCardByName(){
+		Player player = new Player("Jane Doe", WonderType.COLOSSUS);
+		Card card = EasyMock.mock(Card.class);
+		EntityEffect effect = EasyMock.mock(EntityEffect.class);
+		EasyMock.expect(card.getName()).andReturn("Loom");
+		EasyMock.expect(card.getEffectType()).andReturn(EffectType.ENTITY);
+		EasyMock.expect(card.getEffect()).andReturn(effect);
+		EasyMock.expect(effect.getEntityType()).andReturn(EntityType.RESOURCE);
+		EasyMock.replay(card, effect);
+		
+		ArrayList<Card> storage = new ArrayList<Card>();
+		storage.add(card);
+		player.setStoragePile(storage);
+		Assert.assertTrue(player.storagePileContainsCardByName("Loom"));
+		
+		EasyMock.verify(card, effect);
+	}
+	
+	@Test
+	public void testStoragePileContainsCardByNameFails(){
+		Player player = new Player("Jane Doe", WonderType.COLOSSUS);
+		Card card = EasyMock.mock(Card.class);
+		EntityEffect effect = EasyMock.mock(EntityEffect.class);
+		EasyMock.expect(card.getName()).andReturn("Loom");
+		EasyMock.expect(card.getEffectType()).andReturn(EffectType.ENTITY);
+		EasyMock.expect(card.getEffect()).andReturn(effect);
+		EasyMock.expect(effect.getEntityType()).andReturn(EntityType.RESOURCE);
+		EasyMock.replay(card, effect);
+		
+		ArrayList<Card> storage = new ArrayList<Card>();
+		storage.add(card);
+		player.setStoragePile(storage);
+		Assert.assertFalse(player.storagePileContainsCardByName("Press"));
+		
+		EasyMock.verify(card, effect);
 	}
 
 	@Test
@@ -791,15 +832,15 @@ public class PlayerTest {
 	public void testAddValue5ConflictTokens(){
 		Player player = new Player("Jane Doe", WonderType.COLOSSUS);
 		player.addValue5(3, Chip.ChipType.CONFLICTTOKEN);
-		Assert.assertEquals(3, player.getNumValue5ConflictTokens());
-		Assert.assertEquals(15, player.getConflictTotal());
+		assertEquals(3, player.getNumValue5ConflictTokens());
+		assertEquals(15, player.getConflictTotal());
 	}
 	
 	@Test
 	public void testAddValue5ConflictTokens2(){
 		Player player = new Player("Jane Doe", WonderType.COLOSSUS);
 		player.addValue5(5, Chip.ChipType.CONFLICTTOKEN);
-		Assert.assertEquals(5, player.getNumValue5ConflictTokens());
-		Assert.assertEquals(25, player.getConflictTotal());
+		assertEquals(5, player.getNumValue5ConflictTokens());
+		assertEquals(25, player.getConflictTotal());
 	}
 }

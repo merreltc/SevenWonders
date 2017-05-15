@@ -1,4 +1,3 @@
-
 package dataStructures;
 
 import java.util.ArrayList;
@@ -18,7 +17,7 @@ public class Player {
 	private Wonder wonder;
 
 	private ArrayList<Card> currentHand = new ArrayList<Card>();
-	private ArrayList<Card> storagePile = new ArrayList<Card>();
+	private StoragePile storagePile = new StoragePile();
 
 	private HashMap<Enum, Integer> currentTrades = new HashMap<Enum, Integer>();
 	private PlayerChips playerChips = new PlayerChips();
@@ -32,7 +31,7 @@ public class Player {
 		protected int numOfValue5ConflictTokens = 0;
 		protected int conflictTotal = 0;
 		protected int coinTotal = 3;
-		public int numOfValueNeg3ConflictTokens = 0;
+		public int numOfValueNeg1ConflictTokens = 0;
 
 	}
 
@@ -85,7 +84,7 @@ public class Player {
 		validateNumChipsToAdd(numChipsToAdd, Chip.ChipValue.NEG1);
 		
 		this.playerChips.conflictTotal += (-1) * numChipsToAdd;
-		this.playerChips.numOfValueNeg3ConflictTokens  += numChipsToAdd;
+		this.playerChips.numOfValueNeg1ConflictTokens  += numChipsToAdd;
 	}
 
 	private void validateNumChipsToAdd(int numChips, Chip.ChipValue type) {
@@ -302,20 +301,31 @@ public class Player {
 	}
 
 	public ArrayList<Card> getStoragePile() {
-		return this.storagePile;
+		return this.storagePile.getEntireStoragePile();
 	}
 
 	public void setStoragePile(ArrayList<Card> storagePile) {
-		this.storagePile = storagePile;
+		for(Card card: storagePile){
+			this.storagePile.addCard(card);
+		}
 	}
 
 	public boolean storagePileContainsEntity(Enum entity) {
-		for (Card storage : this.storagePile) {
+		for (Card storage : this.storagePile.getCommercePile()) {
 			if (storage.getEffectType().equals(EffectType.ENTITY)) {
 				EntityEffect effect = (EntityEffect) storage.getEffect();
 				if (effect.getEntities().containsKey(entity)) {
 					return true;
 				}
+			}
+		}
+		return false;
+	}
+	
+	public boolean storagePileContainsCardByName(String name){
+		for (Card storage : this.storagePile.getEntireStoragePile()){
+			if (storage.getName().equals(name)){
+				return true;
 			}
 		}
 		return false;
@@ -338,7 +348,7 @@ public class Player {
 	}
 
 	public void addToStoragePile(Card card) {
-		this.storagePile.add(card);
+		this.storagePile.addCard(card);
 	}
 
 	public void removeFromCurrentHand(Card card) {
@@ -391,7 +401,6 @@ public class Player {
 	}
 	
 	public int getNumValueNeg1ConflictTokens() {
-		return 1;
+		return this.playerChips.numOfValueNeg1ConflictTokens;
 	}
 }
-

@@ -336,7 +336,7 @@ public class GameManagerTest {
 		Player next = manager.getNextPlayer();
 		
 		assertEquals(1, (int) current.getCurrentTrades().get(RawResource.LUMBER));
-		assertEquals(6, next.getCoinTotal());
+		assertEquals(5, next.getCoinTotal());
 	}
 	
 	@Test
@@ -358,7 +358,7 @@ public class GameManagerTest {
 		Player next = manager.getNextPlayer();
 		
 		assertEquals(1, (int) current.getCurrentTrades().get(Good.GLASS));
-		assertEquals(6, next.getCoinTotal());
+		assertEquals(5, next.getCoinTotal());
 	}
 	
 	private ArrayList<PlayerInformationHolder> compileHolderObjects(ArrayList<String> playerNames, ArrayList<WonderType> wonders){

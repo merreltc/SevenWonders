@@ -42,6 +42,9 @@ public class HandManager {
 			Card card = currentHand.get(i);
 			((CardHolder) cardHolder).giveCard(card);
 			cardHolder.addImage(renderer.getImage(card.getName()));
+			if (player.storagePileContainsCardByName(card.getPreviousStructureName())){
+				((CardHolder) cardHolder).setHasPreviousStructure();
+			}
 			this.playerHand.add(cardHolder);
 		}
 	}
