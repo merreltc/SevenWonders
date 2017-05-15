@@ -31,4 +31,11 @@ public class GuildEffectTest {
 		assertEquals(EffectType.GUILD, effect.getEffectType());
 	}
 
+	@Test
+	public void testAllManufacturedGoodGuildEffect() {
+		Effect effect = new GuildEffect(EffectType.GUILD, CardType.MANUFACTUREDGOOD, Direction.ALL);
+		Assert.assertEquals(CardType.MANUFACTUREDGOOD, ((GuildEffect) effect).getObjectToLookFor());
+		Assert.assertEquals(Direction.ALL, effect.getDirection());
+		assertEquals(EffectType.GUILD, effect.getEffectType());
+	}
 }
