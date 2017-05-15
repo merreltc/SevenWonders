@@ -283,4 +283,28 @@ public class TurnHandlerTest {
 		Assert.assertEquals(1, players.get(6).getNumValueNeg1ConflictTokens());
 		Assert.assertEquals(1, players.get(6).getNumValue1ConflictTokens());
 	}
+	
+	@Test
+	public void endAge2ThreePlayersMiddleWithMostWarTokens(){
+		Player middlePlayer = new Player("Jane Doe", WonderType.COLOSSUS);
+		middlePlayer.addNumShields(5);
+		
+		Player leftNeighborPlayers = new Player("Jane Doe", WonderType.COLOSSUS);
+		leftNeighborPlayers.addNumShields(2);
+		
+		Player rightNeighborPlayers = new Player("Jane Doe", WonderType.COLOSSUS);
+		rightNeighborPlayers.addNumShields(2);
+		
+		ArrayList<Player> players = new ArrayList<Player>();
+		players.add(leftNeighborPlayers);
+		players.add(middlePlayer);
+		players.add(rightNeighborPlayers);
+		
+		TurnHandler turnHandler = new TurnHandler();
+		turnHandler.endAge(players,Age.AGE2);
+		
+		Assert.assertEquals(1, players.get(0).getNumValueNeg1ConflictTokens());
+		Assert.assertEquals(2, players.get(1).getNumValue3ConflictTokens());
+		Assert.assertEquals(1, players.get(2).getNumValueNeg1ConflictTokens());
+	}
 }
