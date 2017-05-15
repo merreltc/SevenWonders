@@ -47,6 +47,8 @@ public class TurnHandler {
 			winner.addValue1(1, ChipType.CONFLICTTOKEN);
 		}else if (age == Age.AGE2){
 			winner.addValue3(1, ChipType.CONFLICTTOKEN);
+		}else {
+			winner.addValue5(1, ChipType.CONFLICTTOKEN);
 		}
 	}
 
