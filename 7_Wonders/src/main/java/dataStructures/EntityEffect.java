@@ -28,7 +28,8 @@ public class EntityEffect extends Effect {
 	public boolean equals(Object obj) {
 		EntityEffect effect = (EntityEffect) obj;
 
-		if (this.entitiesAndAmounts.toString().equals(effect.entitiesAndAmounts.toString())) {
+		if (this.entityType == effect.entityType
+				&& this.entitiesAndAmounts.toString().equals(effect.entitiesAndAmounts.toString())) {
 			return true;
 		}
 
