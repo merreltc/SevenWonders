@@ -112,4 +112,12 @@ public class CostTest {
 		
 		assertTrue(cost.equals(cost2));
 	}
+	
+	@Test
+	public void testValidTwoCostsEqualCoinType(){
+		Cost cost = new Cost(CostType.COIN, 6);
+		Cost cost2 = new Cost(CostType.COIN, 6);
+		
+		assertTrue(cost.equals(cost2));
+	}
 }
