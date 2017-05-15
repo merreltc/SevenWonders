@@ -409,8 +409,17 @@ public class PlayerTest {
 			player.removeValue5(7,ChipType.CONFLICTTOKEN);
 			fail();
 		}catch (Exception e){
-			Assert.assertEquals("Player does not have 7 value 5 coin(s)", e.getMessage());
+			Assert.assertEquals("Player does not have 7 value 5 token(s)", e.getMessage());
 		}
+	}
+	
+	@Test
+	public void testRemoveAllValue5ConflictTokens(){
+		Player player = new Player("Jane Doe", WonderType.COLOSSUS);
+		player.addValue5(5, ChipType.CONFLICTTOKEN);
+		player.removeValue5(5, ChipType.CONFLICTTOKEN);
+		Assert.assertEquals(0,player.getNumValue5ConflictTokens());
+		Assert.assertEquals(0,player.getConflictTotal());
 	}
 
 	@Test
