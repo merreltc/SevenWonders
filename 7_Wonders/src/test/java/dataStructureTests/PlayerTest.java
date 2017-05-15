@@ -361,7 +361,16 @@ public class PlayerTest {
 		player.addValue5(5, ChipType.COIN);
 		player.removeValue5(3);
 		Assert.assertEquals(2,player.getNumValue5Coins());
-		Assert.assertEquals(10,player.getCoinTotal());
+		Assert.assertEquals(13,player.getCoinTotal());
+	}
+	
+	@Test
+	public void testRemove2Value5Coins(){
+		Player player = new Player("Jane Doe", WonderType.COLOSSUS);
+		player.addValue5(5, ChipType.COIN);
+		player.removeValue5(2);
+		Assert.assertEquals(3,player.getNumValue5Coins());
+		Assert.assertEquals(18,player.getCoinTotal());
 	}
 
 	@Test

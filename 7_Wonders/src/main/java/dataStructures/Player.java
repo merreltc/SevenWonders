@@ -134,9 +134,9 @@ public class Player {
 	
 	public void removeValue5(int numCoinsToRemove) {
 		validateNumCoinsToRemove(numCoinsToRemove, Chip.ChipValue.FIVE);
-
-		this.playerChips.coinTotal = 10;
-		this.playerChips.numOfValue5Coins = 2;
+   
+		this.playerChips.coinTotal -= 5 * numCoinsToRemove;
+		this.playerChips.numOfValue5Coins -= numCoinsToRemove;
 	}
 
 	private void validateNumCoinsToRemove(int numCoins, Chip.ChipValue type) {
