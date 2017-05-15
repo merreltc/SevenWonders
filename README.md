@@ -50,14 +50,6 @@ Cards are passed left-right-left over the three ages, so you need to keep an eye
 3. Double-click "GuiMain"
 4. Right-click "GuiMainMenu" and selecte "Run As->Java Application"
 
-## Configuring the Build Path:
-1. In the package explorer, right-click on "7_Wonders" and select "Properties"
-2. In the left pane, select "Build Path / Configure Build Path"
-3. In the right pane, select the "Source" tab
-4. Select "Add Folder"
-5. Navigate to "src/org" and select the check box next to "org"
-6. Hit ok, apply and then ok again
-
 # Definition of "Done"
 ## Display
 ### Player Board
@@ -163,66 +155,66 @@ Cards are passed left-right-left over the three ages, so you need to keep an eye
 - [ ] The wonder does not need to be built in order for a player to win
 
 ### Wonders
-- Wonders provide players 1 of the resource specified in the top left corner
+- [x] Wonders provide players 1 of the resource specified in the top left corner
 - Side A always has 3 levels
-    - The first level is worth +3 Victory Points
+    - [ ] The first level is worth +3 Victory Points
     - The second level is determined by the Wonder
-    - The third level is worth +7 Victory Points
-- Number of levels and the effects for each level vary by Wonder on side B
-- The cost of building each level varies from side A to B and from Wonder to Wonder
+    - [ ] The third level is worth +7 Victory Points
+- [ ] Number of levels and the effects for each level vary by Wonder on side B
+- [ ] The cost of building each level varies from side A to B and from Wonder to Wonder
 - *The Colossus of Rhodes*
     - Resource: Ore
-    - Side A, Level 2: 2 Shields
+    - [ ] Side A, Level 2: 2 Shields
     - Side B:
-        - Level 1: 1 Shield, 3 Victory Points, 3 Coins (from bank)
-        - Level 2: 1 Shield, 4 Victory Points, 4 Coins (from bank)
+        - [ ] Level 1: 1 Shield, 3 Victory Points, 3 Coins (from bank)
+        - [ ] Level 2: 1 Shield, 4 Victory Points, 4 Coins (from bank)
 - *The Lighthouse of Alexandria*
     - Resource: Glass
-    - Side A, Level 2: Resource of choice from 4 raw materials (lumber, stone, ore, clay) **every turn**
+    - [ ] Side A, Level 2: Resource of choice from 4 raw materials (lumber, stone, ore, clay) **every turn**
     - Side B:
-        - Level 1: (See "Side A, Level 2")
-        - Level 2: Resource of choice from 3 manufactured goods (loom, glass, press) **every turn**
-        - Level 3: 7 Victory Points
+        - [ ] Level 1: (See "Side A, Level 2")
+        - [ ] Level 2: Resource of choice from 3 manufactured goods (loom, glass, press) **every turn**
+        - [ ] Level 3: 7 Victory Points
 - *The Temple of Artemis in Ephesus*
     - Resource: Press
-    - Side A, Level 2: 9 Coins (from bank) **immediately following the building of this level**
+    - [ ] Side A, Level 2: 9 Coins (from bank) **immediately following the building of this level**
     - Side B:
-        - Level 1: 2 Victory Points, 4 Coins (from bank)
-        - Level 2: 3 Victory Points, 4 Coins (from bank)
-        - Level 3: 5 Victory Points, 4 Coins (from bank)
+        - [ ] Level 1: 2 Victory Points, 4 Coins (from bank)
+        - [ ] Level 2: 3 Victory Points, 4 Coins (from bank)
+        - [ ] Level 3: 5 Victory Points, 4 Coins (from bank)
 - *The Hanging Gardens of Babylon*
     - Resource: Clay
-    - Side A, Level 2: Science symbol of choice from 2 types (wheel, protractor, tablet) at the **end of the game**
+    - [ ] Side A, Level 2: Science symbol of choice from 2 types (wheel, protractor, tablet) at the **end of the game**
     - Side B:
-        - Level 1: 3 Victory Points
-        - Level 2: Optional ability to play seventh card instead of discarding **on sixth turn**
+        - [ ] Level 1: 3 Victory Points
+        - [ ] Level 2: Optional ability to play seventh card instead of discarding **on sixth turn**
             - This card can be built (See "Building the Structure"), used to build level 3 (See "Building the Next Level of Wonder"), or discarded for 3 coins from the bank
-        - Level 3: (See "Side A, Level 2")
+        - [ ] Level 3: (See "Side A, Level 2")
 - *The Statue of Zeus in Olympia*
     - Resource: Lumber
-    - Side A, Level 2: Build structure for free **once per age**
+    - [ ] Side A, Level 2: Build structure for free **once per age**
     - Side B:
-        - Level 1: Allows player to purchase raw materials (lumber, stone, ore, clay) from either neighbor for 1 coin
+        - [ ] Level 1: Allows player to purchase raw materials (lumber, stone, ore, clay) from either neighbor for 1 coin
             - Same effect as both Eastern and Western Trading Posts (Commercial Structures)
             - Both trading posts can still be built, but the effect is not cumulative
-        - Level 2: 5 Victory Points
-        - Level 3: Allows player to "copy" a Guild (purple) card from **one** of their two neighbors at the **end of the game**
+        - [ ] Level 2: 5 Victory Points
+        - [ ] Level 3: Allows player to "copy" a Guild (purple) card from **one** of their two neighbors at the **end of the game**
             - This ability has no effect on the player who owns the copied Guild
 - *The Mausoleum of Halicarnassus*
     - Resource: Loom
-    - Side A, Level 2: At the **end of turn when this level is built,** choose one structure from all discarded cards since beginning of game and build for free
+    - [ ] Side A, Level 2: At the **end of turn when this level is built,** choose one structure from all discarded cards since beginning of game and build for free
     - Side B:
-        - Level 1: 2 Victory Points, (See "Side A, Level 2")
-        - Level 2: 1 Victory Point, (See "Side A, Level 2")
-        - Level 3: (See "Side A, Level 2")
+        - [ ] Level 1: 2 Victory Points, (See "Side A, Level 2")
+        - [ ] Level 2: 1 Victory Point, (See "Side A, Level 2")
+        - [ ] Level 3: (See "Side A, Level 2")
 - *The Pyramids of Giza*
     - Resource: Stone
-    - Side A, Level 2: 5 Victory Points
+    - [ ] Side A, Level 2: 5 Victory Points
     - Side B:
-        - Level 1: 3 Victory Points
-        - Level 2: 5 Victory Points
-        - Level 3: 5 Victory Points
-        - Level 4: 7 Victory Points
+        - [ ] Level 1: 3 Victory Points
+        - [ ] Level 2: 5 Victory Points
+        - [ ] Level 3: 5 Victory Points
+        - [ ] Level 4: 7 Victory Points
 
 ## End Game and Victory
 - [ ] After the war of Age III, a score card displaying total Victory Points for each player is displayed
