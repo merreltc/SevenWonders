@@ -60,7 +60,6 @@ public class PlayerBoard {
 
 	public void draw(Graphics graphics) {
 		drawBoard(graphics);
-		drawCoinAndWarTokens(graphics);
 		drawResources(graphics);
 	}
 
@@ -104,11 +103,6 @@ public class PlayerBoard {
 				position.y + Constants.PlayerNameYOffset);
 	}
 
-	public void drawCoinAndWarTokens(Graphics graphics) {
-		graphics.drawString(this.player.getCoinTotal() + "", position.x + sizePoint.x - 30, position.y + 25);
-		graphics.drawString(this.player.getConflictTotal() + "", position.x + sizePoint.x - 30, position.y + 65);
-	}
-
 	public void drawResources(Graphics graphics) {
 
 		Object[] lumberArgs = { this.lumber };
@@ -118,61 +112,25 @@ public class PlayerBoard {
 		MessageFormat format = new MessageFormat("");
 		format.setLocale(Locale.getDefault());
 
-		format.applyPattern(messages.getString("resourceLumberTemplate"));
-		graphics.drawString(format.format(lumberArgs), position.x + 10, position.y + 25);
+		Image image = renderer.getImage("lumber");
+		RenderImage.draw(graphics, image, position.x, position.y, Constants.RESOURCE_IMAGE_HEIGHT+10, Constants.RESOURCE_IMAGE_WIDTH+10);
 
-		format.applyPattern(messages.getString("resourceOreTemplate"));
-		graphics.drawString(format.format(oreArgs), position.x + 10, position.y + 65);
+		image = renderer.getImage("ore");
+		RenderImage.draw(graphics, image, position.x, position.y + 45, Constants.RESOURCE_IMAGE_HEIGHT+10, Constants.RESOURCE_IMAGE_WIDTH+10);
 
-		format.applyPattern(messages.getString("resourceStoneTemplate"));
-		graphics.drawString(format.format(stoneArgs), position.x + 10, position.y + 105);
+		image = renderer.getImage("stone");
+		RenderImage.draw(graphics, image, position.x, position.y + 85, Constants.RESOURCE_IMAGE_HEIGHT+10, Constants.RESOURCE_IMAGE_WIDTH+10);
 
-		format.applyPattern(messages.getString("resourceClayTemplate"));
-		graphics.drawString(format.format(clayArgs), position.x + 10, position.y + 145);
+		
+		image = renderer.getImage("clay");
+		RenderImage.draw(graphics, image, position.x, position.y + 125, Constants.RESOURCE_IMAGE_HEIGHT+10, Constants.RESOURCE_IMAGE_WIDTH+10);
 	}
 
 	public void changePlayer(Player player) {
 		this.player = player;
 		this.WonderImage = renderer.getImage(player.getWonder().getName());
-		recalculateResources();
 	}
 
-	public void recalculateResources() {
-		ArrayList<Card> storagePile = player.getStoragePile();
-		lumber = 0;
-		ore = 0;
-		stone = 0;
-		clay = 0;
-		loom = 0;
-		glass = 0;
-		press = 0;
-		for (int i = 0; i < storagePile.size(); i++) {
-			Card card = storagePile.get(i);
-			if (card.getEffectType() == Effect.EffectType.ENTITY) {
-				EntityEffect effect = (EntityEffect) card.getEffect();
-				sumEntities(effect);
-			}
-		}
-	}
 
-	private void sumEntities(EntityEffect effect) {
-		for (Enum entity : effect.getEntities().keySet()) {
-			if (entity == Resource.LUMBER) {
-				lumber++;
-			} else if (entity == Resource.CLAY) {
-				clay++;
-			} else if (entity == Resource.ORE) {
-				ore++;
-			} else if (entity == Resource.STONE) {
-				stone++;
-			} else if (entity == Good.LOOM) {
-				loom++;
-			} else if (entity == Good.GLASS) {
-				glass++;
-			} else if (entity == Good.PRESS) {
-				press++;
-			}
-		}
-	}
 
 }

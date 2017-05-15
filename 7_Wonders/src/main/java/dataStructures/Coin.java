@@ -5,6 +5,7 @@ public class Coin extends Chip {
 	public Coin() {
 		super();
 		this.setValue(1);
+		this.chipType = ChipType.COIN;
 	}	
 	
 	public Coin(int value) {
@@ -14,5 +15,6 @@ public class Coin extends Chip {
 		}
 		
 		this.setValue(value);
+		this.chipType = ChipType.COIN;
 	}
 }

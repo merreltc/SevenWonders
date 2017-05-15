@@ -1,8 +1,10 @@
 package backend;
 
+import dataStructures.Chip;
 import dataStructures.GameBoard;
 import dataStructures.GeneralEnums.Resource;
 import dataStructures.Player;
+import dataStructures.Chip.ChipType;
 import exceptions.InvalidTradeException;
 
 public class TradeHandler {
@@ -51,13 +53,13 @@ public class TradeHandler {
 	}
 
 	public static void tradeFromToValue1(Player from, Player to, int numCoinsToTrade) {
-		from.removeValue1(numCoinsToTrade);
-		to.addValue1(numCoinsToTrade);
+		from.removeValue1(numCoinsToTrade,ChipType.COIN);
+		to.addValue1(numCoinsToTrade, Chip.ChipType.COIN);
 	}
 
 	public static void tradeFromToValue3(Player from, Player to, int numCoinsToTrade) {
-		from.removeValue3(numCoinsToTrade);
-		to.addValue3(numCoinsToTrade);
+		from.removeValue3(numCoinsToTrade, Chip.ChipType.COIN);
+		to.addValue3(numCoinsToTrade, Chip.ChipType.COIN);
 	}
 
 	public void tradeFromToForEntity(Player from, Player to, Enum entity) {

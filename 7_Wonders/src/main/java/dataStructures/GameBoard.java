@@ -2,12 +2,17 @@ package dataStructures;
 
 import java.util.ArrayList;
 
+import dataStructures.Chip.ChipType;
+import exceptions.InsufficientFundsException;
+
 public class GameBoard {
 	private ArrayList<Player> players = new ArrayList<Player>();
 	private ArrayList<Card> discardPile = new ArrayList<Card>();
 	private Deck currentDeck;
 
 	private int numPlayers;
+	private int totalValue1CoinsInBank = 46;
+	private int totalValue3CoinsInBank = 24;
 
 	private int currentPlayerIndex;
 	private int nextPlayerIndex;
@@ -15,6 +20,7 @@ public class GameBoard {
 
 	public GameBoard(ArrayList<Player> players, Deck deck) {
 		this.numPlayers = players.size();
+		this.totalValue1CoinsInBank -= 3 * this.numPlayers;
 		this.currentPlayerIndex = 0;
 		this.nextPlayerIndex = 1;
 		this.previousPlayerIndex = this.numPlayers - 1;
@@ -71,6 +77,61 @@ public class GameBoard {
 		}
 	}
 
+	public void addToDiscardPile(Player active, Card toTest) {
+		this.discardPile.add(toTest);
+
+		if (this.totalValue3CoinsInBank-- > 0) {
+			active.addValue3(1, Chip.ChipType.COIN);
+		} else {
+			this.totalValue1CoinsInBank--;
+			active.addValue1(3, Chip.ChipType.COIN);
+		}
+	}
+
+	public boolean makeChangeForValue1Coins(Player active, int numCoinsWanted) {
+		if (numCoinsWanted > this.totalValue1CoinsInBank) {
+			throw new InsufficientFundsException("Not enough value 1 coins left in bank");
+		}
+
+		int numValue3CoinsToRemove = numCoinsWanted / 3;
+		active.removeValue3(numValue3CoinsToRemove,ChipType.COIN);
+		this.totalValue3CoinsInBank += numValue3CoinsToRemove;
+		this.totalValue1CoinsInBank -= numCoinsWanted;
+		active.addValue1(numCoinsWanted, Chip.ChipType.COIN);
+
+		return true;
+	}
+
+	public boolean makeChangeForValue3Coins(Player active, int numCoinsWanted) {
+		if (numCoinsWanted > this.totalValue3CoinsInBank) {
+			throw new InsufficientFundsException("Not enough value 3 coins left in bank");
+		}
+
+		int numValue1CoinsToRemove = numCoinsWanted * 3;
+		active.removeValue1(numValue1CoinsToRemove,ChipType.COIN);
+		this.totalValue3CoinsInBank -= numCoinsWanted;
+		this.totalValue1CoinsInBank += numValue1CoinsToRemove;
+		active.addValue3(numCoinsWanted, Chip.ChipType.COIN);
+		return true;
+	}
+
+	public void giveNumCoins(Player player, int numCoinsToGet) {
+		int numValue3 = numCoinsToGet / 3;
+		int numValue1 = numCoinsToGet % 3;
+
+		if (numValue3 > this.totalValue3CoinsInBank) {
+			int numValue3Left = numValue3 - this.totalValue3CoinsInBank;
+			numValue3 = this.totalValue3CoinsInBank;
+			this.totalValue3CoinsInBank = 0;
+			numValue1 += numValue3Left * 3;
+		} else {
+			this.totalValue3CoinsInBank -= numValue3;
+		}
+		this.totalValue1CoinsInBank -= numValue1;
+		player.addValue3(numValue3, Chip.ChipType.COIN);
+		player.addValue1(numValue1, Chip.ChipType.COIN);
+	}
+
 	public int getCurrentPlayerIndex() {
 		return this.currentPlayerIndex;
 	}
@@ -91,7 +152,19 @@ public class GameBoard {
 		return this.discardPile;
 	}
 
-	public void addToDiscardPile(Card toTest) {
-		this.discardPile.add(toTest);
+	public int getTotalValue1CoinsInBank() {
+		return this.totalValue1CoinsInBank;
+	}
+
+	public int getTotalValue3CoinsInBank() {
+		return this.totalValue3CoinsInBank;
+	}
+
+	public void discardEndOfAgeCard(Card toDiscard) {
+		this.discardPile.add(toDiscard);
+	}
+
+	public void setDeck(Deck deck) {
+		this.currentDeck = deck;
 	}
 }

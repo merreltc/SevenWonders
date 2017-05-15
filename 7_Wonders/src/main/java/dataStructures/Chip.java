@@ -1,11 +1,19 @@
 package dataStructures;
 
+import dataStructures.Chip.ChipValue;
+
 public abstract class Chip {
-	public enum ChipType {
-		ONE, THREE
+	
+	public enum ChipType{
+		COIN, CONFLICTTOKEN
+	}
+	
+	public enum ChipValue {
+		ONE, THREE, NEG1, FIVE
 	}
 	
 	private int value;
+	protected ChipType chipType;
 	
 	public int getValue() {
 		return value;
@@ -13,6 +21,10 @@ public abstract class Chip {
 	
 	protected void setValue(int value) {
 		this.value = value;		
+	}
+
+	public ChipType getChipType() {
+		return this.chipType;
 	}
 	
 	

@@ -16,17 +16,14 @@ import javax.swing.JPanel;
 public class RenderImage {
 	
 	private HashMap<String, Image> images = new HashMap<String, Image>(); 
-	ResourceBundle messages = ResourceBundle.getBundle("message", Locale.getDefault());
+	ResourceBundle messages = Translate.getNewResourceBundle();
 	
 	public static void draw(Graphics graphics, Image image, int x, int y, int width, int height) {
 			graphics.drawImage(image, x, y, width, height, null);
 	}
 	
 	public Image getImage(String name) {
-		Object[] messageArgs = {name};
-		MessageFormat format = new MessageFormat("");
-		format.setLocale(Locale.getDefault());
-		format.applyPattern(messages.getString("loadImageError"));
+		String translated = Translate.prepareStringTemplateWithStringArg(name, "loadImageError", messages);
 		
 		if (this.images.containsKey(name)){
 			return this.images.get(name);
@@ -37,7 +34,7 @@ public class RenderImage {
 			return image;
 		}
 		catch (IOException e) {
-				System.err.println(format.format(messageArgs));
+				System.err.println(translated);
 		}
 		
 		try {
@@ -46,7 +43,7 @@ public class RenderImage {
 			return image;
 		}
 		catch (IOException e) {
-				System.err.println(format.format(messageArgs));
+				System.err.println(translated);
 		}
 		return new BufferedImage(0, 0, 0);
 	}

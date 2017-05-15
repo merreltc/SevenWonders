@@ -139,5 +139,16 @@ public class DeckTest {
 		cards.add(forumCard);
 		cards.add(statueCard);
 	}
+	
+	@Test
+	public void testGetNumCardsSmallAge2() {
+		ArrayList<Card> cards = new ArrayList<Card>();
+		initiateCards(cards);
+		
+		Deck deck = new Deck(Age.AGE2, cards);
+		
+		assertEquals(Age.AGE2, deck.getAge());
+		assertEquals(2, deck.getNumCards());
+	}
 
 }
