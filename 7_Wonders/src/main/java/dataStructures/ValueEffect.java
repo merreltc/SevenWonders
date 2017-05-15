@@ -110,7 +110,8 @@ public class ValueEffect extends Effect {
 	public boolean equals(Object obj) {
 		ValueEffect value = (ValueEffect) obj;
 
-		if (this.valueAmount == value.getValueAmount() && this.getDirection() == value.getDirection()) {
+		if (this.valueAmount == value.getValueAmount() && this.getDirection() == value.getDirection()
+				&& this.affectingEntity == value.affectingEntity) {
 			return true;
 		}
 

@@ -332,4 +332,12 @@ public class ValueEffectTest {
 		
 		assertFalse(effect.equals(effect2));
 	}
+	
+	@Test
+	public void testInvalidValueEffectEqualsCommerceAffecting(){
+		ValueEffect effect = new ValueEffect(EffectType.VALUE, Value.COMMERCE, AffectingEntity.RAWRESOURCES, Direction.RIGHT, 1);
+		ValueEffect effect2 = new ValueEffect(EffectType.VALUE, Value.COMMERCE, AffectingEntity.COMMERCIALSTRUCTURES, Direction.RIGHT, 1);
+		
+		assertFalse(effect.equals(effect2));
+	}
 }
