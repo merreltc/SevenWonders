@@ -138,6 +138,33 @@ public class StoragePileTest {
 		assertTrue(storagePile.getEntireStoragePile().contains(card2));
 		assertTrue(storagePile.getEntireStoragePile().contains(card3));
 		assertTrue(storagePile.getEntireStoragePile().contains(card4));
+	}
+	
+	@Test
+	public void testGetEntireStoragePileMany(){
+		StoragePile storagePile = new StoragePile();
+		for(int i = 0; i < 50; i++){
+			Card card = EasyMock.mock(Card.class);
+			storagePile.addToCommercePile(card);
+			assertTrue(storagePile.getEntireStoragePile().contains(card));
+		}
+		for(int i = 0; i < 50; i++){
+			Card card = EasyMock.mock(Card.class);
+			storagePile.addToSciencePile(card);
+			assertTrue(storagePile.getEntireStoragePile().contains(card));
+		}
+		for(int i = 0; i < 50; i++){
+			Card card = EasyMock.mock(Card.class);
+			storagePile.addToEndGamePile(card);
+			assertTrue(storagePile.getEntireStoragePile().contains(card));
+		}
+		for(int i = 0; i < 50; i++){
+			Card card = EasyMock.mock(Card.class);
+			storagePile.addToImmediateEffectPile(card);
+			assertTrue(storagePile.getEntireStoragePile().contains(card));
+		}
+		
+		assertEquals(200, storagePile.getEntireStoragePile().size());
 		
 	}
 }
