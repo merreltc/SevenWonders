@@ -61,9 +61,13 @@ public class TradeHandler {
 		to.addValue3(numCoinsToTrade, Chip.ChipType.COIN);
 	}
 
-	public void tradeFromToForEntity(Player from, Player to, Enum entity) {
+	public void tradeFromToForEntity(Player from, Player to, Enum entity, boolean discount) {
 		if (to.storagePileContainsEntity(entity)) {
-			this.tradeCoinsFromTo(from, to, 2);
+			if (discount) {
+				this.tradeCoinsFromTo(from, to, 1);
+			} else {
+				this.tradeCoinsFromTo(from, to, 2);
+			}
 			from.addTradedValue(entity);
 		} else {
 			throw new InvalidTradeException("Player doesn't have the resource for trading: " + entity.toString());

@@ -351,7 +351,7 @@ public class TradeHandlerTest {
 	}
 	
 	@Test
-	public void testValidTrade3CoinsForSingleLumberResource(){
+	public void testValidTrade2CoinsForSingleLumberResource(){
 		ArrayList<Player> players = new ArrayList<Player>();
 		players.add(new Player("Wolverine", WonderType.COLOSSUS));
 		players.add(new Player("Captain America", WonderType.LIGHTHOUSE));
@@ -371,7 +371,7 @@ public class TradeHandlerTest {
 		
 		next.setStoragePile(storage);
 		
-		tradeHandler.tradeFromToForEntity(current, next, RawResource.LUMBER);
+		tradeHandler.tradeFromToForEntity(current, next, RawResource.LUMBER, false);
 		
 		assertEquals(0, current.getNumValue3Coins());
 		assertEquals(1, (int) current.getCurrentTrades().get(RawResource.LUMBER));
@@ -379,7 +379,7 @@ public class TradeHandlerTest {
 	}
 	
 	@Test(expected = InvalidTradeException.class)
-	public void testInvalidTrade3CoinsForSingleLumberResource(){
+	public void testInvalidTrade2CoinsForSingleLumberResource(){
 		ArrayList<Player> players = new ArrayList<Player>();
 		players.add(new Player("Wolverine", WonderType.COLOSSUS));
 		players.add(new Player("Captain America", WonderType.LIGHTHOUSE));
@@ -399,12 +399,12 @@ public class TradeHandlerTest {
 		
 		next.setStoragePile(storage);
 		
-		tradeHandler.tradeFromToForEntity(current, next, RawResource.ORE);
+		tradeHandler.tradeFromToForEntity(current, next, RawResource.ORE, false);
 		fail();
 	}
 	
 	@Test
-	public void testValidTrade3CoinsForSingleLoomGood(){
+	public void testValidTrade2CoinsForSingleLoomGood(){
 		ArrayList<Player> players = new ArrayList<Player>();
 		players.add(new Player("Wolverine", WonderType.COLOSSUS));
 		players.add(new Player("Captain America", WonderType.LIGHTHOUSE));
@@ -424,10 +424,41 @@ public class TradeHandlerTest {
 		
 		next.setStoragePile(storage);
 		
-		tradeHandler.tradeFromToForEntity(current, next, Good.GLASS);
+		tradeHandler.tradeFromToForEntity(current, next, Good.GLASS, false);
 		
 		assertEquals(0, current.getNumValue3Coins());
 		assertEquals(1, (int) current.getCurrentTrades().get(Good.GLASS));
 		assertEquals(5, next.getCoinTotal());
+	}
+	
+	@Test
+	public void testValidTrade1CoinHasEastTradingPost(){
+		ArrayList<Player> players = new ArrayList<Player>();
+		players.add(new Player("Wolverine", WonderType.COLOSSUS));
+		players.add(new Player("Captain America", WonderType.LIGHTHOUSE));
+		players.add(new Player("Black Widow", WonderType.TEMPLE));
+
+		ArrayList<Card> cards = new SetUpDeckHandler().createCards(Age.AGE1, 3);
+		Deck deck = new Deck(Age.AGE1, cards);
+		
+		GameBoard board = new GameBoard(players, deck);
+		TradeHandler tradeHandler = new TradeHandler(board);
+		
+		Player current = board.getPlayer(0);
+		Player right = board.getPlayer(1);
+		ArrayList<Card> storage = new ArrayList<Card>();
+		storage.add(deck.getCard(12)); //east trading post
+		current.setStoragePile(storage);
+		
+
+		ArrayList<Card> rStorage = new ArrayList<Card>();
+		rStorage.add(deck.getCard(0));
+		right.setStoragePile(rStorage);
+		
+		tradeHandler.tradeFromToForEntity(current, right, RawResource.LUMBER, true);
+		
+		assertEquals(2, current.getNumValue1Coins());
+		assertEquals(1, (int) current.getCurrentTrades().get(RawResource.LUMBER));
+		assertEquals(4, right.getCoinTotal());
 	}
 }
