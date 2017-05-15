@@ -13,7 +13,6 @@ import org.junit.Test;
 import backend.GameManager;
 import backend.PlayerTurnHandler;
 import backend.SetUpDeckHandler;
-import backend.SetUpHandler;
 import backend.TurnHandler;
 import dataStructures.Card;
 import dataStructures.Cost;
@@ -496,16 +495,20 @@ public class PlayerTurnHandlerTest {
 		ArrayList<Card> storage = new ArrayList<Card>();
 		Card cardInStorage = EasyMock.mock(Card.class);
 		storage.add(cardInStorage);
-		EasyMock.expect(player.storagePileContainsCardByName("Baths")).andReturn(false);
+		String previousStructureName = "None";
 		EasyMock.expect(cardToBuild.getName()).andReturn("Baths");
+		EasyMock.expect(player.storagePileContainsCardByName("Baths")).andReturn(false);
+		EasyMock.expect(cardToBuild.getPreviousStructureName()).andReturn(previousStructureName);
 		EasyMock.expect(cardToBuild.getCostType()).andReturn(CostType.RESOURCE);
 		EasyMock.expect(cardToBuild.getCostType()).andReturn(CostType.RESOURCE);
 		EasyMock.expect(cardToBuild.getEffectType()).andReturn(EffectType.VALUE);
 		EasyMock.expect(cardToBuild.getCost()).andReturn(cost);
 		EasyMock.expect(player.getStoragePile()).andReturn(storage);
+		EasyMock.expect(player.getStoragePile()).andReturn(storage);
 		EntityEffect entityEffect = EasyMock.mock(EntityEffect.class);
 
 		for (Card sCards : storage) {
+			EasyMock.expect(sCards.getName()).andReturn("Brick Yard");
 			EasyMock.expect(sCards.getEffectType()).andReturn(EffectType.ENTITY);
 
 			EasyMock.expect(sCards.getEffect()).andReturn(entityEffect);
@@ -543,16 +546,19 @@ public class PlayerTurnHandlerTest {
 		ArrayList<Card> storage = new ArrayList<Card>();
 		Card cardInStorage = EasyMock.mock(Card.class);
 		storage.add(cardInStorage);
-
+		String previousStructureName = "None";
 		EasyMock.expect(cardToBuild.getName()).andReturn("Baths");
+		EasyMock.expect(cardToBuild.getPreviousStructureName()).andReturn(previousStructureName);
 		EasyMock.expect(cardToBuild.getCostType()).andReturn(CostType.RESOURCE);
 		EasyMock.expect(cardToBuild.getCostType()).andReturn(CostType.RESOURCE);
 		EasyMock.expect(cardToBuild.getEffectType()).andReturn(EffectType.VALUE);
 		EasyMock.expect(cardToBuild.getCost()).andReturn(cost);
 		EasyMock.expect(player.getStoragePile()).andReturn(storage);
+		EasyMock.expect(player.getStoragePile()).andReturn(storage);
 		EntityEffect entityEffect = EasyMock.mock(EntityEffect.class);
 
 		for (Card sCards : storage) {
+			EasyMock.expect(sCards.getName()).andReturn("Brick Yard");
 			EasyMock.expect(sCards.getEffectType()).andReturn(EffectType.ENTITY);
 
 			EasyMock.expect(sCards.getEffect()).andReturn(entityEffect);
@@ -585,5 +591,31 @@ public class PlayerTurnHandlerTest {
 		}
 
 		EasyMock.verify(player, cardToBuild, cardInStorage, entityEffect, effect);
+	}
+	
+	@Test
+	public void testBuildPreviousStructureFree(){
+		Player player = EasyMock.mock(Player.class);
+		
+		ArrayList<Card> storage = new ArrayList<Card>();
+		Card storaged = EasyMock.mock(Card.class);
+		storage.add(storaged);
+		
+		Card cardToBuild = EasyMock.mock(Card.class);
+		String previousStructureName = "Trading Post";
+		EasyMock.expect(cardToBuild.getPreviousStructureName()).andReturn(previousStructureName);
+		EasyMock.expect(player.getStoragePile()).andReturn(storage);
+		
+		EasyMock.expect(storaged.getName()).andReturn("East Trading Post");
+		player.addToStoragePile(cardToBuild);
+		player.removeFromCurrentHand(cardToBuild);
+		EasyMock.expect(player.storagePileContainsCardByName("Trading Post")).andReturn(false);
+		EasyMock.expect(cardToBuild.getName()).andReturn("Trading Post");
+		EasyMock.replay(player, storaged, cardToBuild);
+		
+		PlayerTurnHandler playerTurnHandler = new PlayerTurnHandler();
+		playerTurnHandler.buildStructure(player, cardToBuild);
+		
+		EasyMock.verify(player, storaged, cardToBuild);
 	}
 }

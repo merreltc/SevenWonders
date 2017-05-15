@@ -19,6 +19,7 @@ import guiMain.HandManager;
 import guiMain.Message;
 import guiMain.PlayerBoard;
 import guiMain.RenderImage;
+import guiMain.Translate;
 import guiMain.Interactables.Button;
 import guiMain.Interactables.CardHolder;
 import guiMain.Interactables.Interactable;
@@ -28,7 +29,7 @@ public class Game extends Menu {
 	private GameManager gameManager;
 	private HandManager handManager;
 	private RenderImage renderer;
-	ResourceBundle messages = ResourceBundle.getBundle("message", Locale.getDefault());
+	ResourceBundle messages = Translate.getNewResourceBundle();
 	ResourceViewer resource = new ResourceViewer();
 
 	public Game(int numOfPlayers, RenderImage renderer) {

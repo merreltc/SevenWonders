@@ -11,7 +11,7 @@ import backend.GameManager;
 import backend.PlayerTurnHandler;
 import backend.RotateHandler;
 import backend.SetUpDeckHandler;
-import backend.SetUpHandler;
+import backend.SetUpPlayerHandler;
 import backend.TurnHandler;
 import backend.RotateHandler.Direction;
 import dataStructures.Card;
@@ -277,7 +277,7 @@ public class RotateHandlerTest {
 		ArrayList<WonderType> wonders = new ArrayList<WonderType>(Arrays.asList(WonderType.COLOSSUS,
 				WonderType.LIGHTHOUSE, WonderType.TEMPLE, WonderType.STATUE, WonderType.MAUSOLEUM));
 
-		GameManager manager = new GameManager(compileHolderObjects(playerNames, wonders), new SetUpHandler(),
+		GameManager manager = new GameManager(compileHolderObjects(playerNames, wonders), new SetUpPlayerHandler(),
 				new SetUpDeckHandler(), new TurnHandler(), new PlayerTurnHandler());
 		manager.dealInitialTurnCards();
 		ArrayList<Player> players = manager.getPlayers();
@@ -304,7 +304,7 @@ public class RotateHandlerTest {
 		ArrayList<WonderType> wonders = new ArrayList<WonderType>(
 				Arrays.asList(WonderType.COLOSSUS, WonderType.LIGHTHOUSE, WonderType.TEMPLE));
 
-		GameManager manager = new GameManager(compileHolderObjects(playerNames, wonders), new SetUpHandler(),
+		GameManager manager = new GameManager(compileHolderObjects(playerNames, wonders), new SetUpPlayerHandler(),
 				new SetUpDeckHandler(), new TurnHandler(), new PlayerTurnHandler());
 		manager.dealInitialTurnCards();
 		ArrayList<Player> players = manager.getPlayers();
@@ -329,7 +329,7 @@ public class RotateHandlerTest {
 		ArrayList<WonderType> wonders = new ArrayList<WonderType>(Arrays.asList(WonderType.COLOSSUS,
 				WonderType.LIGHTHOUSE, WonderType.TEMPLE, WonderType.STATUE, WonderType.MAUSOLEUM));
 
-		GameManager manager = new GameManager(compileHolderObjects(playerNames, wonders), new SetUpHandler(),
+		GameManager manager = new GameManager(compileHolderObjects(playerNames, wonders), new SetUpPlayerHandler(),
 				new SetUpDeckHandler(), new TurnHandler(), new PlayerTurnHandler());
 		manager.dealInitialTurnCards();
 		ArrayList<Player> players = manager.getPlayers();
@@ -356,7 +356,7 @@ public class RotateHandlerTest {
 		ArrayList<WonderType> wonders = new ArrayList<WonderType>(
 				Arrays.asList(WonderType.COLOSSUS, WonderType.LIGHTHOUSE, WonderType.TEMPLE));
 
-		GameManager manager = new GameManager(compileHolderObjects(playerNames, wonders), new SetUpHandler(),
+		GameManager manager = new GameManager(compileHolderObjects(playerNames, wonders), new SetUpPlayerHandler(),
 				new SetUpDeckHandler(), new TurnHandler(), new PlayerTurnHandler());
 		manager.dealInitialTurnCards();
 		ArrayList<Player> players = manager.getPlayers();

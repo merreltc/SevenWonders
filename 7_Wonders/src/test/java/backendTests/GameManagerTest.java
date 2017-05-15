@@ -12,7 +12,7 @@ import backend.GameManager;
 import backend.PlayerTurnHandler;
 import backend.RotateHandler.Direction;
 import backend.SetUpDeckHandler;
-import backend.SetUpHandler;
+import backend.SetUpPlayerHandler;
 import backend.TurnHandler;
 import dataStructures.Card;
 import dataStructures.Chip;
@@ -66,7 +66,7 @@ public class GameManagerTest {
 		ArrayList<WonderType> wonders = new ArrayList<WonderType>(Arrays.asList( WonderType.COLOSSUS, WonderType.LIGHTHOUSE, WonderType.TEMPLE));
 		
 		GameManager manager = new GameManager(compileHolderObjects(playerNames, wonders));
-		new GameManager(compileHolderObjects(playerNames, wonders), new SetUpHandler(), setUpDeckHandler, new TurnHandler(), new PlayerTurnHandler());
+		new GameManager(compileHolderObjects(playerNames, wonders), new SetUpPlayerHandler(), setUpDeckHandler, new TurnHandler(), new PlayerTurnHandler());
 
 		EasyMock.verify(setUpDeckHandler);
 	}
@@ -83,7 +83,7 @@ public class GameManagerTest {
 		ArrayList<WonderType> wonders = new ArrayList<WonderType>(Arrays.asList( WonderType.COLOSSUS, WonderType.LIGHTHOUSE, WonderType.TEMPLE, WonderType.STATUE, WonderType.MAUSOLEUM
 				, WonderType.GARDENS, WonderType.PYRAMIDS));
 
-		new GameManager(compileHolderObjects(playerNames, wonders), new SetUpHandler(), setUpDeckHandler, new TurnHandler(), new PlayerTurnHandler());
+		new GameManager(compileHolderObjects(playerNames, wonders), new SetUpPlayerHandler(), setUpDeckHandler, new TurnHandler(), new PlayerTurnHandler());
 
 		EasyMock.verify(setUpDeckHandler);
 	}
@@ -286,7 +286,7 @@ public class GameManagerTest {
 		ArrayList<WonderType> wonders = new ArrayList<WonderType>(Arrays.asList( WonderType.COLOSSUS, WonderType.LIGHTHOUSE, WonderType.TEMPLE, WonderType.STATUE, WonderType.MAUSOLEUM
 				));
 
-		GameManager manager = new GameManager(compileHolderObjects(playerNames, wonders), new SetUpHandler(), new SetUpDeckHandler(), turnHandler, new PlayerTurnHandler());
+		GameManager manager = new GameManager(compileHolderObjects(playerNames, wonders), new SetUpPlayerHandler(), new SetUpDeckHandler(), turnHandler, new PlayerTurnHandler());
 		turnHandler.dealInitialTurnCards(manager.getPlayers(), manager.getNumPlayers(),
 				manager.getGameBoard().getDeck());
 
@@ -305,7 +305,7 @@ public class GameManagerTest {
 		ArrayList<WonderType> wonders = new ArrayList<WonderType>(Arrays.asList( WonderType.COLOSSUS, WonderType.LIGHTHOUSE, WonderType.TEMPLE, WonderType.STATUE, WonderType.MAUSOLEUM
 				));
 
-		GameManager manager = new GameManager(compileHolderObjects(playerNames, wonders), new SetUpHandler(), new SetUpDeckHandler(), new TurnHandler(), playerTurnHandler);
+		GameManager manager = new GameManager(compileHolderObjects(playerNames, wonders), new SetUpPlayerHandler(), new SetUpDeckHandler(), new TurnHandler(), playerTurnHandler);
 		manager.dealInitialTurnCards();
 		Card card = manager.getCurrentPlayer().getCurrentHand().get(0);
 		playerTurnHandler.buildStructure(manager.getCurrentPlayer(), card);
@@ -322,7 +322,7 @@ public class GameManagerTest {
 		ArrayList<String> playerNames = new ArrayList<String>(Arrays.asList("Wolverine", "Captain America", "Black Widow"));
 		ArrayList<WonderType> wonders = new ArrayList<WonderType>(Arrays.asList( WonderType.COLOSSUS, WonderType.LIGHTHOUSE, WonderType.TEMPLE));
 
-		GameManager manager = new GameManager(compileHolderObjects(playerNames, wonders), new SetUpHandler(), new SetUpDeckHandler(), new TurnHandler(), new PlayerTurnHandler());
+		GameManager manager = new GameManager(compileHolderObjects(playerNames, wonders), new SetUpPlayerHandler(), new SetUpDeckHandler(), new TurnHandler(), new PlayerTurnHandler());
 		
 		ArrayList<Card> storage = new ArrayList<Card>();
 		Deck deck = manager.getGameBoard().getDeck();
@@ -344,7 +344,7 @@ public class GameManagerTest {
 		ArrayList<String> playerNames = new ArrayList<String>(Arrays.asList("Wolverine", "Captain America", "Black Widow"));
 		ArrayList<WonderType> wonders = new ArrayList<WonderType>(Arrays.asList( WonderType.COLOSSUS, WonderType.LIGHTHOUSE, WonderType.TEMPLE));
 
-		GameManager manager = new GameManager(compileHolderObjects(playerNames, wonders), new SetUpHandler(), new SetUpDeckHandler(), new TurnHandler(), new PlayerTurnHandler());
+		GameManager manager = new GameManager(compileHolderObjects(playerNames, wonders), new SetUpPlayerHandler(), new SetUpDeckHandler(), new TurnHandler(), new PlayerTurnHandler());
 		
 		ArrayList<Card> storage = new ArrayList<Card>();
 		Deck deck = manager.getGameBoard().getDeck();
@@ -378,7 +378,7 @@ public class GameManagerTest {
 		ArrayList<WonderType> wonders = new ArrayList<WonderType>(
 				Arrays.asList(WonderType.COLOSSUS, WonderType.LIGHTHOUSE, WonderType.TEMPLE));
 
-		GameManager manager = new GameManager(compileHolderObjects(playerNames, wonders), new SetUpHandler(), new SetUpDeckHandler(),
+		GameManager manager = new GameManager(compileHolderObjects(playerNames, wonders), new SetUpPlayerHandler(), new SetUpDeckHandler(),
 				new TurnHandler(), new PlayerTurnHandler());
 		GameBoard board = manager.getGameBoard();
 		manager.getCurrentPlayer().addValue3(1, Chip.ChipType.COIN);
@@ -397,7 +397,7 @@ public class GameManagerTest {
 		ArrayList<WonderType> wonders = new ArrayList<WonderType>(
 				Arrays.asList(WonderType.COLOSSUS, WonderType.LIGHTHOUSE, WonderType.TEMPLE));
 
-		GameManager manager = new GameManager(compileHolderObjects(playerNames, wonders), new SetUpHandler(), new SetUpDeckHandler(),
+		GameManager manager = new GameManager(compileHolderObjects(playerNames, wonders), new SetUpPlayerHandler(), new SetUpDeckHandler(),
 				new TurnHandler(), new PlayerTurnHandler());
 		GameBoard board = manager.getGameBoard();
 
@@ -417,7 +417,7 @@ public class GameManagerTest {
 
 		PlayerTurnHandler playerTurnHandler = EasyMock.mock(PlayerTurnHandler.class);
 
-		GameManager manager = new GameManager(compileHolderObjects(playerNames, wonders), new SetUpHandler(), new SetUpDeckHandler(),
+		GameManager manager = new GameManager(compileHolderObjects(playerNames, wonders), new SetUpPlayerHandler(), new SetUpDeckHandler(),
 				new TurnHandler(), playerTurnHandler);
 		playerTurnHandler.discardSelectedCard(manager.getCurrentPlayer(), manager.getGameBoard().getDeck().getCard(0),
 				manager.getGameBoard());
@@ -438,7 +438,7 @@ public class GameManagerTest {
 				Arrays.asList(WonderType.COLOSSUS, WonderType.LIGHTHOUSE, WonderType.TEMPLE));
 
 		TurnHandler turnHandler = EasyMock.mock(TurnHandler.class);
-		GameManager manager = new GameManager(compileHolderObjects(playerNames, wonders), new SetUpHandler(), new SetUpDeckHandler(),
+		GameManager manager = new GameManager(compileHolderObjects(playerNames, wonders), new SetUpPlayerHandler(), new SetUpDeckHandler(),
 				turnHandler, new PlayerTurnHandler());
 
 		EasyMock.expect(turnHandler.getNumPlayersUntilPass()).andReturn(2);
@@ -464,7 +464,7 @@ public class GameManagerTest {
 
 		TurnHandler turnHandler = EasyMock.partialMockBuilder(TurnHandler.class)
 				.addMockedMethod("getNumPlayersUntilPass").createMock();
-		GameManager manager = new GameManager(compileHolderObjects(playerNames, wonders), new SetUpHandler(), new SetUpDeckHandler(),
+		GameManager manager = new GameManager(compileHolderObjects(playerNames, wonders), new SetUpPlayerHandler(), new SetUpDeckHandler(),
 				turnHandler, new PlayerTurnHandler());
 		manager.dealInitialTurnCards();
 
@@ -500,7 +500,7 @@ public class GameManagerTest {
 		ArrayList<Card> cards2 = new SetUpDeckHandler().createCards(Age.AGE2, 3);
 		Deck deck2 = new Deck(Age.AGE2, cards2);
 
-		GameManager manager = EasyMock.partialMockBuilder(GameManager.class).withConstructor(compileHolderObjects(playerNames, wonders), new SetUpHandler(), new SetUpDeckHandler(),
+		GameManager manager = EasyMock.partialMockBuilder(GameManager.class).withConstructor(compileHolderObjects(playerNames, wonders), new SetUpPlayerHandler(), new SetUpDeckHandler(),
 				turnHandler, new PlayerTurnHandler()).addMockedMethod("rotateCounterClockwise").createMock();
 		manager.dealInitialTurnCards();
 
@@ -547,7 +547,7 @@ public class GameManagerTest {
 		ArrayList<Card> cards3 = new SetUpDeckHandler().createCards(Age.AGE3, 3);
 		Deck deck3 = new Deck(Age.AGE3, cards3);
 
-		GameManager manager = new GameManager(compileHolderObjects(playerNames, wonders), new SetUpHandler(), new SetUpDeckHandler(),
+		GameManager manager = new GameManager(compileHolderObjects(playerNames, wonders), new SetUpPlayerHandler(), new SetUpDeckHandler(),
 				turnHandler, new PlayerTurnHandler());
 		manager.getGameBoard().setDeck(deck2);
 		manager.dealInitialTurnCards();

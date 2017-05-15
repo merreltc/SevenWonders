@@ -21,7 +21,7 @@ import dataStructures.Deck.Age;
  */
 public class GameManager {
 	private GameBoard board;
-	private SetUpHandler setUpHandler;
+	private SetUpPlayerHandler setUpPlayerHandler;
 	private SetUpDeckHandler setUpDeckHandler;
 	private TurnHandler turnHandler;
 
@@ -32,12 +32,12 @@ public class GameManager {
 	private Direction currentDirection = Direction.CLOCKWISE;
 
 	public GameManager(ArrayList<PlayerInformationHolder> holder) {
-		this(holder, new SetUpHandler(), new SetUpDeckHandler(), new TurnHandler(), new PlayerTurnHandler());
+		this(holder, new SetUpPlayerHandler(), new SetUpDeckHandler(), new TurnHandler(), new PlayerTurnHandler());
 	}
 
-	public GameManager(ArrayList<PlayerInformationHolder> holder, SetUpHandler setUpHandler,
+	public GameManager(ArrayList<PlayerInformationHolder> holder, SetUpPlayerHandler setUpPlayerHandler,
 			SetUpDeckHandler setUpDeckHandler, TurnHandler turnHandler, PlayerTurnHandler playerTurnHandler) {
-		this.setUpHandler = setUpHandler;
+		this.setUpPlayerHandler = setUpPlayerHandler;
 		this.setUpDeckHandler = setUpDeckHandler;
 		this.turnHandler = turnHandler;
 		this.playerTurnHandler = playerTurnHandler;
@@ -45,7 +45,7 @@ public class GameManager {
 	}
 
 	public void setUpGame(ArrayList<PlayerInformationHolder> holder) {
-		ArrayList<Player> players = this.setUpHandler.setUpAndReturnPlayers(holder);
+		ArrayList<Player> players = this.setUpPlayerHandler.setUpAndReturnPlayers(holder);
 		Deck deck = this.setUpDeckHandler.createDeck(Age.AGE1, holder.size());
 
 		this.board = new GameBoard(players, deck);

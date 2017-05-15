@@ -6,6 +6,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Set;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import dataStructures.Card;
 import dataStructures.Card.CardType;
 import dataStructures.Cost;
@@ -25,9 +29,6 @@ import dataStructures.ValueEffect;
 import dataStructures.ValueEffect.AffectingEntity;
 import dataStructures.ValueEffect.Value;
 import dataStructures.ValueEffect.ValueType;
-import json.JSONArray;
-import json.JSONException;
-import json.JSONObject;
 
 public class SetUpDeckHandler {
 	

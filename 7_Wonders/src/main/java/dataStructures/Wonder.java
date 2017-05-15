@@ -7,62 +7,16 @@ public class Wonder {
 	private String name;
 	private Resource resource;
 	private char side;
-	private int numLevels;
 
 	public enum WonderType {
 		COLOSSUS, LIGHTHOUSE, TEMPLE, GARDENS, STATUE, MAUSOLEUM, PYRAMIDS
 	}
 
 	public Wonder(char side, WonderType type) {
-		this(side, type, 3);
-	}
-
-	public Wonder(char side, WonderType type, int numLevels) {
 		this.type = type;
 		this.name = getNameByType(type);
 		this.resource = getResourceByType(type);
 		this.side = side;
-		validateNumLevels(type, numLevels);
-		this.numLevels = numLevels;
-	}
-	
-	private void validateNumLevels(WonderType type, int numLevels) {
-		if (this.side == 'A') {
-			validateNumLevelsSideA(numLevels);
-		} else {
-			validateNumLevelsSideB(type, numLevels);
-		}
-	}
-
-	private void validateNumLevelsSideA(int numLevels) {
-		if (numLevels <= 2 || numLevels >= 4)
-			throw new IllegalArgumentException("Invalid Number of Wonder Levels: " + numLevels);
-	}
-
-	private void validateNumLevelsSideB(WonderType type, int numLevels) {
-		switch(type) {
-		case LIGHTHOUSE:
-		case TEMPLE:
-		case GARDENS:
-		case STATUE:
-		case MAUSOLEUM:
-			if (numLevels <= 2 || numLevels >= 4) {
-				throw new IllegalArgumentException("Invalid Number of Wonder Levels: " + numLevels);
-			} 
-			break;
-		case COLOSSUS:
-			if (numLevels <=1 || numLevels >= 3) {
-				throw new IllegalArgumentException("Invalid Number of Wonder Levels: " + numLevels);
-			}
-			break;
-		case PYRAMIDS:
-			if (numLevels <=3 || numLevels >= 5) {
-				throw new IllegalArgumentException("Invalid Number of Wonder Levels: " + numLevels);
-			}
-			break;
-		default:
-			throw new IllegalArgumentException("Invalid WonderType: " + type);
-		}
 	}
 
 	public WonderType getType() {
@@ -72,7 +26,7 @@ public class Wonder {
 	public String getName() {
 		return this.name;
 	}
-	
+
 	public Resource getResource() {
 		return this.resource;
 	}
@@ -82,9 +36,30 @@ public class Wonder {
 	}
 
 	public int getNumLevels() {
-		return this.numLevels;
+		return this.getNumLevels(this.side, this.type);
 	}
-	
+
+	public int getNumLevels(char side, Wonder.WonderType type) {
+		if(side == 'A') {
+			return 3;
+		} else {
+			switch(type) {
+			case COLOSSUS:
+				return 2;
+			case LIGHTHOUSE:
+			case TEMPLE:
+			case GARDENS:
+			case STATUE:
+			case MAUSOLEUM:
+				return 3;
+			case PYRAMIDS:
+				return 4;
+			default:
+				throw new IllegalArgumentException("Bad Wonder Type");
+			}
+		}
+	}
+
 	public static String getNameByType(Wonder.WonderType wonder) {
 		switch (wonder) {
 		case COLOSSUS:
@@ -105,7 +80,7 @@ public class Wonder {
 			throw new IllegalArgumentException("Bad Wonder Type");
 		}
 	}
-	
+
 	public static String getShortNameByType(Wonder.WonderType wonder) {
 		switch (wonder) {
 		case COLOSSUS:
@@ -126,7 +101,7 @@ public class Wonder {
 			throw new IllegalArgumentException("Bad Wonder Type");
 		}
 	}
-	
+
 	public static Resource getResourceByType(WonderType type) {
 		switch (type) {
 		case COLOSSUS:
