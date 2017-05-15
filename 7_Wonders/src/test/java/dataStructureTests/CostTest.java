@@ -1,6 +1,6 @@
 package dataStructureTests;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 
 import java.util.HashMap;
 
@@ -103,5 +103,13 @@ public class CostTest {
 		assertEquals(expectedCost.get(Good.LOOM), cost.getCost().get(Good.LOOM));
 		assertEquals(expectedCost.get(Good.PRESS), cost.getCost().get(Good.PRESS));
 		assertEquals(expectedCost.get(Good.GLASS), cost.getCost().get(Good.GLASS));
+	}
+	
+	@Test
+	public void testValidTwoCostsEqualNoneType(){
+		Cost cost = new Cost(CostType.NONE, 0);
+		Cost cost2 = new Cost(CostType.NONE, 0);
+		
+		assertTrue(cost.equals(cost2));
 	}
 }
