@@ -11,7 +11,7 @@ public class ValueEffect extends Effect {
 	private AffectingEntity affectingEntity = AffectingEntity.NONE;
 	private HashMap<Enum, Integer> affectingEntities = new HashMap<Enum, Integer>();
 	private static final int NO_VALUE_AMOUNT = -1;
-	
+
 	public enum Value {
 		VICTORYPOINTS, MILITARY, COMMERCE, GUILD
 	}
@@ -19,14 +19,12 @@ public class ValueEffect extends Effect {
 	public enum ValueType {
 		VICTORYPOINT, CONFLICTTOKEN, COIN
 	}
-	
+
 	public enum AffectingEntity {
-		NONE, RAWRESOURCES, MANUFACTUREDGOODS, COMMERCIALSTRUCTURES, 
-		SCIENTIFICSTRUCTURES, MILITARYSTRUCTURES, CIVILIANSTRUCTURES, GUILD, WONDERLEVEL
+		NONE, RAWRESOURCES, MANUFACTUREDGOODS, COMMERCIALSTRUCTURES, SCIENTIFICSTRUCTURES, MILITARYSTRUCTURES, CIVILIANSTRUCTURES, GUILD, WONDERLEVEL
 	}
 
-	public ValueEffect(EffectType effectType, Value value,
-			AffectingEntity affectingEntity, int valueAmount) {
+	public ValueEffect(EffectType effectType, Value value, AffectingEntity affectingEntity, int valueAmount) {
 		super(effectType);
 		this.value = value;
 		this.affectingEntity = affectingEntity;
@@ -34,9 +32,8 @@ public class ValueEffect extends Effect {
 		validateValueAmount(value, valueAmount);
 		this.valueAmount = valueAmount;
 	}
-	
-	public ValueEffect(EffectType effectType, Value value,
-			AffectingEntity affectingEntity, Direction direction) {
+
+	public ValueEffect(EffectType effectType, Value value, AffectingEntity affectingEntity, Direction direction) {
 		super(effectType);
 		this.value = value;
 		this.setDirection(direction);
@@ -44,8 +41,7 @@ public class ValueEffect extends Effect {
 		this.valueAmount = NO_VALUE_AMOUNT;
 	}
 
-	public ValueEffect(EffectType effectType, Value value,
-			AffectingEntity affectingEntity, Direction direction,
+	public ValueEffect(EffectType effectType, Value value, AffectingEntity affectingEntity, Direction direction,
 			int valueAmount) {
 		super(effectType);
 		this.value = value;
@@ -62,25 +58,25 @@ public class ValueEffect extends Effect {
 	}
 
 	private void validateValueAmount(Value value, int valueAmount) {
-		switch (value){
+		switch (value) {
 		case VICTORYPOINTS:
-			if (valueAmount <= 0 || valueAmount >= 9){
+			if (valueAmount <= 0 || valueAmount >= 9) {
 				throw new IllegalArgumentException("Cannot have valueAmount of " + valueAmount);
 			}
 			break;
 		case COMMERCE:
-			if(valueAmount <= 0){
+			if (valueAmount <= 0) {
 				throw new IllegalArgumentException("Cannot have valueAmount of " + valueAmount);
 			}
 			break;
 		default:
-			if (valueAmount <= -2 || valueAmount == 0 || valueAmount >= 4){
+			if (valueAmount <= -2 || valueAmount == 0 || valueAmount >= 4) {
 				throw new IllegalArgumentException("Cannot have valueAmount of " + valueAmount);
 			}
 			break;
 		}
 	}
-	
+
 	public int getValueAmount() {
 		return this.valueAmount;
 	}
@@ -101,7 +97,7 @@ public class ValueEffect extends Effect {
 			return ValueType.CONFLICTTOKEN;
 		}
 	}
-	
+
 	public AffectingEntity getAffectingEntity() {
 		return this.affectingEntity;
 	}
@@ -109,11 +105,15 @@ public class ValueEffect extends Effect {
 	public HashMap<Enum, Integer> getAffectingEntities() {
 		return this.affectingEntities;
 	}
-	
+
 	@Override
-	public boolean equals(Object obj){
+	public boolean equals(Object obj) {
 		ValueEffect value = (ValueEffect) obj;
-		
-		return true;
+
+		if (this.valueAmount == value.getValueAmount()) {
+			return true;
+		}
+
+		return false;
 	}
 }

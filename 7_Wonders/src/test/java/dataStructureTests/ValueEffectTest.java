@@ -308,4 +308,12 @@ public class ValueEffectTest {
 		
 		assertTrue(effect.equals(effect2));
 	}
+	
+	@Test
+	public void testInvalidValueEffectEqualsNoAffectingentities() {
+		ValueEffect effect = new ValueEffect(EffectType.VALUE, Value.VICTORYPOINTS, AffectingEntity.NONE, 3);
+		ValueEffect effect2 = new ValueEffect(EffectType.VALUE, Value.VICTORYPOINTS, AffectingEntity.NONE, 2);
+		
+		assertFalse(effect.equals(effect2));
+	}
 }
