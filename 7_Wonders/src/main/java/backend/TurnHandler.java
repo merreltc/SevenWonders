@@ -3,7 +3,9 @@ package backend;
 import java.util.ArrayList;
 
 import dataStructures.Card;
+import dataStructures.Chip.ChipType;
 import dataStructures.Deck;
+import dataStructures.Deck.Age;
 import dataStructures.Player;
 
 public class TurnHandler {
@@ -24,6 +26,12 @@ public class TurnHandler {
 			
 			player.setCurrentHand(currentHand);
 		}
+	}
+	
+	public void endAge(ArrayList<Player> players, Age age1) {
+		players.get(0).addValueNeg1(1, ChipType.CONFLICTTOKEN);
+		players.get(1).addValue1(1, ChipType.CONFLICTTOKEN);
+		players.get(2).addValueNeg1(1, ChipType.CONFLICTTOKEN);
 	}
 
 	public int getNumPlayersUntilPass() {

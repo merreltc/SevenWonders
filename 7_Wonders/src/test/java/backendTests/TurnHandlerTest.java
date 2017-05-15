@@ -16,7 +16,9 @@ import backend.SetUpDeckHandler;
 import backend.SetUpPlayerHandler;
 import backend.TurnHandler;
 import dataStructures.Card;
+import dataStructures.Chip.ChipType;
 import dataStructures.Deck;
+import dataStructures.Deck.Age;
 import dataStructures.Player;
 import dataStructures.Wonder;
 import dataStructures.Wonder.WonderType;
@@ -182,5 +184,29 @@ public class TurnHandlerTest {
 		turnHandler.setNumTurnsTilEndOfAge(5);
 		
 		assertEquals(5, turnHandler.getNumTurnsTilEndOfAge());
+	}
+	
+	@Test
+	public void endAge1ThreePlayersMiddleWithMostWarTokens(){
+		Player middlePlayer = new Player("Jane Doe", WonderType.COLOSSUS);
+		middlePlayer.addNumShields(5);
+		
+		Player leftNeighborPlayers = new Player("Jane Doe", WonderType.COLOSSUS);
+		leftNeighborPlayers.addNumShields(2);
+		
+		Player rightNeighborPlayers = new Player("Jane Doe", WonderType.COLOSSUS);
+		rightNeighborPlayers.addNumShields(2);
+		
+		ArrayList<Player> players = new ArrayList<Player>();
+		players.add(leftNeighborPlayers);
+		players.add(middlePlayer);
+		players.add(rightNeighborPlayers);
+		
+		TurnHandler turnHandler = new TurnHandler();
+		turnHandler.endAge(players,Age.AGE1);
+		
+		Assert.assertEquals(1, players.get(0).getNumValueNeg1ConflictTokens());
+		Assert.assertEquals(1, players.get(1).getNumValue1ConflictTokens());
+		Assert.assertEquals(1, players.get(2).getNumValueNeg1ConflictTokens());
 	}
 }
