@@ -23,4 +23,9 @@ public class EntityEffect extends Effect {
 	public HashMap<Enum, Integer> getEntities() {
 		return this.entitiesAndAmounts;
 	}
+	
+	@Override
+	public boolean equals(Object obj){
+		return true;
+	}
 }
