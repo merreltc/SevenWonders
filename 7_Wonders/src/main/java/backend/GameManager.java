@@ -62,7 +62,11 @@ public class GameManager {
 	}
 
 	public void tradeForEntity(Player from, Player to, Enum entity) {
-		this.tradeHandler.tradeFromToForEntity(from, to, entity, false);
+		if (from.storagePileContainsCardByName("East Trading Post")) {
+			this.tradeHandler.tradeFromToForEntity(from, to, entity, true);
+		} else {
+			this.tradeHandler.tradeFromToForEntity(from, to, entity, false);
+		}
 	}
 
 	public void buildStructure(Card card) {
@@ -101,10 +105,10 @@ public class GameManager {
 				if (this.board.getDeck().getAge() == Age.AGE1) {
 					newDeck = this.setUpDeckHandler.createDeck(Age.AGE2, getNumPlayers());
 					this.currentDirection = Direction.COUNTERCLOCKWISE;
-				}else{
+				} else {
 					newDeck = this.setUpDeckHandler.createDeck(Age.AGE3, getNumPlayers());
 				}
-				
+
 				this.board.setDeck(newDeck);
 				this.turnHandler.dealInitialTurnCards(this.getPlayers(), this.getNumPlayers(), this.board.getDeck());
 				message = "This is the end of the Age.  Finalizing Points";
@@ -118,10 +122,10 @@ public class GameManager {
 		}
 
 		this.turnHandler.setNumPlayersUntilPass(playersUntilPass - 1);
-		
-		if(this.currentDirection == Direction.CLOCKWISE){
+
+		if (this.currentDirection == Direction.CLOCKWISE) {
 			this.rotateClockwise();
-		}else{
+		} else {
 			this.rotateCounterClockwise();
 		}
 		return message;

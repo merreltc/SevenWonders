@@ -361,6 +361,27 @@ public class GameManagerTest {
 		assertEquals(5, next.getCoinTotal());
 	}
 	
+	@Test
+	public void testValidTradeForDiscountEastTradingPost() {
+		ArrayList<String> playerNames = new ArrayList<String>(Arrays.asList("Wolverine", "Captain America", "Black Widow"));
+		ArrayList<WonderType> wonders = new ArrayList<WonderType>(Arrays.asList( WonderType.COLOSSUS, WonderType.LIGHTHOUSE, WonderType.TEMPLE));
+
+		GameManager manager = new GameManager(compileHolderObjects(playerNames, wonders), new SetUpPlayerHandler(), new SetUpDeckHandler(), new TurnHandler(), new PlayerTurnHandler());
+		
+		Deck deck = manager.getGameBoard().getDeck();
+		Player current = manager.getCurrentPlayer();
+		Player right = manager.getNextPlayer();
+		ArrayList<Card> storage = new ArrayList<Card>();
+		storage.add(deck.getCard(12)); //east trading post
+		current.setStoragePile(storage);
+		ArrayList<Card> storage2 = new ArrayList<Card>();
+		storage2.add(deck.getCard(0)); //lumber
+		right.setStoragePile(storage2);
+		manager.tradeForEntity(current, right, RawResource.LUMBER);
+		assertTrue(current.getCurrentTrades().containsKey(RawResource.LUMBER));
+		assertEquals(4, right.getCoinTotal());
+	}
+	
 	private ArrayList<PlayerInformationHolder> compileHolderObjects(ArrayList<String> playerNames, ArrayList<WonderType> wonders){
 		ArrayList<PlayerInformationHolder> holders = new ArrayList<PlayerInformationHolder>();
 		
