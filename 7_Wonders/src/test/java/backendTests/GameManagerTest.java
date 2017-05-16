@@ -459,9 +459,9 @@ public class GameManagerTest {
 		manager.changeRotateDirectionAndResetPositions(Rotation.COUNTERCLOCKWISE);
 		Deck deck = manager.getGameBoard().getDeck();
 		Player current = manager.getCurrentPlayer();
-		Player left = manager.getPreviousPlayer();
+		Player left = manager.getNextPlayer();
 		ArrayList<Card> storage = new ArrayList<Card>();
-		storage.add(deck.getCard(12)); // east trading post
+		storage.add(deck.getCard(13)); // west trading post
 		current.setStoragePile(storage);
 		ArrayList<Card> storage2 = new ArrayList<Card>();
 		storage2.add(deck.getCard(0)); // lumber
@@ -526,9 +526,9 @@ public class GameManagerTest {
 		manager.rotateClockwise();
 		Deck deck = manager.getGameBoard().getDeck();
 		Player current = manager.getCurrentPlayer();
-		Player left = manager.getNextPlayer();
+		Player left = manager.getPreviousPlayer();
 		ArrayList<Card> storage = new ArrayList<Card>();
-		storage.add(deck.getCard(12)); // east trading post
+		storage.add(deck.getCard(13)); // west trading post
 		current.setStoragePile(storage);
 		ArrayList<Card> storage2 = new ArrayList<Card>();
 		storage2.add(deck.getCard(0)); // lumber
