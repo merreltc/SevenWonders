@@ -1,6 +1,6 @@
 package dataStructureTests;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 
 import java.util.HashMap;
 
@@ -103,5 +103,78 @@ public class CostTest {
 		assertEquals(expectedCost.get(Good.LOOM), cost.getCost().get(Good.LOOM));
 		assertEquals(expectedCost.get(Good.PRESS), cost.getCost().get(Good.PRESS));
 		assertEquals(expectedCost.get(Good.GLASS), cost.getCost().get(Good.GLASS));
+	}
+	
+	@Test
+	public void testValidTwoCostsEqualNoneType(){
+		Cost cost = new Cost(CostType.NONE, 0);
+		Cost cost2 = new Cost(CostType.NONE, 0);
+		
+		assertTrue(cost.equals(cost2));
+	}
+	
+	@Test
+	public void testValidTwoCostsEqualCoinType(){
+		Cost cost = new Cost(CostType.COIN, 6);
+		Cost cost2 = new Cost(CostType.COIN, 6);
+		
+		assertTrue(cost.equals(cost2));
+	}
+	
+	@Test
+	public void testInvalidTwoCostsEqualCoinType(){
+		Cost cost = new Cost(CostType.COIN, 6);
+		Cost cost2 = new Cost(CostType.COIN, 9);
+		
+		assertFalse(cost.equals(cost2));
+	}
+	
+	@Test
+	public void testValidTwoCostsEqualResourceType(){
+		HashMap<Enum, Integer> cost1 = new HashMap<Enum, Integer>();
+		cost1.put(RawResource.STONE, 3);
+		cost1.put(Good.GLASS, 1);
+		
+		HashMap<Enum, Integer> cost2Info = new HashMap<Enum, Integer>();
+		cost2Info.put(RawResource.STONE, 3);
+		cost2Info.put(Good.GLASS, 1);
+		
+		Cost cost = new Cost(CostType.COIN, cost1);
+		Cost cost2 = new Cost(CostType.COIN, cost2Info);
+		
+		assertTrue(cost.equals(cost2));
+	}
+	
+	@Test
+	public void testInvalidTwoCostsEqualResourceType(){
+		HashMap<Enum, Integer> cost1 = new HashMap<Enum, Integer>();
+		cost1.put(RawResource.STONE, 9);
+		cost1.put(Good.GLASS, 1);
+		
+		HashMap<Enum, Integer> cost2Info = new HashMap<Enum, Integer>();
+		cost2Info.put(RawResource.STONE, 3);
+		cost2Info.put(Good.GLASS, 1);
+		
+		Cost cost = new Cost(CostType.COIN, cost1);
+		Cost cost2 = new Cost(CostType.COIN, cost2Info);
+		
+		assertFalse(cost.equals(cost2));
+	}
+	
+
+	@Test
+	public void testInvalidTwoCostsEqual(){
+		HashMap<Enum, Integer> cost1 = new HashMap<Enum, Integer>();
+		cost1.put(RawResource.STONE, 9);
+		cost1.put(Good.GLASS, 1);
+		
+		HashMap<Enum, Integer> cost2Info = new HashMap<Enum, Integer>();
+		cost2Info.put(RawResource.LUMBER, 3);
+		cost2Info.put(Good.LOOM, 1);
+		
+		Cost cost = new Cost(CostType.COIN, cost1);
+		Cost cost2 = new Cost(CostType.COIN, cost2Info);
+		
+		assertFalse(cost.equals(cost2));
 	}
 }

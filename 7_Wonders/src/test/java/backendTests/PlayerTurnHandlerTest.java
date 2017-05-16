@@ -548,7 +548,6 @@ public class PlayerTurnHandlerTest {
 		storage.add(cardInStorage);
 		String previousStructureName = "None";
 		EasyMock.expect(cardToBuild.getName()).andReturn("Baths");
-		EasyMock.expect(player.storagePileContainsCardByName("Baths")).andReturn(false);
 		EasyMock.expect(cardToBuild.getPreviousStructureName()).andReturn(previousStructureName);
 		EasyMock.expect(cardToBuild.getCostType()).andReturn(CostType.RESOURCE);
 		EasyMock.expect(cardToBuild.getCostType()).andReturn(CostType.RESOURCE);
@@ -572,6 +571,7 @@ public class PlayerTurnHandlerTest {
 
 		EasyMock.expect(effect.getValueType()).andReturn(ValueType.VICTORYPOINT);
 		EasyMock.expect(effect.getValueAmount()).andReturn(Integer.valueOf(3));
+		EasyMock.expect(player.storagePileContainsCardByName("Baths")).andReturn(false);
 		player.addNumVictoryPoints(3);
 		player.addToStoragePile(cardToBuild);
 		player.removeFromCurrentHand(cardToBuild);

@@ -27,4 +27,15 @@ public class Cost {
 	public HashMap<Enum, Integer> getCost() {
 		return this.cost;
 	}
+	
+	@Override
+	public boolean equals(Object obj){
+		Cost cost = (Cost) obj;
+		
+		if(this.getType() == cost.getType() && this.getCost().toString().equals(cost.getCost().toString())){
+			return true;
+		}
+		
+		return false;
+	}
 }

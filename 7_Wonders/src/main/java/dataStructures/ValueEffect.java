@@ -113,4 +113,23 @@ public class ValueEffect extends Effect {
 	public HashMap<Enum, Integer> getAffectingEntities() {
 		return this.affectingEntities;
 	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		Effect effect = (Effect) obj;
+		if(effect.getEffectType() != EffectType.VALUE){
+			return false;
+		}
+		
+		ValueEffect value = (ValueEffect) effect;
+
+		if (this.valueAmount == value.getValueAmount() && this.getDirection() == value.getDirection()
+				&& this.affectingEntity == value.affectingEntity && this.value == value.getValue()
+				&& this.affectingEntities.toString().equals(value.affectingEntities.toString())) {
+			return true;
+		}
+
+		return false;
+	}
 }
+
