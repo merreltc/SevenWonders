@@ -93,6 +93,19 @@ public class SetUpDeckHandlerTest {
 		}
 
 	}
+	
+	@Test
+	public void testCreateAge3Cards7Players() {
+		int numPlayers = 7;
+		ArrayList<Card> cards = createAge3Cards(numPlayers);
+
+		ArrayList<Card> actual = new SetUpDeckHandler().createCards(Age.AGE3, numPlayers);
+
+		for (int i = 0; i < actual.size(); i++) {
+			assertEquals(cards.get(i).toString(), actual.get(i).toString());
+		}
+
+	}
 
 	@Test
 	public void testAge2Cards3PlayersTempleHasNextAndPrevious() {
