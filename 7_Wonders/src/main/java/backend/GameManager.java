@@ -66,7 +66,11 @@ public class GameManager {
 		if (from.storagePileContainsCardByName("East Trading Post")) {
 			int fromPosition = this.getPlayers().indexOf(from);
 			int toPosition = this.getPlayers().indexOf(to);
-			if (++fromPosition == toPosition) {
+			if(++fromPosition == this.getNumPlayers()){
+				fromPosition = 0;
+			}
+			
+			if (fromPosition == toPosition) {
 				this.tradeHandler.tradeFromToForEntity(from, to, entity, true);
 				return;
 			}
@@ -76,6 +80,7 @@ public class GameManager {
 			if(--fromPosition == -1){
 				fromPosition = this.getNumPlayers() - 1;
 			}
+			
 			if (fromPosition == toPosition) {
 				this.tradeHandler.tradeFromToForEntity(from, to, entity, true);
 				return;
