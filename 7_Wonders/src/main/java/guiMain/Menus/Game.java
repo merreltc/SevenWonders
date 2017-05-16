@@ -19,6 +19,7 @@ import guiMain.HandManager;
 import guiMain.Message;
 import guiMain.PlayerBoard;
 import guiMain.RenderImage;
+import guiMain.Translate;
 import guiMain.Interactables.Button;
 import guiMain.Interactables.CardHolder;
 import guiMain.Interactables.Interactable;
@@ -28,7 +29,7 @@ public class Game extends Menu {
 	private GameManager gameManager;
 	private HandManager handManager;
 	private RenderImage renderer;
-	ResourceBundle messages = ResourceBundle.getBundle("message", Locale.getDefault());
+	ResourceBundle messages = Translate.getNewResourceBundle();
 	ResourceViewer resource = new ResourceViewer();
 
 	public Game(int numOfPlayers, RenderImage renderer) {
@@ -98,7 +99,7 @@ public class Game extends Menu {
 		int numOfPlayers = this.gameManager.getNumPlayers();
 		for (int i = -1; i < numOfPlayers - 1; i++) {
 			PlayerBoard board = new PlayerBoard(i, numOfPlayers,
-					this.gameManager.getPlayer((2 * numOfPlayers - i) % numOfPlayers), renderer);
+					this.gameManager.getPlayer((2 * numOfPlayers + i) % numOfPlayers), renderer);
 			this.addInteractable(board.generateResourceButton());
 			boards.add(board);
 		}
@@ -146,33 +147,7 @@ public class Game extends Menu {
 	@Override
 	public void onClick(Interactable clicked) {
 		if (clicked.getClass().equals(CardHolder.class)) {
-			String[] buttons = new String[] { this.messages.getString("buildStructure"),
-					this.messages.getString("buildWonder"), this.messages.getString("discard") };
-			int val = JOptionPane.showOptionDialog(null, this.messages.getString("choosePlayType"),
-					this.messages.getString("playCard"), JOptionPane.INFORMATION_MESSAGE, 0, null, buttons, buttons[0]);
-			try {
-				if (val == 0) {
-					((CardHolder) clicked).activate(this.gameManager);
-				}else if (val == 2){
-					((CardHolder) clicked).discard(this.gameManager);
-				}
-				String message = gameManager.endCurrentPlayerTurn();
-				if (!message.equals("")){
-					Message.showMessage(message);
-				}
-				redrawBoards();
-				/* update the cards after rotation */
-				for (Interactable toRemove : this.handManager.getCurrentPlayerHand()) {
-					this.removeInteractable(toRemove);
-				}
-				this.handManager.drawCurrentPlayerCards(this.gameManager.getCurrentPlayer(), renderer);
-				for (int i = 0; i < this.handManager.getPlayerHandSize(); i++) {
-					this.addInteractable(this.handManager.getCardHolder(i));
-				}
-				
-			} catch (Exception e) {
-				Message.showMessage(e.getMessage());
-			}
+			this.attemptPlayCard((CardHolder) clicked);
 		} else if (clicked.getValue().equals(this.messages.getString("exit"))) {
 			if (this.resource.isActive()) {
 				this.resource.closeMenu();
@@ -189,6 +164,36 @@ public class Game extends Menu {
 			tradeHandler.trade(splitValue);
 		}
 	}
+	
+	private void attemptPlayCard(CardHolder clicked){
+		String[] buttons = new String[] { this.messages.getString("buildStructure"),
+				this.messages.getString("buildWonder"), this.messages.getString("discard") };
+		int val = JOptionPane.showOptionDialog(null, this.messages.getString("choosePlayType"),
+				this.messages.getString("playCard"), JOptionPane.INFORMATION_MESSAGE, 0, null, buttons, buttons[0]);
+		try {
+			if (val == 0) {
+				clicked.activate(this.gameManager);
+			}else if (val == 2){
+				 clicked.discard(this.gameManager);
+			}
+			String message = gameManager.endCurrentPlayerTurn();
+			if (!message.equals("")){
+				Message.showMessage(message);
+			}
+			redrawBoards();
+			/* update the cards after rotation */
+			for (Interactable toRemove : this.handManager.getCurrentPlayerHand()) {
+				this.removeInteractable(toRemove);
+			}
+			this.handManager.drawCurrentPlayerCards(this.gameManager.getCurrentPlayer(), renderer);
+			for (int i = 0; i < this.handManager.getPlayerHandSize(); i++) {
+				this.addInteractable(this.handManager.getCardHolder(i));
+			}
+			
+		} catch (Exception e) {
+			Message.showMessage(e.getMessage());
+		}
+	}
 
 	private int codePointToInt(int val) {
 		return val - 48;
@@ -201,7 +206,7 @@ public class Game extends Menu {
 		int nextPlayerIndex = players.indexOf(nextPlayer);
 		for (int i = 0; i < players.size(); i++) {
 			boards.get(i)
-					.changePlayer(players.get((totalNumberOfPlayers + nextPlayerIndex - i) % totalNumberOfPlayers));
+					.changePlayer(players.get((totalNumberOfPlayers + nextPlayerIndex + i+1) % totalNumberOfPlayers));
 		}
 	}
 }

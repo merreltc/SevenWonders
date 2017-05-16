@@ -15,30 +15,42 @@ public class Message {
 	public static void showMessage(String message) {
 		JOptionPane.showMessageDialog(null, message);
 	}
+	
+	public static String selectLanguageMessage() {
+		ResourceBundle messages = ResourceBundle.getBundle("message", Locale.getDefault());
+		String[] langs = {messages.getString("en_US"), messages.getString("zh_CN")};
+		String language = (String) JOptionPane.showInputDialog(null,
+				messages.getString("chooseYourLanguage"),
+				messages.getString("languageSelector"),
+				JOptionPane.PLAIN_MESSAGE,
+				null,
+				langs,
+				langs[0]);
+		if(language == null) {
+			language = " -" + Locale.getDefault().toString();
+		}
+		return language.split("-")[1];
+	}
 
 	public static String inputPlayerNameMessage(int i) {
-		ResourceBundle messages = ResourceBundle.getBundle("message", Locale.getDefault());
-		Object[] messageArgs = {new Integer(i+1)};
-		MessageFormat format = new MessageFormat("");
-		format.setLocale(Locale.getDefault());
-		format.applyPattern(messages.getString("playerNameTemplate"));
-		
-		String name = JOptionPane.showInputDialog(format.format(messageArgs));
+		ResourceBundle messages = Translate.getNewResourceBundle();
+		String name = JOptionPane
+				.showInputDialog(Translate.prepareStringTemplateWithIntArg(i + 1, "playerNameTemplate", messages));
 		if (name == null || name.equals("")) {
-			format.applyPattern(messages.getString("defaultPlayerTemplate"));
-			name = format.format(messageArgs);
+			name = Translate.prepareStringTemplateWithIntArg(i + 1, "defaultPlayerTemplate", messages);
 		}
 		return name;
 	}
 
 	public static String dropDownWonderSelectionMessage(Object[] wonders) {
-		ResourceBundle messages = ResourceBundle.getBundle("message", Locale.getDefault());
-		return (String) JOptionPane.showInputDialog(null,
-				messages.getString("chooseYourWonder"),
-				messages.getString("wonderSelector"),
-				JOptionPane.PLAIN_MESSAGE,
-				null,
-				wonders,
-				wonders[0]);
+		ResourceBundle messages = Translate.getNewResourceBundle();
+		return (String) JOptionPane.showInputDialog(null, messages.getString("chooseYourWonder"),
+				messages.getString("wonderSelector"), JOptionPane.PLAIN_MESSAGE, null, wonders, wonders[0]);
+	}
+
+	public static int SelectDifficulty() {
+		Object[] objects = { "Easy", "Normal" };
+		return JOptionPane.showOptionDialog(null, "Select Your Difficulty", "Difficulty", JOptionPane.YES_NO_OPTION,
+				JOptionPane.PLAIN_MESSAGE, null, objects, null);
 	}
 }

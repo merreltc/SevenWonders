@@ -29,13 +29,15 @@ public class GuiMainMenu extends JPanel implements ActionListener {
 	private Integer numOfPlayers;
 	private Image image;
 	private RenderImage renderer = new RenderImage();
-	ResourceBundle messages = ResourceBundle.getBundle("message", Locale.getDefault());
+	ResourceBundle messages;
 
 	public enum MenuType {
 		MainMenu, PlayerSelect, Game
 	}
 
 	public GuiMainMenu() {
+		Constants.LOCALE = Message.selectLanguageMessage();
+		this.messages = Translate.getNewResourceBundle();
 		this.switchMenu(MenuType.MainMenu);
 		this.frame = new JFrame();
 		this.frame.setSize(Constants.FrameWidth, Constants.FrameHeight);

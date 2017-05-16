@@ -10,7 +10,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import backend.SetUpHandler;
+import backend.SetUpPlayerHandler;
 import dataStructures.Player;
 import dataStructures.Wonder.WonderType;
 import guiDataStructures.PlayerInformationHolder;
@@ -19,26 +19,26 @@ public class SetupBackendTest {
 
 	@Test
 	public void testValidPlayerNum() {
-		assertTrue(new SetUpHandler().validatePlayerNum(3));
-		assertTrue(new SetUpHandler().validatePlayerNum(7));
+		assertTrue(new SetUpPlayerHandler().validatePlayerNum(3));
+		assertTrue(new SetUpPlayerHandler().validatePlayerNum(7));
 	}
 
 	@Test(expected = IllegalArgumentException.class)
 	public void testInvalidPlayerNum2() {
-		new SetUpHandler().validatePlayerNum(2);
+		new SetUpPlayerHandler().validatePlayerNum(2);
 		fail();
 	}
 
 	@Test(expected = IllegalArgumentException.class)
 	public void testInvalidPlayerNum8() {
-		new SetUpHandler().validatePlayerNum(8);
+		new SetUpPlayerHandler().validatePlayerNum(8);
 		fail();
 	}
 
 	@Test
 	public void testInvalidPlayerNum2ErrorMessage() {
 		try {
-			new SetUpHandler().validatePlayerNum(2);
+			new SetUpPlayerHandler().validatePlayerNum(2);
 		} catch (IllegalArgumentException error) {
 			String message = "Cannot play with 2 players";
 			assertEquals(message, error.getMessage());
@@ -48,7 +48,7 @@ public class SetupBackendTest {
 	@Test
 	public void testInvalidPlayerNum8ErrorMessage() {
 		try {
-			new SetUpHandler().validatePlayerNum(8);
+			new SetUpPlayerHandler().validatePlayerNum(8);
 		} catch (IllegalArgumentException error) {
 			String message = "Cannot play with 8 players";
 			assertEquals(message, error.getMessage());
@@ -62,7 +62,7 @@ public class SetupBackendTest {
 		ArrayList<WonderType> wonders = new ArrayList<WonderType>(
 				Arrays.asList(WonderType.COLOSSUS, WonderType.LIGHTHOUSE, WonderType.TEMPLE));
 
-		SetUpHandler setUpHandler = new SetUpHandler();
+		SetUpPlayerHandler setUpHandler = new SetUpPlayerHandler();
 		ArrayList<Player> players = setUpHandler.setUpAndReturnPlayers(compileHolderObjects(playerNames, wonders));
 
 		for (int i = 0; i < players.size(); i++) {
@@ -78,7 +78,7 @@ public class SetupBackendTest {
 				Arrays.asList(WonderType.COLOSSUS, WonderType.LIGHTHOUSE, WonderType.TEMPLE, WonderType.STATUE,
 						WonderType.MAUSOLEUM, WonderType.GARDENS, WonderType.PYRAMIDS));
 
-		SetUpHandler setUpHandler = new SetUpHandler();
+		SetUpPlayerHandler setUpHandler = new SetUpPlayerHandler();
 		ArrayList<Player> players = setUpHandler.setUpAndReturnPlayers(compileHolderObjects(playerNames, wonders));
 
 		for (int i = 0; i < players.size(); i++) {
@@ -91,7 +91,7 @@ public class SetupBackendTest {
 		ArrayList<String> playerNames = new ArrayList<String>();
 		ArrayList<WonderType> wonders = new ArrayList<WonderType>();
 
-		SetUpHandler setUpHandler = new SetUpHandler();
+		SetUpPlayerHandler setUpHandler = new SetUpPlayerHandler();
 		setUpHandler.setUpAndReturnPlayers(compileHolderObjects(playerNames, wonders));
 		fail();
 	}
@@ -104,7 +104,7 @@ public class SetupBackendTest {
 				Arrays.asList(WonderType.COLOSSUS, WonderType.LIGHTHOUSE, WonderType.TEMPLE, WonderType.STATUE,
 						WonderType.MAUSOLEUM, WonderType.GARDENS, WonderType.PYRAMIDS, WonderType.PYRAMIDS));
 
-		SetUpHandler setUpHandler = new SetUpHandler();
+		SetUpPlayerHandler setUpHandler = new SetUpPlayerHandler();
 		setUpHandler.setUpAndReturnPlayers(compileHolderObjects(playerNames, wonders));
 		fail();
 	}
@@ -116,7 +116,7 @@ public class SetupBackendTest {
 		ArrayList<WonderType> wonders = new ArrayList<WonderType>(
 				Arrays.asList(WonderType.COLOSSUS, WonderType.LIGHTHOUSE, WonderType.TEMPLE));
 
-		SetUpHandler setUpHandler = new SetUpHandler();
+		SetUpPlayerHandler setUpHandler = new SetUpPlayerHandler();
 		ArrayList<Player> players = setUpHandler.createPlayers(compileHolderObjects(playerNames, wonders));
 
 		for (int i = 0; i < players.size(); i++) {
@@ -131,7 +131,7 @@ public class SetupBackendTest {
 		ArrayList<WonderType> wonders = new ArrayList<WonderType>(
 				Arrays.asList(WonderType.COLOSSUS, WonderType.LIGHTHOUSE, WonderType.TEMPLE));
 
-		SetUpHandler setUpHandler = new SetUpHandler();
+		SetUpPlayerHandler setUpHandler = new SetUpPlayerHandler();
 		ArrayList<Player> players = setUpHandler.createPlayers(compileHolderObjects(playerNames, wonders));
 
 		for (int i = 0; i < players.size(); i++) {
@@ -147,7 +147,7 @@ public class SetupBackendTest {
 				Arrays.asList(WonderType.COLOSSUS, WonderType.LIGHTHOUSE, WonderType.TEMPLE, WonderType.STATUE,
 						WonderType.MAUSOLEUM, WonderType.GARDENS, WonderType.PYRAMIDS));
 
-		SetUpHandler setUpHandler = new SetUpHandler();
+		SetUpPlayerHandler setUpHandler = new SetUpPlayerHandler();
 		ArrayList<Player> players = setUpHandler.createPlayers(compileHolderObjects(playerNames, wonders));
 
 		for (int i = 0; i < players.size(); i++) {

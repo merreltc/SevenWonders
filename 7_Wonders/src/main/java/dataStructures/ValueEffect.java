@@ -4,6 +4,7 @@ import java.util.HashMap;
 
 import dataStructures.Effect.EffectType;
 import dataStructures.ValueEffect.Value;
+import guiMain.Translate;
 
 public class ValueEffect extends Effect {
 	private Value value;
@@ -65,17 +66,20 @@ public class ValueEffect extends Effect {
 		switch (value){
 		case VICTORYPOINTS:
 			if (valueAmount <= 0 || valueAmount >= 9){
-				throw new IllegalArgumentException("Cannot have valueAmount of " + valueAmount);
+				String msg = Translate.prepareStringTemplateWithIntArg(valueAmount, "improperValueAmount", Translate.getNewResourceBundle());
+				throw new IllegalArgumentException(msg);
 			}
 			break;
 		case COMMERCE:
 			if(valueAmount <= 0){
-				throw new IllegalArgumentException("Cannot have valueAmount of " + valueAmount);
+				String msg = Translate.prepareStringTemplateWithIntArg(valueAmount, "improperValueAmount", Translate.getNewResourceBundle());
+				throw new IllegalArgumentException(msg);
 			}
 			break;
 		default:
 			if (valueAmount <= -2 || valueAmount == 0 || valueAmount >= 4){
-				throw new IllegalArgumentException("Cannot have valueAmount of " + valueAmount);
+				String msg = Translate.prepareStringTemplateWithIntArg(valueAmount, "improperValueAmount", Translate.getNewResourceBundle());
+				throw new IllegalArgumentException(msg);
 			}
 			break;
 		}
@@ -109,4 +113,23 @@ public class ValueEffect extends Effect {
 	public HashMap<Enum, Integer> getAffectingEntities() {
 		return this.affectingEntities;
 	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		Effect effect = (Effect) obj;
+		if(effect.getEffectType() != EffectType.VALUE){
+			return false;
+		}
+		
+		ValueEffect value = (ValueEffect) effect;
+
+		if (this.valueAmount == value.getValueAmount() && this.getDirection() == value.getDirection()
+				&& this.affectingEntity == value.affectingEntity && this.value == value.getValue()
+				&& this.affectingEntities.toString().equals(value.affectingEntities.toString())) {
+			return true;
+		}
+
+		return false;
+	}
 }
+

@@ -218,3 +218,4 @@ public class ChipTest {
 		assertEquals(ChipType.CONFLICTTOKEN, conflictToken.getChipType());
 	}
 }
+

@@ -1,15 +1,15 @@
 package dataStructureTests;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 
 import java.util.HashMap;
 
 import org.junit.Test;
 
 import dataStructures.Effect;
+import dataStructures.EntityEffect;
 import dataStructures.Effect.Direction;
 import dataStructures.Effect.EffectType;
-import dataStructures.EntityEffect;
 import dataStructures.EntityEffect.EntityType;
 import dataStructures.GeneralEnums.Good;
 import dataStructures.GeneralEnums.RawResource;
@@ -328,5 +328,61 @@ public class EntityEffectTest {
 		assertEquals(Direction.SELF, effect.getDirection());
 		assertEquals(EntityType.SCIENCE, ((EntityEffect) effect).getEntityType());
 		assertEquals(sciencesAndAmount, ((EntityEffect) effect).getEntities());
+	}
+	
+	@Test
+	public void testValidEqualsResource() {
+		HashMap<Enum, Integer> resourcesAndAmount = new HashMap<Enum, Integer>();
+		resourcesAndAmount.put(RawResource.LUMBER, 1);
+		
+		EntityEffect effect = new EntityEffect(EffectType.ENTITY, EntityType.RESOURCE, resourcesAndAmount);
+		HashMap<Enum, Integer> resourcesAndAmount2 = new HashMap<Enum, Integer>();
+		resourcesAndAmount2.put(RawResource.LUMBER, 1);
+		
+		EntityEffect effect2 = new EntityEffect(EffectType.ENTITY, EntityType.RESOURCE, resourcesAndAmount2);
+		
+		assertTrue(effect.equals(effect2));
+	}
+	
+	@Test
+	public void testInalidEqualsResourceDifferentAmounts() {
+		HashMap<Enum, Integer> resourcesAndAmount = new HashMap<Enum, Integer>();
+		resourcesAndAmount.put(RawResource.LUMBER, 3);
+		
+		EntityEffect effect = new EntityEffect(EffectType.ENTITY, EntityType.RESOURCE, resourcesAndAmount);
+		HashMap<Enum, Integer> resourcesAndAmount2 = new HashMap<Enum, Integer>();
+		resourcesAndAmount2.put(RawResource.LUMBER, 1);
+		
+		EntityEffect effect2 = new EntityEffect(EffectType.ENTITY, EntityType.RESOURCE, resourcesAndAmount2);
+		
+		assertFalse(effect.equals(effect2));
+	}
+	
+	@Test
+	public void testInalidEqualsResourceDifferentTypes() {
+		HashMap<Enum, Integer> resourcesAndAmount = new HashMap<Enum, Integer>();
+		resourcesAndAmount.put(RawResource.LUMBER, 1);
+		
+		EntityEffect effect = new EntityEffect(EffectType.ENTITY, EntityType.MANUFACTUREDGOOD, resourcesAndAmount);
+		HashMap<Enum, Integer> resourcesAndAmount2 = new HashMap<Enum, Integer>();
+		resourcesAndAmount2.put(RawResource.LUMBER, 1);
+		
+		EntityEffect effect2 = new EntityEffect(EffectType.ENTITY, EntityType.RESOURCE, resourcesAndAmount2);
+		
+		assertFalse(effect.equals(effect2));
+	}
+	
+	@Test
+	public void testInalidEqualsResourceDifferentResources() {
+		HashMap<Enum, Integer> resourcesAndAmount = new HashMap<Enum, Integer>();
+		resourcesAndAmount.put(RawResource.ORE, 1);
+		
+		EntityEffect effect = new EntityEffect(EffectType.ENTITY, EntityType.RESOURCE, resourcesAndAmount);
+		HashMap<Enum, Integer> resourcesAndAmount2 = new HashMap<Enum, Integer>();
+		resourcesAndAmount2.put(RawResource.LUMBER, 1);
+		
+		EntityEffect effect2 = new EntityEffect(EffectType.ENTITY, EntityType.RESOURCE, resourcesAndAmount2);
+		
+		assertFalse(effect.equals(effect2));
 	}
 }

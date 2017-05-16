@@ -21,7 +21,7 @@ import dataStructures.Deck.Age;
  */
 public class GameManager {
 	private GameBoard board;
-	private SetUpHandler setUpHandler;
+	private SetUpPlayerHandler setUpHandler;
 	private SetUpDeckHandler setUpDeckHandler;
 	private TurnHandler turnHandler;
 
@@ -32,10 +32,10 @@ public class GameManager {
 	private Direction currentDirection = Direction.CLOCKWISE;
 
 	public GameManager(ArrayList<PlayerInformationHolder> holder) {
-		this(holder, new SetUpHandler(), new SetUpDeckHandler(), new TurnHandler(), new PlayerTurnHandler());
+		this(holder, new SetUpPlayerHandler(), new SetUpDeckHandler(), new TurnHandler(), new PlayerTurnHandler());
 	}
 
-	public GameManager(ArrayList<PlayerInformationHolder> holder, SetUpHandler setUpHandler,
+	public GameManager(ArrayList<PlayerInformationHolder> holder, SetUpPlayerHandler setUpHandler,
 			SetUpDeckHandler setUpDeckHandler, TurnHandler turnHandler, PlayerTurnHandler playerTurnHandler) {
 		this.setUpHandler = setUpHandler;
 		this.setUpDeckHandler = setUpDeckHandler;

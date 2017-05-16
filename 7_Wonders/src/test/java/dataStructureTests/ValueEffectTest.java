@@ -1,7 +1,6 @@
 package dataStructureTests;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.fail;
+import static org.junit.Assert.*;
 
 import java.util.HashMap;
 
@@ -300,5 +299,89 @@ public class ValueEffectTest {
 		assertEquals(Value.GUILD, ((ValueEffect) effect).getValue());
 		assertEquals(ValueType.VICTORYPOINT, ((ValueEffect) effect).getValueType());
 		assertEquals(affectingEntities, ((ValueEffect) effect).getAffectingEntities());
+	}
+	
+	@Test
+	public void testValidValueEffectEqualsNoAffectingentities() {
+		ValueEffect effect = new ValueEffect(EffectType.VALUE, Value.VICTORYPOINTS, AffectingEntity.NONE, 2);
+		ValueEffect effect2 = new ValueEffect(EffectType.VALUE, Value.VICTORYPOINTS, AffectingEntity.NONE, 2);
+		
+		assertTrue(effect.equals(effect2));
+	}
+	
+	@Test
+	public void testInvalidValueEffectEqualsNoAffectingentities() {
+		ValueEffect effect = new ValueEffect(EffectType.VALUE, Value.VICTORYPOINTS, AffectingEntity.NONE, 3);
+		ValueEffect effect2 = new ValueEffect(EffectType.VALUE, Value.VICTORYPOINTS, AffectingEntity.NONE, 2);
+		
+		assertFalse(effect.equals(effect2));
+	}
+	
+	@Test
+	public void testValidValueEffectEqualsCommerce(){
+		ValueEffect effect = new ValueEffect(EffectType.VALUE, Value.COMMERCE, AffectingEntity.RAWRESOURCES, Direction.RIGHT, 1);
+		ValueEffect effect2 = new ValueEffect(EffectType.VALUE, Value.COMMERCE, AffectingEntity.RAWRESOURCES, Direction.RIGHT, 1);
+		
+		assertTrue(effect.equals(effect2));
+	}
+	
+	@Test
+	public void testInvalidValueEffectEqualsCommerce(){
+		ValueEffect effect = new ValueEffect(EffectType.VALUE, Value.COMMERCE, AffectingEntity.RAWRESOURCES, Direction.RIGHT, 1);
+		ValueEffect effect2 = new ValueEffect(EffectType.VALUE, Value.COMMERCE, AffectingEntity.RAWRESOURCES, Direction.LEFT, 1);
+		
+		assertFalse(effect.equals(effect2));
+	}
+	
+	@Test
+	public void testInvalidValueEffectEqualsCommerceAffecting(){
+		ValueEffect effect = new ValueEffect(EffectType.VALUE, Value.COMMERCE, AffectingEntity.RAWRESOURCES, Direction.RIGHT, 1);
+		ValueEffect effect2 = new ValueEffect(EffectType.VALUE, Value.COMMERCE, AffectingEntity.COMMERCIALSTRUCTURES, Direction.RIGHT, 1);
+		
+		assertFalse(effect.equals(effect2));
+	}
+	
+	@Test
+	public void testInvalidValueEffectEqualsGuild(){
+		ValueEffect effect = new ValueEffect(EffectType.VALUE, Value.GUILD, AffectingEntity.RAWRESOURCES, Direction.RIGHT, 1);
+		ValueEffect effect2 = new ValueEffect(EffectType.VALUE, Value.COMMERCE, AffectingEntity.RAWRESOURCES, Direction.RIGHT, 1);
+		
+		assertFalse(effect.equals(effect2));
+	}
+	
+	@Test
+	public void testValidValueEffectEqualsGuild(){
+		HashMap<Enum, Integer> affectingEntities = new HashMap<Enum, Integer>();
+		affectingEntities.put(AffectingEntity.RAWRESOURCES, 1);
+		affectingEntities.put(AffectingEntity.MANUFACTUREDGOODS, 1);
+		affectingEntities.put(AffectingEntity.GUILD, 1);
+		
+		ValueEffect effect = new ValueEffect(EffectType.VALUE, Value.GUILD, affectingEntities);
+		HashMap<Enum, Integer> affectingEntities2 = new HashMap<Enum, Integer>();
+		affectingEntities2.put(AffectingEntity.RAWRESOURCES, 1);
+		affectingEntities2.put(AffectingEntity.MANUFACTUREDGOODS, 1);
+		affectingEntities2.put(AffectingEntity.GUILD, 1);
+		
+		ValueEffect effect2 = new ValueEffect(EffectType.VALUE, Value.GUILD, affectingEntities2);
+		
+		assertTrue(effect.equals(effect2));
+	}
+	
+	@Test
+	public void testInvalidValueEffectEqualsGuildAffecting(){
+		HashMap<Enum, Integer> affectingEntities = new HashMap<Enum, Integer>();
+		affectingEntities.put(AffectingEntity.RAWRESOURCES, 6);
+		affectingEntities.put(AffectingEntity.MANUFACTUREDGOODS, 1);
+		affectingEntities.put(AffectingEntity.GUILD, 1);
+		
+		ValueEffect effect = new ValueEffect(EffectType.VALUE, Value.GUILD, affectingEntities);
+		HashMap<Enum, Integer> affectingEntities2 = new HashMap<Enum, Integer>();
+		affectingEntities2.put(AffectingEntity.RAWRESOURCES, 1);
+		affectingEntities2.put(AffectingEntity.MANUFACTUREDGOODS, 1);
+		affectingEntities2.put(AffectingEntity.GUILD, 1);
+		
+		ValueEffect effect2 = new ValueEffect(EffectType.VALUE, Value.GUILD, affectingEntities2);
+		
+		assertFalse(effect.equals(effect2));
 	}
 }

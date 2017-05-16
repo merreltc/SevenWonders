@@ -8,9 +8,9 @@ import java.util.HashMap;
 import backend.GameManager;
 import dataStructures.Card;
 import dataStructures.Cost;
-import dataStructures.Cost.CostType;
 import dataStructures.Effect;
 import dataStructures.EntityEffect;
+import dataStructures.Cost.CostType;
 import dataStructures.EntityEffect.EntityType;
 import dataStructures.Player;
 import guiDataStructures.Constants;
@@ -42,6 +42,9 @@ public class HandManager {
 			Card card = currentHand.get(i);
 			((CardHolder) cardHolder).giveCard(card);
 			cardHolder.addImage(renderer.getImage(card.getName()));
+			if (player.storagePileContainsCardByName(card.getPreviousStructureName())){
+				((CardHolder) cardHolder).setHasPreviousStructure();
+			}
 			this.playerHand.add(cardHolder);
 		}
 	}

@@ -1,8 +1,13 @@
+plugins {
+    id "com.github.samueltbrown.cucumber" version "0.9"
+}
+
 apply plugin: 'java'
 apply plugin: 'jacoco'
 apply plugin: 'eclipse'
 apply plugin: 'checkstyle'
 apply plugin: 'findbugs'
+apply plugin: "com.github.samueltbrown.cucumber"
 
 sourceCompatibility = 1.8
 version = '1.0'
@@ -31,6 +36,15 @@ jacocoTestReport {
 
 dependencies {
     testCompile 'junit:junit:4.+', 'org.easymock:easymock:3.4'
+    testCompile 'junit:junit:4.+', 'info.cukes:cucumber-java:1.2.2'
+    cucumberCompile 'junit:junit:4.+', 'info.cukes:cucumber-java:1.2.2'
+    cucumberCompile 'junit:junit:4.+', 'info.cukes:cucumber-java:1.2.2', 'info.cukes:cucumber-picocontainer:1.2.5'
+    compile 'org.json:json:20160810'
+}
+
+cucumber {
+	formats = ['pretty','junit:build/cucumber.xml']
+	monochrome = true
 }
 
 test {
