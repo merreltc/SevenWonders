@@ -59,7 +59,7 @@ Cards are passed left-right-left over the three ages, so you need to keep an eye
 - [x] Minimal details for non-neighboring players
 
 ## Set Up
-- [ ] Language is chosen: English or Chinese
+- [x] Language is chosen: English or Chinese
 - [ ] Game mode is chosen (Easy or Normal)
     - Easy Mode: all players receive side A
     - Normal Mode: players can receive side A or B of a Wonder
@@ -111,12 +111,12 @@ Cards are passed left-right-left over the three ages, so you need to keep an eye
 
 ## War
 - [ ] At the end of an age (following sixth rotation), players go to war with BOTH neighboring cities
-- [ ] A player with more shields than their neighbor is successful
-- [ ] A player with less shields than their neighbor is defeated
-- [ ] A player with equal shield as their neighbor is tied
-- [ ] A successful conflict results in a number of conflict tokens (Age I: +1, Age II: +3, Age III: +5)
-- [ ] A defeat results in a conflict token with the value -1
-- [ ] A tie results in no tokens for either city
+- [x] A player with more shields than their neighbor is successful
+- [x] A player with less shields than their neighbor is defeated
+- [x] A player with equal shield as their neighbor is tied
+- [x] A successful conflict results in a number of conflict tokens (Age I: +1, Age II: +3, Age III: +5)
+- [x] A defeat results in a conflict token with the value -1
+- [x] A tie results in no tokens for either city
 
 ## Player Stats
 - [x] Name
