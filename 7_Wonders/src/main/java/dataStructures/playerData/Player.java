@@ -345,6 +345,10 @@ public class Player {
 		}
 		return false;
 	}
+	
+	public Card getCardFromEndGame(int index){
+		return this.storagePile.getEndGamePile().get(index);
+	}
 
 	public HashMap<Enum, Integer> getCurrentTrades() {
 		return this.currentTrades;
