@@ -946,6 +946,17 @@ public class PlayerTest {
 		Assert.assertEquals(2, amounts[2]);
 	}
 	
+	@Test
+	public void testGetAmountOfScienceEmpty(){
+		Player player = new Player("Jane Doe", WonderType.COLOSSUS);
+		
+		int[] amounts = player.getNumberOfEachScience();
+		
+		Assert.assertEquals(0, amounts[0]);
+		Assert.assertEquals(0, amounts[1]);
+		Assert.assertEquals(0, amounts[2]);
+	}
+	
 	private Card createWorkersGuild(){
 		HashMap<Enum, Integer> costs = new HashMap<Enum, Integer>();
 		costs.put(RawResource.LUMBER, 1);
