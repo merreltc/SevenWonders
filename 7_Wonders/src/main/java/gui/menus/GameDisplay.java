@@ -161,6 +161,7 @@ public class GameDisplay extends Menu {
 			if (!message.equals("")) {
 				Message.showMessage(message);
 			}
+			System.out.println(gameManager.getPlayers());
 			redrawBoards();
 			/* update the cards after rotation */
 			for (Interactable toRemove : this.handManager.getCurrentPlayerHand()) {
@@ -182,12 +183,12 @@ public class GameDisplay extends Menu {
 
 	public void redrawBoards() {
 		ArrayList<Player> players = this.gameManager.getPlayers();
-		Player nextPlayer = this.gameManager.getNextPlayer();
+		Player currentPlayer = this.gameManager.getCurrentPlayer();
 		int totalNumberOfPlayers = this.gameManager.getNumPlayers();
-		int nextPlayerIndex = players.indexOf(nextPlayer);
+		int currentPlayerIndex = players.indexOf(currentPlayer);
 		for (int i = 0; i < players.size(); i++) {
 			boards.get(i)
-					.changePlayer(players.get((totalNumberOfPlayers + nextPlayerIndex + i + 1) % totalNumberOfPlayers));
+					.changePlayer(players.get((totalNumberOfPlayers + currentPlayerIndex + i - 1) % totalNumberOfPlayers));
 		}
 	}
 }
