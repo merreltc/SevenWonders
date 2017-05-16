@@ -169,6 +169,28 @@ public class EndGameHandlerTest {
 		Assert.assertEquals(4, end.getPointsFromGuildCards(player2, player1, player3));
 	}
 	
+	@Test
+	public void testSpiesGuildEffect(){
+		ArrayList<Card> cards = new ArrayList<Card>();
+		cards.add(createMilitaryCard());
+		cards.add(createMilitaryCard());
+		
+		Player player1 = EasyMock.mock(Player.class);
+		Player player2 = EasyMock.mock(Player.class);
+		Player player3 = EasyMock.mock(Player.class);
+		
+		EasyMock.expect(player2.getCardFromEndGame(0)).andReturn(this.createSpiesGuild());
+		EasyMock.expect(player2.getCardFromEndGame(1)).andThrow(new IllegalArgumentException(""));
+		
+		EndGameHandler end = new EndGameHandler();
+		EasyMock.expect(player1.getStoragePile()).andReturn(cards);
+		EasyMock.expect(player3.getStoragePile()).andReturn(cards);
+		
+		EasyMock.replay(player1,player2,player3);
+		
+		Assert.assertEquals(4, end.getPointsFromGuildCards(player2, player1, player3));
+	}
+	
 	private Card createWorkersGuild(){
 		HashMap<Enum, Integer> costs = new HashMap<Enum, Integer>();
 		costs.put(RawResource.LUMBER, 1);
