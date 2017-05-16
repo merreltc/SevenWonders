@@ -347,6 +347,9 @@ public class Player {
 	}
 	
 	public Card getCardFromEndGame(int index){
+		if (index >= this.storagePile.getEndGamePile().size()){
+			throw new IllegalArgumentException("End of End Game pile reached");
+		}
 		return this.storagePile.getEndGamePile().get(index);
 	}
 

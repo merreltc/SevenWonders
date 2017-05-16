@@ -882,6 +882,23 @@ public class PlayerTest {
 		Assert.assertEquals(card2, player.getCardFromEndGame(0));
 	}
 	
+	@Test
+	public void testGetTooManyGuildCardsFromEndGame(){
+		Player player = new Player("Jane Doe", WonderType.COLOSSUS);
+		Card card = createCourthouseCard();
+		player.addToStoragePile(card);
+		Card card2 = createCraftsmenGuild();
+		player.addToStoragePile(card2);
+		
+		Assert.assertEquals(card2, player.getCardFromEndGame(0));
+		try {
+			player.getCardFromEndGame(1);
+			fail();
+		}catch(Exception e){
+			Assert.assertEquals("End of End Game pile reached", e.getMessage());
+		}
+	}
+	
 	private Card createWorkersGuild(){
 		HashMap<Enum, Integer> costs = new HashMap<Enum, Integer>();
 		costs.put(RawResource.LUMBER, 1);
