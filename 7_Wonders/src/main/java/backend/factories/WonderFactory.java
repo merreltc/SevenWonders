@@ -1,0 +1,44 @@
+package backend.factories;
+
+import java.util.ArrayList;
+
+import dataStructures.gameMaterials.Wonder.WonderType;
+
+public class WonderFactory {
+	private ArrayList<WonderType> remainingWonders;
+	private int numRemainingWonders;
+
+	public WonderFactory() {
+		this.remainingWonders = new ArrayList<WonderType>();
+		buildWonderSet(this.remainingWonders);
+		this.numRemainingWonders = 7;
+	}
+
+	public WonderType getWonder() {
+		int index = getRandomIndex();
+		this.numRemainingWonders--;
+		return removeAtIndex(index);
+	}
+
+	public int getRandomIndex() {
+		double randomNum = Math.random();
+		double correctedRandomNum = randomNum * (this.numRemainingWonders - 1);
+		int index = (int) Math.round(correctedRandomNum);
+		return index;
+	}
+
+	WonderType removeAtIndex(int index) {
+		return (WonderType) this.remainingWonders.remove(index);
+	}
+
+	private void buildWonderSet(ArrayList<WonderType> wonders) {
+		wonders.add(WonderType.COLOSSUS);
+		wonders.add(WonderType.TEMPLE);
+		wonders.add(WonderType.GARDENS);
+		wonders.add(WonderType.PYRAMIDS);
+		wonders.add(WonderType.LIGHTHOUSE);
+		wonders.add(WonderType.MAUSOLEUM);
+		wonders.add(WonderType.STATUE);
+	}
+
+}

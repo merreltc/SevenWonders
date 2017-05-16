@@ -7,14 +7,15 @@ import java.util.ArrayList;
 import org.easymock.EasyMock;
 import org.junit.Test;
 
-import backend.SetUpDeckHandler;
-import dataStructures.Card;
-import dataStructures.Deck;
+import backend.handlers.SetUpDeckHandler;
 import dataStructures.GameBoard;
-import dataStructures.Player;
-import dataStructures.Wonder.WonderType;
+import dataStructures.gameMaterials.Card;
+import dataStructures.gameMaterials.Deck;
+import dataStructures.gameMaterials.Deck.Age;
+import dataStructures.gameMaterials.Wonder.WonderType;
+import dataStructures.playerData.Chip;
+import dataStructures.playerData.Player;
 import exceptions.InsufficientFundsException;
-import dataStructures.Deck.Age;
 
 public class GameBoardTests {
 
@@ -385,8 +386,8 @@ public class GameBoardTests {
 		Deck deck = new Deck(Age.AGE1, cards);
 
 		GameBoard board = new GameBoard(players, deck);
-		players.get(1).addValue1(36);
-		players.get(1).addValue1(36);
+		players.get(1).addValue1(36, Chip.ChipType.COIN);
+		players.get(1).addValue1(36, Chip.ChipType.COIN);
 		board.makeChangeForValue3Coins(players.get(1), 24);
 		Card toTest = deck.getCard(0);
 		board.addToDiscardPile(players.get(0),toTest);
@@ -454,7 +455,7 @@ public class GameBoardTests {
 
 		GameBoard board = new GameBoard(players, deck);
 		Player active = players.get(0);
-		active.addValue3(1);
+		active.addValue3(1, Chip.ChipType.COIN);
 		assertTrue(board.makeChangeForValue1Coins(active, 3));
 		assertEquals(6, active.getNumValue1Coins());
 		assertEquals(0, active.getNumValue3Coins());
@@ -474,7 +475,7 @@ public class GameBoardTests {
 
 		GameBoard board = new GameBoard(players, deck);
 		Player active = players.get(0);
-		active.addValue3(14);
+		active.addValue3(14, Chip.ChipType.COIN);
 		
 		try{
 			board.makeChangeForValue1Coins(active, 42);
@@ -514,8 +515,8 @@ public class GameBoardTests {
 
 		GameBoard board = new GameBoard(players, deck);
 		Player active = players.get(0);
-		active.addValue1(40);
-		active.addValue1(40);
+		active.addValue1(40, Chip.ChipType.COIN);
+		active.addValue1(40, Chip.ChipType.COIN);
 		
 		try{
 			board.makeChangeForValue3Coins(active, 25);

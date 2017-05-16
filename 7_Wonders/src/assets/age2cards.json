@@ -502,7 +502,7 @@
 	"cardName": "Courthouse",
 	"cardType": "CIVILIANSTRUCTURE",
 	"Cost": {
-				"CostType": "MULTIVALUE",
+				"CostType": "MULTITYPE",
 				"cost": [{
 							"Good": "LOOM",
 							"amount": 1

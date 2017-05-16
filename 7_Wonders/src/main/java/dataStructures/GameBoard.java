@@ -3,8 +3,14 @@ package dataStructures;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
+import dataStructures.gameMaterials.Card;
+import dataStructures.gameMaterials.Deck;
+import dataStructures.playerData.Chip;
+import dataStructures.playerData.Chip.ChipType;
+import dataStructures.playerData.Player;
 import exceptions.InsufficientFundsException;
-import guiMain.Translate;
+import utils.Translate;
+
 
 public class GameBoard {
 	private ArrayList<Player> players = new ArrayList<Player>();
@@ -18,7 +24,6 @@ public class GameBoard {
 	private int currentPlayerIndex;
 	private int nextPlayerIndex;
 	private int previousPlayerIndex;
-	
 	ResourceBundle messages = Translate.getNewResourceBundle();
 
 	public GameBoard(ArrayList<Player> players, Deck deck) {
@@ -85,10 +90,10 @@ public class GameBoard {
 		this.discardPile.add(toTest);
 
 		if (this.totalValue3CoinsInBank-- > 0) {
-			active.addValue3(1);
+			active.addValue3(1, Chip.ChipType.COIN);
 		} else {
 			this.totalValue1CoinsInBank--;
-			active.addValue1(3);
+			active.addValue1(3, Chip.ChipType.COIN);
 		}
 	}
 
@@ -99,10 +104,10 @@ public class GameBoard {
 		}
 
 		int numValue3CoinsToRemove = numCoinsWanted / 3;
-		active.removeValue3(numValue3CoinsToRemove);
+		active.removeValue3(numValue3CoinsToRemove, ChipType.COIN);
 		this.totalValue3CoinsInBank += numValue3CoinsToRemove;
 		this.totalValue1CoinsInBank -= numCoinsWanted;
-		active.addValue1(numCoinsWanted);
+		active.addValue1(numCoinsWanted, Chip.ChipType.COIN);
 
 		return true;
 	}
@@ -114,10 +119,11 @@ public class GameBoard {
 		}
 
 		int numValue1CoinsToRemove = numCoinsWanted * 3;
-		active.removeValue1(numValue1CoinsToRemove);
+		active.removeValue1(numValue1CoinsToRemove, ChipType.COIN);
 		this.totalValue3CoinsInBank -= numCoinsWanted;
 		this.totalValue1CoinsInBank += numValue1CoinsToRemove;
-		active.addValue3(numCoinsWanted);
+		active.addValue3(numCoinsWanted, Chip.ChipType.COIN);
+
 		return true;
 	}
 
@@ -134,8 +140,9 @@ public class GameBoard {
 			this.totalValue3CoinsInBank -= numValue3;
 		}
 		this.totalValue1CoinsInBank -= numValue1;
-		player.addValue3(numValue3);
-		player.addValue1(numValue1);
+
+		player.addValue3(numValue3, Chip.ChipType.COIN);
+		player.addValue1(numValue1, Chip.ChipType.COIN);
 	}
 
 	public int getCurrentPlayerIndex() {

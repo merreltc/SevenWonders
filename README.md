@@ -50,24 +50,16 @@ Cards are passed left-right-left over the three ages, so you need to keep an eye
 3. Double-click "GuiMain"
 4. Right-click "GuiMainMenu" and selecte "Run As->Java Application"
 
-## Configuring the Build Path:
-1. In the package explorer, right-click on "7_Wonders" and select "Properties"
-2. In the left pane, select "Build Path / Configure Build Path"
-3. In the right pane, select the "Source" tab
-4. Select "Add Folder"
-5. Navigate to "src/org" and select the check box next to "org"
-6. Hit ok, apply and then ok again
-
 # Definition of "Done"
 ## Display
 ### Player Board
-- [ ] Overview of player statistics (see "Player Stats")
-- [ ] Detailed view of player statistics (see "Player Stats")
-- [ ] Details for left/right neighbors
-- [ ] Minimal details for non-neighboring players
+- [x] Overview of player statistics (see "Player Stats")
+- [x] Detailed view of player statistics (see "Player Stats")
+- [x] Details for left/right neighbors
+- [x] Minimal details for non-neighboring players
 
 ## Set Up
-- [ ] Language is chosen: English or Chinese
+- [x] Language is chosen: English or Chinese
 - [ ] Game mode is chosen (Easy or Normal)
     - Easy Mode: all players receive side A
     - Normal Mode: players can receive side A or B of a Wonder
@@ -76,7 +68,7 @@ Cards are passed left-right-left over the three ages, so you need to keep an eye
 - [ ] Players are assigned random, unique wonders and sides
 - [x] Age I Deck is assembled based on number of players and shuffled
 - [x] Players are dealt equal number of cards
-- [ ] Each player begins with 3 value 1 coins
+- [x] Each player begins with 3 value 1 coins
 
 ## Decks
 - [x] Each age has a unique set of cards
@@ -85,11 +77,11 @@ Cards are passed left-right-left over the three ages, so you need to keep an eye
 - [x] Age I and II decks do not have Guild cards
 
 ## Cards
-- [ ] Name and type of structure/resource (See "Card Types")
-- [ ] Cost of building the structure
+- [x] Name and type of structure/resource (See "Card Types")
+- [x] Cost of building the structure
 - [ ] The effect caused by building the structure
-- [ ] Previous structures that allow this structure to be built for free
-- [ ] Future structures that can be built free is this card has already been built
+- [x] Previous structures that allow this structure to be built for free
+- [x] Future structures that can be built free is this card has already been built
 
 ### Card Types
 - Raw Resource: (Brown) Produce raw materials (lumber, stone, ore, clay)
@@ -111,47 +103,47 @@ Cards are passed left-right-left over the three ages, so you need to keep an eye
 - [x] Players can only trade with neighboring cities
 - [ ] Trading a neighboring city is initially 2 coins per resource and only allows players to use that resource, not take it from their neighbors
     - [ ] Some Commercial Structure (yellow) cards allow players to trade for certain materials for 1 coin after being built
-- [ ] On a single turn, players may trade for multiple resources from both neighboring cities
+- [x] On a single turn, players may trade for multiple resources from both neighboring cities
 - [ ] Traded resources are only available to the player during the turn they are bought
 - [ ] Only resources produced through the city/Wonder or a neighbors raw resource or manufactured good cards can be traded
 - [ ] Players are unable to purchase resources produced by commercial structures (or some Wonders)
-- [ ] Trade cannot be refused by neighboring cities
+- [x] Trade cannot be refused by neighboring cities
 
 ## War
 - [ ] At the end of an age (following sixth rotation), players go to war with BOTH neighboring cities
-- [ ] A player with more shields than their neighbor is successful
-- [ ] A player with less shields than their neighbor is defeated
-- [ ] A player with equal shield as their neighbor is tied
-- [ ] A successful conflict results in a number of conflict tokens (Age I: +1, Age II: +3, Age III: +5)
-- [ ] A defeat results in a conflict token with the value -1
-- [ ] A tie results in no tokens for either city
+- [x] A player with more shields than their neighbor is successful
+- [x] A player with less shields than their neighbor is defeated
+- [x] A player with equal shield as their neighbor is tied
+- [x] A successful conflict results in a number of conflict tokens (Age I: +1, Age II: +3, Age III: +5)
+- [x] A defeat results in a conflict token with the value -1
+- [x] A tie results in no tokens for either city
 
 ## Player Stats
 - [x] Name
 - [ ] Wonder and build level
 - [x] Value 1 and value 3 coins
-- [ ] Military Shields
-- [ ] Conflict Tokens
+- [x] Military Shields
+- [x] Conflict Tokens
 - [ ] Victory Points
 - [x] Entities (Raw Resources, Manufactured Goods, Science)
 
 ## Process of Turn
 1. Choose card from temporary hand
 2. Action
--  [x] Build the Structure
--  [ ] Build the Next Level of Wonder
--  [x] Discard for 3 Coins
-    -  Discarded cards create a Discard Pile
-    -  A card can always be chosen for discard, even if the player does not have enough resources to build it
+    -  [x] Build the Structure
+    -  [ ] Build the Next Level of Wonder
+    -  [x] Discard for 3 Coins
+        -  Discarded cards create a Discard Pile
+        -  A card can always be chosen for discard, even if the player does not have enough resources to build it
 3. Pass temporary hand to next player
-- [x] Temporary hand is passed to next player (excluding chosen card)
-- [x] Pass direction is determined by Age (I: left, II: right, III: left)
+    - [x] Temporary hand is passed to next player (excluding chosen card)
+    - [x] Pass direction is determined by Age (I: left, II: right, III: left)
 4. On the sixth turn, player has 2 cards: one is chosen, second is discarded for NO coins
 
 ## Building the Structure
 - [x] If a structure has a resource cost, the player must have sufficient resources in their stockpile or purchase them from neighbors (see "Commerce and Trading")
 - [x] If a structure has a coin cost, the player must pay that cost to the bank
-- [ ] If player owns a previous structure, they may build their chosen structure for free
+- [x] If player owns a previous structure, they may build their chosen structure for free
 - [ ] Identical structures cannot be built by the same player
 - [x] At the end of a rotation, all player's built structures are revealed
 
@@ -163,66 +155,66 @@ Cards are passed left-right-left over the three ages, so you need to keep an eye
 - [ ] The wonder does not need to be built in order for a player to win
 
 ### Wonders
-- Wonders provide players 1 of the resource specified in the top left corner
+- [x] Wonders provide players 1 of the resource specified in the top left corner
 - Side A always has 3 levels
-    - The first level is worth +3 Victory Points
+    - [ ] The first level is worth +3 Victory Points
     - The second level is determined by the Wonder
-    - The third level is worth +7 Victory Points
-- Number of levels and the effects for each level vary by Wonder on side B
-- The cost of building each level varies from side A to B and from Wonder to Wonder
+    - [ ] The third level is worth +7 Victory Points
+- [ ] Number of levels and the effects for each level vary by Wonder on side B
+- [ ] The cost of building each level varies from side A to B and from Wonder to Wonder
 - *The Colossus of Rhodes*
     - Resource: Ore
-    - Side A, Level 2: 2 Shields
+    - [ ] Side A, Level 2: 2 Shields
     - Side B:
-        - Level 1: 1 Shield, 3 Victory Points, 3 Coins (from bank)
-        - Level 2: 1 Shield, 4 Victory Points, 4 Coins (from bank)
+        - [ ] Level 1: 1 Shield, 3 Victory Points, 3 Coins (from bank)
+        - [ ] Level 2: 1 Shield, 4 Victory Points, 4 Coins (from bank)
 - *The Lighthouse of Alexandria*
     - Resource: Glass
-    - Side A, Level 2: Resource of choice from 4 raw materials (lumber, stone, ore, clay) **every turn**
+    - [ ] Side A, Level 2: Resource of choice from 4 raw materials (lumber, stone, ore, clay) **every turn**
     - Side B:
-        - Level 1: (See "Side A, Level 2")
-        - Level 2: Resource of choice from 3 manufactured goods (loom, glass, press) **every turn**
-        - Level 3: 7 Victory Points
+        - [ ] Level 1: (See "Side A, Level 2")
+        - [ ] Level 2: Resource of choice from 3 manufactured goods (loom, glass, press) **every turn**
+        - [ ] Level 3: 7 Victory Points
 - *The Temple of Artemis in Ephesus*
     - Resource: Press
-    - Side A, Level 2: 9 Coins (from bank) **immediately following the building of this level**
+    - [ ] Side A, Level 2: 9 Coins (from bank) **immediately following the building of this level**
     - Side B:
-        - Level 1: 2 Victory Points, 4 Coins (from bank)
-        - Level 2: 3 Victory Points, 4 Coins (from bank)
-        - Level 3: 5 Victory Points, 4 Coins (from bank)
+        - [ ] Level 1: 2 Victory Points, 4 Coins (from bank)
+        - [ ] Level 2: 3 Victory Points, 4 Coins (from bank)
+        - [ ] Level 3: 5 Victory Points, 4 Coins (from bank)
 - *The Hanging Gardens of Babylon*
     - Resource: Clay
-    - Side A, Level 2: Science symbol of choice from 2 types (wheel, protractor, tablet) at the **end of the game**
+    - [ ] Side A, Level 2: Science symbol of choice from 2 types (wheel, protractor, tablet) at the **end of the game**
     - Side B:
-        - Level 1: 3 Victory Points
-        - Level 2: Optional ability to play seventh card instead of discarding **on sixth turn**
+        - [ ] Level 1: 3 Victory Points
+        - [ ] Level 2: Optional ability to play seventh card instead of discarding **on sixth turn**
             - This card can be built (See "Building the Structure"), used to build level 3 (See "Building the Next Level of Wonder"), or discarded for 3 coins from the bank
-        - Level 3: (See "Side A, Level 2")
+        - [ ] Level 3: (See "Side A, Level 2")
 - *The Statue of Zeus in Olympia*
     - Resource: Lumber
-    - Side A, Level 2: Build structure for free **once per age**
+    - [ ] Side A, Level 2: Build structure for free **once per age**
     - Side B:
-        - Level 1: Allows player to purchase raw materials (lumber, stone, ore, clay) from either neighbor for 1 coin
+        - [ ] Level 1: Allows player to purchase raw materials (lumber, stone, ore, clay) from either neighbor for 1 coin
             - Same effect as both Eastern and Western Trading Posts (Commercial Structures)
             - Both trading posts can still be built, but the effect is not cumulative
-        - Level 2: 5 Victory Points
-        - Level 3: Allows player to "copy" a Guild (purple) card from **one** of their two neighbors at the **end of the game**
+        - [ ] Level 2: 5 Victory Points
+        - [ ] Level 3: Allows player to "copy" a Guild (purple) card from **one** of their two neighbors at the **end of the game**
             - This ability has no effect on the player who owns the copied Guild
 - *The Mausoleum of Halicarnassus*
     - Resource: Loom
-    - Side A, Level 2: At the **end of turn when this level is built,** choose one structure from all discarded cards since beginning of game and build for free
+    - [ ] Side A, Level 2: At the **end of turn when this level is built,** choose one structure from all discarded cards since beginning of game and build for free
     - Side B:
-        - Level 1: 2 Victory Points, (See "Side A, Level 2")
-        - Level 2: 1 Victory Point, (See "Side A, Level 2")
-        - Level 3: (See "Side A, Level 2")
+        - [ ] Level 1: 2 Victory Points, (See "Side A, Level 2")
+        - [ ] Level 2: 1 Victory Point, (See "Side A, Level 2")
+        - [ ] Level 3: (See "Side A, Level 2")
 - *The Pyramids of Giza*
     - Resource: Stone
-    - Side A, Level 2: 5 Victory Points
+    - [ ] Side A, Level 2: 5 Victory Points
     - Side B:
-        - Level 1: 3 Victory Points
-        - Level 2: 5 Victory Points
-        - Level 3: 5 Victory Points
-        - Level 4: 7 Victory Points
+        - [ ] Level 1: 3 Victory Points
+        - [ ] Level 2: 5 Victory Points
+        - [ ] Level 3: 5 Victory Points
+        - [ ] Level 4: 7 Victory Points
 
 ## End Game and Victory
 - [ ] After the war of Age III, a score card displaying total Victory Points for each player is displayed

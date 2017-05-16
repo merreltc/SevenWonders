@@ -1,0 +1,927 @@
+{
+	"wonders": [
+		{
+			"wonderType": "COLOSSUS",
+			"side": "A",
+			"levels": [{
+				"priority": "1",
+				"cost": {
+					"costType": "RAWRESOURCE",
+					"costs": [{
+						"resource": "LUMBER",
+						"amount": 2
+					}]
+				},
+				"effects": [{
+					"effectType": "VALUE",
+					"value": "VICTORYPOINTS",
+					"affectingEntities": "NONE",
+					"valueAmount": 3,
+					"frequency": "ENDOFGAME"
+				}]
+			},
+			{
+				"priority": "2",
+				"cost": {
+					"costType": "RAWRESOURCE",
+					"costs": [{
+						"resource": "CLAY",
+						"amount": 3
+					}]
+				},
+				"effects": [{
+					"effectType": "VALUE",
+					"Value": "CONFLICTTOKEN",
+					"AffectingEntities": "NONE",
+					"valueAmount": 2,
+					"frequency": "ONCEIMMEDIATE"
+				}]
+			},
+			{
+				"priority": "3",
+				"cost": {
+					"costType": "RAWRESOURCE",
+					"costs": [{
+						"resource": "ORE",
+						"amount": 4
+					}]
+				},
+				"effects": [{
+					"effectType": "VALUE",
+					"Value": "VICTORYPOINTS",
+					"AffectingEntities": "NONE",
+					"valueAmount": 7,
+					"frequency": "ENDOFGAME"
+				}]
+			}]
+		},
+		{
+			"wonderType": "COLOSSUS",
+			"side": "B",
+			"levels": [{
+				"priority": "1",
+				"cost": {
+					"costType": "RAWRESOURCE",
+					"costs": [{
+						"resource": "STONE",
+						"amount": 3
+					}]
+				},
+				"effects": [{
+					"effectType": "VALUE",
+					"value": "CONFLICTTOKEN",
+					"affectingEntities": "NONE",
+					"valueAmount": 1,
+					"frequency": "ONCEIMMEDIATE"
+				},
+				{
+					"effectType": "VALUE",
+					"value": "COIN",
+					"affectingEntities": "NONE",
+					"valueAmount": 3,
+					"frequency": "ONCEIMMEDIATE"
+				},
+				{
+					"effectType": "VALUE",
+					"value": "VICTORYPOINTS",
+					"affectingEntities": "NONE",
+					"valueAmount": 3,
+					"frequency": "ENDOFGAME"
+				}]
+			},
+			{
+				"priority": "2",
+				"cost": {
+					"costType": "RAWRESOURCE",
+					"costs": [{
+						"resource": "ORE",
+						"amount": 4
+					}]
+				},
+				"effects": [{
+					"effectType": "VALUE",
+					"value": "CONFLICTTOKEN",
+					"affectingEntities": "NONE",
+					"valueAmount": 1,
+					"frequency": "ONCEIMMEDIATE"
+				},
+				{
+					"effectType": "VALUE",
+					"value": "COIN",
+					"affectingEntities": "NONE",
+					"valueAmount": 4,
+					"frequency": "ONCEIMMEDIATE"
+				},
+				{
+					"effectType": "VALUE",
+					"value": "VICTORYPOINTS",
+					"affectingEntities": "NONE",
+					"valueAmount": 4,
+					"frequency": "ENDOFGAME"
+				}]
+			}]
+		},
+		{
+			"wonderType": "LIGHTHOUSE",
+			"side": "A",
+			"levels": [{
+				"priority": "1",
+				"cost": {
+					"costType": "RAWRESOURCE",
+					"costs": [{
+						"resource": "STONE",
+						"amount": 2
+					}]
+				},
+				"effects": [{
+					"effectType": "VALUE",
+					"value": "VICTORYPOINTS",
+					"affectingEntities": "NONE",
+					"valueAmount": 3,
+					"frequency": "ENDOFGAME"
+				}]
+			},
+			{
+				"priority": "2",
+				"cost": {
+					"costType": "RAWRESOURCE",
+					"costs": [{
+						"resource": "ORE",
+						"amount": 2
+					}]
+				},
+				"effects": [{
+					"effectType": "ENTITY",
+					"entityType": "RAWRESOURCE",
+					"entitiesAndAmounts": [{
+						"resource": "CLAY",
+						"entityAmount": 1
+					},
+					{
+						"resource": "ORE",
+						"entityAmount": 1
+					},
+					{
+						"resource": "LUMBER",
+						"entityAmount": 1
+					},
+					{
+						"resource": "STONE",
+						"entityAmount": 1
+					}],
+					"frequency": "EVERYTURN"
+				}]
+			},
+			{
+				"priority": "3",
+				"cost": {
+					"costType": "MANUFACTUREDGOOD",
+					"costs": [{
+						"good": "GLASS",
+						"amount": 2
+					}]
+				},
+				"effects": [{
+					"effectType": "VALUE",
+					"Value": "VICTORYPOINTS",
+					"AffectingEntities": "NONE",
+					"valueAmount": 7,
+					"frequency": "ENDOFGAME"
+				}]
+			}]
+		},
+		{
+			"wonderType": "LIGHTHOUSE",
+			"side": "B",
+			"levels": [{
+				"priority": "1",
+				"cost": {
+					"costType": "RAWRESOURCE",
+					"costs": [{
+						"resource": "CLAY",
+						"amount": 2
+					}]
+				},
+				"effects": [{
+					"effectType": "ENTITY",
+					"entityType": "RAWRESOURCE",
+					"entitiesAndAmounts": [{
+						"resource": "CLAY",
+						"entityAmount": 1
+					},
+					{
+						"resource": "ORE",
+						"entityAmount": 1
+					},
+					{
+						"resource": "LUMBER",
+						"entityAmount": 1
+					},
+					{
+						"resource": "STONE",
+						"entityAmount": 1
+					}],
+					"frequency": "EVERYTURN"
+				}]
+			},
+			{
+				"priority": "2",
+				"cost": {
+					"costType": "RAWRESOURCE",
+					"costs": [{
+						"resource": "LUMBER",
+						"amount": 2
+					}]
+				},
+				"effects": [{
+					"effectType": "ENTITY",
+					"entityType": "MANUFACTUREDGOOD",
+					"entitiesAndAmounts": [{
+						"good": "GLASS",
+						"entityAmount": 1
+					},
+					{
+						"good": "LOOM",
+						"entityAmount": 1
+					},
+					{
+						"good": "PRESS",
+						"entityAmount": 1
+					}],
+					"frequency": "EVERYTURN"
+				}]
+			},
+			{
+				"priority": "3",
+				"cost": {
+					"costType": "RAWRESOURCE",
+					"costs": [{
+						"resource": "STONE",
+						"amount": 3
+					}]
+				},
+				"effects": [{
+					"effectType": "VALUE",
+					"Value": "VICTORYPOINTS",
+					"AffectingEntities": "NONE",
+					"valueAmount": 7,
+					"frequency": "ENDOFGAME"
+				}]
+			}]
+		},
+		{
+			"wonderType": "TEMPLE",
+			"side": "A",
+			"levels": [{
+				"priority": "1",
+				"cost": {
+					"costType": "RAWRESOURCE",
+					"costs": [{
+						"resource": "STONE",
+						"amount": 2
+					}]
+				},
+				"effects": [{
+					"effectType": "VALUE",
+					"value": "VICTORYPOINTS",
+					"affectingEntities": "NONE",
+					"valueAmount": 3,
+					"frequency": "ENDOFGAME"
+				}]
+			},
+			{
+				"priority": "2",
+				"cost": {
+					"costType": "RAWRESOURCE",
+					"costs": [{
+						"resource": "LUMBER",
+						"amount": 2
+					}]
+				},
+				"effects": [{
+					"effectType": "VALUE",
+					"Value": "COIN",
+					"AffectingEntities": "NONE",
+					"valueAmount": 9,
+					"frequency": "ONCEIMMEDIATE"
+				}]
+			},
+			{
+				"priority": "3",
+				"cost": {
+					"costType": "MANUFACTUREDGOOD",
+					"costs": [{
+						"good": "PRESS",
+						"amount": 2
+					}]
+				},
+				"effects": [{
+					"effectType": "VALUE",
+					"Value": "VICTORYPOINTS",
+					"AffectingEntities": "NONE",
+					"valueAmount": 7,
+					"frequency": "ENDOFGAME"
+				}]
+			}]
+		},
+		{
+			"wonderType": "TEMPLE",
+			"side": "B",
+			"levels": [{
+				"priority": "1",
+				"cost": {
+					"costType": "RAWRESOURCE",
+					"costs": [{
+						"resource": "STONE",
+						"amount": 2
+					}]
+				},
+				"effects": [{
+					"effectType": "VALUE",
+					"value": "COIN",
+					"affectingEntities": "NONE",
+					"valueAmount": 4,
+					"frequency": "ONCEIMMEDIATE"
+				},
+				{
+					"effectType": "VALUE",
+					"value": "VICTORYPOINTS",
+					"affectingEntities": "NONE",
+					"valueAmount": 2,
+					"frequency": "ENDOFGAME"
+				}]
+			},
+			{
+				"priority": "2",
+				"cost": {
+					"costType": "RAWRESOURCE",
+					"costs": [{
+						"resource": "LUMBER",
+						"amount": 2
+					}]
+				},
+				"effects": [{
+					"effectType": "VALUE",
+					"Value": "COIN",
+					"AffectingEntities": "NONE",
+					"valueAmount": 4,
+					"frequency": "ONCEIMMEDIATE"
+				},
+				{
+					"effectType": "VALUE",
+					"value": "VICTORYPOINTS",
+					"affectingEntities": "NONE",
+					"valueAmount": 3,
+					"frequency": "ENDOFGAME"
+				}]
+			},
+			{
+				"priority": "3",
+				"cost": {
+					"costType": "MANUFACTUREDGOOD",
+					"costs": [{
+						"good": "PRESS",
+						"amount": 1
+					},
+					{
+						"good": "LOOM",
+						"amount": 1
+					},
+					{
+						"good": "GLASS",
+						"amount": 1
+					}]
+				},
+				"effects": [{
+					"effectType": "VALUE",
+					"Value": "COIN",
+					"AffectingEntities": "NONE",
+					"valueAmount": 4,
+					"frequency": "ONCEIMMEDIATE"
+				},
+				{
+					"effectType": "VALUE",
+					"value": "VICTORYPOINTS",
+					"affectingEntities": "NONE",
+					"valueAmount": 5,
+					"frequency": "ENDOFGAME"
+				}]
+			}]
+		},
+		{
+			"wonderType": "GARDENS",
+			"side": "A",
+			"levels": [{
+				"priority": "1",
+				"cost": {
+					"costType": "RAWRESOURCE",
+					"costs": [{
+						"resource": "CLAY",
+						"amount": 2
+					}]
+				},
+				"effects": [{
+					"effectType": "VALUE",
+					"value": "VICTORYPOINTS",
+					"affectingEntities": "NONE",
+					"valueAmount": 3,
+					"frequency": "ENDOFGAME"
+				}]
+			},
+			{
+				"priority": "2",
+				"cost": {
+					"costType": "RAWRESOURCE",
+					"costs": [{
+						"resource": "LUMBER",
+						"amount": 3
+					}]
+				},
+				"effects": [{
+					"effectType": "ENTITY",
+					"entityType": "SCIENCE",
+					"entitiesAndAmounts": [{
+						"science": "TABLET",
+						"entityAmount": 1
+					},
+					{
+						"science": "PROTRACTOR",
+						"entityAmount": 1
+					},
+					{
+						"science": "WHEEL",
+						"entityAmount": 1
+					}],
+					"frequency": "ENDOFGAME"
+				}]
+			},
+			{
+				"priority": "3",
+				"cost": {
+					"costType": "RAWRESOURCE",
+					"costs": [{
+						"resource": "CLAY",
+						"amount": 4
+					}]
+				},
+				"effects": [{
+					"effectType": "VALUE",
+					"Value": "VICTORYPOINTS",
+					"AffectingEntities": "NONE",
+					"valueAmount": 7,
+					"frequency": "ENDOFGAME"
+				}]
+			}]
+		},
+		{
+			"wonderType": "GARDENS",
+			"side": "B",
+			"levels": [{
+				"priority": "1",
+				"cost": {
+					"costType": "MULTI",
+					"costs": [{
+						"entityType": "MANUFACTUREDGOOD",
+						"good": "LOOM",
+						"amount": 1
+					},
+					{
+						"entityType": "RAWRESOURCE",
+						"resource": "CLAY",
+						"amount": 1
+					}]
+				},
+				"effects": [{
+					"effectType": "VALUE",
+					"value": "VICTORYPOINTS",
+					"affectingEntities": "NONE",
+					"valueAmount": 3,
+					"frequency": "ENDOFGAME"
+				}]
+			},
+			{
+				"priority": "2",
+				"cost": {
+					"costType": "MULTI",
+					"costs": [{
+						"entityType": "MANUFACTUREDGOOD",
+						"good": "GLASS",
+						"amount": 1
+					},
+					{
+						"entityType": "RAWRESOURCE",
+						"resource": "LUMBER",
+						"amount": 2
+					}]
+				},
+				"effects": [{
+					"effectType": "ABILITY",
+					"ability": "PLAYSEVENTH",
+					"frequency": "SIXTHTURN"
+				}]
+			},
+			{
+				"priority": "3",
+				"cost": {
+					"costType": "MULTI",
+					"costs": [{
+						"entityType": "MANUFACTUREDGOOD",
+						"good": "PRESS",
+						"amount": 1
+					},
+					{
+						"entityType": "RAWRESOURCE",
+						"resource": "CLAY",
+						"amount": 3
+					}]
+				},
+				"effects": [{
+					"effectType": "ENTITY",
+					"entityType": "SCIENCE",
+					"entitiesAndAmounts": [{
+						"science": "TABLET",
+						"entityAmount": 1
+					},
+					{
+						"science": "PROTRACTOR",
+						"entityAmount": 1
+					},
+					{
+						"science": "WHEEL",
+						"entityAmount": 1
+					}],
+					"frequency": "ENDOFGAME"
+				}]
+			}]
+		},
+		{
+			"wonderType": "STATUE",
+			"side": "A",
+			"levels": [{
+				"priority": "1",
+				"cost": {
+					"costType": "RAWRESOURCE",
+					"costs": [{
+						"resource": "LUMBER",
+						"amount": 2
+					}]
+				},
+				"effects": [{
+					"effectType": "VALUE",
+					"value": "VICTORYPOINTS",
+					"affectingEntities": "NONE",
+					"valueAmount": 3,
+					"frequency": "ENDOFGAME"
+				}]
+			},
+			{
+				"priority": "2",
+				"cost": {
+					"costType": "RAWRESOURCE",
+					"costs": [{
+						"resource": "STONE",
+						"amount": 2
+					}]
+				},
+				"effects": [{
+					"effectType": "ABILITY",
+					"ability": "FREEBUILD",
+					"frequency": "ONCEAGE"
+				}]
+			},
+			{
+				"priority": "3",
+				"cost": {
+					"costType": "RAWRESOURCE",
+					"costs": [{
+						"resource": "ORE",
+						"amount": 2
+					}]
+				},
+				"effects": [{
+					"effectType": "VALUE",
+					"Value": "VICTORYPOINTS",
+					"AffectingEntities": "NONE",
+					"valueAmount": 7,
+					"frequency": "ENDOFGAME"
+				}]
+			}]
+		},
+		{
+			"wonderType": "STATUE",
+			"side": "B",
+			"levels": [{
+				"priority": "1",
+				"cost": {
+					"costType": "RAWRESOURCE",
+					"costs": [{
+						"resource": "LUMBER",
+						"amount": 2
+					}]
+				},
+				"effects": [{
+					"effectType": "VALUE",
+					"value": "COMMERCE",
+					"affectingEntities": "RAWRESOURCE",
+					"valueAmount": 1,
+					"frequency": "EVERYTURN"
+				}]
+			},
+			{
+				"priority": "2",
+				"cost": {
+					"costType": "RAWRESOURCE",
+					"costs": [{
+						"resource": "STONE",
+						"amount": 2
+					}]
+				},
+				"effects": [{
+					"effectType": "VALUE",
+					"Value": "VICTORYPOINTS",
+					"AffectingEntities": "NONE",
+					"valueAmount": 5,
+					"frequency": "ENDOFGAME"
+				}]
+			},
+			{
+				"priority": "3",
+				"cost": {
+					"costType": "MULTI",
+					"costs": [{
+						"entityType":"MANUFACTUREDGOOD",
+						"good": "LOOM",
+						"amount": 1
+					},
+					{
+						"entityType":"RAWRESOURCE",
+						"resource": "ORE",
+						"amount": 2
+					}]
+				},
+				"effects": [{
+					"effectType": "ABILITY",
+					"ability":"COPYONENEIGHBORGUILD",
+					"frequency": "ENDOFGAME"
+				}]
+			}]
+		},
+		{
+			"wonderType": "MAUSOLEUM",
+			"side": "A",
+			"levels": [{
+				"priority": "1",
+				"cost": {
+					"costType": "RAWRESOURCE",
+					"costs": [{
+						"resource": "CLAY",
+						"amount": 2
+					}]
+				},
+				"effects": [{
+					"effectType": "VALUE",
+					"value": "VICTORYPOINTS",
+					"affectingEntities": "NONE",
+					"valueAmount": 3,
+					"frequency": "ENDOFGAME"
+				}]
+			},
+			{
+				"priority": "2",
+				"cost": {
+					"costType": "RAWRESOURCE",
+					"costs": [{
+						"resource": "ORE",
+						"amount": 3
+					}]
+				},
+				"effects": [{
+					"effectType": "ABILITY",
+					"ability": "FREEBUILDFROMDISCARD",
+					"frequency": "ENDOFTURN"					
+				}]
+			},
+			{
+				"priority": "3",
+				"cost": {
+					"costType": "MANUFACTUREDGOOD",
+					"costs": [{
+						"good": "LOOM",
+						"amount": 2
+					}]
+				},
+				"effects": [{
+					"effectType": "VALUE",
+					"Value": "VICTORYPOINTS",
+					"AffectingEntities": "NONE",
+					"valueAmount": 7,
+					"frequency": "ENDOFGAME"
+				}]
+			}]
+		},
+		{
+			"wonderType": "MAUSOLEUM",
+			"side": "B",
+			"levels": [{
+				"priority": "1",
+				"cost": {
+					"costType": "RAWRESOURCE",
+					"costs": [{
+						"resource": "ORE",
+						"amount": 2
+					}]
+				},
+				"effects": [{
+					"effectType": "VALUE",
+					"value": "VICTORYPOINTS",
+					"affectingEntities": "NONE",
+					"valueAmount": 2,
+					"frequency": "ENDOFGAME"
+				},
+				{
+					"effectType": "ABILITY",
+					"ability": "FREEBUILDFROMDISCARD",
+					"frequency": "ENDOFTURN"					
+				}]
+			},
+			{
+				"priority": "2",
+				"cost": {
+					"costType": "RAWRESOURCE",
+					"costs": [{
+						"resource": "CLAY",
+						"amount": 3
+					}]
+				},
+				"effects": [{
+					"effectType": "VALUE",
+					"value": "VICTORYPOINTS",
+					"affectingEntities": "NONE",
+					"valueAmount": 1,
+					"frequency": "ENDOFGAME"
+				},
+				{
+					"effectType": "ABILITY",
+					"ability": "FREEBUILDFROMDISCARD",
+					"frequency": "ENDOFTURN"					
+				}]
+			},
+			{
+				"priority": "3",
+				"cost": {
+					"costType": "MANUFACTUREDGOOD",
+					"costs": [{
+						"good": "PRESS",
+						"amount": 1
+					},
+					{
+						"good": "LOOM",
+						"amount": 1
+					},
+					{
+						"good": "GLASS",
+						"amount": 1
+					}]
+				},
+				"effects": [{
+					"effectType": "ABILITY",
+					"ability": "FREEBUILDFROMDISCARD",
+					"frequency": "ENDOFTURN"					
+				}]
+			}]
+		},
+		{
+			"wonderType": "PYRAMIDS",
+			"side": "A",
+			"levels": [{
+				"priority": "1",
+				"cost": {
+					"costType": "RAWRESOURCE",
+					"costs": [{
+						"resource": "STONE",
+						"amount": 2
+					}]
+				},
+				"effects": [{
+					"effectType": "VALUE",
+					"value": "VICTORYPOINTS",
+					"affectingEntities": "NONE",
+					"valueAmount": 3,
+					"frequency": "ENDOFGAME"
+				}]
+			},
+			{
+				"priority": "2",
+				"cost": {
+					"costType": "RAWRESOURCE",
+					"costs": [{
+						"resource": "LUMBER",
+						"amount": 3
+					}]
+				},
+				"effects": [{
+					"effectType": "VALUE",
+					"value": "VICTORYPOINTS",
+					"affectingEntities": "NONE",
+					"valueAmount": 5,
+					"frequency": "ENDOFGAME"
+				}]
+			},
+			{
+				"priority": "3",
+				"cost": {
+					"costType": "RAWRESOURCE",
+					"costs": [{
+						"resource": "STONE",
+						"amount": 4
+					}]
+				},
+				"effects": [{
+					"effectType": "VALUE",
+					"Value": "VICTORYPOINTS",
+					"AffectingEntities": "NONE",
+					"valueAmount": 7,
+					"frequency": "ENDOFGAME"
+				}]
+			}]
+		},
+		{
+			"wonderType": "PYRAMIDS",
+			"side": "B",
+			"levels": [{
+				"priority": "1",
+				"cost": {
+					"costType": "RAWRESOURCE",
+					"costs": [{
+						"resource": "LUMBER",
+						"amount": 2
+					}]
+				},
+				"effects": [{
+					"effectType": "VALUE",
+					"value": "VICTORYPOINTS",
+					"affectingEntities": "NONE",
+					"valueAmount": 3,
+					"frequency": "ENDOFGAME"
+				}]
+			},
+			{
+				"priority": "2",
+				"cost": {
+					"costType": "RAWRESOURCE",
+					"costs": [{
+						"resource": "STONE",
+						"amount": 2
+					}]
+				},
+				"effects": [{
+					"effectType": "VALUE",
+					"value": "VICTORYPOINTS",
+					"affectingEntities": "NONE",
+					"valueAmount": 5,
+					"frequency": "ENDOFGAME"
+				}]
+			},
+			{
+				"priority": "3",
+				"cost": {
+					"costType": "RAWRESOURCE",
+					"costs": [{
+						"resource": "CLAY",
+						"amount": 2
+					}]
+				},
+				"effects": [{
+					"effectType": "VALUE",
+					"value": "VICTORYPOINTS",
+					"affectingEntities": "NONE",
+					"valueAmount": 5,
+					"frequency": "ENDOFGAME"
+				}]
+			},
+			{
+				"priority": "4",
+				"cost": {
+					"costType": "MULTI",
+					"costs": [{
+						"type":"MANUFACTUREDGOOD",
+						"good": "PRESS",
+						"amount": 1
+					},
+					{
+						"type":"RAWRESOURCE",
+						"resource": "STONE",
+						"amount": 4
+					}]
+				},
+				"effects": [{
+					"effectType": "VALUE",
+					"Value": "VICTORYPOINTS",
+					"AffectingEntities": "NONE",
+					"valueAmount": 7,
+					"frequency": "ENDOFGAME"
+				}]
+			}]
+		}
+	]
+}
