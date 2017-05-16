@@ -71,8 +71,15 @@ public class GameManager {
 				return;
 			}
 		}else if (from.storagePileContainsCardByName("West Trading Post")) {
-			this.tradeHandler.tradeFromToForEntity(from, to, entity, true);
-			return;
+			int fromPosition = this.getPlayers().indexOf(from);
+			int toPosition = this.getPlayers().indexOf(to);
+			if(--fromPosition == -1){
+				fromPosition = this.getNumPlayers() - 1;
+			}
+			if (fromPosition == toPosition) {
+				this.tradeHandler.tradeFromToForEntity(from, to, entity, true);
+				return;
+			}
 		}
 
 		this.tradeHandler.tradeFromToForEntity(from, to, entity, false);
