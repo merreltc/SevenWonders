@@ -16,6 +16,7 @@ import backend.handlers.SetUpDeckHandler;
 import constants.GeneralEnums.CostType;
 import constants.GeneralEnums.Good;
 import constants.GeneralEnums.RawResource;
+import constants.GeneralEnums.Science;
 import dataStructures.gameMaterials.Card;
 import dataStructures.gameMaterials.Cost;
 import dataStructures.gameMaterials.Deck.Age;
@@ -912,6 +913,22 @@ public class PlayerTest {
 		}
 	}
 	
+	@Test
+	public void testGetAmountOfScienceOneOfEach(){
+		Player player = new Player("Jane Doe", WonderType.COLOSSUS);
+		
+		Card card1 = createApocathery();
+		player.addToStoragePile(createApocathery());
+		player.addToStoragePile(createScriptorium());
+		player.addToStoragePile(createWorkshop());
+		
+		int[] amounts = player.getNumberOfEachScience();
+		
+		Assert.assertEquals(1, amounts[0]);
+		Assert.assertEquals(1, amounts[1]);
+		Assert.assertEquals(1, amounts[2]);
+	}
+	
 	private Card createWorkersGuild(){
 		HashMap<Enum, Integer> costs = new HashMap<Enum, Integer>();
 		costs.put(RawResource.LUMBER, 1);
@@ -942,6 +959,39 @@ public class PlayerTest {
 		Cost cost = new Cost(CostType.MULTITYPE, costs);
 		Effect effect = new ValueEffect(EffectType.VALUE, Value.VICTORYPOINTS, AffectingEntity.NONE, 4);
 		Card card = new Card("Courthouse", CardType.SCIENTIFICSTRUCTURE, cost, effect);
+		return card;
+	}
+	
+	private Card createApocathery(){
+		HashMap<Enum, Integer> costs = new HashMap<Enum, Integer>();
+		costs.put(Good.LOOM, 1);
+		Cost cost = new Cost(CostType.GOOD, costs);
+		HashMap<Enum, Integer> entitiesAndAmounts = new HashMap<Enum, Integer>();
+		entitiesAndAmounts.put(Science.PROTRACTOR, 1);
+		Effect effect = new EntityEffect(EffectType.ENTITY, EntityType.SCIENCE, entitiesAndAmounts);
+		Card card = new Card("Apothecary", CardType.SCIENTIFICSTRUCTURE, cost, effect);
+		return card;
+	}
+	
+	private Card createWorkshop(){
+		HashMap<Enum, Integer>costs = new HashMap<Enum, Integer>();
+		costs.put(Good.GLASS, 1);
+		Cost cost = new Cost(CostType.GOOD, costs);
+		HashMap<Enum, Integer> entitiesAndAmounts = new HashMap<Enum, Integer>();
+		entitiesAndAmounts.put(Science.WHEEL, 1);
+		Effect effect = new EntityEffect(EffectType.ENTITY, EntityType.SCIENCE, entitiesAndAmounts);
+		Card card = new Card("Workshop", CardType.SCIENTIFICSTRUCTURE, cost, effect);
+		return card;
+	}
+	
+	private Card createScriptorium(){
+		HashMap<Enum, Integer> costs = new HashMap<Enum, Integer>();
+		costs.put(Good.PRESS, 1);
+		Cost cost = new Cost(CostType.GOOD, costs);
+		HashMap<Enum, Integer> entitiesAndAmounts = new HashMap<Enum, Integer>();
+		entitiesAndAmounts.put(Science.TABLET, 1);
+		Effect effect = new EntityEffect(EffectType.ENTITY, EntityType.SCIENCE, entitiesAndAmounts);
+		Card card = new Card("Scriptorium", CardType.SCIENTIFICSTRUCTURE, cost, effect);
 		return card;
 	}
 }
