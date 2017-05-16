@@ -143,7 +143,7 @@ public class GameManager {
 				message = "End of current rotation.  Switching Player hands.";
 			}
 
-			playersUntilPass = 3;
+			playersUntilPass = this.getNumPlayers();
 		}
 
 		this.turnHandler.setNumPlayersUntilPass(playersUntilPass - 1);
