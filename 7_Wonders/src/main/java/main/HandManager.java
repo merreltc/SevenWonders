@@ -15,11 +15,12 @@ public class HandManager {
 
 	private Player currentPlayer;
 	private ArrayList<Interactable> playerHand = new ArrayList<>();
-	
-	public HandManager() { }
+
+	public HandManager() {
+	}
 
 	public void draw(Graphics graphics) {
-		for (Interactable card : this.playerHand){
+		for (Interactable card : this.playerHand) {
 			card.draw(graphics);
 		}
 	}
@@ -36,19 +37,22 @@ public class HandManager {
 			Card card = currentHand.get(i);
 			((CardHolder) cardHolder).giveCard(card);
 			cardHolder.addImage(renderer.getImage(card.getName()));
+			if (player.storagePileContainsCardByName(card.getPreviousStructureName())) {
+				((CardHolder) cardHolder).setHasPreviousStructure();
+			}
 			this.playerHand.add(cardHolder);
 		}
 	}
 
-	public int getPlayerHandSize(){
+	public int getPlayerHandSize() {
 		return this.playerHand.size();
 	}
 
 	public Interactable getCardHolder(int cardToGet) {
 		return this.playerHand.get(cardToGet);
 	}
-	
-	public ArrayList<Interactable> getCurrentPlayerHand(){
+
+	public ArrayList<Interactable> getCurrentPlayerHand() {
 		return this.playerHand;
 	}
 }

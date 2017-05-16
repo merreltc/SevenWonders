@@ -15,16 +15,20 @@ import exceptions.InsufficientFundsException;
 public class PlayerTurnHandler {
 
 	public void buildStructure(Player current, Card card) {
+		if (current.storagePileContainsCardByName(card.getName())) {
+			throw new IllegalArgumentException("Player already has the structure cannot build the same structure");
+		}
+
 		String previousStructure = card.getPreviousStructureName();
-		
-		for(Card storage : current.getStoragePile()){
-			if(storage.getName().contains(previousStructure)){
+
+		for (Card storage : current.getStoragePile()) {
+			if (storage.getName().contains(previousStructure)) {
 				current.addToStoragePile(card);
 				current.removeFromCurrentHand(card);
 				return;
 			}
 		}
-		
+
 		if (card.getCostType() == CostType.COIN) {
 			int coinCost = card.getCost().get(CostType.COIN);
 			current.removeTotalCoins(coinCost);
@@ -89,5 +93,4 @@ public class PlayerTurnHandler {
 		board.addToDiscardPile(player, card);
 		player.removeFromCurrentHand(card);
 	}
-
 }

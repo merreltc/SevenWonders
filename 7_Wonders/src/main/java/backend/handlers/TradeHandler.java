@@ -1,10 +1,9 @@
 package backend.handlers;
 
-import constants.GeneralEnums.Resource;
 import dataStructures.GameBoard;
 import dataStructures.playerData.Chip;
-import dataStructures.playerData.Player;
 import dataStructures.playerData.Chip.ChipType;
+import dataStructures.playerData.Player;
 import exceptions.InvalidTradeException;
 
 public class TradeHandler {
@@ -23,7 +22,7 @@ public class TradeHandler {
 		// they have precedence over number of value 1 coins
 		int numValue3Coins = getNumValue3Coins(from, valueToTrade);
 		int valueRemaining = valueToTrade - (numValue3Coins * 3);
-		int numValue1Coins = getNumValue1Coins(valueRemaining);
+		int numValue1Coins = valueRemaining;
 
 		tradeFromToValue1(from, to, numValue1Coins);
 		tradeFromToValue3(from, to, numValue3Coins);
@@ -48,12 +47,8 @@ public class TradeHandler {
 		return valueToTrade;
 	}
 
-	private static int getNumValue1Coins(int valueRemaining) {
-		return valueRemaining;
-	}
-
 	public static void tradeFromToValue1(Player from, Player to, int numCoinsToTrade) {
-		from.removeValue1(numCoinsToTrade,ChipType.COIN);
+		from.removeValue1(numCoinsToTrade, ChipType.COIN);
 		to.addValue1(numCoinsToTrade, Chip.ChipType.COIN);
 	}
 
@@ -62,9 +57,13 @@ public class TradeHandler {
 		to.addValue3(numCoinsToTrade, Chip.ChipType.COIN);
 	}
 
-	public void tradeFromToForEntity(Player from, Player to, Enum entity) {
+	public void tradeFromToForEntity(Player from, Player to, Enum entity, boolean discount) {
 		if (to.storagePileContainsEntity(entity)) {
-			this.tradeCoinsFromTo(from, to, 3);
+			if (discount) {
+				this.tradeCoinsFromTo(from, to, 1);
+			} else {
+				this.tradeCoinsFromTo(from, to, 2);
+			}
 			from.addTradedValue(entity);
 		} else {
 			throw new InvalidTradeException("Player doesn't have the resource for trading: " + entity.toString());

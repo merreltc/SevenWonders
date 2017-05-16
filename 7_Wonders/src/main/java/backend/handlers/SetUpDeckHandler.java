@@ -31,8 +31,8 @@ import dataStructures.gameMaterials.ValueEffect.Value;
 import dataStructures.gameMaterials.ValueEffect.ValueType;
 
 public class SetUpDeckHandler {
-	
-	public Deck createDeck(Age age, int numPlayers){
+
+	public Deck createDeck(Age age, int numPlayers) {
 		ArrayList<Card> cards = createCards(age, numPlayers);
 		return new Deck(age, cards);
 	}
@@ -113,6 +113,7 @@ public class SetUpDeckHandler {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+
 		return result;
 	}
 

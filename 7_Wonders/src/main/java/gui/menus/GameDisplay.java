@@ -3,14 +3,12 @@ package gui.menus;
 import java.awt.Graphics;
 import java.awt.Point;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.ResourceBundle;
 
 import javax.swing.JOptionPane;
 
 import backend.GameManager;
 import constants.Constants;
-import dataStructures.gameMaterials.Wonder;
 import dataStructures.playerData.Player;
 import gui.interactables.Button;
 import gui.interactables.CardHolder;
@@ -81,7 +79,7 @@ public class GameDisplay extends Menu {
 		int numOfPlayers = this.gameManager.getNumPlayers();
 		for (int i = -1; i < numOfPlayers - 1; i++) {
 			PlayerBoard board = new PlayerBoard(i, numOfPlayers,
-					this.gameManager.getPlayer((2 * numOfPlayers - i) % numOfPlayers), renderer);
+					this.gameManager.getPlayer((2 * numOfPlayers + i) % numOfPlayers), renderer);
 			this.addInteractable(board.generateResourceButton());
 			boards.add(board);
 		}
@@ -129,33 +127,7 @@ public class GameDisplay extends Menu {
 	@Override
 	public void onClick(Interactable clicked) {
 		if (clicked.getClass().equals(CardHolder.class)) {
-			String[] buttons = new String[] { this.messages.getString("buildStructure"),
-					this.messages.getString("buildWonder"), this.messages.getString("discard") };
-			int val = JOptionPane.showOptionDialog(null, this.messages.getString("choosePlayType"),
-					this.messages.getString("playCard"), JOptionPane.INFORMATION_MESSAGE, 0, null, buttons, buttons[0]);
-			try {
-				if (val == 0) {
-					((CardHolder) clicked).activate(this.gameManager);
-				}else if (val == 2){
-					((CardHolder) clicked).discard(this.gameManager);
-				}
-				String message = gameManager.endCurrentPlayerTurn();
-				if (!message.equals("")){
-					Message.showMessage(message);
-				}
-				redrawBoards();
-				/* update the cards after rotation */
-				for (Interactable toRemove : this.handManager.getCurrentPlayerHand()) {
-					this.removeInteractable(toRemove);
-				}
-				this.handManager.drawCurrentPlayerCards(this.gameManager.getCurrentPlayer(), renderer);
-				for (int i = 0; i < this.handManager.getPlayerHandSize(); i++) {
-					this.addInteractable(this.handManager.getCardHolder(i));
-				}
-				
-			} catch (Exception e) {
-				Message.showMessage(e.getMessage());
-			}
+			this.attemptPlayCard((CardHolder) clicked);
 		} else if (clicked.getValue().equals(this.messages.getString("exit"))) {
 			if (this.resource.isActive()) {
 				this.resource.closeMenu();
@@ -165,11 +137,42 @@ public class GameDisplay extends Menu {
 		} else if (clicked.getValue().codePointAt(0) >= 48 && clicked.getValue().codePointAt(0) <= 57) {
 			int playerNum = codePointToInt(clicked.getValue().codePointAt(0));
 			int locOfCurrentPlayer = this.gameManager.getPlayers().indexOf(this.gameManager.getCurrentPlayer());
-			this.resource.openMenu(this.gameManager.getPlayer((locOfCurrentPlayer + playerNum)%this.gameManager.getNumPlayers()));
+			this.resource.openMenu(
+					this.gameManager.getPlayer((locOfCurrentPlayer + playerNum) % this.gameManager.getNumPlayers()));
 		} else {
 			String[] splitValue = clicked.getValue().split("-");
 			TradeHelper tradeHandler = new TradeHelper(this.gameManager);
 			tradeHandler.trade(splitValue);
+		}
+	}
+
+	private void attemptPlayCard(CardHolder clicked) {
+		String[] buttons = new String[] { this.messages.getString("buildStructure"),
+				this.messages.getString("buildWonder"), this.messages.getString("discard") };
+		int val = JOptionPane.showOptionDialog(null, this.messages.getString("choosePlayType"),
+				this.messages.getString("playCard"), JOptionPane.INFORMATION_MESSAGE, 0, null, buttons, buttons[0]);
+		try {
+			if (val == 0) {
+				clicked.activate(this.gameManager);
+			} else if (val == 2) {
+				clicked.discard(this.gameManager);
+			}
+			String message = gameManager.endCurrentPlayerTurn();
+			if (!message.equals("")) {
+				Message.showMessage(message);
+			}
+			redrawBoards();
+			/* update the cards after rotation */
+			for (Interactable toRemove : this.handManager.getCurrentPlayerHand()) {
+				this.removeInteractable(toRemove);
+			}
+			this.handManager.drawCurrentPlayerCards(this.gameManager.getCurrentPlayer(), renderer);
+			for (int i = 0; i < this.handManager.getPlayerHandSize(); i++) {
+				this.addInteractable(this.handManager.getCardHolder(i));
+			}
+
+		} catch (Exception e) {
+			Message.showMessage(e.getMessage());
 		}
 	}
 
@@ -184,7 +187,7 @@ public class GameDisplay extends Menu {
 		int nextPlayerIndex = players.indexOf(nextPlayer);
 		for (int i = 0; i < players.size(); i++) {
 			boards.get(i)
-					.changePlayer(players.get((totalNumberOfPlayers + nextPlayerIndex - i) % totalNumberOfPlayers));
+					.changePlayer(players.get((totalNumberOfPlayers + nextPlayerIndex + i + 1) % totalNumberOfPlayers));
 		}
 	}
 }

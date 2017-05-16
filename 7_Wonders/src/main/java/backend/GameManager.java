@@ -8,7 +8,7 @@ import backend.handlers.SetUpDeckHandler;
 import backend.handlers.SetUpPlayerHandler;
 import backend.handlers.TradeHandler;
 import backend.handlers.TurnHandler;
-import backend.handlers.RotateHandler.Direction;
+import backend.handlers.RotateHandler.Rotation;
 import dataStructures.GameBoard;
 import dataStructures.gameMaterials.Card;
 import dataStructures.gameMaterials.Deck;
@@ -30,7 +30,7 @@ public class GameManager {
 	private TradeHandler tradeHandler;
 	private PlayerTurnHandler playerTurnHandler;
 
-	private Direction currentDirection = Direction.CLOCKWISE;
+	private Rotation currentDirection = Rotation.CLOCKWISE;
 
 	public GameManager(ArrayList<String> names) {
 		this(names, new SetUpPlayerHandler(), new SetUpDeckHandler(), new TurnHandler(), new PlayerTurnHandler());
@@ -45,15 +45,15 @@ public class GameManager {
 		setUpGame(names);
 	}
 
-	public void setUpGame(ArrayList<String> holder) {
-		ArrayList<Player> players = this.setUpPlayerHandler.setUpAndReturnPlayers(holder);
-		Deck deck = this.setUpDeckHandler.createDeck(Age.AGE1, holder.size());
+	public void setUpGame(ArrayList<String> names) {
+		ArrayList<Player> players = this.setUpPlayerHandler.setUpAndReturnPlayers(names);
+		Deck deck = this.setUpDeckHandler.createDeck(Age.AGE1, names.size());
 
 		this.board = new GameBoard(players, deck);
 		this.rotateHandler = new RotateHandler(this.board);
 		this.tradeHandler = new TradeHandler(this.board);
 	}
-
+	
 	public void dealInitialTurnCards() {
 		this.turnHandler.dealInitialTurnCards(this.getPlayers(), this.getNumPlayers(), this.board.getDeck());
 	}
@@ -63,14 +63,23 @@ public class GameManager {
 	}
 
 	public void tradeForEntity(Player from, Player to, Enum entity) {
-		this.tradeHandler.tradeFromToForEntity(from, to, entity);
+		if (from.storagePileContainsCardByName("East Trading Post")) {
+			int fromPosition = this.getPlayers().indexOf(from);
+			int toPosition = this.getPlayers().indexOf(to);
+			if (++fromPosition == toPosition) {
+				this.tradeHandler.tradeFromToForEntity(from, to, entity, true);
+				return;
+			}
+		}
+
+		this.tradeHandler.tradeFromToForEntity(from, to, entity, false);
 	}
 
 	public void buildStructure(Card card) {
 		this.playerTurnHandler.buildStructure(getCurrentPlayer(), card);
 	}
 
-	public void changeRotateDirectionAndResetPositions(Direction direction) {
+	public void changeRotateDirectionAndResetPositions(Rotation direction) {
 		this.rotateHandler.changeRotateDirectionAndResetPositions(direction);
 		this.currentDirection = direction;
 	}
@@ -101,11 +110,11 @@ public class GameManager {
 				Deck newDeck;
 				if (this.board.getDeck().getAge() == Age.AGE1) {
 					newDeck = this.setUpDeckHandler.createDeck(Age.AGE2, getNumPlayers());
-					this.currentDirection = Direction.COUNTERCLOCKWISE;
-				}else{
+					this.currentDirection = Rotation.COUNTERCLOCKWISE;
+				} else {
 					newDeck = this.setUpDeckHandler.createDeck(Age.AGE3, getNumPlayers());
 				}
-				
+
 				this.board.setDeck(newDeck);
 				this.turnHandler.dealInitialTurnCards(this.getPlayers(), this.getNumPlayers(), this.board.getDeck());
 				message = "This is the end of the Age.  Finalizing Points";
@@ -119,10 +128,10 @@ public class GameManager {
 		}
 
 		this.turnHandler.setNumPlayersUntilPass(playersUntilPass - 1);
-		
-		if(this.currentDirection == Direction.CLOCKWISE){
+
+		if (this.currentDirection == Rotation.CLOCKWISE) {
 			this.rotateClockwise();
-		}else{
+		} else {
 			this.rotateCounterClockwise();
 		}
 		return message;
@@ -160,7 +169,7 @@ public class GameManager {
 		return this.board.getPreviousPlayer();
 	}
 
-	public Direction getDirection() {
+	public Rotation getDirection() {
 		return this.currentDirection;
 	}
 }

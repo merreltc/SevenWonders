@@ -13,16 +13,16 @@ public class RotateHandler {
 		this.board = board;
 	}
 
-	public enum Direction {
+	public enum Rotation {
 		CLOCKWISE, COUNTERCLOCKWISE;
 	}
 
-	public void changeRotateDirectionAndResetPositions(Direction direction) {
+	public void changeRotateDirectionAndResetPositions(Rotation direction) {
 		this.board.setCurrentPlayer(0);
 		int playerToRight = 1;
 		int playerToLeft = this.board.getNumPlayers() - 1;
 
-		if (direction == Direction.COUNTERCLOCKWISE) {
+		if (direction == Rotation.COUNTERCLOCKWISE) {
 			this.board.setNextPlayer(playerToLeft);
 			this.board.setPreviousPlayer(playerToRight);
 		} else {
@@ -33,15 +33,15 @@ public class RotateHandler {
 
 	public void rotateClockwise() {
 		setCurrentAndPreviousPlayers();
-		setNextPlayer(Direction.CLOCKWISE);
+		setNextPlayer(Rotation.CLOCKWISE);
 	}
 
 	public void rotateCounterClockwise() {
 		setCurrentAndPreviousPlayers();
-		setNextPlayer(Direction.COUNTERCLOCKWISE);
+		setNextPlayer(Rotation.COUNTERCLOCKWISE);
 	}
 
-	private void setNextPlayer(Direction rotateDirection) {
+	private void setNextPlayer(Rotation rotateDirection) {
 		int tempNextPlayerIndex = this.board.getNextPlayerIndex();
 		int lastPlayerIndex = this.board.getNumPlayers() - 1;
 		int firstPlayerIndex = 0;
@@ -49,7 +49,7 @@ public class RotateHandler {
 		int equalsCompareIndex;
 		int notEqualsCompareIndex;
 
-		if (rotateDirection == Direction.CLOCKWISE) {
+		if (rotateDirection == Rotation.CLOCKWISE) {
 			compareIndex = lastPlayerIndex;
 			equalsCompareIndex = firstPlayerIndex;
 			notEqualsCompareIndex = tempNextPlayerIndex + 1;
@@ -72,9 +72,9 @@ public class RotateHandler {
 		this.board.setCurrentPlayer(this.board.getNextPlayerIndex());
 	}
 
-	public void rotateCurrentHands(ArrayList<Player> players, Direction direction) {
+	public void rotateCurrentHands(ArrayList<Player> players, Rotation direction) {
 
-		if (direction == Direction.CLOCKWISE) {
+		if (direction == Rotation.CLOCKWISE) {
 			ArrayList<Card> previousPlayerHand = players.get(players.size() - 1).getCurrentHand();
 
 			for (int i = 0; i < players.size(); i++) {

@@ -2,10 +2,12 @@ package dataStructures.gameMaterials;
 
 import java.util.ArrayList;
 
+import utils.Translate;
+
 public class Deck {
 	private ArrayList<Card> cards = new ArrayList<Card>();
 	private Age age;
-	
+
 	public enum Age {
 		AGE1, AGE2, AGE3
 	}
@@ -28,10 +30,12 @@ public class Deck {
 	}
 
 	public Card getCard(int index) {
-		if(this.cards.size() <= index){
-			throw new IndexOutOfBoundsException("There are not enough cards in the deck to get card: " + index);
+		if (this.cards.size() <= index) {
+			String msg = Translate.prepareStringTemplateWithIntArg(index, "notEnoughCards",
+					Translate.getNewResourceBundle());
+			throw new IndexOutOfBoundsException(msg);
 		}
-		
+
 		return this.cards.get(index);
 	}
 }

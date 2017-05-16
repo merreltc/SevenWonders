@@ -5,6 +5,8 @@ import java.awt.Font;
 import java.awt.Point;
 
 public class Constants {
+	public static String LOCALE = "en_US";
+	
 	/* For GuiMainMenu Class */
 	public static final int FrameWidth = 1900;
 	public static final int FrameHeight = 1000;
@@ -14,18 +16,18 @@ public class Constants {
 	public static final Point StartButtonPosition = new Point(850, 400);
 	public static final Point StartButtonBounds = new Point(200, 100);
 
-	public static final Font TitleFont = new Font("MS Song", Font.BOLD, 66);
+	public static final Font TitleFont = new Font("DengXian Regular", Font.BOLD, 60);
 	public static final Color TitleColor = Color.yellow;
 	
-	public static final Font ButtonFont = new Font("MS Song", Font.BOLD, 50);
-	public static final Font ResourceFont = new Font("MS Song", Font.BOLD, 30);
+	public static final Font ButtonFont = new Font("DengXian Regular", Font.BOLD, 50);
+	public static final Font ResourceFont = new Font("DengXian Regular", Font.BOLD, 30);
 
 	public static final Point MainMenuTitlePosition = new Point(740, 100);
 
 	public static final Point PlayerSelectButtonBounds = new Point(150, 100);
 	public static final Point PlayerSelectTitlePosition = new Point(500, 280);
 
-	public static final Font ErrorFont = new Font("MS Song", Font.BOLD, 35);
+	public static final Font ErrorFont = new Font("DengXian Regular", Font.BOLD, 35);
 	public static final Point ErrorMessagePosition = new Point(550, 400);
 
 	public static final Point ExitButtonBounds = new Point(200, 80);
@@ -81,7 +83,7 @@ public class Constants {
 	public static final String[] ResourceImages = new String[] { "clay", "lumber", "ore", "stone", "glass", "loom symbol", "papyrus", "manufactured", "resource", "science"};
 	public static final int RESOURCE_IMAGE_HEIGHT = 30;
 	public static final int RESOURCE_IMAGE_WIDTH = 30;
-	public static final Font RESOURCE_VIEWER_FONT = new Font("MS Song", Font.BOLD, 30);
+	public static final Font RESOURCE_VIEWER_FONT = new Font("DengXian Regular", Font.BOLD, 30);
 	public static final int NUM_OF_COLUMNS = 10;
 	public static final int RESOURCE_VIEWER_ROW_HEIGHT = 40;
 	public static final int RESOURCE_VIEWER_ROW_X = 50;
@@ -97,6 +99,14 @@ public class Constants {
 	
 	public static final int RESOURCE_VIEWER_SHIELD_X = FrameWidth - 200;
 	public static final int RESOURCE_VIEWER_SHIELD_Y = 100;
+	
+	public static final int RESOURCE_VIEWER_WAR_TOKEN_X = RESOURCE_VIEWER_SHIELD_X;
+	public static final int RESOURCE_VIEWER_WAR_TOKEN_Y = RESOURCE_VIEWER_SHIELD_Y + 3 * RESOURCE_VIEWER_ROW_HEIGHT;
+	
+	public static final int RESOURCE_VIEWER_THREE_COIN_X = RESOURCE_VIEWER_ONE_COIN_X;
+	public static final int RESOURCE_VIEWER_THREE_COIN_Y = RESOURCE_VIEWER_ONE_COIN_Y + 3 * RESOURCE_VIEWER_ROW_HEIGHT;
+	
+	
 
 
 }

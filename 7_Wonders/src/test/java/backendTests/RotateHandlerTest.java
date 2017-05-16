@@ -13,7 +13,7 @@ import backend.handlers.RotateHandler;
 import backend.handlers.SetUpDeckHandler;
 import backend.handlers.SetUpPlayerHandler;
 import backend.handlers.TurnHandler;
-import backend.handlers.RotateHandler.Direction;
+import backend.handlers.RotateHandler.Rotation;
 import dataStructures.GameBoard;
 import dataStructures.gameMaterials.Card;
 import dataStructures.gameMaterials.Deck;
@@ -36,10 +36,10 @@ public class RotateHandlerTest {
 		GameBoard board = new GameBoard(players, deck);
 		RotateHandler rotateHandler = new RotateHandler(board);
 
-		rotateHandler.changeRotateDirectionAndResetPositions(Direction.CLOCKWISE);
+		rotateHandler.changeRotateDirectionAndResetPositions(Rotation.CLOCKWISE);
 		comparePlayerPositions(players, board, 0, 1, 2);
 
-		rotateHandler.changeRotateDirectionAndResetPositions(Direction.COUNTERCLOCKWISE);
+		rotateHandler.changeRotateDirectionAndResetPositions(Rotation.COUNTERCLOCKWISE);
 		comparePlayerPositions(players, board, 0, 2, 1);
 	}
 
@@ -60,10 +60,10 @@ public class RotateHandlerTest {
 		GameBoard board = new GameBoard(players, deck);
 		RotateHandler rotateHandler = new RotateHandler(board);
 
-		rotateHandler.changeRotateDirectionAndResetPositions(Direction.CLOCKWISE);
+		rotateHandler.changeRotateDirectionAndResetPositions(Rotation.CLOCKWISE);
 		comparePlayerPositions(players, board, 0, 1, 6);
 
-		rotateHandler.changeRotateDirectionAndResetPositions(Direction.COUNTERCLOCKWISE);
+		rotateHandler.changeRotateDirectionAndResetPositions(Rotation.COUNTERCLOCKWISE);
 		comparePlayerPositions(players, board, 0, 6, 1);
 	}
 
@@ -83,12 +83,12 @@ public class RotateHandlerTest {
 		RotateHandler rotateHandler = new RotateHandler(board);
 
 		rotateHandler.rotateClockwise();
-		rotateHandler.changeRotateDirectionAndResetPositions(Direction.COUNTERCLOCKWISE);
+		rotateHandler.changeRotateDirectionAndResetPositions(Rotation.COUNTERCLOCKWISE);
 
 		comparePlayerPositions(players, board, 0, 4, 1);
 
 		rotateHandler.rotateCounterClockwise();
-		rotateHandler.changeRotateDirectionAndResetPositions(Direction.CLOCKWISE);
+		rotateHandler.changeRotateDirectionAndResetPositions(Rotation.CLOCKWISE);
 
 		comparePlayerPositions(players, board, 0, 1, 4);
 	}
@@ -187,7 +187,7 @@ public class RotateHandlerTest {
 		GameBoard board = new GameBoard(players, deck);
 		RotateHandler rotateHandler = new RotateHandler(board);
 
-		rotateHandler.changeRotateDirectionAndResetPositions(Direction.COUNTERCLOCKWISE);
+		rotateHandler.changeRotateDirectionAndResetPositions(Rotation.COUNTERCLOCKWISE);
 		rotateHandler.rotateCounterClockwise();
 
 		comparePlayerPositions(players, board, 2, 1, 0);
@@ -210,7 +210,7 @@ public class RotateHandlerTest {
 		GameBoard board = new GameBoard(players, deck);
 		RotateHandler rotateHandler = new RotateHandler(board);
 
-		rotateHandler.changeRotateDirectionAndResetPositions(Direction.COUNTERCLOCKWISE);
+		rotateHandler.changeRotateDirectionAndResetPositions(Rotation.COUNTERCLOCKWISE);
 		rotateHandler.rotateCounterClockwise();
 
 		comparePlayerPositions(players, board, 6, 5, 0);
@@ -231,7 +231,7 @@ public class RotateHandlerTest {
 		GameBoard board = new GameBoard(players, deck);
 		RotateHandler rotateHandler = new RotateHandler(board);
 
-		rotateHandler.changeRotateDirectionAndResetPositions(Direction.COUNTERCLOCKWISE);
+		rotateHandler.changeRotateDirectionAndResetPositions(Rotation.COUNTERCLOCKWISE);
 		rotateHandler.rotateCounterClockwise();
 		rotateHandler.rotateCounterClockwise();
 
@@ -253,7 +253,7 @@ public class RotateHandlerTest {
 		GameBoard board = new GameBoard(players, deck);
 		RotateHandler rotateHandler = new RotateHandler(board);
 
-		rotateHandler.changeRotateDirectionAndResetPositions(Direction.COUNTERCLOCKWISE);
+		rotateHandler.changeRotateDirectionAndResetPositions(Rotation.COUNTERCLOCKWISE);
 
 		for (int i = 0; i < 10; i++) {
 			rotateHandler.rotateCounterClockwise();
@@ -289,7 +289,7 @@ public class RotateHandlerTest {
 		expectedHands.add(players.get(3).getCurrentHand());
 
 		RotateHandler rotateHandler = new RotateHandler(manager.getGameBoard());
-		rotateHandler.rotateCurrentHands(players, Direction.CLOCKWISE);
+		rotateHandler.rotateCurrentHands(players, Rotation.CLOCKWISE);
 
 		for (int i = 0; i < 5; i++) {
 			assertEquals(expectedHands.get(i), players.get(i).getCurrentHand());
@@ -314,7 +314,7 @@ public class RotateHandlerTest {
 		expectedHands.add(players.get(1).getCurrentHand());
 
 		RotateHandler rotateHandler = new RotateHandler(manager.getGameBoard());
-		rotateHandler.rotateCurrentHands(players, Direction.CLOCKWISE);
+		rotateHandler.rotateCurrentHands(players, Rotation.CLOCKWISE);
 
 		for (int i = 0; i < 3; i++) {
 			assertEquals(expectedHands.get(i), players.get(i).getCurrentHand());
@@ -341,7 +341,7 @@ public class RotateHandlerTest {
 		expectedHands.add(players.get(0).getCurrentHand());
 
 		RotateHandler rotateHandler = new RotateHandler(manager.getGameBoard());
-		rotateHandler.rotateCurrentHands(players, Direction.COUNTERCLOCKWISE);
+		rotateHandler.rotateCurrentHands(players, Rotation.COUNTERCLOCKWISE);
 
 		for (int i = 0; i < 5; i++) {
 			assertEquals(expectedHands.get(i), players.get(i).getCurrentHand());
@@ -366,7 +366,7 @@ public class RotateHandlerTest {
 		expectedHands.add(players.get(0).getCurrentHand());
 
 		RotateHandler rotateHandler = new RotateHandler(manager.getGameBoard());
-		rotateHandler.rotateCurrentHands(players, Direction.COUNTERCLOCKWISE);
+		rotateHandler.rotateCurrentHands(players, Rotation.COUNTERCLOCKWISE);
 
 		for (int i = 0; i < 3; i++) {
 			assertEquals(expectedHands.get(i), players.get(i).getCurrentHand());

@@ -6,7 +6,6 @@ import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
-import java.util.Locale;
 import java.util.ResourceBundle;
 
 import javax.swing.JFrame;
@@ -20,7 +19,9 @@ import gui.menus.GameDisplay;
 import gui.menus.MainMenu;
 import gui.menus.Menu;
 import gui.menus.PlayerSelect;
+import utils.Message;
 import utils.RenderImage;
+import utils.Translate;
 
 public class Main extends JPanel implements ActionListener {
 
@@ -30,13 +31,15 @@ public class Main extends JPanel implements ActionListener {
 	private Integer numOfPlayers;
 	private Image image;
 	private RenderImage renderer = new RenderImage();
-	ResourceBundle messages = ResourceBundle.getBundle("message", Locale.getDefault());
+	ResourceBundle messages;
 
 	public enum MenuType {
 		MainMenu, PlayerSelect, Game
 	}
 
 	public Main() {
+		Constants.LOCALE = Message.selectLanguageMessage();
+		this.messages = Translate.getNewResourceBundle();
 		this.switchMenu(MenuType.MainMenu);
 		this.frame = new JFrame();
 		this.frame.setSize(Constants.FrameWidth, Constants.FrameHeight);
@@ -93,7 +96,7 @@ public class Main extends JPanel implements ActionListener {
 			this.current = new PlayerSelect(this.renderer);
 			break;
 		case Game:
-			this.current = new GameDisplay(this.numOfPlayers,this.renderer);
+			this.current = new GameDisplay(this.numOfPlayers, this.renderer);
 			break;
 		}
 		this.current.initialize();

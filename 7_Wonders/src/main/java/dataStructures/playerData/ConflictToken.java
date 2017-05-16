@@ -1,9 +1,9 @@
 package dataStructures.playerData;
 
-import dataStructures.playerData.Chip.ChipType;
+import utils.Translate;
 
 public class ConflictToken extends Chip {
-	
+
 	public ConflictToken() {
 		super();
 		this.setValue(1);
@@ -12,11 +12,13 @@ public class ConflictToken extends Chip {
 
 	public ConflictToken(int value) {
 		super();
-		if(value <= -2 || (value % 2) == 0 || value >= 6){
-			throw new IllegalArgumentException("Cannot have a conflict token whose's value is " + value);
+		if (value <= -2 || (value % 2) == 0 || value >= 6) {
+			String msg = Translate.prepareStringTemplateWithIntArg(value, "improperConflictTokenValue",
+					Translate.getNewResourceBundle());
+			throw new IllegalArgumentException(msg);
 		}
-		
+
 		this.setValue(value);
 		this.chipType = ChipType.COIN;
-	}	
+	}
 }

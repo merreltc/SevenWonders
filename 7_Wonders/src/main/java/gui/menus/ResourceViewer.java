@@ -8,27 +8,26 @@ import java.awt.Graphics2D;
 import java.awt.Image;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.ResourceBundle;
 
 import constants.Constants;
 import constants.GeneralEnums.Good;
 import constants.GeneralEnums.RawResource;
-import constants.GeneralEnums.Resource;
 import constants.GeneralEnums.Science;
 import dataStructures.gameMaterials.Card;
-import dataStructures.gameMaterials.Effect;
-import dataStructures.gameMaterials.EntityEffect;
-import dataStructures.gameMaterials.MultiValueEffect;
-import dataStructures.gameMaterials.ValueEffect;
 import dataStructures.gameMaterials.Effect.EffectType;
+import dataStructures.gameMaterials.EntityEffect;
 import dataStructures.gameMaterials.EntityEffect.EntityType;
 import dataStructures.playerData.Player;
 import utils.RenderImage;
+import utils.Translate;
 
 public class ResourceViewer extends Menu {
 
 	private Player player;
 	private RenderImage renderer = new RenderImage();
 	private boolean shouldDraw = false;
+	private ResourceBundle messages = Translate.getNewResourceBundle();
 
 	@Override
 	public void draw(Graphics graphics) {
@@ -43,6 +42,8 @@ public class ResourceViewer extends Menu {
 
 			draw1CoinBox(graphics);
 			drawShieldBox(graphics);
+			draw3CoinBox(graphics);
+			drawWarTokenBox(graphics);
 
 			graphics.setColor(startingColor);
 			graphics.setFont(startingFont);
@@ -78,15 +79,51 @@ public class ResourceViewer extends Menu {
 				Constants.RESOURCE_VIEWER_ONE_COIN_X + Constants.RESOURCE_VIEWER_CELL_WIDTH / 3,
 				Constants.RESOURCE_VIEWER_ONE_COIN_Y + 5, Constants.RESOURCE_IMAGE_WIDTH,
 				Constants.RESOURCE_IMAGE_HEIGHT);
-		graphics.drawString(player.getCoinTotal() + "",
+		graphics.drawString(player.getNumValue1Coins() + "",
 				Constants.RESOURCE_VIEWER_ONE_COIN_X + Constants.RESOURCE_VIEWER_TEXT_X_OFFSET,
 				Constants.RESOURCE_VIEWER_ONE_COIN_Y + Constants.RESOURCE_VIEWER_TEXT_Y_OFFSET
 						+ Constants.RESOURCE_VIEWER_ROW_HEIGHT);
 	}
 
+	private void drawWarTokenBox(Graphics graphics) {
+		graphics.setColor(new Color(50, 50, 50, 150));
+		graphics.drawRect(Constants.RESOURCE_VIEWER_WAR_TOKEN_X, Constants.RESOURCE_VIEWER_WAR_TOKEN_Y,
+				Constants.RESOURCE_VIEWER_CELL_WIDTH, Constants.RESOURCE_VIEWER_ROW_HEIGHT);
+		graphics.drawRect(Constants.RESOURCE_VIEWER_WAR_TOKEN_X,
+				Constants.RESOURCE_VIEWER_WAR_TOKEN_Y + Constants.RESOURCE_VIEWER_ROW_HEIGHT,
+				Constants.RESOURCE_VIEWER_CELL_WIDTH, Constants.RESOURCE_VIEWER_ROW_HEIGHT);
+		Image image = this.renderer.getImage("one shield");
+		RenderImage.draw(graphics, image,
+				Constants.RESOURCE_VIEWER_WAR_TOKEN_X + Constants.RESOURCE_VIEWER_CELL_WIDTH / 3,
+				Constants.RESOURCE_VIEWER_WAR_TOKEN_Y + 5, Constants.RESOURCE_IMAGE_WIDTH,
+				Constants.RESOURCE_IMAGE_HEIGHT);
+		graphics.drawString(player.getConflictTotal() + "",
+				Constants.RESOURCE_VIEWER_WAR_TOKEN_X + Constants.RESOURCE_VIEWER_TEXT_X_OFFSET,
+				Constants.RESOURCE_VIEWER_WAR_TOKEN_Y + Constants.RESOURCE_VIEWER_TEXT_Y_OFFSET
+						+ Constants.RESOURCE_VIEWER_ROW_HEIGHT);
+	}
+
+	private void draw3CoinBox(Graphics graphics) {
+		graphics.setColor(new Color(50, 50, 50, 150));
+		graphics.drawRect(Constants.RESOURCE_VIEWER_THREE_COIN_X, Constants.RESOURCE_VIEWER_THREE_COIN_Y,
+				Constants.RESOURCE_VIEWER_CELL_WIDTH, Constants.RESOURCE_VIEWER_ROW_HEIGHT);
+		graphics.drawRect(Constants.RESOURCE_VIEWER_THREE_COIN_X,
+				Constants.RESOURCE_VIEWER_THREE_COIN_Y + Constants.RESOURCE_VIEWER_ROW_HEIGHT,
+				Constants.RESOURCE_VIEWER_CELL_WIDTH, Constants.RESOURCE_VIEWER_ROW_HEIGHT);
+		Image image = this.renderer.getImage("coin");
+		RenderImage.draw(graphics, image,
+				Constants.RESOURCE_VIEWER_THREE_COIN_X + Constants.RESOURCE_VIEWER_CELL_WIDTH / 3,
+				Constants.RESOURCE_VIEWER_THREE_COIN_Y + 5, Constants.RESOURCE_IMAGE_WIDTH,
+				Constants.RESOURCE_IMAGE_HEIGHT);
+		graphics.drawString(player.getNumValue3Coins() + "",
+				Constants.RESOURCE_VIEWER_THREE_COIN_X + Constants.RESOURCE_VIEWER_TEXT_X_OFFSET,
+				Constants.RESOURCE_VIEWER_THREE_COIN_Y + Constants.RESOURCE_VIEWER_TEXT_Y_OFFSET
+						+ Constants.RESOURCE_VIEWER_ROW_HEIGHT);
+	}
+
 	private void drawGrid(int rows, Graphics graphics) {
 		graphics.setColor(new Color(254, 254, 254, 150));
-		int rowOffset = rows > 3 ? rows : 3;
+		int rowOffset = rows > 6 ? rows : 6;
 		graphics.fillRect(Constants.RESOURCE_VIEWER_ROW_X, Constants.RESOURCE_VIEWER_ROW_BASE_Y,
 				Constants.RESOURCE_VIEWER_ROW_WIDTH, Constants.RESOURCE_VIEWER_ROW_HEIGHT * rowOffset);
 		graphics.setColor(new Color(50, 50, 50, 150));
@@ -103,7 +140,8 @@ public class ResourceViewer extends Menu {
 	private void drawTitleRow(int y, Graphics graphics) {
 		graphics.drawRect(Constants.RESOURCE_VIEWER_ROW_X, y, Constants.RESOURCE_VIEWER_FIRST_CELL_WIDTH,
 				Constants.RESOURCE_VIEWER_ROW_HEIGHT);
-		graphics.drawString("Card", Constants.RESOURCE_VIEWER_ROW_X + Constants.RESOURCE_VIEWER_TEXT_X_OFFSET,
+		graphics.drawString(messages.getString("card"),
+				Constants.RESOURCE_VIEWER_ROW_X + Constants.RESOURCE_VIEWER_TEXT_X_OFFSET,
 				y + Constants.RESOURCE_VIEWER_TEXT_Y_OFFSET);
 		for (int i = 0; i < Constants.NUM_OF_COLUMNS; i++) {
 			int x = (Constants.RESOURCE_VIEWER_ROW_X + Constants.RESOURCE_VIEWER_FIRST_CELL_WIDTH)
@@ -227,6 +265,7 @@ public class ResourceViewer extends Menu {
 	}
 
 	public void openMenu(Player player) {
+		System.out.println(player.getName());
 		this.player = player;
 		this.shouldDraw = true;
 	}

@@ -1,25 +1,29 @@
-
 package dataStructures.playerData;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.ResourceBundle;
 
 import dataStructures.gameMaterials.Card;
+import dataStructures.gameMaterials.Effect.EffectType;
 import dataStructures.gameMaterials.EntityEffect;
 import dataStructures.gameMaterials.Wonder;
-import dataStructures.gameMaterials.Effect.EffectType;
 import dataStructures.playerData.Chip.ChipType;
 import dataStructures.playerData.Chip.ChipValue;
 import exceptions.InsufficientFundsException;
+import utils.Translate;
 
 public class Player {
 	private String name = "Jane Doe";
+	private ResourceBundle messages = Translate.getNewResourceBundle();
+
 	private int numShields = 0;
 	private int numVictoryPoints = 0;
+
 	private Wonder wonder;
 
 	private ArrayList<Card> currentHand = new ArrayList<Card>();
-	private ArrayList<Card> storagePile = new ArrayList<Card>();
+	private StoragePile storagePile = new StoragePile();
 
 	private HashMap<Enum, Integer> currentTrades = new HashMap<Enum, Integer>();
 	private PlayerChips playerChips = new PlayerChips();
@@ -33,7 +37,7 @@ public class Player {
 		protected int numOfValue5ConflictTokens = 0;
 		protected int conflictTotal = 0;
 		protected int coinTotal = 3;
-		public int numOfValueNeg3ConflictTokens = 0;
+		public int numOfValueNeg1ConflictTokens = 0;
 
 	}
 
@@ -86,7 +90,7 @@ public class Player {
 		validateNumChipsToAdd(numChipsToAdd, Chip.ChipValue.NEG1);
 		
 		this.playerChips.conflictTotal += (-1) * numChipsToAdd;
-		this.playerChips.numOfValueNeg3ConflictTokens  += numChipsToAdd;
+		this.playerChips.numOfValueNeg1ConflictTokens  += numChipsToAdd;
 	}
 
 	private void validateNumChipsToAdd(int numChips, Chip.ChipValue type) {
@@ -111,7 +115,8 @@ public class Player {
 			chipType = "-1";
 			break;
 		default:
-			throw new IllegalArgumentException("Bad CoinType");
+			String msg = Translate.prepareStringWithNoArgs("BadCoinType", messages);
+			throw new IllegalArgumentException(msg);
 		}
 
 		if (numChips <= -1 || numChips > max) {
@@ -174,18 +179,20 @@ public class Player {
 				coinType = "5";
 				break;
 			default:
-				throw new IllegalArgumentException("Bad CoinType");
+				String msg = Translate.prepareStringWithNoArgs("BadCoinType", messages);
+				throw new IllegalArgumentException(msg);
 			}
 
-			throw new IllegalArgumentException("Cannot remove " + numCoins + " value " + coinType + " coins");
+			String msg = Translate.prepareStringTemplateWithIntAndStringArg(numCoins, coinType, "cannotRemoveCoins", messages);
+			throw new IllegalArgumentException(msg);
 		}
 
 		int numCoinsToCheck = getNumOfCoinValue(type);
 		String coinType = coinTypeToString(type);
 
 		if (numCoins > numCoinsToCheck) {
-			throw new InsufficientFundsException(
-					"Player does not have " + numCoins + " value " + coinType + " coin(s)");
+			String msg = Translate.prepareStringTemplateWithIntAndStringArg(numCoins, coinType, "notEnoughCoins", messages);
+			throw new InsufficientFundsException(msg);
 		}
 	}
 
@@ -194,10 +201,9 @@ public class Player {
 	}
 	
 	@Override
-	public boolean equals(Object obj) {
-		Player temp = (Player) obj;
-		
-		return(temp.getName().equals(this.name));
+	public boolean equals(Object object) {
+		Player temp = (Player) object;
+		return this.name.equals(temp.getName());
 	}
 
 	private int getNumOfCoinValue(Chip.ChipValue type) {
@@ -310,20 +316,31 @@ public class Player {
 	}
 
 	public ArrayList<Card> getStoragePile() {
-		return this.storagePile;
+		return this.storagePile.getEntireStoragePile();
 	}
 
 	public void setStoragePile(ArrayList<Card> storagePile) {
-		this.storagePile = storagePile;
+		for(Card card: storagePile){
+			this.storagePile.addCard(card);
+		}
 	}
 
 	public boolean storagePileContainsEntity(Enum entity) {
-		for (Card storage : this.storagePile) {
+		for (Card storage : this.storagePile.getCommercePile()) {
 			if (storage.getEffectType().equals(EffectType.ENTITY)) {
 				EntityEffect effect = (EntityEffect) storage.getEffect();
 				if (effect.getEntities().containsKey(entity)) {
 					return true;
 				}
+			}
+		}
+		return false;
+	}
+	
+	public boolean storagePileContainsCardByName(String name){
+		for (Card storage : this.storagePile.getEntireStoragePile()){
+			if (storage.getName().equals(name)){
+				return true;
 			}
 		}
 		return false;
@@ -346,7 +363,7 @@ public class Player {
 	}
 
 	public void addToStoragePile(Card card) {
-		this.storagePile.add(card);
+		this.storagePile.addCard(card);
 	}
 
 	public void removeFromCurrentHand(Card card) {
@@ -399,7 +416,6 @@ public class Player {
 	}
 	
 	public int getNumValueNeg1ConflictTokens() {
-		return 1;
+		return this.playerChips.numOfValueNeg1ConflictTokens;
 	}
 }
-

@@ -4,6 +4,8 @@ import java.util.ArrayList;
 
 import dataStructures.gameMaterials.Card;
 import dataStructures.gameMaterials.Deck;
+import dataStructures.gameMaterials.Deck.Age;
+import dataStructures.playerData.Chip.ChipType;
 import dataStructures.playerData.Player;
 
 public class TurnHandler {
@@ -23,6 +25,30 @@ public class TurnHandler {
 			}
 			
 			player.setCurrentHand(currentHand);
+		}
+	}
+	
+	public void endAge(ArrayList<Player> players, Age age) {
+		for (int i = 0; i < players.size(); i++){
+			Player player1 = players.get(i);
+			Player player2 = players.get((i+1)%players.size());
+			if (player1.getNumShields() > player2.getNumShields()){
+				this.addWinningPlayersTokensByAge(player1, age);
+				player2.addValueNeg1(1, ChipType.CONFLICTTOKEN);
+			}else if (player1.getNumShields() < player2.getNumShields()){
+				this.addWinningPlayersTokensByAge(player2, age);
+				player1.addValueNeg1(1, ChipType.CONFLICTTOKEN);
+			}
+		}
+	}
+	
+	private void addWinningPlayersTokensByAge(Player winner, Age age){
+		if (age == Age.AGE1){
+			winner.addValue1(1, ChipType.CONFLICTTOKEN);
+		}else if (age == Age.AGE2){
+			winner.addValue3(1, ChipType.CONFLICTTOKEN);
+		}else {
+			winner.addValue5(1, ChipType.CONFLICTTOKEN);
 		}
 	}
 

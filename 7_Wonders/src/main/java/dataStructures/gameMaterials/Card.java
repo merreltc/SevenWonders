@@ -50,6 +50,21 @@ public class Card {
 				+ this.getEffectType().toString();
 		return value;
 	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		Card card = (Card) obj;
+
+		if (this.getCardType() == card.getCardType() && this.previousStructure.equals(card.previousStructure)
+				&& this.frequencyByNumPlayers.toString().equals(card.frequencyByNumPlayers.toString())
+				&& this.cost.equals(card.cost) && this.effect.equals(card.effect) && this.name.equals(card.name)
+				&& this.nextStructure.equals(card.nextStructure)) {
+			return true;
+		}
+
+		return false;
+	}
+	
 	public String getName() {
 		return this.name;
 	}

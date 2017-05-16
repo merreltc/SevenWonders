@@ -3,13 +3,12 @@ package gui.menus;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Point;
-import java.util.ArrayList;
-import java.util.Locale;
 import java.util.ResourceBundle;
 
 import constants.Constants;
 import gui.interactables.Button;
 import gui.interactables.Interactable;
+import utils.Message;
 import utils.RenderImage;
 import utils.Translate;
 
@@ -35,6 +34,7 @@ public class PlayerSelect extends Menu {
 
 	@Override
 	public void initialize() {
+		Message.SelectDifficulty();
 		this.clearInteractables();
 		for (int i = 3; i <= 7; i++) {
 			Button startGame = new Button(new Point(400 + 250 * (i - 3), 400), Constants.PlayerSelectButtonBounds,

@@ -1,5 +1,7 @@
 package dataStructures.playerData;
 
+import utils.Translate;
+
 public class Coin extends Chip {
 
 	public Coin() {
@@ -11,7 +13,8 @@ public class Coin extends Chip {
 	public Coin(int value) {
 		super();
 		if(value <= 0 || value == 2 || value >= 4) {
-			throw new IllegalArgumentException("Cannot have a coin whose's value is " + value);
+			String msg = Translate.prepareStringTemplateWithIntArg(value, "improperCoinValue", Translate.getNewResourceBundle());
+			throw new IllegalArgumentException(msg);
 		}
 		
 		this.setValue(value);
