@@ -516,8 +516,28 @@ public class GameManagerTest {
 		assertEquals(4, right.getCoinTotal());
 	}
 	
-	
+	@Test
+	public void testValidTradeForDiscountWestTradingPostRotate() {
+		ArrayList<String> playerNames = new ArrayList<String>(
+				Arrays.asList("Wolverine", "Captain America", "Black Widow"));
 
+		GameManager manager = new GameManager(playerNames, new SetUpPlayerHandler(),
+				new SetUpDeckHandler(), new TurnHandler(), new PlayerTurnHandler());
+		manager.rotateClockwise();
+		Deck deck = manager.getGameBoard().getDeck();
+		Player current = manager.getCurrentPlayer();
+		Player left = manager.getNextPlayer();
+		ArrayList<Card> storage = new ArrayList<Card>();
+		storage.add(deck.getCard(12)); // east trading post
+		current.setStoragePile(storage);
+		ArrayList<Card> storage2 = new ArrayList<Card>();
+		storage2.add(deck.getCard(0)); // lumber
+		left.setStoragePile(storage2);
+		manager.tradeForEntity(current, left, RawResource.LUMBER);
+		assertTrue(current.getCurrentTrades().containsKey(RawResource.LUMBER));
+		assertEquals(4, left.getCoinTotal());
+	}
+	
 	@Test
 	public void testNoDiscountEastTradingPostRegularTrade() {
 		ArrayList<String> playerNames = new ArrayList<String>(
