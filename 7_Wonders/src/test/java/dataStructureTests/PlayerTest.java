@@ -929,6 +929,23 @@ public class PlayerTest {
 		Assert.assertEquals(1, amounts[2]);
 	}
 	
+	@Test
+	public void testGetAmountOfScienceOneOfTwoAndTwoOfOne(){
+		Player player = new Player("Jane Doe", WonderType.COLOSSUS);
+		
+		Card card1 = createApocathery();
+		player.addToStoragePile(createApocathery());
+		player.addToStoragePile(createScriptorium());
+		player.addToStoragePile(createWorkshop());
+		player.addToStoragePile(createWorkshop());
+		
+		int[] amounts = player.getNumberOfEachScience();
+		
+		Assert.assertEquals(1, amounts[0]);
+		Assert.assertEquals(1, amounts[1]);
+		Assert.assertEquals(2, amounts[2]);
+	}
+	
 	private Card createWorkersGuild(){
 		HashMap<Enum, Integer> costs = new HashMap<Enum, Integer>();
 		costs.put(RawResource.LUMBER, 1);
