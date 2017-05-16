@@ -43,6 +43,8 @@ public class PlayerTurnHandler {
 			case VICTORYPOINT:
 				current.addNumVictoryPoints(effect.getValueAmount());
 				break;
+			case COIN:
+				break;
 			default:
 				current.addNumShields(effect.getValueAmount());
 				break;

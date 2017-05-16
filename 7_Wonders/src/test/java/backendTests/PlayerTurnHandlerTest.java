@@ -479,6 +479,35 @@ public class PlayerTurnHandlerTest {
 
 		assertEquals(3, current.getNumVictoryPoints());
 	}
+	
+	@Test
+	public void testBuildStructureAddCommerce() {
+		ArrayList<Player> players = new ArrayList<Player>();
+		players.add(new Player("Wolverine", WonderType.COLOSSUS));
+		players.add(new Player("Captain America", WonderType.LIGHTHOUSE));
+		players.add(new Player("Black Widow", WonderType.PYRAMIDS));
+
+		ArrayList<Card> cards = new SetUpDeckHandler().createCards(Age.AGE1, 3);
+		Deck deck = new Deck(Age.AGE1, cards);
+
+		GameBoard board = new GameBoard(players, deck);
+
+		Player current = board.getCurrentPlayer();
+		ArrayList<Card> currentHand = new ArrayList<Card>();
+
+		Card east = deck.getCard(12); //east trading post
+		
+		currentHand.add(east);
+
+		current.setCurrentHand(currentHand);
+
+		PlayerTurnHandler playerTurnHandler = new PlayerTurnHandler();
+		playerTurnHandler.buildStructure(current, east);
+
+		assertEquals(0, current.getNumVictoryPoints());
+		assertEquals(0, current.getNumShields());
+		assertTrue(current.storagePileContainsCardByName("East Trading Post"));
+	}
 
 	@Test
 	public void testBuildStructureAddTwoVictoryPointsMockedVersion() {
