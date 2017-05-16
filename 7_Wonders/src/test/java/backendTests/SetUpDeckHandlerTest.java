@@ -72,6 +72,20 @@ public class SetUpDeckHandlerTest {
 		}
 
 	}
+	
+	@Test
+	public void testCreateAge2Cards7Players() {
+		int numPlayers = 7;
+		ArrayList<Card> cards = createAge2Cards(numPlayers);
+
+		ArrayList<Card> actual = new SetUpDeckHandler().createCards(Age.AGE2, numPlayers);
+
+		assertEquals(cards.size(), actual.size());
+		for (int i = 0; i < actual.size(); i++) {
+			assertEquals(cards.get(i).toString(), actual.get(i).toString());
+		}
+
+	}
 
 	@Test
 	public void testCreateAge3Cards3Players() {
@@ -895,7 +909,7 @@ public class SetUpDeckHandlerTest {
 					"Lighthouse");
 			cards.add(card);
 
-			if (numPlayers == 6) {
+			if (numPlayers >= 6) {
 				card = new Card("Caravansery", frequency, CardType.COMMERCIALSTRUCTURE, cost, effect, "Marketplace",
 						"Lighthouse");
 				cards.add(card);
@@ -1048,7 +1062,7 @@ public class SetUpDeckHandlerTest {
 		cards.add(card);
 
 		if (numPlayers >= 5) {
-			card = new Card("Dispensary", frequency, CardType.SCIENTIFICSTRUCTURE, cost, effect, "Workshop",
+			card = new Card("Laboratory", frequency, CardType.SCIENTIFICSTRUCTURE, cost, effect, "Workshop",
 					"Siege Workshop/Observatory");
 			cards.add(card);
 		}
