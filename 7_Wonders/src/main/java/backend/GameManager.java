@@ -76,7 +76,7 @@ public class GameManager {
 	}
 
 	public void buildStructure(Card card) {
-		this.playerTurnHandler.buildStructure(getCurrentPlayer(), card);
+		this.playerTurnHandler.buildStructure(getCurrentPlayer(), card, this.board);
 	}
 
 	public void changeRotateDirectionAndResetPositions(Rotation direction) {

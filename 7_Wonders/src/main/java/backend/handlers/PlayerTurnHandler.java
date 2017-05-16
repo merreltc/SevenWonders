@@ -14,7 +14,7 @@ import exceptions.InsufficientFundsException;
 
 public class PlayerTurnHandler {
 
-	public void buildStructure(Player current, Card card) {
+	public void buildStructure(Player current, Card card, GameBoard board) {
 		if (current.storagePileContainsCardByName(card.getName())) {
 			throw new IllegalArgumentException("Player already has the structure cannot build the same structure");
 		}
@@ -44,6 +44,9 @@ public class PlayerTurnHandler {
 				current.addNumVictoryPoints(effect.getValueAmount());
 				break;
 			case COIN:
+				if(card.getName().equals("Tavern")){
+					board.giveNumCoins(current, effect.getValueAmount());
+				}
 				break;
 			default:
 				current.addNumShields(effect.getValueAmount());
