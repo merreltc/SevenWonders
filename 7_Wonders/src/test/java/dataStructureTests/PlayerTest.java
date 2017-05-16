@@ -860,7 +860,7 @@ public class PlayerTest {
 	}
 	
 	@Test
-	public void testGetTwoGuildCardsCardFromEndGame(){
+	public void testGetTwoGuildCardsFromEndGame(){
 		Player player = new Player("Jane Doe", WonderType.COLOSSUS);
 		Card card = createWorkersGuild();
 		player.addToStoragePile(card);
@@ -869,6 +869,17 @@ public class PlayerTest {
 		
 		Assert.assertEquals(card, player.getCardFromEndGame(0));
 		Assert.assertEquals(card2, player.getCardFromEndGame(1));
+	}
+	
+	@Test
+	public void testGetGuildCardAfterRegularCardFromEndGame(){
+		Player player = new Player("Jane Doe", WonderType.COLOSSUS);
+		Card card = createCourthouseCard();
+		player.addToStoragePile(card);
+		Card card2 = createCraftsmenGuild();
+		player.addToStoragePile(card2);
+		
+		Assert.assertEquals(card2, player.getCardFromEndGame(0));
 	}
 	
 	private Card createWorkersGuild(){
@@ -891,6 +902,16 @@ public class PlayerTest {
 		Effect effect = new ValueEffect(EffectType.VALUE, Value.GUILD, AffectingEntity.MANUFACTUREDGOODS, Direction.NEIGHBORS,
 				2);
 		Card card = new Card("Craftsmens Guild", CardType.GUILD, cost, effect);
+		return card;
+	}
+	
+	private Card createCourthouseCard(){
+		HashMap<Enum, Integer> costs = new HashMap<Enum, Integer>();
+		costs.put(Good.LOOM, 1);
+		costs.put(RawResource.CLAY, 2);
+		Cost cost = new Cost(CostType.MULTITYPE, costs);
+		Effect effect = new ValueEffect(EffectType.VALUE, Value.VICTORYPOINTS, AffectingEntity.NONE, 4);
+		Card card = new Card("Courthouse", CardType.SCIENTIFICSTRUCTURE, cost, effect);
 		return card;
 	}
 }
