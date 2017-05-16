@@ -265,7 +265,6 @@ public class ResourceViewer extends Menu {
 	}
 
 	public void openMenu(Player player) {
-		System.out.println(player.getName());
 		this.player = player;
 		this.shouldDraw = true;
 	}
