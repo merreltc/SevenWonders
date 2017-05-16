@@ -84,7 +84,7 @@ public class SetUpDeckHandlerTest {
 	@Test
 	public void testCreateAge3Cards3Players() {
 		int numPlayers = 3;
-		ArrayList<Card> cards = new ArrayList<Card>();
+		ArrayList<Card> cards = createAge3Cards(numPlayers);
 
 		ArrayList<Card> actual = new SetUpDeckHandler().createCards(Age.AGE3, numPlayers);
 
@@ -1115,6 +1115,511 @@ public class SetUpDeckHandlerTest {
 
 		if (numPlayers >= 5) {
 			card = new Card("Courthouse", frequency, CardType.SCIENTIFICSTRUCTURE, cost, effect, "Scriptorium", "None");
+			cards.add(card);
+		}
+
+		return cards;
+	}
+
+	public ArrayList<Card> createAge3Cards(int numPlayers) {
+		ArrayList<Card> cards = new ArrayList<Card>();
+		ArrayList<Integer> frequency = new ArrayList<Integer>();
+		HashMap<Enum, Integer> entitiesAndAmounts = new HashMap<Enum, Integer>();
+		Cost cost;
+		Effect effect;
+		Card card;
+
+		// workers guild
+		frequency.add(-1);
+		HashMap<Enum, Integer> costs = new HashMap<Enum, Integer>();
+		costs.put(RawResource.LUMBER, 1);
+		costs.put(RawResource.CLAY, 1);
+		costs.put(RawResource.ORE, 2);
+		costs.put(RawResource.STONE, 1);
+		cost = new Cost(CostType.RESOURCE, costs);
+		effect = new ValueEffect(EffectType.VALUE, Value.GUILD, AffectingEntity.RAWRESOURCES, Direction.NEIGHBORS, 1);
+		card = new Card("Workers Guild", frequency, CardType.GUILD, cost, effect, "None", "None");
+		cards.add(card);
+
+		// craftsmens guild
+		frequency = new ArrayList<Integer>();
+		frequency.add(-1);
+		costs = new HashMap<Enum, Integer>();
+		costs.put(RawResource.ORE, 2);
+		costs.put(RawResource.STONE, 2);
+		cost = new Cost(CostType.RESOURCE, costs);
+		effect = new ValueEffect(EffectType.VALUE, Value.GUILD, AffectingEntity.MANUFACTUREDGOODS, Direction.NEIGHBORS,
+				2);
+		card = new Card("Craftsmens Guild", frequency, CardType.GUILD, cost, effect, "None", "None");
+		cards.add(card);
+
+		// traders guild
+		frequency = new ArrayList<Integer>();
+		frequency.add(-1);
+		costs = new HashMap<Enum, Integer>();
+		costs.put(Good.LOOM, 1);
+		costs.put(Good.PRESS, 1);
+		costs.put(Good.GLASS, 1);
+		cost = new Cost(CostType.GOOD, costs);
+		effect = new ValueEffect(EffectType.VALUE, Value.GUILD, AffectingEntity.COMMERCIALSTRUCTURES,
+				Direction.NEIGHBORS, 1);
+		card = new Card("Traders Guild", frequency, CardType.GUILD, cost, effect, "None", "None");
+		cards.add(card);
+
+		// philosophers guild
+		frequency = new ArrayList<Integer>();
+		frequency.add(-1);
+		costs = new HashMap<Enum, Integer>();
+		costs.put(Good.LOOM, 1);
+		costs.put(Good.PRESS, 1);
+		costs.put(RawResource.CLAY, 3);
+		cost = new Cost(CostType.MULTITYPE, costs);
+		effect = new ValueEffect(EffectType.VALUE, Value.GUILD, AffectingEntity.SCIENTIFICSTRUCTURES,
+				Direction.NEIGHBORS, 1);
+		card = new Card("Philosophers Guild", frequency, CardType.GUILD, cost, effect, "None", "None");
+		cards.add(card);
+
+		// Spies guild
+		frequency = new ArrayList<Integer>();
+		frequency.add(-1);
+		costs = new HashMap<Enum, Integer>();
+		costs.put(Good.GLASS, 1);
+		costs.put(RawResource.LUMBER, 3);
+		cost = new Cost(CostType.MULTITYPE, costs);
+		effect = new ValueEffect(EffectType.VALUE, Value.GUILD, AffectingEntity.MILITARYSTRUCTURES, Direction.NEIGHBORS,
+				1);
+		card = new Card("Spies Guild", frequency, CardType.GUILD, cost, effect, "None", "None");
+		cards.add(card);
+
+		// strategists guild
+		frequency = new ArrayList<Integer>();
+		frequency.add(-1);
+		costs = new HashMap<Enum, Integer>();
+		costs.put(Good.LOOM, 1);
+		costs.put(RawResource.ORE, 2);
+		costs.put(RawResource.STONE, 1);
+		cost = new Cost(CostType.MULTITYPE, costs);
+		effect = new ValueEffect(EffectType.VALUE, Value.GUILD, AffectingEntity.MILITARYSTRUCTURES, Direction.NEIGHBORS,
+				1);
+		card = new Card("Strategists Guild", frequency, CardType.GUILD, cost, effect, "None", "None");
+		cards.add(card);
+
+		// shipowners guild
+		frequency = new ArrayList<Integer>();
+		frequency.add(-1);
+		costs = new HashMap<Enum, Integer>();
+		costs.put(Good.GLASS, 1);
+		costs.put(Good.PRESS, 1);
+		costs.put(RawResource.LUMBER, 3);
+		cost = new Cost(CostType.MULTITYPE, costs);
+		entitiesAndAmounts = new HashMap<Enum, Integer>();
+		entitiesAndAmounts.put(AffectingEntity.RAWRESOURCES, 1);
+		entitiesAndAmounts.put(AffectingEntity.MANUFACTUREDGOODS, 1);
+		entitiesAndAmounts.put(AffectingEntity.GUILD, 1);
+		effect = new ValueEffect(EffectType.VALUE, Value.GUILD, entitiesAndAmounts);
+		card = new Card("Shipowners Guild", frequency, CardType.GUILD, cost, effect, "None", "None");
+		cards.add(card);
+
+		// Scientists guild
+		frequency = new ArrayList<Integer>();
+		frequency.add(-1);
+		costs = new HashMap<Enum, Integer>();
+		costs.put(Good.PRESS, 1);
+		costs.put(RawResource.LUMBER, 2);
+		costs.put(RawResource.ORE, 2);
+		cost = new Cost(CostType.MULTITYPE, costs);
+		entitiesAndAmounts = new HashMap<Enum, Integer>();
+		entitiesAndAmounts.put(Science.PROTRACTOR, 1);
+		entitiesAndAmounts.put(Science.WHEEL, 1);
+		entitiesAndAmounts.put(Science.TABLET, 1);
+		effect = new EntityEffect(EffectType.ENTITY, EntityType.SCIENCE, entitiesAndAmounts);
+		card = new Card("Scientists Guild", frequency, CardType.GUILD, cost, effect, "None", "None");
+		cards.add(card);
+
+		// magistrates guild
+		frequency = new ArrayList<Integer>();
+		frequency.add(-1);
+		costs = new HashMap<Enum, Integer>();
+		costs.put(Good.LOOM, 1);
+		costs.put(RawResource.LUMBER, 3);
+		costs.put(RawResource.STONE, 1);
+		cost = new Cost(CostType.MULTITYPE, costs);
+		effect = new ValueEffect(EffectType.VALUE, Value.GUILD, AffectingEntity.CIVILIANSTRUCTURES, Direction.NEIGHBORS,
+				1);
+		card = new Card("Magistrates Guild", frequency, CardType.GUILD, cost, effect, "None", "None");
+		cards.add(card);
+
+		// builders guild
+		frequency = new ArrayList<Integer>();
+		frequency.add(-1);
+		costs = new HashMap<Enum, Integer>();
+		costs.put(Good.LOOM, 1);
+		costs.put(RawResource.CLAY, 2);
+		costs.put(RawResource.STONE, 2);
+		cost = new Cost(CostType.MULTITYPE, costs);
+		effect = new ValueEffect(EffectType.VALUE, Value.GUILD, AffectingEntity.WONDERLEVEL, Direction.ALL, 1);
+		card = new Card("Builders Guild", frequency, CardType.GUILD, cost, effect, "None", "None");
+		cards.add(card);
+
+		// pantheon
+		frequency = new ArrayList<Integer>();
+		frequency.add(3);
+		frequency.add(6);
+		costs = new HashMap<Enum, Integer>();
+		costs.put(Good.GLASS, 1);
+		costs.put(Good.LOOM, 1);
+		costs.put(Good.PRESS, 1);
+		costs.put(RawResource.CLAY, 2);
+		costs.put(RawResource.ORE, 1);
+		cost = new Cost(CostType.MULTITYPE, costs);
+		effect = new ValueEffect(EffectType.VALUE, Value.VICTORYPOINTS, AffectingEntity.NONE, 7);
+		card = new Card("Pantheon", frequency, CardType.CIVILIANSTRUCTURE, cost, effect, "Temple", "None");
+		cards.add(card);
+
+		if (numPlayers >= 6) {
+			card = new Card("Pantheon", frequency, CardType.CIVILIANSTRUCTURE, cost, effect, "Temple", "None");
+			cards.add(card);
+		}
+
+		// gardens
+		frequency = new ArrayList<Integer>();
+		frequency.add(3);
+		frequency.add(4);
+		costs = new HashMap<Enum, Integer>();
+		costs.put(RawResource.CLAY, 2);
+		costs.put(RawResource.LUMBER, 1);
+		cost = new Cost(CostType.RESOURCE, costs);
+		effect = new ValueEffect(EffectType.VALUE, Value.VICTORYPOINTS, AffectingEntity.NONE, 5);
+		card = new Card("Gardens", frequency, CardType.CIVILIANSTRUCTURE, cost, effect, "Statue", "None");
+		cards.add(card);
+
+		if (numPlayers >= 4) {
+			card = new Card("Gardens", frequency, CardType.CIVILIANSTRUCTURE, cost, effect, "Statue", "None");
+			cards.add(card);
+		}
+
+		// Town hall
+		frequency = new ArrayList<Integer>();
+		frequency.add(3);
+		frequency.add(5);
+		frequency.add(6);
+		costs = new HashMap<Enum, Integer>();
+		costs.put(RawResource.ORE, 1);
+		costs.put(RawResource.STONE, 2);
+		costs.put(Good.GLASS, 1);
+		cost = new Cost(CostType.MULTITYPE, costs);
+		effect = new ValueEffect(EffectType.VALUE, Value.VICTORYPOINTS, AffectingEntity.NONE, 6);
+		card = new Card("Town Hall", frequency, CardType.CIVILIANSTRUCTURE, cost, effect, "None", "None");
+		cards.add(card);
+
+		if (numPlayers >= 5) {
+			card = new Card("Town Hall", frequency, CardType.CIVILIANSTRUCTURE, cost, effect, "None", "None");
+			cards.add(card);
+
+			if (numPlayers >= 6) {
+				card = new Card("Town Hall", frequency, CardType.CIVILIANSTRUCTURE, cost, effect, "None", "None");
+				cards.add(card);
+			}
+		}
+
+		// palace
+		frequency = new ArrayList<Integer>();
+		frequency.add(3);
+		frequency.add(7);
+		costs = new HashMap<Enum, Integer>();
+		costs.put(Good.GLASS, 1);
+		costs.put(Good.LOOM, 1);
+		costs.put(Good.PRESS, 1);
+		costs.put(RawResource.STONE, 1);
+		costs.put(RawResource.LUMBER, 1);
+		costs.put(RawResource.CLAY, 1);
+		costs.put(RawResource.ORE, 1);
+		cost = new Cost(CostType.MULTITYPE, costs);
+		effect = new ValueEffect(EffectType.VALUE, Value.VICTORYPOINTS, AffectingEntity.NONE, 8);
+		card = new Card("Palace", frequency, CardType.CIVILIANSTRUCTURE, cost, effect, "None", "None");
+		cards.add(card);
+
+		if (numPlayers >= 7) {
+			card = new Card("Palace", frequency, CardType.CIVILIANSTRUCTURE, cost, effect, "None", "None");
+			cards.add(card);
+		}
+
+		// haven
+		frequency = new ArrayList<Integer>();
+		frequency.add(3);
+		frequency.add(4);
+		costs = new HashMap<Enum, Integer>();
+		costs.put(Good.LOOM, 1);
+		costs.put(RawResource.LUMBER, 1);
+		costs.put(RawResource.ORE, 1);
+		cost = new Cost(CostType.MULTITYPE, costs);
+		entitiesAndAmounts = new HashMap<Enum, Integer>();
+		entitiesAndAmounts.put(ValueType.COIN, 1);
+		entitiesAndAmounts.put(ValueType.VICTORYPOINT, 1);
+		effect = new MultiValueEffect(EffectType.MULTIVALUE, Value.COMMERCE, AffectingEntity.RAWRESOURCES,
+				Direction.SELF, entitiesAndAmounts);
+		card = new Card("Haven", frequency, CardType.COMMERCIALSTRUCTURE, cost, effect, "Forum", "None");
+		cards.add(card);
+
+		if (numPlayers >= 4) {
+			card = new Card("Haven", frequency, CardType.COMMERCIALSTRUCTURE, cost, effect, "Forum", "None");
+			cards.add(card);
+		}
+
+		// lighthouse
+		frequency = new ArrayList<Integer>();
+		frequency.add(3);
+		frequency.add(6);
+		costs = new HashMap<Enum, Integer>();
+		costs.put(Good.LOOM, 1);
+		costs.put(RawResource.STONE, 1);
+		cost = new Cost(CostType.MULTITYPE, costs);
+		entitiesAndAmounts = new HashMap<Enum, Integer>();
+		entitiesAndAmounts.put(ValueType.COIN, 1);
+		entitiesAndAmounts.put(ValueType.VICTORYPOINT, 1);
+		effect = new MultiValueEffect(EffectType.MULTIVALUE, Value.COMMERCE, AffectingEntity.COMMERCIALSTRUCTURES,
+				Direction.SELF, entitiesAndAmounts);
+		card = new Card("Lighthouse", frequency, CardType.COMMERCIALSTRUCTURE, cost, effect, "Caravansery", "None");
+		cards.add(card);
+
+		if (numPlayers >= 6) {
+			card = new Card("Lighthouse", frequency, CardType.COMMERCIALSTRUCTURE, cost, effect, "Caravansery", "None");
+			cards.add(card);
+		}
+
+		// chamber of commerce
+		if (numPlayers >= 4) {
+			frequency = new ArrayList<Integer>();
+			frequency.add(4);
+			frequency.add(6);
+			costs = new HashMap<Enum, Integer>();
+			costs.put(Good.PRESS, 1);
+			costs.put(RawResource.CLAY, 2);
+			cost = new Cost(CostType.MULTITYPE, costs);
+			entitiesAndAmounts = new HashMap<Enum, Integer>();
+			entitiesAndAmounts.put(ValueType.COIN, 2);
+			entitiesAndAmounts.put(ValueType.VICTORYPOINT, 2);
+			effect = new MultiValueEffect(EffectType.MULTIVALUE, Value.COMMERCE, AffectingEntity.MANUFACTUREDGOODS,
+					Direction.SELF, entitiesAndAmounts);
+			card = new Card("Chamber Of Commerce", frequency, CardType.COMMERCIALSTRUCTURE, cost, effect, "Caravansery",
+					"None");
+			cards.add(card);
+
+			if (numPlayers >= 6) {
+				card = new Card("Chamber Of Commerce", frequency, CardType.COMMERCIALSTRUCTURE, cost, effect,
+						"Caravansery", "None");
+				cards.add(card);
+			}
+		}
+
+		// arena
+		frequency = new ArrayList<Integer>();
+		frequency.add(3);
+		frequency.add(6);
+		frequency.add(7);
+		costs = new HashMap<Enum, Integer>();
+		costs.put(RawResource.ORE, 1);
+		costs.put(RawResource.STONE, 2);
+		cost = new Cost(CostType.RESOURCE, costs);
+		entitiesAndAmounts = new HashMap<Enum, Integer>();
+		entitiesAndAmounts.put(ValueType.COIN, 3);
+		entitiesAndAmounts.put(ValueType.VICTORYPOINT, 1);
+		effect = new MultiValueEffect(EffectType.MULTIVALUE, Value.COMMERCE, AffectingEntity.WONDERLEVEL,
+				Direction.SELF, entitiesAndAmounts);
+		card = new Card("Arena", frequency, CardType.COMMERCIALSTRUCTURE, cost, effect, "Dispensary", "None");
+		cards.add(card);
+
+		if (numPlayers >= 5) {
+			card = new Card("Arena", frequency, CardType.COMMERCIALSTRUCTURE, cost, effect, "Dispensary", "None");
+			cards.add(card);
+
+			if (numPlayers == 7) {
+				card = new Card("Arena", frequency, CardType.COMMERCIALSTRUCTURE, cost, effect, "Dispensary", "None");
+				cards.add(card);
+			}
+		}
+
+		// Fortifications
+		frequency = new ArrayList<Integer>();
+		frequency.add(3);
+		frequency.add(7);
+		costs = new HashMap<Enum, Integer>();
+		costs.put(RawResource.STONE, 1);
+		costs.put(RawResource.ORE, 3);
+		cost = new Cost(CostType.RESOURCE, costs);
+		effect = new ValueEffect(EffectType.VALUE, Value.MILITARY, AffectingEntity.NONE, 3);
+		card = new Card("Fortifications", frequency, CardType.MILITARYSTRUCTURE, cost, effect, "Walls", "None");
+		cards.add(card);
+
+		if (numPlayers == 7) {
+			card = new Card("Fortifications", frequency, CardType.MILITARYSTRUCTURE, cost, effect, "Walls", "None");
+			cards.add(card);
+		}
+
+		// circus
+		if (numPlayers >= 4) {
+			frequency = new ArrayList<Integer>();
+			frequency.add(4);
+			frequency.add(5);
+			frequency.add(6);
+			costs = new HashMap<Enum, Integer>();
+			costs.put(RawResource.STONE, 3);
+			costs.put(RawResource.ORE, 1);
+			cost = new Cost(CostType.RESOURCE, costs);
+			effect = new ValueEffect(EffectType.VALUE, Value.MILITARY, AffectingEntity.NONE, 3);
+			card = new Card("Circus", frequency, CardType.MILITARYSTRUCTURE, cost, effect, "Training Ground", "None");
+			cards.add(card);
+
+			if (numPlayers >= 5) {
+				card = new Card("Circus", frequency, CardType.MILITARYSTRUCTURE, cost, effect, "Training Ground",
+						"None");
+				cards.add(card);
+
+				if (numPlayers >= 6) {
+					card = new Card("Circus", frequency, CardType.MILITARYSTRUCTURE, cost, effect, "Training Ground",
+							"None");
+					cards.add(card);
+				}
+			}
+		}
+
+		// arsenal
+		frequency = new ArrayList<Integer>();
+		frequency.add(3);
+		frequency.add(4);
+		frequency.add(7);
+		costs = new HashMap<Enum, Integer>();
+		costs.put(RawResource.LUMBER, 2);
+		costs.put(RawResource.ORE, 1);
+		costs.put(Good.LOOM, 1);
+		cost = new Cost(CostType.MULTITYPE, costs);
+		effect = new ValueEffect(EffectType.VALUE, Value.MILITARY, AffectingEntity.NONE, 3);
+		card = new Card("Arsenal", frequency, CardType.MILITARYSTRUCTURE, cost, effect, "None", "None");
+		cards.add(card);
+
+		if (numPlayers >= 4) {
+			card = new Card("Arsenal", frequency, CardType.MILITARYSTRUCTURE, cost, effect, "None", "None");
+			cards.add(card);
+
+			if (numPlayers == 7) {
+				card = new Card("Arsenal", frequency, CardType.MILITARYSTRUCTURE, cost, effect, "None", "None");
+				cards.add(card);
+			}
+		}
+
+		// Siege workshop
+		frequency = new ArrayList<Integer>();
+		frequency.add(3);
+		frequency.add(5);
+		costs = new HashMap<Enum, Integer>();
+		costs.put(RawResource.LUMBER, 1);
+		costs.put(RawResource.CLAY, 3);
+		cost = new Cost(CostType.RESOURCE, costs);
+		effect = new ValueEffect(EffectType.VALUE, Value.MILITARY, AffectingEntity.NONE, 3);
+		card = new Card("Siege Workshop", frequency, CardType.MILITARYSTRUCTURE, cost, effect, "Walls", "None");
+		cards.add(card);
+
+		if (numPlayers >= 5) {
+			card = new Card("Siege Workshop", frequency, CardType.MILITARYSTRUCTURE, cost, effect, "Walls", "None");
+			cards.add(card);
+		}
+
+		// lodge
+		frequency = new ArrayList<Integer>();
+		frequency.add(3);
+		frequency.add(6);
+		costs = new HashMap<Enum, Integer>();
+		costs.put(RawResource.CLAY, 1);
+		costs.put(Good.LOOM, 1);
+		costs.put(Good.PRESS, 1);
+		cost = new Cost(CostType.MULTITYPE, costs);
+		entitiesAndAmounts = new HashMap<Enum, Integer>();
+		entitiesAndAmounts.put(Science.PROTRACTOR, 1);
+		effect = new EntityEffect(EffectType.ENTITY, EntityType.SCIENCE, entitiesAndAmounts);
+		card = new Card("Lodge", frequency, CardType.SCIENTIFICSTRUCTURE, cost, effect, "Dispensary", "None");
+		cards.add(card);
+
+		if (numPlayers >= 6) {
+			card = new Card("Lodge", frequency, CardType.SCIENTIFICSTRUCTURE, cost, effect, "Dispensary", "None");
+			cards.add(card);
+		}
+
+		// observatory
+		frequency = new ArrayList<Integer>();
+		frequency.add(3);
+		frequency.add(7);
+		costs = new HashMap<Enum, Integer>();
+		costs.put(RawResource.ORE, 1);
+		costs.put(Good.GLASS, 1);
+		costs.put(Good.LOOM, 1);
+		cost = new Cost(CostType.MULTITYPE, costs);
+		entitiesAndAmounts = new HashMap<Enum, Integer>();
+		entitiesAndAmounts.put(Science.WHEEL, 1);
+		effect = new EntityEffect(EffectType.ENTITY, EntityType.SCIENCE, entitiesAndAmounts);
+		card = new Card("Observatory", frequency, CardType.SCIENTIFICSTRUCTURE, cost, effect, "Laboratory", "None");
+		cards.add(card);
+
+		if (numPlayers >= 7) {
+			card = new Card("Observatory", frequency, CardType.SCIENTIFICSTRUCTURE, cost, effect, "Laboratory", "None");
+			cards.add(card);
+		}
+
+		// university
+		frequency = new ArrayList<Integer>();
+		frequency.add(3);
+		frequency.add(4);
+		costs = new HashMap<Enum, Integer>();
+		costs.put(RawResource.LUMBER, 1);
+		costs.put(Good.PRESS, 1);
+		costs.put(Good.GLASS, 1);
+		cost = new Cost(CostType.MULTITYPE, costs);
+		entitiesAndAmounts = new HashMap<Enum, Integer>();
+		entitiesAndAmounts.put(Science.TABLET, 1);
+		effect = new EntityEffect(EffectType.ENTITY, EntityType.SCIENCE, entitiesAndAmounts);
+		card = new Card("University", frequency, CardType.SCIENTIFICSTRUCTURE, cost, effect, "Library", "None");
+		cards.add(card);
+
+		if (numPlayers >= 4) {
+			card = new Card("University", frequency, CardType.SCIENTIFICSTRUCTURE, cost, effect, "Library", "None");
+			cards.add(card);
+		}
+
+		// academy
+		frequency = new ArrayList<Integer>();
+		frequency.add(3);
+		frequency.add(7);
+		costs = new HashMap<Enum, Integer>();
+		costs.put(RawResource.STONE, 3);
+		costs.put(Good.GLASS, 1);
+		cost = new Cost(CostType.MULTITYPE, costs);
+		entitiesAndAmounts = new HashMap<Enum, Integer>();
+		entitiesAndAmounts.put(Science.PROTRACTOR, 1);
+		effect = new EntityEffect(EffectType.ENTITY, EntityType.SCIENCE, entitiesAndAmounts);
+		card = new Card("Academy", frequency, CardType.SCIENTIFICSTRUCTURE, cost, effect, "School", "None");
+		cards.add(card);
+
+		if (numPlayers >= 7) {
+			card = new Card("Academy", frequency, CardType.SCIENTIFICSTRUCTURE, cost, effect, "School", "None");
+			cards.add(card);
+		}
+
+		// study
+		frequency = new ArrayList<Integer>();
+		frequency.add(3);
+		frequency.add(5);
+		costs = new HashMap<Enum, Integer>();
+		costs.put(RawResource.LUMBER, 1);
+		costs.put(Good.PRESS, 1);
+		costs.put(Good.LOOM, 1);
+		cost = new Cost(CostType.MULTITYPE, costs);
+		entitiesAndAmounts = new HashMap<Enum, Integer>();
+		entitiesAndAmounts.put(Science.WHEEL, 1);
+		effect = new EntityEffect(EffectType.ENTITY, EntityType.SCIENCE, entitiesAndAmounts);
+		card = new Card("Study", frequency, CardType.SCIENTIFICSTRUCTURE, cost, effect, "School", "None");
+		cards.add(card);
+
+		if (numPlayers >= 5) {
+			card = new Card("Study", frequency, CardType.SCIENTIFICSTRUCTURE, cost, effect, "School", "None");
 			cards.add(card);
 		}
 
