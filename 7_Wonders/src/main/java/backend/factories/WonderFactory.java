@@ -27,7 +27,7 @@ public class WonderFactory {
 		return index;
 	}
 
-	WonderType removeAtIndex(int index) {
+	public WonderType removeAtIndex(int index) {
 		return (WonderType) this.remainingWonders.remove(index);
 	}
 
