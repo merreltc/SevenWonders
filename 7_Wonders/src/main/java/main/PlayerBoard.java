@@ -1,20 +1,14 @@
 package main;
 
 import java.awt.Color;
-import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Point;
 import java.text.MessageFormat;
-import java.util.ArrayList;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
 import constants.Constants;
-import constants.GeneralEnums.*;
-import dataStructures.gameMaterials.Card;
-import dataStructures.gameMaterials.Effect;
-import dataStructures.gameMaterials.EntityEffect;
 import dataStructures.playerData.Player;
 import gui.interactables.Button;
 import utils.RenderImage;
@@ -113,24 +107,24 @@ public class PlayerBoard {
 		format.setLocale(Locale.getDefault());
 
 		Image image = renderer.getImage("lumber");
-		RenderImage.draw(graphics, image, position.x, position.y, Constants.RESOURCE_IMAGE_HEIGHT+10, Constants.RESOURCE_IMAGE_WIDTH+10);
+		RenderImage.draw(graphics, image, position.x, position.y, Constants.RESOURCE_IMAGE_HEIGHT + 10,
+				Constants.RESOURCE_IMAGE_WIDTH + 10);
 
 		image = renderer.getImage("ore");
-		RenderImage.draw(graphics, image, position.x, position.y + 45, Constants.RESOURCE_IMAGE_HEIGHT+10, Constants.RESOURCE_IMAGE_WIDTH+10);
+		RenderImage.draw(graphics, image, position.x, position.y + 45, Constants.RESOURCE_IMAGE_HEIGHT + 10,
+				Constants.RESOURCE_IMAGE_WIDTH + 10);
 
 		image = renderer.getImage("stone");
-		RenderImage.draw(graphics, image, position.x, position.y + 85, Constants.RESOURCE_IMAGE_HEIGHT+10, Constants.RESOURCE_IMAGE_WIDTH+10);
+		RenderImage.draw(graphics, image, position.x, position.y + 85, Constants.RESOURCE_IMAGE_HEIGHT + 10,
+				Constants.RESOURCE_IMAGE_WIDTH + 10);
 
-		
 		image = renderer.getImage("clay");
-		RenderImage.draw(graphics, image, position.x, position.y + 125, Constants.RESOURCE_IMAGE_HEIGHT+10, Constants.RESOURCE_IMAGE_WIDTH+10);
+		RenderImage.draw(graphics, image, position.x, position.y + 125, Constants.RESOURCE_IMAGE_HEIGHT + 10,
+				Constants.RESOURCE_IMAGE_WIDTH + 10);
 	}
 
 	public void changePlayer(Player player) {
 		this.player = player;
 		this.WonderImage = renderer.getImage(player.getWonder().getName());
 	}
-
-
-
 }

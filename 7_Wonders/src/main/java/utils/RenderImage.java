@@ -5,13 +5,10 @@ import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.text.MessageFormat;
 import java.util.HashMap;
-import java.util.Locale;
 import java.util.ResourceBundle;
 
 import javax.imageio.ImageIO;
-import javax.swing.JPanel;
 
 public class RenderImage {
 
@@ -45,5 +42,4 @@ public class RenderImage {
 		}
 		return new BufferedImage(0, 0, 0);
 	}
-
 }

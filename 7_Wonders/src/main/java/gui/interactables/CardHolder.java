@@ -14,7 +14,6 @@ public class CardHolder extends Interactable {
 
 	public CardHolder(Point positionPoint, Point boundPoint, String value) {
 		super(positionPoint, boundPoint, value);
-
 	}
 
 	public void giveCard(Card card) {

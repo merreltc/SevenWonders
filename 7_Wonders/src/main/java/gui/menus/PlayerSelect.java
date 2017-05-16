@@ -34,7 +34,7 @@ public class PlayerSelect extends Menu {
 
 	@Override
 	public void initialize() {
-		Message.SelectDifficulty();
+		Message.selectDifficulty();
 		this.clearInteractables();
 		for (int i = 3; i <= 7; i++) {
 			Button startGame = new Button(new Point(400 + 250 * (i - 3), 400), Constants.PlayerSelectButtonBounds,

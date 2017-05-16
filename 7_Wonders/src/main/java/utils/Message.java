@@ -1,14 +1,9 @@
 package utils;
 
-import java.awt.Graphics;
-import java.text.MessageFormat;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
 import javax.swing.JOptionPane;
-
-import constants.Constants;
-import dataStructures.gameMaterials.Wonder;
 
 public class Message {
 
@@ -43,7 +38,7 @@ public class Message {
 				messages.getString("wonderSelector"), JOptionPane.PLAIN_MESSAGE, null, wonders, wonders[0]);
 	}
 
-	public static int SelectDifficulty() {
+	public static int selectDifficulty() {
 		Object[] objects = { "Easy", "Normal" };
 		return JOptionPane.showOptionDialog(null, "Select Your Difficulty", "Difficulty", JOptionPane.YES_NO_OPTION,
 				JOptionPane.PLAIN_MESSAGE, null, objects, null);

@@ -11,6 +11,7 @@ import dataStructures.playerData.Player;
 import exceptions.InsufficientFundsException;
 import utils.Translate;
 
+
 public class GameBoard {
 	private ArrayList<Player> players = new ArrayList<Player>();
 	private ArrayList<Card> discardPile = new ArrayList<Card>();
