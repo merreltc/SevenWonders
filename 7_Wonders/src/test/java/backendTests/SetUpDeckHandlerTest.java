@@ -47,6 +47,17 @@ public class SetUpDeckHandlerTest {
 			assertEquals(cards.get(i).toString(), actual.get(i).toString());
 		}
 	}
+	
+	@Test
+	public void testCreateAge1Cards7Players() {
+		int numPlayers = 7;
+		ArrayList<Card> cards = createAge1Cards(numPlayers);
+		ArrayList<Card> actual = new SetUpDeckHandler().createCards(Age.AGE1, numPlayers);
+
+		for (int i = 0; i < actual.size(); i++) {
+			assertEquals(cards.get(i).toString(), actual.get(i).toString());
+		}
+	}
 
 	@Test
 	public void testCreateAge2Cards3Players() {
