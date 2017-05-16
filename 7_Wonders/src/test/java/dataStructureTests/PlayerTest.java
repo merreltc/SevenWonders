@@ -899,6 +899,19 @@ public class PlayerTest {
 		}
 	}
 	
+
+	@Test
+	public void testGetGuildCardFromEmptyEndGame(){
+		Player player = new Player("Jane Doe", WonderType.COLOSSUS);
+
+		try {
+			player.getCardFromEndGame(0);
+			fail();
+		}catch(Exception e){
+			Assert.assertEquals("End of End Game pile reached", e.getMessage());
+		}
+	}
+	
 	private Card createWorkersGuild(){
 		HashMap<Enum, Integer> costs = new HashMap<Enum, Integer>();
 		costs.put(RawResource.LUMBER, 1);
