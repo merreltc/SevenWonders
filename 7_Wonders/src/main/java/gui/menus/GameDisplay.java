@@ -137,15 +137,16 @@ public class GameDisplay extends Menu {
 		} else if (clicked.getValue().codePointAt(0) >= 48 && clicked.getValue().codePointAt(0) <= 57) {
 			int playerNum = codePointToInt(clicked.getValue().codePointAt(0));
 			int locOfCurrentPlayer = this.gameManager.getPlayers().indexOf(this.gameManager.getCurrentPlayer());
-			this.resource.openMenu(this.gameManager.getPlayer((locOfCurrentPlayer + playerNum)%this.gameManager.getNumPlayers()));
+			this.resource.openMenu(
+					this.gameManager.getPlayer((locOfCurrentPlayer + playerNum) % this.gameManager.getNumPlayers()));
 		} else {
 			String[] splitValue = clicked.getValue().split("-");
 			TradeHelper tradeHandler = new TradeHelper(this.gameManager);
 			tradeHandler.trade(splitValue);
 		}
 	}
-	
-	private void attemptPlayCard(CardHolder clicked){
+
+	private void attemptPlayCard(CardHolder clicked) {
 		String[] buttons = new String[] { this.messages.getString("buildStructure"),
 				this.messages.getString("buildWonder"), this.messages.getString("discard") };
 		int val = JOptionPane.showOptionDialog(null, this.messages.getString("choosePlayType"),
@@ -153,11 +154,11 @@ public class GameDisplay extends Menu {
 		try {
 			if (val == 0) {
 				clicked.activate(this.gameManager);
-			}else if (val == 2){
-				 clicked.discard(this.gameManager);
+			} else if (val == 2) {
+				clicked.discard(this.gameManager);
 			}
 			String message = gameManager.endCurrentPlayerTurn();
-			if (!message.equals("")){
+			if (!message.equals("")) {
 				Message.showMessage(message);
 			}
 			redrawBoards();
@@ -169,7 +170,7 @@ public class GameDisplay extends Menu {
 			for (int i = 0; i < this.handManager.getPlayerHandSize(); i++) {
 				this.addInteractable(this.handManager.getCardHolder(i));
 			}
-			
+
 		} catch (Exception e) {
 			Message.showMessage(e.getMessage());
 		}
@@ -186,7 +187,7 @@ public class GameDisplay extends Menu {
 		int nextPlayerIndex = players.indexOf(nextPlayer);
 		for (int i = 0; i < players.size(); i++) {
 			boards.get(i)
-					.changePlayer(players.get((totalNumberOfPlayers + nextPlayerIndex + i+1) % totalNumberOfPlayers));
+					.changePlayer(players.get((totalNumberOfPlayers + nextPlayerIndex + i + 1) % totalNumberOfPlayers));
 		}
 	}
 }
