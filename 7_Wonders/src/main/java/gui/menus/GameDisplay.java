@@ -161,7 +161,6 @@ public class GameDisplay extends Menu {
 			if (!message.equals("")) {
 				Message.showMessage(message);
 			}
-			System.out.println(gameManager.getPlayers());
 			redrawBoards();
 			/* update the cards after rotation */
 			for (Interactable toRemove : this.handManager.getCurrentPlayerHand()) {
