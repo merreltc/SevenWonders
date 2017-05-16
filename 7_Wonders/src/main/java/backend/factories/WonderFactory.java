@@ -16,7 +16,7 @@ public class WonderFactory {
 
 	public WonderType getWonder() {
 		int index = getRandomIndex();
-		this.numRemainingWonders--;
+		decrementNumRemainingWonders();
 		return removeAtIndex(index);
 	}
 
@@ -25,6 +25,10 @@ public class WonderFactory {
 		double correctedRandomNum = randomNum * (this.numRemainingWonders - 1);
 		int index = (int) Math.round(correctedRandomNum);
 		return index;
+	}
+	
+	public void decrementNumRemainingWonders() {
+		this.numRemainingWonders--;
 	}
 
 	public WonderType removeAtIndex(int index) {
@@ -41,4 +45,7 @@ public class WonderFactory {
 		wonders.add(WonderType.STATUE);
 	}
 
+	public boolean isOutOfWonders() {
+		return this.numRemainingWonders == 0;
+	}
 }
