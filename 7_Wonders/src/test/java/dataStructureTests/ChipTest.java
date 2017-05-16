@@ -1,13 +1,14 @@
 package dataStructureTests;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
 
 import org.junit.Test;
 
-import dataStructures.Chip;
-import dataStructures.Chip.ChipType;
-import dataStructures.Coin;
-import dataStructures.ConflictToken;
+import dataStructures.playerData.Chip;
+import dataStructures.playerData.Chip.ChipType;
+import dataStructures.playerData.Coin;
+import dataStructures.playerData.ConflictToken;
 
 public class ChipTest {
 
@@ -198,7 +199,7 @@ public class ChipTest {
 			assertEquals(message, error.getMessage());
 		}
 	}
-	
+
 	@Test
 	public void testInvalidConflictToken7ErrorMessage() {
 		try {
@@ -208,7 +209,7 @@ public class ChipTest {
 			assertEquals(message, error.getMessage());
 		}
 	}
-	
+
 	@Test
 	public void testGetChipTypesForCoinAndConflictToken(){
 		Chip coin = new Coin(1);

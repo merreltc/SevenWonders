@@ -8,11 +8,11 @@ import java.util.Collections;
 import org.easymock.EasyMock;
 import org.junit.Test;
 
-import backend.DeckHandler;
-import backend.SetUpDeckHandler;
-import dataStructures.Card;
-import dataStructures.Deck;
-import dataStructures.Deck.Age;
+import backend.handlers.DeckHandler;
+import backend.handlers.SetUpDeckHandler;
+import dataStructures.gameMaterials.Card;
+import dataStructures.gameMaterials.Deck;
+import dataStructures.gameMaterials.Deck.Age;
 
 public class DeckHandlerTest {
 

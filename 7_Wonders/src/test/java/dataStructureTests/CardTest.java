@@ -1,6 +1,8 @@
 package dataStructureTests;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -8,13 +10,18 @@ import java.util.HashMap;
 import org.easymock.EasyMock;
 import org.junit.Test;
 
-import dataStructures.Card;
-import dataStructures.Card.CardType;
-import dataStructures.Cost;
-import dataStructures.Cost.CostType;
-import dataStructures.Effect;
-import dataStructures.Effect.EffectType;
-import dataStructures.GeneralEnums.RawResource;
+import constants.GeneralEnums.CostType;
+import constants.GeneralEnums.RawResource;
+import dataStructures.gameMaterials.Card;
+import dataStructures.gameMaterials.Card.CardType;
+import dataStructures.gameMaterials.Cost;
+import dataStructures.gameMaterials.Effect;
+import dataStructures.gameMaterials.Effect.EffectType;
+import dataStructures.gameMaterials.EntityEffect;
+import dataStructures.gameMaterials.EntityEffect.EntityType;
+import dataStructures.gameMaterials.ValueEffect;
+import dataStructures.gameMaterials.ValueEffect.AffectingEntity;
+import dataStructures.gameMaterials.ValueEffect.Value;
 
 public class CardTest {
 
@@ -122,7 +129,8 @@ public class CardTest {
 
 		EasyMock.replay(cost, effect);
 
-		Card card = new Card("East Trading Post", frequency, CardType.COMMERCIALSTRUCTURE, cost, effect, "None", "None");
+		Card card = new Card("East Trading Post", frequency, CardType.COMMERCIALSTRUCTURE, cost, effect, "None",
+				"None");
 
 		assertEquals("East Trading Post", card.getName());
 		assertEquals(frequency, card.getFrequencyByNumPlayers());
@@ -370,9 +378,9 @@ public class CardTest {
 		assertEquals("Trading Post", card.getPreviousStructureName());
 		assertEquals("Haven", card.getNextStructureName());
 	}
-	
+
 	@Test
-	public void testToStringEastTrading(){
+	public void testToStringEastTrading() {
 		ArrayList<Integer> frequency = new ArrayList<Integer>();
 		frequency.add(3);
 		frequency.add(6);
@@ -386,14 +394,213 @@ public class CardTest {
 
 		EasyMock.replay(cost, effect);
 
-		Card card = new Card("East Trading Post", frequency, CardType.COMMERCIALSTRUCTURE, cost, effect, "None", "None");
-		String expected = "name: East Trading Post" + System.lineSeparator()
-						+ "minFrequencyByNumPlayers: 3" + System.lineSeparator()
-						+ "costType: RESOURCE" + System.lineSeparator()
-						+ "effectType: VALUE";
-		
+		Card card = new Card("East Trading Post", frequency, CardType.COMMERCIALSTRUCTURE, cost, effect, "None",
+				"None");
+		String expected = "name: East Trading Post" + System.lineSeparator() + "minFrequencyByNumPlayers: 3"
+				+ System.lineSeparator() + "costType: RESOURCE" + System.lineSeparator() + "effectType: VALUE";
+
 		assertEquals(expected, card.toString());
-		
+
 		EasyMock.verify(cost, effect);
+	}
+
+	@Test
+	public void testValidEqualsResource() {
+		ArrayList<Integer> frequency = new ArrayList<Integer>();
+		frequency.add(3);
+		frequency.add(4);
+		ArrayList<Integer> frequency2 = new ArrayList<Integer>();
+		frequency2.add(3);
+		frequency2.add(4);
+
+		Cost cost = new Cost(CostType.NONE, 0);
+		Effect effect = new EntityEffect(EffectType.ENTITY, EntityType.RESOURCE, new HashMap<Enum, Integer>());
+		Cost cost2 = new Cost(CostType.NONE, 0);
+		Effect effect2 = new EntityEffect(EffectType.ENTITY, EntityType.RESOURCE, new HashMap<Enum, Integer>());
+
+		Card card = new Card("Lumber Yard", frequency, CardType.RAWMATERIAL, cost, effect, "None", "None");
+		Card card2 = new Card("Lumber Yard", frequency2, CardType.RAWMATERIAL, cost2, effect2, "None", "None");
+
+		assertTrue(card.equals(card2));
+	}
+
+	@Test
+	public void testInvalidEqualsResourceEffect() {
+		ArrayList<Integer> frequency = new ArrayList<Integer>();
+		frequency.add(3);
+		frequency.add(4);
+		ArrayList<Integer> frequency2 = new ArrayList<Integer>();
+		frequency2.add(3);
+		frequency2.add(4);
+
+		Cost cost = new Cost(CostType.NONE, 0);
+		Effect effect = new EntityEffect(EffectType.ENTITY, EntityType.MANUFACTUREDGOOD, new HashMap<Enum, Integer>());
+		Cost cost2 = new Cost(CostType.NONE, 0);
+		Effect effect2 = new EntityEffect(EffectType.ENTITY, EntityType.RESOURCE, new HashMap<Enum, Integer>());
+
+		Card card = new Card("Lumber Yard", frequency, CardType.RAWMATERIAL, cost, effect, "None", "None");
+		Card card2 = new Card("Lumber Yard", frequency2, CardType.RAWMATERIAL, cost2, effect2, "None", "None");
+
+		assertFalse(card.equals(card2));
+	}
+
+	@Test
+	public void testInvalidEqualsResourceCost() {
+		ArrayList<Integer> frequency = new ArrayList<Integer>();
+		frequency.add(3);
+		frequency.add(4);
+		ArrayList<Integer> frequency2 = new ArrayList<Integer>();
+		frequency2.add(3);
+		frequency2.add(4);
+
+		Cost cost = new Cost(CostType.NONE, 1);
+		Effect effect = new EntityEffect(EffectType.ENTITY, EntityType.RESOURCE, new HashMap<Enum, Integer>());
+		Cost cost2 = new Cost(CostType.NONE, 0);
+		Effect effect2 = new EntityEffect(EffectType.ENTITY, EntityType.RESOURCE, new HashMap<Enum, Integer>());
+
+		Card card = new Card("Lumber Yard", frequency, CardType.RAWMATERIAL, cost, effect, "None", "None");
+		Card card2 = new Card("Lumber Yard", frequency2, CardType.RAWMATERIAL, cost2, effect2, "None", "None");
+
+		assertFalse(card.equals(card2));
+	}
+
+	@Test
+	public void testInvalidEqualsResourceFrequency() {
+		ArrayList<Integer> frequency = new ArrayList<Integer>();
+		frequency.add(3);
+		frequency.add(4);
+		ArrayList<Integer> frequency2 = new ArrayList<Integer>();
+		frequency2.add(3);
+		frequency2.add(7);
+
+		Cost cost = new Cost(CostType.NONE, 0);
+		Effect effect = new EntityEffect(EffectType.ENTITY, EntityType.RESOURCE, new HashMap<Enum, Integer>());
+		Cost cost2 = new Cost(CostType.NONE, 0);
+		Effect effect2 = new EntityEffect(EffectType.ENTITY, EntityType.RESOURCE, new HashMap<Enum, Integer>());
+
+		Card card = new Card("Lumber Yard", frequency, CardType.RAWMATERIAL, cost, effect, "None", "None");
+		Card card2 = new Card("Lumber Yard", frequency2, CardType.RAWMATERIAL, cost2, effect2, "None", "None");
+
+		assertFalse(card.equals(card2));
+	}
+
+	@Test
+	public void testInvalidEqualsResourceEffectType() {
+		ArrayList<Integer> frequency = new ArrayList<Integer>();
+		frequency.add(3);
+		frequency.add(4);
+		ArrayList<Integer> frequency2 = new ArrayList<Integer>();
+		frequency2.add(3);
+		frequency2.add(4);
+
+		Cost cost = new Cost(CostType.NONE, 0);
+		Effect effect = new EntityEffect(EffectType.ENTITY, EntityType.RESOURCE, new HashMap<Enum, Integer>());
+		Cost cost2 = new Cost(CostType.NONE, 0);
+		Effect effect2 = new ValueEffect(EffectType.VALUE, Value.COMMERCE, AffectingEntity.NONE, 3);
+
+		Card card = new Card("Lumber Yard", frequency, CardType.RAWMATERIAL, cost, effect, "None", "None");
+		Card card2 = new Card("Lumber Yard", frequency2, CardType.RAWMATERIAL, cost2, effect2, "None", "None");
+
+		assertFalse(card.equals(card2));
+	}
+
+	@Test
+	public void testInvalidEqualsResourceEffectTypeValue() {
+		ArrayList<Integer> frequency = new ArrayList<Integer>();
+		frequency.add(3);
+		frequency.add(4);
+		ArrayList<Integer> frequency2 = new ArrayList<Integer>();
+		frequency2.add(3);
+		frequency2.add(4);
+
+		Cost cost = new Cost(CostType.NONE, 0);
+		Effect effect = new EntityEffect(EffectType.ENTITY, EntityType.RESOURCE, new HashMap<Enum, Integer>());
+		Cost cost2 = new Cost(CostType.NONE, 0);
+		Effect effect2 = new ValueEffect(EffectType.VALUE, Value.COMMERCE, AffectingEntity.NONE, 3);
+
+		Card card = new Card("Lumber Yard", frequency, CardType.RAWMATERIAL, cost, effect, "None", "None");
+		Card card2 = new Card("Lumber Yard", frequency2, CardType.RAWMATERIAL, cost2, effect2, "None", "None");
+
+		assertFalse(card2.equals(card));
+	}
+
+	@Test
+	public void testInvalidEqualsResourceName() {
+		ArrayList<Integer> frequency = new ArrayList<Integer>();
+		frequency.add(3);
+		frequency.add(4);
+		ArrayList<Integer> frequency2 = new ArrayList<Integer>();
+		frequency2.add(3);
+		frequency2.add(4);
+
+		Cost cost = new Cost(CostType.NONE, 0);
+		Effect effect = new EntityEffect(EffectType.ENTITY, EntityType.RESOURCE, new HashMap<Enum, Integer>());
+		Cost cost2 = new Cost(CostType.NONE, 0);
+		Effect effect2 = new EntityEffect(EffectType.ENTITY, EntityType.RESOURCE, new HashMap<Enum, Integer>());
+
+		Card card = new Card("Lumber Yard", frequency, CardType.RAWMATERIAL, cost, effect, "None", "None");
+		Card card2 = new Card("Baths", frequency2, CardType.RAWMATERIAL, cost2, effect2, "None", "None");
+
+		assertFalse(card.equals(card2));
+	}
+
+	@Test
+	public void testInvalidEqualsResourcePrevious() {
+		ArrayList<Integer> frequency = new ArrayList<Integer>();
+		frequency.add(3);
+		frequency.add(4);
+		ArrayList<Integer> frequency2 = new ArrayList<Integer>();
+		frequency2.add(3);
+		frequency2.add(4);
+
+		Cost cost = new Cost(CostType.NONE, 0);
+		Effect effect = new EntityEffect(EffectType.ENTITY, EntityType.RESOURCE, new HashMap<Enum, Integer>());
+		Cost cost2 = new Cost(CostType.NONE, 0);
+		Effect effect2 = new EntityEffect(EffectType.ENTITY, EntityType.RESOURCE, new HashMap<Enum, Integer>());
+
+		Card card = new Card("Lumber Yard", frequency, CardType.RAWMATERIAL, cost, effect, "None", "None");
+		Card card2 = new Card("Lumber Yard", frequency2, CardType.RAWMATERIAL, cost2, effect2, "Baths", "None");
+
+		assertFalse(card.equals(card2));
+	}
+
+	@Test
+	public void testInvalidEqualsResourceNext() {
+		ArrayList<Integer> frequency = new ArrayList<Integer>();
+		frequency.add(3);
+		frequency.add(4);
+		ArrayList<Integer> frequency2 = new ArrayList<Integer>();
+		frequency2.add(3);
+		frequency2.add(4);
+
+		Cost cost = new Cost(CostType.NONE, 0);
+		Effect effect = new EntityEffect(EffectType.ENTITY, EntityType.RESOURCE, new HashMap<Enum, Integer>());
+		Cost cost2 = new Cost(CostType.NONE, 0);
+		Effect effect2 = new EntityEffect(EffectType.ENTITY, EntityType.RESOURCE, new HashMap<Enum, Integer>());
+
+		Card card = new Card("Lumber Yard", frequency, CardType.RAWMATERIAL, cost, effect, "None", "None");
+		Card card2 = new Card("Lumber Yard", frequency2, CardType.RAWMATERIAL, cost2, effect2, "None", "Baths");
+
+		assertFalse(card.equals(card2));
+	}
+
+	@Test
+	public void testInvalidEqualsCardType() {
+		ArrayList<Integer> frequency = new ArrayList<Integer>();
+		frequency.add(3);
+		frequency.add(4);
+		ArrayList<Integer> frequency2 = new ArrayList<Integer>();
+		frequency2.add(3);
+		frequency2.add(4);
+
+		Cost cost = new Cost(CostType.NONE, 0);
+		Effect effect = new EntityEffect(EffectType.ENTITY, EntityType.RESOURCE, new HashMap<Enum, Integer>());
+		Cost cost2 = new Cost(CostType.NONE, 0);
+		Effect effect2 = new EntityEffect(EffectType.ENTITY, EntityType.RESOURCE, new HashMap<Enum, Integer>());
+
+		Card card = new Card("Lumber Yard", frequency, CardType.CIVILIANSTRUCTURE, cost, effect, "None", "None");
+		Card card2 = new Card("Lumber Yard", frequency2, CardType.RAWMATERIAL, cost2, effect2, "None", "None");
+
+		assertFalse(card.equals(card2));
 	}
 }
