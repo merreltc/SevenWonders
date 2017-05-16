@@ -77,7 +77,7 @@ public class ResourceViewer extends Menu {
 		Image image = this.renderer.getImage("coin");
 		RenderImage.draw(graphics, image, Constants.RESOURCE_VIEWER_ONE_COIN_X + Constants.RESOURCE_VIEWER_CELL_WIDTH/3, Constants.RESOURCE_VIEWER_ONE_COIN_Y + 5
 				, Constants.RESOURCE_IMAGE_WIDTH, Constants.RESOURCE_IMAGE_HEIGHT);
-		graphics.drawString(player.getCoinTotal() + "", Constants.RESOURCE_VIEWER_ONE_COIN_X + Constants.RESOURCE_VIEWER_TEXT_X_OFFSET, Constants.RESOURCE_VIEWER_ONE_COIN_Y + Constants.RESOURCE_VIEWER_TEXT_Y_OFFSET + Constants.RESOURCE_VIEWER_ROW_HEIGHT);
+		graphics.drawString(player.getNumValue1Coins() + "", Constants.RESOURCE_VIEWER_ONE_COIN_X + Constants.RESOURCE_VIEWER_TEXT_X_OFFSET, Constants.RESOURCE_VIEWER_ONE_COIN_Y + Constants.RESOURCE_VIEWER_TEXT_Y_OFFSET + Constants.RESOURCE_VIEWER_ROW_HEIGHT);
 	}
 	
 	private void drawWarTokenBox(Graphics graphics) {
@@ -90,7 +90,7 @@ public class ResourceViewer extends Menu {
 		Image image = this.renderer.getImage("one shield");
 		RenderImage.draw(graphics, image, Constants.RESOURCE_VIEWER_WAR_TOKEN_X + Constants.RESOURCE_VIEWER_CELL_WIDTH/3, Constants.RESOURCE_VIEWER_WAR_TOKEN_Y + 5
 				, Constants.RESOURCE_IMAGE_WIDTH, Constants.RESOURCE_IMAGE_HEIGHT);
-		graphics.drawString(player.getNumShields() + "", Constants.RESOURCE_VIEWER_WAR_TOKEN_X + Constants.RESOURCE_VIEWER_TEXT_X_OFFSET, Constants.RESOURCE_VIEWER_WAR_TOKEN_Y + Constants.RESOURCE_VIEWER_TEXT_Y_OFFSET + Constants.RESOURCE_VIEWER_ROW_HEIGHT);
+		graphics.drawString(player.getConflictTotal() + "", Constants.RESOURCE_VIEWER_WAR_TOKEN_X + Constants.RESOURCE_VIEWER_TEXT_X_OFFSET, Constants.RESOURCE_VIEWER_WAR_TOKEN_Y + Constants.RESOURCE_VIEWER_TEXT_Y_OFFSET + Constants.RESOURCE_VIEWER_ROW_HEIGHT);
 	}
 
 	private void draw3CoinBox(Graphics graphics) {
@@ -103,7 +103,7 @@ public class ResourceViewer extends Menu {
 		Image image = this.renderer.getImage("coin");
 		RenderImage.draw(graphics, image, Constants.RESOURCE_VIEWER_THREE_COIN_X + Constants.RESOURCE_VIEWER_CELL_WIDTH/3, Constants.RESOURCE_VIEWER_THREE_COIN_Y + 5
 				, Constants.RESOURCE_IMAGE_WIDTH, Constants.RESOURCE_IMAGE_HEIGHT);
-		graphics.drawString(player.getCoinTotal() + "", Constants.RESOURCE_VIEWER_THREE_COIN_X + Constants.RESOURCE_VIEWER_TEXT_X_OFFSET, Constants.RESOURCE_VIEWER_THREE_COIN_Y + Constants.RESOURCE_VIEWER_TEXT_Y_OFFSET + Constants.RESOURCE_VIEWER_ROW_HEIGHT);
+		graphics.drawString(player.getNumValue3Coins() + "", Constants.RESOURCE_VIEWER_THREE_COIN_X + Constants.RESOURCE_VIEWER_TEXT_X_OFFSET, Constants.RESOURCE_VIEWER_THREE_COIN_Y + Constants.RESOURCE_VIEWER_TEXT_Y_OFFSET + Constants.RESOURCE_VIEWER_ROW_HEIGHT);
 	}
 
 	private void drawGrid(int rows, Graphics graphics) {
@@ -249,6 +249,7 @@ public class ResourceViewer extends Menu {
 	}
 
 	public void openMenu(Player player) {
+		System.out.println(player.getName());
 		this.player = player;
 		this.shouldDraw = true;
 	}
