@@ -82,7 +82,7 @@ public class EndGameHandlerTest {
 	}
 
 	@Test
-	public void activateWorkersGuildEffect(){
+	public void testWorkersGuildEffect(){
 		ArrayList<Card> cards = new ArrayList<Card>();
 		cards.add(createRawMaterialCard());
 		cards.add(createRawMaterialCard());
@@ -104,7 +104,7 @@ public class EndGameHandlerTest {
 	}
 	
 	@Test
-	public void activateCraftsmenGuildEffect(){
+	public void testCraftsmenGuildEffect(){
 		ArrayList<Card> cards = new ArrayList<Card>();
 		cards.add(createManufacturedCard());
 		cards.add(createManufacturedCard());
@@ -123,6 +123,28 @@ public class EndGameHandlerTest {
 		EasyMock.replay(player1,player2,player3);
 		
 		Assert.assertEquals(8, end.getPointsFromGuildCards(player2, player1, player3));
+	}
+	
+	@Test
+	public void testTradersGuildEffect(){
+		ArrayList<Card> cards = new ArrayList<Card>();
+		cards.add(createCommercialCard());
+		cards.add(createCommercialCard());
+		
+		Player player1 = EasyMock.mock(Player.class);
+		Player player2 = EasyMock.mock(Player.class);
+		Player player3 = EasyMock.mock(Player.class);
+		
+		EasyMock.expect(player2.getCardFromEndGame(0)).andReturn(this.createTradersGuild());
+		EasyMock.expect(player2.getCardFromEndGame(1)).andThrow(new IllegalArgumentException(""));
+		
+		EndGameHandler end = new EndGameHandler();
+		EasyMock.expect(player1.getStoragePile()).andReturn(cards);
+		EasyMock.expect(player3.getStoragePile()).andReturn(cards);
+		
+		EasyMock.replay(player1,player2,player3);
+		
+		Assert.assertEquals(4, end.getPointsFromGuildCards(player2, player1, player3));
 	}
 	
 	private Card createWorkersGuild(){
@@ -145,6 +167,107 @@ public class EndGameHandlerTest {
 		Effect effect = new ValueEffect(EffectType.VALUE, Value.GUILD, AffectingEntity.MANUFACTUREDGOODS, Direction.NEIGHBORS,
 				2);
 		Card card = new Card("Craftsmens Guild", CardType.GUILD, cost, effect);
+		return card;
+	}
+	
+	private Card createTradersGuild(){
+		HashMap<Enum, Integer> costs = new HashMap<Enum, Integer>();
+		costs.put(Good.LOOM, 1);
+		costs.put(Good.PRESS, 1);
+		costs.put(Good.GLASS, 1);
+		Cost cost = new Cost(CostType.GOOD, costs);
+		Effect effect = new ValueEffect(EffectType.VALUE, Value.GUILD, AffectingEntity.COMMERCIALSTRUCTURES,
+				Direction.NEIGHBORS, 1);
+		Card card = new Card("Traders Guild", CardType.GUILD, cost, effect);
+		return card;
+	}
+	
+	public Card createPhilosophersGuild(){
+		HashMap<Enum, Integer> costs = new HashMap<Enum, Integer>();
+		costs.put(Good.LOOM, 1);
+		costs.put(Good.PRESS, 1);
+		costs.put(RawResource.CLAY, 3);
+		Cost cost = new Cost(CostType.MULTITYPE, costs);
+		Effect effect = new ValueEffect(EffectType.VALUE, Value.GUILD, AffectingEntity.SCIENTIFICSTRUCTURES,
+				Direction.NEIGHBORS, 1);
+		Card card = new Card("Philosophers Guild", CardType.GUILD, cost, effect);
+		return card;
+	}
+	
+	public Card createSpiesGuild(){
+		HashMap<Enum, Integer> costs = new HashMap<Enum, Integer>();
+		costs.put(Good.GLASS, 1);
+		costs.put(RawResource.LUMBER, 3);
+		Cost cost = new Cost(CostType.MULTITYPE, costs);
+		Effect effect = new ValueEffect(EffectType.VALUE, Value.GUILD, AffectingEntity.MILITARYSTRUCTURES, Direction.NEIGHBORS,
+				1);
+		Card card = new Card("Spies Guild", CardType.GUILD, cost, effect);
+		return card;
+	}
+	
+	public Card createStrategistsGuild(){
+		HashMap<Enum, Integer> costs = new HashMap<Enum, Integer>();
+		costs.put(Good.LOOM, 1);
+		costs.put(RawResource.ORE, 2);
+		costs.put(RawResource.STONE, 1);
+		Cost cost = new Cost(CostType.MULTITYPE, costs);
+		Effect effect = new ValueEffect(EffectType.VALUE, Value.GUILD, AffectingEntity.MILITARYSTRUCTURES, Direction.NEIGHBORS,
+				1);
+		Card card = new Card("Strategists Guild", CardType.GUILD, cost, effect);
+		return card;
+	}
+	
+	public Card createShipOwnersGuild(){
+		HashMap<Enum, Integer> costs = new HashMap<Enum, Integer>();
+		costs.put(Good.GLASS, 1);
+		costs.put(Good.PRESS, 1);
+		costs.put(RawResource.LUMBER, 3);
+		Cost cost = new Cost(CostType.MULTITYPE, costs);
+		HashMap<Enum, Integer> entitiesAndAmounts = new HashMap<Enum, Integer>();
+		entitiesAndAmounts.put(AffectingEntity.RAWRESOURCES, 1);
+		entitiesAndAmounts.put(AffectingEntity.MANUFACTUREDGOODS, 1);
+		entitiesAndAmounts.put(AffectingEntity.GUILD, 1);
+		Effect effect = new ValueEffect(EffectType.VALUE, Value.GUILD, entitiesAndAmounts);
+		Card card = new Card("Shipowners Guild",CardType.GUILD, cost, effect);
+		return card;
+	}
+	
+	public Card createScientistsGuild(){
+		HashMap<Enum, Integer> costs = new HashMap<Enum, Integer>();
+		costs.put(Good.PRESS, 1);
+		costs.put(RawResource.LUMBER, 2);
+		costs.put(RawResource.ORE, 2);
+		Cost cost = new Cost(CostType.MULTITYPE, costs);
+		HashMap<Enum, Integer> entitiesAndAmounts = new HashMap<Enum, Integer>();
+		entitiesAndAmounts.put(Science.PROTRACTOR, 1);
+		entitiesAndAmounts.put(Science.WHEEL, 1);
+		entitiesAndAmounts.put(Science.TABLET, 1);
+		Effect effect = new EntityEffect(EffectType.ENTITY, EntityType.SCIENCE, entitiesAndAmounts);
+		Card card = new Card("Scientists Guild", CardType.GUILD, cost, effect);
+		return card;
+	}
+	
+	public Card createMagistratesGuild(){
+		HashMap<Enum, Integer> costs = new HashMap<Enum, Integer>();
+		costs = new HashMap<Enum, Integer>();
+		costs.put(Good.LOOM, 1);
+		costs.put(RawResource.LUMBER, 3);
+		costs.put(RawResource.STONE, 1);
+		Cost cost = new Cost(CostType.MULTITYPE, costs);
+		Effect effect = new ValueEffect(EffectType.VALUE, Value.GUILD, AffectingEntity.CIVILIANSTRUCTURES, Direction.NEIGHBORS,
+				1);
+		Card card = new Card("Magistrates Guild", CardType.GUILD, cost, effect);
+		return card;
+	}
+	
+	public Card createBuildersGuild(){
+		HashMap<Enum, Integer> costs = new HashMap<Enum, Integer>();
+		costs.put(Good.LOOM, 1);
+		costs.put(RawResource.CLAY, 2);
+		costs.put(RawResource.STONE, 2);
+		Cost cost = new Cost(CostType.MULTITYPE, costs);
+		Effect effect = new ValueEffect(EffectType.VALUE, Value.GUILD, AffectingEntity.WONDERLEVEL, Direction.ALL, 1);
+		Card card = new Card("Builders Guild", CardType.GUILD, cost, effect);
 		return card;
 	}
 	
