@@ -67,12 +67,9 @@ public class EndGameHandler {
 		
 		ArrayList<Card> cards = players.getStoragePile();
 		for (Card currentCard : cards){
-			System.out.println(currentType);
-			System.out.println(currentCard.getCardType());
 			if (currentType.toString().contains(currentCard.getCardType().toString())){
 				total += valueToAdd;
 			}else if (currentCard.getCardType() == CardType.RAWMATERIAL && currentType == AffectingEntity.RAWRESOURCES){
-				System.out.println(valueToAdd);
 				total += valueToAdd;
 			}
 		}
