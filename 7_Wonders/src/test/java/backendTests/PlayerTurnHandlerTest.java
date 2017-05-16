@@ -48,7 +48,7 @@ public class PlayerTurnHandlerTest {
 		current.setCurrentHand(currentHand);
 
 		PlayerTurnHandler playerTurnHandler = new PlayerTurnHandler();
-		playerTurnHandler.buildStructure(current, current.getCurrentHand().get(0));
+		playerTurnHandler.buildStructure(current, current.getCurrentHand().get(0), board);
 
 		assertEquals(1, current.getStoragePile().size());
 		assertEquals(0, current.getCurrentHand().size());
@@ -75,7 +75,7 @@ public class PlayerTurnHandlerTest {
 		current.setCurrentHand(currentHand);
 
 		PlayerTurnHandler playerTurnHandler = new PlayerTurnHandler();
-		playerTurnHandler.buildStructure(current, current.getCurrentHand().get(0));
+		playerTurnHandler.buildStructure(current, current.getCurrentHand().get(0), board);
 
 		assertEquals(1, current.getStoragePile().size());
 		assertEquals(0, current.getCurrentHand().size());
@@ -105,8 +105,8 @@ public class PlayerTurnHandlerTest {
 		current.setCurrentHand(currentHand);
 
 		PlayerTurnHandler playerTurnHandler = new PlayerTurnHandler();
-		playerTurnHandler.buildStructure(current, current.getCurrentHand().get(0));
-		playerTurnHandler.buildStructure(current, current.getCurrentHand().get(0));
+		playerTurnHandler.buildStructure(current, current.getCurrentHand().get(0), board);
+		playerTurnHandler.buildStructure(current, current.getCurrentHand().get(0), board);
 
 		assertEquals(2, current.getStoragePile().size());
 		assertEquals(0, current.getCurrentHand().size());
@@ -134,8 +134,8 @@ public class PlayerTurnHandlerTest {
 		current.setCurrentHand(currentHand);
 
 		PlayerTurnHandler playerTurnHandler = new PlayerTurnHandler();
-		playerTurnHandler.buildStructure(current, current.getCurrentHand().get(0));
-		playerTurnHandler.buildStructure(current, current.getCurrentHand().get(0));
+		playerTurnHandler.buildStructure(current, current.getCurrentHand().get(0), board);
+		playerTurnHandler.buildStructure(current, current.getCurrentHand().get(0), board);
 		fail();
 	}
 
@@ -159,8 +159,8 @@ public class PlayerTurnHandlerTest {
 		current.setCurrentHand(currentHand);
 
 		PlayerTurnHandler playerTurnHandler = new PlayerTurnHandler();
-		playerTurnHandler.buildStructure(current, current.getCurrentHand().get(0));
-		playerTurnHandler.buildStructure(current, current.getCurrentHand().get(0));
+		playerTurnHandler.buildStructure(current, current.getCurrentHand().get(0), board);
+		playerTurnHandler.buildStructure(current, current.getCurrentHand().get(0), board);
 
 		assertEquals(2, current.getStoragePile().size());
 		assertEquals(0, current.getCurrentHand().size());
@@ -190,8 +190,8 @@ public class PlayerTurnHandlerTest {
 		current.setCurrentHand(currentHand);
 
 		PlayerTurnHandler playerTurnHandler = new PlayerTurnHandler();
-		playerTurnHandler.buildStructure(current, current.getCurrentHand().get(0));
-		playerTurnHandler.buildStructure(current, current.getCurrentHand().get(0));
+		playerTurnHandler.buildStructure(current, current.getCurrentHand().get(0), board);
+		playerTurnHandler.buildStructure(current, current.getCurrentHand().get(0), board);
 		fail();
 	}
 
@@ -216,9 +216,9 @@ public class PlayerTurnHandlerTest {
 		current.setCurrentHand(currentHand);
 
 		PlayerTurnHandler playerTurnHandler = new PlayerTurnHandler();
-		playerTurnHandler.buildStructure(current, current.getCurrentHand().get(0));
-		playerTurnHandler.buildStructure(current, current.getCurrentHand().get(0));
-		playerTurnHandler.buildStructure(current, current.getCurrentHand().get(0));
+		playerTurnHandler.buildStructure(current, current.getCurrentHand().get(0), board);
+		playerTurnHandler.buildStructure(current, current.getCurrentHand().get(0), board);
+		playerTurnHandler.buildStructure(current, current.getCurrentHand().get(0), board);
 
 		assertEquals(3, current.getStoragePile().size());
 		assertEquals(0, current.getCurrentHand().size());
@@ -250,8 +250,8 @@ public class PlayerTurnHandlerTest {
 		current.setCurrentHand(currentHand);
 
 		PlayerTurnHandler playerTurnHandler = new PlayerTurnHandler();
-		playerTurnHandler.buildStructure(current, current.getCurrentHand().get(0));
-		playerTurnHandler.buildStructure(current, current.getCurrentHand().get(0));
+		playerTurnHandler.buildStructure(current, current.getCurrentHand().get(0), board);
+		playerTurnHandler.buildStructure(current, current.getCurrentHand().get(0), board);
 		fail();
 	}
 
@@ -276,9 +276,9 @@ public class PlayerTurnHandlerTest {
 		current.setCurrentHand(currentHand);
 
 		PlayerTurnHandler playerTurnHandler = new PlayerTurnHandler();
-		playerTurnHandler.buildStructure(current, current.getCurrentHand().get(0));
-		playerTurnHandler.buildStructure(current, current.getCurrentHand().get(0));
-		playerTurnHandler.buildStructure(current, current.getCurrentHand().get(0));
+		playerTurnHandler.buildStructure(current, current.getCurrentHand().get(0), board);
+		playerTurnHandler.buildStructure(current, current.getCurrentHand().get(0), board);
+		playerTurnHandler.buildStructure(current, current.getCurrentHand().get(0), board);
 
 		assertEquals(3, current.getStoragePile().size());
 		assertEquals(0, current.getCurrentHand().size());
@@ -311,9 +311,9 @@ public class PlayerTurnHandlerTest {
 		current.setCurrentHand(currentHand);
 
 		PlayerTurnHandler playerTurnHandler = new PlayerTurnHandler();
-		playerTurnHandler.buildStructure(current, current.getCurrentHand().get(0));
-		playerTurnHandler.buildStructure(current, current.getCurrentHand().get(0));
-		playerTurnHandler.buildStructure(current, current.getCurrentHand().get(0));
+		playerTurnHandler.buildStructure(current, current.getCurrentHand().get(0), board);
+		playerTurnHandler.buildStructure(current, current.getCurrentHand().get(0), board);
+		playerTurnHandler.buildStructure(current, current.getCurrentHand().get(0), board);
 		fail();
 	}
 
@@ -371,8 +371,8 @@ public class PlayerTurnHandlerTest {
 		current.setCurrentHand(currentHand);
 
 		PlayerTurnHandler playerTurnHandler = new PlayerTurnHandler();
-		playerTurnHandler.buildStructure(current, lumber);
-		playerTurnHandler.buildStructure(current, stockade);
+		playerTurnHandler.buildStructure(current, lumber, board);
+		playerTurnHandler.buildStructure(current, stockade, board);
 
 		assertEquals(1, current.getNumShields());
 	}
@@ -406,9 +406,9 @@ public class PlayerTurnHandlerTest {
 		current.setCurrentHand(currentHand);
 
 		PlayerTurnHandler playerTurnHandler = new PlayerTurnHandler();
-		playerTurnHandler.buildStructure(current, quarry);
-		playerTurnHandler.buildStructure(current, stone);
-		playerTurnHandler.buildStructure(current, walls);
+		playerTurnHandler.buildStructure(current, quarry, board);
+		playerTurnHandler.buildStructure(current, stone, board);
+		playerTurnHandler.buildStructure(current, walls, board);
 
 		assertEquals(2, current.getNumShields());
 	}
@@ -444,9 +444,9 @@ public class PlayerTurnHandlerTest {
 		current.setCurrentHand(currentHand);
 
 		PlayerTurnHandler playerTurnHandler = new PlayerTurnHandler();
-		playerTurnHandler.buildStructure(current, ore);
-		playerTurnHandler.buildStructure(current, forest);
-		playerTurnHandler.buildStructure(current, statue);
+		playerTurnHandler.buildStructure(current, ore, board);
+		playerTurnHandler.buildStructure(current, forest, board);
+		playerTurnHandler.buildStructure(current, statue, board);
 		fail();
 	}
 
@@ -474,16 +474,78 @@ public class PlayerTurnHandlerTest {
 		current.setCurrentHand(currentHand);
 
 		PlayerTurnHandler playerTurnHandler = new PlayerTurnHandler();
-		playerTurnHandler.buildStructure(current, stone);
-		playerTurnHandler.buildStructure(current, baths);
+		playerTurnHandler.buildStructure(current, stone, board);
+		playerTurnHandler.buildStructure(current, baths, board);
 
 		assertEquals(3, current.getNumVictoryPoints());
+	}
+	
+	@Test
+	public void testBuildStructureAddCommerce() {
+		ArrayList<Player> players = new ArrayList<Player>();
+		players.add(new Player("Wolverine", WonderType.COLOSSUS));
+		players.add(new Player("Captain America", WonderType.LIGHTHOUSE));
+		players.add(new Player("Black Widow", WonderType.PYRAMIDS));
+
+		ArrayList<Card> cards = new SetUpDeckHandler().createCards(Age.AGE1, 3);
+		Deck deck = new Deck(Age.AGE1, cards);
+
+		GameBoard board = new GameBoard(players, deck);
+
+		Player current = board.getCurrentPlayer();
+		ArrayList<Card> currentHand = new ArrayList<Card>();
+
+		Card east = deck.getCard(12); //east trading post
+		
+		currentHand.add(east);
+
+		current.setCurrentHand(currentHand);
+
+		PlayerTurnHandler playerTurnHandler = new PlayerTurnHandler();
+		playerTurnHandler.buildStructure(current, east, board);
+
+		assertEquals(0, current.getNumVictoryPoints());
+		assertEquals(0, current.getNumShields());
+		assertTrue(current.storagePileContainsCardByName("East Trading Post"));
+	}
+	
+	@Test
+	public void testBuildStructureAddCommerceCoinAdd() {
+		ArrayList<Player> players = new ArrayList<Player>();
+		players.add(new Player("Wolverine", WonderType.COLOSSUS));
+		players.add(new Player("Captain America", WonderType.LIGHTHOUSE));
+		players.add(new Player("Black Widow", WonderType.PYRAMIDS));
+
+		ArrayList<Card> cards = new SetUpDeckHandler().createCards(Age.AGE1, 4);
+		Deck deck = new Deck(Age.AGE1, cards);
+
+		GameBoard board = new GameBoard(players, deck);
+
+		Player current = board.getCurrentPlayer();
+		ArrayList<Card> currentHand = new ArrayList<Card>();
+
+		Card tavern = deck.getCard(16); //tavern
+		
+		currentHand.add(tavern);
+
+		current.setCurrentHand(currentHand);
+
+		PlayerTurnHandler playerTurnHandler = new PlayerTurnHandler();
+		playerTurnHandler.buildStructure(current, tavern, board);
+
+		assertEquals(0, current.getNumVictoryPoints());
+		assertEquals(0, current.getNumShields());
+		assertEquals(8, current.getCoinTotal());
+		assertEquals(1, current.getNumValue3Coins());
+		assertTrue(current.storagePileContainsCardByName("Tavern"));
 	}
 
 	@Test
 	public void testBuildStructureAddTwoVictoryPointsMockedVersion() {
 		Player player = EasyMock.mock(Player.class);
 		Card cardToBuild = EasyMock.mock(Card.class);
+		GameBoard board = EasyMock.mock(GameBoard.class);
+		
 		HashMap<Enum, Integer> cost = new HashMap<Enum, Integer>();
 		HashMap<Enum, Integer> entities = new HashMap<Enum, Integer>();
 
@@ -526,7 +588,7 @@ public class PlayerTurnHandlerTest {
 		EasyMock.replay(player, cardToBuild, cardInStorage, entityEffect, effect);
 
 		PlayerTurnHandler playerTurnHandler = new PlayerTurnHandler();
-		playerTurnHandler.buildStructure(player, cardToBuild);
+		playerTurnHandler.buildStructure(player, cardToBuild, board);
 
 		EasyMock.verify(player, cardToBuild, cardInStorage, entityEffect, effect);
 	}
@@ -535,6 +597,7 @@ public class PlayerTurnHandlerTest {
 	public void testInvalidBuildStructureAlreadyHaveStructure() {
 		Player player = EasyMock.mock(Player.class);
 		Card cardToBuild = EasyMock.mock(Card.class);
+		GameBoard board = EasyMock.mock(GameBoard.class);
 		HashMap<Enum, Integer> cost = new HashMap<Enum, Integer>();
 		HashMap<Enum, Integer> entities = new HashMap<Enum, Integer>();
 
@@ -579,10 +642,10 @@ public class PlayerTurnHandlerTest {
 		EasyMock.replay(player, cardToBuild, cardInStorage, entityEffect, effect);
 
 		PlayerTurnHandler playerTurnHandler = new PlayerTurnHandler();
-		playerTurnHandler.buildStructure(player, cardToBuild);
+		playerTurnHandler.buildStructure(player, cardToBuild, board);
 
 		try {
-			playerTurnHandler.buildStructure(player, cardToBuild);
+			playerTurnHandler.buildStructure(player, cardToBuild, board);
 			fail();
 		} catch (IllegalArgumentException error) {
 			assertEquals("Player already has the structure cannot build the same structure", error.getMessage());
@@ -594,7 +657,7 @@ public class PlayerTurnHandlerTest {
 	@Test
 	public void testBuildPreviousStructureFree() {
 		Player player = EasyMock.mock(Player.class);
-
+		GameBoard board = EasyMock.mock(GameBoard.class);
 		ArrayList<Card> storage = new ArrayList<Card>();
 		Card storaged = EasyMock.mock(Card.class);
 		storage.add(storaged);
@@ -612,7 +675,7 @@ public class PlayerTurnHandlerTest {
 		EasyMock.replay(player, storaged, cardToBuild);
 
 		PlayerTurnHandler playerTurnHandler = new PlayerTurnHandler();
-		playerTurnHandler.buildStructure(player, cardToBuild);
+		playerTurnHandler.buildStructure(player, cardToBuild, board);
 
 		EasyMock.verify(player, storaged, cardToBuild);
 	}
