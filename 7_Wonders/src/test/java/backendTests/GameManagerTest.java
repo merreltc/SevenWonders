@@ -346,7 +346,7 @@ public class GameManagerTest {
 				new SetUpDeckHandler(), new TurnHandler(), playerTurnHandler);
 		manager.dealInitialTurnCards();
 		Card card = manager.getCurrentPlayer().getCurrentHand().get(0);
-		playerTurnHandler.buildStructure(manager.getCurrentPlayer(), card);
+		playerTurnHandler.buildStructure(manager.getCurrentPlayer(), card, manager.getGameBoard());
 
 		EasyMock.replay(playerTurnHandler);
 

@@ -18,9 +18,9 @@ public class PlayerTurnHandler {
 	
 	private ResourceBundle messages = Translate.getNewResourceBundle();
 
-	public void buildStructure(Player current, Card card) {
+	public void buildStructure(Player current, Card card, GameBoard board) {
 		if (current.storagePileContainsCardByName(card.getName())) {
-			throw new IllegalArgumentException(messages.getString("playerHasAlreadyHasStructure"));
+			throw new IllegalArgumentException(this.messages.getString("playerHasAlreadyHasStructure"));
 		}
 
 		String previousStructure = card.getPreviousStructureName();
@@ -46,6 +46,11 @@ public class PlayerTurnHandler {
 			switch (effect.getValueType()) {
 			case VICTORYPOINT:
 				current.addNumVictoryPoints(effect.getValueAmount());
+				break;
+			case COIN:
+				if(card.getName().equals("Tavern")){
+					board.giveNumCoins(current, effect.getValueAmount());
+				}
 				break;
 			default:
 				current.addNumShields(effect.getValueAmount());
@@ -87,7 +92,7 @@ public class PlayerTurnHandler {
 			}
 
 			if (!costfound || numcost > 0) {
-				throw new InsufficientFundsException(messages.getString("noRequiredItemToBuildStructure"));
+				throw new InsufficientFundsException(this.messages.getString("noRequiredItemToBuildStructure"));
 			}
 		}
 	}
