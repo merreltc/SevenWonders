@@ -63,10 +63,16 @@ public class GameManager {
 
 	public void tradeForEntity(Player from, Player to, Enum entity) {
 		if (from.storagePileContainsCardByName("East Trading Post")) {
-			this.tradeHandler.tradeFromToForEntity(from, to, entity, true);
-		} else {
-			this.tradeHandler.tradeFromToForEntity(from, to, entity, false);
+			int fromPosition = this.getPlayers().indexOf(from);
+			int toPosition = this.getPlayers().indexOf(to);
+			if (++fromPosition == toPosition) {
+				this.tradeHandler.tradeFromToForEntity(from, to, entity, true);
+				return;
+			}
 		}
+		
+		this.tradeHandler.tradeFromToForEntity(from, to, entity, false);
+
 	}
 
 	public void buildStructure(Card card) {
