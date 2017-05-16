@@ -8,10 +8,10 @@ import java.util.HashMap;
 import org.easymock.EasyMock;
 import org.junit.Test;
 
-import dataStructures.GeneralEnums.Resource;
-import dataStructures.Level;
-import dataStructures.Wonder;
-import dataStructures.Wonder.WonderType;
+import constants.GeneralEnums.Resource;
+import dataStructures.gameMaterials.Level;
+import dataStructures.gameMaterials.Wonder;
+import dataStructures.gameMaterials.Wonder.WonderType;
 
 public class WonderTest {
 

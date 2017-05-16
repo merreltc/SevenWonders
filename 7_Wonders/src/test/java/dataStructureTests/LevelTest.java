@@ -8,21 +8,21 @@ import java.util.HashMap;
 import org.easymock.EasyMock;
 import org.junit.Test;
 
-import dataStructures.Cost;
-import dataStructures.Effect;
-import dataStructures.EntityEffect;
-import dataStructures.Cost.CostType;
-import dataStructures.Effect.Direction;
-import dataStructures.Effect.EffectType;
-import dataStructures.EntityEffect.EntityType;
-import dataStructures.GeneralEnums.RawResource;
-import dataStructures.Level;
-import dataStructures.MultiValueEffect;
-import dataStructures.ValueEffect;
-import dataStructures.Level.Frequency;
-import dataStructures.ValueEffect.AffectingEntity;
-import dataStructures.ValueEffect.Value;
-import dataStructures.ValueEffect.ValueType;
+import constants.GeneralEnums.CostType;
+import constants.GeneralEnums.RawResource;
+import dataStructures.gameMaterials.Cost;
+import dataStructures.gameMaterials.Effect;
+import dataStructures.gameMaterials.Effect.Direction;
+import dataStructures.gameMaterials.Effect.EffectType;
+import dataStructures.gameMaterials.EntityEffect;
+import dataStructures.gameMaterials.EntityEffect.EntityType;
+import dataStructures.gameMaterials.Level;
+import dataStructures.gameMaterials.Level.Frequency;
+import dataStructures.gameMaterials.MultiValueEffect;
+import dataStructures.gameMaterials.ValueEffect;
+import dataStructures.gameMaterials.ValueEffect.AffectingEntity;
+import dataStructures.gameMaterials.ValueEffect.Value;
+import dataStructures.gameMaterials.ValueEffect.ValueType;
 
 public class LevelTest {
 

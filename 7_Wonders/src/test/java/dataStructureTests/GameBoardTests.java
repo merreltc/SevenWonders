@@ -7,15 +7,15 @@ import java.util.ArrayList;
 import org.easymock.EasyMock;
 import org.junit.Test;
 
-import backend.SetUpDeckHandler;
-import dataStructures.Card;
-import dataStructures.Chip;
-import dataStructures.Deck;
+import backend.handlers.SetUpDeckHandler;
 import dataStructures.GameBoard;
-import dataStructures.Player;
-import dataStructures.Wonder.WonderType;
+import dataStructures.gameMaterials.Card;
+import dataStructures.gameMaterials.Deck;
+import dataStructures.gameMaterials.Deck.Age;
+import dataStructures.gameMaterials.Wonder.WonderType;
+import dataStructures.playerData.Chip;
+import dataStructures.playerData.Player;
 import exceptions.InsufficientFundsException;
-import dataStructures.Deck.Age;
 
 public class GameBoardTests {
 

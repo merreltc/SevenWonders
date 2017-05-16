@@ -1,19 +1,17 @@
 package backendTests;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 
-import org.easymock.EasyMock;
-import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
 
-import backend.SetUpPlayerHandler;
-import dataStructures.Player;
-import dataStructures.Wonder.WonderType;
-import guiDataStructures.PlayerInformationHolder;
+import backend.handlers.SetUpPlayerHandler;
+import dataStructures.gameMaterials.Wonder.WonderType;
+import dataStructures.playerData.Player;
 
 public class SetupBackendTest {
 
@@ -63,7 +61,7 @@ public class SetupBackendTest {
 				Arrays.asList(WonderType.COLOSSUS, WonderType.LIGHTHOUSE, WonderType.TEMPLE));
 
 		SetUpPlayerHandler setUpHandler = new SetUpPlayerHandler();
-		ArrayList<Player> players = setUpHandler.setUpAndReturnPlayers(compileHolderObjects(playerNames, wonders));
+		ArrayList<Player> players = setUpHandler.setUpAndReturnPlayers(playerNames);
 
 		for (int i = 0; i < players.size(); i++) {
 			assertEquals(playerNames.get(i), players.get(i).getName());
@@ -79,7 +77,7 @@ public class SetupBackendTest {
 						WonderType.MAUSOLEUM, WonderType.GARDENS, WonderType.PYRAMIDS));
 
 		SetUpPlayerHandler setUpHandler = new SetUpPlayerHandler();
-		ArrayList<Player> players = setUpHandler.setUpAndReturnPlayers(compileHolderObjects(playerNames, wonders));
+		ArrayList<Player> players = setUpHandler.setUpAndReturnPlayers(playerNames);
 
 		for (int i = 0; i < players.size(); i++) {
 			assertEquals(playerNames.get(i), players.get(i).getName());
@@ -92,7 +90,7 @@ public class SetupBackendTest {
 		ArrayList<WonderType> wonders = new ArrayList<WonderType>();
 
 		SetUpPlayerHandler setUpHandler = new SetUpPlayerHandler();
-		setUpHandler.setUpAndReturnPlayers(compileHolderObjects(playerNames, wonders));
+		setUpHandler.setUpAndReturnPlayers(playerNames);
 		fail();
 	}
 
@@ -105,7 +103,7 @@ public class SetupBackendTest {
 						WonderType.MAUSOLEUM, WonderType.GARDENS, WonderType.PYRAMIDS, WonderType.PYRAMIDS));
 
 		SetUpPlayerHandler setUpHandler = new SetUpPlayerHandler();
-		setUpHandler.setUpAndReturnPlayers(compileHolderObjects(playerNames, wonders));
+		setUpHandler.setUpAndReturnPlayers(playerNames);
 		fail();
 	}
 
@@ -117,7 +115,7 @@ public class SetupBackendTest {
 				Arrays.asList(WonderType.COLOSSUS, WonderType.LIGHTHOUSE, WonderType.TEMPLE));
 
 		SetUpPlayerHandler setUpHandler = new SetUpPlayerHandler();
-		ArrayList<Player> players = setUpHandler.createPlayers(compileHolderObjects(playerNames, wonders));
+		ArrayList<Player> players = setUpHandler.createPlayers(playerNames);
 
 		for (int i = 0; i < players.size(); i++) {
 			assertEquals(playerNames.get(i), players.get(i).getName());
@@ -132,7 +130,7 @@ public class SetupBackendTest {
 				Arrays.asList(WonderType.COLOSSUS, WonderType.LIGHTHOUSE, WonderType.TEMPLE));
 
 		SetUpPlayerHandler setUpHandler = new SetUpPlayerHandler();
-		ArrayList<Player> players = setUpHandler.createPlayers(compileHolderObjects(playerNames, wonders));
+		ArrayList<Player> players = setUpHandler.createPlayers(playerNames);
 
 		for (int i = 0; i < players.size(); i++) {
 			assertEquals(playerNames.get(i), players.get(i).getName());
@@ -148,20 +146,10 @@ public class SetupBackendTest {
 						WonderType.MAUSOLEUM, WonderType.GARDENS, WonderType.PYRAMIDS));
 
 		SetUpPlayerHandler setUpHandler = new SetUpPlayerHandler();
-		ArrayList<Player> players = setUpHandler.createPlayers(compileHolderObjects(playerNames, wonders));
+		ArrayList<Player> players = setUpHandler.createPlayers(playerNames);
 
 		for (int i = 0; i < players.size(); i++) {
 			assertEquals(playerNames.get(i), players.get(i).getName());
 		}
-	}
-	
-	private ArrayList<PlayerInformationHolder> compileHolderObjects(ArrayList<String> playerNames, ArrayList<WonderType> wonders){
-		ArrayList<PlayerInformationHolder> holders = new ArrayList<PlayerInformationHolder>();
-		
-		for (int i = 0; i < playerNames.size(); i++){
-			PlayerInformationHolder currentHolder = new PlayerInformationHolder(playerNames.get(i), wonders.get(i), 'a');
-			holders.add(currentHolder);
-		}
-		return holders;
 	}
 }
