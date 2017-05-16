@@ -3,6 +3,7 @@ package main;
 import java.util.ResourceBundle;
 
 import backend.GameManager;
+import constants.GeneralEnums.RawResource;
 import constants.GeneralEnums.Resource;
 import dataStructures.playerData.Player;
 import utils.Message;
@@ -24,10 +25,10 @@ public class TradeHelper {
 		int currentIndex = this.gameManager.getPlayers().indexOf(tradeFrom);
 
 		if (splitValue[0].equals("Right")) {
-			int offsetRight = (currentIndex - 1 + this.gameManager.getNumPlayers());
+			int offsetRight = (currentIndex + 1 + this.gameManager.getNumPlayers());
 			tradeTo = this.gameManager.getPlayer(offsetRight % this.gameManager.getNumPlayers());
 		} else {
-			int offsetLeft = (currentIndex + 1 + this.gameManager.getNumPlayers());
+			int offsetLeft = (currentIndex - 1 + this.gameManager.getNumPlayers());
 			tradeTo = this.gameManager.getPlayer(offsetLeft % this.gameManager.getNumPlayers());
 		}
 
@@ -41,14 +42,13 @@ public class TradeHelper {
 
 	private Enum translateStringToEnum(String resource) {
 		if (resource.equals("Lumber")) {
-			return Resource.LUMBER;
+			return RawResource.LUMBER;
 		} else if (resource.equals("Stone")) {
-			return Resource.STONE;
+			return RawResource.STONE;
 		} else if (resource.equals("Ore")) {
-			return Resource.ORE;
+			return RawResource.ORE;
 		}
-		return Resource.CLAY;
-
+		return RawResource.CLAY;
 	}
 
 }
