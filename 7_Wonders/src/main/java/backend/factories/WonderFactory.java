@@ -3,6 +3,7 @@ package backend.factories;
 import java.util.ArrayList;
 
 import dataStructures.gameMaterials.Wonder.WonderType;
+import exceptions.NoMoreWondersException;
 
 public class WonderFactory {
 	private ArrayList<WonderType> remainingWonders;
@@ -15,6 +16,9 @@ public class WonderFactory {
 	}
 
 	public WonderType getWonder() {
+		if (isOutOfWonders()) {
+			throw new NoMoreWondersException("There are no more unique wonders left.");
+		}
 		int index = getRandomIndex();
 		decrementNumRemainingWonders();
 		return removeAtIndex(index);
@@ -26,7 +30,7 @@ public class WonderFactory {
 		int index = (int) Math.round(correctedRandomNum);
 		return index;
 	}
-	
+
 	public void decrementNumRemainingWonders() {
 		this.numRemainingWonders--;
 	}
