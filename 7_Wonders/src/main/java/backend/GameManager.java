@@ -33,7 +33,7 @@ public class GameManager {
 	private PlayerTurnHandler playerTurnHandler;
 	
 	private ResourceBundle messages = Translate.getNewResourceBundle();
-	
+
 	private Rotation currentDirection = Rotation.CLOCKWISE;
 
 	public GameManager(ArrayList<String> names) {
@@ -80,7 +80,7 @@ public class GameManager {
 	}
 
 	public void buildStructure(Card card) {
-		this.playerTurnHandler.buildStructure(getCurrentPlayer(), card);
+		this.playerTurnHandler.buildStructure(getCurrentPlayer(), card, this.board);
 	}
 
 	public void changeRotateDirectionAndResetPositions(Rotation direction) {
