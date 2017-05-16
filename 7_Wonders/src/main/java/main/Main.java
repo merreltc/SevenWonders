@@ -71,7 +71,7 @@ public class Main extends JPanel implements ActionListener {
 	public void onClick(Interactable clicked) {
 		String text = clicked.getValue();
 		String classString = current.getClass().getName();
-		String currentMenu = classString.substring(14);
+		String currentMenu = classString.substring(10);
 		switch (currentMenu) {
 		case "MainMenu":
 			switchMenu(MenuType.PlayerSelect);
@@ -80,7 +80,7 @@ public class Main extends JPanel implements ActionListener {
 			numOfPlayers = Integer.parseInt(text);
 			switchMenu(MenuType.Game);
 			break;
-		case "Game":
+		case "GameDisplay":
 			this.current.onClick(clicked);
 			break;
 		}

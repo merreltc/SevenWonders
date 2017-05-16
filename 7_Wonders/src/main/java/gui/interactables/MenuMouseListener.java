@@ -15,6 +15,7 @@ public class MenuMouseListener implements MouseListener {
 		this.menu = menu;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public void mouseClicked(MouseEvent mouseEvent) {
 		ArrayList<Interactable> buttons = (ArrayList<Interactable>) menu.getActiveButtons().clone();
