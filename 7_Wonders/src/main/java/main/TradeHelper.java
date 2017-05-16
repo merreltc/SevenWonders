@@ -1,12 +1,16 @@
 package main;
 
+import java.util.ResourceBundle;
+
 import backend.GameManager;
 import constants.GeneralEnums.Resource;
 import dataStructures.playerData.Player;
 import utils.Message;
+import utils.Translate;
 
 public class TradeHelper {
 	private GameManager gameManager;
+	private ResourceBundle messages = Translate.getNewResourceBundle();
 
 	public TradeHelper(GameManager gameManager) {
 		this.gameManager = gameManager;
@@ -29,7 +33,7 @@ public class TradeHelper {
 
 		try {
 			this.gameManager.tradeForEntity(tradeFrom, tradeTo, resourceEnum);
-			Message.showMessage("Trade Successful");
+			Message.showMessage(this.messages.getString("tradeSuccess"));
 		} catch (Exception e) {
 			Message.showMessage(e.getMessage());
 		}
