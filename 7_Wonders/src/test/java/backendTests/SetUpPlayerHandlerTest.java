@@ -9,10 +9,8 @@ import java.util.Arrays;
 
 import org.junit.Test;
 
-import backend.GameManager;
 import backend.handlers.SetUpPlayerHandler;
 import constants.GeneralEnums.GameMode;
-import dataStructures.gameMaterials.Wonder.WonderType;
 import dataStructures.playerData.Player;
 
 public class SetUpPlayerHandlerTest {
@@ -71,5 +69,70 @@ public class SetUpPlayerHandlerTest {
 		SetUpPlayerHandler setUpHandler = new SetUpPlayerHandler(GameMode.EASY);
 		setUpHandler.setUpAndReturnPlayers(playerNames);
 		fail();
+	}
+
+	@Test
+	public void testSetUpReturnsPlayerNamesMin() {
+		ArrayList<String> playerNames = new ArrayList<String>(
+				Arrays.asList("Wolverine", "Captain America", "Black Widow"));
+
+		SetUpPlayerHandler setUpHandler = new SetUpPlayerHandler(GameMode.EASY);
+		ArrayList<Player> players = setUpHandler.setUpAndReturnPlayers(playerNames);
+
+		for (int i = 0; i < players.size(); i++) {
+			assertEquals(playerNames.get(i), players.get(i).getName());
+		}
+	}
+
+	@Test
+	public void testSetUpReturnsPlayerNamesMax() {
+		ArrayList<String> playerNames = new ArrayList<String>(
+				Arrays.asList("Wolverine", "Captain America", "Black Widow", "Hulk", "Iron Man", "Spider Man", "Thor"));
+
+		SetUpPlayerHandler setUpHandler = new SetUpPlayerHandler(GameMode.EASY);
+		ArrayList<Player> players = setUpHandler.setUpAndReturnPlayers(playerNames);
+
+		for (int i = 0; i < players.size(); i++) {
+			assertEquals(playerNames.get(i), players.get(i).getName());
+		}
+	}
+
+	@Test
+	public void testCreatePlayersMinNumPlayers() {
+		ArrayList<String> playerNames = new ArrayList<String>(
+				Arrays.asList("Wolverine", "Captain America", "Black Widow"));
+
+		SetUpPlayerHandler setUpHandler = new SetUpPlayerHandler(GameMode.EASY);
+		ArrayList<Player> players = setUpHandler.createPlayers(playerNames);
+
+		for (int i = 0; i < players.size(); i++) {
+			assertEquals(playerNames.get(i), players.get(i).getName());
+		}
+	}
+
+	@Test
+	public void testCreateNamedPlayersMin() {
+		ArrayList<String> playerNames = new ArrayList<String>(
+				Arrays.asList("Wolverine", "Captain America", "Black Widow"));
+
+		SetUpPlayerHandler setUpHandler = new SetUpPlayerHandler(GameMode.EASY);
+		ArrayList<Player> players = setUpHandler.createPlayers(playerNames);
+
+		for (int i = 0; i < players.size(); i++) {
+			assertEquals(playerNames.get(i), players.get(i).getName());
+		}
+	}
+
+	@Test
+	public void testCreateNamedPlayersMax() {
+		ArrayList<String> playerNames = new ArrayList<String>(
+				Arrays.asList("Wolverine", "Captain America", "Black Widow", "Hulk", "Iron Man", "Spider Man", "Thor"));
+
+		SetUpPlayerHandler setUpHandler = new SetUpPlayerHandler(GameMode.EASY);
+		ArrayList<Player> players = setUpHandler.createPlayers(playerNames);
+
+		for (int i = 0; i < players.size(); i++) {
+			assertEquals(playerNames.get(i), players.get(i).getName());
+		}
 	}
 }
