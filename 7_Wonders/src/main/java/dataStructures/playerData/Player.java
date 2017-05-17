@@ -116,8 +116,7 @@ public class Player {
 			chipType = "-1";
 			break;
 		default:
-			String msg = Translate.prepareStringWithNoArgs("BadCoinType", messages);
-			throw new IllegalArgumentException(msg);
+			throw new IllegalArgumentException("Bad CoinType");
 		}
 
 		if (numChips <= -1 || numChips > max) {
@@ -180,19 +179,17 @@ public class Player {
 				coinType = "5";
 				break;
 			default:
-				String msg = Translate.prepareStringWithNoArgs("BadCoinType", messages);
-				throw new IllegalArgumentException(msg);
+				throw new IllegalArgumentException("Bad CoinType");
 			}
 
-			String msg = Translate.prepareStringTemplateWithIntAndStringArg(numCoins, coinType, "cannotRemoveCoins", messages);
-			throw new IllegalArgumentException(msg);
+			throw new IllegalArgumentException("Cannot remove " + numCoins + " value " + coinType + " coins");
 		}
 
 		int numCoinsToCheck = getNumOfCoinValue(type);
 		String coinType = coinTypeToString(type);
 
 		if (numCoins > numCoinsToCheck) {
-			String msg = Translate.prepareStringTemplateWithIntAndStringArg(numCoins, coinType, "notEnoughCoins", messages);
+			String msg = Translate.prepareStringTemplateWithIntAndStringArg(numCoins, coinType, "notEnoughCoinsTemplate", messages);
 			throw new InsufficientFundsException(msg);
 		}
 	}
