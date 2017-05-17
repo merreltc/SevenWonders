@@ -579,6 +579,22 @@ public class PlayerTest {
 
 		assertTrue(player.storagePileContainsEntity(RawResource.LUMBER));
 	}
+	
+	@Test
+	public void testStoragePileContainsResourceHasEastTradingPost() {
+		Player player = new Player("Jane Doe", WonderType.COLOSSUS);
+		ArrayList<Card> deckCards = new SetUpDeckHandler().createCards(Age.AGE1, 3);
+
+		ArrayList<Card> playerCards = new ArrayList<Card>();
+		playerCards.add(deckCards.get(12));
+		playerCards.add(deckCards.get(0));
+		playerCards.add(deckCards.get(1));
+		playerCards.add(deckCards.get(2));
+
+		player.setStoragePile(playerCards);
+
+		assertTrue(player.storagePileContainsEntity(RawResource.LUMBER));
+	}
 
 	@Test
 	public void testStoragePileContainsCardByName() {
