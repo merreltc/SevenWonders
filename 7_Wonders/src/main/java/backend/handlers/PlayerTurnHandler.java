@@ -83,10 +83,6 @@ public class PlayerTurnHandler {
 						costfound = true;
 						numcost -= effect.getEntities().get(key);
 						usedEntities.add(sCards);
-
-						if (numcost <= 0) {
-							break;
-						}
 					}
 				}
 			}

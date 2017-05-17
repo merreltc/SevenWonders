@@ -477,10 +477,31 @@ public class GameBoardTests {
 
 		GameBoard board = new GameBoard(players, deck);
 		Player active = players.get(0);
+		active.addValue3(12, Chip.ChipType.COIN);
+		board.giveNumCoins(active, 1);
+		assertTrue(board.makeChangeForValue1Coins(active, 36));
+		assertEquals(40, active.getNumValue1Coins());
+		assertEquals(0, active.getNumValue3Coins());
+		assertEquals(0, board.getTotalValue1CoinsInBank());
+		assertEquals(36, board.getTotalValue3CoinsInBank());
+	}
+	
+	@Test
+	public void testMakeChangeForValue1CoinsJustEnoughInBank(){
+		ArrayList<Player> players = new ArrayList<Player>();
+		players.add(new Player("Wolverine", WonderType.COLOSSUS));
+		players.add(new Player("Captain America", WonderType.LIGHTHOUSE));
+		players.add(new Player("Black Widow", WonderType.PYRAMIDS));
+
+		ArrayList<Card> cards = new SetUpDeckHandler().createCards(Age.AGE1, 3);
+		Deck deck = new Deck(Age.AGE1, cards);
+
+		GameBoard board = new GameBoard(players, deck);
+		Player active = players.get(0);
 		active.addValue3(14, Chip.ChipType.COIN);
 		
 		try{
-			board.makeChangeForValue1Coins(active, 42);
+			board.makeChangeForValue1Coins(active, 46);
 		}catch (InsufficientFundsException e){
 			assertEquals("Not enough value 1 coins left in bank", e.getMessage());
 		}
