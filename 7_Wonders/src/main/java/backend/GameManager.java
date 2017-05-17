@@ -134,6 +134,7 @@ public class GameManager {
 					this.turnHandler.endAge(this.getPlayers(), Age.AGE1);
 				} else {
 					newDeck = this.setUpDeckHandler.createDeck(Age.AGE3, getNumPlayers());
+					this.currentDirection = Rotation.CLOCKWISE;
 					this.turnHandler.endAge(this.getPlayers(), Age.AGE2);
 				}
 

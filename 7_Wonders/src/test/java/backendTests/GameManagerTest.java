@@ -817,11 +817,9 @@ public class GameManagerTest {
 
 		assertEquals(7, manager.getCurrentPlayer().getCurrentHand().size());
 
-		for (int calls = 4; calls >= 0; calls--) {
-			mockExpectTurnHandlerCalls(turnHandler, calls);
+		for (int calls = 5; calls >= 0; calls--) {
+			mockExpectTurnHandlerCalls(turnHandler);
 		}
-
-		mockExpectTurnHandlerCalls(turnHandler, 4);
 
 		turnHandler.dealInitialTurnCards(manager.getPlayers(), 3, deck2);
 		manager.rotateCounterClockwise();
@@ -860,16 +858,17 @@ public class GameManagerTest {
 				new SetUpDeckHandler(), turnHandler, new PlayerTurnHandler());
 		manager.getGameBoard().setDeck(deck2);
 		manager.dealInitialTurnCards();
+		manager.changeRotateDirectionAndResetPositions(Rotation.COUNTERCLOCKWISE);
 
 		ArrayList<Card> previousCurrentCards = manager.getCurrentPlayer().getCurrentHand();
 
 		assertEquals(7, manager.getCurrentPlayer().getCurrentHand().size());
 
 		for (int calls = 4; calls >= 0; calls--) {
-			mockExpectTurnHandlerCalls(turnHandler, calls);
+			mockExpectTurnHandlerCalls(turnHandler);
 		}
 
-		mockExpectTurnHandlerCalls(turnHandler, 4);
+		mockExpectTurnHandlerCalls(turnHandler);
 
 		turnHandler.dealInitialTurnCards(manager.getPlayers(), 3, deck3);
 
@@ -881,13 +880,14 @@ public class GameManagerTest {
 
 		assertEquals("This is the end of the Age.  Finalizing Points", manager.endCurrentPlayerTurn());
 		assertEquals(7, manager.getCurrentPlayer().getCurrentHand().size());
+		assertEquals(Rotation.CLOCKWISE, manager.getDirection());
 		assertFalse(manager.getCurrentPlayer().getCurrentHand().equals(previousCurrentCards));
 		assertEquals(Age.AGE3, manager.getGameBoard().getDeck().getAge());
 
 		EasyMock.verify(turnHandler);
 	}
 
-	private void mockExpectTurnHandlerCalls(TurnHandler turnHandler, int numTurns) {
+	private void mockExpectTurnHandlerCalls(TurnHandler turnHandler) {
 		EasyMock.expect(turnHandler.getNumPlayersUntilPass()).andReturn(2);
 		turnHandler.setNumPlayersUntilPass(1);
 		EasyMock.expect(turnHandler.getNumPlayersUntilPass()).andReturn(1);
