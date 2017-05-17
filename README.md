@@ -64,6 +64,10 @@ Cards are passed left-right-left over the three ages, so you need to keep an eye
     - Easy Mode: all players receive side A
     - Normal Mode: players can receive side A or B of a Wonder
 - [x] Number of players is chosen from valid options
+        - [x] Can play with 3 players [a relative link](7_Wonders/src/test/java/backendTests/GameManagerTest.java#L36) 
+        - [x] Can play with 7 players
+        - [x] Can't play with 0 players
+        - [x] Can't player with 8 players
 - [x] Players enter their names
 - [ ] Players are assigned random, unique wonders and sides
 - [x] Age I Deck is assembled based on number of players and shuffled
