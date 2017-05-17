@@ -36,7 +36,7 @@ public class TurnHandlerTest {
 		GameManager manager = new GameManager(playerNames, this.setUpPlayerHandler, new SetUpDeckHandler(),
 				new TurnHandler(), new PlayerTurnHandler());
 
-		Deck deck = manager.getGameBoard().getDeck();
+		Deck deck = manager.getDeck();
 		int numPlayers = 3;
 		int expectedDeckSize = deck.getNumCards() - (7 * numPlayers);
 
@@ -137,6 +137,7 @@ public class TurnHandlerTest {
 		assertEquals(5, turnHandler.getNumTurnsTilEndOfAge());
 	}
 
+	@SuppressWarnings("unchecked")
 	@Test
 	public void testGetNumPlayersUntilPass6Players() {
 		ArrayList<Player> players = setUpPlayersByNum(5);

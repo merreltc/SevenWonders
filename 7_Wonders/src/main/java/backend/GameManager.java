@@ -4,11 +4,12 @@ import java.util.ArrayList;
 
 import backend.handlers.PlayerTurnHandler;
 import backend.handlers.RotateHandler;
+import backend.handlers.RotateHandler.Rotation;
 import backend.handlers.SetUpDeckHandler;
 import backend.handlers.SetUpPlayerHandler;
 import backend.handlers.TradeHandler;
 import backend.handlers.TurnHandler;
-import backend.handlers.RotateHandler.Rotation;
+import constants.GeneralEnums.GameMode;
 import dataStructures.GameBoard;
 import dataStructures.gameMaterials.Card;
 import dataStructures.gameMaterials.Deck;
@@ -32,8 +33,8 @@ public class GameManager {
 
 	private Rotation currentDirection = Rotation.CLOCKWISE;
 
-	public GameManager(ArrayList<String> names) {
-		this(names, new SetUpPlayerHandler(), new SetUpDeckHandler(), new TurnHandler(), new PlayerTurnHandler());
+	public GameManager(ArrayList<String> names, GameMode mode) {
+		this(names, new SetUpPlayerHandler(mode), new SetUpDeckHandler(), new TurnHandler(), new PlayerTurnHandler());
 	}
 
 	public GameManager(ArrayList<String> names, SetUpPlayerHandler setUpPlayerHandler,
@@ -46,16 +47,19 @@ public class GameManager {
 	}
 
 	public void setUpGame(ArrayList<String> names) {
-		ArrayList<Player> players = this.setUpPlayerHandler.setUpAndReturnPlayers(names);
-		Deck deck = this.setUpDeckHandler.createDeck(Age.AGE1, names.size());
-
-		this.board = new GameBoard(players, deck);
+		this.board = createGameBoard(names);
 		this.rotateHandler = new RotateHandler(this.board);
 		this.tradeHandler = new TradeHandler(this.board);
 	}
 	
+	public GameBoard createGameBoard(ArrayList<String> names) {
+		ArrayList<Player> players = this.setUpPlayerHandler.setUpAndReturnPlayers(names);
+		Deck deck = this.setUpDeckHandler.createDeck(Age.AGE1, names.size());
+		return new GameBoard(players, deck);
+	}
+
 	public void dealInitialTurnCards() {
-		this.turnHandler.dealInitialTurnCards(this.getPlayers(), this.getNumPlayers(), this.board.getDeck());
+		this.turnHandler.dealInitialTurnCards(this.getPlayers(), this.board.getDeck());
 	}
 
 	public void trade(Player from, Player to, int valueToTrade) {
@@ -66,6 +70,9 @@ public class GameManager {
 		if (from.storagePileContainsCardByName("East Trading Post")) {
 			int fromPosition = this.getPlayers().indexOf(from);
 			int toPosition = this.getPlayers().indexOf(to);
+
+			System.out.println("from: " + fromPosition + " to: " + toPosition);
+
 			if (++fromPosition == toPosition) {
 				this.tradeHandler.tradeFromToForEntity(from, to, entity, true);
 				return;
@@ -116,7 +123,7 @@ public class GameManager {
 				}
 
 				this.board.setDeck(newDeck);
-				this.turnHandler.dealInitialTurnCards(this.getPlayers(), this.getNumPlayers(), this.board.getDeck());
+				this.turnHandler.dealInitialTurnCards(this.getPlayers(), this.board.getDeck());
 				message = "This is the end of the Age.  Finalizing Points";
 			} else {
 				this.rotateHandler.rotateCurrentHands(getPlayers(), this.currentDirection);
@@ -135,6 +142,10 @@ public class GameManager {
 			this.rotateCounterClockwise();
 		}
 		return message;
+	}
+	
+	public Deck getDeck() {
+		return this.board.getDeck();
 	}
 
 	public int getNumPlayers() {
