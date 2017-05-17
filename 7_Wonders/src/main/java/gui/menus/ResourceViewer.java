@@ -130,7 +130,7 @@ public class ResourceViewer extends Menu {
 		graphics.drawRect(Constants.RESOURCE_VIEWER_THREE_COIN_X,
 				Constants.RESOURCE_VIEWER_THREE_COIN_Y + Constants.RESOURCE_VIEWER_ROW_HEIGHT,
 				Constants.RESOURCE_VIEWER_CELL_WIDTH, Constants.RESOURCE_VIEWER_ROW_HEIGHT);
-		Image image = this.renderer.getImage("coin");
+		Image image = this.renderer.getImage("coin3");
 		RenderImage.draw(graphics, image,
 				Constants.RESOURCE_VIEWER_THREE_COIN_X + Constants.RESOURCE_VIEWER_CELL_WIDTH / 3,
 				Constants.RESOURCE_VIEWER_THREE_COIN_Y + 5, Constants.RESOURCE_IMAGE_WIDTH,
@@ -148,7 +148,7 @@ public class ResourceViewer extends Menu {
 		graphics.drawRect(Constants.RESOURCE_VIEWER_FIVE_COIN_X,
 				Constants.RESOURCE_VIEWER_FIVE_COIN_Y + Constants.RESOURCE_VIEWER_ROW_HEIGHT,
 				Constants.RESOURCE_VIEWER_CELL_WIDTH, Constants.RESOURCE_VIEWER_ROW_HEIGHT);
-		Image image = this.renderer.getImage("coin");
+		Image image = this.renderer.getImage("coin5");
 		RenderImage.draw(graphics, image,
 				Constants.RESOURCE_VIEWER_FIVE_COIN_X + Constants.RESOURCE_VIEWER_CELL_WIDTH / 3,
 				Constants.RESOURCE_VIEWER_FIVE_COIN_Y + 5, Constants.RESOURCE_IMAGE_WIDTH,
