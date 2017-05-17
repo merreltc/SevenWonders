@@ -24,7 +24,7 @@ public class WonderFactory {
 		if (isOutOfWonders()) {
 			throw new NoMoreWondersException("There are no more unique wonders left.");
 		}
-		
+
 		int index = getRandomIndex();
 		decrementNumRemainingWonders();
 		return removeAtIndex(index);
@@ -43,7 +43,17 @@ public class WonderFactory {
 
 	public Wonder removeAtIndex(int index) {
 		WonderType type = (WonderType) this.remainingWonders.remove(index);
-		return new Wonder(Side.A, type);
+		return new Wonder(getSide(), type);
+	}
+
+	public Side getSide() {
+		if (this.mode == GameMode.EASY) {
+			return Side.A;
+		}
+
+		double randomNum = Math.random();
+		int sideAOrB = (int) Math.round(randomNum);
+		return sideAOrB == 0 ? Side.A : Side.B;
 	}
 
 	private void buildWonderSet(ArrayList<WonderType> wonders) {

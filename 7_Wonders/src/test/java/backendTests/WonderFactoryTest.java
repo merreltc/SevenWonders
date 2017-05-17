@@ -49,7 +49,18 @@ public class WonderFactoryTest {
 				.withConstructor(GameMode.EASY).createMock();
 
 		expectAndReplayIndexOnly(7, factory);
-		verifySide(factory, GameMode.EASY);
+		Side[] sides = { Side.A, Side.A, Side.A, Side.A, Side.A, Side.A, Side.A };
+		verifySide(factory, GameMode.EASY, sides);
+	}
+
+	@Test
+	public void testNormalMode() {
+		WonderFactory factory = EasyMock.partialMockBuilder(WonderFactory.class).addMockedMethod("getRandomIndex")
+				.addMockedMethod("getSide").withConstructor(GameMode.NORMAL).createMock();
+
+		Side[] sides = { Side.A, Side.B, Side.A, Side.A, Side.B, Side.A, Side.B };
+		expectAndReplayIndexAndSide(7, factory, sides);
+		verifySide(factory, GameMode.NORMAL, sides);
 	}
 
 	private void expectAndReplayIndexAndRemove(int numTimesToCall, WonderFactory factory) {
@@ -58,6 +69,15 @@ public class WonderFactoryTest {
 		for (int i = 0; i < numTimesToCall; i++) {
 			EasyMock.expect(factory.getRandomIndex()).andReturn(0);
 			EasyMock.expect(factory.removeAtIndex(0)).andReturn(wonder);
+		}
+
+		EasyMock.replay(factory);
+	}
+
+	private void expectAndReplayIndexAndSide(int numTimesToCall, WonderFactory factory, Side[] sides) {
+		for (int i = 0; i < numTimesToCall; i++) {
+			EasyMock.expect(factory.getRandomIndex()).andReturn(0);
+			EasyMock.expect(factory.getSide()).andReturn(sides[i]);
 		}
 
 		EasyMock.replay(factory);
@@ -91,10 +111,12 @@ public class WonderFactoryTest {
 		EasyMock.verify(factory);
 	}
 
-	private void verifySide(WonderFactory factory, GameMode mode) {
+	private void verifySide(WonderFactory factory, GameMode mode, Side[] sides) {
+		int i = 0;
 		while (!factory.isOutOfWonders()) {
 			Wonder temp = factory.getWonder();
-			assertEquals(Side.A, temp.getSide());
+			assertEquals(sides[i], temp.getSide());
+			i++;
 		}
 	}
 }
