@@ -1,19 +1,19 @@
 package dataStructures.gameMaterials;
 
-import constants.GeneralEnums;
 import constants.GeneralEnums.Resource;
+import constants.GeneralEnums.Side;
 
 public class Wonder {
 	private WonderType type;
 	private String name;
 	private Resource resource;
-	private char side;
+	private Side side;
 
 	public enum WonderType {
 		COLOSSUS, LIGHTHOUSE, TEMPLE, GARDENS, STATUE, MAUSOLEUM, PYRAMIDS
 	}
 
-	public Wonder(char side, WonderType type) {
+	public Wonder(Side side, WonderType type) {
 		this.type = type;
 		this.name = getNameByType(type);
 		this.resource = getResourceByType(type);
@@ -32,7 +32,7 @@ public class Wonder {
 		return this.resource;
 	}
 
-	public char getSide() {
+	public Side getSide() {
 		return this.side;
 	}
 
@@ -40,11 +40,11 @@ public class Wonder {
 		return this.getNumLevels(this.side, this.type);
 	}
 
-	public int getNumLevels(char side, Wonder.WonderType type) {
-		if(side == 'A') {
+	public int getNumLevels(Side side, Wonder.WonderType type) {
+		if (side == Side.A) {
 			return 3;
 		} else {
-			switch(type) {
+			switch (type) {
 			case COLOSSUS:
 				return 2;
 			case LIGHTHOUSE:
