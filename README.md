@@ -60,7 +60,7 @@ Cards are passed left-right-left over the three ages, so you need to keep an eye
 
 ## Set Up
 - [x] Language is chosen: English or Chinese
-- [ ] Game mode is chosen (Easy or Normal)
+- [x] Game mode is chosen (Easy or Normal)
     - Easy Mode: all players receive side A
     - Normal Mode: players can receive side A or B of a Wonder
 - [x] Number of players is chosen from valid options 3-7
@@ -105,7 +105,7 @@ Cards are passed left-right-left over the three ages, so you need to keep an eye
 - Manufacture Good: (Grey) Produce displayed products (loom, glass, press)
 - Science: (Green) Award victory points at end game based on collected symbols (wheel, protractor, tablet)
     - Rules:
-        - [ ] End game victory points are equal to number of identical symbols^2 + (7 * number of sets of 3 different symbols)
+        - [x] End game victory points are equal to number of identical symbols^2 + (7 * number of sets of 3 different symbols) https://ada.csse.rose-hulman.edu/moormaet/Silver_Falcons_Seven_Wonders/blob/master/7_Wonders/src/test/java/dataStructureTests/PlayerTest.java
 
 - Civilian Structure: (Blue) Provide victory points
 - Commercial Structure: (Yellow) Provide advantages during commercial transactions (See "Commerce and Trading")
@@ -113,7 +113,7 @@ Cards are passed left-right-left over the three ages, so you need to keep an eye
 - Guild: (Purple) Provide end game victory points based on certain criteria
     - Rules:
         - [ ] Number of guild cards in the game is equal to the number of players + 2 and is kept a secret from players
-        - [ ] At the end of the game, players scores are affected by the Guild cards
+        - [x] At the end of the game, players scores are affected by the Guild cards https://ada.csse.rose-hulman.edu/moormaet/Silver_Falcons_Seven_Wonders/blob/master/7_Wonders/src/test/java/backendTests/EndGameHandlerTest.java
 
 ## Commerce and Trading
 - [x] In order to trade or build anything, player must have appropriate resources or coins in their stockpile at the beginning of the turn
