@@ -1,6 +1,7 @@
 package backend;
 
 import java.util.ArrayList;
+import java.util.ResourceBundle;
 
 import backend.handlers.PlayerTurnHandler;
 import backend.handlers.RotateHandler;
@@ -14,6 +15,7 @@ import dataStructures.gameMaterials.Card;
 import dataStructures.gameMaterials.Deck;
 import dataStructures.gameMaterials.Deck.Age;
 import dataStructures.playerData.Player;
+import utils.Translate;
 
 /**
  * Controls the actions of the game and delegates those responsibilities to
@@ -29,6 +31,8 @@ public class GameManager {
 	private RotateHandler rotateHandler;
 	private TradeHandler tradeHandler;
 	private PlayerTurnHandler playerTurnHandler;
+	
+	private ResourceBundle messages = Translate.getNewResourceBundle();
 
 	private Rotation currentDirection = Rotation.CLOCKWISE;
 
@@ -76,7 +80,7 @@ public class GameManager {
 	}
 
 	public void buildStructure(Card card) {
-		this.playerTurnHandler.buildStructure(getCurrentPlayer(), card);
+		this.playerTurnHandler.buildStructure(getCurrentPlayer(), card, this.board);
 	}
 
 	public void changeRotateDirectionAndResetPositions(Rotation direction) {
@@ -119,11 +123,11 @@ public class GameManager {
 
 				this.board.setDeck(newDeck);
 				this.turnHandler.dealInitialTurnCards(this.getPlayers(), this.getNumPlayers(), this.board.getDeck());
-				message = "This is the end of the Age.  Finalizing Points";
+				message = this.messages.getString("endOfAge");
 			} else {
 				this.rotateHandler.rotateCurrentHands(getPlayers(), this.currentDirection);
 				this.turnHandler.setNumTurnsTilEndOfAge(turnsTilEnd - 1);
-				message = "End of current rotation.  Switching Player hands.";
+				message = this.messages.getString("endOfCurrentRotation");
 			}
 
 			playersUntilPass = 3;

@@ -1,13 +1,17 @@
 package backend.handlers;
 
+import java.util.ResourceBundle;
+
 import dataStructures.GameBoard;
 import dataStructures.playerData.Chip;
 import dataStructures.playerData.Chip.ChipType;
 import dataStructures.playerData.Player;
 import exceptions.InvalidTradeException;
+import utils.Translate;
 
 public class TradeHandler {
 	private GameBoard board;
+	private ResourceBundle messages = Translate.getNewResourceBundle();
 
 	public TradeHandler(GameBoard board) {
 		this.board = board;
@@ -15,7 +19,7 @@ public class TradeHandler {
 
 	public void tradeCoinsFromTo(Player from, Player to, int valueToTrade) {
 		if (to != this.board.getPreviousPlayer() && to != this.board.getNextPlayer()) {
-			throw new InvalidTradeException("You cannot trade to this player");
+			throw new InvalidTradeException(messages.getString("cannotTradeToPlayer"));
 		}
 
 		// player's number of value 3 coins is calculated first because
@@ -66,7 +70,8 @@ public class TradeHandler {
 			}
 			from.addTradedValue(entity);
 		} else {
-			throw new InvalidTradeException("Player doesn't have the resource for trading: " + entity.toString());
+			String msg = Translate.prepareStringTemplateWithStringArg(this.messages.getString(entity.toString()), "noResourceForTradingTemplate", this.messages);
+			throw new InvalidTradeException(msg);
 		}
 	}
 }

@@ -922,7 +922,6 @@ public final class SetUpDeckTestHelper {
 		Card card;
 
 		// workers guild
-		frequency.add(-1);
 		HashMap<Enum, Integer> costs = new HashMap<Enum, Integer>();
 		costs.put(RawResource.LUMBER, 1);
 		costs.put(RawResource.CLAY, 1);
@@ -930,24 +929,20 @@ public final class SetUpDeckTestHelper {
 		costs.put(RawResource.STONE, 1);
 		cost = new Cost(CostType.RESOURCE, costs);
 		effect = new ValueEffect(EffectType.VALUE, Value.GUILD, AffectingEntity.RAWRESOURCES, Direction.NEIGHBORS, 1);
-		card = new Card("Workers Guild", frequency, CardType.GUILD, cost, effect, "None", "None");
+		card = new Card("Workers Guild", CardType.GUILD, cost, effect);
 		cards.add(card);
 
 		// craftsmens guild
-		frequency = new ArrayList<Integer>();
-		frequency.add(-1);
 		costs = new HashMap<Enum, Integer>();
 		costs.put(RawResource.ORE, 2);
 		costs.put(RawResource.STONE, 2);
 		cost = new Cost(CostType.RESOURCE, costs);
 		effect = new ValueEffect(EffectType.VALUE, Value.GUILD, AffectingEntity.MANUFACTUREDGOODS, Direction.NEIGHBORS,
 				2);
-		card = new Card("Craftsmens Guild", frequency, CardType.GUILD, cost, effect, "None", "None");
+		card = new Card("Craftsmens Guild", CardType.GUILD, cost, effect);
 		cards.add(card);
 
 		// traders guild
-		frequency = new ArrayList<Integer>();
-		frequency.add(-1);
 		costs = new HashMap<Enum, Integer>();
 		costs.put(Good.LOOM, 1);
 		costs.put(Good.PRESS, 1);
@@ -955,12 +950,10 @@ public final class SetUpDeckTestHelper {
 		cost = new Cost(CostType.GOOD, costs);
 		effect = new ValueEffect(EffectType.VALUE, Value.GUILD, AffectingEntity.COMMERCIALSTRUCTURES,
 				Direction.NEIGHBORS, 1);
-		card = new Card("Traders Guild", frequency, CardType.GUILD, cost, effect, "None", "None");
+		card = new Card("Traders Guild", CardType.GUILD, cost, effect);
 		cards.add(card);
 
 		// philosophers guild
-		frequency = new ArrayList<Integer>();
-		frequency.add(-1);
 		costs = new HashMap<Enum, Integer>();
 		costs.put(Good.LOOM, 1);
 		costs.put(Good.PRESS, 1);
@@ -968,24 +961,20 @@ public final class SetUpDeckTestHelper {
 		cost = new Cost(CostType.MULTITYPE, costs);
 		effect = new ValueEffect(EffectType.VALUE, Value.GUILD, AffectingEntity.SCIENTIFICSTRUCTURES,
 				Direction.NEIGHBORS, 1);
-		card = new Card("Philosophers Guild", frequency, CardType.GUILD, cost, effect, "None", "None");
+		card = new Card("Philosophers Guild", CardType.GUILD, cost, effect);
 		cards.add(card);
 
 		// Spies guild
-		frequency = new ArrayList<Integer>();
-		frequency.add(-1);
 		costs = new HashMap<Enum, Integer>();
 		costs.put(Good.GLASS, 1);
 		costs.put(RawResource.LUMBER, 3);
 		cost = new Cost(CostType.MULTITYPE, costs);
 		effect = new ValueEffect(EffectType.VALUE, Value.GUILD, AffectingEntity.MILITARYSTRUCTURES, Direction.NEIGHBORS,
 				1);
-		card = new Card("Spies Guild", frequency, CardType.GUILD, cost, effect, "None", "None");
+		card = new Card("Spies Guild", CardType.GUILD, cost, effect);
 		cards.add(card);
 
 		// strategists guild
-		frequency = new ArrayList<Integer>();
-		frequency.add(-1);
 		costs = new HashMap<Enum, Integer>();
 		costs.put(Good.LOOM, 1);
 		costs.put(RawResource.ORE, 2);
@@ -993,12 +982,10 @@ public final class SetUpDeckTestHelper {
 		cost = new Cost(CostType.MULTITYPE, costs);
 		effect = new ValueEffect(EffectType.VALUE, Value.GUILD, AffectingEntity.MILITARYSTRUCTURES, Direction.NEIGHBORS,
 				1);
-		card = new Card("Strategists Guild", frequency, CardType.GUILD, cost, effect, "None", "None");
+		card = new Card("Strategists Guild", CardType.GUILD, cost, effect);
 		cards.add(card);
 
 		// shipowners guild
-		frequency = new ArrayList<Integer>();
-		frequency.add(-1);
 		costs = new HashMap<Enum, Integer>();
 		costs.put(Good.GLASS, 1);
 		costs.put(Good.PRESS, 1);
@@ -1009,12 +996,10 @@ public final class SetUpDeckTestHelper {
 		entitiesAndAmounts.put(AffectingEntity.MANUFACTUREDGOODS, 1);
 		entitiesAndAmounts.put(AffectingEntity.GUILD, 1);
 		effect = new ValueEffect(EffectType.VALUE, Value.GUILD, entitiesAndAmounts);
-		card = new Card("Shipowners Guild", frequency, CardType.GUILD, cost, effect, "None", "None");
+		card = new Card("Shipowners Guild", CardType.GUILD, cost, effect);
 		cards.add(card);
 
 		// Scientists guild
-		frequency = new ArrayList<Integer>();
-		frequency.add(-1);
 		costs = new HashMap<Enum, Integer>();
 		costs.put(Good.PRESS, 1);
 		costs.put(RawResource.LUMBER, 2);
@@ -1025,12 +1010,10 @@ public final class SetUpDeckTestHelper {
 		entitiesAndAmounts.put(Science.WHEEL, 1);
 		entitiesAndAmounts.put(Science.TABLET, 1);
 		effect = new EntityEffect(EffectType.ENTITY, EntityType.SCIENCE, entitiesAndAmounts);
-		card = new Card("Scientists Guild", frequency, CardType.GUILD, cost, effect, "None", "None");
+		card = new Card("Scientists Guild", CardType.GUILD, cost, effect);
 		cards.add(card);
 
 		// magistrates guild
-		frequency = new ArrayList<Integer>();
-		frequency.add(-1);
 		costs = new HashMap<Enum, Integer>();
 		costs.put(Good.LOOM, 1);
 		costs.put(RawResource.LUMBER, 3);
@@ -1038,19 +1021,17 @@ public final class SetUpDeckTestHelper {
 		cost = new Cost(CostType.MULTITYPE, costs);
 		effect = new ValueEffect(EffectType.VALUE, Value.GUILD, AffectingEntity.CIVILIANSTRUCTURES, Direction.NEIGHBORS,
 				1);
-		card = new Card("Magistrates Guild", frequency, CardType.GUILD, cost, effect, "None", "None");
+		card = new Card("Magistrates Guild", CardType.GUILD, cost, effect);
 		cards.add(card);
 
 		// builders guild
-		frequency = new ArrayList<Integer>();
-		frequency.add(-1);
 		costs = new HashMap<Enum, Integer>();
 		costs.put(Good.LOOM, 1);
 		costs.put(RawResource.CLAY, 2);
 		costs.put(RawResource.STONE, 2);
 		cost = new Cost(CostType.MULTITYPE, costs);
 		effect = new ValueEffect(EffectType.VALUE, Value.GUILD, AffectingEntity.WONDERLEVEL, Direction.ALL, 1);
-		card = new Card("Builders Guild", frequency, CardType.GUILD, cost, effect, "None", "None");
+		card = new Card("Builders Guild", CardType.GUILD, cost, effect);
 		cards.add(card);
 
 		// pantheon

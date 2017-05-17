@@ -2,6 +2,7 @@ package backend.handlers;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.ResourceBundle;
 
 import constants.GeneralEnums.CostType;
 import dataStructures.GameBoard;
@@ -11,12 +12,15 @@ import dataStructures.gameMaterials.EntityEffect;
 import dataStructures.gameMaterials.ValueEffect;
 import dataStructures.playerData.Player;
 import exceptions.InsufficientFundsException;
+import utils.Translate;
 
 public class PlayerTurnHandler {
+	
+	private ResourceBundle messages = Translate.getNewResourceBundle();
 
-	public void buildStructure(Player current, Card card) {
+	public void buildStructure(Player current, Card card, GameBoard board) {
 		if (current.storagePileContainsCardByName(card.getName())) {
-			throw new IllegalArgumentException("Player already has the structure cannot build the same structure");
+			throw new IllegalArgumentException(this.messages.getString("playerHasAlreadyHasStructure"));
 		}
 
 		String previousStructure = card.getPreviousStructureName();
@@ -42,6 +46,11 @@ public class PlayerTurnHandler {
 			switch (effect.getValueType()) {
 			case VICTORYPOINT:
 				current.addNumVictoryPoints(effect.getValueAmount());
+				break;
+			case COIN:
+				if(card.getName().equals("Tavern")){
+					board.giveNumCoins(current, effect.getValueAmount());
+				}
 				break;
 			default:
 				current.addNumShields(effect.getValueAmount());
@@ -83,8 +92,7 @@ public class PlayerTurnHandler {
 			}
 
 			if (!costfound || numcost > 0) {
-				throw new InsufficientFundsException(
-						"Player doesn't not have the required items to build the structure");
+				throw new InsufficientFundsException(this.messages.getString("noRequiredItemToBuildStructure"));
 			}
 		}
 	}
