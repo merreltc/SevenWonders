@@ -141,14 +141,15 @@ public class TurnHandlerTest {
 	public void testGetNumPlayersUntilPass6Players() {
 		ArrayList<Player> players = EasyMock.partialMockBuilder(ArrayList.class).addMockedMethod("size").createMock();
 		Deck deck = EasyMock.mock(Deck.class);
-
+		
+		EasyMock.expect(deck.getCards()).andReturn(new ArrayList<Card>());
 		EasyMock.expect(players.size()).andReturn(5);
 
-		EasyMock.replay(players);
+		EasyMock.replay(players, deck);
 		TurnHandler turnHandler = new TurnHandler();
 		turnHandler.dealInitialTurnCards(players, 5, deck);
 
-		EasyMock.verify(players);
+		EasyMock.verify(players, deck);
 		assertEquals(5, turnHandler.getNumTurnsTilEndOfAge());
 	}
 

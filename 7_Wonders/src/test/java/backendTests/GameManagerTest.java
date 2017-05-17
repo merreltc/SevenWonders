@@ -878,7 +878,7 @@ public class GameManagerTest {
 			manager.endCurrentPlayerTurn();
 		}
 
-		assertEquals("This is the end of the Age.  Finalizing Points", manager.endCurrentPlayerTurn());
+		assertEquals("This is the end of the Age.  Finalizing Points.", manager.endCurrentPlayerTurn());
 		assertEquals(7, manager.getCurrentPlayer().getCurrentHand().size());
 		assertEquals(Rotation.CLOCKWISE, manager.getDirection());
 		assertFalse(manager.getCurrentPlayer().getCurrentHand().equals(previousCurrentCards));

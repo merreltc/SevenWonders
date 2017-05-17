@@ -68,9 +68,12 @@ Cards are passed left-right-left over the three ages, so you need to keep an eye
     - [x] Can play with 7 players [TestCase](7_Wonders/src/test/java/dataStructuresTests/GameManagerTest.java#L38)
 - [x] Players enter their names
 - [ ] Players are assigned random, unique wonders and sides
-- [x] Age I Deck is assembled based on number of players and shuffled
+- [x] Age I Deck is assembled based on number of players [TestCase](7_Wonders/src/test/java/backendTests/SetUpDeckHandlerTest.java#L36)
+        and shuffled [TestCase](7_Wonders/src/test/java/backendTests/DeckHandlerTest.java#L20)
 - [x] Players are dealt equal number of cards
-- [x] Each player begins with 3 value 1 coins
+    - [x] 3 Players [TestCase](7_Wonders/src/test/java/backendTests/TurnHandlerTest.java#L26)
+    - [x] 7 Players [TestCase](7_Wonders/src/test/java/backendTests/TurnHandlerTest.java#L46)
+- [x] Each player begins with 3 value 1 coins [TestCase](7_Wonders/src/test/java/dataStructuresTests/PlayerTest.java#L51)
 
 ## Decks
 - [x] Each age has a unique set of cards
@@ -90,9 +93,10 @@ Cards are passed left-right-left over the three ages, so you need to keep an eye
 - [x] Age I and II decks do not have Guild cards - covered in unique set of cards tests
 
 ## Cards
+[Card Tests](7_Wonders/src/test/java/dataStructuresTests/CardTest.java) For structure related things see [Building Structure](#L172)
 - [x] Name and type of structure/resource (See "Card Types")
 - [x] Cost of building the structure
-- [ ] The effect caused by building the structure
+- [x] The effect caused by building the structure - See below on building structure
 - [x] Previous structures that allow this structure to be built for free
 - [x] Future structures that can be built free is this card has already been built
 
@@ -144,6 +148,7 @@ Cards are passed left-right-left over the three ages, so you need to keep an eye
 - [x] A tie results in no tokens for either city
 
 ## Player Stats
+[Player Tests](7_Wonders/src/test/java/dataStructuresTests/PlayerTest.java)
 - [x] Name
 - [ ] Wonder and build level
 - [x] Value 1 and value 3 coins
@@ -155,14 +160,14 @@ Cards are passed left-right-left over the three ages, so you need to keep an eye
 ## Process of Turn
 1. Choose card from temporary hand
 2. Action
-    -  [x] Build the Structure
+    -  [x] Build the Structure - See [Building Structure](#L172) but [Tests In](7_Wonders/src/test/java/backendTests/PlayerTurnHandlerTest.java)
     -  [ ] Build the Next Level of Wonder
-    -  [x] Discard for 3 Coins
+    -  [x] Discard for 3 Coins [TestCase](7_Wonders/src/test/java/backendTests/PlayerTurnHandlerTest.java#L322)
         -  Discarded cards create a Discard Pile
         -  A card can always be chosen for discard, even if the player does not have enough resources to build it
 3. Pass temporary hand to next player
-    - [x] Temporary hand is passed to next player (excluding chosen card)
-    - [x] Pass direction is determined by Age (I: left, II: right, III: left)
+    - [x] Temporary hand is passed to next player (excluding chosen card), wait until every player chooses a card to pass [TestCase](7_Wonders/src/test/java/backendTests/GameManagerTest.java#L733)
+    - [x] Pass direction is determined by Age (I: left/clockwise [TestCase](7_Wonders/src/test/java/backendTests/GameManagerTest.java#L102), II: right/counterclockwise [TestCase](7_Wonders/src/test/java/backendTests/GameManagerTest.java#L798) but [Exact Line](7_Wonders/src/test/java/backendTests/GameManagerTest.java#L835), III: left/clockwise [TestCase](7_Wonders/src/test/java/backendTests/GameManagerTest.java#L843) but [Exact Line](7_Wonders/src/test/java/backendTests/GameManagerTest.java#L883))
 4. On the sixth turn, player has 2 cards: one is chosen, second is discarded for NO coins
 
 ## Building the Structure
@@ -272,41 +277,41 @@ Cards are passed left-right-left over the three ages, so you need to keep an eye
 ## Criteria
 **Key Code Smells from "Clean Code":**  
 * Names:  
-	> Descriptive, albeit long names  
+    > Descriptive, albeit long names  
 * Functions:  
-	> Short (extract functions where necessary)  
-	> With as few arguments as possible  
-	> Descriptive, verb names  
+    > Short (extract functions where necessary)  
+    > With as few arguments as possible  
+    > Descriptive, verb names  
 * Comments:  
-	> Explain a feature succinctly  
-	> Not overpower the code (only use when necessary)  
-	> No commented code  
+    > Explain a feature succinctly  
+    > Not overpower the code (only use when necessary)  
+    > No commented code  
 * Formatting:  
-	> Camel case functions and variable names  
-	> Ctrl-Shift-F before committing  
-	> One blank line between methods  
-	> Decreasing order of function abstraction levels  
-	> Getters/Setters at the bottom  
+    > Camel case functions and variable names  
+    > Ctrl-Shift-F before committing  
+    > One blank line between methods  
+    > Decreasing order of function abstraction levels  
+    > Getters/Setters at the bottom  
 * Demeter:  
-	> Avoid trainwrecks by extracting methods in calling code  
+    > Avoid trainwrecks by extracting methods in calling code  
 * Error Handling:  
-	> Use try-catch/RuntimeException for user-created exceptions  
-	> Descriptive messages  
-	> Don't pass/return null  
-	> Use Exceptions rather than error codes  
+    > Use try-catch/RuntimeException for user-created exceptions  
+    > Descriptive messages  
+    > Don't pass/return null  
+    > Use Exceptions rather than error codes  
 * Unit Testing:  
-	> Use BVA to test all boundaries  
-	> Single responsibility/concept per test  
+    > Use BVA to test all boundaries  
+    > Single responsibility/concept per test  
 * Classes:  
-	> Small  
-	> Single Responsibility  
-	> Object classes should be "Open for extension, Closed for modification"  
-	> Organized for change  
+    > Small  
+    > Single Responsibility  
+    > Object classes should be "Open for extension, Closed for modification"  
+    > Organized for change  
 * TDD:  
-	> Follow the following steps:  
-		1. Failing test  
-		2. Write minimal code to pass  
-		3. Refactor after major responsibility is fully tested
+    > Follow the following steps:  
+        1. Failing test  
+        2. Write minimal code to pass  
+        3. Refactor after major responsibility is fully tested
 
 **Will everyone apply all criteria?**  
 * Use of pair programming allows for good oversight by partner  
