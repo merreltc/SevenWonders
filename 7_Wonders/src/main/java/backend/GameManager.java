@@ -60,8 +60,8 @@ public class GameManager {
 	}
 
 	public void dealInitialTurnCards() {
-		this.turnHandler.dealInitialTurnCards(this.getPlayers(), this.getNumPlayers(), this.board.getDeck());
 		DeckHandler.shuffleDeck(this.board.getDeck());
+		this.turnHandler.dealInitialTurnCards(this.getPlayers(), this.getNumPlayers(), this.board.getDeck());
 	}
 
 	public void trade(Player from, Player to, int valueToTrade) {
@@ -145,8 +145,8 @@ public class GameManager {
 				}
 
 				this.board.setDeck(newDeck);
-				this.turnHandler.dealInitialTurnCards(this.getPlayers(), this.getNumPlayers(), this.board.getDeck());
 				DeckHandler.shuffleDeck(this.board.getDeck());
+				this.turnHandler.dealInitialTurnCards(this.getPlayers(), this.getNumPlayers(), this.board.getDeck());
 				message = this.messages.getString("endOfAge");
 			} else {
 				this.rotateHandler.rotateCurrentHands(getPlayers(), this.currentDirection);
