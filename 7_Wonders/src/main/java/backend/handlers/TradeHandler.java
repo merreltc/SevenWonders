@@ -70,7 +70,8 @@ public class TradeHandler {
 			}
 			from.addTradedValue(entity);
 		} else {
-			String msg = Translate.prepareStringTemplateWithStringArg(this.messages.getString(entity.toString()), "noResourceForTradingTemplate", this.messages);
+			String msg = Translate.prepareStringTemplateWithStringArg(this.messages.getString(entity.toString()),
+					"noResourceForTradingTemplate", this.messages);
 			throw new InvalidTradeException(msg);
 		}
 	}

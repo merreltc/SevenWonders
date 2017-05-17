@@ -63,23 +63,40 @@ Cards are passed left-right-left over the three ages, so you need to keep an eye
 - [ ] Game mode is chosen (Easy or Normal)
     - Easy Mode: all players receive side A
     - Normal Mode: players can receive side A or B of a Wonder
-- [x] Number of players is chosen from valid options
+- [x] Number of players is chosen from valid options 3-7
+    - [x] Can play with 3 players [TestCase](7_Wonders/src/test/java/dataStructuresTests/GameManagerTest.java#L23) 
+    - [x] Can play with 7 players [TestCase](7_Wonders/src/test/java/dataStructuresTests/GameManagerTest.java#L38)
 - [x] Players enter their names
 - [ ] Players are assigned random, unique wonders and sides
-- [x] Age I Deck is assembled based on number of players and shuffled
+- [x] Age I Deck is assembled based on number of players [TestCase](7_Wonders/src/test/java/backendTests/SetUpDeckHandlerTest.java#L36)
+        and shuffled [TestCase](7_Wonders/src/test/java/backendTests/DeckHandlerTest.java#L20)
 - [x] Players are dealt equal number of cards
-- [x] Each player begins with 3 value 1 coins
+    - [x] 3 Players [TestCase](7_Wonders/src/test/java/backendTests/TurnHandlerTest.java#L26)
+    - [x] 7 Players [TestCase](7_Wonders/src/test/java/backendTests/TurnHandlerTest.java#L46)
+- [x] Each player begins with 3 value 1 coins [TestCase](7_Wonders/src/test/java/dataStructuresTests/PlayerTest.java#L51)
 
 ## Decks
 - [x] Each age has a unique set of cards
+    - [x] Age1 Cards 
+        - [TestCase 3 Players](7_Wonders/src/test/java/backendTests/SetUpDeckHandlerTest.java#L35)
+        - [TestCase 7 Players](7_Wonders/src/test/java/backendTests/SetUpDeckHandlerTest.java#L46)
+    - [x] Age2 Cards 
+        - [TestCase 3 Players](7_Wonders/src/test/java/backendTests/SetUpDeckHandlerTest.java#L57)
+        - [TestCase 7 Players](7_Wonders/src/test/java/backendTests/SetUpDeckHandlerTest.java#L71)
+    - [x] Age3 Cards 
+        - [TestCase 3 Players](7_Wonders/src/test/java/backendTests/SetUpDeckHandlerTest.java#L85)
+        - [TestCase 7 Players](7_Wonders/src/test/java/backendTests/SetUpDeckHandlerTest.java#L98)
 - [x] Deck swaps at the end of round 6 in an age (1->2->3)
-- [ ] Age III Deck does not have raw material or manufactured goods cards
-- [x] Age I and II decks do not have Guild cards
+    - [x] Age1 to Age2 [TestCase](7_Wonders/src/test/java/backendTests/GameManagerTest.java#L798)
+    - [x] Age2 to Age3 [TestCase](7_Wonders/src/test/java/backendTests/GameManagerTest.java#L843)
+- [x] Age III Deck does not have raw material or manufactured goods cards - covered in unique set of cards tests
+- [x] Age I and II decks do not have Guild cards - covered in unique set of cards tests
 
 ## Cards
+[Card Tests](7_Wonders/src/test/java/dataStructuresTests/CardTest.java) For structure related things see [Building Structure](#building-the-structure)
 - [x] Name and type of structure/resource (See "Card Types")
 - [x] Cost of building the structure
-- [ ] The effect caused by building the structure
+- [x] The effect caused by building the structure - See below on building structure
 - [x] Previous structures that allow this structure to be built for free
 - [x] Future structures that can be built free is this card has already been built
 
@@ -100,14 +117,26 @@ Cards are passed left-right-left over the three ages, so you need to keep an eye
 
 ## Commerce and Trading
 - [x] In order to trade or build anything, player must have appropriate resources or coins in their stockpile at the beginning of the turn
-- [x] Players can only trade with neighboring cities
-- [ ] Trading a neighboring city is initially 2 coins per resource and only allows players to use that resource, not take it from their neighbors
-    - [ ] Some Commercial Structure (yellow) cards allow players to trade for certain materials for 1 coin after being built
-- [x] On a single turn, players may trade for multiple resources from both neighboring cities
-- [ ] Traded resources are only available to the player during the turn they are bought
+    - [x] Trading with a city with the incorrect materials
+        - [x] Invalid Amount of Coins [TestCase](7_Wonders/src/test/java/backendTests/TradeHandlerTest.java#L93)
+        - [x] Invalid Amount of Resources [TestCase](7_Wonders/src/test/java/backendTests/TradeHandlerTest.java#L382)
+    - [x] Trading with a city with just enough materials [TestCase](7_Wonders/src/test/java/backendTests/TradeHandlerTest.java#L468)
+    - [x] Trading with a city with more than enough materials [TestCase](7_Wonders/src/test/java/backendTests/TradeHandlerTest.java#L355)
+- [x] Players can only trade with neighboring cities 
+    - [x] Can Trade to Next Player [TestCase](7_Wonders/src/test/java/backendTests/TradeHandlerTest.java#L293)
+    - [x] Can Trade to Previous Player [TestCase](7_Wonders/src/test/java/backendTests/TradeHandlerTest.java#L314)
+    - [x] Cannot trade to other player [TestCase](7_Wonders/src/test/java/backendTests/TradeHandlerTest.java#L335)
+- [x] Trading a neighboring city is initially 2 coins per resource and only allows players to use that resource, not take it from their neighbors [TestCase](7_Wonders/src/test/java/backendTests/TradeHandlerTest.java#L407)
+    - [x] Some Commercial Structure (yellow) cards allow players to trade for certain materials for 1 coin after being built
+        [Main TestCases start at](7_Wonders/src/test/java/backendTests/GameManagerTest.java#L409) Until [L626](7_Wonders/src/test/java/backendTests/GameManagerTest.java#L626)
+        - [x] East Trading Post  [TestCase](7_Wonders/src/test/java/backendTests/TradeHandlerTest.java#L437)
+        - [x] West Trading Post
+        - [x] Marketplace
+- [x] On a single turn, players may trade for multiple resources from both neighboring cities - On GUI
+- [x] Traded resources are only available to the player during the turn they are bought [TestCase](7_Wonders/src/test/java/backendTests/GameManagerTest.java#L630)
 - [ ] Only resources produced through the city/Wonder or a neighbors raw resource or manufactured good cards can be traded
 - [ ] Players are unable to purchase resources produced by commercial structures (or some Wonders)
-- [x] Trade cannot be refused by neighboring cities
+- [x] Trade cannot be refused by neighboring cities - On GUI
 
 ## War
 - [ ] At the end of an age (following sixth rotation), players go to war with BOTH neighboring cities
@@ -119,32 +148,38 @@ Cards are passed left-right-left over the three ages, so you need to keep an eye
 - [x] A tie results in no tokens for either city
 
 ## Player Stats
+[Player Tests](7_Wonders/src/test/java/dataStructuresTests/PlayerTest.java)
 - [x] Name
 - [ ] Wonder and build level
 - [x] Value 1 and value 3 coins
 - [x] Military Shields
 - [x] Conflict Tokens
-- [ ] Victory Points
+- [x] Victory Points
 - [x] Entities (Raw Resources, Manufactured Goods, Science)
 
 ## Process of Turn
 1. Choose card from temporary hand
 2. Action
-    -  [x] Build the Structure
+    -  [x] Build the Structure - See [Building Structure](#building-the-structure) but [Tests In](7_Wonders/src/test/java/backendTests/PlayerTurnHandlerTest.java)
     -  [ ] Build the Next Level of Wonder
-    -  [x] Discard for 3 Coins
+    -  [x] Discard for 3 Coins [TestCase](7_Wonders/src/test/java/backendTests/PlayerTurnHandlerTest.java#L322)
         -  Discarded cards create a Discard Pile
         -  A card can always be chosen for discard, even if the player does not have enough resources to build it
 3. Pass temporary hand to next player
-    - [x] Temporary hand is passed to next player (excluding chosen card)
-    - [x] Pass direction is determined by Age (I: left, II: right, III: left)
+    - [x] Temporary hand is passed to next player (excluding chosen card), wait until every player chooses a card to pass [TestCase](7_Wonders/src/test/java/backendTests/GameManagerTest.java#L733)
+    - [x] Pass direction is determined by Age (I: left/clockwise [TestCase](7_Wonders/src/test/java/backendTests/GameManagerTest.java#L102), II: right/counterclockwise [TestCase](7_Wonders/src/test/java/backendTests/GameManagerTest.java#L798) but [Exact Line](7_Wonders/src/test/java/backendTests/GameManagerTest.java#L835), III: left/clockwise [TestCase](7_Wonders/src/test/java/backendTests/GameManagerTest.java#L843) but [Exact Line](7_Wonders/src/test/java/backendTests/GameManagerTest.java#L883))
 4. On the sixth turn, player has 2 cards: one is chosen, second is discarded for NO coins
 
 ## Building the Structure
-- [x] If a structure has a resource cost, the player must have sufficient resources in their stockpile or purchase them from neighbors (see "Commerce and Trading")
-- [x] If a structure has a coin cost, the player must pay that cost to the bank
+- [x] If a structure has a resource/entity cost, the player must have sufficient resources in their stockpile or purchase them from neighbors (see "Commerce and Trading")
+    - [x] Player can build structure [TestCases Begin at](7_Wonders/src/test/java/backendTests/PlayerTurnHandlerTest.java#L90)
+    - [x] Player cannot build structure [TestCase](7_Wonders/src/test/java/backendTests/PlayerTurnHandlerTest.java#L119)
+    - [x] Player had to trade first [TestCase](7_Wonders/src/test/java/backendTests/PlayerTurnHandlerTest.java#L723)
+    Other tests in same file
+- [x] If a structure has a coin cost, the player must pay that cost to the bank [TestCase](7_Wonders/src/test/java/backendTests/PlayerTurnHandlerTest.java#L61)
 - [x] If player owns a previous structure, they may build their chosen structure for free
-- [ ] Identical structures cannot be built by the same player
+- [x] Identical structures cannot be built by the same player [TestCase](7_Wonders/src/test/java/backendTests/PlayerTurnHandlerTest.java#L697)
+- [x] If a structure has no cost, the player can build it [TestCase](7_Wonders/src/test/java/backendTests/PlayerTurnHandlerTest.java#L34)
 - [x] At the end of a rotation, all player's built structures are revealed
 
 ## Building the Next Level of Wonder
@@ -242,41 +277,41 @@ Cards are passed left-right-left over the three ages, so you need to keep an eye
 ## Criteria
 **Key Code Smells from "Clean Code":**  
 * Names:  
-	> Descriptive, albeit long names  
+    > Descriptive, albeit long names  
 * Functions:  
-	> Short (extract functions where necessary)  
-	> With as few arguments as possible  
-	> Descriptive, verb names  
+    > Short (extract functions where necessary)  
+    > With as few arguments as possible  
+    > Descriptive, verb names  
 * Comments:  
-	> Explain a feature succinctly  
-	> Not overpower the code (only use when necessary)  
-	> No commented code  
+    > Explain a feature succinctly  
+    > Not overpower the code (only use when necessary)  
+    > No commented code  
 * Formatting:  
-	> Camel case functions and variable names  
-	> Ctrl-Shift-F before committing  
-	> One blank line between methods  
-	> Decreasing order of function abstraction levels  
-	> Getters/Setters at the bottom  
+    > Camel case functions and variable names  
+    > Ctrl-Shift-F before committing  
+    > One blank line between methods  
+    > Decreasing order of function abstraction levels  
+    > Getters/Setters at the bottom  
 * Demeter:  
-	> Avoid trainwrecks by extracting methods in calling code  
+    > Avoid trainwrecks by extracting methods in calling code  
 * Error Handling:  
-	> Use try-catch/RuntimeException for user-created exceptions  
-	> Descriptive messages  
-	> Don't pass/return null  
-	> Use Exceptions rather than error codes  
+    > Use try-catch/RuntimeException for user-created exceptions  
+    > Descriptive messages  
+    > Don't pass/return null  
+    > Use Exceptions rather than error codes  
 * Unit Testing:  
-	> Use BVA to test all boundaries  
-	> Single responsibility/concept per test  
+    > Use BVA to test all boundaries  
+    > Single responsibility/concept per test  
 * Classes:  
-	> Small  
-	> Single Responsibility  
-	> Object classes should be "Open for extension, Closed for modification"  
-	> Organized for change  
+    > Small  
+    > Single Responsibility  
+    > Object classes should be "Open for extension, Closed for modification"  
+    > Organized for change  
 * TDD:  
-	> Follow the following steps:  
-		1. Failing test  
-		2. Write minimal code to pass  
-		3. Refactor after major responsibility is fully tested
+    > Follow the following steps:  
+        1. Failing test  
+        2. Write minimal code to pass  
+        3. Refactor after major responsibility is fully tested
 
 **Will everyone apply all criteria?**  
 * Use of pair programming allows for good oversight by partner  

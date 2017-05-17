@@ -90,6 +90,13 @@ public class PlayerTurnHandler {
 					}
 				}
 			}
+			
+			if(numcost > 0){
+				if(current.getCurrentTrades().containsKey(key)){
+					costfound = true;
+					numcost -= current.getCurrentTrades().get(key);
+				}
+			}
 
 			if (!costfound || numcost > 0) {
 				throw new InsufficientFundsException(this.messages.getString("noRequiredItemToBuildStructure"));

@@ -14,6 +14,7 @@ import org.junit.Test;
 import backend.handlers.PlayerTurnHandler;
 import backend.handlers.SetUpDeckHandler;
 import constants.GeneralEnums.CostType;
+import constants.GeneralEnums.RawResource;
 import constants.GeneralEnums.Resource;
 import dataStructures.GameBoard;
 import dataStructures.gameMaterials.Card;
@@ -412,6 +413,44 @@ public class PlayerTurnHandlerTest {
 
 		assertEquals(2, current.getNumShields());
 	}
+	
+	@Test
+	public void testBuildStructureAddTwoShieldsSomethingNotEntity() {
+		ArrayList<Player> players = new ArrayList<Player>();
+		players.add(new Player("Wolverine", WonderType.COLOSSUS));
+		players.add(new Player("Captain America", WonderType.LIGHTHOUSE));
+		players.add(new Player("Black Widow", WonderType.PYRAMIDS));
+
+		ArrayList<Card> cards1 = new SetUpDeckHandler().createCards(Age.AGE1, 3);
+		Deck deck1 = new Deck(Age.AGE1, cards1);
+
+		ArrayList<Card> cards = new SetUpDeckHandler().createCards(Age.AGE2, 3);
+		Deck deck = new Deck(Age.AGE2, cards);
+
+		GameBoard board = new GameBoard(players, deck);
+
+		Player current = board.getCurrentPlayer();
+		ArrayList<Card> currentHand = new ArrayList<Card>();
+
+		Card stone = deck1.getCard(1);
+		Card altar = deck1.getCard(10); //alter
+		Card quarry = deck.getCard(1);
+		Card walls = deck.getCard(13);
+
+		currentHand.add(quarry);
+		currentHand.add(stone);
+		currentHand.add(walls);
+
+		current.setCurrentHand(currentHand);
+
+		PlayerTurnHandler playerTurnHandler = new PlayerTurnHandler();
+		playerTurnHandler.buildStructure(current, quarry, board);
+		playerTurnHandler.buildStructure(current, altar, board);
+		playerTurnHandler.buildStructure(current, stone, board);
+		playerTurnHandler.buildStructure(current, walls, board);
+
+		assertEquals(2, current.getNumShields());
+	}
 
 	@Test(expected = InsufficientFundsException.class)
 	public void testBuildStructureNotEnoughResourcesCanOnlyUseOneOrOther() {
@@ -648,7 +687,7 @@ public class PlayerTurnHandlerTest {
 			playerTurnHandler.buildStructure(player, cardToBuild, board);
 			fail();
 		} catch (IllegalArgumentException error) {
-			assertEquals("Player already has the structure cannot build the same structure", error.getMessage());
+			assertEquals("Cannot build Structure: Player already has the same Structure", error.getMessage());
 		}
 
 		EasyMock.verify(player, cardToBuild, cardInStorage, entityEffect, effect);
@@ -678,5 +717,32 @@ public class PlayerTurnHandlerTest {
 		playerTurnHandler.buildStructure(player, cardToBuild, board);
 
 		EasyMock.verify(player, storaged, cardToBuild);
+	}
+	
+	@Test
+	public void testValidBuildStructureResourceInTradesCost() {
+		ArrayList<Player> players = new ArrayList<Player>();
+		players.add(new Player("Wolverine", WonderType.COLOSSUS));
+		players.add(new Player("Captain America", WonderType.LIGHTHOUSE));
+		players.add(new Player("Black Widow", WonderType.PYRAMIDS));
+
+		ArrayList<Card> cards = new SetUpDeckHandler().createCards(Age.AGE1, 3);
+		Deck deck = new Deck(Age.AGE1, cards);
+
+		GameBoard board = new GameBoard(players, deck);
+
+		Player current = board.getCurrentPlayer();
+		current.addTradedValue(RawResource.STONE);
+		ArrayList<Card> currentHand = new ArrayList<Card>();
+		currentHand.add(deck.getCard(9)); // baths
+		current.setCurrentHand(currentHand);
+
+		PlayerTurnHandler playerTurnHandler = new PlayerTurnHandler();
+		playerTurnHandler.buildStructure(current, current.getCurrentHand().get(0), board);
+
+		assertEquals(1, current.getStoragePile().size());
+		assertEquals(0, current.getCurrentHand().size());
+		assertFalse(current.getCurrentHand().contains(deck.getCard(9)));
+		assertTrue(current.getStoragePile().contains(deck.getCard(9)));
 	}
 }
