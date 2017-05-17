@@ -441,6 +441,25 @@ public class EndGameHandlerTest {
 	}
 	
 	@Test
+	public void testScientistsGuildEffectWheel(){
+		
+		Message message = EasyMock.mock(Message.class);
+		
+		
+		EasyMock.expect(message.dropDownScienceSelectionMessage()).andReturn("Wheel");
+		
+		EasyMock.replay(message);
+		
+		Player player1 = new Player("Jane Doe", WonderType.COLOSSUS);
+		player1.addToStoragePile(this.createScientistsGuild());
+		
+		EndGameHandler end = new EndGameHandler();
+		end.handleScientistsGuild(player1, message);
+		
+		Assert.assertEquals(1, end.getSciencePoints(player1));
+	}
+	
+	@Test
 	public void testMagistratesGuildEffect(){
 		ArrayList<Card> cards = new ArrayList<Card>();
 		cards.add(createCivilianCard());
