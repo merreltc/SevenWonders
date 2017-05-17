@@ -87,6 +87,9 @@ public class GameManager {
 				this.tradeHandler.tradeFromToForEntity(from, to, entity, true);
 				return;
 			}
+		} else if (from.storagePileContainsCardByName("Marketplace")){
+			this.tradeHandler.tradeFromToForEntity(from, to, entity, true);
+			return;
 		}
 
 		this.tradeHandler.tradeFromToForEntity(from, to, entity, false);
