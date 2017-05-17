@@ -211,7 +211,7 @@ public class ResourceViewer extends Menu {
 		y += Constants.RESOURCE_VIEWER_TEXT_Y_OFFSET;
 		Card card = cards.get(row - 1);
 		int[] values = getRowValues(card);
-		graphics.drawString(card.getName(), Constants.RESOURCE_VIEWER_ROW_X + Constants.RESOURCE_VIEWER_CELL_WIDTH / 3,
+		graphics.drawString(messages.getString(Translate.prepareNoSpaceString(card.getName())), Constants.RESOURCE_VIEWER_ROW_X + Constants.RESOURCE_VIEWER_CELL_WIDTH / 3,
 				y);
 		for (int i = 0; i < values.length; i++) {
 			graphics.drawString(values[i] + "",

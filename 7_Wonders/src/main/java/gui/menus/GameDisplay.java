@@ -79,7 +79,7 @@ public class GameDisplay extends Menu {
 		int numOfPlayers = this.gameManager.getNumPlayers();
 		for (int i = -1; i < numOfPlayers - 1; i++) {
 			PlayerBoard board = new PlayerBoard(i, numOfPlayers,
-					this.gameManager.getPlayer((2 * numOfPlayers + i) % numOfPlayers), renderer);
+					this.gameManager.getPlayer((2 * numOfPlayers - i) % numOfPlayers), renderer);
 			this.addInteractable(board.generateResourceButton());
 			boards.add(board);
 		}
@@ -187,7 +187,7 @@ public class GameDisplay extends Menu {
 		int currentPlayerIndex = players.indexOf(currentPlayer);
 		for (int i = 0; i < players.size(); i++) {
 			boards.get(i)
-					.changePlayer(players.get((totalNumberOfPlayers + currentPlayerIndex + i - 1) % totalNumberOfPlayers));
+					.changePlayer(players.get((totalNumberOfPlayers + currentPlayerIndex - i + 1) % totalNumberOfPlayers));
 		}
 	}
 }

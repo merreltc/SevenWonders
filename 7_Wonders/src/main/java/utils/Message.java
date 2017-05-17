@@ -5,10 +5,14 @@ import java.util.ResourceBundle;
 
 import javax.swing.JOptionPane;
 
+import constants.Constants;
+
 public class Message {
 
 	public static void showMessage(String message) {
-		JOptionPane.showMessageDialog(null, message);
+		ResourceBundle messages = Translate.getNewResourceBundle();
+		changeJOptionPaneLocale();
+		JOptionPane.showMessageDialog(null, message, messages.getString("msg"), JOptionPane.PLAIN_MESSAGE);
 	}
 
 	public static String selectLanguageMessage() {
@@ -24,8 +28,9 @@ public class Message {
 
 	public static String inputPlayerNameMessage(int i) {
 		ResourceBundle messages = Translate.getNewResourceBundle();
-		String name = JOptionPane
-				.showInputDialog(Translate.prepareStringTemplateWithIntArg(i + 1, "playerNameTemplate", messages));
+		changeJOptionPaneLocale();
+		String msg = Translate.prepareStringTemplateWithIntArg(i + 1, "playerNameTemplate", messages);
+		String name = JOptionPane.showInputDialog(null, msg, messages.getString("inputPlayerName"), JOptionPane.PLAIN_MESSAGE);
 		if (name == null || name.equals("")) {
 			name = Translate.prepareStringTemplateWithIntArg(i + 1, "defaultPlayerTemplate", messages);
 		}
@@ -39,8 +44,15 @@ public class Message {
 	}
 
 	public static int selectDifficulty() {
-		Object[] objects = { "Easy", "Normal" };
-		return JOptionPane.showOptionDialog(null, "Select Your Difficulty", "Difficulty", JOptionPane.YES_NO_OPTION,
+		ResourceBundle messages = Translate.getNewResourceBundle();
+		Object[] objects = { messages.getString("easy"), messages.getString("normal") };
+		return JOptionPane.showOptionDialog(null, messages.getString("selectDifficulty"), messages.getString("difficulty"), JOptionPane.YES_OPTION,
 				JOptionPane.PLAIN_MESSAGE, null, objects, null);
+	}
+	
+	public static void changeJOptionPaneLocale() {
+		String[] country_lang = Constants.LOCALE.split("_");
+		Locale locale = new Locale(country_lang[0], country_lang[1]);
+		JOptionPane.setDefaultLocale(locale);
 	}
 }
