@@ -11,6 +11,7 @@ import org.easymock.EasyMock;
 import org.junit.Test;
 
 import backend.GameManager;
+import backend.handlers.PlayerChipHandler;
 import backend.handlers.PlayerTurnHandler;
 import backend.handlers.RotateHandler.Rotation;
 import backend.handlers.SetUpDeckHandler;
@@ -657,7 +658,7 @@ public class GameManagerTest {
 		GameManager manager = new GameManager(playerNames, new SetUpPlayerHandler(),
 				new SetUpDeckHandler(), new TurnHandler(), new PlayerTurnHandler());
 		GameBoard board = manager.getGameBoard();
-		manager.getCurrentPlayer().addValue3(1, Chip.ChipType.COIN);
+		PlayerChipHandler.addValue3(manager.getCurrentPlayer(), 1, Chip.ChipType.COIN);
 
 		assertTrue(manager.makeChangeForValue1Coins(3));
 		assertEquals(6, manager.getCurrentPlayer().getNumValue1Coins());

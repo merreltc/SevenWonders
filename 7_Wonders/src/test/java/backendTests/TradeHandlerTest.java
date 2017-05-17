@@ -6,6 +6,7 @@ import java.util.ArrayList;
 
 import org.junit.Test;
 
+import backend.handlers.PlayerChipHandler;
 import backend.handlers.SetUpDeckHandler;
 import backend.handlers.TradeHandler;
 import constants.GeneralEnums.Good;
@@ -64,7 +65,7 @@ public class TradeHandlerTest {
 		Player player1 = new Player("Jane Doe", WonderType.COLOSSUS);
 		Player player2 = new Player("Jane Doe", WonderType.COLOSSUS);
 
-		player1.addValue3(1, Chip.ChipType.COIN);
+		PlayerChipHandler.addValue3(player1, 1, Chip.ChipType.COIN);
 		TradeHandler.tradeFromToValue3(player1, player2, 1);
 
 		assertEquals(6, player2.getCoinTotal());
@@ -78,7 +79,7 @@ public class TradeHandlerTest {
 		Player player1 = new Player("Jane Doe", WonderType.COLOSSUS);
 		Player player2 = new Player("Jane Doe", WonderType.COLOSSUS);
 
-		player1.addValue3(3, Chip.ChipType.COIN);
+		PlayerChipHandler.addValue3(player1, 3, Chip.ChipType.COIN);
 		TradeHandler.tradeFromToValue3(player1, player2, 2);
 		TradeHandler.tradeFromToValue3(player1, player2, 1);
 
@@ -102,7 +103,7 @@ public class TradeHandlerTest {
 		Player player1 = new Player("Jane Doe", WonderType.COLOSSUS);
 		Player player2 = new Player("Jane Doe", WonderType.COLOSSUS);
 
-		player1.addValue3(3, Chip.ChipType.COIN);
+		PlayerChipHandler.addValue3(player1, 3, Chip.ChipType.COIN);
 
 		TradeHandler.tradeFromToValue3(player1, player2, 2);
 		TradeHandler.tradeFromToValue3(player2, player1, 1);
@@ -122,7 +123,7 @@ public class TradeHandlerTest {
 		Player player1 = new Player("Jane Doe", WonderType.COLOSSUS);
 		Player player2 = new Player("Jane Doe", WonderType.COLOSSUS);
 
-		player1.addValue3(2, Chip.ChipType.COIN);
+		PlayerChipHandler.addValue3(player1, 2, Chip.ChipType.COIN);
 
 		ArrayList<Player> players = new ArrayList<Player>();
 		players.add(player1);
@@ -151,7 +152,7 @@ public class TradeHandlerTest {
 		Player player1 = new Player("Jane Doe", WonderType.COLOSSUS);
 		Player player2 = new Player("Jane Doe", WonderType.COLOSSUS);
 
-		player1.addValue3(2, Chip.ChipType.COIN);
+		PlayerChipHandler.addValue3(player1, 2, Chip.ChipType.COIN);
 
 		ArrayList<Player> players = new ArrayList<Player>();
 		players.add(player1);
@@ -180,7 +181,7 @@ public class TradeHandlerTest {
 		Player player1 = new Player("Jane Doe", WonderType.COLOSSUS);
 		Player player2 = new Player("Jane Doe", WonderType.COLOSSUS);
 
-		player1.addValue3(2, Chip.ChipType.COIN);
+		PlayerChipHandler.addValue3(player1, 2, Chip.ChipType.COIN);
 
 		ArrayList<Player> players = new ArrayList<Player>();
 		players.add(player1);
@@ -209,7 +210,7 @@ public class TradeHandlerTest {
 		Player player1 = new Player("Jane Doe", WonderType.COLOSSUS);
 		Player player2 = new Player("Jane Doe", WonderType.COLOSSUS);
 
-		player1.addValue3(2, Chip.ChipType.COIN);
+		PlayerChipHandler.addValue3(player1, 2, Chip.ChipType.COIN);
 
 		ArrayList<Player> players = new ArrayList<Player>();
 		players.add(player1);
@@ -265,7 +266,7 @@ public class TradeHandlerTest {
 		Player player1 = new Player("Jane Doe", WonderType.COLOSSUS);
 		Player player2 = new Player("Jane Doe", WonderType.COLOSSUS);
 
-		player1.addValue3(1, Chip.ChipType.COIN);
+		PlayerChipHandler.addValue3(player1, 1, Chip.ChipType.COIN);
 
 		ArrayList<Player> players = new ArrayList<Player>();
 		players.add(player1);

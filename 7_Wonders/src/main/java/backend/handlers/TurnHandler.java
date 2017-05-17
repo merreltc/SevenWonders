@@ -34,21 +34,21 @@ public class TurnHandler {
 			Player player2 = players.get((i+1)%players.size());
 			if (player1.getNumShields() > player2.getNumShields()){
 				this.addWinningPlayersTokensByAge(player1, age);
-				player2.addValueNeg1(1, ChipType.CONFLICTTOKEN);
+				PlayerChipHandler.addValueNeg1(player2, 1, ChipType.CONFLICTTOKEN);
 			}else if (player1.getNumShields() < player2.getNumShields()){
 				this.addWinningPlayersTokensByAge(player2, age);
-				player1.addValueNeg1(1, ChipType.CONFLICTTOKEN);
+				PlayerChipHandler.addValueNeg1(player1, 1, ChipType.CONFLICTTOKEN);
 			}
 		}
 	}
 	
 	private void addWinningPlayersTokensByAge(Player winner, Age age){
 		if (age == Age.AGE1){
-			winner.addValue1(1, ChipType.CONFLICTTOKEN);
+			PlayerChipHandler.addValue1(winner, 1, ChipType.CONFLICTTOKEN);
 		}else if (age == Age.AGE2){
-			winner.addValue3(1, ChipType.CONFLICTTOKEN);
+			PlayerChipHandler.addValue3(winner, 1, ChipType.CONFLICTTOKEN);
 		}else {
-			winner.addValue5(1, ChipType.CONFLICTTOKEN);
+			PlayerChipHandler.addValue5(winner, 1, ChipType.CONFLICTTOKEN);
 		}
 	}
 
