@@ -191,6 +191,102 @@ public class EndGameHandlerTest {
 		Assert.assertEquals(4, end.getPointsFromGuildCards(player2, player1, player3));
 	}
 	
+	@Test
+	public void testStrategistsGuildEffect(){
+		ArrayList<Card> cards = new ArrayList<Card>();
+		cards.add(createMilitaryCard());
+		cards.add(createMilitaryCard());
+		
+		Player player1 = EasyMock.mock(Player.class);
+		Player player2 = EasyMock.mock(Player.class);
+		Player player3 = EasyMock.mock(Player.class);
+		
+		EasyMock.expect(player2.getCardFromEndGame(0)).andReturn(this.createStrategistsGuild());
+		EasyMock.expect(player2.getCardFromEndGame(1)).andThrow(new IllegalArgumentException(""));
+		
+		EndGameHandler end = new EndGameHandler();
+		EasyMock.expect(player1.getStoragePile()).andReturn(cards);
+		EasyMock.expect(player3.getStoragePile()).andReturn(cards);
+		EasyMock.expect(player1.getNumValueNeg1ConflictTokens()).andReturn(2);
+		EasyMock.expect(player3.getNumValueNeg1ConflictTokens()).andReturn(1);
+		
+		EasyMock.replay(player1,player2,player3);
+		
+		Assert.assertEquals(3, end.getPointsFromGuildCards(player2, player1, player3));
+	}
+	
+	@Test
+	public void testShipOwnersGuildEffect(){
+		ArrayList<Card> cards = new ArrayList<Card>();
+		cards.add(createManufacturedCard());
+		cards.add(createManufacturedCard());
+		cards.add(createRawMaterialCard());
+		cards.add(createCraftsmenGuild());
+		
+		Player player1 = EasyMock.mock(Player.class);
+		Player player2 = EasyMock.mock(Player.class);
+		Player player3 = EasyMock.mock(Player.class);
+		
+		EasyMock.expect(player2.getCardFromEndGame(0)).andReturn(this.createShipOwnersGuild());
+		EasyMock.expect(player2.getCardFromEndGame(1)).andThrow(new IllegalArgumentException(""));
+		
+		EndGameHandler end = new EndGameHandler();
+		EasyMock.expect(player2.getStoragePile()).andReturn(cards);
+		EasyMock.expect(player2.getStoragePile()).andReturn(cards);
+		EasyMock.expect(player2.getStoragePile()).andReturn(cards);
+		
+		EasyMock.replay(player1,player2,player3);
+		
+		Assert.assertEquals(4, end.getPointsFromGuildCards(player2, player1, player3));
+	}
+	
+	//TODO:  figure this out how to test Scientists guild
+
+	
+	@Test
+	public void testMagistratesGuildEffect(){
+		ArrayList<Card> cards = new ArrayList<Card>();
+		cards.add(createCivilianCard());
+		cards.add(createCivilianCard());
+		
+		Player player1 = EasyMock.mock(Player.class);
+		Player player2 = EasyMock.mock(Player.class);
+		Player player3 = EasyMock.mock(Player.class);
+		
+		EasyMock.expect(player2.getCardFromEndGame(0)).andReturn(this.createMagistratesGuild());
+		EasyMock.expect(player2.getCardFromEndGame(1)).andThrow(new IllegalArgumentException(""));
+		
+		EndGameHandler end = new EndGameHandler();
+		EasyMock.expect(player1.getStoragePile()).andReturn(cards);
+		EasyMock.expect(player3.getStoragePile()).andReturn(cards);
+		
+		EasyMock.replay(player1,player2,player3);
+		
+		Assert.assertEquals(4, end.getPointsFromGuildCards(player2, player1, player3));
+	}
+	
+	@Test
+	public void testBuildersGuildEffect(){
+		ArrayList<Card> cards = new ArrayList<Card>();
+		cards.add(createMilitaryCard());
+		cards.add(createMilitaryCard());
+		
+		Player player1 = EasyMock.mock(Player.class);
+		Player player2 = EasyMock.mock(Player.class);
+		Player player3 = EasyMock.mock(Player.class);
+		
+		EasyMock.expect(player2.getCardFromEndGame(0)).andReturn(this.createSpiesGuild());
+		EasyMock.expect(player2.getCardFromEndGame(1)).andThrow(new IllegalArgumentException(""));
+		
+		EndGameHandler end = new EndGameHandler();
+		EasyMock.expect(player1.getStoragePile()).andReturn(cards);
+		EasyMock.expect(player3.getStoragePile()).andReturn(cards);
+		
+		EasyMock.replay(player1,player2,player3);
+		
+		Assert.assertEquals(4, end.getPointsFromGuildCards(player2, player1, player3));
+	}
+	
 	private Card createWorkersGuild(){
 		HashMap<Enum, Integer> costs = new HashMap<Enum, Integer>();
 		costs.put(RawResource.LUMBER, 1);
@@ -321,7 +417,7 @@ public class EndGameHandlerTest {
 		costs.put(RawResource.CLAY, 2);
 		Cost cost = new Cost(CostType.MULTITYPE, costs);
 		Effect effect = new ValueEffect(EffectType.VALUE, Value.VICTORYPOINTS, AffectingEntity.NONE, 4);
-		Card card = new Card("Courthouse", CardType.SCIENTIFICSTRUCTURE, cost, effect);
+		Card card = new Card("Altar", CardType.CIVILIANSTRUCTURE, cost, effect);
 		return card;
 	}
 	

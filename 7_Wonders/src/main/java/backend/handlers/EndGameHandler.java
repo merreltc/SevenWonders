@@ -19,6 +19,11 @@ public class EndGameHandler {
 		for (;;){
 			try{
 				Card card = current.getCardFromEndGame(counter);
+				if (card.getName().equals("Strategists Guild")){
+					return right.getNumValueNeg1ConflictTokens() + left.getNumValueNeg1ConflictTokens();
+				}else if (card.getName().equals("Scientists Guild")){
+					//Figure this out
+				}
 				
 				if (card.getEffect().getDirection() == Direction.SELF || card.getEffect().getDirection() == Direction.ALL){
 					points += this.useEffect(card, current);
