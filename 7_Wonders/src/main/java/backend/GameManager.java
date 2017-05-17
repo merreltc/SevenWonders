@@ -150,12 +150,14 @@ public class GameManager {
 		}
 
 		this.turnHandler.setNumPlayersUntilPass(playersUntilPass - 1);
+		this.getCurrentPlayer().removeCurrentTrades();
 
 		if (this.currentDirection == Rotation.CLOCKWISE) {
 			this.rotateClockwise();
 		} else {
 			this.rotateCounterClockwise();
 		}
+		
 		return message;
 	}
 

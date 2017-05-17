@@ -627,6 +627,27 @@ public class GameManagerTest {
 	}
 	
 	@Test
+	public void testTradeFromToForGoodEmptyTradesAfterTurnEnds() {
+		ArrayList<String> playerNames = new ArrayList<String>(
+				Arrays.asList("Wolverine", "Captain America", "Black Widow"));
+
+		GameManager manager = new GameManager(playerNames, new SetUpPlayerHandler(),
+				new SetUpDeckHandler(), new TurnHandler(), new PlayerTurnHandler());
+
+		ArrayList<Card> storage = new ArrayList<Card>();
+		Deck deck = manager.getGameBoard().getDeck();
+		storage.add(deck.getCard(7));
+		storage.add(deck.getCard(8));
+
+		manager.getNextPlayer().setStoragePile(storage);
+		manager.tradeForEntity(manager.getCurrentPlayer(), manager.getNextPlayer(), Good.GLASS);
+		manager.endCurrentPlayerTurn();
+		Player previous = manager.getPreviousPlayer();
+
+		assertTrue(previous.getCurrentTrades().isEmpty());
+	}
+	
+	@Test
 	public void testMakeChangeForValue1Coins() {
 		ArrayList<String> playerNames = new ArrayList<String>(
 				Arrays.asList("Wolverine", "Captain America", "Black Widow"));
