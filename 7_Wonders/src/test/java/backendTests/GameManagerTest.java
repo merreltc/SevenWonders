@@ -702,6 +702,9 @@ public class GameManagerTest {
 		manager.discardSelectedCard(manager.getCurrentPlayer().getCurrentHand().get(0));
 
 		EasyMock.verify(playerTurnHandler);
+		
+		ArrayList<Card> age1Order = new SetUpDeckHandler().createCards(Age.AGE1, 3);
+		assertFalse(age1Order.toString().equals(manager.getGameBoard().getDeck().getCards().toString()));
 	}
 
 	@Test
@@ -901,7 +904,6 @@ public class GameManagerTest {
 
 		ArrayList<Card> cards2 = new SetUpDeckHandler().createCards(Age.AGE2, 3);
 		Deck deck2 = new Deck(Age.AGE2, cards2);
-		ArrayList<Card> cards3 = new SetUpDeckHandler().createCards(Age.AGE3, 3);
 
 		GameManager manager = new GameManager(playerNames, new SetUpPlayerHandler(),
 				new SetUpDeckHandler(), turnHandler, new PlayerTurnHandler());
@@ -922,9 +924,12 @@ public class GameManagerTest {
 			manager.endCurrentPlayerTurn();
 		}
 
+
+		ArrayList<Card> age3Order = new SetUpDeckHandler().createCards(Age.AGE3, 3);
 		assertEquals("This is the end of the Age.  Finalizing Points.", manager.endCurrentPlayerTurn());
 		assertEquals(Rotation.CLOCKWISE, manager.getDirection());
 		assertEquals(Age.AGE3, manager.getGameBoard().getDeck().getAge());
+		assertFalse(age3Order.toString().equals(manager.getGameBoard().getDeck().getCards().toString()));
 
 		EasyMock.verify(turnHandler);
 	}
