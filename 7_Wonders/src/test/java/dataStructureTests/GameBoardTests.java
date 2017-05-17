@@ -622,12 +622,12 @@ public class GameBoardTests {
 		GameBoard board = new GameBoard(players, deck);
 		Player active = players.get(0);
 
-		board.giveNumCoins(players.get(1), 72);
+		board.giveNumCoins(players.get(1), 69);
 		board.giveNumCoins(active, 10);
 		
 		assertEquals(13, active.getCoinTotal());
 		assertEquals(0, board.getTotalValue3CoinsInBank());
-		assertEquals(27, board.getTotalValue1CoinsInBank());
+		assertEquals(30, board.getTotalValue1CoinsInBank());
 	}
 	
 	@Test
