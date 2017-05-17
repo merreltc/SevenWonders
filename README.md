@@ -124,12 +124,12 @@ Cards are passed left-right-left over the three ages, so you need to keep an eye
     - [x] Cannot trade to other player [TestCase](7_Wonders/src/test/java/backendTests/TradeHandlerTest.java#L335)
 - [x] Trading a neighboring city is initially 2 coins per resource and only allows players to use that resource, not take it from their neighbors [TestCase](7_Wonders/src/test/java/backendTests/TradeHandlerTest.java#L407)
     - [x] Some Commercial Structure (yellow) cards allow players to trade for certain materials for 1 coin after being built
-        [Main TestCases start at](7_Wonders/src/test/java/backendTests/GameManager.java#L409) Until [L626](7_Wonders/src/test/java/backendTests/GameManager.java#L626)
+        [Main TestCases start at](7_Wonders/src/test/java/backendTests/GameManagerTest.java#L409) Until [L626](7_Wonders/src/test/java/backendTests/GameManagerTest.java#L626)
         - [x] East Trading Post  [TestCase](7_Wonders/src/test/java/backendTests/TradeHandlerTest.java#L437)
         - [x] West Trading Post
         - [x] Marketplace
 - [x] On a single turn, players may trade for multiple resources from both neighboring cities - On GUI
-- [x] Traded resources are only available to the player during the turn they are bought [TestCase](7_Wonders/src/test/java/backendTests/GameManager.java#L630)
+- [x] Traded resources are only available to the player during the turn they are bought [TestCase](7_Wonders/src/test/java/backendTests/GameManagerTest.java#L630)
 - [ ] Only resources produced through the city/Wonder or a neighbors raw resource or manufactured good cards can be traded
 - [ ] Players are unable to purchase resources produced by commercial structures (or some Wonders)
 - [x] Trade cannot be refused by neighboring cities - On GUI
