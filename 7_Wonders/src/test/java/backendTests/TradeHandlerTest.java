@@ -1,7 +1,6 @@
 package backendTests;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.fail;
+import static org.junit.Assert.*;
 
 import java.util.ArrayList;
 
@@ -380,7 +379,7 @@ public class TradeHandlerTest {
 	}
 
 	@Test(expected = InvalidTradeException.class)
-	public void testInvalidTrade2CoinsForSingleLumberResource() {
+	public void testInvalidTrade2CoinsForSingleOreResource() {
 		ArrayList<Player> players = new ArrayList<Player>();
 		players.add(new Player("Wolverine", WonderType.COLOSSUS));
 		players.add(new Player("Captain America", WonderType.LIGHTHOUSE));
@@ -430,6 +429,8 @@ public class TradeHandlerTest {
 		assertEquals(0, current.getNumValue3Coins());
 		assertEquals(1, (int) current.getCurrentTrades().get(Good.GLASS));
 		assertEquals(5, next.getCoinTotal());
+		assertTrue(next.getStoragePile().contains(deck.getCard(7)));
+		assertTrue(next.getStoragePile().contains(deck.getCard(8)));
 	}
 
 	@Test
@@ -461,5 +462,32 @@ public class TradeHandlerTest {
 		assertEquals(2, current.getNumValue1Coins());
 		assertEquals(1, (int) current.getCurrentTrades().get(RawResource.LUMBER));
 		assertEquals(4, right.getCoinTotal());
+	}
+	
+	@Test
+	public void testValidTrade2CoinsForSingleLumberExactResource() {
+		ArrayList<Player> players = new ArrayList<Player>();
+		players.add(new Player("Wolverine", WonderType.COLOSSUS));
+		players.add(new Player("Captain America", WonderType.LIGHTHOUSE));
+		players.add(new Player("Black Widow", WonderType.TEMPLE));
+
+		ArrayList<Card> cards = new SetUpDeckHandler().createCards(Age.AGE1, 3);
+		Deck deck = new Deck(Age.AGE1, cards);
+
+		GameBoard board = new GameBoard(players, deck);
+		TradeHandler tradeHandler = new TradeHandler(board);
+
+		Player current = board.getCurrentPlayer();
+		Player next = board.getNextPlayer();
+		ArrayList<Card> storage = new ArrayList<Card>();
+		storage.add(deck.getCard(0));
+
+		next.setStoragePile(storage);
+
+		tradeHandler.tradeFromToForEntity(current, next, RawResource.LUMBER, false);
+
+		assertEquals(0, current.getNumValue3Coins());
+		assertEquals(1, (int) current.getCurrentTrades().get(RawResource.LUMBER));
+		assertEquals(5, next.getCoinTotal());
 	}
 }
