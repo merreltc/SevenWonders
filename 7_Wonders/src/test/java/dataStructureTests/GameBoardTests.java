@@ -569,6 +569,27 @@ public class GameBoardTests {
 	}
 	
 	@Test
+	public void testGiveNumCoinsAllValue3(){
+		ArrayList<Player> players = new ArrayList<Player>();
+		players.add(new Player("Wolverine", WonderType.COLOSSUS));
+		players.add(new Player("Captain America", WonderType.LIGHTHOUSE));
+		players.add(new Player("Black Widow", WonderType.PYRAMIDS));
+
+		ArrayList<Card> cards = new SetUpDeckHandler().createCards(Age.AGE1, 3);
+		Deck deck = new Deck(Age.AGE1, cards);
+
+		GameBoard board = new GameBoard(players, deck);
+		Player active = players.get(0);
+		
+		board.giveNumCoins(active, 72);
+		
+		assertEquals(75, active.getCoinTotal());
+		assertEquals(0, board.getTotalValue3CoinsInBank());
+		assertEquals(37, board.getTotalValue1CoinsInBank());
+		assertEquals(24, active.getNumValue3Coins());
+	}
+	
+	@Test
 	public void testGiveNumCoins10(){
 		ArrayList<Player> players = new ArrayList<Player>();
 		players.add(new Player("Wolverine", WonderType.COLOSSUS));
