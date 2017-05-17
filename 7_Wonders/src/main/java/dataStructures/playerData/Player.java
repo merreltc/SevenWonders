@@ -9,9 +9,7 @@ import dataStructures.gameMaterials.Card;
 import dataStructures.gameMaterials.Effect.EffectType;
 import dataStructures.gameMaterials.EntityEffect;
 import dataStructures.gameMaterials.Wonder;
-import dataStructures.playerData.Chip.ChipType;
 import dataStructures.playerData.Chip.ChipValue;
-import exceptions.InsufficientFundsException;
 import utils.Translate;
 
 public class Player {
@@ -30,15 +28,17 @@ public class Player {
 	private PlayerChips playerChips = new PlayerChips();
 
 	public class PlayerChips {
-		public int numOfValue1Coins = 3;
-		public int numOfValue3Coins = 0;
-		public int numOfValue5Coins = 0;
-		public int numOfValue1ConflictTokens = 0;
-		public int numOfValue3ConflictTokens = 0;
-		public int numOfValue5ConflictTokens = 0;
-		public int conflictTotal = 0;
-		public int coinTotal = 3;
-		public int numOfValueNeg1ConflictTokens = 0;
+		private HashMap<ChipValue, Integer> coins = new HashMap<ChipValue, Integer>();
+		private HashMap<ChipValue, Integer> conflictTokens = new HashMap<ChipValue, Integer>();
+
+		public PlayerChips() {
+			coins.put(ChipValue.ONE, 3);
+			coins.put(ChipValue.THREE, 0);
+			conflictTokens.put(ChipValue.ONE, 0);
+			conflictTokens.put(ChipValue.THREE, 0);
+			conflictTokens.put(ChipValue.FIVE, 0);
+			conflictTokens.put(ChipValue.NEG1, 0);
+		}
 
 	}
 
@@ -62,23 +62,33 @@ public class Player {
 	}
 
 	public int getCoinTotal() {
-		return this.getPlayerChips().coinTotal;
-	}
+		int total = 0;
 
-	public int getNumValue1Coins() {
-		return this.getPlayerChips().numOfValue1Coins;
-	}
-
-	public int getNumValue3Coins() {
-		return this.getPlayerChips().numOfValue3Coins;
-	}
-
-	public int getNumValue5Coins() {
-		return this.getPlayerChips().numOfValue5Coins;
+		for (ChipValue value : this.getCoins().keySet()) {
+			if (value == ChipValue.THREE) {
+				total += (3 * this.getCoins().get(value));
+			} else {
+				total += this.getCoins().get(value);
+			}
+		}
+		return total;
 	}
 
 	public int getConflictTotal() {
-		return this.getPlayerChips().conflictTotal;
+		int total = 0;
+		
+		for (ChipValue value : this.getConflictTokens().keySet()) {
+			if (value == ChipValue.THREE) {
+				total += (3 * this.getConflictTokens().get(value));
+			} else if (value == ChipValue.FIVE) {
+				total += (5 * this.getConflictTokens().get(value));
+			} else if (value == ChipValue.NEG1) {
+				total += (-1) * this.getConflictTokens().get(value);
+			} else {
+				total += this.getConflictTokens().get(value);
+			}
+		}
+		return total;
 	}
 
 	public ArrayList<Card> getCurrentHand() {
@@ -189,23 +199,11 @@ public class Player {
 		this.numVictoryPoints += numPoints;
 	}
 
-	public int getNumValue1ConflictTokens() {
-		return this.getPlayerChips().numOfValue1ConflictTokens;
+	public HashMap<ChipValue, Integer> getConflictTokens() {
+		return this.playerChips.conflictTokens;
 	}
 
-	public int getNumValue3ConflictTokens() {
-		return this.getPlayerChips().numOfValue3ConflictTokens;
-	}
-
-	public int getNumValue5ConflictTokens() {
-		return this.getPlayerChips().numOfValue5ConflictTokens;
-	}
-
-	public int getNumValueNeg1ConflictTokens() {
-		return this.getPlayerChips().numOfValueNeg1ConflictTokens;
-	}
-
-	public PlayerChips getPlayerChips() {
-		return this.playerChips;
+	public HashMap<ChipValue, Integer> getCoins() {
+		return this.playerChips.coins;
 	}
 }

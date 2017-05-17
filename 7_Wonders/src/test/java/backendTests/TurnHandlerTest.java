@@ -19,6 +19,7 @@ import dataStructures.gameMaterials.Deck;
 import dataStructures.gameMaterials.Deck.Age;
 import dataStructures.gameMaterials.Wonder.WonderType;
 import dataStructures.playerData.Player;
+import dataStructures.playerData.Chip.ChipValue;
 
 public class TurnHandlerTest {
 
@@ -180,9 +181,10 @@ public class TurnHandlerTest {
 		TurnHandler turnHandler = new TurnHandler();
 		turnHandler.endAge(players, Age.AGE1);
 
-		Assert.assertEquals(1, players.get(0).getNumValueNeg1ConflictTokens());
-		Assert.assertEquals(2, players.get(1).getNumValue1ConflictTokens());
-		Assert.assertEquals(1, players.get(2).getNumValueNeg1ConflictTokens());
+		Assert.assertEquals(1, (int) players.get(0).getConflictTokens().get(ChipValue.NEG1));
+		Assert.assertEquals(2, (int) players.get(1).getConflictTokens().get(ChipValue.ONE));
+		Assert.assertEquals(1, (int) players.get(2).getConflictTokens().get(ChipValue.NEG1));
+	
 	}
 
 	@Test
@@ -204,13 +206,13 @@ public class TurnHandlerTest {
 		TurnHandler turnHandler = new TurnHandler();
 		turnHandler.endAge(players, Age.AGE1);
 
-		Assert.assertEquals(1, players.get(0).getNumValueNeg1ConflictTokens());
-		Assert.assertEquals(1, players.get(1).getNumValueNeg1ConflictTokens());
-		Assert.assertEquals(2, players.get(2).getNumValue1ConflictTokens());
+		Assert.assertEquals(1, (int) players.get(0).getConflictTokens().get(ChipValue.NEG1));
+		Assert.assertEquals(1, (int) players.get(1).getConflictTokens().get(ChipValue.NEG1));
+		Assert.assertEquals(2, (int) players.get(2).getConflictTokens().get(ChipValue.ONE));
 
-		Assert.assertEquals(0, players.get(0).getNumValue1ConflictTokens());
-		Assert.assertEquals(0, players.get(1).getNumValue1ConflictTokens());
-		Assert.assertEquals(0, players.get(2).getNumValueNeg1ConflictTokens());
+		Assert.assertEquals(0, (int) players.get(0).getConflictTokens().get(ChipValue.ONE));
+		Assert.assertEquals(0, (int) players.get(1).getConflictTokens().get(ChipValue.ONE));
+		Assert.assertEquals(0, (int) players.get(2).getConflictTokens().get(ChipValue.NEG1));
 	}
 
 	@Test
@@ -246,17 +248,16 @@ public class TurnHandlerTest {
 
 		TurnHandler turnHandler = new TurnHandler();
 		turnHandler.endAge(players, Age.AGE1);
-
-		Assert.assertEquals(2, players.get(0).getNumValueNeg1ConflictTokens());
-		Assert.assertEquals(1, players.get(1).getNumValueNeg1ConflictTokens());
-		Assert.assertEquals(1, players.get(1).getNumValue1ConflictTokens());
-		Assert.assertEquals(1, players.get(2).getNumValue1ConflictTokens());
-		Assert.assertEquals(1, players.get(3).getNumValueNeg1ConflictTokens());
-		Assert.assertEquals(2, players.get(4).getNumValue1ConflictTokens());
-		Assert.assertEquals(1, players.get(5).getNumValueNeg1ConflictTokens());
-		Assert.assertEquals(1, players.get(5).getNumValue1ConflictTokens());
-		Assert.assertEquals(1, players.get(6).getNumValueNeg1ConflictTokens());
-		Assert.assertEquals(1, players.get(6).getNumValue1ConflictTokens());
+		Assert.assertEquals(2, (int) players.get(0).getConflictTokens().get(ChipValue.NEG1));
+		Assert.assertEquals(1, (int) players.get(1).getConflictTokens().get(ChipValue.NEG1));
+		Assert.assertEquals(1, (int) players.get(1).getConflictTokens().get(ChipValue.ONE));
+		Assert.assertEquals(1, (int) players.get(2).getConflictTokens().get(ChipValue.ONE));
+		Assert.assertEquals(1, (int) players.get(3).getConflictTokens().get(ChipValue.NEG1));
+		Assert.assertEquals(2, (int) players.get(4).getConflictTokens().get(ChipValue.ONE));
+		Assert.assertEquals(1, (int) players.get(5).getConflictTokens().get(ChipValue.NEG1));
+		Assert.assertEquals(1, (int) players.get(5).getConflictTokens().get(ChipValue.ONE));
+		Assert.assertEquals(1, (int) players.get(6).getConflictTokens().get(ChipValue.NEG1));
+		Assert.assertEquals(1, (int) players.get(6).getConflictTokens().get(ChipValue.ONE));
 	}
 
 	@Test
@@ -278,9 +279,9 @@ public class TurnHandlerTest {
 		TurnHandler turnHandler = new TurnHandler();
 		turnHandler.endAge(players, Age.AGE2);
 
-		Assert.assertEquals(1, players.get(0).getNumValueNeg1ConflictTokens());
-		Assert.assertEquals(2, players.get(1).getNumValue3ConflictTokens());
-		Assert.assertEquals(1, players.get(2).getNumValueNeg1ConflictTokens());
+		Assert.assertEquals(1, (int) players.get(0).getConflictTokens().get(ChipValue.NEG1));
+		Assert.assertEquals(2, (int) players.get(1).getConflictTokens().get(ChipValue.THREE));
+		Assert.assertEquals(1, (int) players.get(2).getConflictTokens().get(ChipValue.NEG1));
 	}
 
 	@Test
@@ -302,13 +303,13 @@ public class TurnHandlerTest {
 		TurnHandler turnHandler = new TurnHandler();
 		turnHandler.endAge(players, Age.AGE2);
 
-		Assert.assertEquals(1, players.get(0).getNumValueNeg1ConflictTokens());
-		Assert.assertEquals(1, players.get(1).getNumValueNeg1ConflictTokens());
-		Assert.assertEquals(2, players.get(2).getNumValue3ConflictTokens());
+		Assert.assertEquals(1, (int) players.get(0).getConflictTokens().get(ChipValue.NEG1));
+		Assert.assertEquals(1, (int) players.get(1).getConflictTokens().get(ChipValue.NEG1));
+		Assert.assertEquals(2, (int) players.get(2).getConflictTokens().get(ChipValue.THREE));
 
-		Assert.assertEquals(0, players.get(0).getNumValue1ConflictTokens());
-		Assert.assertEquals(0, players.get(1).getNumValue1ConflictTokens());
-		Assert.assertEquals(0, players.get(2).getNumValueNeg1ConflictTokens());
+		Assert.assertEquals(0, (int) players.get(0).getConflictTokens().get(ChipValue.THREE));
+		Assert.assertEquals(0, (int) players.get(1).getConflictTokens().get(ChipValue.THREE));
+		Assert.assertEquals(0, (int) players.get(2).getConflictTokens().get(ChipValue.NEG1));
 	}
 
 	@Test
@@ -344,17 +345,16 @@ public class TurnHandlerTest {
 
 		TurnHandler turnHandler = new TurnHandler();
 		turnHandler.endAge(players, Age.AGE2);
-
-		Assert.assertEquals(2, players.get(0).getNumValueNeg1ConflictTokens());
-		Assert.assertEquals(1, players.get(1).getNumValueNeg1ConflictTokens());
-		Assert.assertEquals(1, players.get(1).getNumValue3ConflictTokens());
-		Assert.assertEquals(1, players.get(2).getNumValue3ConflictTokens());
-		Assert.assertEquals(1, players.get(3).getNumValueNeg1ConflictTokens());
-		Assert.assertEquals(2, players.get(4).getNumValue3ConflictTokens());
-		Assert.assertEquals(1, players.get(5).getNumValueNeg1ConflictTokens());
-		Assert.assertEquals(1, players.get(5).getNumValue3ConflictTokens());
-		Assert.assertEquals(1, players.get(6).getNumValueNeg1ConflictTokens());
-		Assert.assertEquals(1, players.get(6).getNumValue3ConflictTokens());
+		Assert.assertEquals(2, (int) players.get(0).getConflictTokens().get(ChipValue.NEG1));
+		Assert.assertEquals(1, (int) players.get(1).getConflictTokens().get(ChipValue.NEG1));
+		Assert.assertEquals(1, (int) players.get(1).getConflictTokens().get(ChipValue.THREE));
+		Assert.assertEquals(1, (int) players.get(2).getConflictTokens().get(ChipValue.THREE));
+		Assert.assertEquals(1, (int) players.get(3).getConflictTokens().get(ChipValue.NEG1));
+		Assert.assertEquals(2, (int) players.get(4).getConflictTokens().get(ChipValue.THREE));
+		Assert.assertEquals(1, (int) players.get(5).getConflictTokens().get(ChipValue.NEG1));
+		Assert.assertEquals(1, (int) players.get(5).getConflictTokens().get(ChipValue.THREE));
+		Assert.assertEquals(1, (int) players.get(6).getConflictTokens().get(ChipValue.NEG1));
+		Assert.assertEquals(1, (int) players.get(6).getConflictTokens().get(ChipValue.THREE));
 	}
 
 	@Test
@@ -376,9 +376,9 @@ public class TurnHandlerTest {
 		TurnHandler turnHandler = new TurnHandler();
 		turnHandler.endAge(players, Age.AGE3);
 
-		Assert.assertEquals(1, players.get(0).getNumValueNeg1ConflictTokens());
-		Assert.assertEquals(2, players.get(1).getNumValue5ConflictTokens());
-		Assert.assertEquals(1, players.get(2).getNumValueNeg1ConflictTokens());
+		Assert.assertEquals(1, (int) players.get(0).getConflictTokens().get(ChipValue.NEG1));
+		Assert.assertEquals(2, (int) players.get(1).getConflictTokens().get(ChipValue.FIVE));
+		Assert.assertEquals(1, (int) players.get(2).getConflictTokens().get(ChipValue.NEG1));
 	}
 
 	@Test
@@ -399,14 +399,13 @@ public class TurnHandlerTest {
 
 		TurnHandler turnHandler = new TurnHandler();
 		turnHandler.endAge(players, Age.AGE3);
+		Assert.assertEquals(1, (int) players.get(0).getConflictTokens().get(ChipValue.NEG1));
+		Assert.assertEquals(1, (int) players.get(1).getConflictTokens().get(ChipValue.NEG1));
+		Assert.assertEquals(2, (int) players.get(2).getConflictTokens().get(ChipValue.FIVE));
 
-		Assert.assertEquals(1, players.get(0).getNumValueNeg1ConflictTokens());
-		Assert.assertEquals(1, players.get(1).getNumValueNeg1ConflictTokens());
-		Assert.assertEquals(2, players.get(2).getNumValue5ConflictTokens());
-
-		Assert.assertEquals(0, players.get(0).getNumValue5ConflictTokens());
-		Assert.assertEquals(0, players.get(1).getNumValue5ConflictTokens());
-		Assert.assertEquals(0, players.get(2).getNumValueNeg1ConflictTokens());
+		Assert.assertEquals(0, (int) players.get(0).getConflictTokens().get(ChipValue.FIVE));
+		Assert.assertEquals(0, (int) players.get(1).getConflictTokens().get(ChipValue.FIVE));
+		Assert.assertEquals(0, (int) players.get(2).getConflictTokens().get(ChipValue.NEG1));
 	}
 
 	@Test
@@ -443,15 +442,15 @@ public class TurnHandlerTest {
 		TurnHandler turnHandler = new TurnHandler();
 		turnHandler.endAge(players, Age.AGE3);
 
-		Assert.assertEquals(2, players.get(0).getNumValueNeg1ConflictTokens());
-		Assert.assertEquals(1, players.get(1).getNumValueNeg1ConflictTokens());
-		Assert.assertEquals(1, players.get(1).getNumValue5ConflictTokens());
-		Assert.assertEquals(1, players.get(2).getNumValue5ConflictTokens());
-		Assert.assertEquals(1, players.get(3).getNumValueNeg1ConflictTokens());
-		Assert.assertEquals(2, players.get(4).getNumValue5ConflictTokens());
-		Assert.assertEquals(1, players.get(5).getNumValueNeg1ConflictTokens());
-		Assert.assertEquals(1, players.get(5).getNumValue5ConflictTokens());
-		Assert.assertEquals(1, players.get(6).getNumValueNeg1ConflictTokens());
-		Assert.assertEquals(1, players.get(6).getNumValue5ConflictTokens());
+		Assert.assertEquals(2, (int) players.get(0).getConflictTokens().get(ChipValue.NEG1));
+		Assert.assertEquals(1, (int) players.get(1).getConflictTokens().get(ChipValue.NEG1));
+		Assert.assertEquals(1, (int) players.get(1).getConflictTokens().get(ChipValue.FIVE));
+		Assert.assertEquals(1, (int) players.get(2).getConflictTokens().get(ChipValue.FIVE));
+		Assert.assertEquals(1, (int) players.get(3).getConflictTokens().get(ChipValue.NEG1));
+		Assert.assertEquals(2, (int) players.get(4).getConflictTokens().get(ChipValue.FIVE));
+		Assert.assertEquals(1, (int) players.get(5).getConflictTokens().get(ChipValue.NEG1));
+		Assert.assertEquals(1, (int) players.get(5).getConflictTokens().get(ChipValue.FIVE));
+		Assert.assertEquals(1, (int) players.get(6).getConflictTokens().get(ChipValue.NEG1));
+		Assert.assertEquals(1, (int) players.get(6).getConflictTokens().get(ChipValue.FIVE));
 	}
 }

@@ -26,6 +26,7 @@ import dataStructures.gameMaterials.ValueEffect;
 import dataStructures.gameMaterials.ValueEffect.ValueType;
 import dataStructures.gameMaterials.Wonder.WonderType;
 import dataStructures.playerData.Player;
+import dataStructures.playerData.Chip.ChipValue;
 import exceptions.InsufficientFundsException;
 
 public class PlayerTurnHandlerTest {
@@ -82,7 +83,7 @@ public class PlayerTurnHandlerTest {
 		assertEquals(0, current.getCurrentHand().size());
 		assertFalse(current.getCurrentHand().contains(deck.getCard(4)));
 		assertTrue(current.getStoragePile().contains(deck.getCard(4)));
-		assertEquals(0, current.getNumValue3Coins());
+		assertEquals(0, (int) current.getCoins().get(ChipValue.THREE));
 		assertEquals(2, current.getCoinTotal());
 	}
 
@@ -575,7 +576,7 @@ public class PlayerTurnHandlerTest {
 		assertEquals(0, current.getNumVictoryPoints());
 		assertEquals(0, current.getNumShields());
 		assertEquals(8, current.getCoinTotal());
-		assertEquals(1, current.getNumValue3Coins());
+		assertEquals(1, (int) current.getCoins().get(ChipValue.THREE));
 		assertTrue(current.storagePileContainsCardByName("Tavern"));
 	}
 

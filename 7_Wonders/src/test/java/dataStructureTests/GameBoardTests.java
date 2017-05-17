@@ -16,6 +16,7 @@ import dataStructures.gameMaterials.Deck.Age;
 import dataStructures.gameMaterials.Wonder.WonderType;
 import dataStructures.playerData.Chip;
 import dataStructures.playerData.Player;
+import dataStructures.playerData.Chip.ChipValue;
 import exceptions.InsufficientFundsException;
 
 public class GameBoardTests {
@@ -368,7 +369,7 @@ public class GameBoardTests {
 		Card toTest = deck.getCard(0);
 		board.addToDiscardPile(players.get(0), toTest);
 
-		assertEquals(1, players.get(0).getNumValue3Coins());
+		assertEquals(1, (int) players.get(0).getCoins().get(ChipValue.THREE));
 		assertFalse(board.getDiscardPile().isEmpty());
 		assertEquals(toTest, board.getDiscardPile().get(0));
 		assertEquals(23, board.getTotalValue3CoinsInBank());
@@ -393,7 +394,7 @@ public class GameBoardTests {
 		Card toTest = deck.getCard(0);
 		board.addToDiscardPile(players.get(0), toTest);
 
-		assertEquals(6, players.get(0).getNumValue1Coins());
+		assertEquals(6, (int) players.get(0).getCoins().get(ChipValue.ONE));
 		assertFalse(board.getDiscardPile().isEmpty());
 		assertEquals(toTest, board.getDiscardPile().get(0));
 		assertEquals(102, board.getTotalValue1CoinsInBank());
@@ -460,8 +461,8 @@ public class GameBoardTests {
 
 		PlayerChipHandler.addValue3(active, 1, Chip.ChipType.COIN);
 		assertTrue(board.makeChangeForValue1Coins(active, 3));
-		assertEquals(6, active.getNumValue1Coins());
-		assertEquals(0, active.getNumValue3Coins());
+		assertEquals(6, (int) active.getCoins().get(ChipValue.ONE));
+		assertEquals(0, (int) active.getCoins().get(ChipValue.THREE));
 		assertEquals(34, board.getTotalValue1CoinsInBank());
 		assertEquals(25, board.getTotalValue3CoinsInBank());
 	}
@@ -481,8 +482,8 @@ public class GameBoardTests {
 		PlayerChipHandler.addValue3(active, 12, Chip.ChipType.COIN);
 		board.giveNumCoins(active, 1);
 		assertTrue(board.makeChangeForValue1Coins(active, 36));
-		assertEquals(40, active.getNumValue1Coins());
-		assertEquals(0, active.getNumValue3Coins());
+		assertEquals(40, (int) active.getCoins().get(ChipValue.ONE));
+		assertEquals(0, (int) active.getCoins().get(ChipValue.THREE));
 		assertEquals(0, board.getTotalValue1CoinsInBank());
 		assertEquals(36, board.getTotalValue3CoinsInBank());
 	}
@@ -521,8 +522,8 @@ public class GameBoardTests {
 		GameBoard board = new GameBoard(players, deck);
 		Player active = players.get(0);
 		assertTrue(board.makeChangeForValue3Coins(active, 1));
-		assertEquals(0, active.getNumValue1Coins());
-		assertEquals(1, active.getNumValue3Coins());
+		assertEquals(0, (int) active.getCoins().get(ChipValue.ONE));
+		assertEquals(1, (int) active.getCoins().get(ChipValue.THREE));
 		assertEquals(40, board.getTotalValue1CoinsInBank());
 		assertEquals(23, board.getTotalValue3CoinsInBank());
 	}
@@ -587,7 +588,7 @@ public class GameBoardTests {
 		assertEquals(75, active.getCoinTotal());
 		assertEquals(0, board.getTotalValue3CoinsInBank());
 		assertEquals(37, board.getTotalValue1CoinsInBank());
-		assertEquals(24, active.getNumValue3Coins());
+		assertEquals(24, (int) active.getCoins().get(ChipValue.THREE));
 	}
 
 	@Test

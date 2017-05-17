@@ -18,6 +18,7 @@ import dataStructures.gameMaterials.Deck.Age;
 import dataStructures.gameMaterials.Wonder.WonderType;
 import dataStructures.playerData.Chip;
 import dataStructures.playerData.Player;
+import dataStructures.playerData.Chip.ChipValue;
 import exceptions.InsufficientFundsException;
 import exceptions.InvalidTradeException;
 
@@ -30,9 +31,9 @@ public class TradeHandlerTest {
 		TradeHandler.tradeFromToValue1(player1, player2, 1);
 
 		assertEquals(4, player2.getCoinTotal());
-		assertEquals(4, player2.getNumValue1Coins());
+		assertEquals(4, (int) player2.getCoins().get(ChipValue.ONE));
 		assertEquals(2, player1.getCoinTotal());
-		assertEquals(2, player1.getNumValue1Coins());
+		assertEquals(2, (int) player1.getCoins().get(ChipValue.ONE));
 
 	}
 
@@ -45,9 +46,9 @@ public class TradeHandlerTest {
 		TradeHandler.tradeFromToValue1(player1, player2, 1);
 
 		assertEquals(6, player2.getCoinTotal());
-		assertEquals(6, player2.getNumValue1Coins());
+		assertEquals(6, (int) player2.getCoins().get(ChipValue.ONE));
 		assertEquals(0, player1.getCoinTotal());
-		assertEquals(0, player1.getNumValue1Coins());
+		assertEquals(0, (int) player1.getCoins().get(ChipValue.ONE));
 
 	}
 
@@ -69,9 +70,9 @@ public class TradeHandlerTest {
 		TradeHandler.tradeFromToValue3(player1, player2, 1);
 
 		assertEquals(6, player2.getCoinTotal());
-		assertEquals(1, player2.getNumValue3Coins());
+		assertEquals(1, (int) player2.getCoins().get(ChipValue.THREE));
 		assertEquals(3, player1.getCoinTotal());
-		assertEquals(0, player1.getNumValue3Coins());
+		assertEquals(0, (int) player1.getCoins().get(ChipValue.THREE));
 	}
 
 	@Test
@@ -84,9 +85,9 @@ public class TradeHandlerTest {
 		TradeHandler.tradeFromToValue3(player1, player2, 1);
 
 		assertEquals(12, player2.getCoinTotal());
-		assertEquals(3, player2.getNumValue3Coins());
+		assertEquals(3, (int) player2.getCoins().get(ChipValue.THREE));
 		assertEquals(3, player1.getCoinTotal());
-		assertEquals(0, player1.getNumValue3Coins());
+		assertEquals(0, (int) player1.getCoins().get(ChipValue.THREE));
 	}
 
 	@Test(expected = InsufficientFundsException.class)
@@ -110,12 +111,12 @@ public class TradeHandlerTest {
 		TradeHandler.tradeFromToValue1(player2, player1, 3);
 
 		assertEquals(12, player1.getCoinTotal());
-		assertEquals(6, player1.getNumValue1Coins());
-		assertEquals(2, player1.getNumValue3Coins());
+		assertEquals(6, (int) player1.getCoins().get(ChipValue.ONE));
+		assertEquals(2, (int) player1.getCoins().get(ChipValue.THREE));
 
 		assertEquals(3, player2.getCoinTotal());
-		assertEquals(0, player2.getNumValue1Coins());
-		assertEquals(1, player2.getNumValue3Coins());
+		assertEquals(0, (int) player2.getCoins().get(ChipValue.ONE));
+		assertEquals(1, (int) player2.getCoins().get(ChipValue.THREE));
 	}
 
 	@Test
@@ -139,12 +140,12 @@ public class TradeHandlerTest {
 		tradeHandler.tradeCoinsFromTo(player1, player2, 4);
 
 		assertEquals(5, player1.getCoinTotal());
-		assertEquals(2, player1.getNumValue1Coins());
-		assertEquals(1, player1.getNumValue3Coins());
+		assertEquals(2, (int) player1.getCoins().get(ChipValue.ONE));
+		assertEquals(1, (int) player1.getCoins().get(ChipValue.THREE));
 
 		assertEquals(7, player2.getCoinTotal());
-		assertEquals(4, player2.getNumValue1Coins());
-		assertEquals(1, player2.getNumValue3Coins());
+		assertEquals(4, (int) player2.getCoins().get(ChipValue.ONE));
+		assertEquals(1, (int) player2.getCoins().get(ChipValue.THREE));
 	}
 
 	@Test
@@ -168,12 +169,12 @@ public class TradeHandlerTest {
 		tradeHandler.tradeCoinsFromTo(player1, player2, 5);
 
 		assertEquals(4, player1.getCoinTotal());
-		assertEquals(1, player1.getNumValue1Coins());
-		assertEquals(1, player1.getNumValue3Coins());
+		assertEquals(1, (int) player1.getCoins().get(ChipValue.ONE));
+		assertEquals(1, (int) player1.getCoins().get(ChipValue.THREE));
 
 		assertEquals(8, player2.getCoinTotal());
-		assertEquals(5, player2.getNumValue1Coins());
-		assertEquals(1, player2.getNumValue3Coins());
+		assertEquals(5, (int) player2.getCoins().get(ChipValue.ONE));
+		assertEquals(1, (int) player2.getCoins().get(ChipValue.THREE));
 	}
 
 	@Test
@@ -197,12 +198,12 @@ public class TradeHandlerTest {
 		tradeHandler.tradeCoinsFromTo(player1, player2, 7);
 
 		assertEquals(2, player1.getCoinTotal());
-		assertEquals(2, player1.getNumValue1Coins());
-		assertEquals(0, player1.getNumValue3Coins());
+		assertEquals(2, (int) player1.getCoins().get(ChipValue.ONE));
+		assertEquals(0, (int) player1.getCoins().get(ChipValue.THREE));
 
 		assertEquals(10, player2.getCoinTotal());
-		assertEquals(4, player2.getNumValue1Coins());
-		assertEquals(2, player2.getNumValue3Coins());
+		assertEquals(4, (int) player2.getCoins().get(ChipValue.ONE));
+		assertEquals(2, (int) player2.getCoins().get(ChipValue.THREE));
 	}
 
 	@Test
@@ -226,12 +227,12 @@ public class TradeHandlerTest {
 		tradeHandler.tradeCoinsFromTo(player1, player2, 8);
 
 		assertEquals(1, player1.getCoinTotal());
-		assertEquals(1, player1.getNumValue1Coins());
-		assertEquals(0, player1.getNumValue3Coins());
+		assertEquals(1, (int) player1.getCoins().get(ChipValue.ONE));
+		assertEquals(0, (int) player1.getCoins().get(ChipValue.THREE));
 
 		assertEquals(11, player2.getCoinTotal());
-		assertEquals(5, player2.getNumValue1Coins());
-		assertEquals(2, player2.getNumValue3Coins());
+		assertEquals(5, (int) player2.getCoins().get(ChipValue.ONE));
+		assertEquals(2, (int) player2.getCoins().get(ChipValue.THREE));
 	}
 
 	@Test
@@ -253,12 +254,12 @@ public class TradeHandlerTest {
 		tradeHandler.tradeCoinsFromTo(player1, player2, 3);
 
 		assertEquals(0, player1.getCoinTotal());
-		assertEquals(0, player1.getNumValue1Coins());
-		assertEquals(0, player1.getNumValue3Coins());
+		assertEquals(0, (int) player1.getCoins().get(ChipValue.ONE));
+		assertEquals(0, (int) player1.getCoins().get(ChipValue.THREE));
 
 		assertEquals(6, player2.getCoinTotal());
-		assertEquals(6, player2.getNumValue1Coins());
-		assertEquals(0, player2.getNumValue3Coins());
+		assertEquals(6, (int) player2.getCoins().get(ChipValue.ONE));
+		assertEquals(0, (int) player2.getCoins().get(ChipValue.THREE));
 	}
 
 	@Test
@@ -282,12 +283,12 @@ public class TradeHandlerTest {
 		tradeHandler.tradeCoinsFromTo(player1, player2, 6);
 
 		assertEquals(0, player1.getCoinTotal());
-		assertEquals(0, player1.getNumValue1Coins());
-		assertEquals(0, player1.getNumValue3Coins());
+		assertEquals(0, (int) player1.getCoins().get(ChipValue.ONE));
+		assertEquals(0, (int) player1.getCoins().get(ChipValue.THREE));
 
 		assertEquals(9, player2.getCoinTotal());
-		assertEquals(6, player2.getNumValue1Coins());
-		assertEquals(1, player2.getNumValue3Coins());
+		assertEquals(6, (int) player2.getCoins().get(ChipValue.ONE));
+		assertEquals(1, (int) player2.getCoins().get(ChipValue.THREE));
 	}
 
 	@Test
@@ -374,7 +375,7 @@ public class TradeHandlerTest {
 
 		tradeHandler.tradeFromToForEntity(current, next, RawResource.LUMBER, false);
 
-		assertEquals(0, current.getNumValue3Coins());
+		assertEquals(0, (int) current.getCoins().get(ChipValue.THREE));
 		assertEquals(1, (int) current.getCurrentTrades().get(RawResource.LUMBER));
 		assertEquals(5, next.getCoinTotal());
 	}
@@ -427,7 +428,7 @@ public class TradeHandlerTest {
 
 		tradeHandler.tradeFromToForEntity(current, next, Good.GLASS, false);
 
-		assertEquals(0, current.getNumValue3Coins());
+		assertEquals(0, (int) current.getCoins().get(ChipValue.THREE));
 		assertEquals(1, (int) current.getCurrentTrades().get(Good.GLASS));
 		assertEquals(5, next.getCoinTotal());
 		assertTrue(next.getStoragePile().contains(deck.getCard(7)));
@@ -459,7 +460,7 @@ public class TradeHandlerTest {
 
 		tradeHandler.tradeFromToForEntity(current, right, RawResource.LUMBER, true);
 
-		assertEquals(2, current.getNumValue1Coins());
+		assertEquals(2, (int) current.getCoins().get(ChipValue.ONE));
 		assertEquals(1, (int) current.getCurrentTrades().get(RawResource.LUMBER));
 		assertEquals(4, right.getCoinTotal());
 	}
@@ -486,7 +487,7 @@ public class TradeHandlerTest {
 
 		tradeHandler.tradeFromToForEntity(current, next, RawResource.LUMBER, false);
 
-		assertEquals(0, current.getNumValue3Coins());
+		assertEquals(0, (int) current.getCoins().get(ChipValue.THREE));
 		assertEquals(1, (int) current.getCurrentTrades().get(RawResource.LUMBER));
 		assertEquals(5, next.getCoinTotal());
 	}

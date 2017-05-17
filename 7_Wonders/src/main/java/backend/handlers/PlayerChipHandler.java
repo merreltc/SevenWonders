@@ -12,11 +12,11 @@ public final class PlayerChipHandler {
 		validateNumChipsToAdd(numChipsToAdd, Chip.ChipValue.ONE);
 
 		if (chipType == ChipType.COIN) {
-			player.getPlayerChips().coinTotal += numChipsToAdd;
-			player.getPlayerChips().numOfValue1Coins += numChipsToAdd;
+			int currentNum = player.getCoins().get(ChipValue.ONE);
+			player.getCoins().put(ChipValue.ONE, currentNum + numChipsToAdd);
 		} else {
-			player.getPlayerChips().conflictTotal += numChipsToAdd;
-			player.getPlayerChips().numOfValue1ConflictTokens += numChipsToAdd;
+			int currentNum = player.getConflictTokens().get(ChipValue.ONE);
+			player.getConflictTokens().put(ChipValue.ONE, currentNum + numChipsToAdd);
 		}
 	}
 
@@ -24,24 +24,22 @@ public final class PlayerChipHandler {
 		validateNumChipsToAdd(numChipsToAdd, Chip.ChipValue.THREE);
 
 		if (chipType == ChipType.COIN) {
-			player.getPlayerChips().coinTotal += 3 * numChipsToAdd;
-			player.getPlayerChips().numOfValue3Coins += numChipsToAdd;
+			int currentNum = player.getCoins().get(ChipValue.THREE);
+			player.getCoins().put(ChipValue.THREE, currentNum + numChipsToAdd);
 		} else {
-			player.getPlayerChips().conflictTotal += 3 * numChipsToAdd;
-			player.getPlayerChips().numOfValue3ConflictTokens += numChipsToAdd;
+			int currentNum = player.getConflictTokens().get(ChipValue.THREE);
+			player.getConflictTokens().put(ChipValue.THREE, currentNum + numChipsToAdd);
 		}
 	}
 
 	public static void addValue5(Player player, int numChipsToAdd, ChipType chipType) {
+		if (chipType == ChipType.COIN) {
+			throw new IllegalArgumentException("Cannot have a 5 coin value");
+		} 
 		validateNumChipsToAdd(numChipsToAdd, Chip.ChipValue.FIVE);
 
-		if (chipType == ChipType.COIN) {
-			player.getPlayerChips().numOfValue5Coins += numChipsToAdd;
-			player.getPlayerChips().coinTotal += 5 * numChipsToAdd;
-		} else {
-			player.getPlayerChips().numOfValue5ConflictTokens += numChipsToAdd;
-			player.getPlayerChips().conflictTotal += 5 * numChipsToAdd;
-		}
+		int currentNum = player.getConflictTokens().get(ChipValue.FIVE);
+		player.getConflictTokens().put(ChipValue.FIVE, currentNum + numChipsToAdd);
 	}
 
 	public static void addValueNeg1(Player player, int numChipsToAdd, ChipType chipType) {
@@ -51,8 +49,8 @@ public final class PlayerChipHandler {
 
 		validateNumChipsToAdd(numChipsToAdd, Chip.ChipValue.NEG1);
 
-		player.getPlayerChips().conflictTotal += (-1) * numChipsToAdd;
-		player.getPlayerChips().numOfValueNeg1ConflictTokens += numChipsToAdd;
+		int currentNum = player.getConflictTokens().get(ChipValue.NEG1);
+		player.getConflictTokens().put(ChipValue.NEG1, currentNum + numChipsToAdd);
 	}
 
 	private static void validateNumChipsToAdd(int numChips, Chip.ChipValue type) {
@@ -78,15 +76,15 @@ public final class PlayerChipHandler {
 		}
 	}
 
-	public static void removeValue1(Player player, int numCoinsToRemove, ChipType chipType) {
-		validateNumChipsToRemove(player, numCoinsToRemove, chipType, Chip.ChipValue.ONE);
+	public static void removeValue1(Player player, int numChipsToRemove, ChipType chipType) {
+		validateNumChipsToRemove(player, numChipsToRemove, chipType, Chip.ChipValue.ONE);
 		
 		if (chipType == ChipType.COIN) {
-			player.getPlayerChips().coinTotal -= numCoinsToRemove;
-			player.getPlayerChips().numOfValue1Coins -= numCoinsToRemove;
+			int currentNum = player.getCoins().get(ChipValue.ONE);
+			player.getCoins().put(ChipValue.ONE, currentNum - numChipsToRemove);
 		} else {
-			player.getPlayerChips().conflictTotal -= numCoinsToRemove;
-			player.getPlayerChips().numOfValue1ConflictTokens -= numCoinsToRemove;
+			int currentNum = player.getConflictTokens().get(ChipValue.ONE);
+			player.getConflictTokens().put(ChipValue.ONE, currentNum - numChipsToRemove);
 		}
 	}
 
@@ -94,24 +92,23 @@ public final class PlayerChipHandler {
 		validateNumChipsToRemove(player, numChipsToRemove, chipType, Chip.ChipValue.THREE);
 		
 		if (chipType == ChipType.COIN) {
-			player.getPlayerChips().coinTotal -= 3 * numChipsToRemove;
-			player.getPlayerChips().numOfValue3Coins -= numChipsToRemove;
+			int currentNum = player.getCoins().get(ChipValue.THREE);
+			player.getCoins().put(ChipValue.THREE, currentNum - numChipsToRemove);
 		} else {
-			player.getPlayerChips().conflictTotal -= 3 * numChipsToRemove;
-			player.getPlayerChips().numOfValue3ConflictTokens -= numChipsToRemove;
+			int currentNum = player.getConflictTokens().get(ChipValue.THREE);
+			player.getConflictTokens().put(ChipValue.THREE, currentNum - numChipsToRemove);
 		}
 	}
 
 	public static void removeValue5(Player player, int numChipsToRemove, ChipType chipType) {
-		validateNumChipsToRemove(player, numChipsToRemove, chipType, Chip.ChipValue.FIVE);
-		
 		if (chipType == ChipType.COIN) {
-			player.getPlayerChips().coinTotal -= 5 * numChipsToRemove;
-			player.getPlayerChips().numOfValue5Coins -= numChipsToRemove;
-		} else {
-			player.getPlayerChips().conflictTotal -= 5 * numChipsToRemove;
-			player.getPlayerChips().numOfValue5ConflictTokens -= numChipsToRemove;
-		}
+			throw new IllegalArgumentException("Cannot have a negative 1 coin value");
+		} 
+		
+		validateNumChipsToRemove(player, numChipsToRemove, chipType, Chip.ChipValue.FIVE);
+
+		int currentNum = player.getConflictTokens().get(ChipValue.FIVE);
+		player.getConflictTokens().put(ChipValue.FIVE, currentNum - numChipsToRemove);
 	}
 
 	private static void validateNumChipsToRemove(Player player, int numChips, ChipType chipType, Chip.ChipValue value) {
@@ -122,9 +119,9 @@ public final class PlayerChipHandler {
 		int numChipsToCheck;
 		
 		if(chipType == ChipType.COIN){
-			numChipsToCheck = getNumOfCoinValue(player, value);
+			numChipsToCheck = player.getCoins().get(value);
 		}else{
-			numChipsToCheck = getNumberOfTokens(player, value);
+			numChipsToCheck = player.getConflictTokens().get(value);
 		}
 		
 
@@ -132,16 +129,6 @@ public final class PlayerChipHandler {
 			String msg = "Player does not have " + numChips + " value " + chipValueToString(value) + " chip(s)";
 			throw new InsufficientFundsException(msg);
 		}
-	}
-	
-	private static int getNumOfCoinValue(Player player, Chip.ChipValue type) {
-		if (type == Chip.ChipValue.ONE) {
-			return player.getPlayerChips().numOfValue1Coins;
-		} else if (type == Chip.ChipValue.FIVE) {
-			return player.getPlayerChips().numOfValue5Coins;
-		}
-
-		return player.getPlayerChips().numOfValue3Coins;
 	}
 
 	private static String chipValueToString(Chip.ChipValue type) {
@@ -156,28 +143,15 @@ public final class PlayerChipHandler {
 			throw new IllegalArgumentException("Bad Coin.CoinValue");
 		}
 	}
-
-	private static int getNumberOfTokens(Player player, Chip.ChipValue type) {
-		if (type == ChipValue.ONE) {
-			return player.getNumValue1ConflictTokens();
-		}
-		if (type == ChipValue.THREE) {
-			return player.getNumValue3ConflictTokens();
-		}
-		if (type == ChipValue.FIVE) {
-			return player.getNumValue5ConflictTokens();
-		}
-		
-		return player.getNumValueNeg1ConflictTokens();
-	}
 	
 	public static void removeTotalCoins(Player player, int total) {
 		int numValue3CoinsToRemove = total / 3;
 		int numValue1CoinsToRemove = total % 3;
-
-		if (numValue3CoinsToRemove > player.getPlayerChips().numOfValue3Coins) {
-			numValue1CoinsToRemove += 3 * (numValue3CoinsToRemove - player.getPlayerChips().numOfValue3Coins);
-			numValue3CoinsToRemove = player.getPlayerChips().numOfValue3Coins;
+		int currentNumValue3Coins = player.getCoins().get(ChipValue.THREE);
+		
+		if (numValue3CoinsToRemove > currentNumValue3Coins) {
+			numValue1CoinsToRemove += 3 * (numValue3CoinsToRemove - currentNumValue3Coins);
+			numValue3CoinsToRemove = currentNumValue3Coins;
 		}
 
 		removeValue3(player, numValue3CoinsToRemove, ChipType.COIN);

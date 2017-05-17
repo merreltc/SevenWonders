@@ -5,6 +5,7 @@ import java.util.ResourceBundle;
 import dataStructures.GameBoard;
 import dataStructures.playerData.Chip;
 import dataStructures.playerData.Chip.ChipType;
+import dataStructures.playerData.Chip.ChipValue;
 import dataStructures.playerData.Player;
 import exceptions.InvalidTradeException;
 import utils.Translate;
@@ -33,7 +34,7 @@ public class TradeHandler {
 	}
 
 	private static int getNumValue3Coins(Player from, int valueToTrade) {
-		int fromPlayerNumValueValue3Coins = from.getNumValue3Coins();
+		int fromPlayerNumValueValue3Coins = from.getCoins().get(ChipValue.THREE);
 		int fromPlayerValueOfValue3Coins = 3 * fromPlayerNumValueValue3Coins;
 
 		int valueofValue3Removed = getValueOfValue3CoinsRemoved(valueToTrade, fromPlayerValueOfValue3Coins);

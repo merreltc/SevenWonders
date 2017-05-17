@@ -34,6 +34,7 @@ import dataStructures.gameMaterials.Card.CardType;
 import dataStructures.gameMaterials.Wonder.WonderType;
 import dataStructures.playerData.Chip;
 import dataStructures.playerData.Chip.ChipType;
+import dataStructures.playerData.Chip.ChipValue;
 import dataStructures.playerData.Player;
 import exceptions.InsufficientFundsException;
 
@@ -52,8 +53,8 @@ public class PlayerTest {
 	public void testDefaultPlayerCoins() {
 		Player player = new Player("Jane Doe", WonderType.COLOSSUS);
 
-		assertEquals(3, player.getNumValue1Coins());
-		assertEquals(0, player.getNumValue3Coins());
+		assertEquals(3, (int) player.getCoins().get(ChipValue.ONE));
+		assertEquals(0, (int) player.getCoins().get(ChipValue.THREE));
 	}
 
 	@Test
@@ -359,7 +360,7 @@ public class PlayerTest {
 	@Test
 	public void testDefaultGetNumConflictTokens() {
 		Player player = new Player("Jane Doe", WonderType.COLOSSUS);
-		assertEquals(0, player.getNumValue1ConflictTokens());
+		assertEquals(0, player.getConflictTotal());
 	}
 	
 	@Test
