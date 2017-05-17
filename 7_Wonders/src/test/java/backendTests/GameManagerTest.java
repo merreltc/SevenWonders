@@ -802,7 +802,7 @@ public class GameManagerTest {
 				Arrays.asList(WonderType.COLOSSUS, WonderType.LIGHTHOUSE, WonderType.TEMPLE));
 
 		TurnHandler turnHandler = EasyMock.partialMockBuilder(TurnHandler.class)
-				.addMockedMethod("getNumPlayersUntilPass").addMockedMethod("setNumPlayersUntilPass").createMock();
+				.addMockedMethod("getNumPlayersUntilPass").addMockedMethod("setNumPlayersUntilPass").addMockedMethod("endAge").createMock();
 
 		ArrayList<Card> cards2 = new SetUpDeckHandler().createCards(Age.AGE2, 3);
 		Deck deck2 = new Deck(Age.AGE2, cards2);
@@ -822,6 +822,7 @@ public class GameManagerTest {
 		}
 
 		turnHandler.dealInitialTurnCards(manager.getPlayers(), 3, deck2);
+		turnHandler.endAge(manager.getPlayers(), Age.AGE1);
 		manager.rotateCounterClockwise();
 
 		EasyMock.replay(turnHandler, manager);
@@ -847,7 +848,7 @@ public class GameManagerTest {
 				Arrays.asList(WonderType.COLOSSUS, WonderType.LIGHTHOUSE, WonderType.TEMPLE));
 
 		TurnHandler turnHandler = EasyMock.partialMockBuilder(TurnHandler.class)
-				.addMockedMethod("getNumPlayersUntilPass").addMockedMethod("setNumPlayersUntilPass").createMock();
+				.addMockedMethod("getNumPlayersUntilPass").addMockedMethod("setNumPlayersUntilPass").addMockedMethod("endAge").createMock();
 
 		ArrayList<Card> cards2 = new SetUpDeckHandler().createCards(Age.AGE2, 3);
 		Deck deck2 = new Deck(Age.AGE2, cards2);
@@ -870,6 +871,7 @@ public class GameManagerTest {
 
 		mockExpectTurnHandlerCalls(turnHandler);
 
+		turnHandler.endAge(manager.getPlayers(), Age.AGE2);
 		turnHandler.dealInitialTurnCards(manager.getPlayers(), 3, deck3);
 
 		EasyMock.replay(turnHandler);
@@ -882,6 +884,46 @@ public class GameManagerTest {
 		assertEquals(7, manager.getCurrentPlayer().getCurrentHand().size());
 		assertEquals(Rotation.CLOCKWISE, manager.getDirection());
 		assertFalse(manager.getCurrentPlayer().getCurrentHand().equals(previousCurrentCards));
+		assertEquals(Age.AGE3, manager.getGameBoard().getDeck().getAge());
+
+		EasyMock.verify(turnHandler);
+	}
+	
+	@Test
+	public void testEndPlayerTurnEndsCurrentAgeTo3ActuallyDealsTurnCards() {
+		ArrayList<String> playerNames = new ArrayList<String>(
+				Arrays.asList("Wolverine", "Captain America", "Black Widow"));
+		ArrayList<WonderType> wonders = new ArrayList<WonderType>(
+				Arrays.asList(WonderType.COLOSSUS, WonderType.LIGHTHOUSE, WonderType.TEMPLE));
+
+		TurnHandler turnHandler = EasyMock.partialMockBuilder(TurnHandler.class).addMockedMethod("dealInitialTurnCards")
+				.addMockedMethod("getNumPlayersUntilPass").addMockedMethod("setNumPlayersUntilPass").addMockedMethod("endAge").createMock();
+
+		ArrayList<Card> cards2 = new SetUpDeckHandler().createCards(Age.AGE2, 3);
+		Deck deck2 = new Deck(Age.AGE2, cards2);
+		ArrayList<Card> cards3 = new SetUpDeckHandler().createCards(Age.AGE3, 3);
+
+		GameManager manager = new GameManager(playerNames, new SetUpPlayerHandler(),
+				new SetUpDeckHandler(), turnHandler, new PlayerTurnHandler());
+		manager.getGameBoard().setDeck(deck2);
+
+		for (int calls = 4; calls >= 0; calls--) {
+			mockExpectTurnHandlerCalls(turnHandler);
+		}
+
+		mockExpectTurnHandlerCalls(turnHandler);
+
+		turnHandler.endAge(manager.getPlayers(), Age.AGE2);
+		turnHandler.dealInitialTurnCards(EasyMock.isA(ArrayList.class), EasyMock.anyInt(), EasyMock.isA(Deck.class));
+		turnHandler.setNumTurnsTilEndOfAge(5);
+		EasyMock.replay(turnHandler);
+
+		for (int numCalls = 0; numCalls < 17; numCalls++) {
+			manager.endCurrentPlayerTurn();
+		}
+
+		assertEquals("This is the end of the Age.  Finalizing Points.", manager.endCurrentPlayerTurn());
+		assertEquals(Rotation.CLOCKWISE, manager.getDirection());
 		assertEquals(Age.AGE3, manager.getGameBoard().getDeck().getAge());
 
 		EasyMock.verify(turnHandler);
