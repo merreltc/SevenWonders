@@ -9,6 +9,7 @@ import javax.swing.JOptionPane;
 
 import backend.GameManager;
 import constants.Constants;
+import constants.GeneralEnums.GameMode;
 import dataStructures.playerData.Player;
 import gui.interactables.Button;
 import gui.interactables.CardHolder;
@@ -25,17 +26,19 @@ public class GameDisplay extends Menu {
 	private GameManager gameManager;
 	private HandManager handManager;
 	private RenderImage renderer;
+	private GameMode mode;
 	ResourceBundle messages = Translate.getNewResourceBundle();
 	ResourceViewer resource = new ResourceViewer();
 
-	public GameDisplay(int numOfPlayers, RenderImage renderer) {
+	public GameDisplay(int numOfPlayers, RenderImage renderer, GameMode mode) {
 		initializeGameManager(numOfPlayers);
 		this.renderer = renderer;
+		this.mode = mode;
 	}
 
 	private void initializeGameManager(int numOfPlayers) {
 		ArrayList<String> playerNames = setUpPlayers(numOfPlayers);
-		this.gameManager = new GameManager(playerNames);
+		this.gameManager = new GameManager(playerNames, this.mode);
 		this.gameManager.dealInitialTurnCards();
 	}
 

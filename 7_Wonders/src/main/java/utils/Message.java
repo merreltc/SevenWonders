@@ -5,6 +5,8 @@ import java.util.ResourceBundle;
 
 import javax.swing.JOptionPane;
 
+import constants.GeneralEnums.GameMode;
+
 public class Message {
 
 	public static void showMessage(String message) {
@@ -38,9 +40,12 @@ public class Message {
 				messages.getString("wonderSelector"), JOptionPane.PLAIN_MESSAGE, null, wonders, wonders[0]);
 	}
 
-	public static int selectDifficulty() {
+	public static GameMode selectDifficulty() {
 		Object[] objects = { "Easy", "Normal" };
-		return JOptionPane.showOptionDialog(null, "Select Your Difficulty", "Difficulty", JOptionPane.YES_NO_OPTION,
+		int result = JOptionPane.showOptionDialog(null, "Select Your Difficulty", "Difficulty", JOptionPane.YES_NO_OPTION,
 				JOptionPane.PLAIN_MESSAGE, null, objects, null);
+		System.out.println("result: " + result);
+		System.out.println("yes option: " + JOptionPane.YES_OPTION);
+		return (result == JOptionPane.YES_OPTION) ? GameMode.EASY : GameMode.NORMAL;
 	}
 }
