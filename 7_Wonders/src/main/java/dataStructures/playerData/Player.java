@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.ResourceBundle;
 
+import constants.GeneralEnums.Science;
 import dataStructures.gameMaterials.Card;
 import dataStructures.gameMaterials.Effect.EffectType;
 import dataStructures.gameMaterials.EntityEffect;
@@ -344,6 +345,31 @@ public class Player {
 			}
 		}
 		return false;
+	}
+	
+	public Card getCardFromEndGame(int index){
+		if (index >= this.storagePile.getEndGamePile().size()){
+			throw new IllegalArgumentException("End of End Game pile reached");
+		}
+		return this.storagePile.getEndGamePile().get(index);
+	}
+	
+	public int[] getNumberOfEachScience(){
+		int[] amounts = {0,0,0};
+		ArrayList<Card> cards = this.storagePile.getSciencePile();
+		for (Card card : cards){
+			EntityEffect effect = (EntityEffect) card.getEffect();
+			for (Enum type : effect.getEntities().keySet()){
+				if (type == Science.PROTRACTOR){
+					amounts[0] += 1;
+				}else if (type == Science.TABLET){
+					amounts[1] += 1;
+				}else {
+					amounts[2] += 1;
+				}
+			}
+		}
+		return amounts;
 	}
 
 	public HashMap<Enum, Integer> getCurrentTrades() {

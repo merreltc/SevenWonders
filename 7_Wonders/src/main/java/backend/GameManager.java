@@ -57,7 +57,7 @@ public class GameManager {
 		this.rotateHandler = new RotateHandler(this.board);
 		this.tradeHandler = new TradeHandler(this.board);
 	}
-	
+
 	public void dealInitialTurnCards() {
 		this.turnHandler.dealInitialTurnCards(this.getPlayers(), this.getNumPlayers(), this.board.getDeck());
 	}
@@ -70,10 +70,30 @@ public class GameManager {
 		if (from.storagePileContainsCardByName("East Trading Post")) {
 			int fromPosition = this.getPlayers().indexOf(from);
 			int toPosition = this.getPlayers().indexOf(to);
-			if (++fromPosition == toPosition) {
+
+			if (++fromPosition == this.getNumPlayers()) {
+				fromPosition = 0;
+			}
+
+			if (fromPosition == toPosition) {
 				this.tradeHandler.tradeFromToForEntity(from, to, entity, true);
 				return;
 			}
+		} else if (from.storagePileContainsCardByName("West Trading Post")) {
+			int fromPosition = this.getPlayers().indexOf(from);
+			int toPosition = this.getPlayers().indexOf(to);
+
+			if (--fromPosition == -1) {
+				fromPosition = this.getNumPlayers() - 1;
+			}
+
+			if (fromPosition == toPosition) {
+				this.tradeHandler.tradeFromToForEntity(from, to, entity, true);
+				return;
+			}
+		} else if (from.storagePileContainsCardByName("Marketplace")){
+			this.tradeHandler.tradeFromToForEntity(from, to, entity, true);
+			return;
 		}
 
 		this.tradeHandler.tradeFromToForEntity(from, to, entity, false);
@@ -118,6 +138,7 @@ public class GameManager {
 					this.turnHandler.endAge(this.getPlayers(), Age.AGE1);
 				} else {
 					newDeck = this.setUpDeckHandler.createDeck(Age.AGE3, getNumPlayers());
+					this.currentDirection = Rotation.CLOCKWISE;
 					this.turnHandler.endAge(this.getPlayers(), Age.AGE2);
 				}
 
@@ -130,16 +151,18 @@ public class GameManager {
 				message = this.messages.getString("endOfCurrentRotation");
 			}
 
-			playersUntilPass = 3;
+			playersUntilPass = this.getNumPlayers();
 		}
 
 		this.turnHandler.setNumPlayersUntilPass(playersUntilPass - 1);
+		this.getCurrentPlayer().removeCurrentTrades();
 
 		if (this.currentDirection == Rotation.CLOCKWISE) {
 			this.rotateClockwise();
 		} else {
 			this.rotateCounterClockwise();
 		}
+		
 		return message;
 	}
 

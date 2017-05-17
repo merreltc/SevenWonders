@@ -409,8 +409,6 @@ public class GameManagerTest {
 	public void testValidTradeForDiscountEastTradingPost() {
 		ArrayList<String> playerNames = new ArrayList<String>(
 				Arrays.asList("Wolverine", "Captain America", "Black Widow"));
-		ArrayList<WonderType> wonders = new ArrayList<WonderType>(
-				Arrays.asList(WonderType.COLOSSUS, WonderType.LIGHTHOUSE, WonderType.TEMPLE));
 
 		GameManager manager = new GameManager(playerNames, new SetUpPlayerHandler(),
 				new SetUpDeckHandler(), new TurnHandler(), new PlayerTurnHandler());
@@ -428,17 +426,15 @@ public class GameManagerTest {
 		assertTrue(current.getCurrentTrades().containsKey(RawResource.LUMBER));
 		assertEquals(4, right.getCoinTotal());
 	}
-
+	
 	@Test
-	public void testNoDiscountEastTradingPostRegularTrade() {
+	public void testValidTradeForDiscountEastTradingPostCounter() {
 		ArrayList<String> playerNames = new ArrayList<String>(
 				Arrays.asList("Wolverine", "Captain America", "Black Widow"));
-		ArrayList<WonderType> wonders = new ArrayList<WonderType>(
-				Arrays.asList(WonderType.COLOSSUS, WonderType.LIGHTHOUSE, WonderType.TEMPLE));
 
 		GameManager manager = new GameManager(playerNames, new SetUpPlayerHandler(),
 				new SetUpDeckHandler(), new TurnHandler(), new PlayerTurnHandler());
-
+		manager.changeRotateDirectionAndResetPositions(Rotation.COUNTERCLOCKWISE);
 		Deck deck = manager.getGameBoard().getDeck();
 		Player current = manager.getCurrentPlayer();
 		Player right = manager.getPreviousPlayer();
@@ -450,7 +446,205 @@ public class GameManagerTest {
 		right.setStoragePile(storage2);
 		manager.tradeForEntity(current, right, RawResource.LUMBER);
 		assertTrue(current.getCurrentTrades().containsKey(RawResource.LUMBER));
+		assertEquals(4, right.getCoinTotal());
+	}
+	
+	@Test
+	public void testValidTradeForDiscountWestTradingPostCounter() {
+		ArrayList<String> playerNames = new ArrayList<String>(
+				Arrays.asList("Wolverine", "Captain America", "Black Widow"));
+
+		GameManager manager = new GameManager(playerNames, new SetUpPlayerHandler(),
+				new SetUpDeckHandler(), new TurnHandler(), new PlayerTurnHandler());
+		manager.changeRotateDirectionAndResetPositions(Rotation.COUNTERCLOCKWISE);
+		Deck deck = manager.getGameBoard().getDeck();
+		Player current = manager.getCurrentPlayer();
+		Player left = manager.getNextPlayer();
+		ArrayList<Card> storage = new ArrayList<Card>();
+		storage.add(deck.getCard(13)); // west trading post
+		current.setStoragePile(storage);
+		ArrayList<Card> storage2 = new ArrayList<Card>();
+		storage2.add(deck.getCard(0)); // lumber
+		left.setStoragePile(storage2);
+		manager.tradeForEntity(current, left, RawResource.LUMBER);
+		assertTrue(current.getCurrentTrades().containsKey(RawResource.LUMBER));
+		assertEquals(4, left.getCoinTotal());
+	}
+	
+	@Test
+	public void testValidTradeForDiscountWestTradingPost() {
+		ArrayList<String> playerNames = new ArrayList<String>(
+				Arrays.asList("Wolverine", "Captain America", "Black Widow"));
+
+		GameManager manager = new GameManager(playerNames, new SetUpPlayerHandler(),
+				new SetUpDeckHandler(), new TurnHandler(), new PlayerTurnHandler());
+
+		Deck deck = manager.getGameBoard().getDeck();
+		Player current = manager.getCurrentPlayer();
+		Player left = manager.getPreviousPlayer();
+		ArrayList<Card> storage = new ArrayList<Card>();
+		storage.add(deck.getCard(13)); // west trading post
+		current.setStoragePile(storage);
+		ArrayList<Card> storage2 = new ArrayList<Card>();
+		storage2.add(deck.getCard(0)); // lumber
+		left.setStoragePile(storage2);
+		manager.tradeForEntity(current, left, RawResource.LUMBER);
+		assertTrue(current.getCurrentTrades().containsKey(RawResource.LUMBER));
+		assertEquals(4, left.getCoinTotal());
+	}
+	
+	@Test
+	public void testValidTradeForDiscountMarketPlace() {
+		ArrayList<String> playerNames = new ArrayList<String>(
+				Arrays.asList("Wolverine", "Captain America", "Black Widow"));
+
+		GameManager manager = new GameManager(playerNames, new SetUpPlayerHandler(),
+				new SetUpDeckHandler(), new TurnHandler(), new PlayerTurnHandler());
+
+		Deck deck = manager.getGameBoard().getDeck();
+		Player current = manager.getCurrentPlayer();
+		Player right = manager.getNextPlayer();
+		ArrayList<Card> storage = new ArrayList<Card>();
+		storage.add(deck.getCard(14)); // marketplace
+		current.setStoragePile(storage);
+		ArrayList<Card> storage2 = new ArrayList<Card>();
+		storage2.add(deck.getCard(0)); // lumber
+		right.setStoragePile(storage2);
+		manager.tradeForEntity(current, right, RawResource.LUMBER);
+		assertTrue(current.getCurrentTrades().containsKey(RawResource.LUMBER));
+		assertEquals(4, right.getCoinTotal());
+	}
+	
+	@Test
+	public void testValidTradeForDiscountMarketPlaceLeft() {
+		ArrayList<String> playerNames = new ArrayList<String>(
+				Arrays.asList("Wolverine", "Captain America", "Black Widow"));
+
+		GameManager manager = new GameManager(playerNames, new SetUpPlayerHandler(),
+				new SetUpDeckHandler(), new TurnHandler(), new PlayerTurnHandler());
+
+		Deck deck = manager.getGameBoard().getDeck();
+		Player current = manager.getCurrentPlayer();
+		Player left = manager.getPreviousPlayer();
+		ArrayList<Card> storage = new ArrayList<Card>();
+		storage.add(deck.getCard(14)); // marketplace
+		current.setStoragePile(storage);
+		ArrayList<Card> storage2 = new ArrayList<Card>();
+		storage2.add(deck.getCard(0)); // lumber
+		left.setStoragePile(storage2);
+		manager.tradeForEntity(current, left, RawResource.LUMBER);
+		assertTrue(current.getCurrentTrades().containsKey(RawResource.LUMBER));
+		assertEquals(4, left.getCoinTotal());
+	}
+	
+	@Test
+	public void testValidTradeForDiscountEastTradingPostRotate() {
+		ArrayList<String> playerNames = new ArrayList<String>(
+				Arrays.asList("Wolverine", "Captain America", "Black Widow"));
+
+		GameManager manager = new GameManager(playerNames, new SetUpPlayerHandler(),
+				new SetUpDeckHandler(), new TurnHandler(), new PlayerTurnHandler());
+		manager.rotateClockwise();
+		manager.rotateClockwise();
+		Deck deck = manager.getGameBoard().getDeck();
+		Player current = manager.getCurrentPlayer();
+		Player right = manager.getNextPlayer();
+		ArrayList<Card> storage = new ArrayList<Card>();
+		storage.add(deck.getCard(12)); // east trading post
+		current.setStoragePile(storage);
+		ArrayList<Card> storage2 = new ArrayList<Card>();
+		storage2.add(deck.getCard(0)); // lumber
+		right.setStoragePile(storage2);
+		manager.tradeForEntity(current, right, RawResource.LUMBER);
+		assertTrue(current.getCurrentTrades().containsKey(RawResource.LUMBER));
+		assertEquals(4, right.getCoinTotal());
+	}
+	
+	@Test
+	public void testValidTradeForDiscountWestTradingPostRotate() {
+		ArrayList<String> playerNames = new ArrayList<String>(
+				Arrays.asList("Wolverine", "Captain America", "Black Widow"));
+
+		GameManager manager = new GameManager(playerNames, new SetUpPlayerHandler(),
+				new SetUpDeckHandler(), new TurnHandler(), new PlayerTurnHandler());
+		manager.rotateClockwise();
+		Deck deck = manager.getGameBoard().getDeck();
+		Player current = manager.getCurrentPlayer();
+		Player left = manager.getPreviousPlayer();
+		ArrayList<Card> storage = new ArrayList<Card>();
+		storage.add(deck.getCard(13)); // west trading post
+		current.setStoragePile(storage);
+		ArrayList<Card> storage2 = new ArrayList<Card>();
+		storage2.add(deck.getCard(0)); // lumber
+		left.setStoragePile(storage2);
+		manager.tradeForEntity(current, left, RawResource.LUMBER);
+		assertTrue(current.getCurrentTrades().containsKey(RawResource.LUMBER));
+		assertEquals(4, left.getCoinTotal());
+	}
+	
+	@Test
+	public void testNoDiscountEastTradingPostRegularTrade() {
+		ArrayList<String> playerNames = new ArrayList<String>(
+				Arrays.asList("Wolverine", "Captain America", "Black Widow"));
+
+		GameManager manager = new GameManager(playerNames, new SetUpPlayerHandler(),
+				new SetUpDeckHandler(), new TurnHandler(), new PlayerTurnHandler());
+
+		Deck deck = manager.getGameBoard().getDeck();
+		Player current = manager.getCurrentPlayer();
+		Player left = manager.getPreviousPlayer();
+		ArrayList<Card> storage = new ArrayList<Card>();
+		storage.add(deck.getCard(12)); // east trading post
+		current.setStoragePile(storage);
+		ArrayList<Card> storage2 = new ArrayList<Card>();
+		storage2.add(deck.getCard(0)); // lumber
+		left.setStoragePile(storage2);
+		manager.tradeForEntity(current, left, RawResource.LUMBER);
+		assertTrue(current.getCurrentTrades().containsKey(RawResource.LUMBER));
+		assertEquals(5, left.getCoinTotal());
+	}
+	
+	@Test
+	public void testNoDiscountWestTradingPostRegularTrade() {
+		ArrayList<String> playerNames = new ArrayList<String>(
+				Arrays.asList("Wolverine", "Captain America", "Black Widow"));
+
+		GameManager manager = new GameManager(playerNames, new SetUpPlayerHandler(),
+				new SetUpDeckHandler(), new TurnHandler(), new PlayerTurnHandler());
+
+		Deck deck = manager.getGameBoard().getDeck();
+		Player current = manager.getCurrentPlayer();
+		Player right = manager.getNextPlayer();
+		ArrayList<Card> storage = new ArrayList<Card>();
+		storage.add(deck.getCard(13)); // west trading post
+		current.setStoragePile(storage);
+		ArrayList<Card> storage2 = new ArrayList<Card>();
+		storage2.add(deck.getCard(0)); // lumber
+		right.setStoragePile(storage2);
+		manager.tradeForEntity(current, right, RawResource.LUMBER);
+		assertTrue(current.getCurrentTrades().containsKey(RawResource.LUMBER));
 		assertEquals(5, right.getCoinTotal());
+	}
+	
+	@Test
+	public void testTradeFromToForGoodEmptyTradesAfterTurnEnds() {
+		ArrayList<String> playerNames = new ArrayList<String>(
+				Arrays.asList("Wolverine", "Captain America", "Black Widow"));
+
+		GameManager manager = new GameManager(playerNames, new SetUpPlayerHandler(),
+				new SetUpDeckHandler(), new TurnHandler(), new PlayerTurnHandler());
+
+		ArrayList<Card> storage = new ArrayList<Card>();
+		Deck deck = manager.getGameBoard().getDeck();
+		storage.add(deck.getCard(7));
+		storage.add(deck.getCard(8));
+
+		manager.getNextPlayer().setStoragePile(storage);
+		manager.tradeForEntity(manager.getCurrentPlayer(), manager.getNextPlayer(), Good.GLASS);
+		manager.endCurrentPlayerTurn();
+		Player previous = manager.getPreviousPlayer();
+
+		assertTrue(previous.getCurrentTrades().isEmpty());
 	}
 	
 	@Test
@@ -494,19 +688,17 @@ public class GameManagerTest {
 	public void testDiscardSelectedCard() {
 		ArrayList<String> playerNames = new ArrayList<String>(
 				Arrays.asList("Wolverine", "Captain America", "Black Widow"));
-		ArrayList<WonderType> wonders = new ArrayList<WonderType>(
-				Arrays.asList(WonderType.COLOSSUS, WonderType.LIGHTHOUSE, WonderType.TEMPLE));
 
 		PlayerTurnHandler playerTurnHandler = EasyMock.mock(PlayerTurnHandler.class);
 
 		GameManager manager = new GameManager(playerNames, new SetUpPlayerHandler(),
 				new SetUpDeckHandler(), new TurnHandler(), playerTurnHandler);
-		playerTurnHandler.discardSelectedCard(manager.getCurrentPlayer(), manager.getGameBoard().getDeck().getCard(0),
+
+		manager.dealInitialTurnCards();
+		playerTurnHandler.discardSelectedCard(manager.getCurrentPlayer(), manager.getCurrentPlayer().getCurrentHand().get(0),
 				manager.getGameBoard());
 
 		EasyMock.replay(playerTurnHandler);
-
-		manager.dealInitialTurnCards();
 		manager.discardSelectedCard(manager.getCurrentPlayer().getCurrentHand().get(0));
 
 		EasyMock.verify(playerTurnHandler);
@@ -568,6 +760,39 @@ public class GameManagerTest {
 
 		EasyMock.verify(turnHandler);
 	}
+	
+	@Test
+	public void testEndCurrentPlayersTurn3TimesAndTradeHands5Players() {
+		ArrayList<String> playerNames = new ArrayList<String>(
+				Arrays.asList("Wolverine", "Captain America", "Black Widow", "Hulk", "Iron Man"));
+
+		TurnHandler turnHandler = EasyMock.partialMockBuilder(TurnHandler.class)
+				.addMockedMethod("getNumPlayersUntilPass").createMock();
+		GameManager manager = new GameManager(playerNames, new SetUpPlayerHandler(),
+				new SetUpDeckHandler(), turnHandler, new PlayerTurnHandler());
+		manager.dealInitialTurnCards();
+		EasyMock.expect(turnHandler.getNumPlayersUntilPass()).andReturn(4);
+		EasyMock.expect(turnHandler.getNumPlayersUntilPass()).andReturn(3);
+		EasyMock.expect(turnHandler.getNumPlayersUntilPass()).andReturn(2);
+		EasyMock.expect(turnHandler.getNumPlayersUntilPass()).andReturn(1);
+		EasyMock.expect(turnHandler.getNumPlayersUntilPass()).andReturn(0);
+		turnHandler.setNumPlayersUntilPass(4);
+
+		EasyMock.replay(turnHandler);
+		Player expectedNewCurrentPlayer = manager.getCurrentPlayer();
+		ArrayList<Card> expectedNewCurrentHand = manager.getPreviousPlayer().getCurrentHand();
+
+		assertEquals("", manager.endCurrentPlayerTurn());
+		assertEquals("", manager.endCurrentPlayerTurn());
+		assertEquals("", manager.endCurrentPlayerTurn());
+		assertEquals("", manager.endCurrentPlayerTurn());
+		assertEquals("End of current rotation.  Switching Player hands.", manager.endCurrentPlayerTurn());
+
+		assertEquals(expectedNewCurrentPlayer, manager.getCurrentPlayer());
+		assertEquals(expectedNewCurrentHand, manager.getCurrentPlayer().getCurrentHand());
+
+		EasyMock.verify(turnHandler);
+	}
 
 	@Test
 	public void testEndPlayerTurnEndsCurrentAge() {
@@ -592,11 +817,9 @@ public class GameManagerTest {
 
 		assertEquals(7, manager.getCurrentPlayer().getCurrentHand().size());
 
-		for (int calls = 4; calls >= 0; calls--) {
-			mockExpectTurnHandlerCalls(turnHandler, calls);
+		for (int calls = 5; calls >= 0; calls--) {
+			mockExpectTurnHandlerCalls(turnHandler);
 		}
-
-		mockExpectTurnHandlerCalls(turnHandler, 4);
 
 		turnHandler.dealInitialTurnCards(manager.getPlayers(), 3, deck2);
 		manager.rotateCounterClockwise();
@@ -607,7 +830,7 @@ public class GameManagerTest {
 			manager.endCurrentPlayerTurn();
 		}
 
-		assertEquals("This is the end of the Age.  Finalizing Points", manager.endCurrentPlayerTurn());
+		assertEquals("This is the end of the Age.  Finalizing Points.", manager.endCurrentPlayerTurn());
 		assertEquals(7, manager.getCurrentPlayer().getCurrentHand().size());
 		assertEquals(Rotation.COUNTERCLOCKWISE, manager.getDirection());
 		assertFalse(manager.getCurrentPlayer().getCurrentHand().equals(previousCurrentCards));
@@ -635,16 +858,17 @@ public class GameManagerTest {
 				new SetUpDeckHandler(), turnHandler, new PlayerTurnHandler());
 		manager.getGameBoard().setDeck(deck2);
 		manager.dealInitialTurnCards();
+		manager.changeRotateDirectionAndResetPositions(Rotation.COUNTERCLOCKWISE);
 
 		ArrayList<Card> previousCurrentCards = manager.getCurrentPlayer().getCurrentHand();
 
 		assertEquals(7, manager.getCurrentPlayer().getCurrentHand().size());
 
 		for (int calls = 4; calls >= 0; calls--) {
-			mockExpectTurnHandlerCalls(turnHandler, calls);
+			mockExpectTurnHandlerCalls(turnHandler);
 		}
 
-		mockExpectTurnHandlerCalls(turnHandler, 4);
+		mockExpectTurnHandlerCalls(turnHandler);
 
 		turnHandler.dealInitialTurnCards(manager.getPlayers(), 3, deck3);
 
@@ -656,13 +880,14 @@ public class GameManagerTest {
 
 		assertEquals("This is the end of the Age.  Finalizing Points", manager.endCurrentPlayerTurn());
 		assertEquals(7, manager.getCurrentPlayer().getCurrentHand().size());
+		assertEquals(Rotation.CLOCKWISE, manager.getDirection());
 		assertFalse(manager.getCurrentPlayer().getCurrentHand().equals(previousCurrentCards));
 		assertEquals(Age.AGE3, manager.getGameBoard().getDeck().getAge());
 
 		EasyMock.verify(turnHandler);
 	}
 
-	private void mockExpectTurnHandlerCalls(TurnHandler turnHandler, int numTurns) {
+	private void mockExpectTurnHandlerCalls(TurnHandler turnHandler) {
 		EasyMock.expect(turnHandler.getNumPlayersUntilPass()).andReturn(2);
 		turnHandler.setNumPlayersUntilPass(1);
 		EasyMock.expect(turnHandler.getNumPlayersUntilPass()).andReturn(1);
