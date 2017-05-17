@@ -223,7 +223,7 @@ public class PlayerTest {
 		try {
 			player.addValue1(-1, Chip.ChipType.COIN);
 		} catch (IllegalArgumentException error) {
-			String message = "Cannot add -1 value 1 chips";
+			String message = "Cannot add -1 value 1 chip(s)";
 			assertEquals(message, error.getMessage());
 		}
 	}
@@ -235,7 +235,7 @@ public class PlayerTest {
 		try {
 			player.addValue1(47, Chip.ChipType.COIN);
 		} catch (IllegalArgumentException error) {
-			String message = "Cannot add 47 value 1 chips";
+			String message = "Cannot add 47 value 1 chip(s)";
 			assertEquals(message, error.getMessage());
 		}
 	}
@@ -275,7 +275,7 @@ public class PlayerTest {
 			player.removeValue1(6, ChipType.CONFLICTTOKEN);
 			fail();
 		} catch (Exception e) {
-			assertEquals("Player does not have 6 value 1 token(s)", e.getMessage());
+			assertEquals("Player does not have 6 value 1 chip(s)", e.getMessage());
 		}
 
 	}
@@ -287,7 +287,7 @@ public class PlayerTest {
 		try {
 			player.addValue3(-1, Chip.ChipType.COIN);
 		} catch (IllegalArgumentException error) {
-			String message = "Cannot add -1 value 3 chips";
+			String message = "Cannot add -1 value 3 chip(s)";
 			assertEquals(message, error.getMessage());
 		}
 	}
@@ -299,7 +299,7 @@ public class PlayerTest {
 		try {
 			player.removeValue1(-1, ChipType.COIN);
 		} catch (IllegalArgumentException error) {
-			String message = "Cannot remove -1 value 1 coins";
+			String message = "Cannot remove -1 value 1 chip(s)";
 			assertEquals(message, error.getMessage());
 		}
 	}
@@ -311,7 +311,7 @@ public class PlayerTest {
 		try {
 			player.removeValue1(-2, ChipType.COIN);
 		} catch (IllegalArgumentException error) {
-			String message = "Cannot remove -2 value 1 coins";
+			String message = "Cannot remove -2 value 1 chip(s)";
 			assertEquals(message, error.getMessage());
 		}
 	}
@@ -323,7 +323,7 @@ public class PlayerTest {
 		try {
 			player.removeValue3(-1, ChipType.COIN);
 		} catch (IllegalArgumentException error) {
-			String message = "Cannot remove -1 value 3 coins";
+			String message = "Cannot remove -1 value 3 chip(s)";
 			assertEquals(message, error.getMessage());
 		}
 	}
@@ -335,7 +335,7 @@ public class PlayerTest {
 		try {
 			player.removeValue3(-2, ChipType.COIN);
 		} catch (IllegalArgumentException error) {
-			String message = "Cannot remove -2 value 3 coins";
+			String message = "Cannot remove -2 value 3 chip(s)";
 			assertEquals(message, error.getMessage());
 		}
 	}
@@ -347,7 +347,7 @@ public class PlayerTest {
 		try {
 			player.removeValue1(4, ChipType.COIN);
 		} catch (InsufficientFundsException error) {
-			String message = "Player does not have 4 value 1 coin(s)";
+			String message = "Player does not have 4 value 1 chip(s)";
 			assertEquals(message, error.getMessage());
 		}
 	}
@@ -359,7 +359,7 @@ public class PlayerTest {
 		try {
 			player.removeValue1(5, ChipType.COIN);
 		} catch (InsufficientFundsException error) {
-			String message = "Player does not have 5 value 1 coin(s)";
+			String message = "Player does not have 5 value 1 chip(s)";
 			assertEquals(message, error.getMessage());
 		}
 	}
@@ -372,7 +372,7 @@ public class PlayerTest {
 			player.removeValue3(1, ChipType.COIN);
 			fail();
 		} catch (InsufficientFundsException error) {
-			String message = "Player does not have 1 value 3 coin(s)";
+			String message = "Player does not have 1 value 3 chip(s)";
 			assertEquals(message, error.getMessage());
 		}
 	}
@@ -385,7 +385,7 @@ public class PlayerTest {
 			player.removeValue3(2, ChipType.COIN);
 			fail();
 		} catch (InsufficientFundsException error) {
-			String message = "Player does not have 2 value 3 coin(s)";
+			String message = "Player does not have 2 value 3 chip(s)";
 			assertEquals(message, error.getMessage());
 		}
 	}
@@ -425,7 +425,7 @@ public class PlayerTest {
 			player.removeValue3(6, ChipType.CONFLICTTOKEN);
 			fail();
 		} catch (Exception e) {
-			Assert.assertEquals("Player does not have 6 value 3 token(s)", e.getMessage());
+			Assert.assertEquals("Player does not have 6 value 3 chip(s)", e.getMessage());
 		}
 	}
 
@@ -473,7 +473,7 @@ public class PlayerTest {
 			player.removeValue5(7, ChipType.COIN);
 			fail();
 		} catch (Exception e) {
-			Assert.assertEquals("Player does not have 7 value 5 coin(s)", e.getMessage());
+			Assert.assertEquals("Player does not have 7 value 5 chip(s)", e.getMessage());
 		}
 	}
 
@@ -501,7 +501,7 @@ public class PlayerTest {
 			player.removeValue5(7, ChipType.CONFLICTTOKEN);
 			fail();
 		} catch (Exception e) {
-			Assert.assertEquals("Player does not have 7 value 5 token(s)", e.getMessage());
+			Assert.assertEquals("Player does not have 7 value 5 chip(s)", e.getMessage());
 		}
 	}
 
@@ -847,7 +847,7 @@ public class PlayerTest {
 			player.addValue5(21, Chip.ChipType.COIN);
 			fail();
 		} catch (IllegalArgumentException error) {
-			assertEquals("Cannot add 21 value 5 chips", error.getMessage());
+			assertEquals("Cannot add 21 value 5 chip(s)", error.getMessage());
 		}
 	}
 
