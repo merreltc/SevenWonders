@@ -147,7 +147,8 @@ public class GameManager {
 					newDeck = this.setUpDeckHandler.createDeck(Age.AGE3, getNumPlayers());
 					this.turnHandler.endAge(this.getPlayers(), Age.AGE3);
 					EndGameHandler end = new EndGameHandler();
-					end.calculateScores(this.getPlayers());
+					ArrayList<Integer> scores = end.calculateScores(this.getPlayers());
+					return formatFinalScores(scores);
 				}
 
 				this.board.setDeck(newDeck);
