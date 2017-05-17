@@ -23,28 +23,23 @@ import dataStructures.gameMaterials.Effect.EffectType;
 import dataStructures.gameMaterials.EntityEffect;
 import dataStructures.gameMaterials.ValueEffect;
 import dataStructures.gameMaterials.ValueEffect.ValueType;
-import dataStructures.gameMaterials.Wonder.WonderType;
+import dataStructures.gameMaterials.Wonder;
 import dataStructures.playerData.Player;
 import exceptions.InsufficientFundsException;
 
 public class PlayerTurnHandlerTest {
+	private Deck age1Deck, age2Deck;
 
 	@Test
 	public void testBuildStructureNoCost() {
-		ArrayList<Player> players = new ArrayList<Player>();
-		players.add(new Player("Wolverine", WonderType.COLOSSUS));
-		players.add(new Player("Captain America", WonderType.LIGHTHOUSE));
-		players.add(new Player("Black Widow", WonderType.PYRAMIDS));
+		ArrayList<Player> players = setUpArrayWithNumPlayers(3);
+		this.age1Deck = createDeck(Age.AGE1, 3);
 
-		ArrayList<Card> cards = new SetUpDeckHandler().createCards(Age.AGE1, 3);
-		Deck deck = new Deck(Age.AGE1, cards);
-
-		GameBoard board = new GameBoard(players, deck);
-
+		GameBoard board = new GameBoard(players, this.age1Deck);
 		Player current = board.getCurrentPlayer();
 		ArrayList<Card> currentHand = new ArrayList<Card>();
 
-		currentHand.add(deck.getCard(0));
+		currentHand.add(this.age1Deck.getCard(0));
 		current.setCurrentHand(currentHand);
 
 		PlayerTurnHandler playerTurnHandler = new PlayerTurnHandler();
@@ -52,26 +47,20 @@ public class PlayerTurnHandlerTest {
 
 		assertEquals(1, current.getStoragePile().size());
 		assertEquals(0, current.getCurrentHand().size());
-		assertFalse(current.getCurrentHand().contains(deck.getCard(0)));
-		assertTrue(current.getStoragePile().contains(deck.getCard(0)));
+		assertFalse(current.getCurrentHand().contains(this.age1Deck.getCard(0)));
+		assertTrue(current.getStoragePile().contains(this.age1Deck.getCard(0)));
 	}
 
 	@Test
 	public void testBuildStructureCoinCost() {
-		ArrayList<Player> players = new ArrayList<Player>();
-		players.add(new Player("Wolverine", WonderType.COLOSSUS));
-		players.add(new Player("Captain America", WonderType.LIGHTHOUSE));
-		players.add(new Player("Black Widow", WonderType.PYRAMIDS));
+		ArrayList<Player> players = setUpArrayWithNumPlayers(3);
+		this.age1Deck = createDeck(Age.AGE1, 3);
 
-		ArrayList<Card> cards = new SetUpDeckHandler().createCards(Age.AGE1, 3);
-		Deck deck = new Deck(Age.AGE1, cards);
-
-		GameBoard board = new GameBoard(players, deck);
-
+		GameBoard board = new GameBoard(players, this.age1Deck);
 		Player current = board.getCurrentPlayer();
 		ArrayList<Card> currentHand = new ArrayList<Card>();
 
-		currentHand.add(deck.getCard(4));
+		currentHand.add(this.age1Deck.getCard(4));
 		current.setCurrentHand(currentHand);
 
 		PlayerTurnHandler playerTurnHandler = new PlayerTurnHandler();
@@ -79,29 +68,23 @@ public class PlayerTurnHandlerTest {
 
 		assertEquals(1, current.getStoragePile().size());
 		assertEquals(0, current.getCurrentHand().size());
-		assertFalse(current.getCurrentHand().contains(deck.getCard(4)));
-		assertTrue(current.getStoragePile().contains(deck.getCard(4)));
+		assertFalse(current.getCurrentHand().contains(this.age1Deck.getCard(4)));
+		assertTrue(current.getStoragePile().contains(this.age1Deck.getCard(4)));
 		assertEquals(0, current.getNumValue3Coins());
 		assertEquals(2, current.getCoinTotal());
 	}
 
 	@Test
 	public void testValidBuildStructureResourceCost() {
-		ArrayList<Player> players = new ArrayList<Player>();
-		players.add(new Player("Wolverine", WonderType.COLOSSUS));
-		players.add(new Player("Captain America", WonderType.LIGHTHOUSE));
-		players.add(new Player("Black Widow", WonderType.PYRAMIDS));
+		ArrayList<Player> players = setUpArrayWithNumPlayers(3);
+		this.age1Deck = createDeck(Age.AGE1, 3);
 
-		ArrayList<Card> cards = new SetUpDeckHandler().createCards(Age.AGE1, 3);
-		Deck deck = new Deck(Age.AGE1, cards);
-
-		GameBoard board = new GameBoard(players, deck);
-
+		GameBoard board = new GameBoard(players, this.age1Deck);
 		Player current = board.getCurrentPlayer();
 		ArrayList<Card> currentHand = new ArrayList<Card>();
 
-		currentHand.add(deck.getCard(1)); // Stone pit
-		currentHand.add(deck.getCard(9)); // baths
+		currentHand.add(this.age1Deck.getCard(1)); // Stone pit
+		currentHand.add(this.age1Deck.getCard(9)); // baths
 		current.setCurrentHand(currentHand);
 
 		PlayerTurnHandler playerTurnHandler = new PlayerTurnHandler();
@@ -110,27 +93,21 @@ public class PlayerTurnHandlerTest {
 
 		assertEquals(2, current.getStoragePile().size());
 		assertEquals(0, current.getCurrentHand().size());
-		assertFalse(current.getCurrentHand().contains(deck.getCard(9)));
-		assertTrue(current.getStoragePile().contains(deck.getCard(9)));
+		assertFalse(current.getCurrentHand().contains(this.age1Deck.getCard(9)));
+		assertTrue(current.getStoragePile().contains(this.age1Deck.getCard(9)));
 	}
 
 	@Test(expected = InsufficientFundsException.class)
 	public void testInvalidBuildStructureResourceCost() {
-		ArrayList<Player> players = new ArrayList<Player>();
-		players.add(new Player("Wolverine", WonderType.COLOSSUS));
-		players.add(new Player("Captain America", WonderType.LIGHTHOUSE));
-		players.add(new Player("Black Widow", WonderType.PYRAMIDS));
+		ArrayList<Player> players = setUpArrayWithNumPlayers(3);
+		this.age1Deck = createDeck(Age.AGE1, 3);
 
-		ArrayList<Card> cards = new SetUpDeckHandler().createCards(Age.AGE1, 3);
-		Deck deck = new Deck(Age.AGE1, cards);
-
-		GameBoard board = new GameBoard(players, deck);
-
+		GameBoard board = new GameBoard(players, this.age1Deck);
 		Player current = board.getCurrentPlayer();
 		ArrayList<Card> currentHand = new ArrayList<Card>();
 
-		currentHand.add(deck.getCard(0)); // lumber yard
-		currentHand.add(deck.getCard(9)); // baths
+		currentHand.add(this.age1Deck.getCard(0)); // lumber yard
+		currentHand.add(this.age1Deck.getCard(9)); // baths
 		current.setCurrentHand(currentHand);
 
 		PlayerTurnHandler playerTurnHandler = new PlayerTurnHandler();
@@ -141,21 +118,15 @@ public class PlayerTurnHandlerTest {
 
 	@Test
 	public void testValidBuildStructureEntityCost() {
-		ArrayList<Player> players = new ArrayList<Player>();
-		players.add(new Player("Wolverine", WonderType.COLOSSUS));
-		players.add(new Player("Captain America", WonderType.LIGHTHOUSE));
-		players.add(new Player("Black Widow", WonderType.PYRAMIDS));
+		ArrayList<Player> players = setUpArrayWithNumPlayers(3);
+		this.age1Deck = createDeck(Age.AGE1, 3);
 
-		ArrayList<Card> cards = new SetUpDeckHandler().createCards(Age.AGE1, 3);
-		Deck deck = new Deck(Age.AGE1, cards);
-
-		GameBoard board = new GameBoard(players, deck);
-
+		GameBoard board = new GameBoard(players, this.age1Deck);
 		Player current = board.getCurrentPlayer();
 		ArrayList<Card> currentHand = new ArrayList<Card>();
 
-		currentHand.add(deck.getCard(6)); // loom
-		currentHand.add(deck.getCard(18)); // apothecary
+		currentHand.add(this.age1Deck.getCard(6)); // loom
+		currentHand.add(this.age1Deck.getCard(18)); // apothecary
 		current.setCurrentHand(currentHand);
 
 		PlayerTurnHandler playerTurnHandler = new PlayerTurnHandler();
@@ -164,29 +135,23 @@ public class PlayerTurnHandlerTest {
 
 		assertEquals(2, current.getStoragePile().size());
 		assertEquals(0, current.getCurrentHand().size());
-		assertFalse(current.getCurrentHand().contains(deck.getCard(6)));
-		assertTrue(current.getStoragePile().contains(deck.getCard(6)));
-		assertFalse(current.getCurrentHand().contains(deck.getCard(18)));
-		assertTrue(current.getStoragePile().contains(deck.getCard(18)));
+		assertFalse(current.getCurrentHand().contains(this.age1Deck.getCard(6)));
+		assertTrue(current.getStoragePile().contains(this.age1Deck.getCard(6)));
+		assertFalse(current.getCurrentHand().contains(this.age1Deck.getCard(18)));
+		assertTrue(current.getStoragePile().contains(this.age1Deck.getCard(18)));
 	}
 
 	@Test(expected = InsufficientFundsException.class)
 	public void testInvalidBuildStructureGoodCost() {
-		ArrayList<Player> players = new ArrayList<Player>();
-		players.add(new Player("Wolverine", WonderType.COLOSSUS));
-		players.add(new Player("Captain America", WonderType.LIGHTHOUSE));
-		players.add(new Player("Black Widow", WonderType.PYRAMIDS));
+		ArrayList<Player> players = setUpArrayWithNumPlayers(3);
+		this.age1Deck = createDeck(Age.AGE1, 3);
 
-		ArrayList<Card> cards = new SetUpDeckHandler().createCards(Age.AGE1, 3);
-		Deck deck = new Deck(Age.AGE1, cards);
-
-		GameBoard board = new GameBoard(players, deck);
-
+		GameBoard board = new GameBoard(players, this.age1Deck);
 		Player current = board.getCurrentPlayer();
 		ArrayList<Card> currentHand = new ArrayList<Card>();
 
-		currentHand.add(deck.getCard(0)); // lumber yard
-		currentHand.add(deck.getCard(18)); // baths
+		currentHand.add(this.age1Deck.getCard(0)); // lumber yard
+		currentHand.add(this.age1Deck.getCard(18)); // baths
 		current.setCurrentHand(currentHand);
 
 		PlayerTurnHandler playerTurnHandler = new PlayerTurnHandler();
@@ -197,22 +162,16 @@ public class PlayerTurnHandlerTest {
 
 	@Test
 	public void testValidBuildStructure2ResourceCost() {
-		ArrayList<Player> players = new ArrayList<Player>();
-		players.add(new Player("Wolverine", WonderType.COLOSSUS));
-		players.add(new Player("Captain America", WonderType.LIGHTHOUSE));
-		players.add(new Player("Black Widow", WonderType.PYRAMIDS));
+		ArrayList<Player> players = setUpArrayWithNumPlayers(3);
+		this.age2Deck = createDeck(Age.AGE2, 3);
 
-		ArrayList<Card> cards = new SetUpDeckHandler().createCards(Age.AGE2, 3);
-		Deck deck = new Deck(Age.AGE2, cards);
-
-		GameBoard board = new GameBoard(players, deck);
-
+		GameBoard board = new GameBoard(players, this.age2Deck);
 		Player current = board.getCurrentPlayer();
 		ArrayList<Card> currentHand = new ArrayList<Card>();
 
-		currentHand.add(deck.getCard(0)); // sawmill
-		currentHand.add(deck.getCard(3)); // quarry
-		currentHand.add(deck.getCard(9)); // statue
+		currentHand.add(this.age2Deck.getCard(0)); // sawmill
+		currentHand.add(this.age2Deck.getCard(3)); // quarry
+		currentHand.add(this.age2Deck.getCard(9)); // statue
 		current.setCurrentHand(currentHand);
 
 		PlayerTurnHandler playerTurnHandler = new PlayerTurnHandler();
@@ -222,31 +181,25 @@ public class PlayerTurnHandlerTest {
 
 		assertEquals(3, current.getStoragePile().size());
 		assertEquals(0, current.getCurrentHand().size());
-		assertFalse(current.getCurrentHand().contains(deck.getCard(0)));
-		assertTrue(current.getStoragePile().contains(deck.getCard(0)));
-		assertFalse(current.getCurrentHand().contains(deck.getCard(3)));
-		assertTrue(current.getStoragePile().contains(deck.getCard(3)));
-		assertFalse(current.getCurrentHand().contains(deck.getCard(9)));
-		assertTrue(current.getStoragePile().contains(deck.getCard(9)));
+		assertFalse(current.getCurrentHand().contains(this.age2Deck.getCard(0)));
+		assertTrue(current.getStoragePile().contains(this.age2Deck.getCard(0)));
+		assertFalse(current.getCurrentHand().contains(this.age2Deck.getCard(3)));
+		assertTrue(current.getStoragePile().contains(this.age2Deck.getCard(3)));
+		assertFalse(current.getCurrentHand().contains(this.age2Deck.getCard(9)));
+		assertTrue(current.getStoragePile().contains(this.age2Deck.getCard(9)));
 	}
 
 	@Test(expected = InsufficientFundsException.class)
 	public void testInalidBuildStructure2ResourceCost() {
-		ArrayList<Player> players = new ArrayList<Player>();
-		players.add(new Player("Wolverine", WonderType.COLOSSUS));
-		players.add(new Player("Captain America", WonderType.LIGHTHOUSE));
-		players.add(new Player("Black Widow", WonderType.PYRAMIDS));
+		ArrayList<Player> players = setUpArrayWithNumPlayers(3);
+		this.age2Deck = createDeck(Age.AGE2, 3);
 
-		ArrayList<Card> cards = new SetUpDeckHandler().createCards(Age.AGE2, 3);
-		Deck deck = new Deck(Age.AGE2, cards);
-
-		GameBoard board = new GameBoard(players, deck);
-
+		GameBoard board = new GameBoard(players, this.age2Deck);
 		Player current = board.getCurrentPlayer();
 		ArrayList<Card> currentHand = new ArrayList<Card>();
 
-		currentHand.add(deck.getCard(1)); // quarry
-		currentHand.add(deck.getCard(7)); // aqueduct
+		currentHand.add(this.age2Deck.getCard(1)); // quarry
+		currentHand.add(this.age2Deck.getCard(7)); // aqueduct
 		current.setCurrentHand(currentHand);
 
 		PlayerTurnHandler playerTurnHandler = new PlayerTurnHandler();
@@ -257,22 +210,16 @@ public class PlayerTurnHandlerTest {
 
 	@Test
 	public void testValidBuildStructureMultiEntityCost() {
-		ArrayList<Player> players = new ArrayList<Player>();
-		players.add(new Player("Wolverine", WonderType.COLOSSUS));
-		players.add(new Player("Captain America", WonderType.LIGHTHOUSE));
-		players.add(new Player("Black Widow", WonderType.PYRAMIDS));
+		ArrayList<Player> players = setUpArrayWithNumPlayers(3);
+		this.age2Deck = createDeck(Age.AGE2, 3);
 
-		ArrayList<Card> cards = new SetUpDeckHandler().createCards(Age.AGE2, 3);
-		Deck deck = new Deck(Age.AGE2, cards);
-
-		GameBoard board = new GameBoard(players, deck);
-
+		GameBoard board = new GameBoard(players, this.age2Deck);
 		Player current = board.getCurrentPlayer();
 		ArrayList<Card> currentHand = new ArrayList<Card>();
 
-		currentHand.add(deck.getCard(3)); // foundry
-		currentHand.add(deck.getCard(5)); // glassworks
-		currentHand.add(deck.getCard(16)); // Dispensary
+		currentHand.add(this.age2Deck.getCard(3)); // foundry
+		currentHand.add(this.age2Deck.getCard(5)); // glassworks
+		currentHand.add(this.age2Deck.getCard(16)); // Dispensary
 		current.setCurrentHand(currentHand);
 
 		PlayerTurnHandler playerTurnHandler = new PlayerTurnHandler();
@@ -282,32 +229,26 @@ public class PlayerTurnHandlerTest {
 
 		assertEquals(3, current.getStoragePile().size());
 		assertEquals(0, current.getCurrentHand().size());
-		assertFalse(current.getCurrentHand().contains(deck.getCard(3)));
-		assertTrue(current.getStoragePile().contains(deck.getCard(3)));
-		assertFalse(current.getCurrentHand().contains(deck.getCard(5)));
-		assertTrue(current.getStoragePile().contains(deck.getCard(5)));
-		assertFalse(current.getCurrentHand().contains(deck.getCard(16)));
-		assertTrue(current.getStoragePile().contains(deck.getCard(16)));
+		assertFalse(current.getCurrentHand().contains(this.age2Deck.getCard(3)));
+		assertTrue(current.getStoragePile().contains(this.age2Deck.getCard(3)));
+		assertFalse(current.getCurrentHand().contains(this.age2Deck.getCard(5)));
+		assertTrue(current.getStoragePile().contains(this.age2Deck.getCard(5)));
+		assertFalse(current.getCurrentHand().contains(this.age2Deck.getCard(16)));
+		assertTrue(current.getStoragePile().contains(this.age2Deck.getCard(16)));
 	}
 
 	@Test(expected = InsufficientFundsException.class)
 	public void testInvalidBuildStructureMultiEntityCost() {
-		ArrayList<Player> players = new ArrayList<Player>();
-		players.add(new Player("Wolverine", WonderType.COLOSSUS));
-		players.add(new Player("Captain America", WonderType.LIGHTHOUSE));
-		players.add(new Player("Black Widow", WonderType.PYRAMIDS));
+		ArrayList<Player> players = setUpArrayWithNumPlayers(3);
+		this.age2Deck = createDeck(Age.AGE2, 3);
 
-		ArrayList<Card> cards = new SetUpDeckHandler().createCards(Age.AGE2, 3);
-		Deck deck = new Deck(Age.AGE2, cards);
-
-		GameBoard board = new GameBoard(players, deck);
-
+		GameBoard board = new GameBoard(players, this.age2Deck);
 		Player current = board.getCurrentPlayer();
 		ArrayList<Card> currentHand = new ArrayList<Card>();
 
-		currentHand.add(deck.getCard(3)); // foundry
-		currentHand.add(deck.getCard(6)); // press
-		currentHand.add(deck.getCard(18)); // Dispensary
+		currentHand.add(this.age2Deck.getCard(3)); // foundry
+		currentHand.add(this.age2Deck.getCard(6)); // press
+		currentHand.add(this.age2Deck.getCard(18)); // Dispensary
 		current.setCurrentHand(currentHand);
 
 		PlayerTurnHandler playerTurnHandler = new PlayerTurnHandler();
@@ -319,23 +260,17 @@ public class PlayerTurnHandlerTest {
 
 	@Test
 	public void testDiscardSelectedCard() {
-		ArrayList<Player> players = new ArrayList<Player>();
-		players.add(new Player("Wolverine", WonderType.COLOSSUS));
-		players.add(new Player("Captain America", WonderType.LIGHTHOUSE));
-		players.add(new Player("Black Widow", WonderType.PYRAMIDS));
+		ArrayList<Player> players = setUpArrayWithNumPlayers(3);
+		this.age2Deck = createDeck(Age.AGE2, 3);
 
-		ArrayList<Card> cards = new SetUpDeckHandler().createCards(Age.AGE2, 3);
-		Deck deck = new Deck(Age.AGE2, cards);
-
-		GameBoard board = new GameBoard(players, deck);
-
+		GameBoard board = new GameBoard(players, this.age2Deck);
 		Player current = board.getCurrentPlayer();
 		ArrayList<Card> currentHand = new ArrayList<Card>();
 
-		Card discarded = deck.getCard(3);
+		Card discarded = this.age2Deck.getCard(3);
 		currentHand.add(discarded); // foundry
-		currentHand.add(deck.getCard(6)); // press
-		currentHand.add(deck.getCard(18)); // Dispensary
+		currentHand.add(this.age2Deck.getCard(6)); // press
+		currentHand.add(this.age2Deck.getCard(18)); // Dispensary
 		current.setCurrentHand(currentHand);
 
 		PlayerTurnHandler playerTurnHandler = new PlayerTurnHandler();
@@ -350,21 +285,15 @@ public class PlayerTurnHandlerTest {
 
 	@Test
 	public void testBuildStructureAddOneShield() {
-		ArrayList<Player> players = new ArrayList<Player>();
-		players.add(new Player("Wolverine", WonderType.COLOSSUS));
-		players.add(new Player("Captain America", WonderType.LIGHTHOUSE));
-		players.add(new Player("Black Widow", WonderType.PYRAMIDS));
+		ArrayList<Player> players = setUpArrayWithNumPlayers(3);
+		this.age1Deck = createDeck(Age.AGE1, 3);
 
-		ArrayList<Card> cards = new SetUpDeckHandler().createCards(Age.AGE1, 3);
-		Deck deck = new Deck(Age.AGE1, cards);
-
-		GameBoard board = new GameBoard(players, deck);
-
+		GameBoard board = new GameBoard(players, this.age1Deck);
 		Player current = board.getCurrentPlayer();
 		ArrayList<Card> currentHand = new ArrayList<Card>();
 
-		Card lumber = deck.getCard(0);
-		Card stockade = deck.getCard(15);
+		Card lumber = this.age1Deck.getCard(0);
+		Card stockade = this.age1Deck.getCard(15);
 		currentHand.add(lumber); // lumber yard
 		currentHand.add(stockade); // stockade
 
@@ -379,25 +308,17 @@ public class PlayerTurnHandlerTest {
 
 	@Test
 	public void testBuildStructureAddTwoShields() {
-		ArrayList<Player> players = new ArrayList<Player>();
-		players.add(new Player("Wolverine", WonderType.COLOSSUS));
-		players.add(new Player("Captain America", WonderType.LIGHTHOUSE));
-		players.add(new Player("Black Widow", WonderType.PYRAMIDS));
+		ArrayList<Player> players = setUpArrayWithNumPlayers(3);
+		this.age1Deck = createDeck(Age.AGE1, 3);
+		this.age2Deck = createDeck(Age.AGE2, 3);
 
-		ArrayList<Card> cards1 = new SetUpDeckHandler().createCards(Age.AGE1, 3);
-		Deck deck1 = new Deck(Age.AGE1, cards1);
-
-		ArrayList<Card> cards = new SetUpDeckHandler().createCards(Age.AGE2, 3);
-		Deck deck = new Deck(Age.AGE2, cards);
-
-		GameBoard board = new GameBoard(players, deck);
-
+		GameBoard board = new GameBoard(players, this.age1Deck);
 		Player current = board.getCurrentPlayer();
 		ArrayList<Card> currentHand = new ArrayList<Card>();
 
-		Card stone = deck1.getCard(1);
-		Card quarry = deck.getCard(1);
-		Card walls = deck.getCard(13);
+		Card stone = this.age1Deck.getCard(1);
+		Card quarry = this.age2Deck.getCard(1);
+		Card walls = this.age2Deck.getCard(13);
 
 		currentHand.add(quarry);
 		currentHand.add(stone);
@@ -415,27 +336,17 @@ public class PlayerTurnHandlerTest {
 
 	@Test(expected = InsufficientFundsException.class)
 	public void testBuildStructureNotEnoughResourcesCanOnlyUseOneOrOther() {
-		ArrayList<Player> players = new ArrayList<Player>();
-		players.add(new Player("Wolverine", WonderType.COLOSSUS));
-		players.add(new Player("Captain America", WonderType.LIGHTHOUSE));
-		players.add(new Player("Black Widow", WonderType.PYRAMIDS));
-		players.add(new Player("Hulk", WonderType.TEMPLE));
-		players.add(new Player("Iron Man", WonderType.MAUSOLEUM));
+		ArrayList<Player> players = setUpArrayWithNumPlayers(5);
+		this.age1Deck = createDeck(Age.AGE1, 3);
+		this.age2Deck = createDeck(Age.AGE2, 3);
 
-		ArrayList<Card> cards1 = new SetUpDeckHandler().createCards(Age.AGE1, 5);
-		Deck deck1 = new Deck(Age.AGE1, cards1);
-
-		ArrayList<Card> cards = new SetUpDeckHandler().createCards(Age.AGE2, 5);
-		Deck deck = new Deck(Age.AGE2, cards);
-
-		GameBoard board = new GameBoard(players, deck);
-
+		GameBoard board = new GameBoard(players, this.age1Deck);
 		Player current = board.getCurrentPlayer();
 		ArrayList<Card> currentHand = new ArrayList<Card>();
 
-		Card ore = deck1.getCard(7);
-		Card forest = deck1.getCard(11);
-		Card statue = deck.getCard(16);
+		Card ore = this.age1Deck.getCard(7);
+		Card forest = this.age1Deck.getCard(11);
+		Card statue = this.age2Deck.getCard(16);
 
 		currentHand.add(forest);
 		currentHand.add(ore);
@@ -452,21 +363,15 @@ public class PlayerTurnHandlerTest {
 
 	@Test
 	public void testBuildStructureAddTwoVictoryPoints() {
-		ArrayList<Player> players = new ArrayList<Player>();
-		players.add(new Player("Wolverine", WonderType.COLOSSUS));
-		players.add(new Player("Captain America", WonderType.LIGHTHOUSE));
-		players.add(new Player("Black Widow", WonderType.PYRAMIDS));
+		ArrayList<Player> players = setUpArrayWithNumPlayers(3);
+		this.age1Deck = createDeck(Age.AGE1, 3);
 
-		ArrayList<Card> cards = new SetUpDeckHandler().createCards(Age.AGE1, 3);
-		Deck deck = new Deck(Age.AGE1, cards);
-
-		GameBoard board = new GameBoard(players, deck);
-
+		GameBoard board = new GameBoard(players, this.age1Deck);
 		Player current = board.getCurrentPlayer();
 		ArrayList<Card> currentHand = new ArrayList<Card>();
 
-		Card stone = deck.getCard(1);
-		Card baths = deck.getCard(9);
+		Card stone = this.age1Deck.getCard(1);
+		Card baths = this.age1Deck.getCard(9);
 
 		currentHand.add(stone);
 		currentHand.add(baths);
@@ -615,5 +520,19 @@ public class PlayerTurnHandlerTest {
 		playerTurnHandler.buildStructure(player, cardToBuild);
 
 		EasyMock.verify(player, storaged, cardToBuild);
+	}
+
+	private ArrayList<Player> setUpArrayWithNumPlayers(int num) {
+		Wonder wonder = EasyMock.createStrictMock(Wonder.class);
+		ArrayList<Player> result = new ArrayList<Player>();
+		for (int i = 0; i < num; i++) {
+			Player temp = EasyMock.partialMockBuilder(Player.class).withConstructor("Jane Doe", wonder).createMock();
+			result.add(temp);
+		}
+		return result;
+	}
+
+	private Deck createDeck(Age age, int numPlayers) {
+		return new SetUpDeckHandler().createDeck(age, numPlayers);
 	}
 }
