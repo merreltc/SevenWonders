@@ -14,6 +14,7 @@ import org.junit.Test;
 import backend.handlers.PlayerTurnHandler;
 import backend.handlers.SetUpDeckHandler;
 import constants.GeneralEnums.CostType;
+import constants.GeneralEnums.RawResource;
 import constants.GeneralEnums.Resource;
 import dataStructures.GameBoard;
 import dataStructures.gameMaterials.Card;
@@ -678,5 +679,32 @@ public class PlayerTurnHandlerTest {
 		playerTurnHandler.buildStructure(player, cardToBuild, board);
 
 		EasyMock.verify(player, storaged, cardToBuild);
+	}
+	
+	@Test
+	public void testValidBuildStructureResourceInTradesCost() {
+		ArrayList<Player> players = new ArrayList<Player>();
+		players.add(new Player("Wolverine", WonderType.COLOSSUS));
+		players.add(new Player("Captain America", WonderType.LIGHTHOUSE));
+		players.add(new Player("Black Widow", WonderType.PYRAMIDS));
+
+		ArrayList<Card> cards = new SetUpDeckHandler().createCards(Age.AGE1, 3);
+		Deck deck = new Deck(Age.AGE1, cards);
+
+		GameBoard board = new GameBoard(players, deck);
+
+		Player current = board.getCurrentPlayer();
+		current.addTradedValue(RawResource.STONE);
+		ArrayList<Card> currentHand = new ArrayList<Card>();
+		currentHand.add(deck.getCard(9)); // baths
+		current.setCurrentHand(currentHand);
+
+		PlayerTurnHandler playerTurnHandler = new PlayerTurnHandler();
+		playerTurnHandler.buildStructure(current, current.getCurrentHand().get(0), board);
+
+		assertEquals(1, current.getStoragePile().size());
+		assertEquals(0, current.getCurrentHand().size());
+		assertFalse(current.getCurrentHand().contains(deck.getCard(9)));
+		assertTrue(current.getStoragePile().contains(deck.getCard(9)));
 	}
 }
