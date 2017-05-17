@@ -93,7 +93,7 @@ Cards are passed left-right-left over the three ages, so you need to keep an eye
 - [x] Age I and II decks do not have Guild cards - covered in unique set of cards tests
 
 ## Cards
-[Card Tests](7_Wonders/src/test/java/dataStructuresTests/CardTest.java) For structure related things see [Building Structure](#L172)
+[Card Tests](7_Wonders/src/test/java/dataStructuresTests/CardTest.java) For structure related things see [Building Structure](#building-the-structure)
 - [x] Name and type of structure/resource (See "Card Types")
 - [x] Cost of building the structure
 - [x] The effect caused by building the structure - See below on building structure
@@ -160,7 +160,7 @@ Cards are passed left-right-left over the three ages, so you need to keep an eye
 ## Process of Turn
 1. Choose card from temporary hand
 2. Action
-    -  [x] Build the Structure - See [Building Structure](#L172) but [Tests In](7_Wonders/src/test/java/backendTests/PlayerTurnHandlerTest.java)
+    -  [x] Build the Structure - See [Building Structure](#building-the-structure) but [Tests In](7_Wonders/src/test/java/backendTests/PlayerTurnHandlerTest.java)
     -  [ ] Build the Next Level of Wonder
     -  [x] Discard for 3 Coins [TestCase](7_Wonders/src/test/java/backendTests/PlayerTurnHandlerTest.java#L322)
         -  Discarded cards create a Discard Pile

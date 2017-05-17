@@ -371,6 +371,7 @@ public class GameBoardTests {
 		assertEquals(1, players.get(0).getNumValue3Coins());
 		assertFalse(board.getDiscardPile().isEmpty());
 		assertEquals(toTest, board.getDiscardPile().get(0));
+		assertEquals(23, board.getTotalValue3CoinsInBank());
 	}
 	
 	@Test
@@ -395,6 +396,7 @@ public class GameBoardTests {
 		assertEquals(6, players.get(0).getNumValue1Coins());
 		assertFalse(board.getDiscardPile().isEmpty());
 		assertEquals(toTest, board.getDiscardPile().get(0));
+		assertEquals(102, board.getTotalValue1CoinsInBank());
 	}
 	
 	@Test
