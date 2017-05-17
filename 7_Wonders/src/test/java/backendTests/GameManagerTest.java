@@ -26,6 +26,7 @@ import dataStructures.gameMaterials.Wonder;
 import dataStructures.gameMaterials.Wonder.WonderType;
 import dataStructures.playerData.Chip;
 import dataStructures.playerData.Player;
+import junit.framework.Assert;
 
 public class GameManagerTest {
 
@@ -885,6 +886,19 @@ public class GameManagerTest {
 		assertEquals(Age.AGE3, manager.getGameBoard().getDeck().getAge());
 
 		EasyMock.verify(turnHandler);
+	}
+	
+	@Test
+	public void testFormatResultString(){
+		ArrayList<String> playerNames = new ArrayList<String>(Arrays.asList("Player1","Player2","Player3"));
+		GameManager game = new GameManager(playerNames);
+		
+		ArrayList<Integer> scores = new ArrayList<Integer>(Arrays.asList(23,12,35));
+		
+		String result = game.formatFinalScores(scores);
+		String expected = "Player1 : 23\nPlayer2 : 12\nPlayer3 : 35\n";
+		
+		Assert.assertEquals(expected, result);
 	}
 
 	private void mockExpectTurnHandlerCalls(TurnHandler turnHandler) {

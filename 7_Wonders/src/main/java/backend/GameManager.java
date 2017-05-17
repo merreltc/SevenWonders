@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 import backend.handlers.DeckHandler;
+import backend.handlers.EndGameHandler;
 import backend.handlers.PlayerTurnHandler;
 import backend.handlers.RotateHandler;
 import backend.handlers.SetUpDeckHandler;
@@ -138,10 +139,15 @@ public class GameManager {
 					newDeck = this.setUpDeckHandler.createDeck(Age.AGE2, getNumPlayers());
 					this.currentDirection = Rotation.COUNTERCLOCKWISE;
 					this.turnHandler.endAge(this.getPlayers(), Age.AGE1);
-				} else {
+				} else if (this.board.getDeck().getAge() == Age.AGE2){
 					newDeck = this.setUpDeckHandler.createDeck(Age.AGE3, getNumPlayers());
 					this.currentDirection = Rotation.CLOCKWISE;
 					this.turnHandler.endAge(this.getPlayers(), Age.AGE2);
+				}else {
+					newDeck = this.setUpDeckHandler.createDeck(Age.AGE3, getNumPlayers());
+					this.turnHandler.endAge(this.getPlayers(), Age.AGE3);
+					EndGameHandler end = new EndGameHandler();
+					end.calculateScores(this.getPlayers());
 				}
 
 				this.board.setDeck(newDeck);
@@ -167,6 +173,15 @@ public class GameManager {
 		}
 		
 		return message;
+	}
+	
+	public String formatFinalScores(ArrayList<Integer> scores){
+		StringBuilder formattedString = new StringBuilder();
+		for (int i = 0; i < scores.size(); i++){
+			String playerName = this.getPlayer(i).getName();
+			formattedString.append(playerName + " : " + scores.get(i) + "\n");
+		}
+		return formattedString.toString();
 	}
 
 	public int getNumPlayers() {
