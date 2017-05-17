@@ -3,13 +3,21 @@ package backend.handlers;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import javax.swing.JOptionPane;
+
+import constants.GeneralEnums;
+import constants.GeneralEnums.Science;
 import dataStructures.gameMaterials.Card;
 import dataStructures.gameMaterials.Card.CardType;
 import dataStructures.gameMaterials.Effect;
 import dataStructures.gameMaterials.Effect.Direction;
+import dataStructures.gameMaterials.Effect.EffectType;
+import dataStructures.gameMaterials.EntityEffect.EntityType;
+import dataStructures.gameMaterials.EntityEffect;
 import dataStructures.gameMaterials.ValueEffect.AffectingEntity;
 import dataStructures.gameMaterials.ValueEffect;
 import dataStructures.playerData.Player;
+import utils.Message;
 
 public class EndGameHandler {
 
@@ -17,7 +25,7 @@ public class EndGameHandler {
 		ArrayList<Integer> scores = new ArrayList<Integer>();
 		for (int i = 0; i < players.size(); i++) {
 			Player player = players.get(i);
-			
+			handleScientistsGuild(player, new Message());
 			int guildEffects = getPointsFromGuildCards(player, players.get((players.size() + i - 1) % players.size()),
 					players.get((i + 1) % players.size()));
 			
@@ -27,7 +35,7 @@ public class EndGameHandler {
 		return scores;
 	}
 	
-	private int getSciencePoints(Player player){
+	public int getSciencePoints(Player player){
 		int score = 0;
 		int[] scienceOwned = player.getNumberOfEachScience();
 		int min = Integer.MAX_VALUE;
@@ -48,10 +56,11 @@ public class EndGameHandler {
 		for (;;) {
 			try {
 				Card card = current.getCardFromEndGame(counter);
+				
 				if (card.getName().equals("Strategists Guild")) {
 					return right.getNumValueNeg1ConflictTokens() + left.getNumValueNeg1ConflictTokens();
 				} else if (card.getName().equals("Scientists Guild")) {
-					// Figure this out
+					throw new UnsupportedOperationException("Show Option Dialog");
 				}
 
 				if (card.getEffect().getDirection() == Direction.SELF
@@ -72,11 +81,47 @@ public class EndGameHandler {
 				counter++;
 
 			} catch (Exception e) {
-				break;
+				if (!e.getMessage().equals("Show Option Dialog")){
+					break;
+				}
 			}
 		}
 
 		return points;
+	}
+	
+	public void handleScientistsGuild(Player player, Message message){
+		int count = 0;
+		
+		for (;;){
+			try{
+				
+				Card card = player.getCardFromEndGame(count);
+				if (card.getName().equals("Scientists Guild")){
+					String str = "";
+					while (str.equals("")){
+						str = message.dropDownScienceSelectionMessage();
+					}
+					
+					Enum choice = Science.TABLET;
+					if (str.equals("Protractor")){
+						choice = Science.PROTRACTOR;
+					}else if (str.equals("Wheel")){
+						choice = Science.WHEEL;
+					}
+					
+					HashMap<Enum, Integer> entitiesAndAmounts = new HashMap<Enum, Integer>();
+					entitiesAndAmounts.put(choice, 1);
+					Effect effect = new EntityEffect(EffectType.ENTITY, EntityType.SCIENCE, entitiesAndAmounts);
+					Card reward = new Card("Scientists Reward", CardType.SCIENTIFICSTRUCTURE, null, effect);
+					player.addToStoragePile(reward);
+					break;
+				}
+				count++;
+			}catch(Exception e){
+				break;
+			}
+		}
 	}
 
 	private int useEffect(Card card, Player player) {

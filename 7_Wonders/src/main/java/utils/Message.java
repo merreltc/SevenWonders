@@ -43,6 +43,14 @@ public class Message {
 				messages.getString("wonderSelector"), JOptionPane.PLAIN_MESSAGE, null, wonders, wonders[0]);
 	}
 
+	
+	public String dropDownScienceSelectionMessage() {
+		Object[] objects = { "Protractor", "Wheel", "Tablet" };
+		ResourceBundle messages = Translate.getNewResourceBundle();
+		return (String) JOptionPane.showInputDialog(null, messages.getString("chooseAScience"),
+				messages.getString("chooseAScience"), JOptionPane.PLAIN_MESSAGE, null, objects, objects[0]);
+	}
+
 	public static int selectDifficulty() {
 		ResourceBundle messages = Translate.getNewResourceBundle();
 		Object[] objects = { messages.getString("easy"), messages.getString("normal") };
