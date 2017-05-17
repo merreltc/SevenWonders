@@ -20,7 +20,7 @@ public class EndGameHandler {
 			
 			int guildEffects = getPointsFromGuildCards(player, players.get((players.size() + i - 1) % players.size()),
 					players.get((i + 1) % players.size()));
-			System.out.println(guildEffects);
+			
 			int scienceScore = getSciencePoints(player);
 			scores.add(player.getNumVictoryPoints() + player.getCoinTotal()/3 + player.getConflictTotal() + guildEffects + scienceScore);
 		}
