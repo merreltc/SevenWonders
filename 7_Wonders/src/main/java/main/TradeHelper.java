@@ -1,12 +1,17 @@
 package main;
 
+import java.util.ResourceBundle;
+
 import backend.GameManager;
+import constants.GeneralEnums.RawResource;
 import constants.GeneralEnums.Resource;
 import dataStructures.playerData.Player;
 import utils.Message;
+import utils.Translate;
 
 public class TradeHelper {
 	private GameManager gameManager;
+	private ResourceBundle messages = Translate.getNewResourceBundle();
 
 	public TradeHelper(GameManager gameManager) {
 		this.gameManager = gameManager;
@@ -20,16 +25,16 @@ public class TradeHelper {
 		int currentIndex = this.gameManager.getPlayers().indexOf(tradeFrom);
 
 		if (splitValue[0].equals("Right")) {
-			int offsetRight = (currentIndex - 1 + this.gameManager.getNumPlayers());
+			int offsetRight = (currentIndex + 1 + this.gameManager.getNumPlayers());
 			tradeTo = this.gameManager.getPlayer(offsetRight % this.gameManager.getNumPlayers());
 		} else {
-			int offsetLeft = (currentIndex + 1 + this.gameManager.getNumPlayers());
+			int offsetLeft = (currentIndex - 1 + this.gameManager.getNumPlayers());
 			tradeTo = this.gameManager.getPlayer(offsetLeft % this.gameManager.getNumPlayers());
 		}
 
 		try {
 			this.gameManager.tradeForEntity(tradeFrom, tradeTo, resourceEnum);
-			Message.showMessage("Trade Successful");
+			Message.showMessage(this.messages.getString("tradeSuccess"));
 		} catch (Exception e) {
 			Message.showMessage(e.getMessage());
 		}
@@ -37,14 +42,13 @@ public class TradeHelper {
 
 	private Enum translateStringToEnum(String resource) {
 		if (resource.equals("Lumber")) {
-			return Resource.LUMBER;
+			return RawResource.LUMBER;
 		} else if (resource.equals("Stone")) {
-			return Resource.STONE;
+			return RawResource.STONE;
 		} else if (resource.equals("Ore")) {
-			return Resource.ORE;
+			return RawResource.ORE;
 		}
-		return Resource.CLAY;
-
+		return RawResource.CLAY;
 	}
 
 }

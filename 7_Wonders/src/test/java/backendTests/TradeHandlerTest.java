@@ -433,7 +433,7 @@ public class TradeHandlerTest {
 	}
 
 	@Test
-	public void testValidTrade1CoinHasEastTradingPost(){
+	public void testValidTrade1CoinHasEastTradingPost() {
 		ArrayList<Player> players = new ArrayList<Player>();
 		players.add(new Player("Wolverine", WonderType.COLOSSUS));
 		players.add(new Player("Captain America", WonderType.LIGHTHOUSE));
@@ -441,23 +441,22 @@ public class TradeHandlerTest {
 
 		ArrayList<Card> cards = new SetUpDeckHandler().createCards(Age.AGE1, 3);
 		Deck deck = new Deck(Age.AGE1, cards);
-		
+
 		GameBoard board = new GameBoard(players, deck);
 		TradeHandler tradeHandler = new TradeHandler(board);
-		
+
 		Player current = board.getPlayer(0);
 		Player right = board.getPlayer(1);
 		ArrayList<Card> storage = new ArrayList<Card>();
-		storage.add(deck.getCard(12)); //east trading post
+		storage.add(deck.getCard(12)); // east trading post
 		current.setStoragePile(storage);
-		
 
 		ArrayList<Card> rStorage = new ArrayList<Card>();
 		rStorage.add(deck.getCard(0));
 		right.setStoragePile(rStorage);
-		
+
 		tradeHandler.tradeFromToForEntity(current, right, RawResource.LUMBER, true);
-		
+
 		assertEquals(2, current.getNumValue1Coins());
 		assertEquals(1, (int) current.getCurrentTrades().get(RawResource.LUMBER));
 		assertEquals(4, right.getCoinTotal());
