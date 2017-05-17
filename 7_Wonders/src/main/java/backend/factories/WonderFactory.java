@@ -2,23 +2,29 @@ package backend.factories;
 
 import java.util.ArrayList;
 
+import constants.GeneralEnums.GameMode;
+import constants.GeneralEnums.Side;
+import dataStructures.gameMaterials.Wonder;
 import dataStructures.gameMaterials.Wonder.WonderType;
 import exceptions.NoMoreWondersException;
 
 public class WonderFactory {
 	private ArrayList<WonderType> remainingWonders;
 	private int numRemainingWonders;
+	private GameMode mode;
 
-	public WonderFactory() {
+	public WonderFactory(GameMode mode) {
 		this.remainingWonders = new ArrayList<WonderType>();
 		buildWonderSet(this.remainingWonders);
 		this.numRemainingWonders = 7;
+		this.mode = mode;
 	}
 
-	public WonderType getWonder() {
+	public Wonder getWonder() {
 		if (isOutOfWonders()) {
 			throw new NoMoreWondersException("There are no more unique wonders left.");
 		}
+		
 		int index = getRandomIndex();
 		decrementNumRemainingWonders();
 		return removeAtIndex(index);
@@ -35,8 +41,9 @@ public class WonderFactory {
 		this.numRemainingWonders--;
 	}
 
-	public WonderType removeAtIndex(int index) {
-		return (WonderType) this.remainingWonders.remove(index);
+	public Wonder removeAtIndex(int index) {
+		WonderType type = (WonderType) this.remainingWonders.remove(index);
+		return new Wonder(Side.A, type);
 	}
 
 	private void buildWonderSet(ArrayList<WonderType> wonders) {
