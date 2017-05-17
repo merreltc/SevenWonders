@@ -57,8 +57,6 @@ public class SetupBackendTest {
 	public void testSetUpReturnsPlayerNamesMin() {
 		ArrayList<String> playerNames = new ArrayList<String>(
 				Arrays.asList("Wolverine", "Captain America", "Black Widow"));
-		ArrayList<WonderType> wonders = new ArrayList<WonderType>(
-				Arrays.asList(WonderType.COLOSSUS, WonderType.LIGHTHOUSE, WonderType.TEMPLE));
 
 		SetUpPlayerHandler setUpHandler = new SetUpPlayerHandler();
 		ArrayList<Player> players = setUpHandler.setUpAndReturnPlayers(playerNames);
@@ -72,9 +70,6 @@ public class SetupBackendTest {
 	public void testSetUpReturnsPlayerNamesMax() {
 		ArrayList<String> playerNames = new ArrayList<String>(
 				Arrays.asList("Wolverine", "Captain America", "Black Widow", "Hulk", "Iron Man", "Spider Man", "Thor"));
-		ArrayList<WonderType> wonders = new ArrayList<WonderType>(
-				Arrays.asList(WonderType.COLOSSUS, WonderType.LIGHTHOUSE, WonderType.TEMPLE, WonderType.STATUE,
-						WonderType.MAUSOLEUM, WonderType.GARDENS, WonderType.PYRAMIDS));
 
 		SetUpPlayerHandler setUpHandler = new SetUpPlayerHandler();
 		ArrayList<Player> players = setUpHandler.setUpAndReturnPlayers(playerNames);
@@ -87,7 +82,6 @@ public class SetupBackendTest {
 	@Test(expected = IllegalArgumentException.class)
 	public void testSetUpReturnsPlayerNamesZero() {
 		ArrayList<String> playerNames = new ArrayList<String>();
-		ArrayList<WonderType> wonders = new ArrayList<WonderType>();
 
 		SetUpPlayerHandler setUpHandler = new SetUpPlayerHandler();
 		setUpHandler.setUpAndReturnPlayers(playerNames);
@@ -98,9 +92,6 @@ public class SetupBackendTest {
 	public void testSetUpReturnsPlayerNamesTooMany() {
 		ArrayList<String> playerNames = new ArrayList<String>(
 				Arrays.asList("Wolverine", "Captain America", "Black Widow", "Hulk", "Iron Man", "Spider Man", "Thor", "Thor"));
-		ArrayList<WonderType> wonders = new ArrayList<WonderType>(
-				Arrays.asList(WonderType.COLOSSUS, WonderType.LIGHTHOUSE, WonderType.TEMPLE, WonderType.STATUE,
-						WonderType.MAUSOLEUM, WonderType.GARDENS, WonderType.PYRAMIDS, WonderType.PYRAMIDS));
 
 		SetUpPlayerHandler setUpHandler = new SetUpPlayerHandler();
 		setUpHandler.setUpAndReturnPlayers(playerNames);
@@ -111,8 +102,6 @@ public class SetupBackendTest {
 	public void testCreatePlayersMinNumPlayers() {
 		ArrayList<String> playerNames = new ArrayList<String>(
 				Arrays.asList("Wolverine", "Captain America", "Black Widow"));
-		ArrayList<WonderType> wonders = new ArrayList<WonderType>(
-				Arrays.asList(WonderType.COLOSSUS, WonderType.LIGHTHOUSE, WonderType.TEMPLE));
 
 		SetUpPlayerHandler setUpHandler = new SetUpPlayerHandler();
 		ArrayList<Player> players = setUpHandler.createPlayers(playerNames);
@@ -126,8 +115,6 @@ public class SetupBackendTest {
 	public void testCreateNamedPlayersMin() {
 		ArrayList<String> playerNames = new ArrayList<String>(
 				Arrays.asList("Wolverine", "Captain America", "Black Widow"));
-		ArrayList<WonderType> wonders = new ArrayList<WonderType>(
-				Arrays.asList(WonderType.COLOSSUS, WonderType.LIGHTHOUSE, WonderType.TEMPLE));
 
 		SetUpPlayerHandler setUpHandler = new SetUpPlayerHandler();
 		ArrayList<Player> players = setUpHandler.createPlayers(playerNames);
@@ -141,9 +128,6 @@ public class SetupBackendTest {
 	public void testCreateNamedPlayersMax() {
 		ArrayList<String> playerNames = new ArrayList<String>(
 				Arrays.asList("Wolverine", "Captain America", "Black Widow", "Hulk", "Iron Man", "Spider Man", "Thor"));
-		ArrayList<WonderType> wonders = new ArrayList<WonderType>(
-				Arrays.asList(WonderType.COLOSSUS, WonderType.LIGHTHOUSE, WonderType.TEMPLE, WonderType.STATUE,
-						WonderType.MAUSOLEUM, WonderType.GARDENS, WonderType.PYRAMIDS));
 
 		SetUpPlayerHandler setUpHandler = new SetUpPlayerHandler();
 		ArrayList<Player> players = setUpHandler.createPlayers(playerNames);
