@@ -13,6 +13,6 @@ public final class DeckHandler {
 	}
 
 	public static Card drawCard(Deck age1) {
-		return age1.getCards().remove(TOP_OF_DECK);
+		return age1.removeAtIndex(TOP_OF_DECK);
 	}
 }

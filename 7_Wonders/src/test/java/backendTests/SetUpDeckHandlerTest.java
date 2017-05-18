@@ -85,34 +85,19 @@ public class SetUpDeckHandlerTest {
 	public void testCreateAge3Cards3Players() {
 		int numPlayers = 3;
 		ArrayList<Card> cards = SetUpDeckTestHelper.createAge3Cards(numPlayers);
-
 		ArrayList<Card> actual = new SetUpDeckHandler().createCards(Age.AGE3, numPlayers);
 
 		for (int i = 0; i < actual.size(); i++) {
 			assertEquals(cards.get(i).toString(), actual.get(i).toString());
 		}
-
-	}
-	
-	@Test
-	public void testCreateAge3Cards7Players() {
-		int numPlayers = 7;
-		ArrayList<Card> cards = SetUpDeckTestHelper.createAge3Cards(numPlayers);
-
-		ArrayList<Card> actual = new SetUpDeckHandler().createCards(Age.AGE3, numPlayers);
-
-		for (int i = 0; i < actual.size(); i++) {
-			assertEquals(cards.get(i).toString(), actual.get(i).toString());
-		}
-
 	}
 
 	@Test
 	public void testAge2Cards3PlayersTempleHasNextAndPrevious() {
 		int numPlayers = 3;
 		ArrayList<Card> cards = SetUpDeckTestHelper.createAge2Cards(numPlayers);
-
 		ArrayList<Card> actual = new SetUpDeckHandler().createCards(Age.AGE2, numPlayers);
+
 		Card temple = actual.get(8);
 		assertEquals("Temple", temple.getName());
 		assertEquals("Pantheon", temple.getNextStructureName());

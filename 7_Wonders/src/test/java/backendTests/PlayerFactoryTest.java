@@ -6,6 +6,7 @@ import org.easymock.EasyMock;
 import org.junit.Test;
 
 import backend.factories.PlayerFactory;
+import constants.GeneralEnums.GameMode;
 import dataStructures.playerData.Player;
 import exceptions.NoMorePlayersException;
 
@@ -16,7 +17,7 @@ public class PlayerFactoryTest {
 		Player player = EasyMock.createStrictMock(Player.class);
 		replayExpectedGetPlayer(1, player);
 
-		PlayerFactory factory = new PlayerFactory();
+		PlayerFactory factory = new PlayerFactory(GameMode.EASY);
 		verifyActualGetPlayer(1, player, factory);
 	}
 
@@ -25,7 +26,7 @@ public class PlayerFactoryTest {
 		Player player = EasyMock.createStrictMock(Player.class);
 		replayExpectedGetPlayer(3, player);
 
-		PlayerFactory factory = new PlayerFactory();
+		PlayerFactory factory = new PlayerFactory(GameMode.EASY);
 		verifyActualGetPlayer(3, player, factory);
 	}
 
@@ -34,13 +35,13 @@ public class PlayerFactoryTest {
 		Player player = EasyMock.createStrictMock(Player.class);
 		replayExpectedGetPlayer(7, player);
 
-		PlayerFactory factory = new PlayerFactory();
+		PlayerFactory factory = new PlayerFactory(GameMode.EASY);
 		verifyActualGetPlayer(7, player, factory);
 	}
 
 	@Test(expected = NoMorePlayersException.class)
 	public void testGetPlayerInvalid8() {
-		PlayerFactory factory = new PlayerFactory();
+		PlayerFactory factory = new PlayerFactory(GameMode.EASY);
 		for (int i = 0; i < 8; i++) {
 			factory.getPlayer("Player " + i);
 		}
@@ -49,7 +50,7 @@ public class PlayerFactoryTest {
 
 	@Test(expected = NoMorePlayersException.class)
 	public void testGetPlayerInvalid9() {
-		PlayerFactory factory = new PlayerFactory();
+		PlayerFactory factory = new PlayerFactory(GameMode.EASY);
 		for (int i = 0; i < 9; i++) {
 			factory.getPlayer("Player " + i);
 		}
