@@ -15,8 +15,7 @@ public class ResourceViewerRowRenderer {
 	Player player;
 	private ResourceBundle messages = Translate.getNewResourceBundle();
 	
-	public void draw(Graphics graphics){
-		this.graphics = graphics;
+	public void draw(){
 		draw1CoinBox();
 		drawShieldBox();
 		draw3CoinBox();
@@ -121,5 +120,9 @@ public class ResourceViewerRowRenderer {
 	
 	public void setPlayer(Player player){
 		this.player = player;
+	}
+	
+	public void setGraphics(Graphics graphics){
+		this.graphics = graphics;
 	}
 }
