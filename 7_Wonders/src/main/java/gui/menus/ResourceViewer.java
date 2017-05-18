@@ -53,7 +53,7 @@ public class ResourceViewer extends Menu {
 		draw1CoinBox(graphics);
 		drawShieldBox(graphics);
 		draw3CoinBox(graphics);
-		drawWarTokenBox(graphics);
+		drawConflictTokenBox(graphics);
 		drawVictoryTokensBox(graphics);
 	}
 
@@ -88,13 +88,13 @@ public class ResourceViewer extends Menu {
 				Constants.RESOURCE_VIEWER_ONE_COIN_Y + Constants.RESOURCE_VIEWER_TEXT_Y_OFFSET + Constants.RESOURCE_VIEWER_ROW_HEIGHT);
 	}
 
-	private void drawWarTokenBox(Graphics graphics) {
+	private void drawConflictTokenBox(Graphics graphics) {
 		graphics.drawRect(Constants.RESOURCE_VIEWER_WAR_TOKEN_X, Constants.RESOURCE_VIEWER_WAR_TOKEN_Y,
 				Constants.RESOURCE_VIEWER_CELL_WIDTH, Constants.RESOURCE_VIEWER_ROW_HEIGHT);
 		graphics.drawRect(Constants.RESOURCE_VIEWER_WAR_TOKEN_X,
 				Constants.RESOURCE_VIEWER_WAR_TOKEN_Y + Constants.RESOURCE_VIEWER_ROW_HEIGHT,
 				Constants.RESOURCE_VIEWER_CELL_WIDTH, Constants.RESOURCE_VIEWER_ROW_HEIGHT);
-		Image image = this.renderer.getImage("one shield");
+		Image image = this.renderer.getImage("Conflict Token");
 		RenderImage.draw(graphics, image,
 				Constants.RESOURCE_VIEWER_WAR_TOKEN_X + Constants.RESOURCE_VIEWER_CELL_WIDTH / 3,
 				Constants.RESOURCE_VIEWER_WAR_TOKEN_Y + 5, Constants.RESOURCE_IMAGE_WIDTH,
