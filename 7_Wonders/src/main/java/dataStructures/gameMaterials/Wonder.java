@@ -1,18 +1,22 @@
 package dataStructures.gameMaterials;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import constants.GeneralEnums.CostType;
+import constants.GeneralEnums.Good;
+import constants.GeneralEnums.RawResource;
 import constants.GeneralEnums.Resource;
 import constants.GeneralEnums.Side;
 import dataStructures.gameMaterials.Effect.EffectType;
+import dataStructures.gameMaterials.EntityEffect.EntityType;
 import dataStructures.gameMaterials.Level.Frequency;
 import exceptions.CannotBuiltWonderException;
 
 public class Wonder {
 	private WonderType type;
 	private String name;
-	private Resource resource;
+	private EntityEffect resource;
 	private Side side;
 	private int numBuiltLevels = 0;
 	private ArrayList<Level> levels;
@@ -49,7 +53,7 @@ public class Wonder {
 		return this.name;
 	}
 
-	public Resource getResource() {
+	public EntityEffect getResource() {
 		return this.resource;
 	}
 
@@ -59,6 +63,14 @@ public class Wonder {
 
 	public int getNumLevels() {
 		return this.getNumLevels(this.side, this.type);
+	}
+
+	public int getNumBuiltLevels() {
+		return this.levels.size();
+	}
+
+	public Level getLevel(int index) {
+		return this.levels.get(index);
 	}
 
 	public int getNumLevels(Side side, WonderType type) {
@@ -124,32 +136,91 @@ public class Wonder {
 		}
 	}
 
-	public static Resource getResourceByType(WonderType type) {
+	public static EntityEffect getResourceByType(WonderType type) {
+		EntityType entity;
+		Enum specificResource;
+		Resource resource;
+		
 		switch (type) {
 		case COLOSSUS:
-			return Resource.ORE;
+			resource = Resource.ORE;
+			entity = getEntityType(resource);
+			specificResource = getSpecificResource(resource);
+			break;
 		case LIGHTHOUSE:
-			return Resource.GLASS;
+			resource = Resource.GLASS;
+			entity = getEntityType(resource);
+			specificResource = getSpecificResource(resource);
+			break;
 		case TEMPLE:
-			return Resource.PRESS;
+			resource = Resource.PRESS;
+			entity = getEntityType(resource);
+			specificResource = getSpecificResource(resource);
+			break;
 		case GARDENS:
-			return Resource.CLAY;
+			resource = Resource.CLAY;
+			entity = getEntityType(resource);
+			specificResource = getSpecificResource(resource);
+			break;
 		case STATUE:
-			return Resource.LUMBER;
+			resource = Resource.LUMBER;
+			entity = getEntityType(resource);
+			specificResource = getSpecificResource(resource);
+			break;
 		case MAUSOLEUM:
-			return Resource.LOOM;
+			resource = Resource.LOOM;
+			entity = getEntityType(resource);
+			specificResource = getSpecificResource(resource);
+			break;
 		case PYRAMIDS:
-			return Resource.STONE;
+			resource = Resource.STONE;
+			entity = getEntityType(resource);
+			specificResource = getSpecificResource(resource);
+			break;
 		default:
 			throw new IllegalArgumentException("Bad Wonder Type");
 		}
+
+		HashMap<Enum, Integer> effect = new HashMap<Enum, Integer>();
+		effect.put(specificResource, 1);
+		
+		return new EntityEffect(EffectType.ENTITY, entity, effect);
 	}
 
-	public int getNumBuiltLevels() {
-		return this.levels.size();
+	private static EntityType getEntityType(Resource resource) {
+		switch (resource) {
+		case ORE:
+		case STONE:
+		case CLAY:
+		case LUMBER:
+			return EntityType.RESOURCE;
+		case GLASS:
+		case PRESS:
+		case LOOM:
+			return EntityType.MANUFACTUREDGOOD;
+		default:
+			throw new IllegalArgumentException("Bad Resource Type");
+		}
 	}
 
-	public Level getLevel(int index) {
-		return this.levels.get(index);
+	private static Enum getSpecificResource(Resource resource) {
+		switch (resource) {
+		case ORE:
+			return RawResource.ORE;
+		case STONE:
+			return RawResource.STONE;
+		case CLAY:
+			return RawResource.CLAY;
+		case LUMBER:
+			return RawResource.LUMBER;
+		case GLASS:
+			return Good.GLASS;
+		case PRESS:
+			return Good.PRESS;
+		case LOOM:
+			return Good.LOOM;
+		default:
+			throw new IllegalArgumentException("Bad Resource Type");
+		}
 	}
 }

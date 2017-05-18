@@ -6,8 +6,8 @@ import java.util.HashMap;
 
 import org.junit.Test;
 
-import constants.GeneralEnums.Resource;
 import constants.GeneralEnums.Side;
+import dataStructures.gameMaterials.EntityEffect;
 import dataStructures.gameMaterials.Wonder;
 import dataStructures.gameMaterials.Wonder.WonderType;
 
@@ -26,7 +26,7 @@ public class WonderTest {
 
 		for (WonderType type : wonders.keySet()) {
 			Wonder wonder = new Wonder(Side.A, type);
-			Resource resource = Wonder.getResourceByType(type);
+			EntityEffect resource = Wonder.getResourceByType(type);
 			assertEquals(resource, wonder.getResource());
 		}
 	}
