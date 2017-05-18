@@ -215,20 +215,11 @@
 						}]
 			},
 	"Effect": {
-				"EffectType": "ENTITY",
-				"EntityType": "SCIENCE",
-				"entitiesAndAmounts": [{
-										"Science": "PROTRACTOR",
-										"entityAmount": 1
-									  },
-									  {
-										"Science": "WHEEL",
-										"entityAmount": 1
-									  },
-									  {
-										"Science": "TABLET",
-										"entityAmount": 1
-									  }]
+				"EffectType": "VALUE",
+				"Value": "GUILD",
+				"AffectingEntities": "SCIENTIFICSTRUCTURES",
+				"Direction": "SELF",
+				"valueAmount": 1
 			  },
 	"Next": "None",
 	"Previous": "None"

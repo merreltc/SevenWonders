@@ -18,17 +18,14 @@ public class DeckHandlerTest {
 
 	@Test
 	public void testShuffleDeck() {
-		Collections collection = EasyMock.createStrictMock(Collections.class);
 		SetUpDeckHandler setUpDeckHandler = new SetUpDeckHandler();
 		ArrayList<Card> cards = setUpDeckHandler.createCards(Age.AGE1, 3);
-		Collections.shuffle(cards);
-		
-		EasyMock.replay(collection);
+		ArrayList<Card> beginingOrder = setUpDeckHandler.createCards(Age.AGE1, 3);
 		
 		Deck age1 = new Deck(Age.AGE1, cards);
 		DeckHandler.shuffleDeck(age1);
 		
-		EasyMock.verify(collection);
+		assertFalse(beginingOrder.toString().equals(age1.getCards().toString()));
 	}
 
 	@Test

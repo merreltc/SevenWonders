@@ -6,6 +6,7 @@ import java.util.ResourceBundle;
 
 import backend.handlers.DeckHandler;
 import backend.handlers.EndGameHandler;
+import backend.handlers.PlayerChipHandler;
 import backend.handlers.PlayerTurnHandler;
 import backend.handlers.RotateHandler;
 import backend.handlers.RotateHandler.Rotation;
@@ -69,6 +70,7 @@ public class GameManager {
 	}
 
 	public void dealInitialTurnCards() {
+		DeckHandler.shuffleDeck(this.board.getDeck());
 		this.turnHandler.dealInitialTurnCards(this.getPlayers(), this.board.getDeck());
 	}
 
@@ -199,8 +201,8 @@ public class GameManager {
 		newDeck = switchDeck(age);
 
 		this.board.setDeck(newDeck);
-		this.turnHandler.dealInitialTurnCards(this.getPlayers(), this.board.getDeck());
 		DeckHandler.shuffleDeck(this.board.getDeck());
+		this.turnHandler.dealInitialTurnCards(this.getPlayers(), this.board.getDeck());
 		message = this.messages.getString("endOfAge");
 		return message;
 	}

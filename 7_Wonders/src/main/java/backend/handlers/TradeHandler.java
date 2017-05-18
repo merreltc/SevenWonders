@@ -5,6 +5,7 @@ import java.util.ResourceBundle;
 import dataStructures.GameBoard;
 import dataStructures.playerData.Chip;
 import dataStructures.playerData.Chip.ChipType;
+import dataStructures.playerData.Chip.ChipValue;
 import dataStructures.playerData.Player;
 import exceptions.InvalidTradeException;
 import utils.Translate;
@@ -33,7 +34,7 @@ public class TradeHandler {
 	}
 
 	private static int getNumValue3Coins(Player from, int valueToTrade) {
-		int fromPlayerNumValueValue3Coins = from.getNumValue3Coins();
+		int fromPlayerNumValueValue3Coins = from.getCoins().get(ChipValue.THREE);
 		int fromPlayerValueOfValue3Coins = 3 * fromPlayerNumValueValue3Coins;
 
 		int valueofValue3Removed = getValueOfValue3CoinsRemoved(valueToTrade, fromPlayerValueOfValue3Coins);
@@ -52,13 +53,13 @@ public class TradeHandler {
 	}
 
 	public static void tradeFromToValue1(Player from, Player to, int numCoinsToTrade) {
-		from.removeValue1(numCoinsToTrade, ChipType.COIN);
-		to.addValue1(numCoinsToTrade, Chip.ChipType.COIN);
+		PlayerChipHandler.removeValue1(from, numCoinsToTrade, ChipType.COIN);
+		PlayerChipHandler.addValue1(to, numCoinsToTrade, Chip.ChipType.COIN);
 	}
 
 	public static void tradeFromToValue3(Player from, Player to, int numCoinsToTrade) {
-		from.removeValue3(numCoinsToTrade, Chip.ChipType.COIN);
-		to.addValue3(numCoinsToTrade, Chip.ChipType.COIN);
+		PlayerChipHandler.removeValue3(from, numCoinsToTrade, Chip.ChipType.COIN);
+		PlayerChipHandler.addValue3(to, numCoinsToTrade, Chip.ChipType.COIN);
 	}
 
 	public void tradeFromToForEntity(Player from, Player to, Enum entity, boolean discount) {
