@@ -59,8 +59,8 @@ Cards are passed left-right-left over the three ages, so you need to keep an eye
 - [x] Minimal details for non-neighboring players
 
 ## Set Up
-- [x] Language is chosen: English or Chinese
-- [ ] Game mode is chosen (Easy or Normal)
+- [x] Language is chosen: English or Chinese - Implemented in GUI
+- [x] Game mode is chosen (Easy or Normal) [TestCase](https://ada.csse.rose-hulman.edu/moormaet/Silver_Falcons_Seven_Wonders/blob/master/7_Wonders/src/test/java/backendTests/WonderFactoryTest.java#L48)
     - Easy Mode: all players receive side A
     - Normal Mode: players can receive side A or B of a Wonder
 - [x] Number of players is chosen from valid options 3-7
@@ -68,9 +68,12 @@ Cards are passed left-right-left over the three ages, so you need to keep an eye
     - [x] Can play with 7 players [TestCase](7_Wonders/src/test/java/dataStructuresTests/GameManagerTest.java#L38)
 - [x] Players enter their names
 - [ ] Players are assigned random, unique wonders and sides
-- [x] Age I Deck is assembled based on number of players and shuffled
+- [x] Age I Deck is assembled based on number of players [TestCase](7_Wonders/src/test/java/backendTests/SetUpDeckHandlerTest.java#L36)
+        and shuffled [TestCase](7_Wonders/src/test/java/backendTests/DeckHandlerTest.java#L20)
 - [x] Players are dealt equal number of cards
-- [x] Each player begins with 3 value 1 coins
+    - [x] 3 Players [TestCase](7_Wonders/src/test/java/backendTests/TurnHandlerTest.java#L26)
+    - [x] 7 Players [TestCase](7_Wonders/src/test/java/backendTests/TurnHandlerTest.java#L46)
+- [x] Each player begins with 3 value 1 coins [TestCase](7_Wonders/src/test/java/dataStructuresTests/PlayerTest.java#L51)
 
 ## Decks
 - [x] Each age has a unique set of cards
@@ -90,9 +93,10 @@ Cards are passed left-right-left over the three ages, so you need to keep an eye
 - [x] Age I and II decks do not have Guild cards - covered in unique set of cards tests
 
 ## Cards
+[Card Tests](7_Wonders/src/test/java/dataStructuresTests/CardTest.java) For structure related things see [Building Structure](#building-the-structure)
 - [x] Name and type of structure/resource (See "Card Types")
 - [x] Cost of building the structure
-- [ ] The effect caused by building the structure
+- [x] The effect caused by building the structure - See below on building structure
 - [x] Previous structures that allow this structure to be built for free
 - [x] Future structures that can be built free is this card has already been built
 
@@ -101,15 +105,15 @@ Cards are passed left-right-left over the three ages, so you need to keep an eye
 - Manufacture Good: (Grey) Produce displayed products (loom, glass, press)
 - Science: (Green) Award victory points at end game based on collected symbols (wheel, protractor, tablet)
     - Rules:
-        - [ ] End game victory points are equal to number of identical symbols^2 + (7 * number of sets of 3 different symbols)
+        - [x] End game victory points are equal to number of identical symbols^2 + (7 * number of sets of 3 different symbols) [TestCase](https://ada.csse.rose-hulman.edu/moormaet/Silver_Falcons_Seven_Wonders/blob/master/7_Wonders/src/test/java/dataStructureTests/PlayerTest.java)
 
 - Civilian Structure: (Blue) Provide victory points
 - Commercial Structure: (Yellow) Provide advantages during commercial transactions (See "Commerce and Trading")
 - Military Structure: (Red) Builds military strength for wars (See "War")
 - Guild: (Purple) Provide end game victory points based on certain criteria
     - Rules:
-        - [ ] Number of guild cards in the game is equal to the number of players + 2 and is kept a secret from players
-        - [ ] At the end of the game, players scores are affected by the Guild cards
+        - [ ] Number of guild cards in the game is equal to the number of players + 2 and is kept a secret from players [TestCase](https://ada.csse.rose-hulman.edu/moormaet/Silver_Falcons_Seven_Wonders/blob/master/7_Wonders/src/test/java/backendTests/SetUpDeckHandlerTest.java)
+        - [x] At the end of the game, players scores are affected by the Guild cards [TestCase](https://ada.csse.rose-hulman.edu/moormaet/Silver_Falcons_Seven_Wonders/blob/master/7_Wonders/src/test/java/backendTests/EndGameHandlerTest.java)
 
 ## Commerce and Trading
 - [x] In order to trade or build anything, player must have appropriate resources or coins in their stockpile at the beginning of the turn
@@ -126,16 +130,16 @@ Cards are passed left-right-left over the three ages, so you need to keep an eye
     - [x] Some Commercial Structure (yellow) cards allow players to trade for certain materials for 1 coin after being built
         [Main TestCases start at](7_Wonders/src/test/java/backendTests/GameManagerTest.java#L409) Until [L626](7_Wonders/src/test/java/backendTests/GameManagerTest.java#L626)
         - [x] East Trading Post  [TestCase](7_Wonders/src/test/java/backendTests/TradeHandlerTest.java#L437)
-        - [x] West Trading Post
-        - [x] Marketplace
+        - [x] West Trading Post [TestCase](https://ada.csse.rose-hulman.edu/moormaet/Silver_Falcons_Seven_Wonders/blob/master/7_Wonders/src/test/java/backendTests/GameManagerTest.java#L539)
+        - [x] Marketplace [TestCase](https://ada.csse.rose-hulman.edu/moormaet/Silver_Falcons_Seven_Wonders/blob/master/7_Wonders/src/test/java/backendTests/GameManagerTest.java#L425)
 - [x] On a single turn, players may trade for multiple resources from both neighboring cities - On GUI
 - [x] Traded resources are only available to the player during the turn they are bought [TestCase](7_Wonders/src/test/java/backendTests/GameManagerTest.java#L630)
-- [ ] Only resources produced through the city/Wonder or a neighbors raw resource or manufactured good cards can be traded
+- [x] Only resources produced through the city/Wonder or a neighbors raw resource or manufactured good cards can be traded - [TestCase](https://ada.csse.rose-hulman.edu/moormaet/Silver_Falcons_Seven_Wonders/blob/master/7_Wonders/src/test/java/backendTests/TradeHandlerTest.java#L346)
 - [ ] Players are unable to purchase resources produced by commercial structures (or some Wonders)
 - [x] Trade cannot be refused by neighboring cities - On GUI
 
-## War
-- [ ] At the end of an age (following sixth rotation), players go to war with BOTH neighboring cities
+## War [TestCase](https://ada.csse.rose-hulman.edu/moormaet/Silver_Falcons_Seven_Wonders/blob/master/7_Wonders/src/test/java/backendTests/TurnHandlerTest.java)
+- [x] At the end of an age (following sixth rotation), players go to war with BOTH neighboring cities
 - [x] A player with more shields than their neighbor is successful
 - [x] A player with less shields than their neighbor is defeated
 - [x] A player with equal shield as their neighbor is tied
@@ -144,6 +148,7 @@ Cards are passed left-right-left over the three ages, so you need to keep an eye
 - [x] A tie results in no tokens for either city
 
 ## Player Stats
+[Player Tests](7_Wonders/src/test/java/dataStructuresTests/PlayerTest.java)
 - [x] Name
 - [ ] Wonder and build level
 - [x] Value 1 and value 3 coins
@@ -155,14 +160,14 @@ Cards are passed left-right-left over the three ages, so you need to keep an eye
 ## Process of Turn
 1. Choose card from temporary hand
 2. Action
-    -  [x] Build the Structure
+    -  [x] Build the Structure - See [Building Structure](#building-the-structure) but [Tests In](7_Wonders/src/test/java/backendTests/PlayerTurnHandlerTest.java)
     -  [ ] Build the Next Level of Wonder
-    -  [x] Discard for 3 Coins
+    -  [x] Discard for 3 Coins [TestCase](7_Wonders/src/test/java/backendTests/PlayerTurnHandlerTest.java#L322)
         -  Discarded cards create a Discard Pile
         -  A card can always be chosen for discard, even if the player does not have enough resources to build it
 3. Pass temporary hand to next player
-    - [x] Temporary hand is passed to next player (excluding chosen card)
-    - [x] Pass direction is determined by Age (I: left, II: right, III: left)
+    - [x] Temporary hand is passed to next player (excluding chosen card), wait until every player chooses a card to pass [TestCase](7_Wonders/src/test/java/backendTests/GameManagerTest.java#L733)
+    - [x] Pass direction is determined by Age (I: left/clockwise [TestCase](7_Wonders/src/test/java/backendTests/GameManagerTest.java#L102), II: right/counterclockwise [TestCase](7_Wonders/src/test/java/backendTests/GameManagerTest.java#L798) but [Exact Line](7_Wonders/src/test/java/backendTests/GameManagerTest.java#L835), III: left/clockwise [TestCase](7_Wonders/src/test/java/backendTests/GameManagerTest.java#L843) but [Exact Line](7_Wonders/src/test/java/backendTests/GameManagerTest.java#L883))
 4. On the sixth turn, player has 2 cards: one is chosen, second is discarded for NO coins
 
 ## Building the Structure
@@ -172,7 +177,7 @@ Cards are passed left-right-left over the three ages, so you need to keep an eye
     - [x] Player had to trade first [TestCase](7_Wonders/src/test/java/backendTests/PlayerTurnHandlerTest.java#L723)
     Other tests in same file
 - [x] If a structure has a coin cost, the player must pay that cost to the bank [TestCase](7_Wonders/src/test/java/backendTests/PlayerTurnHandlerTest.java#L61)
-- [x] If player owns a previous structure, they may build their chosen structure for free
+- [x] If player owns a previous structure, they may build their chosen structure for free [TestCase](https://ada.csse.rose-hulman.edu/moormaet/Silver_Falcons_Seven_Wonders/blob/master/7_Wonders/src/test/java/backendTests/PlayerTurnHandlerTest.java#L657)
 - [x] Identical structures cannot be built by the same player [TestCase](7_Wonders/src/test/java/backendTests/PlayerTurnHandlerTest.java#L697)
 - [x] If a structure has no cost, the player can build it [TestCase](7_Wonders/src/test/java/backendTests/PlayerTurnHandlerTest.java#L34)
 - [x] At the end of a rotation, all player's built structures are revealed
@@ -182,9 +187,9 @@ Cards are passed left-right-left over the three ages, so you need to keep an eye
 - [ ] Card used to build Wonder does not provide player its effect in addition to the effect of the Wonder Level and is hidden from other players
 - [ ] Levels of Wonder are built once per game and in sequence (left to right)
 - [ ] Wonder can be built at any time, in any age
-- [ ] The wonder does not need to be built in order for a player to win
+- [x] The wonder does not need to be built in order for a player to win - not included in Scoring
 
-### Wonders
+### Wonders [TestCase](https://ada.csse.rose-hulman.edu/moormaet/Silver_Falcons_Seven_Wonders/blob/master/7_Wonders/src/test/java/dataStructureTests/WonderTest.java)
 - [x] Wonders provide players 1 of the resource specified in the top left corner
 - Side A always has 3 levels
     - [ ] The first level is worth +3 Victory Points
@@ -246,9 +251,9 @@ Cards are passed left-right-left over the three ages, so you need to keep an eye
         - [ ] Level 3: 5 Victory Points
         - [ ] Level 4: 7 Victory Points
 
-## End Game and Victory
-- [ ] After the war of Age III, a score card displaying total Victory Points for each player is displayed
-- [ ] Total Victory Points is equal to the sum of total value of Conflict Tokens, the floor of total coin value divided by 3, the total value of Victory Points from Wonders and (Civilian/Commercial) Structures, points acquired from Guild effects (see "Cards->Guild"), and points acquired from Science Cards (see "Cards->Science Structure")
+## End Game and Victory [TestCase](https://ada.csse.rose-hulman.edu/moormaet/Silver_Falcons_Seven_Wonders/blob/master/7_Wonders/src/test/java/backendTests/EndGameHandlerTest.java)
+- [x] After the war of Age III, a score card displaying total Victory Points for each player is displayed
+- [x] Total Victory Points is equal to the sum of total value of Conflict Tokens, the floor of total coin value divided by 3, the total value of Victory Points from Wonders and (Civilian/Commercial) Structures, points acquired from Guild effects (see "Cards->Guild"), and points acquired from Science Cards (see "Cards->Science Structure")
 - [ ] Whichever player has the most victory points is the winner
 - [ ] In the case of a tie, the player with the most coins wins. Ties at this point are not broken further
 
@@ -272,41 +277,41 @@ Cards are passed left-right-left over the three ages, so you need to keep an eye
 ## Criteria
 **Key Code Smells from "Clean Code":**  
 * Names:  
-	> Descriptive, albeit long names  
+    > Descriptive, albeit long names  
 * Functions:  
-	> Short (extract functions where necessary)  
-	> With as few arguments as possible  
-	> Descriptive, verb names  
+    > Short (extract functions where necessary)  
+    > With as few arguments as possible  
+    > Descriptive, verb names  
 * Comments:  
-	> Explain a feature succinctly  
-	> Not overpower the code (only use when necessary)  
-	> No commented code  
+    > Explain a feature succinctly  
+    > Not overpower the code (only use when necessary)  
+    > No commented code  
 * Formatting:  
-	> Camel case functions and variable names  
-	> Ctrl-Shift-F before committing  
-	> One blank line between methods  
-	> Decreasing order of function abstraction levels  
-	> Getters/Setters at the bottom  
+    > Camel case functions and variable names  
+    > Ctrl-Shift-F before committing  
+    > One blank line between methods  
+    > Decreasing order of function abstraction levels  
+    > Getters/Setters at the bottom  
 * Demeter:  
-	> Avoid trainwrecks by extracting methods in calling code  
+    > Avoid trainwrecks by extracting methods in calling code  
 * Error Handling:  
-	> Use try-catch/RuntimeException for user-created exceptions  
-	> Descriptive messages  
-	> Don't pass/return null  
-	> Use Exceptions rather than error codes  
+    > Use try-catch/RuntimeException for user-created exceptions  
+    > Descriptive messages  
+    > Don't pass/return null  
+    > Use Exceptions rather than error codes  
 * Unit Testing:  
-	> Use BVA to test all boundaries  
-	> Single responsibility/concept per test  
+    > Use BVA to test all boundaries  
+    > Single responsibility/concept per test  
 * Classes:  
-	> Small  
-	> Single Responsibility  
-	> Object classes should be "Open for extension, Closed for modification"  
-	> Organized for change  
+    > Small  
+    > Single Responsibility  
+    > Object classes should be "Open for extension, Closed for modification"  
+    > Organized for change  
 * TDD:  
-	> Follow the following steps:  
-		1. Failing test  
-		2. Write minimal code to pass  
-		3. Refactor after major responsibility is fully tested
+    > Follow the following steps:  
+        1. Failing test  
+        2. Write minimal code to pass  
+        3. Refactor after major responsibility is fully tested
 
 **Will everyone apply all criteria?**  
 * Use of pair programming allows for good oversight by partner  

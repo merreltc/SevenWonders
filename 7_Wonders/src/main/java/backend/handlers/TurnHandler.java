@@ -12,21 +12,24 @@ public class TurnHandler {
 	private int numPlayersUntilPass;
 	private int numTurnsTilEndOfAge = 5;
 
-	public void dealInitialTurnCards(ArrayList<Player> players, int numPlayers, Deck deck) {
-		DeckHandler.shuffleDeck(deck);
+	public void dealInitialTurnCards(ArrayList<Player> players, Deck deck) {
 		this.numPlayersUntilPass = players.size() - 1;
 		this.numTurnsTilEndOfAge = 5;
 		
 		for (Player player: players) {
-			ArrayList<Card> currentHand = new ArrayList<Card>();
-			
-			for(int i = 0; i < 7; i++){
-				Card toAdd = DeckHandler.drawCard(deck);
-				currentHand.add(toAdd);
-			}
-			
-			player.setCurrentHand(currentHand);
+			popluatePlayersHand(deck, player);
 		}
+	}
+
+	private void popluatePlayersHand(Deck deck, Player player) {
+		ArrayList<Card> currentHand = new ArrayList<Card>();
+
+		for(int i = 0; i < 7; i++){
+			Card toAdd = DeckHandler.drawCard(deck);
+			currentHand.add(toAdd);
+		}
+		
+		player.setCurrentHand(currentHand);
 	}
 	
 	public void endAge(ArrayList<Player> players, Age age) {
@@ -35,21 +38,21 @@ public class TurnHandler {
 			Player player2 = players.get((i+1)%players.size());
 			if (player1.getNumShields() > player2.getNumShields()){
 				this.addWinningPlayersTokensByAge(player1, age);
-				player2.addValueNeg1(1, ChipType.CONFLICTTOKEN);
+				PlayerChipHandler.addValueNeg1(player2, 1, ChipType.CONFLICTTOKEN);
 			}else if (player1.getNumShields() < player2.getNumShields()){
 				this.addWinningPlayersTokensByAge(player2, age);
-				player1.addValueNeg1(1, ChipType.CONFLICTTOKEN);
+				PlayerChipHandler.addValueNeg1(player1, 1, ChipType.CONFLICTTOKEN);
 			}
 		}
 	}
 	
 	private void addWinningPlayersTokensByAge(Player winner, Age age){
 		if (age == Age.AGE1){
-			winner.addValue1(1, ChipType.CONFLICTTOKEN);
+			PlayerChipHandler.addValue1(winner, 1, ChipType.CONFLICTTOKEN);
 		}else if (age == Age.AGE2){
-			winner.addValue3(1, ChipType.CONFLICTTOKEN);
+			PlayerChipHandler.addValue3(winner, 1, ChipType.CONFLICTTOKEN);
 		}else {
-			winner.addValue5(1, ChipType.CONFLICTTOKEN);
+			PlayerChipHandler.addValue5(winner, 1, ChipType.CONFLICTTOKEN);
 		}
 	}
 

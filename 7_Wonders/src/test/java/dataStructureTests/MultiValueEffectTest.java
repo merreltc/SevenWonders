@@ -186,11 +186,12 @@ public class MultiValueEffectTest {
 	}
 
 	@Test
-	public void testInvalidEqualsGuildDifferentType(){
+	public void testInvalidEqualsGuildDifferentType() {
 		HashMap<Enum, Integer> valuesAndAmounts = new HashMap<Enum, Integer>();
 		valuesAndAmounts.put(ValueType.CONFLICTTOKEN, -1);
 		valuesAndAmounts.put(ValueType.VICTORYPOINT, 1);
-		MultiValueEffect effect = new MultiValueEffect(EffectType.MULTIVALUE, Value.GUILD, AffectingEntity.NONE, Direction.SELF, valuesAndAmounts);
+		MultiValueEffect effect = new MultiValueEffect(EffectType.MULTIVALUE, Value.GUILD, AffectingEntity.NONE,
+				Direction.SELF, valuesAndAmounts);
 		HashMap<Enum, Integer> valuesAndAmounts2 = new HashMap<Enum, Integer>();
 		valuesAndAmounts2.put(ValueType.CONFLICTTOKEN, -1);
 		valuesAndAmounts2.put(ValueType.VICTORYPOINT, 1);

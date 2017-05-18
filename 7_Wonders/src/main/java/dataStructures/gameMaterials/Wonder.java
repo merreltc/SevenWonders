@@ -1,23 +1,44 @@
 package dataStructures.gameMaterials;
 
-import constants.GeneralEnums;
+import java.util.ArrayList;
+
+import constants.GeneralEnums.CostType;
 import constants.GeneralEnums.Resource;
+import constants.GeneralEnums.Side;
+import dataStructures.gameMaterials.Effect.EffectType;
+import dataStructures.gameMaterials.Level.Frequency;
+import exceptions.CannotBuiltWonderException;
 
 public class Wonder {
 	private WonderType type;
 	private String name;
 	private Resource resource;
-	private char side;
+	private Side side;
+	private int numBuiltLevels = 0;
+	private ArrayList<Level> levels;
 
 	public enum WonderType {
 		COLOSSUS, LIGHTHOUSE, TEMPLE, GARDENS, STATUE, MAUSOLEUM, PYRAMIDS
 	}
 
-	public Wonder(char side, WonderType type) {
+	public Wonder(Side side, WonderType type) {
 		this.type = type;
 		this.name = getNameByType(type);
 		this.resource = getResourceByType(type);
 		this.side = side;
+		this.levels = new ArrayList<Level>();
+		// TODO: Parse to set up levels
+	}
+
+	public void buildNextLevel() {
+		this.numBuiltLevels++;
+		if (this.numBuiltLevels > this.getNumLevels()) {
+			throw new CannotBuiltWonderException("Player has built max number of levels.");
+		} else {
+			Level temp = new Level(this.numBuiltLevels, new Cost(CostType.NONE, 1), new Effect(EffectType.NONE),
+					Frequency.DEFAULT);
+			this.levels.add(temp);
+		}
 	}
 
 	public WonderType getType() {
@@ -32,7 +53,7 @@ public class Wonder {
 		return this.resource;
 	}
 
-	public char getSide() {
+	public Side getSide() {
 		return this.side;
 	}
 
@@ -40,11 +61,11 @@ public class Wonder {
 		return this.getNumLevels(this.side, this.type);
 	}
 
-	public int getNumLevels(char side, Wonder.WonderType type) {
-		if(side == 'A') {
+	public int getNumLevels(Side side, WonderType type) {
+		if (side == Side.A) {
 			return 3;
 		} else {
-			switch(type) {
+			switch (type) {
 			case COLOSSUS:
 				return 2;
 			case LIGHTHOUSE:
@@ -61,7 +82,7 @@ public class Wonder {
 		}
 	}
 
-	public static String getNameByType(Wonder.WonderType wonder) {
+	public static String getNameByType(WonderType wonder) {
 		switch (wonder) {
 		case COLOSSUS:
 			return "The Colossus of Rhodes";
@@ -82,7 +103,7 @@ public class Wonder {
 		}
 	}
 
-	public static String getShortNameByType(Wonder.WonderType wonder) {
+	public static String getShortNameByType(WonderType wonder) {
 		switch (wonder) {
 		case COLOSSUS:
 			return "Colossus";
@@ -122,5 +143,13 @@ public class Wonder {
 		default:
 			throw new IllegalArgumentException("Bad Wonder Type");
 		}
+	}
+
+	public int getNumBuiltLevels() {
+		return this.levels.size();
+	}
+
+	public Level getLevel(int index) {
+		return this.levels.get(index);
 	}
 }

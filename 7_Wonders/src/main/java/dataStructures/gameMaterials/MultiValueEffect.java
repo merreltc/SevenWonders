@@ -2,12 +2,19 @@ package dataStructures.gameMaterials;
 
 import java.util.HashMap;
 
+import dataStructures.gameMaterials.Level.Frequency;
+
 public class MultiValueEffect extends ValueEffect {
 	private HashMap<Enum, Integer> valuesAndAmounts;
 
 	public MultiValueEffect(EffectType effectType, Value value, AffectingEntity affectingEntity, Direction direction,
 			HashMap<Enum, Integer> entitiesAndAmounts) {
-		super(effectType, value, affectingEntity, direction);
+		this(effectType, value, affectingEntity, direction, entitiesAndAmounts, Frequency.DEFAULT);
+	}
+
+	public MultiValueEffect(EffectType effectType, Value value, AffectingEntity affectingEntity, Direction direction,
+			HashMap<Enum, Integer> entitiesAndAmounts, Frequency frequency) {
+		super(effectType, value, affectingEntity, direction, frequency);
 		this.valuesAndAmounts = entitiesAndAmounts;
 	}
 
