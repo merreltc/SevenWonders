@@ -2,12 +2,14 @@ package dataStructures.gameMaterials;
 
 import constants.GeneralEnums.Resource;
 import constants.GeneralEnums.Side;
+import exceptions.CannotBuiltWonderException;
 
 public class Wonder {
 	private WonderType type;
 	private String name;
 	private Resource resource;
 	private Side side;
+	private int numBuilds = 0;
 
 	public enum WonderType {
 		COLOSSUS, LIGHTHOUSE, TEMPLE, GARDENS, STATUE, MAUSOLEUM, PYRAMIDS
@@ -18,6 +20,15 @@ public class Wonder {
 		this.name = getNameByType(type);
 		this.resource = getResourceByType(type);
 		this.side = side;
+		System.out.println("Side " + this.side);
+		System.out.println("Num Levels " + this.getNumLevels());
+	}
+
+	public void buildNextLevel() {
+		this.numBuilds++;
+		if (this.numBuilds > this.getNumLevels()) {
+			throw new CannotBuiltWonderException("Player has built max number of levels.");
+		}
 	}
 
 	public WonderType getType() {
@@ -40,7 +51,7 @@ public class Wonder {
 		return this.getNumLevels(this.side, this.type);
 	}
 
-	public int getNumLevels(Side side, Wonder.WonderType type) {
+	public int getNumLevels(Side side, WonderType type) {
 		if (side == Side.A) {
 			return 3;
 		} else {
