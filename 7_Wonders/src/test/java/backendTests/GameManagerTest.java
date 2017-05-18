@@ -21,6 +21,7 @@ import constants.GeneralEnums.GameMode;
 import constants.GeneralEnums.Good;
 import constants.GeneralEnums.RawResource;
 import dataStructures.GameBoard;
+import dataStructures.Handlers;
 import dataStructures.gameMaterials.Card;
 import dataStructures.gameMaterials.Deck;
 import dataStructures.gameMaterials.Deck.Age;
@@ -66,8 +67,13 @@ public class GameManagerTest {
 		EasyMock.replay(setUpDeckHandler);
 
 		ArrayList<String> playerNames = setUpArrayByNum(3);
-		new GameManager(playerNames, this.setUpPlayerHandler, setUpDeckHandler, this.turnHandler,
-				this.playerTurnHandler);
+		
+		Handlers handlers = new Handlers(this.setUpPlayerHandler);
+		handlers.setSetUpDeckHandler(setUpDeckHandler);
+		handlers.setTurnHandler(this.turnHandler);
+		handlers.setPlayerTurnHandler(this.playerTurnHandler);
+		
+		new GameManager(playerNames, handlers);
 
 		EasyMock.verify(setUpDeckHandler);
 	}
@@ -80,8 +86,13 @@ public class GameManagerTest {
 		EasyMock.replay(setUpDeckHandler);
 
 		ArrayList<String> playerNames = setUpArrayByNum(7);
-		new GameManager(playerNames, this.setUpPlayerHandler, setUpDeckHandler, this.turnHandler,
-				this.playerTurnHandler);
+		
+		Handlers handlers = new Handlers(this.setUpPlayerHandler);
+		handlers.setSetUpDeckHandler(setUpDeckHandler);
+		handlers.setTurnHandler(this.turnHandler);
+		handlers.setPlayerTurnHandler(this.playerTurnHandler);
+		
+		new GameManager(playerNames, handlers);
 
 		EasyMock.verify(setUpDeckHandler);
 	}
@@ -248,14 +259,20 @@ public class GameManagerTest {
 		TurnHandler turnHandler = EasyMock.createMock(TurnHandler.class);
 
 		ArrayList<String> playerNames = setUpArrayByNum(5);
-		GameManager manager = new GameManager(playerNames, this.setUpPlayerHandler, this.setUpDeckHandler, turnHandler,
-				this.playerTurnHandler);
+		Handlers handlers = new Handlers(this.setUpPlayerHandler);
+		handlers.setSetUpDeckHandler(this.setUpDeckHandler);
+		handlers.setTurnHandler(turnHandler);
+		handlers.setPlayerTurnHandler(this.playerTurnHandler);
+		
+		GameManager manager = new GameManager(playerNames, handlers);
 
 		turnHandler.dealInitialTurnCards(manager.getPlayers(), manager.getGameBoard().getDeck());
 
 		EasyMock.replay(turnHandler);
-
+		ArrayList<Card> cards = new ArrayList<Card>(manager.getGameBoard().getDeck().getCards());
 		manager.dealInitialTurnCards();
+		
+		assertFalse(cards.toString().equals(manager.getDeck().getCards().toString()));
 		EasyMock.verify(turnHandler);
 	}
 
@@ -263,8 +280,13 @@ public class GameManagerTest {
 	public void testBuildStructure() {
 		PlayerTurnHandler playerTurnHandler = EasyMock.createMock(PlayerTurnHandler.class);
 		ArrayList<String> playerNames = setUpArrayByNum(5);
-		GameManager manager = new GameManager(playerNames, this.setUpPlayerHandler, this.setUpDeckHandler,
-				this.turnHandler, playerTurnHandler);
+		
+		Handlers handlers = new Handlers(this.setUpPlayerHandler);
+		handlers.setSetUpDeckHandler(this.setUpDeckHandler);
+		handlers.setTurnHandler(this.turnHandler);
+		handlers.setPlayerTurnHandler(playerTurnHandler);
+		
+		GameManager manager = new GameManager(playerNames, handlers);
 
 		manager.dealInitialTurnCards();
 		Card card = manager.getCurrentPlayer().getCurrentHand().get(0);
@@ -276,12 +298,28 @@ public class GameManagerTest {
 
 		EasyMock.verify(playerTurnHandler);
 	}
+	
+	@Test
+	public void testBuildStructureNonMockedForMutationCoverage() {
+		ArrayList<String> playerNames = setUpArrayByNum(5);
+		GameManager manager = new GameManager(playerNames, GameMode.EASY);
+
+		Card card = manager.getDeck().getCard(0);
+		manager.buildStructure(card);
+
+		assertTrue(manager.getCurrentPlayer().getStoragePile().contains(card));
+	}
+
 
 	@Test
 	public void testTradeFromToForResource() {
 		ArrayList<String> playerNames = setUpArrayByNum(3);
-		GameManager manager = new GameManager(playerNames, this.setUpPlayerHandler, this.setUpDeckHandler,
-				this.turnHandler, this.playerTurnHandler);
+		Handlers handlers = new Handlers(this.setUpPlayerHandler);
+		handlers.setSetUpDeckHandler(this.setUpDeckHandler);
+		handlers.setTurnHandler(this.turnHandler);
+		handlers.setPlayerTurnHandler(this.playerTurnHandler);
+		
+		GameManager manager = new GameManager(playerNames, handlers);
 
 		ArrayList<Card> storage = new ArrayList<Card>();
 		Deck deck = manager.getGameBoard().getDeck();
@@ -301,8 +339,12 @@ public class GameManagerTest {
 	@Test
 	public void testTradeFromToForGood() {
 		ArrayList<String> playerNames = setUpArrayByNum(3);
-		GameManager manager = new GameManager(playerNames, this.setUpPlayerHandler, this.setUpDeckHandler,
-				this.turnHandler, this.playerTurnHandler);
+		Handlers handlers = new Handlers(this.setUpPlayerHandler);
+		handlers.setSetUpDeckHandler(this.setUpDeckHandler);
+		handlers.setTurnHandler(this.turnHandler);
+		handlers.setPlayerTurnHandler(this.playerTurnHandler);
+		
+		GameManager manager = new GameManager(playerNames, handlers);
 
 		ArrayList<Card> storage = new ArrayList<Card>();
 		Deck deck = manager.getGameBoard().getDeck();
@@ -322,8 +364,12 @@ public class GameManagerTest {
 	@Test
 	public void testValidTradeForDiscountEastTradingPost() {
 		ArrayList<String> playerNames = setUpArrayByNum(3);
-		GameManager manager = new GameManager(playerNames, this.setUpPlayerHandler, this.setUpDeckHandler,
-				this.turnHandler, this.playerTurnHandler);
+		Handlers handlers = new Handlers(this.setUpPlayerHandler);
+		handlers.setSetUpDeckHandler(this.setUpDeckHandler);
+		handlers.setTurnHandler(this.turnHandler);
+		handlers.setPlayerTurnHandler(this.playerTurnHandler);
+		
+		GameManager manager = new GameManager(playerNames, handlers);
 
 		Deck deck = manager.getGameBoard().getDeck();
 		Player current = manager.getCurrentPlayer();
@@ -345,8 +391,12 @@ public class GameManagerTest {
 	@Test
 	public void testValidTradeForDiscountEastTradingPostCounter() {
 		ArrayList<String> playerNames = setUpArrayByNum(3);
-		GameManager manager = new GameManager(playerNames, this.setUpPlayerHandler, this.setUpDeckHandler,
-				this.turnHandler, this.playerTurnHandler);
+		Handlers handlers = new Handlers(this.setUpPlayerHandler);
+		handlers.setSetUpDeckHandler(this.setUpDeckHandler);
+		handlers.setTurnHandler(this.turnHandler);
+		handlers.setPlayerTurnHandler(this.playerTurnHandler);
+		
+		GameManager manager = new GameManager(playerNames, handlers);
 
 		manager.changeRotateDirectionAndResetPositions(Rotation.COUNTERCLOCKWISE);
 
@@ -370,9 +420,12 @@ public class GameManagerTest {
 	@Test
 	public void testValidTradeForDiscountWestTradingPostCounter() {
 		ArrayList<String> playerNames = setUpArrayByNum(3);
-
-		GameManager manager = new GameManager(playerNames, this.setUpPlayerHandler, this.setUpDeckHandler,
-				this.turnHandler, this.playerTurnHandler);
+		Handlers handlers = new Handlers(this.setUpPlayerHandler);
+		handlers.setSetUpDeckHandler(this.setUpDeckHandler);
+		handlers.setTurnHandler(this.turnHandler);
+		handlers.setPlayerTurnHandler(this.playerTurnHandler);
+		
+		GameManager manager = new GameManager(playerNames, handlers);
 		manager.changeRotateDirectionAndResetPositions(Rotation.COUNTERCLOCKWISE);
 		Deck deck = manager.getGameBoard().getDeck();
 		Player current = manager.getCurrentPlayer();
@@ -391,9 +444,12 @@ public class GameManagerTest {
 	@Test
 	public void testValidTradeForDiscountWestTradingPost() {
 		ArrayList<String> playerNames = setUpArrayByNum(3);
-
-		GameManager manager = new GameManager(playerNames, this.setUpPlayerHandler, this.setUpDeckHandler,
-				this.turnHandler, this.playerTurnHandler);
+		Handlers handlers = new Handlers(this.setUpPlayerHandler);
+		handlers.setSetUpDeckHandler(this.setUpDeckHandler);
+		handlers.setTurnHandler(this.turnHandler);
+		handlers.setPlayerTurnHandler(this.playerTurnHandler);
+		
+		GameManager manager = new GameManager(playerNames, handlers);
 
 		Deck deck = manager.getGameBoard().getDeck();
 		Player current = manager.getCurrentPlayer();
@@ -415,8 +471,12 @@ public class GameManagerTest {
 	public void testValidTradeForDiscountMarketPlace() {
 		ArrayList<String> playerNames = setUpArrayByNum(3);
 
-		GameManager manager = new GameManager(playerNames, this.setUpPlayerHandler, this.setUpDeckHandler,
-				this.turnHandler, this.playerTurnHandler);
+		Handlers handlers = new Handlers(this.setUpPlayerHandler);
+		handlers.setSetUpDeckHandler(this.setUpDeckHandler);
+		handlers.setTurnHandler(this.turnHandler);
+		handlers.setPlayerTurnHandler(this.playerTurnHandler);
+		
+		GameManager manager = new GameManager(playerNames, handlers);
 
 		Deck deck = manager.getGameBoard().getDeck();
 		Player current = manager.getCurrentPlayer();
@@ -435,8 +495,8 @@ public class GameManagerTest {
 	@Test
 	public void testValidTradeForDiscountMarketPlaceLeft() {
 		ArrayList<String> playerNames = setUpArrayByNum(3);
-		GameManager manager = new GameManager(playerNames, this.setUpPlayerHandler, this.setUpDeckHandler,
-				this.turnHandler, this.playerTurnHandler);
+		
+		GameManager manager = new GameManager(playerNames, setUpHandlers());
 
 		Deck deck = manager.getGameBoard().getDeck();
 		Player current = manager.getCurrentPlayer();
@@ -455,8 +515,12 @@ public class GameManagerTest {
 	@Test
 	public void testValidTradeForDiscountEastTradingPostRotate() {
 		ArrayList<String> playerNames = setUpArrayByNum(3);
-		GameManager manager = new GameManager(playerNames, this.setUpPlayerHandler, this.setUpDeckHandler,
-				this.turnHandler, this.playerTurnHandler);
+		Handlers handlers = new Handlers(this.setUpPlayerHandler);
+		handlers.setSetUpDeckHandler(this.setUpDeckHandler);
+		handlers.setTurnHandler(this.turnHandler);
+		handlers.setPlayerTurnHandler(this.playerTurnHandler);
+		
+		GameManager manager = new GameManager(playerNames, handlers);
 
 		manager.rotateClockwise();
 		manager.rotateClockwise();
@@ -477,8 +541,12 @@ public class GameManagerTest {
 	@Test
 	public void testValidTradeForDiscountWestTradingPostRotate() {
 		ArrayList<String> playerNames = setUpArrayByNum(3);
-		GameManager manager = new GameManager(playerNames, this.setUpPlayerHandler, this.setUpDeckHandler,
-				this.turnHandler, this.playerTurnHandler);
+		Handlers handlers = new Handlers(this.setUpPlayerHandler);
+		handlers.setSetUpDeckHandler(this.setUpDeckHandler);
+		handlers.setTurnHandler(this.turnHandler);
+		handlers.setPlayerTurnHandler(this.playerTurnHandler);
+		
+		GameManager manager = new GameManager(playerNames, handlers);
 
 		manager.rotateClockwise();
 		Deck deck = manager.getGameBoard().getDeck();
@@ -501,8 +569,8 @@ public class GameManagerTest {
 	@Test
 	public void testNoDiscountEastTradingPostRegularTrade() {
 		ArrayList<String> playerNames = setUpArrayByNum(3);
-		GameManager manager = new GameManager(playerNames, this.setUpPlayerHandler, this.setUpDeckHandler,
-				this.turnHandler, this.playerTurnHandler);
+		
+		GameManager manager = new GameManager(playerNames, setUpHandlers());
 
 		Deck deck = manager.getDeck();
 		Player current = manager.getCurrentPlayer();
@@ -524,9 +592,8 @@ public class GameManagerTest {
 	@Test
 	public void testNoDiscountWestTradingPostRegularTrade() {
 		ArrayList<String> playerNames = setUpArrayByNum(3);
-
-		GameManager manager = new GameManager(playerNames, this.setUpPlayerHandler, this.setUpDeckHandler,
-				this.turnHandler, this.playerTurnHandler);
+		
+		GameManager manager = new GameManager(playerNames, setUpHandlers());
 
 		Deck deck = manager.getGameBoard().getDeck();
 		Player current = manager.getCurrentPlayer();
@@ -546,8 +613,8 @@ public class GameManagerTest {
 	@Test
 	public void testTradeFromToForGoodEmptyTradesAfterTurnEnds() {
 		ArrayList<String> playerNames = setUpArrayByNum(3);
-		GameManager manager = new GameManager(playerNames, this.setUpPlayerHandler, this.setUpDeckHandler,
-				this.turnHandler, this.playerTurnHandler);
+		
+		GameManager manager = new GameManager(playerNames, setUpHandlers());
 
 		ArrayList<Card> storage = new ArrayList<Card>();
 		Deck deck = manager.getGameBoard().getDeck();
@@ -565,8 +632,8 @@ public class GameManagerTest {
 	@Test
 	public void testMakeChangeForValue1Coins() {
 		ArrayList<String> playerNames = setUpArrayByNum(3);
-		GameManager manager = new GameManager(playerNames, this.setUpPlayerHandler, this.setUpDeckHandler,
-				this.turnHandler, this.playerTurnHandler);
+		
+		GameManager manager = new GameManager(playerNames, setUpHandlers());
 		PlayerChipHandler.addValue3(manager.getCurrentPlayer(), 1, ChipType.COIN);
 
 		assertTrue(manager.makeChangeForValue1Coins(3));
@@ -579,8 +646,8 @@ public class GameManagerTest {
 	@Test
 	public void testMakeChangeForValue3Coins() {
 		ArrayList<String> playerNames = setUpArrayByNum(3);
-		GameManager manager = new GameManager(playerNames, this.setUpPlayerHandler, this.setUpDeckHandler,
-				this.turnHandler, this.playerTurnHandler);
+		
+		GameManager manager = new GameManager(playerNames, setUpHandlers());
 		GameBoard board = manager.getGameBoard();
 
 		assertTrue(board.makeChangeForValue3Coins(manager.getCurrentPlayer(), 1));
@@ -595,8 +662,12 @@ public class GameManagerTest {
 		ArrayList<String> playerNames = setUpArrayByNum(3);
 		PlayerTurnHandler playerTurnHandler = EasyMock.mock(PlayerTurnHandler.class);
 
-		GameManager manager = new GameManager(playerNames, this.setUpPlayerHandler, this.setUpDeckHandler,
-				this.turnHandler, playerTurnHandler);
+		Handlers handlers = new Handlers(this.setUpPlayerHandler);
+		handlers.setSetUpDeckHandler(this.setUpDeckHandler);
+		handlers.setTurnHandler(this.turnHandler);
+		handlers.setPlayerTurnHandler(playerTurnHandler);
+		
+		GameManager manager = new GameManager(playerNames, handlers);
 
 		playerTurnHandler.discardSelectedCard(manager.getCurrentPlayer(), manager.getDeck().getCard(0),
 				manager.getGameBoard());
@@ -612,8 +683,12 @@ public class GameManagerTest {
 	public void testEndCurrentPlayerTurn() {
 		ArrayList<String> playerNames = setUpArrayByNum(3);
 		TurnHandler turnHandler = EasyMock.mock(TurnHandler.class);
-		GameManager manager = new GameManager(playerNames, this.setUpPlayerHandler, this.setUpDeckHandler, turnHandler,
-				this.playerTurnHandler);
+		Handlers handlers = new Handlers(this.setUpPlayerHandler);
+		handlers.setSetUpDeckHandler(this.setUpDeckHandler);
+		handlers.setTurnHandler(turnHandler);
+		handlers.setPlayerTurnHandler(this.playerTurnHandler);
+		
+		GameManager manager = new GameManager(playerNames, handlers);
 
 		EasyMock.expect(turnHandler.getNumPlayersUntilPass()).andReturn(2);
 		turnHandler.setNumPlayersUntilPass(1);
@@ -628,14 +703,32 @@ public class GameManagerTest {
 
 		EasyMock.verify(turnHandler);
 	}
+	
+	@Test
+	public void testEndCurrentPlayerTurnNonMockedForMutationCoverage() {
+		ArrayList<String> playerNames = setUpArrayByNum(3);
+		GameManager manager = new GameManager(playerNames, GameMode.EASY);
+
+		Player expectedNewCurrentPlayer = manager.getNextPlayer();
+		Player expectedNewPreviousPlayer = manager.getCurrentPlayer();
+
+		manager.dealInitialTurnCards();
+		assertEquals("", manager.endCurrentPlayerTurn());
+		assertEquals(expectedNewCurrentPlayer, manager.getCurrentPlayer());
+		assertEquals(expectedNewPreviousPlayer, manager.getPreviousPlayer());
+	}
 
 	@Test
 	public void testEndCurrentPlayersTurn3TimesAndTradeHands() {
 		ArrayList<String> playerNames = setUpArrayByNum(3);
 		TurnHandler turnHandler = EasyMock.partialMockBuilder(TurnHandler.class)
 				.addMockedMethod("getNumPlayersUntilPass").createMock();
-		GameManager manager = new GameManager(playerNames, this.setUpPlayerHandler, this.setUpDeckHandler, turnHandler,
-				this.playerTurnHandler);
+		Handlers handlers = new Handlers(this.setUpPlayerHandler);
+		handlers.setSetUpDeckHandler(this.setUpDeckHandler);
+		handlers.setTurnHandler(turnHandler);
+		handlers.setPlayerTurnHandler(this.playerTurnHandler);
+		
+		GameManager manager = new GameManager(playerNames, handlers);
 		manager.dealInitialTurnCards();
 
 		EasyMock.expect(turnHandler.getNumPlayersUntilPass()).andReturn(2);
@@ -662,8 +755,12 @@ public class GameManagerTest {
 		TurnHandler turnHandler = EasyMock.partialMockBuilder(TurnHandler.class)
 				.addMockedMethod("getNumPlayersUntilPass").createMock();
 		ArrayList<String> playerNames = setUpArrayByNum(5);
-		GameManager manager = new GameManager(playerNames, this.setUpPlayerHandler, this.setUpDeckHandler, turnHandler,
-				this.playerTurnHandler);
+		Handlers handlers = new Handlers(this.setUpPlayerHandler);
+		handlers.setSetUpDeckHandler(this.setUpDeckHandler);
+		handlers.setTurnHandler(turnHandler);
+		handlers.setPlayerTurnHandler(this.playerTurnHandler);
+		
+		GameManager manager = new GameManager(playerNames, handlers);
 		manager.dealInitialTurnCards();
 		EasyMock.expect(turnHandler.getNumPlayersUntilPass()).andReturn(4);
 		EasyMock.expect(turnHandler.getNumPlayersUntilPass()).andReturn(3);
@@ -697,9 +794,12 @@ public class GameManagerTest {
 		ArrayList<Card> cards2 = this.setUpDeckHandler.createCards(Age.AGE2, 3);
 		Deck deck2 = new Deck(Age.AGE2, cards2);
 
+		Handlers handlers = new Handlers(this.setUpPlayerHandler);
+		handlers.setSetUpDeckHandler(this.setUpDeckHandler);
+		handlers.setTurnHandler(turnHandler);
+		handlers.setPlayerTurnHandler(this.playerTurnHandler);
 		GameManager manager = EasyMock
-				.partialMockBuilder(GameManager.class).withConstructor(playerNames, this.setUpPlayerHandler,
-						this.setUpDeckHandler, turnHandler, this.playerTurnHandler)
+				.partialMockBuilder(GameManager.class).withConstructor(playerNames, handlers)
 				.addMockedMethod("rotateCounterClockwise").createMock();
 		manager.dealInitialTurnCards();
 
@@ -740,8 +840,12 @@ public class GameManagerTest {
 		ArrayList<Card> cards3 = this.setUpDeckHandler.createCards(Age.AGE3, 3);
 		Deck deck3 = new Deck(Age.AGE3, cards3);
 
-		GameManager manager = new GameManager(playerNames, this.setUpPlayerHandler, this.setUpDeckHandler, turnHandler,
-				this.playerTurnHandler);
+		Handlers handlers = new Handlers(this.setUpPlayerHandler);
+		handlers.setSetUpDeckHandler(this.setUpDeckHandler);
+		handlers.setTurnHandler(turnHandler);
+		handlers.setPlayerTurnHandler(playerTurnHandler);
+		
+		GameManager manager = new GameManager(playerNames, handlers);
 		manager.getGameBoard().setDeck(deck2);
 		manager.dealInitialTurnCards();
 		manager.changeRotateDirectionAndResetPositions(Rotation.COUNTERCLOCKWISE);
@@ -769,8 +873,37 @@ public class GameManagerTest {
 		assertEquals(Rotation.CLOCKWISE, manager.getDirection());
 		assertFalse(manager.getCurrentPlayer().getCurrentHand().equals(previousCurrentCards));
 		assertEquals(Age.AGE3, manager.getGameBoard().getDeck().getAge());
+		assertTrue(manager.getGameBoard().getDeck().getCards().isEmpty());
 
 		EasyMock.verify(turnHandler);
+	}
+	
+	@Test
+	public void testEndAgeShufflesDeck(){
+		ArrayList<String> playerNames = setUpArrayByNum(3);
+		TurnHandler turnHandler = EasyMock.mock(TurnHandler.class);
+		
+		Handlers handlers = new Handlers(this.setUpPlayerHandler);
+		handlers.setSetUpDeckHandler(this.setUpDeckHandler);
+		handlers.setTurnHandler(turnHandler);
+		handlers.setPlayerTurnHandler(this.playerTurnHandler);
+		GameManager manager = EasyMock
+				.partialMockBuilder(GameManager.class).withConstructor(playerNames, handlers)
+				.addMockedMethod("switchDeck").createMock();
+		ArrayList<Card> cards2 = this.setUpDeckHandler.createCards(Age.AGE2, 3);
+		Deck deck2 = new Deck(Age.AGE2, cards2);
+		ArrayList<Card> cardsBefore = new ArrayList<Card>(deck2.getCards());
+		
+		EasyMock.expect(manager.switchDeck(Age.AGE2)).andReturn(deck2);
+		turnHandler.dealInitialTurnCards(manager.getPlayers(), deck2);
+		EasyMock.replay(manager, turnHandler);
+		
+		manager.endAge(Age.AGE2);
+		
+		assertFalse(cardsBefore.toString().equals(manager.getDeck().getCards().toString()));
+		
+		EasyMock.verify(manager, turnHandler);
+		
 	}
 
 	private void mockExpectTurnHandlerCalls(TurnHandler turnHandler) {
@@ -789,5 +922,13 @@ public class GameManagerTest {
 		}
 
 		return result;
+	}
+	
+	private Handlers setUpHandlers(){
+		Handlers handlers = new Handlers(this.setUpPlayerHandler);
+		handlers.setSetUpDeckHandler(this.setUpDeckHandler);
+		handlers.setTurnHandler(this.turnHandler);
+		handlers.setPlayerTurnHandler(this.playerTurnHandler);
+		return handlers;
 	}
 }

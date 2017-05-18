@@ -1,6 +1,6 @@
 package backendTests;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -30,7 +30,6 @@ import dataStructures.gameMaterials.ValueEffect.AffectingEntity;
 import dataStructures.gameMaterials.ValueEffect.Value;
 import dataStructures.gameMaterials.ValueEffect.ValueType;
 import dataStructures.playerData.Player;
-import junit.framework.Assert;
 
 public class SetUpDeckHandlerTest {
 
@@ -239,9 +238,9 @@ public class SetUpDeckHandlerTest {
 		deck = new SetUpDeckHandler().correctNumberOfGuildCards(deck, 3);
 		
 		for (int i = 0; i < 5; i++){
-			Assert.assertEquals(CardType.GUILD, deck.get(i).getCardType());
+			assertEquals(CardType.GUILD, deck.get(i).getCardType());
 		}
-		Assert.assertFalse(CardType.GUILD == deck.get(5).getCardType());
+		assertFalse(CardType.GUILD == deck.get(5).getCardType());
 	}
 
 	@Test
@@ -251,9 +250,9 @@ public class SetUpDeckHandlerTest {
 		deck = new SetUpDeckHandler().correctNumberOfGuildCards(deck, 7);
 		
 		for (int i = 0; i < 9; i++){
-			Assert.assertEquals(CardType.GUILD, deck.get(i).getCardType());
+			assertEquals(CardType.GUILD, deck.get(i).getCardType());
 		}
-		Assert.assertFalse(CardType.GUILD == deck.get(9).getCardType());
+		assertFalse(CardType.GUILD == deck.get(9).getCardType());
 	}
 	
 }

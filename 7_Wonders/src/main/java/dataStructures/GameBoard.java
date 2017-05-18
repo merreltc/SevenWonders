@@ -93,7 +93,7 @@ public class GameBoard {
 		if (this.totalValue3CoinsInBank-- > 0) {
 			PlayerChipHandler.addValue3(active, 1, ChipType.COIN);
 		} else {
-			this.totalValue1CoinsInBank--;
+			this.totalValue1CoinsInBank -= 3;
 			PlayerChipHandler.addValue1(active, 3, ChipType.COIN);
 		}
 	}

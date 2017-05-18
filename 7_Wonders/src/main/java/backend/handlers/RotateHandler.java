@@ -45,26 +45,21 @@ public class RotateHandler {
 		int tempNextPlayerIndex = this.board.getNextPlayerIndex();
 		int lastPlayerIndex = this.board.getNumPlayers() - 1;
 		int firstPlayerIndex = 0;
-		int compareIndex;
-		int equalsCompareIndex;
-		int notEqualsCompareIndex;
 
 		if (rotateDirection == Rotation.CLOCKWISE) {
-			compareIndex = lastPlayerIndex;
-			equalsCompareIndex = firstPlayerIndex;
-			notEqualsCompareIndex = tempNextPlayerIndex + 1;
+			compareToSetNextPlayer(tempNextPlayerIndex, lastPlayerIndex, firstPlayerIndex, tempNextPlayerIndex + 1);
 		} else {
-			compareIndex = firstPlayerIndex;
-			equalsCompareIndex = lastPlayerIndex;
-			notEqualsCompareIndex = tempNextPlayerIndex - 1;
+			compareToSetNextPlayer(tempNextPlayerIndex, firstPlayerIndex, lastPlayerIndex, tempNextPlayerIndex - 1);
 		}
-
+	}
+	
+	private void compareToSetNextPlayer(int tempNextPlayerIndex, int compareIndex, int equalsCompareIndex,
+			int notEqualsCompareIndex) {
 		if (tempNextPlayerIndex == compareIndex) {
 			this.board.setNextPlayer(equalsCompareIndex);
 		} else {
 			this.board.setNextPlayer(notEqualsCompareIndex);
 		}
-
 	}
 
 	private void setCurrentAndPreviousPlayers() {
@@ -73,23 +68,31 @@ public class RotateHandler {
 	}
 
 	public void rotateCurrentHands(ArrayList<Player> players, Rotation direction) {
-
 		if (direction == Rotation.CLOCKWISE) {
-			ArrayList<Card> previousPlayerHand = players.get(players.size() - 1).getCurrentHand();
-
-			for (int i = 0; i < players.size(); i++) {
-				ArrayList<Card> newPreviousPlayerHand = players.get(i).getCurrentHand();
-				players.get(i).setCurrentHand(previousPlayerHand);
-				previousPlayerHand = newPreviousPlayerHand;
-			}
+			performHandRotationClockwise(players);
 		}else{
-			ArrayList<Card> previousPlayerHand = players.get(0).getCurrentHand();
-
-			for (int i = players.size() - 1; i >= 0; i--) {
-				ArrayList<Card> newPreviousPlayerHand = players.get(i).getCurrentHand();
-				players.get(i).setCurrentHand(previousPlayerHand);
-				previousPlayerHand = newPreviousPlayerHand;
-			}
+			performHandRotationCounterClockwise(players);
 		}
 	}
+
+	private void performHandRotationClockwise(ArrayList<Player> players) {
+		ArrayList<Card> previousPlayerHand = players.get(players.size() - 1).getCurrentHand();
+
+		for (int i = 0; i < players.size(); i++) {
+			ArrayList<Card> newPreviousPlayerHand = players.get(i).getCurrentHand();
+			players.get(i).setCurrentHand(previousPlayerHand);
+			previousPlayerHand = newPreviousPlayerHand;
+		}
+	}
+	
+	private void performHandRotationCounterClockwise(ArrayList<Player> players) {
+		ArrayList<Card> previousPlayerHand = players.get(0).getCurrentHand();
+
+		for (int i = players.size() - 1; i >= 0; i--) {
+			ArrayList<Card> newPreviousPlayerHand = players.get(i).getCurrentHand();
+			players.get(i).setCurrentHand(previousPlayerHand);
+			previousPlayerHand = newPreviousPlayerHand;
+		}
+	}
+
 }

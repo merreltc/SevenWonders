@@ -215,6 +215,7 @@ public class GameBoardTests {
 		assertEquals(1, (int) players.get(0).getCoins().get(ChipValue.THREE));
 		assertFalse(board.getDiscardPile().isEmpty());
 		assertEquals(toTest, board.getDiscardPile().get(0));
+		assertEquals(23, board.getTotalValue3CoinsInBank());
 	}
 
 	@Test
@@ -231,6 +232,7 @@ public class GameBoardTests {
 		assertEquals(6, (int) players.get(0).getCoins().get(ChipValue.ONE));
 		assertFalse(board.getDiscardPile().isEmpty());
 		assertEquals(toTest, board.getDiscardPile().get(0));
+		assertEquals(100, board.getTotalValue1CoinsInBank());
 	}
 
 	@Test
@@ -284,6 +286,19 @@ public class GameBoardTests {
 		} catch (InsufficientFundsException e) {
 			assertEquals("Not enough value 1 coins left in bank", e.getMessage());
 		}
+	}
+	
+	@Test
+	public void testMakeChangeForValue1CoinsExactlyEnoughInBank() {
+		ArrayList<Player> players = setUpArrayWithNumPlayers(3);
+		this.age1Deck = createDeck(Age.AGE1, 3);
+		GameBoard board = new GameBoard(players, this.age1Deck);
+		Player active = players.get(0);
+		PlayerChipHandler.addValue3(active, 12, Chip.ChipType.COIN);
+		board.giveNumCoins(players.get(1), 73);
+		board.makeChangeForValue1Coins(active, 36);
+		assertEquals(39, (int) active.getCoins().get(ChipValue.ONE));
+		
 	}
 
 	@Test
@@ -357,6 +372,36 @@ public class GameBoardTests {
 		assertEquals(13, active.getCoinTotal());
 		assertEquals(0, board.getTotalValue3CoinsInBank());
 		assertEquals(27, board.getTotalValue1CoinsInBank());
+	}
+	
+	@Test
+	public void testGiveNumCoins20NotEnoughValue3Coins() {
+		ArrayList<Player> players = setUpArrayWithNumPlayers(3);
+		this.age1Deck = createDeck(Age.AGE1, 3);
+		GameBoard board = new GameBoard(players, this.age1Deck);
+		Player active = players.get(0);
+
+		board.giveNumCoins(players.get(1), 69);
+		board.giveNumCoins(active, 10);
+
+		assertEquals(13, active.getCoinTotal());
+		assertEquals(0, board.getTotalValue3CoinsInBank());
+		assertEquals(30, board.getTotalValue1CoinsInBank());
+	}
+	
+	@Test
+	public void testGiveNumCoinsExactlyEnoughValue3Coins() {
+		ArrayList<Player> players = setUpArrayWithNumPlayers(3);
+		this.age1Deck = createDeck(Age.AGE1, 3);
+		GameBoard board = new GameBoard(players, this.age1Deck);
+		Player active = players.get(0);
+
+		board.giveNumCoins(players.get(1), 69);
+		board.giveNumCoins(active, 3);
+
+		assertEquals(6, active.getCoinTotal());
+		assertEquals(0, board.getTotalValue3CoinsInBank());
+		assertEquals(37, board.getTotalValue1CoinsInBank());
 	}
 
 	@Test

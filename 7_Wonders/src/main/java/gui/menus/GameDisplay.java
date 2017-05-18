@@ -181,6 +181,8 @@ public class GameDisplay extends Menu {
 			clicked.activate(this.gameManager);
 		} else if (val == 2) {
 			clicked.discard(this.gameManager);
+		} else {
+			throw new RuntimeException("You must choose an action to do.");
 		}
 	}
 
@@ -214,7 +216,7 @@ public class GameDisplay extends Menu {
 		int nextPlayerIndex = players.indexOf(nextPlayer);
 		for (int i = 0; i < players.size(); i++) {
 			boards.get(i)
-					.changePlayer(players.get((totalNumberOfPlayers + nextPlayerIndex + i - 2) % totalNumberOfPlayers));
+					.changePlayer(players.get((totalNumberOfPlayers + nextPlayerIndex - i) % totalNumberOfPlayers));
 		}
 	}
 }
