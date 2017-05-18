@@ -64,18 +64,21 @@ public class GameManagerTest {
 		SetUpDeckHandler setUpDeckHandler = EasyMock.createStrictMock(SetUpDeckHandler.class);
 		Deck deck = null;
 		EasyMock.expect(setUpDeckHandler.createDeck(Age.AGE1, 3)).andReturn(deck);
-		EasyMock.replay(setUpDeckHandler);
-
+		PlayerTurnHandler playerTurnHandler = EasyMock.partialMockBuilder(PlayerTurnHandler.class)
+				.addMockedMethod("setGameBoard").createMock();
+		
+		playerTurnHandler.setGameBoard(EasyMock.isA(GameBoard.class));
+		EasyMock.replay(setUpDeckHandler, playerTurnHandler);
 		ArrayList<String> playerNames = setUpArrayByNum(3);
 
 		Handlers handlers = new Handlers(this.setUpPlayerHandler);
 		handlers.setSetUpDeckHandler(setUpDeckHandler);
 		handlers.setTurnHandler(this.turnHandler);
-		handlers.setPlayerTurnHandler(this.playerTurnHandler);
+		handlers.setPlayerTurnHandler(playerTurnHandler);
 
 		new GameManager(playerNames, handlers);
 
-		EasyMock.verify(setUpDeckHandler);
+		EasyMock.verify(setUpDeckHandler, playerTurnHandler);
 	}
 
 	@Test
@@ -788,7 +791,7 @@ public class GameManagerTest {
 	@Test
 	public void testEndPlayerTurnEndsCurrentAge() {
 		ArrayList<String> playerNames = setUpArrayByNum(3);
-		TurnHandler turnHandler = EasyMock.partialMockBuilder(TurnHandler.class)
+		TurnHandler turnHandler = EasyMock.partialMockBuilder(TurnHandler.class).addMockedMethod("endAge")
 				.addMockedMethod("getNumPlayersUntilPass").addMockedMethod("setNumPlayersUntilPass").createMock();
 
 		ArrayList<Card> cards2 = this.setUpDeckHandler.createCards(Age.AGE2, 3);
@@ -811,6 +814,7 @@ public class GameManagerTest {
 		}
 
 		turnHandler.dealInitialTurnCards(manager.getPlayers(), deck2);
+		turnHandler.endAge(manager.getPlayers(), Age.AGE1);
 		manager.rotateCounterClockwise();
 
 		EasyMock.replay(turnHandler, manager);

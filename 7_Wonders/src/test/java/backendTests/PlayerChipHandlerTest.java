@@ -478,6 +478,14 @@ public class PlayerChipHandlerTest {
 		assertEquals(25, player.getConflictTotal());
 	}
 	
+	@Test
+	public void testAddValue5ConflictTokens15(){
+		Player player = createMockedPlayer();
+		PlayerChipHandler.addValue5(player, 15, Chip.ChipType.CONFLICTTOKEN);
+		assertEquals(15, (int) player.getConflictTokens().get(ChipValue.FIVE));
+		assertEquals(75, player.getConflictTotal());
+	}
+	
 	private Player createMockedPlayer() {
 		Wonder wonder = EasyMock.createStrictMock(Wonder.class);
 		return EasyMock.partialMockBuilder(Player.class).withConstructor("Jane Doe", wonder).createMock();
