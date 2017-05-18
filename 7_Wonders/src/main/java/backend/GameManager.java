@@ -203,7 +203,7 @@ public class GameManager {
 		return formatFinalScores(scores);
 	}
 	
-	private String endAge(Age age) {
+	public String endAge(Age age) {
 		String message;
 		Deck newDeck;
 		newDeck = switchDeck(age);
@@ -214,7 +214,7 @@ public class GameManager {
 		return message;
 	}
 
-	private Deck switchDeck(Age currentAge) {
+	public Deck switchDeck(Age currentAge) {
 		Deck newDeck;
 		Age nextAge = getNextAge(currentAge);
 		newDeck = this.handlers.getSetUpDeckHandler().createDeck(nextAge, getNumPlayers());

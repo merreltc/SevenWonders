@@ -269,8 +269,10 @@ public class GameManagerTest {
 		turnHandler.dealInitialTurnCards(manager.getPlayers(), manager.getGameBoard().getDeck());
 
 		EasyMock.replay(turnHandler);
-
+		ArrayList<Card> cards = new ArrayList<Card>(manager.getGameBoard().getDeck().getCards());
 		manager.dealInitialTurnCards();
+		
+		assertFalse(cards.toString().equals(manager.getDeck().getCards().toString()));
 		EasyMock.verify(turnHandler);
 	}
 
@@ -871,8 +873,37 @@ public class GameManagerTest {
 		assertEquals(Rotation.CLOCKWISE, manager.getDirection());
 		assertFalse(manager.getCurrentPlayer().getCurrentHand().equals(previousCurrentCards));
 		assertEquals(Age.AGE3, manager.getGameBoard().getDeck().getAge());
+		assertTrue(manager.getGameBoard().getDeck().getCards().isEmpty());
 
 		EasyMock.verify(turnHandler);
+	}
+	
+	@Test
+	public void testEndAgeShufflesDeck(){
+		ArrayList<String> playerNames = setUpArrayByNum(3);
+		TurnHandler turnHandler = EasyMock.mock(TurnHandler.class);
+		
+		Handlers handlers = new Handlers(this.setUpPlayerHandler);
+		handlers.setSetUpDeckHandler(this.setUpDeckHandler);
+		handlers.setTurnHandler(turnHandler);
+		handlers.setPlayerTurnHandler(this.playerTurnHandler);
+		GameManager manager = EasyMock
+				.partialMockBuilder(GameManager.class).withConstructor(playerNames, handlers)
+				.addMockedMethod("switchDeck").createMock();
+		ArrayList<Card> cards2 = this.setUpDeckHandler.createCards(Age.AGE2, 3);
+		Deck deck2 = new Deck(Age.AGE2, cards2);
+		ArrayList<Card> cardsBefore = new ArrayList<Card>(deck2.getCards());
+		
+		EasyMock.expect(manager.switchDeck(Age.AGE2)).andReturn(deck2);
+		turnHandler.dealInitialTurnCards(manager.getPlayers(), deck2);
+		EasyMock.replay(manager, turnHandler);
+		
+		manager.endAge(Age.AGE2);
+		
+		assertFalse(cardsBefore.toString().equals(manager.getDeck().getCards().toString()));
+		
+		EasyMock.verify(manager, turnHandler);
+		
 	}
 
 	private void mockExpectTurnHandlerCalls(TurnHandler turnHandler) {
