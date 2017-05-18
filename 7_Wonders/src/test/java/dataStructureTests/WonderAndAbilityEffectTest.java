@@ -64,28 +64,28 @@ public class WonderAndAbilityEffectTest {
 
 		assertEquals(Frequency.EVERYTURN, ((MultiValueEffect) effect).getFrequency());
 	}
-	//
-	// effectType": "ABILITY",
-	// "ability": "PLAYSEVENTH",
-	// "frequency": "SIXTHTURN"
 
-	// "effectType": "ABILITY",
-	// "ability": "FREEBUILD",
-	// "frequency": "ONCEAGE"
-
-	// "effectType": "ABILITY",
-	// "ability":"COPYONENEIGHBORGUILD",
-	// "frequency": "ENDOFGAME"
-
-	// "effectType": "ABILITY",
-	// "ability": "FREEBUILDFROMDISCARD",
-	// "frequency": "ENDOFTURN"
 	@Test
 	public void testAbilityEffect() {
 		AbilityEffect effect = new AbilityEffect(EffectType.ABILITY, Ability.PLAYSEVENTH, Frequency.SIXTHTURN);
 		assertEquals(EffectType.ABILITY, effect.getEffectType());
 		assertEquals(Ability.PLAYSEVENTH, effect.getAbility());
 		assertEquals(Frequency.SIXTHTURN, effect.getFrequency());
+
+		effect = new AbilityEffect(EffectType.ABILITY, Ability.FREEBUILD, Frequency.ONCEAGE);
+		assertEquals(EffectType.ABILITY, effect.getEffectType());
+		assertEquals(Ability.FREEBUILD, effect.getAbility());
+		assertEquals(Frequency.ONCEAGE, effect.getFrequency());
+
+		effect = new AbilityEffect(EffectType.ABILITY, Ability.FREEBUILDFROMDISCARD, Frequency.ONCEAGE);
+		assertEquals(EffectType.ABILITY, effect.getEffectType());
+		assertEquals(Ability.FREEBUILDFROMDISCARD, effect.getAbility());
+		assertEquals(Frequency.ONCEAGE, effect.getFrequency());
+
+		effect = new AbilityEffect(EffectType.ABILITY, Ability.COPYONENEIGHBORGUILD, Frequency.ONCEAGE);
+		assertEquals(EffectType.ABILITY, effect.getEffectType());
+		assertEquals(Ability.COPYONENEIGHBORGUILD, effect.getAbility());
+		assertEquals(Frequency.ONCEAGE, effect.getFrequency());
 	}
 
 	@Test
