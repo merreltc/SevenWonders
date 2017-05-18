@@ -402,4 +402,23 @@ public class StoragePileTest {
 
 		EasyMock.verify(card);
 	}
+	
+	@Test
+	public void testContainsEffect() {
+		Effect effect = EasyMock.createStrictMock(EntityEffect.class);
+		EasyMock.expect(effect.getEffectType()).andReturn(EffectType.ENTITY);
+		EasyMock.expect(effect.getEffectType()).andReturn(EffectType.ENTITY);
+		EasyMock.expect(effect.getDirection()).andReturn(Direction.SELF);
+		EasyMock.expect(effect.getDirection()).andReturn(Direction.SELF);
+		EasyMock.expect(effect.getEffectType()).andReturn(EffectType.ENTITY);
+		
+		EasyMock.replay(effect);
+		
+		StoragePile storagePile = new StoragePile();
+		storagePile.addToWonderPile(effect);
+		
+		assertTrue(storagePile.containsEffect(effect));
+		EasyMock.verify(effect);
+		
+	}
 }
