@@ -4,6 +4,8 @@ import static org.junit.Assert.*;
 
 import java.util.ArrayList;
 
+import org.easymock.EasyMock;
+import org.junit.Before;
 import org.junit.Test;
 
 import backend.handlers.PlayerChipHandler;
@@ -15,6 +17,7 @@ import dataStructures.GameBoard;
 import dataStructures.gameMaterials.Card;
 import dataStructures.gameMaterials.Deck;
 import dataStructures.gameMaterials.Deck.Age;
+import dataStructures.gameMaterials.Wonder;
 import dataStructures.gameMaterials.Wonder.WonderType;
 import dataStructures.playerData.Chip;
 import dataStructures.playerData.Player;
@@ -23,13 +26,21 @@ import exceptions.InsufficientFundsException;
 import exceptions.InvalidTradeException;
 
 public class TradeHandlerTest {
+	private Player player1, player2;
+	private Wonder wonder;
+	private Deck testDeck;
+
+	@Before
+	public void setUp() {
+		this.wonder = EasyMock.createStrictMock(Wonder.class);
+		this.player1 = new Player("Jane Doe", this.wonder);
+		this.player2 = new Player("Jane Doe", this.wonder);
+		this.testDeck = EasyMock.partialMockBuilder(Deck.class).createMock();
+	}
+	
 	@Test
 	public void testSingleTradeValue1Coins() {
-		Player player1 = new Player("Jane Doe", WonderType.COLOSSUS);
-		Player player2 = new Player("Jane Doe", WonderType.COLOSSUS);
-
 		TradeHandler.tradeFromToValue1(player1, player2, 1);
-
 		assertEquals(4, player2.getCoinTotal());
 		assertEquals(4, (int) player2.getCoins().get(ChipValue.ONE));
 		assertEquals(2, player1.getCoinTotal());
@@ -39,9 +50,6 @@ public class TradeHandlerTest {
 
 	@Test
 	public void testMultiTradesValue1Coins() {
-		Player player1 = new Player("Jane Doe", WonderType.COLOSSUS);
-		Player player2 = new Player("Jane Doe", WonderType.COLOSSUS);
-
 		TradeHandler.tradeFromToValue1(player1, player2, 2);
 		TradeHandler.tradeFromToValue1(player1, player2, 1);
 
@@ -54,18 +62,12 @@ public class TradeHandlerTest {
 
 	@Test(expected = InsufficientFundsException.class)
 	public void testInvalidTradeValue1Coin() {
-		Player player1 = new Player("Jane Doe", WonderType.COLOSSUS);
-		Player player2 = new Player("Jane Doe", WonderType.COLOSSUS);
-
 		TradeHandler.tradeFromToValue1(player1, player2, 4);
 		fail();
 	}
 
 	@Test
 	public void testSingleTradeValue3Coins() {
-		Player player1 = new Player("Jane Doe", WonderType.COLOSSUS);
-		Player player2 = new Player("Jane Doe", WonderType.COLOSSUS);
-
 		PlayerChipHandler.addValue3(player1, 1, Chip.ChipType.COIN);
 		TradeHandler.tradeFromToValue3(player1, player2, 1);
 
@@ -77,9 +79,6 @@ public class TradeHandlerTest {
 
 	@Test
 	public void testMultiTradesValue3Coins() {
-		Player player1 = new Player("Jane Doe", WonderType.COLOSSUS);
-		Player player2 = new Player("Jane Doe", WonderType.COLOSSUS);
-
 		PlayerChipHandler.addValue3(player1, 3, Chip.ChipType.COIN);
 		TradeHandler.tradeFromToValue3(player1, player2, 2);
 		TradeHandler.tradeFromToValue3(player1, player2, 1);
@@ -92,18 +91,12 @@ public class TradeHandlerTest {
 
 	@Test(expected = InsufficientFundsException.class)
 	public void testInvalidTradeValue3Coin() {
-		Player player1 = new Player("Jane Doe", WonderType.COLOSSUS);
-		Player player2 = new Player("Jane Doe", WonderType.COLOSSUS);
-
 		TradeHandler.tradeFromToValue3(player1, player2, 1);
 		fail();
 	}
 
 	@Test
 	public void testMultiTrades() {
-		Player player1 = new Player("Jane Doe", WonderType.COLOSSUS);
-		Player player2 = new Player("Jane Doe", WonderType.COLOSSUS);
-
 		PlayerChipHandler.addValue3(player1, 3, Chip.ChipType.COIN);
 
 		TradeHandler.tradeFromToValue3(player1, player2, 2);
@@ -121,15 +114,9 @@ public class TradeHandlerTest {
 
 	@Test
 	public void testTradeFromTo() {
-		Player player1 = new Player("Jane Doe", WonderType.COLOSSUS);
-		Player player2 = new Player("Jane Doe", WonderType.COLOSSUS);
-
+		ArrayList<Player> players = setUpArrayWithNumPlayers(3);
+		resetPlayer1And2(players);
 		PlayerChipHandler.addValue3(player1, 2, Chip.ChipType.COIN);
-
-		ArrayList<Player> players = new ArrayList<Player>();
-		players.add(player1);
-		players.add(player2);
-		players.add(new Player("Jane Doe", WonderType.COLOSSUS));
 
 		ArrayList<Card> cards = new SetUpDeckHandler().createCards(Age.AGE1, 3);
 		Deck deck = new Deck(Age.AGE1, cards);
@@ -150,15 +137,9 @@ public class TradeHandlerTest {
 
 	@Test
 	public void testTradeFromToMultiValue1SingleValue3() {
-		Player player1 = new Player("Jane Doe", WonderType.COLOSSUS);
-		Player player2 = new Player("Jane Doe", WonderType.COLOSSUS);
-
+		ArrayList<Player> players = setUpArrayWithNumPlayers(3);
+		resetPlayer1And2(players);
 		PlayerChipHandler.addValue3(player1, 2, Chip.ChipType.COIN);
-
-		ArrayList<Player> players = new ArrayList<Player>();
-		players.add(player1);
-		players.add(player2);
-		players.add(new Player("Jane Doe", WonderType.COLOSSUS));
 
 		ArrayList<Card> cards = new SetUpDeckHandler().createCards(Age.AGE1, 3);
 		Deck deck = new Deck(Age.AGE1, cards);
@@ -179,15 +160,9 @@ public class TradeHandlerTest {
 
 	@Test
 	public void testTradeFromToSingleValue1MultiValue3() {
-		Player player1 = new Player("Jane Doe", WonderType.COLOSSUS);
-		Player player2 = new Player("Jane Doe", WonderType.COLOSSUS);
-
+		ArrayList<Player> players = setUpArrayWithNumPlayers(3);
+		resetPlayer1And2(players);
 		PlayerChipHandler.addValue3(player1, 2, Chip.ChipType.COIN);
-
-		ArrayList<Player> players = new ArrayList<Player>();
-		players.add(player1);
-		players.add(player2);
-		players.add(new Player("Jane Doe", WonderType.COLOSSUS));
 
 		ArrayList<Card> cards = new SetUpDeckHandler().createCards(Age.AGE1, 3);
 		Deck deck = new Deck(Age.AGE1, cards);
@@ -208,15 +183,9 @@ public class TradeHandlerTest {
 
 	@Test
 	public void testTradeFromToMultiValue1MultiValue3() {
-		Player player1 = new Player("Jane Doe", WonderType.COLOSSUS);
-		Player player2 = new Player("Jane Doe", WonderType.COLOSSUS);
-
+		ArrayList<Player> players = setUpArrayWithNumPlayers(3);
+		resetPlayer1And2(players);
 		PlayerChipHandler.addValue3(player1, 2, Chip.ChipType.COIN);
-
-		ArrayList<Player> players = new ArrayList<Player>();
-		players.add(player1);
-		players.add(player2);
-		players.add(new Player("Jane Doe", WonderType.COLOSSUS));
 
 		ArrayList<Card> cards = new SetUpDeckHandler().createCards(Age.AGE1, 3);
 		Deck deck = new Deck(Age.AGE1, cards);
@@ -237,14 +206,8 @@ public class TradeHandlerTest {
 
 	@Test
 	public void testTradeFromToSufficientValue1NoValue3() {
-		Player player1 = new Player("Jane Doe", WonderType.COLOSSUS);
-		Player player2 = new Player("Jane Doe", WonderType.COLOSSUS);
-
-		ArrayList<Player> players = new ArrayList<Player>();
-		players.add(player1);
-		players.add(player2);
-		players.add(new Player("Jane Doe", WonderType.COLOSSUS));
-
+		ArrayList<Player> players = setUpArrayWithNumPlayers(3);
+		resetPlayer1And2(players);
 		ArrayList<Card> cards = new SetUpDeckHandler().createCards(Age.AGE1, 3);
 		Deck deck = new Deck(Age.AGE1, cards);
 
@@ -264,15 +227,9 @@ public class TradeHandlerTest {
 
 	@Test
 	public void testTradeFromToGreaterValue1ThanValue3() {
-		Player player1 = new Player("Jane Doe", WonderType.COLOSSUS);
-		Player player2 = new Player("Jane Doe", WonderType.COLOSSUS);
-
+		ArrayList<Player> players = setUpArrayWithNumPlayers(3);
+		resetPlayer1And2(players);
 		PlayerChipHandler.addValue3(player1, 1, Chip.ChipType.COIN);
-
-		ArrayList<Player> players = new ArrayList<Player>();
-		players.add(player1);
-		players.add(player2);
-		players.add(new Player("Jane Doe", WonderType.COLOSSUS));
 
 		ArrayList<Card> cards = new SetUpDeckHandler().createCards(Age.AGE1, 3);
 		Deck deck = new Deck(Age.AGE1, cards);
@@ -290,22 +247,14 @@ public class TradeHandlerTest {
 		assertEquals(6, (int) player2.getCoins().get(ChipValue.ONE));
 		assertEquals(1, (int) player2.getCoins().get(ChipValue.THREE));
 	}
-
+	
 	@Test
 	public void testTradeToNextPlayer() {
-		ArrayList<Player> players = new ArrayList<Player>();
-		players.add(new Player("Wolverine", WonderType.COLOSSUS));
-		players.add(new Player("Captain America", WonderType.LIGHTHOUSE));
-		players.add(new Player("Black Widow", WonderType.TEMPLE));
-		players.add(new Player("Hulk", WonderType.PYRAMIDS));
-		players.add(new Player("Iron Man", WonderType.STATUE));
+		ArrayList<Player> players = setUpArrayWithNumPlayers(5);
+		resetTestDeck(5);
 
-		ArrayList<Card> cards = new SetUpDeckHandler().createCards(Age.AGE1, 3);
-		Deck deck = new Deck(Age.AGE1, cards);
-
-		GameBoard board = new GameBoard(players, deck);
+		GameBoard board = new GameBoard(players, this.testDeck);
 		TradeHandler tradeHandler = new TradeHandler(board);
-
 		tradeHandler.tradeCoinsFromTo(board.getCurrentPlayer(), board.getNextPlayer(), 3);
 
 		assertEquals(0, board.getPlayerCoinTotal(board.getCurrentPlayerIndex()));
@@ -314,19 +263,11 @@ public class TradeHandlerTest {
 
 	@Test
 	public void testTradeToPreviousPlayer() {
-		ArrayList<Player> players = new ArrayList<Player>();
-		players.add(new Player("Wolverine", WonderType.COLOSSUS));
-		players.add(new Player("Captain America", WonderType.LIGHTHOUSE));
-		players.add(new Player("Black Widow", WonderType.TEMPLE));
-		players.add(new Player("Hulk", WonderType.PYRAMIDS));
-		players.add(new Player("Iron Man", WonderType.STATUE));
+		ArrayList<Player> players = setUpArrayWithNumPlayers(5);
+		resetTestDeck(5);
 
-		ArrayList<Card> cards = new SetUpDeckHandler().createCards(Age.AGE1, 3);
-		Deck deck = new Deck(Age.AGE1, cards);
-
-		GameBoard board = new GameBoard(players, deck);
+		GameBoard board = new GameBoard(players, this.testDeck);
 		TradeHandler tradeHandler = new TradeHandler(board);
-
 		tradeHandler.tradeCoinsFromTo(board.getCurrentPlayer(), board.getPreviousPlayer(), 3);
 
 		assertEquals(0, board.getPlayerCoinTotal(board.getCurrentPlayerIndex()));
@@ -335,30 +276,20 @@ public class TradeHandlerTest {
 
 	@Test(expected = InvalidTradeException.class)
 	public void testTradeToInvalidPlayer() {
-		ArrayList<Player> players = new ArrayList<Player>();
-		players.add(new Player("Wolverine", WonderType.COLOSSUS));
-		players.add(new Player("Captain America", WonderType.LIGHTHOUSE));
-		players.add(new Player("Black Widow", WonderType.TEMPLE));
-		players.add(new Player("Hulk", WonderType.PYRAMIDS));
-		players.add(new Player("Iron Man", WonderType.STATUE));
+		ArrayList<Player> players = setUpArrayWithNumPlayers(5);
+		resetTestDeck(5);
 
-		ArrayList<Card> cards = new SetUpDeckHandler().createCards(Age.AGE1, 3);
-		Deck deck = new Deck(Age.AGE1, cards);
-
-		GameBoard board = new GameBoard(players, deck);
+		GameBoard board = new GameBoard(players, this.testDeck);
 		TradeHandler tradeHandler = new TradeHandler(board);
-
 		tradeHandler.tradeCoinsFromTo(board.getCurrentPlayer(), board.getPlayer(2), 3);
+
 		fail();
 	}
 
 	@Test
 	public void testValidTrade2CoinsForSingleLumberResource() {
-		ArrayList<Player> players = new ArrayList<Player>();
-		players.add(new Player("Wolverine", WonderType.COLOSSUS));
-		players.add(new Player("Captain America", WonderType.LIGHTHOUSE));
-		players.add(new Player("Black Widow", WonderType.TEMPLE));
-
+		ArrayList<Player> players = setUpArrayWithNumPlayers(3);
+		resetPlayer1And2(players);
 		ArrayList<Card> cards = new SetUpDeckHandler().createCards(Age.AGE1, 3);
 		Deck deck = new Deck(Age.AGE1, cards);
 
@@ -382,11 +313,8 @@ public class TradeHandlerTest {
 
 	@Test(expected = InvalidTradeException.class)
 	public void testInvalidTrade2CoinsForSingleOreResource() {
-		ArrayList<Player> players = new ArrayList<Player>();
-		players.add(new Player("Wolverine", WonderType.COLOSSUS));
-		players.add(new Player("Captain America", WonderType.LIGHTHOUSE));
-		players.add(new Player("Black Widow", WonderType.TEMPLE));
-
+		ArrayList<Player> players = setUpArrayWithNumPlayers(3);
+		resetPlayer1And2(players);
 		ArrayList<Card> cards = new SetUpDeckHandler().createCards(Age.AGE1, 3);
 		Deck deck = new Deck(Age.AGE1, cards);
 
@@ -407,11 +335,8 @@ public class TradeHandlerTest {
 
 	@Test
 	public void testValidTrade2CoinsForSingleLoomGood() {
-		ArrayList<Player> players = new ArrayList<Player>();
-		players.add(new Player("Wolverine", WonderType.COLOSSUS));
-		players.add(new Player("Captain America", WonderType.LIGHTHOUSE));
-		players.add(new Player("Black Widow", WonderType.TEMPLE));
-
+		ArrayList<Player> players = setUpArrayWithNumPlayers(3);
+		resetPlayer1And2(players);
 		ArrayList<Card> cards = new SetUpDeckHandler().createCards(Age.AGE1, 3);
 		Deck deck = new Deck(Age.AGE1, cards);
 
@@ -437,11 +362,8 @@ public class TradeHandlerTest {
 
 	@Test
 	public void testValidTrade1CoinHasEastTradingPost() {
-		ArrayList<Player> players = new ArrayList<Player>();
-		players.add(new Player("Wolverine", WonderType.COLOSSUS));
-		players.add(new Player("Captain America", WonderType.LIGHTHOUSE));
-		players.add(new Player("Black Widow", WonderType.TEMPLE));
-
+		ArrayList<Player> players = setUpArrayWithNumPlayers(3);
+		resetPlayer1And2(players);
 		ArrayList<Card> cards = new SetUpDeckHandler().createCards(Age.AGE1, 3);
 		Deck deck = new Deck(Age.AGE1, cards);
 
@@ -467,11 +389,8 @@ public class TradeHandlerTest {
 	
 	@Test
 	public void testValidTrade2CoinsForSingleLumberExactResource() {
-		ArrayList<Player> players = new ArrayList<Player>();
-		players.add(new Player("Wolverine", WonderType.COLOSSUS));
-		players.add(new Player("Captain America", WonderType.LIGHTHOUSE));
-		players.add(new Player("Black Widow", WonderType.TEMPLE));
-
+		ArrayList<Player> players = setUpArrayWithNumPlayers(3);
+		resetPlayer1And2(players);
 		ArrayList<Card> cards = new SetUpDeckHandler().createCards(Age.AGE1, 3);
 		Deck deck = new Deck(Age.AGE1, cards);
 
@@ -490,5 +409,23 @@ public class TradeHandlerTest {
 		assertEquals(0, (int) current.getCoins().get(ChipValue.THREE));
 		assertEquals(1, (int) current.getCurrentTrades().get(RawResource.LUMBER));
 		assertEquals(5, next.getCoinTotal());
+	}
+	
+	private ArrayList<Player> setUpArrayWithNumPlayers(int num) {
+		ArrayList<Player> result = new ArrayList<Player>();
+		for (int i = 0; i < num; i++) {
+			Player temp = new Player("Jane Doe", this.wonder);
+			result.add(temp);
+		}
+		return result;
+	}
+
+	private void resetPlayer1And2(ArrayList<Player> players) {
+		this.player1 = players.get(0);
+		this.player2 = players.get(1);
+	}
+
+	private void resetTestDeck(int numPlayers) {
+		this.testDeck = new SetUpDeckHandler().createDeck(Age.AGE1, numPlayers);
 	}
 }

@@ -6,18 +6,20 @@ import java.awt.Point;
 import java.util.ResourceBundle;
 
 import constants.Constants;
+import constants.GeneralEnums.GameMode;
 import gui.interactables.Button;
 import gui.interactables.Interactable;
 import utils.Message;
 import utils.RenderImage;
 import utils.Translate;
 
-public class PlayerSelect extends Menu {
+public class Logistics extends Menu {
 
 	public RenderImage renderer;
 	ResourceBundle messages = Translate.getNewResourceBundle();
+	private GameMode mode;
 
-	public PlayerSelect(RenderImage renderer) {
+	public Logistics(RenderImage renderer) {
 		this.renderer = renderer;
 	}
 
@@ -34,7 +36,7 @@ public class PlayerSelect extends Menu {
 
 	@Override
 	public void initialize() {
-		Message.selectDifficulty();
+		this.mode = Message.selectDifficulty();
 		this.clearInteractables();
 		for (int i = 3; i <= 7; i++) {
 			Button startGame = new Button(new Point(400 + 250 * (i - 3), 400), Constants.PlayerSelectButtonBounds,
@@ -44,6 +46,10 @@ public class PlayerSelect extends Menu {
 			this.addInteractable(startGame);
 		}
 
+	}
+	
+	public GameMode getGameMode() {
+		return this.mode;
 	}
 
 }

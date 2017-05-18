@@ -6,6 +6,7 @@ import java.util.ResourceBundle;
 import backend.handlers.PlayerChipHandler;
 import dataStructures.gameMaterials.Card;
 import dataStructures.gameMaterials.Deck;
+import dataStructures.gameMaterials.Deck.Age;
 import dataStructures.playerData.Chip;
 import dataStructures.playerData.Chip.ChipType;
 import dataStructures.playerData.Player;
@@ -182,5 +183,9 @@ public class GameBoard {
 
 	public void setDeck(Deck deck) {
 		this.currentDeck = deck;
+	}
+
+	public Age getAge() {
+		return this.currentDeck.getAge();
 	}
 }

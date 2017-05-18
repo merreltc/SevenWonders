@@ -42,9 +42,9 @@ public class Player {
 
 	}
 
-	public Player(String playerName, Wonder.WonderType wonder) {
+	public Player(String playerName, Wonder wonder) {
 		this.name = playerName;
-		this.wonder = new Wonder('A', wonder);
+		this.wonder = wonder;
 	}
 
 	public String toString() {

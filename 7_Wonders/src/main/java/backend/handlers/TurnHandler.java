@@ -12,7 +12,7 @@ public class TurnHandler {
 	private int numPlayersUntilPass;
 	private int numTurnsTilEndOfAge = 5;
 
-	public void dealInitialTurnCards(ArrayList<Player> players, int numPlayers, Deck deck) {
+	public void dealInitialTurnCards(ArrayList<Player> players, Deck deck) {
 		this.numPlayersUntilPass = players.size() - 1;
 		this.numTurnsTilEndOfAge = 5;
 		

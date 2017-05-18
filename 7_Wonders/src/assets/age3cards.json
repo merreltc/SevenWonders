@@ -218,7 +218,8 @@
 				"EffectType": "VALUE",
 				"Value": "GUILD",
 				"AffectingEntities": "SCIENTIFICSTRUCTURES",
-				"Direction": "SELF"
+				"Direction": "SELF",
+				"valueAmount": 1
 			  },
 	"Next": "None",
 	"Previous": "None"

@@ -1,17 +1,16 @@
 package backend.handlers;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 import backend.factories.PlayerFactory;
-import dataStructures.gameMaterials.Wonder;
+import constants.GeneralEnums.GameMode;
 import dataStructures.playerData.Player;
 
 public class SetUpPlayerHandler {
 	private PlayerFactory playerFactory;
 
-	public SetUpPlayerHandler() {
-		this.playerFactory = new PlayerFactory();
+	public SetUpPlayerHandler(GameMode mode) {
+		this.playerFactory = new PlayerFactory(mode);
 	}
 
 	public ArrayList<Player> setUpAndReturnPlayers(ArrayList<String> playerNames) {
