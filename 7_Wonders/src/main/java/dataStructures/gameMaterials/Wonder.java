@@ -27,6 +27,7 @@ public class Wonder {
 		this.resource = getResourceByType(type);
 		this.side = side;
 		this.levels = new ArrayList<Level>();
+		// TODO: Parse to set up levels
 	}
 
 	public void buildNextLevel() {
