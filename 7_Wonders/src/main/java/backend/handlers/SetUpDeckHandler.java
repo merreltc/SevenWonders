@@ -46,7 +46,7 @@ public class SetUpDeckHandler {
 
 	public ArrayList<Card> correctNumberOfGuildCards(ArrayList<Card> cards, int numOfPlayers) {
 		for (int i = 0; i < NUM_OF_GUILD_CARDS - numOfPlayers - 2; i++) {
-			int indexToDelete = (int) (Math.random() * (NUM_OF_GUILD_CARDS - i));
+			int indexToDelete = (int) Math.floor((Math.random() * (NUM_OF_GUILD_CARDS - i)));
 			cards.remove(indexToDelete);
 		}
 

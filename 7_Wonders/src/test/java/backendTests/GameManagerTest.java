@@ -18,6 +18,7 @@ import backend.handlers.PlayerTurnHandler;
 import backend.handlers.RotateHandler.Rotation;
 import backend.handlers.SetUpDeckHandler;
 import backend.handlers.SetUpPlayerHandler;
+import backend.handlers.TradeHandler;
 import backend.handlers.TurnHandler;
 import constants.GeneralEnums.GameMode;
 import constants.GeneralEnums.Good;
@@ -323,7 +324,7 @@ public class GameManagerTest {
 		handlers.setSetUpDeckHandler(this.setUpDeckHandler);
 		handlers.setTurnHandler(this.turnHandler);
 		handlers.setPlayerTurnHandler(this.playerTurnHandler);
-
+		
 		GameManager manager = new GameManager(playerNames, handlers);
 
 		ArrayList<Card> storage = new ArrayList<Card>();
@@ -340,285 +341,11 @@ public class GameManagerTest {
 		assertEquals(1, (int) current.getCurrentTrades().get(RawResource.LUMBER));
 		assertEquals(5, next.getCoinTotal());
 	}
-
-	@Test
-	public void testTradeFromToForGood() {
-		ArrayList<String> playerNames = setUpArrayByNum(3);
-		Handlers handlers = new Handlers(this.setUpPlayerHandler);
-		handlers.setSetUpDeckHandler(this.setUpDeckHandler);
-		handlers.setTurnHandler(this.turnHandler);
-		handlers.setPlayerTurnHandler(this.playerTurnHandler);
-
-		GameManager manager = new GameManager(playerNames, handlers);
-
-		ArrayList<Card> storage = new ArrayList<Card>();
-		Deck deck = manager.getGameBoard().getDeck();
-		storage.add(deck.getCard(7));
-		storage.add(deck.getCard(8));
-
-		manager.getNextPlayer().setStoragePile(storage);
-		manager.tradeForEntity(manager.getCurrentPlayer(), manager.getNextPlayer(), Good.GLASS);
-
-		Player current = manager.getCurrentPlayer();
-		Player next = manager.getNextPlayer();
-
-		assertEquals(1, (int) current.getCurrentTrades().get(Good.GLASS));
-		assertEquals(5, next.getCoinTotal());
-	}
-
-	@Test
-	public void testValidTradeForDiscountEastTradingPost() {
-		ArrayList<String> playerNames = setUpArrayByNum(3);
-		Handlers handlers = new Handlers(this.setUpPlayerHandler);
-		handlers.setSetUpDeckHandler(this.setUpDeckHandler);
-		handlers.setTurnHandler(this.turnHandler);
-		handlers.setPlayerTurnHandler(this.playerTurnHandler);
-
-		GameManager manager = new GameManager(playerNames, handlers);
-
-		Deck deck = manager.getGameBoard().getDeck();
-		Player current = manager.getCurrentPlayer();
-		Player right = manager.getNextPlayer();
-
-		ArrayList<Card> storage = new ArrayList<Card>();
-		storage.add(deck.getCard(12)); // east trading post
-		current.setStoragePile(storage);
-
-		ArrayList<Card> storage2 = new ArrayList<Card>();
-		storage2.add(deck.getCard(0)); // lumber
-		right.setStoragePile(storage2);
-
-		manager.tradeForEntity(current, right, RawResource.LUMBER);
-		assertTrue(current.getCurrentTrades().containsKey(RawResource.LUMBER));
-		assertEquals(4, right.getCoinTotal());
-	}
-
-	@Test
-	public void testValidTradeForDiscountEastTradingPostCounter() {
-		ArrayList<String> playerNames = setUpArrayByNum(3);
-		Handlers handlers = new Handlers(this.setUpPlayerHandler);
-		handlers.setSetUpDeckHandler(this.setUpDeckHandler);
-		handlers.setTurnHandler(this.turnHandler);
-		handlers.setPlayerTurnHandler(this.playerTurnHandler);
-
-		GameManager manager = new GameManager(playerNames, handlers);
-
-		manager.changeRotateDirectionAndResetPositions(Rotation.COUNTERCLOCKWISE);
-
-		Deck deck = manager.getGameBoard().getDeck();
-		Player current = manager.getCurrentPlayer();
-		Player right = manager.getPreviousPlayer();
-
-		ArrayList<Card> storage = new ArrayList<Card>();
-		storage.add(deck.getCard(12)); // east trading post
-		current.setStoragePile(storage);
-
-		ArrayList<Card> storage2 = new ArrayList<Card>();
-		storage2.add(deck.getCard(0)); // lumber
-		right.setStoragePile(storage2);
-
-		manager.tradeForEntity(current, right, RawResource.LUMBER);
-		assertTrue(current.getCurrentTrades().containsKey(RawResource.LUMBER));
-		assertEquals(4, right.getCoinTotal());
-	}
-
-	@Test
-	public void testValidTradeForDiscountWestTradingPostCounter() {
-		ArrayList<String> playerNames = setUpArrayByNum(3);
-		Handlers handlers = new Handlers(this.setUpPlayerHandler);
-		handlers.setSetUpDeckHandler(this.setUpDeckHandler);
-		handlers.setTurnHandler(this.turnHandler);
-		handlers.setPlayerTurnHandler(this.playerTurnHandler);
-
-		GameManager manager = new GameManager(playerNames, handlers);
-		manager.changeRotateDirectionAndResetPositions(Rotation.COUNTERCLOCKWISE);
-		Deck deck = manager.getGameBoard().getDeck();
-		Player current = manager.getCurrentPlayer();
-		Player left = manager.getNextPlayer();
-		ArrayList<Card> storage = new ArrayList<Card>();
-		storage.add(deck.getCard(13)); // west trading post
-		current.setStoragePile(storage);
-		ArrayList<Card> storage2 = new ArrayList<Card>();
-		storage2.add(deck.getCard(0)); // lumber
-		left.setStoragePile(storage2);
-		manager.tradeForEntity(current, left, RawResource.LUMBER);
-		assertTrue(current.getCurrentTrades().containsKey(RawResource.LUMBER));
-		assertEquals(4, left.getCoinTotal());
-	}
-
-	@Test
-	public void testValidTradeForDiscountWestTradingPost() {
-		ArrayList<String> playerNames = setUpArrayByNum(3);
-		Handlers handlers = new Handlers(this.setUpPlayerHandler);
-		handlers.setSetUpDeckHandler(this.setUpDeckHandler);
-		handlers.setTurnHandler(this.turnHandler);
-		handlers.setPlayerTurnHandler(this.playerTurnHandler);
-
-		GameManager manager = new GameManager(playerNames, handlers);
-
-		Deck deck = manager.getGameBoard().getDeck();
-		Player current = manager.getCurrentPlayer();
-		Player left = manager.getPreviousPlayer();
-		ArrayList<Card> storage = new ArrayList<Card>();
-		storage.add(deck.getCard(13)); // west trading post
-		current.setStoragePile(storage);
-
-		ArrayList<Card> storage2 = new ArrayList<Card>();
-		storage2.add(deck.getCard(0)); // lumber
-		left.setStoragePile(storage2);
-
-		manager.tradeForEntity(current, left, RawResource.LUMBER);
-		assertTrue(current.getCurrentTrades().containsKey(RawResource.LUMBER));
-		assertEquals(4, left.getCoinTotal());
-	}
-
-	@Test
-	public void testValidTradeForDiscountMarketPlace() {
-		ArrayList<String> playerNames = setUpArrayByNum(3);
-
-		Handlers handlers = new Handlers(this.setUpPlayerHandler);
-		handlers.setSetUpDeckHandler(this.setUpDeckHandler);
-		handlers.setTurnHandler(this.turnHandler);
-		handlers.setPlayerTurnHandler(this.playerTurnHandler);
-
-		GameManager manager = new GameManager(playerNames, handlers);
-
-		Deck deck = manager.getGameBoard().getDeck();
-		Player current = manager.getCurrentPlayer();
-		Player right = manager.getNextPlayer();
-		ArrayList<Card> storage = new ArrayList<Card>();
-		storage.add(deck.getCard(14)); // marketplace
-		current.setStoragePile(storage);
-		ArrayList<Card> storage2 = new ArrayList<Card>();
-		storage2.add(deck.getCard(0)); // lumber
-		right.setStoragePile(storage2);
-		manager.tradeForEntity(current, right, RawResource.LUMBER);
-		assertTrue(current.getCurrentTrades().containsKey(RawResource.LUMBER));
-		assertEquals(4, right.getCoinTotal());
-	}
-
-	@Test
-	public void testValidTradeForDiscountMarketPlaceLeft() {
-		ArrayList<String> playerNames = setUpArrayByNum(3);
-
-		GameManager manager = new GameManager(playerNames, setUpHandlers());
-
-		Deck deck = manager.getGameBoard().getDeck();
-		Player current = manager.getCurrentPlayer();
-		Player left = manager.getPreviousPlayer();
-		ArrayList<Card> storage = new ArrayList<Card>();
-		storage.add(deck.getCard(14)); // marketplace
-		current.setStoragePile(storage);
-		ArrayList<Card> storage2 = new ArrayList<Card>();
-		storage2.add(deck.getCard(0)); // lumber
-		left.setStoragePile(storage2);
-		manager.tradeForEntity(current, left, RawResource.LUMBER);
-		assertTrue(current.getCurrentTrades().containsKey(RawResource.LUMBER));
-		assertEquals(4, left.getCoinTotal());
-	}
-
-	@Test
-	public void testValidTradeForDiscountEastTradingPostRotate() {
-		ArrayList<String> playerNames = setUpArrayByNum(3);
-		Handlers handlers = new Handlers(this.setUpPlayerHandler);
-		handlers.setSetUpDeckHandler(this.setUpDeckHandler);
-		handlers.setTurnHandler(this.turnHandler);
-		handlers.setPlayerTurnHandler(this.playerTurnHandler);
-
-		GameManager manager = new GameManager(playerNames, handlers);
-
-		manager.rotateClockwise();
-		manager.rotateClockwise();
-		Deck deck = manager.getGameBoard().getDeck();
-		Player current = manager.getCurrentPlayer();
-		Player right = manager.getNextPlayer();
-		ArrayList<Card> storage = new ArrayList<Card>();
-		storage.add(deck.getCard(12)); // east trading post
-		current.setStoragePile(storage);
-		ArrayList<Card> storage2 = new ArrayList<Card>();
-		storage2.add(deck.getCard(0)); // lumber
-		right.setStoragePile(storage2);
-		manager.tradeForEntity(current, right, RawResource.LUMBER);
-		assertTrue(current.getCurrentTrades().containsKey(RawResource.LUMBER));
-		assertEquals(4, right.getCoinTotal());
-	}
-
-	@Test
-	public void testValidTradeForDiscountWestTradingPostRotate() {
-		ArrayList<String> playerNames = setUpArrayByNum(3);
-		Handlers handlers = new Handlers(this.setUpPlayerHandler);
-		handlers.setSetUpDeckHandler(this.setUpDeckHandler);
-		handlers.setTurnHandler(this.turnHandler);
-		handlers.setPlayerTurnHandler(this.playerTurnHandler);
-
-		GameManager manager = new GameManager(playerNames, handlers);
-
-		manager.rotateClockwise();
-		Deck deck = manager.getGameBoard().getDeck();
-		Player current = manager.getCurrentPlayer();
-		Player left = manager.getPreviousPlayer();
-
-		ArrayList<Card> storage = new ArrayList<Card>();
-		storage.add(deck.getCard(13)); // west trading post
-		current.setStoragePile(storage);
-
-		ArrayList<Card> storage2 = new ArrayList<Card>();
-		storage2.add(deck.getCard(0)); // lumber
-		left.setStoragePile(storage2);
-
-		manager.tradeForEntity(current, left, RawResource.LUMBER);
-		assertTrue(current.getCurrentTrades().containsKey(RawResource.LUMBER));
-		assertEquals(4, left.getCoinTotal());
-	}
-
-	@Test
-	public void testNoDiscountEastTradingPostRegularTrade() {
-		ArrayList<String> playerNames = setUpArrayByNum(3);
-
-		GameManager manager = new GameManager(playerNames, setUpHandlers());
-
-		Deck deck = manager.getDeck();
-		Player current = manager.getCurrentPlayer();
-		Player left = manager.getPreviousPlayer();
-
-		ArrayList<Card> storage = new ArrayList<Card>();
-		storage.add(deck.getCard(12)); // east trading post
-		current.setStoragePile(storage);
-
-		ArrayList<Card> storage2 = new ArrayList<Card>();
-		storage2.add(deck.getCard(0)); // lumber
-		left.setStoragePile(storage2);
-
-		manager.tradeForEntity(current, left, RawResource.LUMBER);
-		assertTrue(current.getCurrentTrades().containsKey(RawResource.LUMBER));
-		assertEquals(5, left.getCoinTotal());
-	}
-
-	@Test
-	public void testNoDiscountWestTradingPostRegularTrade() {
-		ArrayList<String> playerNames = setUpArrayByNum(3);
-
-		GameManager manager = new GameManager(playerNames, setUpHandlers());
-
-		Deck deck = manager.getGameBoard().getDeck();
-		Player current = manager.getCurrentPlayer();
-		Player right = manager.getNextPlayer();
-		ArrayList<Card> storage = new ArrayList<Card>();
-		storage.add(deck.getCard(13)); // west trading post
-		current.setStoragePile(storage);
-		ArrayList<Card> storage2 = new ArrayList<Card>();
-		storage2.add(deck.getCard(0)); // lumber
-		right.setStoragePile(storage2);
-		manager.tradeForEntity(current, right, RawResource.LUMBER);
-
-		assertTrue(current.getCurrentTrades().containsKey(RawResource.LUMBER));
-		assertEquals(5, right.getCoinTotal());
-	}
-
+	
 	@Test
 	public void testTradeFromToForGoodEmptyTradesAfterTurnEnds() {
 		ArrayList<String> playerNames = setUpArrayByNum(3);
-
+		
 		GameManager manager = new GameManager(playerNames, setUpHandlers());
 
 		ArrayList<Card> storage = new ArrayList<Card>();
@@ -633,6 +360,7 @@ public class GameManagerTest {
 
 		assertTrue(previous.getCurrentTrades().isEmpty());
 	}
+
 
 	@Test
 	public void testMakeChangeForValue1Coins() {

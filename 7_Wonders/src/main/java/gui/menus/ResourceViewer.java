@@ -37,12 +37,13 @@ public class ResourceViewer extends Menu {
 			Font startingFont = graphics.getFont();
 			Color startingColor = graphics.getColor();
 			this.graphics = graphics;
+			resources.setGraphics(graphics);
 			graphics.setFont(Constants.RESOURCE_VIEWER_FONT);
 			
 			int gridRows = this.player.getStoragePile().size() + 1;
 			drawGrid(gridRows);
 			graphics.setColor(new Color(50, 50, 50, 150));
-			resources.draw(graphics);
+			resources.draw();
 			graphics.setColor(startingColor);
 			graphics.setFont(startingFont);
 		}

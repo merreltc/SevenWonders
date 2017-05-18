@@ -9,6 +9,7 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import backend.handlers.EndGameHandler;
+import constants.GeneralEnums;
 import constants.GeneralEnums.CostType;
 import constants.GeneralEnums.Good;
 import constants.GeneralEnums.RawResource;
@@ -439,9 +440,13 @@ public class EndGameHandlerTest {
 		player1.addToStoragePile(this.createScientistsGuild());
 
 		EndGameHandler end = new EndGameHandler();
-		end.handleScientistsGuild(player1, message);
+		end.message = message;
+		end.handleScientistsGuild(player1);
+		
+		EntityEffect effect = ((EntityEffect)player1.getStoragePile().get(1).getEffect());
 
 		Assert.assertEquals(1, end.getSciencePoints(player1));
+		Assert.assertTrue(effect.getEntities().keySet().contains(Science.PROTRACTOR));
 	}
 
 	@Test
@@ -458,9 +463,13 @@ public class EndGameHandlerTest {
 		player1.addToStoragePile(this.createScientistsGuild());
 
 		EndGameHandler end = new EndGameHandler();
-		end.handleScientistsGuild(player1, message);
+		end.message = message;
+		end.handleScientistsGuild(player1);
+		
+		EntityEffect effect = ((EntityEffect)player1.getStoragePile().get(1).getEffect());
 
 		Assert.assertEquals(1, end.getSciencePoints(player1));
+		Assert.assertTrue(effect.getEntities().keySet().contains(Science.WHEEL));
 	}
 
 	@Test
@@ -477,9 +486,13 @@ public class EndGameHandlerTest {
 		player1.addToStoragePile(this.createScientistsGuild());
 
 		EndGameHandler end = new EndGameHandler();
-		end.handleScientistsGuild(player1, message);
+		end.message = message;
+		end.calculateScores(new ArrayList<Player>(Arrays.asList(player1)));
+
+		EntityEffect effect = ((EntityEffect)player1.getStoragePile().get(1).getEffect());
 
 		Assert.assertEquals(1, end.getSciencePoints(player1));
+		Assert.assertTrue(effect.getEntities().keySet().contains(Science.TABLET));
 	}
 
 	@Test
@@ -502,6 +515,12 @@ public class EndGameHandlerTest {
 		EasyMock.replay(player1, player2, player3);
 
 		Assert.assertEquals(4, end.getPointsFromGuildCards(player2, player1, player3));
+	}
+	
+	@Test
+	public void testTestCardInvalidChoice(){
+		EndGameHandler end = new EndGameHandler();
+		Assert.assertEquals(EffectType.NONE, end.testCard("Invalid"));
 	}
 
 	// TODO: Write Builders test once wonders are done
