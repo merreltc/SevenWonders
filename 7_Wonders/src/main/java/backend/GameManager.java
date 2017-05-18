@@ -29,7 +29,6 @@ import utils.Translate;
  */
 public class GameManager {
 	private GameBoard board;
-	private ResourceBundle messages = Translate.getNewResourceBundle();
 	private Rotation currentDirection = Rotation.CLOCKWISE;
 	private Handlers handlers;
 
@@ -183,7 +182,7 @@ public class GameManager {
 		String message;
 		this.handlers.getRotateHandler().rotateCurrentHands(getPlayers(), this.currentDirection);
 		this.handlers.getTurnHandler().setNumTurnsTilEndOfAge(turnsTilEnd - 1);
-		message = this.messages.getString("endOfCurrentRotation");
+		message = Translate.getNewResourceBundle().getString("endOfCurrentRotation");
 		return message;
 	}
 	
@@ -210,7 +209,7 @@ public class GameManager {
 		this.board.setDeck(newDeck);
 		DeckHandler.shuffleDeck(this.board.getDeck());
 		this.handlers.getTurnHandler().dealInitialTurnCards(this.getPlayers(), this.board.getDeck());
-		message = this.messages.getString("endOfAge");
+		message = Translate.getNewResourceBundle().getString("endOfAge");
 		return message;
 	}
 
