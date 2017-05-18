@@ -605,6 +605,22 @@ public class TurnHandlerTest {
 		EasyMock.verify(rotate);
 	}
 
+	@Test
+	public void testRotateCounterClockWise(){
+		RotateHandler rotate = EasyMock.mock(RotateHandler.class);
+		rotate.rotateCounterClockwise();
+		EasyMock.replay(rotate);
+		
+		Handlers handlers = new Handlers(GameMode.EASY);
+		handlers.setRotateHandler(rotate);
+		
+		TurnHandler turnHandler = new TurnHandler();
+		turnHandler.handlers = handlers;
+		
+		turnHandler.rotate(Rotation.COUNTERCLOCKWISE);
+		
+		EasyMock.verify(rotate);
+	}
 
 	private ArrayList<Player> setUpPlayersByNum(int num) {
 		ArrayList<Player> result = new ArrayList<Player>();
