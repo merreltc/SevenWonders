@@ -23,14 +23,8 @@ public class TradeHelper {
 		Player tradeTo;
 		Player tradeFrom = this.gameManager.getCurrentPlayer();
 		int currentIndex = this.gameManager.getPlayers().indexOf(tradeFrom);
-
-		if (splitValue[0].equals("Right")) {
-			int offsetRight = (currentIndex + 1 + this.gameManager.getNumPlayers());
-			tradeTo = this.gameManager.getPlayer(offsetRight % this.gameManager.getNumPlayers());
-		} else {
-			int offsetLeft = (currentIndex - 1 + this.gameManager.getNumPlayers());
-			tradeTo = this.gameManager.getPlayer(offsetLeft % this.gameManager.getNumPlayers());
-		}
+		
+		tradeTo = decodeTradeButton(splitValue, currentIndex);
 
 		try {
 			this.gameManager.tradeForEntity(tradeFrom, tradeTo, resourceEnum);
@@ -38,6 +32,18 @@ public class TradeHelper {
 		} catch (Exception e) {
 			Message.showMessage(e.getMessage());
 		}
+	}
+
+	private Player decodeTradeButton(String[] splitValue, int currentIndex) {
+		Player tradeTo;
+		if (splitValue[0].equals("Right")) {
+			int offsetRight = (currentIndex + 1 + this.gameManager.getNumPlayers());
+			tradeTo = this.gameManager.getPlayer(offsetRight % this.gameManager.getNumPlayers());
+		} else {
+			int offsetLeft = (currentIndex - 1 + this.gameManager.getNumPlayers());
+			tradeTo = this.gameManager.getPlayer(offsetLeft % this.gameManager.getNumPlayers());
+		}
+		return tradeTo;
 	}
 
 	private Enum translateStringToEnum(String resource) {
