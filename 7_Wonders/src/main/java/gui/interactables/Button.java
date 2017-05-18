@@ -10,11 +10,7 @@ import utils.RenderImage;
 
 public class Button extends Interactable {
 	public Button(Point position, Point bounds, String value) {
-		super(position, bounds, value);
+		super(position, bounds, value, Color.BLUE, Color.RED);
 	}
 
-	@Override
-	public void draw(Graphics graphics) {
-		super.draw(graphics, Color.BLUE, Color.RED);
-	}
 }

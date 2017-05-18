@@ -12,7 +12,7 @@ public final class DeckHandler {
 		Collections.shuffle(deck.getCards());
 	}
 
-	public static Card drawCard(Deck age1) {
-		return age1.removeAtIndex(TOP_OF_DECK);
+	public static Card drawCard(Deck age) {
+		return age.removeAtIndex(TOP_OF_DECK);
 	}
 }

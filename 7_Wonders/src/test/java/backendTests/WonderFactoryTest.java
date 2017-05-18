@@ -119,4 +119,11 @@ public class WonderFactoryTest {
 			i++;
 		}
 	}
+	
+	@Test
+	public void testGenerateSide() {
+		WonderFactory factory = new WonderFactory(GameMode.NORMAL);
+		assertEquals(Side.A, factory.generateSide(0));
+		assertEquals(Side.B, factory.generateSide(1));
+	}
 }

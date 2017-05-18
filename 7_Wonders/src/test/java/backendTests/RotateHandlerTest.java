@@ -18,6 +18,7 @@ import backend.handlers.TurnHandler;
 import backend.handlers.RotateHandler.Rotation;
 import constants.GeneralEnums.GameMode;
 import dataStructures.GameBoard;
+import dataStructures.Handlers;
 import dataStructures.gameMaterials.Card;
 import dataStructures.gameMaterials.Deck;
 import dataStructures.gameMaterials.Deck.Age;
@@ -191,8 +192,7 @@ public class RotateHandlerTest {
 	@Test
 	public void testRotateCurrentHandsClockwise() {
 		ArrayList<String> playerNames = setUpNamesWithNumPlayers(5);		
-		GameManager manager = new GameManager(playerNames, this.setUpPlayerHandler,
-				this.setUpDeckHandler, this.turnHandler, this.playerTurnHandler);
+		GameManager manager = new GameManager(playerNames, setUpHandlers());
 		
 		manager.dealInitialTurnCards();
 		ArrayList<Player> players = manager.getPlayers();
@@ -215,8 +215,7 @@ public class RotateHandlerTest {
 	@Test
 	public void testRotateCurrentHandsClockwise3Players() {
 		ArrayList<String> playerNames = setUpNamesWithNumPlayers(3);
-		GameManager manager = new GameManager(playerNames, this.setUpPlayerHandler,
-				this.setUpDeckHandler, this.turnHandler, this.playerTurnHandler);
+		GameManager manager = new GameManager(playerNames, setUpHandlers());
 		manager.dealInitialTurnCards();
 		ArrayList<Player> players = manager.getPlayers();
 		ArrayList<ArrayList<Card>> expectedHands = new ArrayList<ArrayList<Card>>();
@@ -236,8 +235,7 @@ public class RotateHandlerTest {
 	@Test
 	public void testRotateCurrentHandsCounterClockwise() {
 		ArrayList<String> playerNames = setUpNamesWithNumPlayers(5);
-		GameManager manager = new GameManager(playerNames, this.setUpPlayerHandler,
-				this.setUpDeckHandler, this.turnHandler, this.playerTurnHandler);
+		GameManager manager = new GameManager(playerNames, setUpHandlers());
 		manager.dealInitialTurnCards();
 		ArrayList<Player> players = manager.getPlayers();
 		ArrayList<ArrayList<Card>> expectedHands = new ArrayList<ArrayList<Card>>();
@@ -259,8 +257,7 @@ public class RotateHandlerTest {
 	@Test
 	public void testRotateCurrentHandsCounterClockwise3Players() {
 		ArrayList<String> playerNames = setUpNamesWithNumPlayers(3);
-		GameManager manager = new GameManager(playerNames, this.setUpPlayerHandler,
-				this.setUpDeckHandler, this.turnHandler, this.playerTurnHandler);
+		GameManager manager = new GameManager(playerNames, setUpHandlers());
 		manager.dealInitialTurnCards();
 		
 		ArrayList<Player> players = manager.getPlayers();
@@ -293,5 +290,13 @@ public class RotateHandlerTest {
 			result.add("Jane Doe");
 		}
 		return result;
+	}
+	
+	private Handlers setUpHandlers(){
+		Handlers handlers = new Handlers(this.setUpPlayerHandler);
+		handlers.setSetUpDeckHandler(this.setUpDeckHandler);
+		handlers.setTurnHandler(this.turnHandler);
+		handlers.setPlayerTurnHandler(this.playerTurnHandler);
+		return handlers;
 	}
 }

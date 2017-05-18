@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import org.easymock.EasyMock;
 import org.junit.Test;
 
+import backend.handlers.PlayerChipHandler;
 import backend.handlers.SetUpDeckHandler;
 import dataStructures.GameBoard;
 import dataStructures.gameMaterials.Card;
@@ -19,6 +20,7 @@ import dataStructures.gameMaterials.Deck.Age;
 import dataStructures.gameMaterials.Wonder;
 import dataStructures.playerData.Chip;
 import dataStructures.playerData.Player;
+import dataStructures.playerData.Chip.ChipValue;
 import exceptions.InsufficientFundsException;
 
 public class GameBoardTests {
@@ -210,9 +212,10 @@ public class GameBoardTests {
 		Card toTest = this.age1Deck.getCard(0);
 		board.addToDiscardPile(players.get(0), toTest);
 
-		assertEquals(1, players.get(0).getNumValue3Coins());
+		assertEquals(1, (int) players.get(0).getCoins().get(ChipValue.THREE));
 		assertFalse(board.getDiscardPile().isEmpty());
 		assertEquals(toTest, board.getDiscardPile().get(0));
+		assertEquals(23, board.getTotalValue3CoinsInBank());
 	}
 
 	@Test
@@ -220,15 +223,16 @@ public class GameBoardTests {
 		ArrayList<Player> players = setUpArrayWithNumPlayers(5);
 		this.age1Deck = createDeck(Age.AGE1, 5);
 		GameBoard board = new GameBoard(players, this.age1Deck);
-		players.get(1).addValue1(36, Chip.ChipType.COIN);
-		players.get(1).addValue1(36, Chip.ChipType.COIN);
+		PlayerChipHandler.addValue1(players.get(1), 36, Chip.ChipType.COIN);
+		PlayerChipHandler.addValue1(players.get(1), 36, Chip.ChipType.COIN);
 		board.makeChangeForValue3Coins(players.get(1), 24);
 		Card toTest = this.age1Deck.getCard(0);
 		board.addToDiscardPile(players.get(0), toTest);
 
-		assertEquals(6, players.get(0).getNumValue1Coins());
+		assertEquals(6, (int) players.get(0).getCoins().get(ChipValue.ONE));
 		assertFalse(board.getDiscardPile().isEmpty());
 		assertEquals(toTest, board.getDiscardPile().get(0));
+		assertEquals(100, board.getTotalValue1CoinsInBank());
 	}
 
 	@Test
@@ -261,10 +265,10 @@ public class GameBoardTests {
 		this.age1Deck = createDeck(Age.AGE1, 3);
 		GameBoard board = new GameBoard(players, this.age1Deck);
 		Player active = players.get(0);
-		active.addValue3(1, Chip.ChipType.COIN);
+		PlayerChipHandler.addValue3(active, 1, Chip.ChipType.COIN);
 		assertTrue(board.makeChangeForValue1Coins(active, 3));
-		assertEquals(6, active.getNumValue1Coins());
-		assertEquals(0, active.getNumValue3Coins());
+		assertEquals(6, (int) active.getCoins().get(ChipValue.ONE));
+		assertEquals(0, (int) active.getCoins().get(ChipValue.THREE));
 		assertEquals(34, board.getTotalValue1CoinsInBank());
 		assertEquals(25, board.getTotalValue3CoinsInBank());
 	}
@@ -275,13 +279,26 @@ public class GameBoardTests {
 		this.age1Deck = createDeck(Age.AGE1, 3);
 		GameBoard board = new GameBoard(players, this.age1Deck);
 		Player active = players.get(0);
-		active.addValue3(14, Chip.ChipType.COIN);
+		PlayerChipHandler.addValue3(active, 14, Chip.ChipType.COIN);
 
 		try {
 			board.makeChangeForValue1Coins(active, 42);
 		} catch (InsufficientFundsException e) {
 			assertEquals("Not enough value 1 coins left in bank", e.getMessage());
 		}
+	}
+	
+	@Test
+	public void testMakeChangeForValue1CoinsExactlyEnoughInBank() {
+		ArrayList<Player> players = setUpArrayWithNumPlayers(3);
+		this.age1Deck = createDeck(Age.AGE1, 3);
+		GameBoard board = new GameBoard(players, this.age1Deck);
+		Player active = players.get(0);
+		PlayerChipHandler.addValue3(active, 12, Chip.ChipType.COIN);
+		board.giveNumCoins(players.get(1), 73);
+		board.makeChangeForValue1Coins(active, 36);
+		assertEquals(39, (int) active.getCoins().get(ChipValue.ONE));
+		
 	}
 
 	@Test
@@ -292,8 +309,8 @@ public class GameBoardTests {
 		Player active = players.get(0);
 
 		assertTrue(board.makeChangeForValue3Coins(active, 1));
-		assertEquals(0, active.getNumValue1Coins());
-		assertEquals(1, active.getNumValue3Coins());
+		assertEquals(0, (int) active.getCoins().get(ChipValue.ONE));
+		assertEquals(1, (int) active.getCoins().get(ChipValue.THREE));
 		assertEquals(40, board.getTotalValue1CoinsInBank());
 		assertEquals(23, board.getTotalValue3CoinsInBank());
 	}
@@ -304,8 +321,8 @@ public class GameBoardTests {
 		this.age1Deck = createDeck(Age.AGE1, 3);
 		GameBoard board = new GameBoard(players, this.age1Deck);
 		Player active = players.get(0);
-		active.addValue1(40, Chip.ChipType.COIN);
-		active.addValue1(40, Chip.ChipType.COIN);
+		PlayerChipHandler.addValue1(active, 40, Chip.ChipType.COIN);
+		PlayerChipHandler.addValue1(active, 40, Chip.ChipType.COIN);
 
 		try {
 			board.makeChangeForValue3Coins(active, 25);
@@ -355,6 +372,36 @@ public class GameBoardTests {
 		assertEquals(13, active.getCoinTotal());
 		assertEquals(0, board.getTotalValue3CoinsInBank());
 		assertEquals(27, board.getTotalValue1CoinsInBank());
+	}
+	
+	@Test
+	public void testGiveNumCoins20NotEnoughValue3Coins() {
+		ArrayList<Player> players = setUpArrayWithNumPlayers(3);
+		this.age1Deck = createDeck(Age.AGE1, 3);
+		GameBoard board = new GameBoard(players, this.age1Deck);
+		Player active = players.get(0);
+
+		board.giveNumCoins(players.get(1), 69);
+		board.giveNumCoins(active, 10);
+
+		assertEquals(13, active.getCoinTotal());
+		assertEquals(0, board.getTotalValue3CoinsInBank());
+		assertEquals(30, board.getTotalValue1CoinsInBank());
+	}
+	
+	@Test
+	public void testGiveNumCoinsExactlyEnoughValue3Coins() {
+		ArrayList<Player> players = setUpArrayWithNumPlayers(3);
+		this.age1Deck = createDeck(Age.AGE1, 3);
+		GameBoard board = new GameBoard(players, this.age1Deck);
+		Player active = players.get(0);
+
+		board.giveNumCoins(players.get(1), 69);
+		board.giveNumCoins(active, 3);
+
+		assertEquals(6, active.getCoinTotal());
+		assertEquals(0, board.getTotalValue3CoinsInBank());
+		assertEquals(37, board.getTotalValue1CoinsInBank());
 	}
 
 	@Test

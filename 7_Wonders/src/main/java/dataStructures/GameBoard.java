@@ -3,14 +3,15 @@ package dataStructures;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
+import backend.handlers.PlayerChipHandler;
 import dataStructures.gameMaterials.Card;
 import dataStructures.gameMaterials.Deck;
 import dataStructures.gameMaterials.Deck.Age;
-import dataStructures.playerData.Chip;
 import dataStructures.playerData.Chip.ChipType;
 import dataStructures.playerData.Player;
 import exceptions.InsufficientFundsException;
 import utils.Translate;
+import utils.TranslateWithTemplate;
 
 
 public class GameBoard {
@@ -82,7 +83,7 @@ public class GameBoard {
 
 	private void validatePlayerIndex(int index) {
 		if (index <= -1 || index >= this.numPlayers) {
-			String msg = Translate.prepareStringTemplateWithIntArg(index, "invalidPlayerIndex", messages);
+			String msg = TranslateWithTemplate.prepareStringTemplateWithIntArg(index, "invalidPlayerIndex", messages);
 			throw new IllegalArgumentException(msg);
 		}
 	}
@@ -91,10 +92,10 @@ public class GameBoard {
 		this.discardPile.add(toTest);
 
 		if (this.totalValue3CoinsInBank-- > 0) {
-			active.addValue3(1, Chip.ChipType.COIN);
+			PlayerChipHandler.addValue3(active, 1, ChipType.COIN);
 		} else {
-			this.totalValue1CoinsInBank--;
-			active.addValue1(3, Chip.ChipType.COIN);
+			this.totalValue1CoinsInBank -= 3;
+			PlayerChipHandler.addValue1(active, 3, ChipType.COIN);
 		}
 	}
 
@@ -105,10 +106,11 @@ public class GameBoard {
 		}
 
 		int numValue3CoinsToRemove = numCoinsWanted / 3;
-		active.removeValue3(numValue3CoinsToRemove, ChipType.COIN);
+
+		PlayerChipHandler.removeValue3(active, numValue3CoinsToRemove, ChipType.COIN);
 		this.totalValue3CoinsInBank += numValue3CoinsToRemove;
 		this.totalValue1CoinsInBank -= numCoinsWanted;
-		active.addValue1(numCoinsWanted, Chip.ChipType.COIN);
+		PlayerChipHandler.addValue1(active, numCoinsWanted, ChipType.COIN);
 
 		return true;
 	}
@@ -120,10 +122,10 @@ public class GameBoard {
 		}
 
 		int numValue1CoinsToRemove = numCoinsWanted * 3;
-		active.removeValue1(numValue1CoinsToRemove, ChipType.COIN);
+		PlayerChipHandler.removeValue1(active, numValue1CoinsToRemove, ChipType.COIN);
 		this.totalValue3CoinsInBank -= numCoinsWanted;
 		this.totalValue1CoinsInBank += numValue1CoinsToRemove;
-		active.addValue3(numCoinsWanted, Chip.ChipType.COIN);
+		PlayerChipHandler.addValue3(active, numCoinsWanted, ChipType.COIN);
 
 		return true;
 	}
@@ -142,8 +144,9 @@ public class GameBoard {
 		}
 		this.totalValue1CoinsInBank -= numValue1;
 
-		player.addValue3(numValue3, Chip.ChipType.COIN);
-		player.addValue1(numValue1, Chip.ChipType.COIN);
+
+		PlayerChipHandler.addValue3(player, numValue3, ChipType.COIN);
+		PlayerChipHandler.addValue1(player, numValue1, ChipType.COIN);
 	}
 
 	public int getCurrentPlayerIndex() {

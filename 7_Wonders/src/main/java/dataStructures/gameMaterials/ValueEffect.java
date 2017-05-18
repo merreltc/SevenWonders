@@ -2,14 +2,18 @@ package dataStructures.gameMaterials;
 
 import java.util.HashMap;
 
+import dataStructures.gameMaterials.Level.Frequency;
 import utils.Translate;
+import utils.TranslateWithTemplate;
 
 public class ValueEffect extends Effect {
+	private static final int NO_VALUE_AMOUNT = -1;
+	
 	private Value value;
 	private int valueAmount;
 	private AffectingEntity affectingEntity = AffectingEntity.NONE;
 	private HashMap<Enum, Integer> affectingEntities = new HashMap<Enum, Integer>();
-	private static final int NO_VALUE_AMOUNT = -1;
+	private Frequency frequency;
 
 	public enum Value {
 		VICTORYPOINTS, MILITARY, COMMERCE, GUILD
@@ -28,9 +32,17 @@ public class ValueEffect extends Effect {
 		super(effectType);
 		this.value = value;
 		this.affectingEntity = affectingEntity;
-
 		validateValueAmount(value, valueAmount);
 		this.valueAmount = valueAmount;
+	}
+	
+	public ValueEffect(EffectType effectType, Value value, AffectingEntity affectingEntity, int valueAmount, Frequency frequency) {
+		super(effectType);
+		this.value = value;
+		this.affectingEntity = affectingEntity;
+		validateValueAmount(value, valueAmount);
+		this.valueAmount = valueAmount;
+		this.frequency = frequency;
 	}
 
 	public ValueEffect(EffectType effectType, Value value, AffectingEntity affectingEntity, Direction direction) {
@@ -39,6 +51,15 @@ public class ValueEffect extends Effect {
 		this.setDirection(direction);
 		this.affectingEntity = affectingEntity;
 		this.valueAmount = NO_VALUE_AMOUNT;
+	}
+	
+	public ValueEffect(EffectType effectType, Value value, AffectingEntity affectingEntity, Direction direction, Frequency frequency) {
+		super(effectType);
+		this.value = value;
+		this.setDirection(direction);
+		this.affectingEntity = affectingEntity;
+		this.valueAmount = NO_VALUE_AMOUNT;
+		this.frequency = frequency;
 	}
 
 	public ValueEffect(EffectType effectType, Value value, AffectingEntity affectingEntity, Direction direction,
@@ -49,6 +70,16 @@ public class ValueEffect extends Effect {
 		this.affectingEntity = affectingEntity;
 		this.valueAmount = valueAmount;
 	}
+	
+	public ValueEffect(EffectType effectType, Value value, AffectingEntity affectingEntity, Direction direction,
+			int valueAmount, Frequency frequency) {
+		super(effectType);
+		this.value = value;
+		this.setDirection(direction);
+		this.affectingEntity = affectingEntity;
+		this.valueAmount = valueAmount;
+		this.frequency = frequency;
+	}
 
 	public ValueEffect(EffectType effectType, Value value, HashMap<Enum, Integer> affectingEntities) {
 		super(effectType);
@@ -56,26 +87,34 @@ public class ValueEffect extends Effect {
 		this.affectingEntities = affectingEntities;
 		this.valueAmount = NO_VALUE_AMOUNT;
 	}
+	
+	public ValueEffect(EffectType effectType, Value value, HashMap<Enum, Integer> affectingEntities, Frequency frequency) {
+		super(effectType);
+		this.value = value;
+		this.affectingEntities = affectingEntities;
+		this.valueAmount = NO_VALUE_AMOUNT;
+		this.frequency = frequency;
+	}
 
 	private void validateValueAmount(Value value, int valueAmount) {
 		switch (value) {
 		case VICTORYPOINTS:
 			if (valueAmount <= 0 || valueAmount >= 9) {
-				String msg = Translate.prepareStringTemplateWithIntArg(valueAmount, "improperValueAmount",
+				String msg = TranslateWithTemplate.prepareStringTemplateWithIntArg(valueAmount, "improperValueAmount",
 						Translate.getNewResourceBundle());
 				throw new IllegalArgumentException(msg);
 			}
 			break;
 		case COMMERCE:
 			if (valueAmount <= 0) {
-				String msg = Translate.prepareStringTemplateWithIntArg(valueAmount, "improperValueAmount",
+				String msg = TranslateWithTemplate.prepareStringTemplateWithIntArg(valueAmount, "improperValueAmount",
 						Translate.getNewResourceBundle());
 				throw new IllegalArgumentException(msg);
 			}
 			break;
 		default:
 			if (valueAmount <= -2 || valueAmount == 0 || valueAmount >= 4) {
-				String msg = Translate.prepareStringTemplateWithIntArg(valueAmount, "improperValueAmount",
+				String msg = TranslateWithTemplate.prepareStringTemplateWithIntArg(valueAmount, "improperValueAmount",
 						Translate.getNewResourceBundle());
 				throw new IllegalArgumentException(msg);
 			}
@@ -128,5 +167,9 @@ public class ValueEffect extends Effect {
 		}
 
 		return false;
+	}
+	
+	public Frequency getFrequency() {
+		return this.frequency;
 	}
 }

@@ -4,6 +4,7 @@ stages:
 build:
   stage: build
   script:
+    - cd 7_Wonders
     - gradle build
   only:
     - master          # Only build the master git branch

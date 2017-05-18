@@ -1006,10 +1006,8 @@ public final class SetUpDeckTestHelper {
 		costs.put(RawResource.ORE, 2);
 		cost = new Cost(CostType.MULTITYPE, costs);
 		entitiesAndAmounts = new HashMap<Enum, Integer>();
-		entitiesAndAmounts.put(Science.PROTRACTOR, 1);
-		entitiesAndAmounts.put(Science.WHEEL, 1);
-		entitiesAndAmounts.put(Science.TABLET, 1);
-		effect = new EntityEffect(EffectType.ENTITY, EntityType.SCIENCE, entitiesAndAmounts);
+		entitiesAndAmounts.put(AffectingEntity.SCIENTIFICSTRUCTURES, 1);
+		effect = new ValueEffect(EffectType.VALUE, Value.GUILD, entitiesAndAmounts);
 		card = new Card("Scientists Guild", CardType.GUILD, cost, effect);
 		cards.add(card);
 
@@ -1334,6 +1332,24 @@ public final class SetUpDeckTestHelper {
 
 		if (numPlayers >= 7) {
 			card = new Card("Observatory", frequency, CardType.SCIENTIFICSTRUCTURE, cost, effect, "Laboratory", "None");
+			cards.add(card);
+		}
+		
+		//Senate
+		frequency = new ArrayList<Integer>();
+		frequency.add(3);
+		frequency.add(5);
+		costs = new HashMap<Enum, Integer>();
+		costs.put(Resource.ORE, 1);
+		costs.put(Resource.STONE, 1);
+		costs.put(Resource.LUMBER, 2);
+		cost = new Cost(CostType.RESOURCE, costs);
+		effect = new ValueEffect(EffectType.VALUE, Value.VICTORYPOINTS, AffectingEntity.NONE, 6);
+		card = new Card("Senate", frequency, CardType.CIVILIANSTRUCTURE, cost, effect, "Library", "None");
+		cards.add(card);
+
+		if (numPlayers >= 5) {
+			card = new Card("Senate", frequency, CardType.CIVILIANSTRUCTURE, cost, effect, "Library", "None");
 			cards.add(card);
 		}
 
