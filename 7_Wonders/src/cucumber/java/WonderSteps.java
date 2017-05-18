@@ -1,4 +1,5 @@
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 import java.util.ArrayList;
 
@@ -10,16 +11,19 @@ import cucumber.api.java.en.When;
 import dataStructures.gameMaterials.Cost;
 import dataStructures.gameMaterials.Effect;
 import dataStructures.gameMaterials.Effect.EffectType;
+import dataStructures.gameMaterials.EntityEffect;
 import dataStructures.gameMaterials.Level;
 import dataStructures.gameMaterials.Level.Frequency;
 import dataStructures.gameMaterials.Wonder;
 import dataStructures.gameMaterials.Wonder.WonderType;
+import dataStructures.playerData.Player;
 import exceptions.CannotBuiltWonderException;
 
-public class BuildWonder {
+public class WonderSteps {
 	private Wonder wonder;
 	private CannotBuiltWonderException exception;
 	private ArrayList<Level> levels;
+	private Player player;
 
 	@Given("^A Wonder (Colossus||Lighthouse||Temple||Statue||Mausoleum||Gardens||Pyramids) on Side (.)$")
 	public void a_player_with_a_Wonder_on_Side(String wonderName, char side) throws Throwable {
@@ -57,6 +61,11 @@ public class BuildWonder {
 		}
 	}
 
+	@Given("^A player with that Wonder$")
+	public void a_player_with_that_Wonder() throws Throwable {
+		this.player = new Player("Jane Doe", this.wonder);
+	}
+
 	@Given("^(\\d+) expected Levels$")
 	public void expected_Levels(int numLevels) throws Throwable {
 		this.levels = createLevels(numLevels);
@@ -82,6 +91,11 @@ public class BuildWonder {
 		}
 	}
 
+	@When("^Beginning the game$")
+	public void beginning_the_game() throws Throwable {
+	    // does nothing
+	}
+
 	@Then("^The level cannot be built$")
 	public void the_player_cannot_build_that_level() throws Throwable {
 		System.out.println("Exception " + this.exception);
@@ -93,12 +107,14 @@ public class BuildWonder {
 		assertEquals(numLevels, this.wonder.getNumBuiltLevels());
 	}
 
-//	@Then("^The levels in Wonder match$")
-//	public void the_levels_in_Wonder_match() throws Throwable {
-//		for (int i = 0; i < this.levels.size(); i++) {
-//			Level expected = this.levels.get(i);
-//			Level actual = this.wonder.getLevel(i);
-//			assertTrue(expected.equals(actual));
-//		}
-//	}
+	@Then("^The player begins with the appropriate resource$")
+	public void the_player_begins_with_the_appropriate_resource() throws Throwable {
+		EntityEffect effect = this.wonder.getResource();
+		assertTrue(this.player.storageContainsEffect(effect));
+	}
+
+	@Then("^The player does not begin with any other resources$")
+	public void the_player_does_not_begin_with_any_other_resources() throws Throwable {
+		assertTrue(this.player.getAllEffects().size() == 1);
+	}
 }

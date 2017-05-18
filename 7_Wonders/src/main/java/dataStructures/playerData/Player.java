@@ -2,7 +2,6 @@ package dataStructures.playerData;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.ResourceBundle;
 
 import constants.GeneralEnums.Science;
 import constants.GeneralEnums.Side;
@@ -12,11 +11,9 @@ import dataStructures.gameMaterials.Effect.EffectType;
 import dataStructures.gameMaterials.EntityEffect;
 import dataStructures.gameMaterials.Wonder;
 import dataStructures.playerData.Chip.ChipValue;
-import utils.Translate;
 
 public class Player {
 	private String name = "Jane Doe";
-	private ResourceBundle messages = Translate.getNewResourceBundle();
 
 	private int numShields = 0;
 	private int numVictoryPoints = 0;
@@ -46,6 +43,11 @@ public class Player {
 	public Player(String playerName, Wonder wonder) {
 		this.name = playerName;
 		this.wonder = wonder;
+		addWonderResourceToPile();
+	}
+
+	private void addWonderResourceToPile() {
+		 this.storagePile.addToWonderPile(this.wonder.getResource());
 	}
 
 	public String toString() {
@@ -127,12 +129,11 @@ public class Player {
 	}
 
 	public boolean storagePileContainsCardByName(String name) {
-		for (Card storage : this.storagePile.getAllCardStoragePile()) {
-			if (storage.getName().equals(name)) {
-				return true;
-			}
-		}
-		return false;
+		return this.storagePile.containsCard(name);
+	}
+
+	public boolean storageContainsEffect(Effect effect) {
+		return this.storagePile.containsEffect(effect);
 	}
 
 	public Card getCardFromEndGame(int index) {
