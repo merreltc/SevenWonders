@@ -51,7 +51,7 @@ public class WonderAndAbilityEffectTest {
 		effect = new ValueEffect(EffectType.VALUE, Value.VICTORYPOINTS, affectingEntities, Frequency.EVERYTURN);
 		assertEquals(Frequency.EVERYTURN, ((ValueEffect) effect).getFrequency());
 	}
-	
+
 	@Test
 	public void testMultiValueEffectFrequency() {
 		HashMap<Enum, Integer> valuesAndAmounts = new HashMap<Enum, Integer>();
@@ -61,6 +61,28 @@ public class WonderAndAbilityEffectTest {
 				Direction.NEIGHBORS, valuesAndAmounts, Frequency.EVERYTURN);
 
 		assertEquals(Frequency.EVERYTURN, ((MultiValueEffect) effect).getFrequency());
+	}
+
+	@Test
+	public void testAllFrequencies() {
+		Effect effect = new ValueEffect(EffectType.VALUE, Value.VICTORYPOINTS, AffectingEntity.NONE, 2,
+				Frequency.ENDOFTURN);
+		assertEquals(Frequency.ENDOFTURN, ((ValueEffect) effect).getFrequency());
+
+		effect = new ValueEffect(EffectType.VALUE, Value.VICTORYPOINTS, AffectingEntity.NONE, 2, Frequency.EVERYTURN);
+		assertEquals(Frequency.EVERYTURN, ((ValueEffect) effect).getFrequency());
+
+		effect = new ValueEffect(EffectType.VALUE, Value.VICTORYPOINTS, AffectingEntity.NONE, 2, Frequency.SIXTHTURN);
+		assertEquals(Frequency.SIXTHTURN, ((ValueEffect) effect).getFrequency());
+
+		effect = new ValueEffect(EffectType.VALUE, Value.VICTORYPOINTS, AffectingEntity.NONE, 2, Frequency.ONCEIMMEDIATE);
+		assertEquals(Frequency.ONCEIMMEDIATE, ((ValueEffect) effect).getFrequency());
+
+		effect = new ValueEffect(EffectType.VALUE, Value.VICTORYPOINTS, AffectingEntity.NONE, 2, Frequency.ONCEAGE);
+		assertEquals(Frequency.ONCEAGE, ((ValueEffect) effect).getFrequency());
+
+		effect = new ValueEffect(EffectType.VALUE, Value.VICTORYPOINTS, AffectingEntity.NONE, 2, Frequency.ENDOFGAME);
+		assertEquals(Frequency.ENDOFGAME, ((ValueEffect) effect).getFrequency());
 	}
 
 }
