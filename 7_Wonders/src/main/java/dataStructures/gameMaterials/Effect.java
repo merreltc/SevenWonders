@@ -5,7 +5,7 @@ public class Effect {
 	private Direction direction = Direction.SELF;
 
 	public enum EffectType {
-		NONE, ENTITY, VALUE, MULTIVALUE
+		NONE, ENTITY, VALUE, MULTIVALUE, ABILITY
 	}
 
 	public enum Direction {
