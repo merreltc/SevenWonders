@@ -13,12 +13,13 @@ import javax.swing.JPanel;
 import javax.swing.Timer;
 
 import constants.Constants;
+import constants.GeneralEnums.GameMode;
 import gui.interactables.Interactable;
 import gui.interactables.MenuMouseListener;
 import gui.menus.GameDisplay;
+import gui.menus.Logistics;
 import gui.menus.MainMenu;
 import gui.menus.Menu;
-import gui.menus.PlayerSelect;
 import utils.Message;
 import utils.RenderImage;
 import utils.Translate;
@@ -34,13 +35,13 @@ public class Main extends JPanel implements ActionListener {
 	ResourceBundle messages;
 
 	public enum MenuType {
-		MainMenu, PlayerSelect, Game
+		MAINMENU, LOGISTICS, GAMEDISPLAY
 	}
 
 	public Main() {
 		Constants.LOCALE = Message.selectLanguageMessage();
 		this.messages = Translate.getNewResourceBundle();
-		this.switchMenu(MenuType.MainMenu);
+		this.switchMenu(MenuType.MAINMENU);
 		this.frame = new JFrame();
 		this.frame.setSize(Constants.FrameWidth, Constants.FrameHeight);
 		this.frame.setVisible(true);
@@ -74,11 +75,11 @@ public class Main extends JPanel implements ActionListener {
 		String currentMenu = classString.substring(10);
 		switch (currentMenu) {
 		case "MainMenu":
-			switchMenu(MenuType.PlayerSelect);
+			switchMenu(MenuType.LOGISTICS);
 			break;
-		case "PlayerSelect":
+		case "Logistics":
 			numOfPlayers = Integer.parseInt(text);
-			switchMenu(MenuType.Game);
+			switchMenu(MenuType.GAMEDISPLAY);
 			break;
 		case "GameDisplay":
 			this.current.onClick(clicked);
@@ -87,16 +88,16 @@ public class Main extends JPanel implements ActionListener {
 	}
 
 	public void switchMenu(MenuType menu) {
-
 		switch (menu) {
-		case MainMenu:
+		case MAINMENU:
 			this.current = new MainMenu();
 			break;
-		case PlayerSelect:
-			this.current = new PlayerSelect(this.renderer);
+		case LOGISTICS:
+			this.current = new Logistics(this.renderer);
 			break;
-		case Game:
-			this.current = new GameDisplay(this.numOfPlayers, this.renderer);
+		case GAMEDISPLAY:
+			GameMode mode = ((Logistics) this.current).getGameMode();
+			this.current = new GameDisplay(this.numOfPlayers, this.renderer, mode);
 			break;
 		}
 		this.current.initialize();

@@ -1,6 +1,7 @@
 package dataStructureTests;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
 
 import java.util.ArrayList;
 
@@ -8,11 +9,11 @@ import org.easymock.EasyMock;
 import org.junit.Test;
 
 import dataStructures.gameMaterials.Card;
+import dataStructures.gameMaterials.Card.CardType;
 import dataStructures.gameMaterials.Cost;
 import dataStructures.gameMaterials.Deck;
-import dataStructures.gameMaterials.Effect;
-import dataStructures.gameMaterials.Card.CardType;
 import dataStructures.gameMaterials.Deck.Age;
+import dataStructures.gameMaterials.Effect;
 
 public class DeckTest {
 
@@ -149,6 +150,20 @@ public class DeckTest {
 		
 		assertEquals(Age.AGE2, deck.getAge());
 		assertEquals(2, deck.getNumCards());
+	}
+	
+	@SuppressWarnings("unchecked")
+	@Test
+	public void testRemoveAtIndex() {
+		ArrayList<Card> cards = EasyMock.createStrictMock(ArrayList.class);
+		Card card = EasyMock.createStrictMock(Card.class);
+		EasyMock.expect(cards.remove(0)).andReturn(card);
+		EasyMock.replay(cards, card);
+		
+		Deck deck = new Deck(Age.AGE1, cards);
+		deck.removeAtIndex(0);
+		
+		EasyMock.verify(cards, card);
 	}
 
 }
