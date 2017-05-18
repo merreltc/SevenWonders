@@ -105,7 +105,7 @@ Cards are passed left-right-left over the three ages, so you need to keep an eye
 - Manufacture Good: (Grey) Produce displayed products (loom, glass, press)
 - Science: (Green) Award victory points at end game based on collected symbols (wheel, protractor, tablet)
     - Rules:
-        - [x] End game victory points are equal to number of identical symbols^2 + (7 * number of sets of 3 different symbols) https://ada.csse.rose-hulman.edu/moormaet/Silver_Falcons_Seven_Wonders/blob/master/7_Wonders/src/test/java/dataStructureTests/PlayerTest.java
+        - [x] End game victory points are equal to number of identical symbols^2 + (7 * number of sets of 3 different symbols) [TestCase](https://ada.csse.rose-hulman.edu/moormaet/Silver_Falcons_Seven_Wonders/blob/master/7_Wonders/src/test/java/dataStructureTests/PlayerTest.java)
 
 - Civilian Structure: (Blue) Provide victory points
 - Commercial Structure: (Yellow) Provide advantages during commercial transactions (See "Commerce and Trading")
@@ -113,7 +113,7 @@ Cards are passed left-right-left over the three ages, so you need to keep an eye
 - Guild: (Purple) Provide end game victory points based on certain criteria
     - Rules:
         - [ ] Number of guild cards in the game is equal to the number of players + 2 and is kept a secret from players
-        - [x] At the end of the game, players scores are affected by the Guild cards https://ada.csse.rose-hulman.edu/moormaet/Silver_Falcons_Seven_Wonders/blob/master/7_Wonders/src/test/java/backendTests/EndGameHandlerTest.java
+        - [x] At the end of the game, players scores are affected by the Guild cards [TestCase](https://ada.csse.rose-hulman.edu/moormaet/Silver_Falcons_Seven_Wonders/blob/master/7_Wonders/src/test/java/backendTests/EndGameHandlerTest.java)
 
 ## Commerce and Trading
 - [x] In order to trade or build anything, player must have appropriate resources or coins in their stockpile at the beginning of the turn
@@ -134,12 +134,12 @@ Cards are passed left-right-left over the three ages, so you need to keep an eye
         - [x] Marketplace
 - [x] On a single turn, players may trade for multiple resources from both neighboring cities - On GUI
 - [x] Traded resources are only available to the player during the turn they are bought [TestCase](7_Wonders/src/test/java/backendTests/GameManagerTest.java#L630)
-- [ ] Only resources produced through the city/Wonder or a neighbors raw resource or manufactured good cards can be traded
+- [x] Only resources produced through the city/Wonder or a neighbors raw resource or manufactured good cards can be traded - [TestCase](https://ada.csse.rose-hulman.edu/moormaet/Silver_Falcons_Seven_Wonders/blob/master/7_Wonders/src/test/java/backendTests/TradeHandlerTest.java#L346)
 - [ ] Players are unable to purchase resources produced by commercial structures (or some Wonders)
 - [x] Trade cannot be refused by neighboring cities - On GUI
 
-## War
-- [ ] At the end of an age (following sixth rotation), players go to war with BOTH neighboring cities
+## War [TestCase](https://ada.csse.rose-hulman.edu/moormaet/Silver_Falcons_Seven_Wonders/blob/master/7_Wonders/src/test/java/backendTests/TurnHandlerTest.java)
+- [x] At the end of an age (following sixth rotation), players go to war with BOTH neighboring cities
 - [x] A player with more shields than their neighbor is successful
 - [x] A player with less shields than their neighbor is defeated
 - [x] A player with equal shield as their neighbor is tied
@@ -177,7 +177,7 @@ Cards are passed left-right-left over the three ages, so you need to keep an eye
     - [x] Player had to trade first [TestCase](7_Wonders/src/test/java/backendTests/PlayerTurnHandlerTest.java#L723)
     Other tests in same file
 - [x] If a structure has a coin cost, the player must pay that cost to the bank [TestCase](7_Wonders/src/test/java/backendTests/PlayerTurnHandlerTest.java#L61)
-- [x] If player owns a previous structure, they may build their chosen structure for free
+- [x] If player owns a previous structure, they may build their chosen structure for free [TestCase](https://ada.csse.rose-hulman.edu/moormaet/Silver_Falcons_Seven_Wonders/blob/master/7_Wonders/src/test/java/backendTests/PlayerTurnHandlerTest.java#L657)
 - [x] Identical structures cannot be built by the same player [TestCase](7_Wonders/src/test/java/backendTests/PlayerTurnHandlerTest.java#L697)
 - [x] If a structure has no cost, the player can build it [TestCase](7_Wonders/src/test/java/backendTests/PlayerTurnHandlerTest.java#L34)
 - [x] At the end of a rotation, all player's built structures are revealed
@@ -251,9 +251,9 @@ Cards are passed left-right-left over the three ages, so you need to keep an eye
         - [ ] Level 3: 5 Victory Points
         - [ ] Level 4: 7 Victory Points
 
-## End Game and Victory
-- [ ] After the war of Age III, a score card displaying total Victory Points for each player is displayed
-- [ ] Total Victory Points is equal to the sum of total value of Conflict Tokens, the floor of total coin value divided by 3, the total value of Victory Points from Wonders and (Civilian/Commercial) Structures, points acquired from Guild effects (see "Cards->Guild"), and points acquired from Science Cards (see "Cards->Science Structure")
+## End Game and Victory [TestCase](https://ada.csse.rose-hulman.edu/moormaet/Silver_Falcons_Seven_Wonders/blob/master/7_Wonders/src/test/java/backendTests/EndGameHandlerTest.java)
+- [x] After the war of Age III, a score card displaying total Victory Points for each player is displayed
+- [x] Total Victory Points is equal to the sum of total value of Conflict Tokens, the floor of total coin value divided by 3, the total value of Victory Points from Wonders and (Civilian/Commercial) Structures, points acquired from Guild effects (see "Cards->Guild"), and points acquired from Science Cards (see "Cards->Science Structure")
 - [ ] Whichever player has the most victory points is the winner
 - [ ] In the case of a tie, the player with the most coins wins. Ties at this point are not broken further
 
