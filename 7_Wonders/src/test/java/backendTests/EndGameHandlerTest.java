@@ -428,10 +428,11 @@ public class EndGameHandlerTest {
 		
 		
 		EasyMock.expect(message.dropDownScienceSelectionMessage()).andReturn("Protractor");
+		Wonder wonder = EasyMock.mock(Wonder.class);
 		
-		EasyMock.replay(message);
+		EasyMock.replay(message, wonder);
 		
-		Player player1 = new Player("Jane Doe", WonderType.COLOSSUS);
+		Player player1 = new Player("Jane Doe", wonder);
 		player1.addToStoragePile(this.createScientistsGuild());
 		
 		EndGameHandler end = new EndGameHandler();
@@ -447,10 +448,11 @@ public class EndGameHandlerTest {
 		
 		
 		EasyMock.expect(message.dropDownScienceSelectionMessage()).andReturn("Wheel");
+		Wonder wonder = EasyMock.mock(Wonder.class);
 		
-		EasyMock.replay(message);
+		EasyMock.replay(message, wonder);
 		
-		Player player1 = new Player("Jane Doe", WonderType.COLOSSUS);
+		Player player1 = new Player("Jane Doe", wonder);
 		player1.addToStoragePile(this.createScientistsGuild());
 		
 		EndGameHandler end = new EndGameHandler();
@@ -466,10 +468,11 @@ public class EndGameHandlerTest {
 		
 		
 		EasyMock.expect(message.dropDownScienceSelectionMessage()).andReturn("Tablet");
+		Wonder wonder = EasyMock.mock(Wonder.class);
 		
-		EasyMock.replay(message);
-		
-		Player player1 = new Player("Jane Doe", WonderType.COLOSSUS);
+		EasyMock.replay(message, wonder);
+
+		Player player1 = new Player("Jane Doe", wonder);
 		player1.addToStoragePile(this.createScientistsGuild());
 		
 		EndGameHandler end = new EndGameHandler();

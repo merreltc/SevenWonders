@@ -112,7 +112,7 @@ public class ResourceViewer extends Menu {
 		graphics.drawRect(Constants.RESOURCE_VIEWER_VICTORY_POINTS_X,
 				Constants.RESOURCE_VIEWER_VICTORY_POINTS_Y + Constants.RESOURCE_VIEWER_ROW_HEIGHT,
 				Constants.RESOURCE_VIEWER_CELL_WIDTH, Constants.RESOURCE_VIEWER_ROW_HEIGHT);
-		Image image = this.renderer.getImage("one shield");
+		Image image = this.renderer.getImage("Victory Token");
 		RenderImage.draw(graphics, image,
 				Constants.RESOURCE_VIEWER_VICTORY_POINTS_X + Constants.RESOURCE_VIEWER_CELL_WIDTH / 3,
 				Constants.RESOURCE_VIEWER_VICTORY_POINTS_Y + 5, Constants.RESOURCE_IMAGE_WIDTH,
