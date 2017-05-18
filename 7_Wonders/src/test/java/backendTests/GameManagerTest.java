@@ -341,6 +341,26 @@ public class GameManagerTest {
 		assertEquals(1, (int) current.getCurrentTrades().get(RawResource.LUMBER));
 		assertEquals(5, next.getCoinTotal());
 	}
+	
+	@Test
+	public void testTradeFromToForGoodEmptyTradesAfterTurnEnds() {
+		ArrayList<String> playerNames = setUpArrayByNum(3);
+		
+		GameManager manager = new GameManager(playerNames, setUpHandlers());
+
+		ArrayList<Card> storage = new ArrayList<Card>();
+		Deck deck = manager.getGameBoard().getDeck();
+		storage.add(deck.getCard(7));
+		storage.add(deck.getCard(8));
+
+		manager.getNextPlayer().setStoragePile(storage);
+		manager.tradeForEntity(manager.getCurrentPlayer(), manager.getNextPlayer(), Good.GLASS);
+		manager.endCurrentPlayerTurn();
+		Player previous = manager.getPreviousPlayer();
+
+		assertTrue(previous.getCurrentTrades().isEmpty());
+	}
+
 
 	@Test
 	public void testMakeChangeForValue1Coins() {
