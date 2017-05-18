@@ -290,7 +290,7 @@ public class GameBoardTests {
 		this.age1Deck = createDeck(Age.AGE1, 3);
 		GameBoard board = new GameBoard(players, this.age1Deck);
 		Player active = players.get(0);
-		
+
 		assertTrue(board.makeChangeForValue3Coins(active, 1));
 		assertEquals(0, active.getNumValue1Coins());
 		assertEquals(1, active.getNumValue3Coins());
@@ -391,7 +391,7 @@ public class GameBoardTests {
 		}
 		return result;
 	}
-	
+
 	private Deck createDeck(Age age, int numPlayers) {
 		return new SetUpDeckHandler().createDeck(age, numPlayers);
 	}

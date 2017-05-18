@@ -44,6 +44,8 @@ public class ResourceViewer extends Menu {
 			drawShieldBox(graphics);
 			draw3CoinBox(graphics);
 			drawWarTokenBox(graphics);
+			draw5CoinBox(graphics);
+			drawVictoryTokensBox(graphics);
 
 			graphics.setColor(startingColor);
 			graphics.setFont(startingFont);
@@ -103,6 +105,24 @@ public class ResourceViewer extends Menu {
 						+ Constants.RESOURCE_VIEWER_ROW_HEIGHT);
 	}
 
+	private void drawVictoryTokensBox(Graphics graphics) {
+		graphics.setColor(new Color(50, 50, 50, 150));
+		graphics.drawRect(Constants.RESOURCE_VIEWER_VICTORY_POINTS_X, Constants.RESOURCE_VIEWER_VICTORY_POINTS_Y,
+				Constants.RESOURCE_VIEWER_CELL_WIDTH, Constants.RESOURCE_VIEWER_ROW_HEIGHT);
+		graphics.drawRect(Constants.RESOURCE_VIEWER_VICTORY_POINTS_X,
+				Constants.RESOURCE_VIEWER_VICTORY_POINTS_Y + Constants.RESOURCE_VIEWER_ROW_HEIGHT,
+				Constants.RESOURCE_VIEWER_CELL_WIDTH, Constants.RESOURCE_VIEWER_ROW_HEIGHT);
+		Image image = this.renderer.getImage("one shield");
+		RenderImage.draw(graphics, image,
+				Constants.RESOURCE_VIEWER_VICTORY_POINTS_X + Constants.RESOURCE_VIEWER_CELL_WIDTH / 3,
+				Constants.RESOURCE_VIEWER_VICTORY_POINTS_Y + 5, Constants.RESOURCE_IMAGE_WIDTH,
+				Constants.RESOURCE_IMAGE_HEIGHT);
+		graphics.drawString(player.getNumVictoryPoints() + "",
+				Constants.RESOURCE_VIEWER_VICTORY_POINTS_X + Constants.RESOURCE_VIEWER_TEXT_X_OFFSET,
+				Constants.RESOURCE_VIEWER_VICTORY_POINTS_Y + Constants.RESOURCE_VIEWER_TEXT_Y_OFFSET
+						+ Constants.RESOURCE_VIEWER_ROW_HEIGHT);
+	}
+	
 	private void draw3CoinBox(Graphics graphics) {
 		graphics.setColor(new Color(50, 50, 50, 150));
 		graphics.drawRect(Constants.RESOURCE_VIEWER_THREE_COIN_X, Constants.RESOURCE_VIEWER_THREE_COIN_Y,
@@ -110,7 +130,7 @@ public class ResourceViewer extends Menu {
 		graphics.drawRect(Constants.RESOURCE_VIEWER_THREE_COIN_X,
 				Constants.RESOURCE_VIEWER_THREE_COIN_Y + Constants.RESOURCE_VIEWER_ROW_HEIGHT,
 				Constants.RESOURCE_VIEWER_CELL_WIDTH, Constants.RESOURCE_VIEWER_ROW_HEIGHT);
-		Image image = this.renderer.getImage("coin");
+		Image image = this.renderer.getImage("coin3");
 		RenderImage.draw(graphics, image,
 				Constants.RESOURCE_VIEWER_THREE_COIN_X + Constants.RESOURCE_VIEWER_CELL_WIDTH / 3,
 				Constants.RESOURCE_VIEWER_THREE_COIN_Y + 5, Constants.RESOURCE_IMAGE_WIDTH,
@@ -120,10 +140,28 @@ public class ResourceViewer extends Menu {
 				Constants.RESOURCE_VIEWER_THREE_COIN_Y + Constants.RESOURCE_VIEWER_TEXT_Y_OFFSET
 						+ Constants.RESOURCE_VIEWER_ROW_HEIGHT);
 	}
+	
+	private void draw5CoinBox(Graphics graphics) {
+		graphics.setColor(new Color(50, 50, 50, 150));
+		graphics.drawRect(Constants.RESOURCE_VIEWER_FIVE_COIN_X, Constants.RESOURCE_VIEWER_FIVE_COIN_Y,
+				Constants.RESOURCE_VIEWER_CELL_WIDTH, Constants.RESOURCE_VIEWER_ROW_HEIGHT);
+		graphics.drawRect(Constants.RESOURCE_VIEWER_FIVE_COIN_X,
+				Constants.RESOURCE_VIEWER_FIVE_COIN_Y + Constants.RESOURCE_VIEWER_ROW_HEIGHT,
+				Constants.RESOURCE_VIEWER_CELL_WIDTH, Constants.RESOURCE_VIEWER_ROW_HEIGHT);
+		Image image = this.renderer.getImage("coin5");
+		RenderImage.draw(graphics, image,
+				Constants.RESOURCE_VIEWER_FIVE_COIN_X + Constants.RESOURCE_VIEWER_CELL_WIDTH / 3,
+				Constants.RESOURCE_VIEWER_FIVE_COIN_Y + 5, Constants.RESOURCE_IMAGE_WIDTH,
+				Constants.RESOURCE_IMAGE_HEIGHT);
+		graphics.drawString(player.getNumValue5Coins() + "",
+				Constants.RESOURCE_VIEWER_FIVE_COIN_X + Constants.RESOURCE_VIEWER_TEXT_X_OFFSET,
+				Constants.RESOURCE_VIEWER_FIVE_COIN_Y + Constants.RESOURCE_VIEWER_TEXT_Y_OFFSET
+						+ Constants.RESOURCE_VIEWER_ROW_HEIGHT);
+	}
 
 	private void drawGrid(int rows, Graphics graphics) {
 		graphics.setColor(new Color(254, 254, 254, 150));
-		int rowOffset = rows > 6 ? rows : 6;
+		int rowOffset = rows > 9 ? rows : 9;
 		graphics.fillRect(Constants.RESOURCE_VIEWER_ROW_X, Constants.RESOURCE_VIEWER_ROW_BASE_Y,
 				Constants.RESOURCE_VIEWER_ROW_WIDTH, Constants.RESOURCE_VIEWER_ROW_HEIGHT * rowOffset);
 		graphics.setColor(new Color(50, 50, 50, 150));
@@ -173,7 +211,7 @@ public class ResourceViewer extends Menu {
 		y += Constants.RESOURCE_VIEWER_TEXT_Y_OFFSET;
 		Card card = cards.get(row - 1);
 		int[] values = getRowValues(card);
-		graphics.drawString(card.getName(), Constants.RESOURCE_VIEWER_ROW_X + Constants.RESOURCE_VIEWER_CELL_WIDTH / 3,
+		graphics.drawString(messages.getString(Translate.prepareNoSpaceString(card.getName())), Constants.RESOURCE_VIEWER_ROW_X + Constants.RESOURCE_VIEWER_CELL_WIDTH / 3,
 				y);
 		for (int i = 0; i < values.length; i++) {
 			graphics.drawString(values[i] + "",
@@ -265,7 +303,6 @@ public class ResourceViewer extends Menu {
 	}
 
 	public void openMenu(Player player) {
-		System.out.println(player.getName());
 		this.player = player;
 		this.shouldDraw = true;
 	}

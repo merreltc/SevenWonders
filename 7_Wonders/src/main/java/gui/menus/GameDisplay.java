@@ -62,12 +62,13 @@ public class GameDisplay extends Menu {
 		setUpCardSlots();
 	}
 
+	/**
+	 * Draws current player's board last, so it's on top. Also draws all
+	 * interactable buttons
+	 */
 	@Override
 	public void draw(Graphics graphics) {
 		for (int i = 0; i < boards.size(); i++) {
-			/*
-			 * This will draw current Players board last, in order to be on top
-			 */
 			boards.get((i + 2) % boards.size()).draw(graphics);
 		}
 
@@ -132,20 +133,32 @@ public class GameDisplay extends Menu {
 		if (clicked.getClass().equals(CardHolder.class)) {
 			this.attemptPlayCard((CardHolder) clicked);
 		} else if (clicked.getValue().equals(this.messages.getString("exit"))) {
-			if (this.resource.isActive()) {
-				this.resource.closeMenu();
-			} else {
-				System.exit(0);
-			}
+			exit();
 		} else if (clicked.getValue().codePointAt(0) >= 48 && clicked.getValue().codePointAt(0) <= 57) {
-			int playerNum = codePointToInt(clicked.getValue().codePointAt(0));
-			int locOfCurrentPlayer = this.gameManager.getPlayers().indexOf(this.gameManager.getCurrentPlayer());
-			this.resource.openMenu(
-					this.gameManager.getPlayer((locOfCurrentPlayer + playerNum) % this.gameManager.getNumPlayers()));
+			displayResources(clicked);
 		} else {
-			String[] splitValue = clicked.getValue().split("-");
-			TradeHelper tradeHandler = new TradeHelper(this.gameManager);
-			tradeHandler.trade(splitValue);
+			trade(clicked);
+		}
+	}
+
+	private void displayResources(Interactable clicked) {
+		int playerNum = codePointToInt(clicked.getValue().codePointAt(0));
+		int locOfCurrentPlayer = this.gameManager.getPlayers().indexOf(this.gameManager.getCurrentPlayer());
+		this.resource.openMenu(
+				this.gameManager.getPlayer((locOfCurrentPlayer + playerNum) % this.gameManager.getNumPlayers()));
+	}
+
+	private void trade(Interactable clicked) {
+		String[] splitValue = clicked.getValue().split("-");
+		TradeHelper tradeHandler = new TradeHelper(this.gameManager);
+		tradeHandler.trade(splitValue);
+	}
+
+	private void exit() {
+		if (this.resource.isActive()) {
+			this.resource.closeMenu();
+		} else {
+			System.exit(0);
 		}
 	}
 
@@ -155,27 +168,38 @@ public class GameDisplay extends Menu {
 		int val = JOptionPane.showOptionDialog(null, this.messages.getString("choosePlayType"),
 				this.messages.getString("playCard"), JOptionPane.INFORMATION_MESSAGE, 0, null, buttons, buttons[0]);
 		try {
-			if (val == 0) {
-				clicked.activate(this.gameManager);
-			} else if (val == 2) {
-				clicked.discard(this.gameManager);
-			}
-			String message = gameManager.endCurrentPlayerTurn();
-			if (!message.equals("")) {
-				Message.showMessage(message);
-			}
-			redrawBoards();
-			/* update the cards after rotation */
-			for (Interactable toRemove : this.handManager.getCurrentPlayerHand()) {
-				this.removeInteractable(toRemove);
-			}
-			this.handManager.drawCurrentPlayerCards(this.gameManager.getCurrentPlayer(), renderer);
-			for (int i = 0; i < this.handManager.getPlayerHandSize(); i++) {
-				this.addInteractable(this.handManager.getCardHolder(i));
-			}
-
+			playOrDiscardCard(clicked, val);
+			endPlayerTurn();
+			updateDisplay();
 		} catch (Exception e) {
 			Message.showMessage(e.getMessage());
+		}
+	}
+
+	private void playOrDiscardCard(CardHolder clicked, int val) {
+		if (val == 0) {
+			clicked.activate(this.gameManager);
+		} else if (val == 2) {
+			clicked.discard(this.gameManager);
+		}
+	}
+
+	private void updateDisplay() {
+		redrawBoards();
+		/* update the cards after rotation */
+		for (Interactable toRemove : this.handManager.getCurrentPlayerHand()) {
+			this.removeInteractable(toRemove);
+		}
+		this.handManager.drawCurrentPlayerCards(this.gameManager.getCurrentPlayer(), renderer);
+		for (int i = 0; i < this.handManager.getPlayerHandSize(); i++) {
+			this.addInteractable(this.handManager.getCardHolder(i));
+		}
+	}
+
+	private void endPlayerTurn() {
+		String message = gameManager.endCurrentPlayerTurn();
+		if (!message.equals("")) {
+			Message.showMessage(message);
 		}
 	}
 
@@ -191,6 +215,9 @@ public class GameDisplay extends Menu {
 		for (int i = 0; i < players.size(); i++) {
 			boards.get(i)
 					.changePlayer(players.get((totalNumberOfPlayers + nextPlayerIndex + i + 1) % totalNumberOfPlayers));
+			// boards.get(i).changePlayer(
+			// players.get((totalNumberOfPlayers + currentPlayerIndex - i + 1) %
+			// totalNumberOfPlayers));
 		}
 	}
 }

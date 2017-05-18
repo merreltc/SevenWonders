@@ -28,7 +28,7 @@ public class TurnHandlerTest {
 	public void setUp() {
 		this.setUpPlayerHandler = EasyMock.partialMockBuilder(SetUpPlayerHandler.class).withConstructor(GameMode.EASY)
 				.createMock();
-	}	
+	}
 
 	@Test
 	public void testDealInitialCards3Players() {
@@ -141,24 +141,22 @@ public class TurnHandlerTest {
 	@Test
 	public void testGetNumPlayersUntilPass6Players() {
 		ArrayList<Player> players = setUpPlayersByNum(5);
-		Deck deck = EasyMock.partialMockBuilder(Deck.class).addMockedMethod("getCards").createMock();
-		ArrayList<Card> cards = EasyMock.createStrictMock(ArrayList.class);
-		Card card = EasyMock.createStrictMock(Card.class);
-		expectAndReplayDeckCalls(deck, cards, card);
+		Deck deck = EasyMock.mock(Deck.class);
+		expectAndReplayDeckCalls(deck);
 
 		TurnHandler turnHandler = new TurnHandler();
 		turnHandler.dealInitialTurnCards(players, deck);
 
-		EasyMock.verify(deck, cards, card);
+		EasyMock.verify(deck);
 		assertEquals(5, turnHandler.getNumTurnsTilEndOfAge());
 	}
 
-	private void expectAndReplayDeckCalls(Deck deck, ArrayList<Card> cards, Card card) {
+	private void expectAndReplayDeckCalls(Deck deck) {
+		Card card = EasyMock.createStrictMock(Card.class);
 		for (int i = 0; i < 35; i++) {
-			EasyMock.expect(deck.getCards()).andReturn(cards);
-			EasyMock.expect(cards.remove(0)).andReturn(card);
+			EasyMock.expect(deck.removeAtIndex(0)).andReturn(card);
 		}
-		EasyMock.replay(deck, cards, card);
+		EasyMock.replay(deck);
 	}
 
 	@Test
@@ -391,7 +389,6 @@ public class TurnHandlerTest {
 
 	private ArrayList<String> setUpNamesByNum(int num) {
 		ArrayList<String> result = new ArrayList<String>();
-		Wonder wonder = EasyMock.createStrictMock(Wonder.class);
 		for (int i = 0; i < num; i++) {
 			result.add("Jane Doe");
 		}

@@ -1,6 +1,7 @@
 package backendTests;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 import java.util.ArrayList;
@@ -316,6 +317,8 @@ public class TradeHandlerTest {
 		assertEquals(0, current.getNumValue3Coins());
 		assertEquals(1, (int) current.getCurrentTrades().get(Good.GLASS));
 		assertEquals(5, next.getCoinTotal());
+		assertTrue(next.getStoragePile().contains(this.testDeck.getCard(7)));
+		assertTrue(next.getStoragePile().contains(this.testDeck.getCard(8)));
 	}
 
 	@Test
@@ -343,6 +346,46 @@ public class TradeHandlerTest {
 		assertEquals(4, right.getCoinTotal());
 	}
 
+	@Test(expected = InvalidTradeException.class)
+	public void testInvalidTrade2CoinsForSingleOreResource() {
+		ArrayList<Player> players = setUpArrayWithNumPlayers(3);
+		resetTestDeck(3);
+		GameBoard board = new GameBoard(players, this.testDeck);
+		TradeHandler tradeHandler = new TradeHandler(board);
+
+		Player current = board.getCurrentPlayer();
+		Player next = board.getNextPlayer();
+		ArrayList<Card> storage = new ArrayList<Card>();
+		storage.add(this.testDeck.getCard(0));
+		storage.add(this.testDeck.getCard(1));
+
+		next.setStoragePile(storage);
+
+		tradeHandler.tradeFromToForEntity(current, next, RawResource.ORE, false);
+		fail();
+	}
+
+	@Test
+	public void testValidTrade2CoinsForSingleLumberExactResource() {
+		ArrayList<Player> players = setUpArrayWithNumPlayers(3);
+		resetTestDeck(3);
+		GameBoard board = new GameBoard(players, this.testDeck);
+		TradeHandler tradeHandler = new TradeHandler(board);
+
+		Player current = board.getCurrentPlayer();
+		Player next = board.getNextPlayer();
+		ArrayList<Card> storage = new ArrayList<Card>();
+		storage.add(this.testDeck.getCard(0));
+
+		next.setStoragePile(storage);
+
+		tradeHandler.tradeFromToForEntity(current, next, RawResource.LUMBER, false);
+
+		assertEquals(0, current.getNumValue3Coins());
+		assertEquals(1, (int) current.getCurrentTrades().get(RawResource.LUMBER));
+		assertEquals(5, next.getCoinTotal());
+	}
+	
 	private ArrayList<Player> setUpArrayWithNumPlayers(int num) {
 		ArrayList<Player> result = new ArrayList<Player>();
 		for (int i = 0; i < num; i++) {
