@@ -112,7 +112,7 @@ Cards are passed left-right-left over the three ages, so you need to keep an eye
 - Military Structure: (Red) Builds military strength for wars (See "War")
 - Guild: (Purple) Provide end game victory points based on certain criteria
     - Rules:
-        - [ ] Number of guild cards in the game is equal to the number of players + 2 and is kept a secret from players
+        - [ ] Number of guild cards in the game is equal to the number of players + 2 and is kept a secret from players [TestCase](https://ada.csse.rose-hulman.edu/moormaet/Silver_Falcons_Seven_Wonders/blob/master/7_Wonders/src/test/java/backendTests/SetUpDeckHandlerTest.java)
         - [x] At the end of the game, players scores are affected by the Guild cards [TestCase](https://ada.csse.rose-hulman.edu/moormaet/Silver_Falcons_Seven_Wonders/blob/master/7_Wonders/src/test/java/backendTests/EndGameHandlerTest.java)
 
 ## Commerce and Trading
@@ -130,8 +130,8 @@ Cards are passed left-right-left over the three ages, so you need to keep an eye
     - [x] Some Commercial Structure (yellow) cards allow players to trade for certain materials for 1 coin after being built
         [Main TestCases start at](7_Wonders/src/test/java/backendTests/GameManagerTest.java#L409) Until [L626](7_Wonders/src/test/java/backendTests/GameManagerTest.java#L626)
         - [x] East Trading Post  [TestCase](7_Wonders/src/test/java/backendTests/TradeHandlerTest.java#L437)
-        - [x] West Trading Post
-        - [x] Marketplace
+        - [x] West Trading Post [TestCase](https://ada.csse.rose-hulman.edu/moormaet/Silver_Falcons_Seven_Wonders/blob/master/7_Wonders/src/test/java/backendTests/GameManagerTest.java#L539)
+        - [x] Marketplace [TestCase](https://ada.csse.rose-hulman.edu/moormaet/Silver_Falcons_Seven_Wonders/blob/master/7_Wonders/src/test/java/backendTests/GameManagerTest.java#L425)
 - [x] On a single turn, players may trade for multiple resources from both neighboring cities - On GUI
 - [x] Traded resources are only available to the player during the turn they are bought [TestCase](7_Wonders/src/test/java/backendTests/GameManagerTest.java#L630)
 - [x] Only resources produced through the city/Wonder or a neighbors raw resource or manufactured good cards can be traded - [TestCase](https://ada.csse.rose-hulman.edu/moormaet/Silver_Falcons_Seven_Wonders/blob/master/7_Wonders/src/test/java/backendTests/TradeHandlerTest.java#L346)
@@ -187,7 +187,7 @@ Cards are passed left-right-left over the three ages, so you need to keep an eye
 - [ ] Card used to build Wonder does not provide player its effect in addition to the effect of the Wonder Level and is hidden from other players
 - [ ] Levels of Wonder are built once per game and in sequence (left to right)
 - [ ] Wonder can be built at any time, in any age
-- [x] The wonder does not need to be built in order for a player to win
+- [x] The wonder does not need to be built in order for a player to win - not included in Scoring
 
 ### Wonders [TestCase](https://ada.csse.rose-hulman.edu/moormaet/Silver_Falcons_Seven_Wonders/blob/master/7_Wonders/src/test/java/dataStructureTests/WonderTest.java)
 - [x] Wonders provide players 1 of the resource specified in the top left corner
