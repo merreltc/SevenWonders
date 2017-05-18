@@ -39,8 +39,10 @@ public class Level {
 		Level temp = (Level) obj;
 		boolean equalPriority = this.priority == temp.priority;
 		boolean equalCost = this.getCost() == temp.getCost();
+		boolean equalEffect = this.effect == temp.getEffect();
 		boolean equalEffects = this.effects == temp.getEffects();
-		return equalPriority && equalCost && equalEffects;
+		boolean equalFrequency = this.frequency == temp.getFrequency();
+		return equalPriority && equalCost && equalEffect && equalEffects && equalFrequency;
 	}
 
 	public int getPriority() {
@@ -57,6 +59,10 @@ public class Level {
 
 	public HashMap<Enum, Integer> getCosts() {
 		return this.cost.getCost();
+	}
+	
+	public Effect getEffect() {
+		return this.effect;
 	}
 
 	public EffectType getEffectType() {
