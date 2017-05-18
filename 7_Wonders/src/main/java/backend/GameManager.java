@@ -55,6 +55,7 @@ public class GameManager {
 	
 	public void setUpGame(ArrayList<String> names) {
 		this.board = createGameBoard(names);
+		this.handlers.getPlayerTurnHandler().setGameBoard(this.board);
 		this.handlers.setRotateHandler(new RotateHandler(this.board));
 		this.handlers.setTradeHandler(new TradeHandler(this.board));
 	}
@@ -120,7 +121,7 @@ public class GameManager {
 	}
 
 	public void buildStructure(Card card) {
-		this.handlers.getPlayerTurnHandler().buildStructure(getCurrentPlayer(), card, this.board);
+		this.handlers.getPlayerTurnHandler().buildStructure(getCurrentPlayer(), card);
 	}
 
 	public void changeRotateDirectionAndResetPositions(Rotation direction) {
@@ -149,7 +150,7 @@ public class GameManager {
 	}
 
 	public void discardSelectedCard(Card card) {
-		this.handlers.getPlayerTurnHandler().discardSelectedCard(getCurrentPlayer(), card, this.board);
+		this.handlers.getPlayerTurnHandler().discardSelectedCard(getCurrentPlayer(), card);
 	}
 
 	public String endCurrentPlayerTurn() {

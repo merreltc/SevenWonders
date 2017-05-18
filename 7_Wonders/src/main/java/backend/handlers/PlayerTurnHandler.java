@@ -16,23 +16,23 @@ import exceptions.InsufficientFundsException;
 import utils.Translate;
 
 public class PlayerTurnHandler {
-
-	private ResourceBundle messages = Translate.getNewResourceBundle();
-
-	public void buildStructure(Player current, Card card, GameBoard board) {
+	private GameBoard board;
+	
+	public void buildStructure(Player current, Card card) {
 		if (current.storagePileContainsCardByName(card.getName())) {
-			throw new IllegalArgumentException(this.messages.getString("playerHasAlreadyHasStructure"));
+			throw new IllegalArgumentException(
+					Translate.getNewResourceBundle().getString("playerHasAlreadyHasStructure"));
 		} else if (checkForPreviousStructure(current, card)) {
 			return;
 		}
 
 		validateCost(current, card);
-		enableValueEffect(current, card, board);
+		enableValueEffect(current, card);
 		current.addToStoragePile(card);
 		current.removeFromCurrentHand(card);
 	}
 
-	private void enableValueEffect(Player current, Card card, GameBoard board) {
+	private void enableValueEffect(Player current, Card card) {
 		if (card.getEffectType() == EffectType.VALUE) {
 			ValueEffect effect = (ValueEffect) card.getEffect();
 
@@ -70,52 +70,52 @@ public class PlayerTurnHandler {
 	}
 
 	private void validatePlayerHasEntitiesForCard(Player current, Card card) {
-		HashMap<Enum, Integer> cost = card.getCost();
-		ArrayList<Card> storage = current.getStoragePile();
 		ArrayList<Card> usedEntities = new ArrayList<Card>();
-
-		for (Enum key : cost.keySet()) {
-			findCostInStorage(current, cost, storage, usedEntities, key);
-		}
-	}
-
-	private void findCostInStorage(Player current, HashMap<Enum, Integer> cost, ArrayList<Card> storage,
-			ArrayList<Card> usedEntities, Enum key) {
-		int numcost = cost.get(key);
-		for (Card sCards : storage) {
-			if (usedEntities.contains(sCards))
-				continue;
-			numcost = decrementCostFromEntity(usedEntities, key, numcost, sCards);
-		}
-		numcost = searchCurrentTradesForCost(current, key, numcost);
-
-		if (numcost > 0) {
-			throw new InsufficientFundsException(this.messages.getString("noRequiredItemToBuildStructure"));
-		}
-	}
-
-	private int searchCurrentTradesForCost(Player current, Enum key, int numcost) {
-		if (numcost > 0) {
-			if (current.getCurrentTrades().containsKey(key)) {
-				numcost -= current.getCurrentTrades().get(key);
+		for (Enum key : card.getCost().keySet()) {
+			int numcost = card.getCost().get(key);
+			for (Card sCards : current.getStoragePile()) {
+				if (usedEntities.contains(sCards))
+					continue;
+				if (decrementCostFromEntity(key, sCards) != 0) {
+					usedEntities.add(card);
+					numcost -= decrementCostFromEntity(key, sCards);
+				}
 			}
+			numcost -= searchCurrentTradesForCost(current, key);
+			validateEndCost(numcost);
 		}
-		return numcost;
 	}
 
-	private int decrementCostFromEntity(ArrayList<Card> usedEntities, Enum key, int numcost, Card sCards) {
+	private int searchCurrentTradesForCost(Player current, Enum key) {
+		if (current.getCurrentTrades().containsKey(key)) {
+			return current.getCurrentTrades().get(key);
+		}
+		return 0;
+	}
+
+	private int decrementCostFromEntity(Enum key, Card sCards) {
 		if (sCards.getEffectType() == EffectType.ENTITY) {
 			EntityEffect effect = (EntityEffect) sCards.getEffect();
 			if (effect.getEntities().containsKey(key)) {
-				numcost -= effect.getEntities().get(key);
-				usedEntities.add(sCards);
+				return effect.getEntities().get(key);
 			}
 		}
-		return numcost;
+		return 0;
 	}
 
-	public void discardSelectedCard(Player player, Card card, GameBoard board) {
+	private void validateEndCost(int numcost) {
+		if (numcost > 0) {
+			throw new InsufficientFundsException(
+					Translate.getNewResourceBundle().getString("noRequiredItemToBuildStructure"));
+		}
+	}
+
+	public void discardSelectedCard(Player player, Card card) {
 		board.addToDiscardPile(player, card);
 		player.removeFromCurrentHand(card);
+	}
+	
+	public void setGameBoard(GameBoard board){
+		this.board = board;
 	}
 }
