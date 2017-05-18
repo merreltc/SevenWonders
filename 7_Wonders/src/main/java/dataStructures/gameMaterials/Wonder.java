@@ -20,8 +20,6 @@ public class Wonder {
 		this.name = getNameByType(type);
 		this.resource = getResourceByType(type);
 		this.side = side;
-		System.out.println("Side " + this.side);
-		System.out.println("Num Levels " + this.getNumLevels());
 	}
 
 	public void buildNextLevel() {

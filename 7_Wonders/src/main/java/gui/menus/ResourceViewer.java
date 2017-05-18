@@ -277,9 +277,6 @@ public class ResourceViewer extends Menu {
 		return array;
 	}
 
-	// Card.getCardEffectType() - enum to cast to
-	// Card.getEffect() - effects of the card
-
 	@Override
 	public void initialize() {
 	}
