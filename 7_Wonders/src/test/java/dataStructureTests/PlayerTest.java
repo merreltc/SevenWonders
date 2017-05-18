@@ -158,7 +158,7 @@ public class PlayerTest {
 		assertEquals(playerCards.get(1), player.getAllCards().get(1));
 		assertEquals(playerCards.get(2), player.getAllCards().get(2));
 	}
-	
+
 	@Test
 	public void testAddWonderEffect() {
 		Player player = createMockedPlayer();
@@ -167,11 +167,11 @@ public class PlayerTest {
 		Effect effect1 = EasyMock.createStrictMock(Effect.class);
 		player.addWonderEffectToStoragePile(effect1);
 		effects.add(effect1);
-		
+
 		Effect effect2 = EasyMock.createStrictMock(Effect.class);
 		player.addWonderEffectToStoragePile(effect2);
 		effects.add(effect2);
-		
+
 		assertEquals(effects, player.getAllEffects());
 		assertEquals(effect1, player.getAllEffects().get(0));
 		assertEquals(effect2, player.getAllEffects().get(1));
@@ -342,7 +342,8 @@ public class PlayerTest {
 		EasyMock.expect(wonder.getName()).andReturn("The Statue of Zeus in Olympia");
 		EasyMock.replay(wonder);
 
-		Player player = new Player("Jane Doe", wonder);
+		Player player = EasyMock.partialMockBuilder(Player.class).addMockedMethod("addWonderResourceToPile")
+				.withConstructor("Jane Doe", wonder).createMock();
 		assertEquals("The Statue of Zeus in Olympia", player.getWonder().getName());
 	}
 
@@ -352,7 +353,8 @@ public class PlayerTest {
 		EasyMock.expect(wonder.getType()).andReturn(WonderType.LIGHTHOUSE);
 		EasyMock.expect(wonder.getName()).andReturn("The Lighthouse of Alexandria");
 		EasyMock.replay(wonder);
-		Player player = new Player("Jane Doe", wonder);
+		Player player = EasyMock.partialMockBuilder(Player.class).addMockedMethod("addWonderResourceToPile")
+				.withConstructor("Jane Doe", wonder).createMock();
 		assertEquals("The Lighthouse of Alexandria", player.getWonder().getName());
 	}
 
@@ -384,7 +386,8 @@ public class PlayerTest {
 
 	private Player createMockedPlayer() {
 		Wonder wonder = EasyMock.createStrictMock(Wonder.class);
-		return EasyMock.partialMockBuilder(Player.class).withConstructor("Jane Doe", wonder).createMock();
+		return EasyMock.partialMockBuilder(Player.class).addMockedMethod("addWonderResourceToPile")
+				.withConstructor("Jane Doe", wonder).createMock();
 	}
 
 	@Test

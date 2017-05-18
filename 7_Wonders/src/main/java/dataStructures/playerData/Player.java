@@ -46,7 +46,7 @@ public class Player {
 		addWonderResourceToPile();
 	}
 
-	private void addWonderResourceToPile() {
+	public void addWonderResourceToPile() {
 		 this.storagePile.addToWonderPile(this.wonder.getResource());
 	}
 

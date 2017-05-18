@@ -434,7 +434,8 @@ public class EndGameHandlerTest {
 
 		EasyMock.replay(message, wonder);
 
-		Player player1 = new Player("Jane Doe", wonder);
+		Player player1 = EasyMock.partialMockBuilder(Player.class).addMockedMethod("addWonderResourceToPile")
+				.withConstructor("Jane Doe", wonder).createMock();
 		player1.addCardToStoragePile(this.createScientistsGuild());
 
 		EndGameHandler end = new EndGameHandler();
@@ -453,7 +454,8 @@ public class EndGameHandlerTest {
 
 		EasyMock.replay(message, wonder);
 
-		Player player1 = new Player("Jane Doe", wonder);
+		Player player1 = EasyMock.partialMockBuilder(Player.class).addMockedMethod("addWonderResourceToPile")
+				.withConstructor("Jane Doe", wonder).createMock();
 		player1.addCardToStoragePile(this.createScientistsGuild());
 
 		EndGameHandler end = new EndGameHandler();
@@ -472,7 +474,8 @@ public class EndGameHandlerTest {
 
 		EasyMock.replay(message, wonder);
 
-		Player player1 = new Player("Jane Doe", wonder);
+		Player player1 = EasyMock.partialMockBuilder(Player.class).addMockedMethod("addWonderResourceToPile")
+				.withConstructor("Jane Doe", wonder).createMock();
 		player1.addCardToStoragePile(this.createScientistsGuild());
 
 		EndGameHandler end = new EndGameHandler();

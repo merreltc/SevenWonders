@@ -18,9 +18,11 @@ import constants.GeneralEnums.GameMode;
 import dataStructures.gameMaterials.Card;
 import dataStructures.gameMaterials.Deck;
 import dataStructures.gameMaterials.Deck.Age;
+import dataStructures.gameMaterials.Effect;
+import dataStructures.gameMaterials.EntityEffect;
 import dataStructures.gameMaterials.Wonder;
-import dataStructures.playerData.Player;
 import dataStructures.playerData.Chip.ChipValue;
+import dataStructures.playerData.Player;
 
 public class TurnHandlerTest {
 	private SetUpPlayerHandler setUpPlayerHandler;
@@ -173,7 +175,7 @@ public class TurnHandlerTest {
 		// array order: middle, left, right player
 		int[] playerShields = { 5, 2, 2 };
 		int[] numCalls = { 3, 3, 4 };
-		expectAndReplayAddNumShields(players, playerShields, numCalls);
+		expectAndReplayPlayers(players, playerShields, numCalls);
 
 		TurnHandler turnHandler = new TurnHandler();
 		turnHandler.endAge(players, Age.AGE1);
@@ -184,9 +186,9 @@ public class TurnHandlerTest {
 		Player left = players.get(1);
 		Player right = players.get(2);
 
-		Assert.assertEquals(1,(int) left.getConflictTokens().get(ChipValue.NEG1));
+		Assert.assertEquals(1, (int) left.getConflictTokens().get(ChipValue.NEG1));
 		Assert.assertEquals(2, (int) middle.getConflictTokens().get(ChipValue.ONE));
-		Assert.assertEquals(1,(int) right.getConflictTokens().get(ChipValue.NEG1));
+		Assert.assertEquals(1, (int) right.getConflictTokens().get(ChipValue.NEG1));
 	}
 
 	@Test
@@ -195,24 +197,24 @@ public class TurnHandlerTest {
 		// array order: middle, left, right player
 		int[] playerShields = { 2, 2, 5 };
 		int[] numCalls = { 3, 4, 3 };
-		expectAndReplayAddNumShields(players, playerShields, numCalls);
+		expectAndReplayPlayers(players, playerShields, numCalls);
 
 		TurnHandler turnHandler = new TurnHandler();
 		turnHandler.endAge(players, Age.AGE1);
 
 		verifyPlayers(players);
-		
+
 		Player middle = players.get(0);
 		Player left = players.get(1);
 		Player right = players.get(2);
 
-		Assert.assertEquals(1,(int) left.getConflictTokens().get(ChipValue.NEG1));
+		Assert.assertEquals(1, (int) left.getConflictTokens().get(ChipValue.NEG1));
 		Assert.assertEquals(1, (int) middle.getConflictTokens().get(ChipValue.NEG1));
-		Assert.assertEquals(2,(int) right.getConflictTokens().get(ChipValue.ONE));
-		
-		Assert.assertEquals(0,(int) left.getConflictTokens().get(ChipValue.ONE));
+		Assert.assertEquals(2, (int) right.getConflictTokens().get(ChipValue.ONE));
+
+		Assert.assertEquals(0, (int) left.getConflictTokens().get(ChipValue.ONE));
 		Assert.assertEquals(0, (int) middle.getConflictTokens().get(ChipValue.ONE));
-		Assert.assertEquals(0,(int) right.getConflictTokens().get(ChipValue.NEG1));
+		Assert.assertEquals(0, (int) right.getConflictTokens().get(ChipValue.NEG1));
 	}
 
 	@Test
@@ -220,7 +222,7 @@ public class TurnHandlerTest {
 		ArrayList<Player> players = setUpPlayersByNum(7);
 		int[] playerShields = { 2, 3, 5, 5, 7, 6, 3 };
 		int[] numCalls = { 3, 4, 4, 4, 3, 2, 2 };
-		expectAndReplayAddNumShields(players, playerShields, numCalls);
+		expectAndReplayPlayers(players, playerShields, numCalls);
 
 		TurnHandler turnHandler = new TurnHandler();
 		turnHandler.endAge(players, Age.AGE1);
@@ -246,7 +248,7 @@ public class TurnHandlerTest {
 		// array order: middle, left, right player
 		int[] playerShields = { 5, 2, 2 };
 		int[] numCalls = { 3, 3, 4 };
-		expectAndReplayAddNumShields(players, playerShields, numCalls);
+		expectAndReplayPlayers(players, playerShields, numCalls);
 
 		TurnHandler turnHandler = new TurnHandler();
 		turnHandler.endAge(players, Age.AGE2);
@@ -269,7 +271,7 @@ public class TurnHandlerTest {
 		// array order: middle, left, right player
 		int[] playerShields = { 2, 2, 5 };
 		int[] numCalls = { 3, 4, 3 };
-		expectAndReplayAddNumShields(players, playerShields, numCalls);
+		expectAndReplayPlayers(players, playerShields, numCalls);
 
 		TurnHandler turnHandler = new TurnHandler();
 		turnHandler.endAge(players, Age.AGE2);
@@ -294,7 +296,7 @@ public class TurnHandlerTest {
 		ArrayList<Player> players = setUpPlayersByNum(7);
 		int[] playerShields = { 2, 3, 5, 5, 7, 6, 3 };
 		int[] numCalls = { 3, 4, 4, 4, 3, 2, 2 };
-		expectAndReplayAddNumShields(players, playerShields, numCalls);
+		expectAndReplayPlayers(players, playerShields, numCalls);
 
 		TurnHandler turnHandler = new TurnHandler();
 		turnHandler.endAge(players, Age.AGE2);
@@ -320,7 +322,7 @@ public class TurnHandlerTest {
 		// array order: middle, left, right player
 		int[] playerShields = { 5, 2, 2 };
 		int[] numCalls = { 3, 3, 4 };
-		expectAndReplayAddNumShields(players, playerShields, numCalls);
+		expectAndReplayPlayers(players, playerShields, numCalls);
 
 		TurnHandler turnHandler = new TurnHandler();
 		turnHandler.endAge(players, Age.AGE3);
@@ -342,7 +344,7 @@ public class TurnHandlerTest {
 		// array order: middle, left, right player
 		int[] playerShields = { 2, 2, 5 };
 		int[] numCalls = { 4, 5, 3 };
-		expectAndReplayAddNumShields(players, playerShields, numCalls);
+		expectAndReplayPlayers(players, playerShields, numCalls);
 
 		TurnHandler turnHandler = new TurnHandler();
 		turnHandler.endAge(players, Age.AGE3);
@@ -365,7 +367,7 @@ public class TurnHandlerTest {
 		ArrayList<Player> players = setUpPlayersByNum(7);
 		int[] playerShields = { 2, 3, 5, 5, 7, 6, 3 };
 		int[] numCalls = { 3, 4, 4, 4, 3, 2, 2 };
-		expectAndReplayAddNumShields(players, playerShields, numCalls);
+		expectAndReplayPlayers(players, playerShields, numCalls);
 
 		TurnHandler turnHandler = new TurnHandler();
 		turnHandler.endAge(players, Age.AGE3);
@@ -388,12 +390,28 @@ public class TurnHandlerTest {
 	private ArrayList<Player> setUpPlayersByNum(int num) {
 		ArrayList<Player> result = new ArrayList<Player>();
 		Wonder wonder = EasyMock.createStrictMock(Wonder.class);
+		EntityEffect effect = EasyMock.createStrictMock(EntityEffect.class);
+		
+		replayWonder(num, wonder, effect);
+		replayPlayer(num, result, wonder);
+		
+		EasyMock.verify(wonder, effect);
+		return result;
+	}
+
+	private void replayPlayer(int num, ArrayList<Player> result, Wonder wonder) {
 		for (int i = 0; i < num; i++) {
-			Player temp = EasyMock.partialMockBuilder(Player.class).withConstructor("Jane Doe", wonder)
-					.addMockedMethod("getNumShields").createMock();
+			Player temp = EasyMock.partialMockBuilder(Player.class).addMockedMethod("getNumShields")
+					.withConstructor("Jane Doe", wonder).createMock();
 			result.add(temp);
 		}
-		return result;
+	}
+
+	private void replayWonder(int num, Wonder wonder, EntityEffect effect) {
+		for (int i = 0; i < num; i++) {
+			EasyMock.expect(wonder.getResource()).andReturn(effect);
+		}
+		EasyMock.replay(wonder, effect);
 	}
 
 	private ArrayList<String> setUpNamesByNum(int num) {
@@ -404,16 +422,16 @@ public class TurnHandlerTest {
 		return result;
 	}
 
-	private void expectAndReplayAddNumShields(ArrayList<Player> mockedPlayers, int[] playerShields, int[] numCalls) {
+	private void expectAndReplayPlayers(ArrayList<Player> mockedPlayers, int[] playerShields, int[] numCalls) {
 		int i = 0;
 		for (Player player : mockedPlayers) {
-			callExpected(player, playerShields[i], numCalls[i]);
+			callExpectedNumShields(player, playerShields[i], numCalls[i]);
 			EasyMock.replay(player);
 			i++;
 		}
 	}
 
-	private void callExpected(Player player, int playerShields, int numCalls) {
+	private void callExpectedNumShields(Player player, int playerShields, int numCalls) {
 		for (int i = 0; i < numCalls; i++) {
 			EasyMock.expect(player.getNumShields()).andReturn(playerShields);
 		}

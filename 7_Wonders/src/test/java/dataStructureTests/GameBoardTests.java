@@ -388,7 +388,8 @@ public class GameBoardTests {
 		Wonder wonder = EasyMock.createStrictMock(Wonder.class);
 		ArrayList<Player> result = new ArrayList<Player>();
 		for (int i = 0; i < num; i++) {
-			Player temp = EasyMock.partialMockBuilder(Player.class).withConstructor("Jane Doe", wonder).createMock();
+			Player temp = EasyMock.partialMockBuilder(Player.class).addMockedMethod("addWonderResourceToPile")
+					.withConstructor("Jane Doe", wonder).createMock();
 			result.add(temp);
 		}
 		return result;

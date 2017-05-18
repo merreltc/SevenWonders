@@ -33,11 +33,13 @@ public class TradeHandlerTest {
 	@Before
 	public void setUp() {
 		this.wonder = EasyMock.createStrictMock(Wonder.class);
-		this.player1 = new Player("Jane Doe", this.wonder);
-		this.player2 = new Player("Jane Doe", this.wonder);
+		this.player1 = EasyMock.partialMockBuilder(Player.class).addMockedMethod("addWonderResourceToPile")
+				.withConstructor("Jane Doe", this.wonder).createMock();
+		this.player2 = EasyMock.partialMockBuilder(Player.class).addMockedMethod("addWonderResourceToPile")
+				.withConstructor("Jane Doe", this.wonder).createMock();
 		this.testDeck = EasyMock.partialMockBuilder(Deck.class).createMock();
 	}
-	
+
 	@Test
 	public void testSingleTradeValue1Coins() {
 		TradeHandler.tradeFromToValue1(player1, player2, 1);
@@ -247,7 +249,7 @@ public class TradeHandlerTest {
 		assertEquals(6, (int) player2.getCoins().get(ChipValue.ONE));
 		assertEquals(1, (int) player2.getCoins().get(ChipValue.THREE));
 	}
-	
+
 	@Test
 	public void testTradeToNextPlayer() {
 		ArrayList<Player> players = setUpArrayWithNumPlayers(5);
@@ -386,7 +388,7 @@ public class TradeHandlerTest {
 		assertEquals(1, (int) current.getCurrentTrades().get(RawResource.LUMBER));
 		assertEquals(4, right.getCoinTotal());
 	}
-	
+
 	@Test
 	public void testValidTrade2CoinsForSingleLumberExactResource() {
 		ArrayList<Player> players = setUpArrayWithNumPlayers(3);
@@ -410,11 +412,12 @@ public class TradeHandlerTest {
 		assertEquals(1, (int) current.getCurrentTrades().get(RawResource.LUMBER));
 		assertEquals(5, next.getCoinTotal());
 	}
-	
+
 	private ArrayList<Player> setUpArrayWithNumPlayers(int num) {
 		ArrayList<Player> result = new ArrayList<Player>();
 		for (int i = 0; i < num; i++) {
-			Player temp = new Player("Jane Doe", this.wonder);
+			Player temp = EasyMock.partialMockBuilder(Player.class).addMockedMethod("addWonderResourceToPile")
+					.withConstructor("Jane Doe", this.wonder).createMock();
 			result.add(temp);
 		}
 		return result;
