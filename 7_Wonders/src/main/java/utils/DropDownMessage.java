@@ -13,7 +13,7 @@ public class DropDownMessage {
 				messages.getString("wonderSelector"), JOptionPane.PLAIN_MESSAGE, null, wonders, wonders[0]);
 	}
 
-	public static String dropDownScienceSelectionMessage() {
+	public String dropDownScienceSelectionMessage() {
 		Object[] objects = { "Protractor", "Wheel", "Tablet" };
 		ResourceBundle messages = Translate.getNewResourceBundle();
 		return (String) JOptionPane.showInputDialog(null, messages.getString("chooseAScience"),

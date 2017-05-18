@@ -23,7 +23,7 @@ import utils.DropDownMessage;
 import utils.Message;
 
 public class EndGameHandler {
-	
+
 	private int pointsForGuild = 0;
 
 	public ArrayList<Integer> calculateScores(ArrayList<Player> players) {
@@ -35,27 +35,28 @@ public class EndGameHandler {
 		}
 		return scores;
 	}
-	
-	private int getTotalScore(Player player, ArrayList<Player> players, int playerLoc){
-		handleScientistsGuild(player, new Message());
-		int guildEffects = getPointsFromGuildCards(player, players.get((players.size() + playerLoc - 1) % players.size()),
+
+	private int getTotalScore(Player player, ArrayList<Player> players, int playerLoc) {
+		handleScientistsGuild(player, new DropDownMessage());
+		int guildEffects = getPointsFromGuildCards(player,
+				players.get((players.size() + playerLoc - 1) % players.size()),
 				players.get((playerLoc + 1) % players.size()));
 		int scienceScore = getSciencePoints(player);
-		return player.getNumVictoryPoints() + player.getCoinTotal() / 3 + player.getConflictTotal()
-				+ guildEffects + scienceScore;
+		return player.getNumVictoryPoints() + player.getCoinTotal() / 3 + player.getConflictTotal() + guildEffects
+				+ scienceScore;
 	}
 
 	public int getSciencePoints(Player player) {
 		int score = 0;
 		int[] scienceOwned = player.getNumberOfEachScience();
-		for(int i = 0; i < 3; i++){
+		for (int i = 0; i < 3; i++) {
 			score += (int) Math.pow((double) scienceOwned[i], 2.0);
 		}
 		score += 7 * getMin(scienceOwned);
 		return score;
 	}
-	
-	private int getMin(int[] list){
+
+	private int getMin(int[] list) {
 		int min = Integer.MAX_VALUE;
 		for (int i = 0; i < 3; i++) {
 			if (list[i] < min) {
@@ -73,97 +74,80 @@ public class EndGameHandler {
 		}
 		return pointsForGuild;
 	}
-	
-	private void getPoints(Player current, Player left, Player right){
+
+	private void getPoints(Player current, Player left, Player right) {
 		int counter = 0;
 		for (;;) {
-			pointsForGuild += checkOneCard(current,left,right,counter);
-			counter++;
+			Card card = current.getCardFromEndGame(counter++);
+			if (card.getName().equals("Strategists Guild")) {
+				pointsForGuild += right.getConflictTokens().get(ChipValue.NEG1)
+						+ left.getConflictTokens().get(ChipValue.NEG1);
+			} else if (card.getName().equals("Scientists Guild")) {
+				throw new UnsupportedOperationException("Show Option Dialog");
+			} else {
+				pointsForGuild += this.checkSelf(card, current) + this.checkLeft(card, left)
+						+ this.checkRight(card, right);
+			}
 		}
 	}
-	
-	private int checkOneCard(Player current, Player left, Player right, int counter){
-		Card card = current.getCardFromEndGame(counter);
-		if (card.getName().equals("Strategists Guild")) {
-			return right.getConflictTokens().get(ChipValue.NEG1) + left.getConflictTokens().get(ChipValue.NEG1);
-		} else if (card.getName().equals("Scientists Guild")) {
-			throw new UnsupportedOperationException("Show Option Dialog");
-		}
-		return this.checkSelf(card, current) + this.checkLeft(card, left) + this.checkRight(card, right);
-	}
-	
-	private int checkSelf(Card card, Player player){
-		if (card.getEffect().getDirection() == Direction.SELF
-				|| card.getEffect().getDirection() == Direction.ALL) {
+
+	private int checkSelf(Card card, Player player) {
+		if (card.getEffect().getDirection() == Direction.SELF || card.getEffect().getDirection() == Direction.ALL) {
 			return this.useEffect(card, player);
 		}
 		return 0;
 	}
-	
-	private int checkRight(Card card, Player player){
-		if (card.getEffect().getDirection() == Direction.RIGHT
-				|| card.getEffect().getDirection() == Direction.ALL
-				|| card.getEffect().getDirection() == Direction.NEIGHBORS) {
-			return this.useEffect(card, player);
-		}
-		return 0;
-	}
-	
-	private int checkLeft(Card card, Player player){
-		if (card.getEffect().getDirection() == Direction.LEFT
-				|| card.getEffect().getDirection() == Direction.ALL
+
+	private int checkRight(Card card, Player player) {
+		if (card.getEffect().getDirection() == Direction.RIGHT || card.getEffect().getDirection() == Direction.ALL
 				|| card.getEffect().getDirection() == Direction.NEIGHBORS) {
 			return this.useEffect(card, player);
 		}
 		return 0;
 	}
 
-	public void handleScientistsGuild(Player player, Message message) {
+	private int checkLeft(Card card, Player player) {
+		if (card.getEffect().getDirection() == Direction.LEFT || card.getEffect().getDirection() == Direction.ALL
+				|| card.getEffect().getDirection() == Direction.NEIGHBORS) {
+			return this.useEffect(card, player);
+		}
+		return 0;
+	}
+
+	public void handleScientistsGuild(Player player, DropDownMessage message) {
 		int count = 0;
 		for (;;) {
-			if (!handleScientistsLoop(player,message,count)){
+			try {
+				Card card = player.getCardFromEndGame(count++);
+				Enum choice = testCard(card.getName(), message);
+				if (choice != EffectType.NONE) {
+					givePlayerReward(player, choice);
+					break;
+				}
+			} catch (Exception e) {
 				break;
 			}
-			count++;
 		}
-	}
-	
-	private boolean handleScientistsLoop(Player player, Message message, int count){
-		try {
-			if (!testCard(player, message, count)){
-				return false;
-			}
-		} catch (Exception e) {
-			return false;
-		}
-		return true;
 	}
 
-	private boolean testCard(Player player, Message message, int count) {
-		Card card = player.getCardFromEndGame(count);
-		if (card.getName().equals("Scientists Guild")) {
+	private Enum testCard(String cardName, DropDownMessage message) {
+		if (cardName.equals("Scientists Guild")) {
 			String str = getChosenString(message);
-			Enum choice = translateStringToEnum(str);
-			givePlayerReward(player, choice);
-			return false;
+			Enum choice = Science.TABLET;
+			if (str.equals("Protractor")) {
+				choice = Science.PROTRACTOR;
+			} else if (str.equals("Wheel")) {
+				choice = Science.WHEEL;
+			}
+			return choice;
 		}
-		return true;
+		return EffectType.NONE;
 	}
 
-	private Enum translateStringToEnum(String str) {
-		Enum choice = Science.TABLET;
-		if (str.equals("Protractor")) {
-			choice = Science.PROTRACTOR;
-		} else if (str.equals("Wheel")) {
-			choice = Science.WHEEL;
-		}
-		return choice;
-	}
-
-	private String getChosenString(Message message) {
+	private String getChosenString(DropDownMessage message) {
 		String str = "";
 		while (str.equals("")) {
-			str = DropDownMessage.dropDownScienceSelectionMessage();
+			str = message.dropDownScienceSelectionMessage();
 		}
 		return str;
 	}
@@ -175,16 +159,10 @@ public class EndGameHandler {
 		Card reward = new Card("Scientists Reward", CardType.SCIENTIFICSTRUCTURE, null, effect);
 		player.addToStoragePile(reward);
 	}
-	
+
 	private int useEffect(Card card, Player player) {
 		int total = 0;
 		ValueEffect effect = (ValueEffect) card.getEffect();
-		total = discernAndRunEffect(player, total, effect);
-
-		return total;
-	}
-
-	private int discernAndRunEffect(Player player, int total, ValueEffect effect) {
 		if (effect.getAffectingEntity() != AffectingEntity.NONE) {
 			total += runEffectOnPlayer(effect, effect.getAffectingEntity(), player);
 		} else {

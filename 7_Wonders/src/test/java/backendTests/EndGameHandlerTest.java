@@ -428,9 +428,9 @@ public class EndGameHandlerTest {
 	@Test
 	public void testScientistsGuildEffectProtractor() {
 
-		Message message = EasyMock.mock(Message.class);
+		DropDownMessage message = EasyMock.mock(DropDownMessage.class);
 
-		EasyMock.expect(DropDownMessage.dropDownScienceSelectionMessage()).andReturn("Protractor");
+		EasyMock.expect(message.dropDownScienceSelectionMessage()).andReturn("Protractor");
 		Wonder wonder = EasyMock.mock(Wonder.class);
 
 		EasyMock.replay(message, wonder);
@@ -447,9 +447,9 @@ public class EndGameHandlerTest {
 	@Test
 	public void testScientistsGuildEffectWheel() {
 
-		Message message = EasyMock.mock(Message.class);
+		DropDownMessage message = EasyMock.mock(DropDownMessage.class);
 
-		EasyMock.expect(DropDownMessage.dropDownScienceSelectionMessage()).andReturn("Wheel");
+		EasyMock.expect(message.dropDownScienceSelectionMessage()).andReturn("Wheel");
 		Wonder wonder = EasyMock.mock(Wonder.class);
 
 		EasyMock.replay(message, wonder);
@@ -466,9 +466,9 @@ public class EndGameHandlerTest {
 	@Test
 	public void testScientistsGuildEffectTablet() {
 
-		Message message = EasyMock.mock(Message.class);
+		DropDownMessage message = EasyMock.mock(DropDownMessage.class);
 
-		EasyMock.expect(DropDownMessage.dropDownScienceSelectionMessage()).andReturn("Tablet");
+		EasyMock.expect(message.dropDownScienceSelectionMessage()).andReturn("Tablet");
 		Wonder wonder = EasyMock.mock(Wonder.class);
 
 		EasyMock.replay(message, wonder);
