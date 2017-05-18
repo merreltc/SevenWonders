@@ -5,6 +5,7 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import org.easymock.EasyMock;
 import org.junit.Before;
@@ -29,6 +30,7 @@ import dataStructures.playerData.Chip;
 import dataStructures.playerData.Player;
 import dataStructures.playerData.Chip.ChipType;
 import dataStructures.playerData.Chip.ChipValue;
+import junit.framework.Assert;
 
 public class GameManagerTest {
 	private SetUpPlayerHandler setUpPlayerHandler;
@@ -904,6 +906,30 @@ public class GameManagerTest {
 		
 		EasyMock.verify(manager, turnHandler);
 		
+	}
+	
+	@Test
+	public void testFormatFinalScoreNoTie(){
+		ArrayList<String> playerNames = new ArrayList<String>(Arrays.asList("Player1", "Player2", "Player3"));
+		
+		GameManager gameManager = new GameManager(playerNames,GameMode.EASY);
+		
+		ArrayList<Integer> scores = new ArrayList<Integer>(Arrays.asList(35, 26, 13));
+		
+		Assert.assertEquals(gameManager.formatFinalScores(scores), "Player1 : 35\nPlayer2 : 26\nPlayer3 : 13\nPlayer1 Wins!");
+	}
+	
+	@Test
+	public void testFormatFinalScoreTie(){
+		ArrayList<String> playerNames = new ArrayList<String>(Arrays.asList("Player1", "Player2", "Player3"));
+		
+		GameManager gameManager = new GameManager(playerNames,GameMode.EASY);
+		PlayerChipHandler.addValue1(gameManager.getPlayer(0), 10, ChipType.COIN);
+		PlayerChipHandler.addValue1(gameManager.getPlayer(1), 5, ChipType.COIN);
+		
+		ArrayList<Integer> scores = new ArrayList<Integer>(Arrays.asList(35, 35, 13));
+		
+		Assert.assertEquals(gameManager.formatFinalScores(scores), "Player1 : 35\nPlayer2 : 35\nPlayer3 : 13\nPlayer1 Wins!");
 	}
 
 	private void mockExpectTurnHandlerCalls(TurnHandler turnHandler) {

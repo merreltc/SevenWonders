@@ -229,7 +229,23 @@ public class GameManager {
 			String playerName = this.getPlayer(i).getName();
 			formattedString.append(playerName + " : " + scores.get(i) + "\n");
 		}
+		int indexOfWinner = indexOfMaxScore(scores, this.getPlayers());
+		formattedString.append(this.getPlayers().get(indexOfWinner).getName() + " Wins!");
 		return formattedString.toString();
+	}
+	
+	private int indexOfMaxScore(ArrayList<Integer> scores, ArrayList<Player> players){
+		int max = 0;
+		int maxIndex = 0;
+		for (int i = 0; i < scores.size(); i++){
+			if (scores.get(i) > max){
+				max = scores.get(i);
+				maxIndex = i;
+			}else if (scores.get(i) == max){
+				maxIndex = (players.get(i).getCoinTotal() > players.get(maxIndex).getCoinTotal()) ? i : maxIndex; 
+			}
+		}
+		return maxIndex;
 	}
 
 	private Age getNextAge(Age currentAge) {
