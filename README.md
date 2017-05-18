@@ -59,8 +59,8 @@ Cards are passed left-right-left over the three ages, so you need to keep an eye
 - [x] Minimal details for non-neighboring players
 
 ## Set Up
-- [x] Language is chosen: English or Chinese
-- [x] Game mode is chosen (Easy or Normal)
+- [x] Language is chosen: English or Chinese - Implemented in GUI
+- [x] Game mode is chosen (Easy or Normal) [TestCase](https://ada.csse.rose-hulman.edu/moormaet/Silver_Falcons_Seven_Wonders/blob/master/7_Wonders/src/test/java/backendTests/WonderFactoryTest.java#L48)
     - Easy Mode: all players receive side A
     - Normal Mode: players can receive side A or B of a Wonder
 - [x] Number of players is chosen from valid options 3-7
@@ -187,9 +187,9 @@ Cards are passed left-right-left over the three ages, so you need to keep an eye
 - [ ] Card used to build Wonder does not provide player its effect in addition to the effect of the Wonder Level and is hidden from other players
 - [ ] Levels of Wonder are built once per game and in sequence (left to right)
 - [ ] Wonder can be built at any time, in any age
-- [ ] The wonder does not need to be built in order for a player to win
+- [x] The wonder does not need to be built in order for a player to win
 
-### Wonders
+### Wonders [TestCase](https://ada.csse.rose-hulman.edu/moormaet/Silver_Falcons_Seven_Wonders/blob/master/7_Wonders/src/test/java/dataStructureTests/WonderTest.java)
 - [x] Wonders provide players 1 of the resource specified in the top left corner
 - Side A always has 3 levels
     - [ ] The first level is worth +3 Victory Points
