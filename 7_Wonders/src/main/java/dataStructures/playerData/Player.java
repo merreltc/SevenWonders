@@ -9,9 +9,7 @@ import dataStructures.gameMaterials.Card;
 import dataStructures.gameMaterials.Effect.EffectType;
 import dataStructures.gameMaterials.EntityEffect;
 import dataStructures.gameMaterials.Wonder;
-import dataStructures.playerData.Chip.ChipType;
 import dataStructures.playerData.Chip.ChipValue;
-import exceptions.InsufficientFundsException;
 import utils.Translate;
 
 public class Player {
@@ -29,168 +27,23 @@ public class Player {
 	private HashMap<Enum, Integer> currentTrades = new HashMap<Enum, Integer>();
 	private PlayerChips playerChips = new PlayerChips();
 
-	private class PlayerChips {
-		protected int numOfValue1Coins = 3;
-		protected int numOfValue3Coins = 0;
-		protected int numOfValue5Coins = 0;
-		protected int numOfValue1ConflictTokens = 0;
-		protected int numOfValue3ConflictTokens = 0;
-		protected int numOfValue5ConflictTokens = 0;
-		protected int conflictTotal = 0;
-		protected int coinTotal = 3;
-		public int numOfValueNeg1ConflictTokens = 0;
+	public class PlayerChips {
+		private HashMap<ChipValue, Integer> coins = new HashMap<ChipValue, Integer>();
+		private HashMap<ChipValue, Integer> conflictTokens = new HashMap<ChipValue, Integer>();
+
+		public PlayerChips() {
+			coins.put(ChipValue.ONE, 3);
+			coins.put(ChipValue.THREE, 0);
+			conflictTokens.put(ChipValue.ONE, 0);
+			conflictTokens.put(ChipValue.THREE, 0);
+			conflictTokens.put(ChipValue.FIVE, 0);
+			conflictTokens.put(ChipValue.NEG1, 0);
+		}
 	}
 
 	public Player(String playerName, Wonder wonder) {
 		this.name = playerName;
 		this.wonder = wonder;
-	}
-
-	public void addValue1(int numChipsToAdd, Chip.ChipType chipType) {
-		validateNumChipsToAdd(numChipsToAdd, ChipValue.ONE);
-
-		if (chipType == ChipType.COIN) {
-			this.playerChips.coinTotal += numChipsToAdd;
-			this.playerChips.numOfValue1Coins += numChipsToAdd;
-		} else {
-			this.playerChips.conflictTotal += numChipsToAdd;
-			this.playerChips.numOfValue1ConflictTokens += numChipsToAdd;
-		}
-	}
-
-	public void addValue3(int numChipsToAdd, ChipType chipType) {
-		validateNumChipsToAdd(numChipsToAdd, ChipValue.THREE);
-
-		if (chipType == ChipType.COIN) {
-			this.playerChips.coinTotal += 3 * numChipsToAdd;
-			this.playerChips.numOfValue3Coins += numChipsToAdd;
-		} else {
-			this.playerChips.conflictTotal += 3 * numChipsToAdd;
-			this.playerChips.numOfValue3ConflictTokens += numChipsToAdd;
-		}
-	}
-
-	public void addValue5(int numChipsToAdd, ChipType chipType) {
-		validateNumChipsToAdd(numChipsToAdd, ChipValue.FIVE);
-
-		if (chipType == ChipType.COIN) {
-			this.playerChips.numOfValue5Coins += numChipsToAdd;
-			this.playerChips.coinTotal += 5 * numChipsToAdd;
-		} else {
-			this.playerChips.numOfValue5ConflictTokens += numChipsToAdd;
-			this.playerChips.conflictTotal += 5 * numChipsToAdd;
-		}
-	}
-
-	public void addValueNeg1(int numChipsToAdd, ChipType chipType) {
-		if (chipType == ChipType.COIN) {
-			throw new IllegalArgumentException("Cannot have a negative 1 coin value");
-		}
-
-		validateNumChipsToAdd(numChipsToAdd, ChipValue.NEG1);
-
-		this.playerChips.conflictTotal += (-1) * numChipsToAdd;
-		this.playerChips.numOfValueNeg1ConflictTokens += numChipsToAdd;
-	}
-
-	private void validateNumChipsToAdd(int numChips, ChipValue type) {
-		int max;
-		String chipType;
-
-		switch (type) {
-		case ONE:
-			max = 46;
-			chipType = "1";
-			break;
-		case THREE:
-			max = 24;
-			chipType = "3";
-			break;
-		case FIVE:
-			max = 15;
-			chipType = "5";
-			break;
-		case NEG1:
-			max = 21;
-			chipType = "-1";
-			break;
-		default:
-			throw new IllegalArgumentException("Bad CoinType");
-		}
-
-		if (numChips <= -1 || numChips > max) {
-			throw new IllegalArgumentException("Cannot add " + numChips + " value " + chipType + " chips");
-		}
-	}
-
-	// Add second input for chips and add remove value 1
-	public void removeValue1(int numCoinsToRemove, ChipType chipType) {
-		if (chipType == ChipType.COIN) {
-			validateNumCoinsToRemove(numCoinsToRemove, ChipValue.ONE);
-
-			this.playerChips.coinTotal -= numCoinsToRemove;
-			this.playerChips.numOfValue1Coins -= numCoinsToRemove;
-		} else {
-			validateNumOfConflictTokensToRemove(numCoinsToRemove, ChipValue.ONE);
-			this.playerChips.conflictTotal -= numCoinsToRemove;
-			this.playerChips.numOfValue1ConflictTokens -= numCoinsToRemove;
-		}
-	}
-
-	public void removeValue3(int numCoinsToRemove, ChipType chipType) {
-		if (chipType == ChipType.COIN) {
-			validateNumCoinsToRemove(numCoinsToRemove, ChipValue.THREE);
-			this.playerChips.coinTotal -= 3 * numCoinsToRemove;
-			this.playerChips.numOfValue3Coins -= numCoinsToRemove;
-		} else {
-			validateNumOfConflictTokensToRemove(numCoinsToRemove, ChipValue.THREE);
-			this.playerChips.conflictTotal -= 3 * numCoinsToRemove;
-			this.playerChips.numOfValue3ConflictTokens -= numCoinsToRemove;
-		}
-	}
-
-	public void removeValue5(int numChipsToRemove, ChipType chipType) {
-
-		if (chipType == ChipType.COIN) {
-			validateNumCoinsToRemove(numChipsToRemove, ChipValue.FIVE);
-			this.playerChips.coinTotal -= 5 * numChipsToRemove;
-			this.playerChips.numOfValue5Coins -= numChipsToRemove;
-		} else {
-			validateNumOfConflictTokensToRemove(numChipsToRemove, ChipValue.FIVE);
-			this.playerChips.conflictTotal -= 5 * numChipsToRemove;
-			this.playerChips.numOfValue5ConflictTokens -= numChipsToRemove;
-		}
-	}
-
-	private void validateNumCoinsToRemove(int numCoins, ChipValue type) {
-		if (numCoins <= -1) {
-			String coinType;
-
-			switch (type) {
-			case ONE:
-				coinType = "1";
-				break;
-			case THREE:
-				coinType = "3";
-				break;
-			case FIVE:
-				coinType = "5";
-				break;
-			default:
-				throw new IllegalArgumentException("Bad CoinType");
-			}
-
-			throw new IllegalArgumentException("Cannot remove " + numCoins + " value " + coinType + " coins");
-		}
-
-		int numCoinsToCheck = getNumOfCoinValue(type);
-		String coinType = coinTypeToString(type);
-
-		if (numCoins > numCoinsToCheck) {
-			String msg = Translate.prepareStringTemplateWithIntAndStringArg(numCoins, coinType,
-					"notEnoughCoinsTemplate", messages);
-			throw new InsufficientFundsException(msg);
-		}
 	}
 
 	public String toString() {
@@ -203,107 +56,38 @@ public class Player {
 		return this.name.equals(temp.getName());
 	}
 
-	private int getNumOfCoinValue(ChipValue type) {
-		if (type == ChipValue.ONE) {
-			return this.playerChips.numOfValue1Coins;
-		} else if (type == ChipValue.FIVE) {
-			return this.playerChips.numOfValue5Coins;
-		}
-
-		return this.playerChips.numOfValue3Coins;
-	}
-
-	private String coinTypeToString(ChipValue type) {
-		switch (type) {
-		case ONE:
-			return "1";
-		case THREE:
-			return "3";
-		case FIVE:
-			return "5";
-		default:
-			throw new IllegalArgumentException("Bad Coin.CoinValue");
-		}
-	}
-
-	private void validateNumOfConflictTokensToRemove(int numTokens, ChipValue type) {
-		String tokenType;
-		switch (type) {
-		case ONE:
-			tokenType = "1";
-			break;
-		case THREE:
-			tokenType = "3";
-			break;
-		case FIVE:
-			tokenType = "5";
-			break;
-		default:
-			throw new IllegalArgumentException("Bad TokenType");
-		}
-
-		if (numTokens <= -1) {
-			throw new IllegalArgumentException(
-					"Player does not have " + numTokens + " value " + tokenType + " token(s)");
-		}
-
-		int numToRemove = getNumberOfTokensToBeRemoved(numTokens, type);
-		int numPossessed = this.getNumberOfTokens(type);
-
-		if (numToRemove > numPossessed) {
-			throw new IllegalArgumentException(
-					"Player does not have " + numTokens + " value " + tokenType + " token(s)");
-		}
-	}
-
-	private int getNumberOfTokens(ChipValue type) {
-		if (type == ChipValue.ONE) {
-			return this.getNumValue1ConflictTokens();
-		}
-		if (type == ChipValue.THREE) {
-			return this.getNumValue3ConflictTokens();
-		}
-		if (type == ChipValue.FIVE) {
-			return this.getNumValue5ConflictTokens();
-		}
-		throw new IllegalArgumentException("Cannot remove tokens of -1 value");
-	}
-
-	private int getNumberOfTokensToBeRemoved(int numOfTokensToRemove, ChipValue type) {
-		if (type == ChipValue.ONE) {
-			return numOfTokensToRemove;
-		}
-		if (type == ChipValue.THREE) {
-			return numOfTokensToRemove;
-		}
-		if (type == ChipValue.FIVE) {
-			return numOfTokensToRemove;
-		}
-		throw new IllegalArgumentException("Cannot remove tokens of -1 value");
-	}
-
 	public String getName() {
 		return this.name;
 	}
 
 	public int getCoinTotal() {
-		return this.playerChips.coinTotal;
-	}
+		int total = 0;
 
-	public int getNumValue1Coins() {
-		return this.playerChips.numOfValue1Coins;
-	}
-
-	public int getNumValue3Coins() {
-		return this.playerChips.numOfValue3Coins;
-	}
-
-	public int getNumValue5Coins() {
-		return this.playerChips.numOfValue5Coins;
+		for (ChipValue value : this.getCoins().keySet()) {
+			if (value == ChipValue.THREE) {
+				total += (3 * this.getCoins().get(value));
+			} else {
+				total += this.getCoins().get(value);
+			}
+		}
+		return total;
 	}
 
 	public int getConflictTotal() {
-		return this.playerChips.conflictTotal;
+		int total = 0;
+
+		for (ChipValue value : this.getConflictTokens().keySet()) {
+			if (value == ChipValue.THREE) {
+				total += (3 * this.getConflictTokens().get(value));
+			} else if (value == ChipValue.FIVE) {
+				total += (5 * this.getConflictTokens().get(value));
+			} else if (value == ChipValue.NEG1) {
+				total += (-1) * this.getConflictTokens().get(value);
+			} else {
+				total += this.getConflictTokens().get(value);
+			}
+		}
+		return total;
 	}
 
 	public ArrayList<Card> getCurrentHand() {
@@ -398,19 +182,6 @@ public class Player {
 		return wonder;
 	}
 
-	public void removeTotalCoins(int total) {
-		int numValue3CoinsToRemove = total / 3;
-		int numValue1CoinsToRemove = total % 3;
-
-		if (numValue3CoinsToRemove > this.playerChips.numOfValue3Coins) {
-			numValue1CoinsToRemove += 3 * (numValue3CoinsToRemove - this.playerChips.numOfValue3Coins);
-			numValue3CoinsToRemove = this.playerChips.numOfValue3Coins;
-		}
-
-		this.removeValue3(numValue3CoinsToRemove, ChipType.COIN);
-		this.removeValue1(numValue1CoinsToRemove, ChipType.COIN);
-	}
-
 	public int getNumShields() {
 		return this.numShields;
 	}
@@ -427,19 +198,11 @@ public class Player {
 		this.numVictoryPoints += numPoints;
 	}
 
-	public int getNumValue1ConflictTokens() {
-		return this.playerChips.numOfValue1ConflictTokens;
+	public HashMap<ChipValue, Integer> getConflictTokens() {
+		return this.playerChips.conflictTokens;
 	}
 
-	public int getNumValue3ConflictTokens() {
-		return this.playerChips.numOfValue3ConflictTokens;
-	}
-
-	public int getNumValue5ConflictTokens() {
-		return this.playerChips.numOfValue5ConflictTokens;
-	}
-
-	public int getNumValueNeg1ConflictTokens() {
-		return this.playerChips.numOfValueNeg1ConflictTokens;
+	public HashMap<ChipValue, Integer> getCoins() {
+		return this.playerChips.coins;
 	}
 }

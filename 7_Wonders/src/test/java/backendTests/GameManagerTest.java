@@ -11,6 +11,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import backend.GameManager;
+import backend.handlers.PlayerChipHandler;
 import backend.handlers.PlayerTurnHandler;
 import backend.handlers.RotateHandler.Rotation;
 import backend.handlers.SetUpDeckHandler;
@@ -25,6 +26,8 @@ import dataStructures.gameMaterials.Deck;
 import dataStructures.gameMaterials.Deck.Age;
 import dataStructures.playerData.Chip;
 import dataStructures.playerData.Player;
+import dataStructures.playerData.Chip.ChipType;
+import dataStructures.playerData.Chip.ChipValue;
 
 public class GameManagerTest {
 	private SetUpPlayerHandler setUpPlayerHandler;
@@ -564,11 +567,11 @@ public class GameManagerTest {
 		ArrayList<String> playerNames = setUpArrayByNum(3);
 		GameManager manager = new GameManager(playerNames, this.setUpPlayerHandler, this.setUpDeckHandler,
 				this.turnHandler, this.playerTurnHandler);
-		manager.getCurrentPlayer().addValue3(1, Chip.ChipType.COIN);
+		PlayerChipHandler.addValue3(manager.getCurrentPlayer(), 1, ChipType.COIN);
 
 		assertTrue(manager.makeChangeForValue1Coins(3));
-		assertEquals(6, manager.getCurrentPlayer().getNumValue1Coins());
-		assertEquals(0, manager.getCurrentPlayer().getNumValue3Coins());
+		assertEquals(6, (int) manager.getCurrentPlayer().getCoins().get(ChipValue.ONE));
+		assertEquals(0, (int) manager.getCurrentPlayer().getCoins().get(ChipValue.THREE));
 		assertEquals(34, manager.getGameBoard().getTotalValue1CoinsInBank());
 		assertEquals(25, manager.getGameBoard().getTotalValue3CoinsInBank());
 	}
@@ -581,8 +584,8 @@ public class GameManagerTest {
 		GameBoard board = manager.getGameBoard();
 
 		assertTrue(board.makeChangeForValue3Coins(manager.getCurrentPlayer(), 1));
-		assertEquals(0, manager.getCurrentPlayer().getNumValue1Coins());
-		assertEquals(1, manager.getCurrentPlayer().getNumValue3Coins());
+		assertEquals(0, (int) manager.getCurrentPlayer().getCoins().get(ChipValue.ONE));
+		assertEquals(1, (int) manager.getCurrentPlayer().getCoins().get(ChipValue.THREE));
 		assertEquals(40, board.getTotalValue1CoinsInBank());
 		assertEquals(23, board.getTotalValue3CoinsInBank());
 	}
@@ -599,7 +602,7 @@ public class GameManagerTest {
 				manager.getGameBoard());
 
 		EasyMock.replay(playerTurnHandler);
-		manager.dealInitialTurnCards();
+		this.turnHandler.dealInitialTurnCards(manager.getPlayers(), manager.getDeck());
 		manager.discardSelectedCard(manager.getCurrentPlayer().getCurrentHand().get(0));
 
 		EasyMock.verify(playerTurnHandler);
