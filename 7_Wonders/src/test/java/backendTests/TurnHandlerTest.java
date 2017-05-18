@@ -15,6 +15,7 @@ import backend.handlers.SetUpDeckHandler;
 import backend.handlers.SetUpPlayerHandler;
 import backend.handlers.TurnHandler;
 import constants.GeneralEnums.GameMode;
+import dataStructures.Handlers;
 import dataStructures.gameMaterials.Card;
 import dataStructures.gameMaterials.Deck;
 import dataStructures.gameMaterials.Deck.Age;
@@ -34,8 +35,7 @@ public class TurnHandlerTest {
 	@Test
 	public void testDealInitialCards3Players() {
 		ArrayList<String> playerNames = setUpNamesByNum(3);
-		GameManager manager = new GameManager(playerNames, this.setUpPlayerHandler, new SetUpDeckHandler(),
-				new TurnHandler(), new PlayerTurnHandler());
+		GameManager manager = new GameManager(playerNames, setUpHandlers());
 
 		Deck deck = manager.getDeck();
 		int numPlayers = 3;
@@ -54,8 +54,7 @@ public class TurnHandlerTest {
 	@Test
 	public void testDealInitialCards7Players() {
 		ArrayList<String> playerNames = setUpNamesByNum(7);
-		GameManager manager = new GameManager(playerNames, this.setUpPlayerHandler, new SetUpDeckHandler(),
-				new TurnHandler(), new PlayerTurnHandler());
+		GameManager manager = new GameManager(playerNames, setUpHandlers());
 
 		Deck deck = manager.getGameBoard().getDeck();
 		int numPlayers = 7;
@@ -74,8 +73,7 @@ public class TurnHandlerTest {
 	@Test
 	public void testDealInitialCards5PlayersNotSame() {
 		ArrayList<String> playerNames = setUpNamesByNum(5);
-		GameManager manager = new GameManager(playerNames, this.setUpPlayerHandler, new SetUpDeckHandler(),
-				new TurnHandler(), new PlayerTurnHandler());
+		GameManager manager = new GameManager(playerNames, setUpHandlers());
 
 		Deck deck = manager.getGameBoard().getDeck();
 
@@ -104,8 +102,7 @@ public class TurnHandlerTest {
 	@Test
 	public void testGetNumPlayersUntilPass3Players() {
 		ArrayList<String> playerNames = setUpNamesByNum(3);
-		GameManager manager = new GameManager(playerNames, this.setUpPlayerHandler, new SetUpDeckHandler(),
-				new TurnHandler(), new PlayerTurnHandler());
+		GameManager manager = new GameManager(playerNames, setUpHandlers());
 
 		Deck deck = manager.getGameBoard().getDeck();
 		ArrayList<Player> players = manager.getPlayers();
@@ -126,8 +123,7 @@ public class TurnHandlerTest {
 	@Test
 	public void testDefaultGetNumTurnsTilEndOfAge() {
 		ArrayList<String> playerNames = setUpNamesByNum(3);
-		GameManager manager = new GameManager(playerNames, this.setUpPlayerHandler, new SetUpDeckHandler(),
-				new TurnHandler(), new PlayerTurnHandler());
+		GameManager manager = new GameManager(playerNames, setUpHandlers());
 
 		Deck deck = manager.getGameBoard().getDeck();
 		ArrayList<Player> players = manager.getPlayers();
@@ -184,9 +180,9 @@ public class TurnHandlerTest {
 		Player left = players.get(1);
 		Player right = players.get(2);
 
-		Assert.assertEquals(1,(int) left.getConflictTokens().get(ChipValue.NEG1));
+		Assert.assertEquals(1, (int) left.getConflictTokens().get(ChipValue.NEG1));
 		Assert.assertEquals(2, (int) middle.getConflictTokens().get(ChipValue.ONE));
-		Assert.assertEquals(1,(int) right.getConflictTokens().get(ChipValue.NEG1));
+		Assert.assertEquals(1, (int) right.getConflictTokens().get(ChipValue.NEG1));
 	}
 
 	@Test
@@ -201,18 +197,18 @@ public class TurnHandlerTest {
 		turnHandler.endAge(players, Age.AGE1);
 
 		verifyPlayers(players);
-		
+
 		Player middle = players.get(0);
 		Player left = players.get(1);
 		Player right = players.get(2);
 
-		Assert.assertEquals(1,(int) left.getConflictTokens().get(ChipValue.NEG1));
+		Assert.assertEquals(1, (int) left.getConflictTokens().get(ChipValue.NEG1));
 		Assert.assertEquals(1, (int) middle.getConflictTokens().get(ChipValue.NEG1));
-		Assert.assertEquals(2,(int) right.getConflictTokens().get(ChipValue.ONE));
-		
-		Assert.assertEquals(0,(int) left.getConflictTokens().get(ChipValue.ONE));
+		Assert.assertEquals(2, (int) right.getConflictTokens().get(ChipValue.ONE));
+
+		Assert.assertEquals(0, (int) left.getConflictTokens().get(ChipValue.ONE));
 		Assert.assertEquals(0, (int) middle.getConflictTokens().get(ChipValue.ONE));
-		Assert.assertEquals(0,(int) right.getConflictTokens().get(ChipValue.NEG1));
+		Assert.assertEquals(0, (int) right.getConflictTokens().get(ChipValue.NEG1));
 	}
 
 	@Test
@@ -423,5 +419,13 @@ public class TurnHandlerTest {
 		for (Player player : mockedPlayers) {
 			EasyMock.verify(player);
 		}
+	}
+
+	private Handlers setUpHandlers() {
+		Handlers handlers = new Handlers(this.setUpPlayerHandler);
+		handlers.setSetUpDeckHandler(new SetUpDeckHandler());
+		handlers.setTurnHandler(new TurnHandler());
+		handlers.setPlayerTurnHandler(new PlayerTurnHandler());
+		return handlers;
 	}
 }
