@@ -30,22 +30,23 @@ public class EndGameHandler {
 			handleScientistsGuild(player, new Message());
 			int guildEffects = getPointsFromGuildCards(player, players.get((players.size() + i - 1) % players.size()),
 					players.get((i + 1) % players.size()));
-			
+
 			int scienceScore = getSciencePoints(player);
-			scores.add(player.getNumVictoryPoints() + player.getCoinTotal()/3 + player.getConflictTotal() + guildEffects + scienceScore);
+			scores.add(player.getNumVictoryPoints() + player.getCoinTotal() / 3 + player.getConflictTotal()
+					+ guildEffects + scienceScore);
 		}
 		return scores;
 	}
-	
-	public int getSciencePoints(Player player){
+
+	public int getSciencePoints(Player player) {
 		int score = 0;
 		int[] scienceOwned = player.getNumberOfEachScience();
 		int min = Integer.MAX_VALUE;
-		for (int i = 0; i < 3; i++){
-			if (scienceOwned[i] < min){
+		for (int i = 0; i < 3; i++) {
+			if (scienceOwned[i] < min) {
 				min = scienceOwned[i];
 			}
-			score += (int) Math.pow((double)scienceOwned[i], 2.0);
+			score += (int) Math.pow((double) scienceOwned[i], 2.0);
 		}
 		score += 7 * min;
 		return score;
@@ -82,7 +83,7 @@ public class EndGameHandler {
 				counter++;
 
 			} catch (Exception e) {
-				if (!e.getMessage().equals("Show Option Dialog")){
+				if (!e.getMessage().equals("Show Option Dialog")) {
 					break;
 				}
 			}
@@ -90,27 +91,27 @@ public class EndGameHandler {
 
 		return points;
 	}
-	
-	public void handleScientistsGuild(Player player, Message message){
+
+	public void handleScientistsGuild(Player player, Message message) {
 		int count = 0;
-		
-		for (;;){
-			try{
-				
+
+		for (;;) {
+			try {
+
 				Card card = player.getCardFromEndGame(count);
-				if (card.getName().equals("Scientists Guild")){
+				if (card.getName().equals("Scientists Guild")) {
 					String str = "";
-					while (str.equals("")){
+					while (str.equals("")) {
 						str = message.dropDownScienceSelectionMessage();
 					}
-					
+
 					Enum choice = Science.TABLET;
-					if (str.equals("Protractor")){
+					if (str.equals("Protractor")) {
 						choice = Science.PROTRACTOR;
-					}else if (str.equals("Wheel")){
+					} else if (str.equals("Wheel")) {
 						choice = Science.WHEEL;
 					}
-					
+
 					HashMap<Enum, Integer> entitiesAndAmounts = new HashMap<Enum, Integer>();
 					entitiesAndAmounts.put(choice, 1);
 					Effect effect = new EntityEffect(EffectType.ENTITY, EntityType.SCIENCE, entitiesAndAmounts);
@@ -119,7 +120,7 @@ public class EndGameHandler {
 					break;
 				}
 				count++;
-			}catch(Exception e){
+			} catch (Exception e) {
 				break;
 			}
 		}
