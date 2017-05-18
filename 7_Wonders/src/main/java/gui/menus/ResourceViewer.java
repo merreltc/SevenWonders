@@ -122,7 +122,7 @@ public class ResourceViewer extends Menu {
 				Constants.RESOURCE_VIEWER_VICTORY_POINTS_Y + Constants.RESOURCE_VIEWER_TEXT_Y_OFFSET
 						+ Constants.RESOURCE_VIEWER_ROW_HEIGHT);
 	}
-	
+
 	private void draw3CoinBox(Graphics graphics) {
 		graphics.setColor(new Color(50, 50, 50, 150));
 		graphics.drawRect(Constants.RESOURCE_VIEWER_THREE_COIN_X, Constants.RESOURCE_VIEWER_THREE_COIN_Y,
@@ -193,8 +193,8 @@ public class ResourceViewer extends Menu {
 		y += Constants.RESOURCE_VIEWER_TEXT_Y_OFFSET;
 		Card card = cards.get(row - 1);
 		int[] values = getRowValues(card);
-		graphics.drawString(messages.getString(Translate.prepareNoSpaceString(card.getName())), Constants.RESOURCE_VIEWER_ROW_X + Constants.RESOURCE_VIEWER_CELL_WIDTH / 3,
-				y);
+		graphics.drawString(messages.getString(Translate.prepareNoSpaceString(card.getName())),
+				Constants.RESOURCE_VIEWER_ROW_X + Constants.RESOURCE_VIEWER_CELL_WIDTH / 3, y);
 		for (int i = 0; i < values.length; i++) {
 			graphics.drawString(values[i] + "",
 					(Constants.RESOURCE_VIEWER_ROW_X + Constants.RESOURCE_VIEWER_FIRST_CELL_WIDTH

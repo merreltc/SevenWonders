@@ -33,7 +33,7 @@ import exceptions.InsufficientFundsException;
 public class PlayerTurnHandlerTest {
 	private Deck age1Deck, age2Deck;
 	private GameBoard gameBoard;
-	
+
 	@Before
 	public void setUp() {
 		this.gameBoard = EasyMock.partialMockBuilder(GameBoard.class).createMock();
@@ -393,7 +393,7 @@ public class PlayerTurnHandlerTest {
 
 		assertEquals(3, current.getNumVictoryPoints());
 	}
-	
+
 	@Test
 	public void testBuildStructureAddCommerce() {
 		ArrayList<Player> players = setUpArrayWithNumPlayers(3);
@@ -405,8 +405,8 @@ public class PlayerTurnHandlerTest {
 		Player current = board.getCurrentPlayer();
 		ArrayList<Card> currentHand = new ArrayList<Card>();
 
-		Card east = this.age1Deck.getCard(12); //east trading post
-		
+		Card east = this.age1Deck.getCard(12); // east trading post
+
 		currentHand.add(east);
 
 		current.setCurrentHand(currentHand);
@@ -418,18 +418,18 @@ public class PlayerTurnHandlerTest {
 		assertEquals(0, current.getNumShields());
 		assertTrue(current.storagePileContainsCardByName("East Trading Post"));
 	}
-	
+
 	@Test
 	public void testBuildStructureAddCommerceCoinAdd() {
 		ArrayList<Player> players = setUpArrayWithNumPlayers(4);
-        this.age1Deck = createDeck(Age.AGE1, 4);
+		this.age1Deck = createDeck(Age.AGE1, 4);
 		GameBoard board = new GameBoard(players, this.age1Deck);
 
 		Player current = board.getCurrentPlayer();
 		ArrayList<Card> currentHand = new ArrayList<Card>();
 
-		Card tavern = this.age1Deck.getCard(16); //tavern
-		
+		Card tavern = this.age1Deck.getCard(16); // tavern
+
 		currentHand.add(tavern);
 
 		current.setCurrentHand(currentHand);

@@ -15,6 +15,10 @@
 			<property name="ignorePattern" value="^package.*|^import.*|a href|href|http://|https://|ftp://"/>
 		</module>
 		
+		<module name="MethodLength">
+			<property name="max" value="10"/>
+		</module>
+		
 		<module name="RegexpSinglelineJava">
 		    <property name="format" value="^\t* "/>
     		<property name="message" value="Indent must use tab characters"/>
