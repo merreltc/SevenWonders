@@ -25,6 +25,16 @@ import dataStructures.gameMaterials.ValueEffect.Value;
 import dataStructures.gameMaterials.ValueEffect.ValueType;
 
 public class LevelTest {
+	@Test
+	public void testEquals() {
+		Cost cost = EasyMock.createStrictMock(Cost.class);
+		Effect effect = EasyMock.createStrictMock(Effect.class);
+		int priority = 1;
+		
+		Level level1 = new Level(priority, cost, effect, Frequency.ONCEIMMEDIATE);
+		Level level2 = new Level(priority, cost, effect, Frequency.ONCEIMMEDIATE);
+		assertTrue(level1.equals(level2));
+	}
 
 	@Test
 	public void testPriority1() {
@@ -71,7 +81,7 @@ public class LevelTest {
 		int priority = 1;
 		Level level = new Level(priority, cost, effect, Frequency.ONCEIMMEDIATE);
 		CostType costType = level.getCostType();
-		HashMap<Enum, Integer> actual = level.getCost();
+		HashMap<Enum, Integer> actual = level.getCosts();
 		
 		EasyMock.verify(cost);
 		assertEquals(CostType.RESOURCE, costType);

@@ -33,16 +33,29 @@ public class Level {
 		this.cost = cost;
 		this.effects = effects;
 	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		Level temp = (Level) obj;
+		boolean equalPriority = this.priority == temp.priority;
+		boolean equalCost = this.getCost() == temp.getCost();
+		boolean equalEffects = this.effects == temp.getEffects();
+		return equalPriority && equalCost && equalEffects;
+	}
 
 	public int getPriority() {
 		return this.priority;
+	}
+	
+	public Cost getCost() {
+		return this.cost;
 	}
 	
 	public CostType getCostType() {
 		return this.cost.getType();
 	}
 
-	public HashMap<Enum, Integer> getCost() {
+	public HashMap<Enum, Integer> getCosts() {
 		return this.cost.getCost();
 	}
 
