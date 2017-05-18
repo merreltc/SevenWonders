@@ -270,6 +270,22 @@ public class PlayerTest {
 
 		assertTrue(player.storagePileContainsEntity(Good.GLASS));
 	}
+	
+	@Test
+	public void testStoragePileContainsGoodAndTradingPost() {
+		Player player = createMockedPlayer();
+		ArrayList<Card> deckCards = new SetUpDeckHandler().createCards(Age.AGE1, 3);
+
+		ArrayList<Card> playerCards = new ArrayList<Card>();
+		playerCards.add(deckCards.get(12)); //east trading post
+		playerCards.add(deckCards.get(6));
+		playerCards.add(deckCards.get(7));
+		playerCards.add(deckCards.get(8));
+
+		player.setStoragePile(playerCards);
+		
+		assertTrue(player.storagePileContainsEntity(Good.GLASS));
+	}
 
 	@Test
 	public void testAddToStoragePile() {
