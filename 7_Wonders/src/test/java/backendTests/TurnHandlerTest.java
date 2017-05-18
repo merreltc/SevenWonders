@@ -56,7 +56,7 @@ public class TurnHandlerTest {
 		GameManager manager = new GameManager(playerNames, this.setUpPlayerHandler, new SetUpDeckHandler(),
 				new TurnHandler(), new PlayerTurnHandler());
 
-		Deck deck = manager.getGameBoard().getDeck();
+		Deck deck = manager.getDeck();
 		int numPlayers = 7;
 		int expectedDeckSize = deck.getNumCards() - (7 * numPlayers);
 
@@ -106,7 +106,7 @@ public class TurnHandlerTest {
 		GameManager manager = new GameManager(playerNames, this.setUpPlayerHandler, new SetUpDeckHandler(),
 				new TurnHandler(), new PlayerTurnHandler());
 
-		Deck deck = manager.getGameBoard().getDeck();
+		Deck deck = manager.getDeck();
 		ArrayList<Player> players = manager.getPlayers();
 		TurnHandler turnHandler = new TurnHandler();
 		turnHandler.dealInitialTurnCards(players, deck);
