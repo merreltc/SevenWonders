@@ -61,7 +61,7 @@ public class Wonder {
 		}
 	}
 
-	public static String getNameByType(Wonder.WonderType wonder) {
+	public static String getNameByType(WonderType wonder) {
 		switch (wonder) {
 		case COLOSSUS:
 			return "The Colossus of Rhodes";
@@ -82,7 +82,7 @@ public class Wonder {
 		}
 	}
 
-	public static String getShortNameByType(Wonder.WonderType wonder) {
+	public static String getShortNameByType(WonderType wonder) {
 		switch (wonder) {
 		case COLOSSUS:
 			return "Colossus";

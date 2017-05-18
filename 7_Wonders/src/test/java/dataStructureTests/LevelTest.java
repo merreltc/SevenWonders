@@ -31,12 +31,9 @@ public class LevelTest {
 		int priority = 1;
 		Cost cost = EasyMock.createStrictMock(Cost.class);
 		Effect effect = EasyMock.createStrictMock(Effect.class);
-		
-		HashMap<Effect, Frequency> effects = new HashMap<Effect, Frequency>();
-		effects.put(effect, Frequency.ONCEIMMEDIATE);
 
-		Level level1 = new Level(priority, cost, effects);
-		Level level2 = new Level(priority, cost, effects);
+		Level level1 = new Level(priority, cost, effect, Frequency.EVERYTURN);
+		Level level2 = new Level(priority, cost, effect, Frequency.EVERYTURN);
 		assertTrue(level1.equals(level2));
 	}
 
@@ -51,6 +48,40 @@ public class LevelTest {
 
 		Level level1 = new Level(priority1, cost1, effect1, Frequency.ONCEIMMEDIATE);
 		Level level2 = new Level(priority2, cost2, effect2, Frequency.EVERYTURN);
+		assertFalse(level1.equals(level2));
+	}
+	
+	@Test
+	public void testEqualsTrueMultiEffect() {
+		int priority = 1;
+		Cost cost = EasyMock.createStrictMock(Cost.class);
+		Effect effect = EasyMock.createStrictMock(Effect.class);
+		
+		HashMap<Effect, Frequency> effects = new HashMap<Effect, Frequency>();
+		effects.put(effect, Frequency.ONCEIMMEDIATE);
+
+		Level level1 = new Level(priority, cost, effects);
+		Level level2 = new Level(priority, cost, effects);
+		assertTrue(level1.equals(level2));
+	}
+
+	@Test
+	public void testEqualsFalseMultiEffect() {
+		Cost cost1 = EasyMock.createStrictMock(Cost.class);
+		Cost cost2 = EasyMock.createStrictMock(Cost.class);
+		Effect effect1 = EasyMock.createStrictMock(Effect.class);
+		Effect effect2 = EasyMock.createStrictMock(Effect.class);
+		int priority1 = 1;
+		int priority2 = 2;
+		
+		HashMap<Effect, Frequency> effects1 = new HashMap<Effect, Frequency>();
+		effects1.put(effect1, Frequency.ONCEIMMEDIATE);
+		
+		HashMap<Effect, Frequency> effects2 = new HashMap<Effect, Frequency>();
+		effects2.put(effect2, Frequency.ONCEIMMEDIATE);
+
+		Level level1 = new Level(priority1, cost1, effects1);
+		Level level2 = new Level(priority2, cost2, effects2);
 		assertFalse(level1.equals(level2));
 	}
 	

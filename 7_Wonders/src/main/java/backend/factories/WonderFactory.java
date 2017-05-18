@@ -49,11 +49,18 @@ public class WonderFactory {
 	public Side getSide() {
 		if (this.mode == GameMode.EASY) {
 			return Side.A;
+		} else {
+			int pickSide = (int) (Math.random() * 2);
+			return generateSide(pickSide);
 		}
+	}
 
-		double randomNum = Math.random();
-		int sideAOrB = (int) Math.round(randomNum);
-		return sideAOrB == 0 ? Side.A : Side.B;
+	public Side generateSide(int pickSide) {
+		if (pickSide == 0) {
+			return Side.A;
+		} else {
+			return Side.B;
+		}
 	}
 
 	private void buildWonderSet(ArrayList<WonderType> wonders) {
