@@ -16,7 +16,6 @@ import utils.Translate;
 public class Logistics extends Menu {
 
 	public RenderImage renderer;
-	ResourceBundle messages = Translate.getNewResourceBundle();
 	private GameMode mode;
 
 	public Logistics(RenderImage renderer) {
@@ -25,12 +24,14 @@ public class Logistics extends Menu {
 
 	@Override
 	public void draw(Graphics graphics) {
+		ResourceBundle messages = Translate.getNewResourceBundle();
+		
 		for (Interactable button : this.getInteractables()) {
 			button.draw(graphics);
 		}
 		graphics.setFont(Constants.TitleFont);
 		graphics.setColor(Constants.TitleColor);
-		graphics.drawString(this.messages.getString("chooseNumberOfPlayers"), Constants.PlayerSelectTitlePosition.x,
+		graphics.drawString(messages.getString("chooseNumberOfPlayers"), Constants.PlayerSelectTitlePosition.x,
 				Constants.PlayerSelectTitlePosition.y);
 	}
 

@@ -32,7 +32,6 @@ public class Main extends JPanel implements ActionListener {
 	private Integer numOfPlayers;
 	private Image image;
 	private RenderImage renderer = new RenderImage();
-	ResourceBundle messages;
 
 	public enum MenuType {
 		MAINMENU, LOGISTICS, GAMEDISPLAY
@@ -40,12 +39,12 @@ public class Main extends JPanel implements ActionListener {
 
 	public Main() {
 		Constants.LOCALE = DropDownMessage.selectLanguageMessage();
-		this.messages = Translate.getNewResourceBundle();
+		ResourceBundle messages = Translate.getNewResourceBundle();
 		this.switchMenu(MenuType.MAINMENU);
 		this.frame = new JFrame();
 		this.frame.setSize(Constants.FrameWidth, Constants.FrameHeight);
 		this.frame.setVisible(true);
-		this.frame.setTitle(this.messages.getString("sevenWonders"));
+		this.frame.setTitle(messages.getString("sevenWonders"));
 		this.frame.setResizable(false);
 		this.frame.add(this);
 		this.frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);

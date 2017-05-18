@@ -7,11 +7,13 @@ import static org.junit.Assert.fail;
 
 import java.util.HashMap;
 
+import org.easymock.EasyMock;
 import org.junit.Test;
 
 import dataStructures.gameMaterials.Effect;
 import dataStructures.gameMaterials.Effect.Direction;
 import dataStructures.gameMaterials.Effect.EffectType;
+import dataStructures.gameMaterials.Level.Frequency;
 import dataStructures.gameMaterials.ValueEffect;
 import dataStructures.gameMaterials.ValueEffect.AffectingEntity;
 import dataStructures.gameMaterials.ValueEffect.Value;
@@ -29,6 +31,7 @@ public class ValueEffectTest {
 		assertEquals(ValueType.VICTORYPOINT, ((ValueEffect) effect).getValueType());
 		assertEquals(AffectingEntity.NONE, ((ValueEffect) effect).getAffectingEntity());
 	}
+	
 
 	@Test
 	public void test8VictoryPointsValueEffect() {
@@ -41,10 +44,25 @@ public class ValueEffectTest {
 		assertEquals(ValueType.VICTORYPOINT, ((ValueEffect) effect).getValueType());
 		assertEquals(AffectingEntity.NONE, ((ValueEffect) effect).getAffectingEntity());
 	}
+	
+	@Test
+	public void testValueEffectThirdConstructor(){
+		Effect effect = new ValueEffect(EffectType.VALUE, Value.VICTORYPOINTS, AffectingEntity.NONE, Direction.LEFT);
+		
+		assertEquals(EffectType.VALUE, effect.getEffectType());
+		assertEquals(Direction.LEFT, effect.getDirection());
+		assertEquals(AffectingEntity.NONE, ((ValueEffect) effect).getAffectingEntity());
+	}
 
 	@Test(expected = IllegalArgumentException.class)
 	public void testInvalidVictoryPointsValue0Effect() {
 		new ValueEffect(EffectType.VALUE, Value.VICTORYPOINTS, AffectingEntity.NONE, 0);
+		fail();
+	}
+	
+	@Test(expected = IllegalArgumentException.class)
+	public void testInvalidVictoryPointsValue0EffectSecondConstructor() {
+		new ValueEffect(EffectType.VALUE, Value.VICTORYPOINTS, AffectingEntity.NONE, 0, null);
 		fail();
 	}
 
@@ -356,6 +374,16 @@ public class ValueEffectTest {
 				Direction.RIGHT, 1);
 
 		assertFalse(effect.equals(effect2));
+	}
+	
+	@Test
+	public void testSixthConstructor(){
+		ValueEffect effect = new ValueEffect(EffectType.VALUE, Value.COMMERCE, AffectingEntity.RAWRESOURCES,
+				Direction.RIGHT, 1, Frequency.DEFAULT);
+		
+		assertEquals(Value.COMMERCE, effect.getValue());
+		assertEquals(Direction.RIGHT, effect.getDirection());
+		assertEquals(Frequency.DEFAULT, effect.getFrequency());
 	}
 
 	@Test

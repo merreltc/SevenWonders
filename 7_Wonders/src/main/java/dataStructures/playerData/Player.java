@@ -15,8 +15,6 @@ import utils.Translate;
 
 public class Player {
 	private String name = "Jane Doe";
-	private ResourceBundle messages = Translate.getNewResourceBundle();
-
 	private int numShields = 0;
 	private int numVictoryPoints = 0;
 
