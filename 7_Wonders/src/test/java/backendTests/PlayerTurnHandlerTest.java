@@ -484,7 +484,7 @@ public class PlayerTurnHandlerTest {
 		EasyMock.expect(effect.getValueType()).andReturn(ValueType.VICTORYPOINT);
 		EasyMock.expect(effect.getValueAmount()).andReturn(Integer.valueOf(3));
 		player.addNumVictoryPoints(3);
-		player.addToStoragePile(cardToBuild);
+		player.addCardToStoragePile(cardToBuild);
 		player.removeFromCurrentHand(cardToBuild);
 
 		EasyMock.replay(player, cardToBuild, cardInStorage, entityEffect, effect);
@@ -535,7 +535,7 @@ public class PlayerTurnHandlerTest {
 		EasyMock.expect(effect.getValueAmount()).andReturn(Integer.valueOf(3));
 		EasyMock.expect(player.storagePileContainsCardByName("Baths")).andReturn(false);
 		player.addNumVictoryPoints(3);
-		player.addToStoragePile(cardToBuild);
+		player.addCardToStoragePile(cardToBuild);
 		player.removeFromCurrentHand(cardToBuild);
 		EasyMock.expect(player.storagePileContainsCardByName("Baths")).andReturn(true);
 		EasyMock.expect(cardToBuild.getName()).andReturn("Baths");
@@ -569,7 +569,7 @@ public class PlayerTurnHandlerTest {
 		EasyMock.expect(player.getAllCards()).andReturn(storage);
 
 		EasyMock.expect(storaged.getName()).andReturn("East Trading Post");
-		player.addToStoragePile(cardToBuild);
+		player.addCardToStoragePile(cardToBuild);
 		player.removeFromCurrentHand(cardToBuild);
 		EasyMock.expect(player.storagePileContainsCardByName("Trading Post")).andReturn(false);
 		EasyMock.expect(cardToBuild.getName()).andReturn("Trading Post");

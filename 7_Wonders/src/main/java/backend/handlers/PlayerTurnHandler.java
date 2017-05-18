@@ -27,7 +27,7 @@ public class PlayerTurnHandler {
 
 		for (Card storage : current.getAllCards()) {
 			if (storage.getName().contains(previousStructure)) {
-				current.addToStoragePile(card);
+				current.addCardToStoragePile(card);
 				current.removeFromCurrentHand(card);
 				return;
 			}
@@ -58,7 +58,7 @@ public class PlayerTurnHandler {
 			}
 		}
 
-		current.addToStoragePile(card);
+		current.addCardToStoragePile(card);
 		current.removeFromCurrentHand(card);
 	}
 

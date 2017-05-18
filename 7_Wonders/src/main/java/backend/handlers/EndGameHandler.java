@@ -116,7 +116,7 @@ public class EndGameHandler {
 					entitiesAndAmounts.put(choice, 1);
 					Effect effect = new EntityEffect(EffectType.ENTITY, EntityType.SCIENCE, entitiesAndAmounts);
 					Card reward = new Card("Scientists Reward", CardType.SCIENTIFICSTRUCTURE, null, effect);
-					player.addToStoragePile(reward);
+					player.addCardToStoragePile(reward);
 					break;
 				}
 				count++;

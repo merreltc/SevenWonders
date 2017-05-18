@@ -103,7 +103,7 @@ public class Player {
 	public ArrayList<Card> getAllCards() {
 		return this.storagePile.getAllCardStoragePile();
 	}
-	
+
 	public ArrayList<Effect> getAllEffects() {
 		return this.storagePile.getEntireEffectStorage();
 	}
@@ -177,7 +177,11 @@ public class Player {
 		this.currentTrades.clear();
 	}
 
-	public void addToStoragePile(Card card) {
+	public void addWonderEffectToStoragePile(Effect effect) {
+		this.storagePile.addToWonderPile(effect);
+	}
+
+	public void addCardToStoragePile(Card card) {
 		this.storagePile.addCard(card);
 	}
 
@@ -212,7 +216,7 @@ public class Player {
 	public HashMap<ChipValue, Integer> getCoins() {
 		return this.playerChips.coins;
 	}
-	
+
 	public Side getSide() {
 		return this.wonder.getSide();
 	}

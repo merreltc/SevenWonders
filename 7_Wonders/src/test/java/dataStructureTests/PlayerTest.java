@@ -142,7 +142,7 @@ public class PlayerTest {
 	}
 
 	@Test
-	public void testSetStoragePileHand() {
+	public void testSetCardStoragePileHand() {
 		Player player = createMockedPlayer();
 		ArrayList<Card> deckCards = new SetUpDeckHandler().createCards(Age.AGE1, 3);
 
@@ -157,6 +157,24 @@ public class PlayerTest {
 		assertEquals(playerCards.get(0), player.getAllCards().get(0));
 		assertEquals(playerCards.get(1), player.getAllCards().get(1));
 		assertEquals(playerCards.get(2), player.getAllCards().get(2));
+	}
+	
+	@Test
+	public void testAddWonderEffect() {
+		Player player = createMockedPlayer();
+		ArrayList<Effect> effects = new ArrayList<Effect>();
+
+		Effect effect1 = EasyMock.createStrictMock(Effect.class);
+		player.addWonderEffectToStoragePile(effect1);
+		effects.add(effect1);
+		
+		Effect effect2 = EasyMock.createStrictMock(Effect.class);
+		player.addWonderEffectToStoragePile(effect2);
+		effects.add(effect2);
+		
+		assertEquals(effects, player.getAllEffects());
+		assertEquals(effect1, player.getAllEffects().get(0));
+		assertEquals(effect2, player.getAllEffects().get(1));
 	}
 
 	@Test
@@ -295,7 +313,7 @@ public class PlayerTest {
 
 		player.setStoragePile(playerCards);
 
-		player.addToStoragePile(deckCards.get(3));
+		player.addCardToStoragePile(deckCards.get(3));
 		assertEquals(4, player.getAllCards().size());
 		assertEquals(deckCards.get(3), player.getAllCards().get(3));
 	}
@@ -373,7 +391,7 @@ public class PlayerTest {
 	public void testGetFirstCardFromEndGame() {
 		Player player = createMockedPlayer();
 		Card card = createWorkersGuild();
-		player.addToStoragePile(card);
+		player.addCardToStoragePile(card);
 
 		Assert.assertEquals(card, player.getCardFromEndGame(0));
 	}
@@ -382,9 +400,9 @@ public class PlayerTest {
 	public void testGetTwoGuildCardsFromEndGame() {
 		Player player = createMockedPlayer();
 		Card card = createWorkersGuild();
-		player.addToStoragePile(card);
+		player.addCardToStoragePile(card);
 		Card card2 = createCraftsmenGuild();
-		player.addToStoragePile(card2);
+		player.addCardToStoragePile(card2);
 
 		Assert.assertEquals(card, player.getCardFromEndGame(0));
 		Assert.assertEquals(card2, player.getCardFromEndGame(1));
@@ -394,9 +412,9 @@ public class PlayerTest {
 	public void testGetGuildCardAfterRegularCardFromEndGame() {
 		Player player = createMockedPlayer();
 		Card card = createCourthouseCard();
-		player.addToStoragePile(card);
+		player.addCardToStoragePile(card);
 		Card card2 = createCraftsmenGuild();
-		player.addToStoragePile(card2);
+		player.addCardToStoragePile(card2);
 
 		Assert.assertEquals(card2, player.getCardFromEndGame(0));
 	}
@@ -405,9 +423,9 @@ public class PlayerTest {
 	public void testGetTooManyGuildCardsFromEndGame() {
 		Player player = createMockedPlayer();
 		Card card = createCourthouseCard();
-		player.addToStoragePile(card);
+		player.addCardToStoragePile(card);
 		Card card2 = createCraftsmenGuild();
-		player.addToStoragePile(card2);
+		player.addCardToStoragePile(card2);
 
 		Assert.assertEquals(card2, player.getCardFromEndGame(0));
 		try {
@@ -435,9 +453,9 @@ public class PlayerTest {
 		Player player = createMockedPlayer();
 
 		Card card1 = createApocathery();
-		player.addToStoragePile(createApocathery());
-		player.addToStoragePile(createScriptorium());
-		player.addToStoragePile(createWorkshop());
+		player.addCardToStoragePile(createApocathery());
+		player.addCardToStoragePile(createScriptorium());
+		player.addCardToStoragePile(createWorkshop());
 
 		int[] amounts = player.getNumberOfEachScience();
 
@@ -450,10 +468,10 @@ public class PlayerTest {
 	public void testGetAmountOfScienceOneOfTwoAndTwoOfOne() {
 		Player player = createMockedPlayer();
 		Card card1 = createApocathery();
-		player.addToStoragePile(createApocathery());
-		player.addToStoragePile(createScriptorium());
-		player.addToStoragePile(createWorkshop());
-		player.addToStoragePile(createWorkshop());
+		player.addCardToStoragePile(createApocathery());
+		player.addCardToStoragePile(createScriptorium());
+		player.addCardToStoragePile(createWorkshop());
+		player.addCardToStoragePile(createWorkshop());
 
 		int[] amounts = player.getNumberOfEachScience();
 

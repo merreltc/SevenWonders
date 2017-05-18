@@ -435,7 +435,7 @@ public class EndGameHandlerTest {
 		EasyMock.replay(message, wonder);
 
 		Player player1 = new Player("Jane Doe", wonder);
-		player1.addToStoragePile(this.createScientistsGuild());
+		player1.addCardToStoragePile(this.createScientistsGuild());
 
 		EndGameHandler end = new EndGameHandler();
 		end.handleScientistsGuild(player1, message);
@@ -454,7 +454,7 @@ public class EndGameHandlerTest {
 		EasyMock.replay(message, wonder);
 
 		Player player1 = new Player("Jane Doe", wonder);
-		player1.addToStoragePile(this.createScientistsGuild());
+		player1.addCardToStoragePile(this.createScientistsGuild());
 
 		EndGameHandler end = new EndGameHandler();
 		end.handleScientistsGuild(player1, message);
@@ -473,7 +473,7 @@ public class EndGameHandlerTest {
 		EasyMock.replay(message, wonder);
 
 		Player player1 = new Player("Jane Doe", wonder);
-		player1.addToStoragePile(this.createScientistsGuild());
+		player1.addCardToStoragePile(this.createScientistsGuild());
 
 		EndGameHandler end = new EndGameHandler();
 		end.handleScientistsGuild(player1, message);
