@@ -1,4 +1,3 @@
-
 package backend;
 
 import java.util.ArrayList;
@@ -55,6 +54,7 @@ public class GameManager {
 	
 	public void setUpGame(ArrayList<String> names) {
 		this.board = createGameBoard(names);
+		this.handlers.getPlayerTurnHandler().setGameBoard(this.board);
 		this.handlers.setRotateHandler(new RotateHandler(this.board));
 		this.handlers.setTradeHandler(new TradeHandler(this.board));
 	}
@@ -77,9 +77,9 @@ public class GameManager {
 	public void tradeForEntity(Player from, Player to, Enum entity) {
 		boolean discountSuccesful = false;
 		if (from.storagePileContainsCardByName("East Trading Post")) {
-			discountSuccesful = tryTradeWithDiscount(from, to, entity, CardinalDirection.EAST);
+			discountSuccesful = tryTradeWithDiscountEast(from, to);
 		} else if (from.storagePileContainsCardByName("West Trading Post")) {
-			discountSuccesful = tryTradeWithDiscount(from, to, entity, CardinalDirection.WEST);
+			discountSuccesful = tryTradeWithDiscountWest(from, to);
 		} else if (from.storagePileContainsCardByName("Marketplace")) {
 			discountSuccesful = true;
 		}
@@ -87,10 +87,18 @@ public class GameManager {
 		this.handlers.getTradeHandler().tradeFromToForEntity(from, to, entity, discountSuccesful);
 	}
 
-	private boolean tryTradeWithDiscount(Player from, Player to, Enum entity, CardinalDirection direction) {
+	private boolean tryTradeWithDiscountEast(Player from, Player to) {
 		int fromPosition = this.getPlayers().indexOf(from);
 		int toPosition = this.getPlayers().indexOf(to);
-		fromPosition = correctFromIndex(direction, fromPosition);
+		fromPosition = correctFromIndex(CardinalDirection.EAST, fromPosition);
+
+		return (fromPosition == toPosition) ? true : false;
+	}
+	
+	private boolean tryTradeWithDiscountWest(Player from, Player to) {
+		int fromPosition = this.getPlayers().indexOf(from);
+		int toPosition = this.getPlayers().indexOf(to);
+		fromPosition = correctFromIndex(CardinalDirection.WEST, fromPosition);
 
 		return (fromPosition == toPosition) ? true : false;
 	}
@@ -120,7 +128,7 @@ public class GameManager {
 	}
 
 	public void buildStructure(Card card) {
-		this.handlers.getPlayerTurnHandler().buildStructure(getCurrentPlayer(), card, this.board);
+		this.handlers.getPlayerTurnHandler().buildStructure(getCurrentPlayer(), card);
 	}
 
 	public void changeRotateDirectionAndResetPositions(Rotation direction) {
@@ -149,7 +157,7 @@ public class GameManager {
 	}
 
 	public void discardSelectedCard(Card card) {
-		this.handlers.getPlayerTurnHandler().discardSelectedCard(getCurrentPlayer(), card, this.board);
+		this.handlers.getPlayerTurnHandler().discardSelectedCard(getCurrentPlayer(), card);
 	}
 
 	public String endCurrentPlayerTurn() {

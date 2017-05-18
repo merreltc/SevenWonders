@@ -1,6 +1,7 @@
 package dataStructures.playerData;
 
 import utils.Translate;
+import utils.TranslateWithTemplate;
 
 public class Coin extends Chip {
 
@@ -13,7 +14,7 @@ public class Coin extends Chip {
 	public Coin(int value) {
 		super();
 		if(value <= 0 || value == 2 || value >= 4) {
-			String msg = Translate.prepareStringTemplateWithIntArg(value, "improperCoinValue", Translate.getNewResourceBundle());
+			String msg = TranslateWithTemplate.prepareStringTemplateWithIntArg(value, "improperCoinValue", Translate.getNewResourceBundle());
 			throw new IllegalArgumentException(msg);
 		}
 		

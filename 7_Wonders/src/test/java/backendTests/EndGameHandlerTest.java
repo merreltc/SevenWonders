@@ -27,6 +27,7 @@ import dataStructures.gameMaterials.ValueEffect.Value;
 import dataStructures.gameMaterials.Wonder;
 import dataStructures.playerData.Chip.ChipValue;
 import dataStructures.playerData.Player;
+import utils.DropDownMessage;
 import utils.Message;
 
 public class EndGameHandlerTest {
@@ -427,7 +428,7 @@ public class EndGameHandlerTest {
 	@Test
 	public void testScientistsGuildEffectProtractor() {
 
-		Message message = EasyMock.mock(Message.class);
+		DropDownMessage message = EasyMock.mock(DropDownMessage.class);
 
 		EasyMock.expect(message.dropDownScienceSelectionMessage()).andReturn("Protractor");
 		Wonder wonder = EasyMock.mock(Wonder.class);
@@ -446,7 +447,7 @@ public class EndGameHandlerTest {
 	@Test
 	public void testScientistsGuildEffectWheel() {
 
-		Message message = EasyMock.mock(Message.class);
+		DropDownMessage message = EasyMock.mock(DropDownMessage.class);
 
 		EasyMock.expect(message.dropDownScienceSelectionMessage()).andReturn("Wheel");
 		Wonder wonder = EasyMock.mock(Wonder.class);
@@ -465,7 +466,7 @@ public class EndGameHandlerTest {
 	@Test
 	public void testScientistsGuildEffectTablet() {
 
-		Message message = EasyMock.mock(Message.class);
+		DropDownMessage message = EasyMock.mock(DropDownMessage.class);
 
 		EasyMock.expect(message.dropDownScienceSelectionMessage()).andReturn("Tablet");
 		Wonder wonder = EasyMock.mock(Wonder.class);

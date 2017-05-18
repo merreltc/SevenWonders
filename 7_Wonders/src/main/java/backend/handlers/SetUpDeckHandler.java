@@ -58,9 +58,8 @@ public class SetUpDeckHandler {
 		JSONArray jarr;
 
 		jarr = chooseAgeFile(age);
-		for (int i = 0; i < jarr.length(); i++) {
-			parseCardData(i, numPlayers, cards, jarr);
-		}
+		parseCardData(numPlayers, cards, jarr);
+
 		return cards;
 	}
 
@@ -97,41 +96,39 @@ public class SetUpDeckHandler {
 		return jarr;
 	}
 
-	private void parseCardData(int cardNumber, int numPlayers, ArrayList<Card> cards, JSONArray jarr) {
-		Card card;
-		ArrayList<Integer> frequencyByNumPlayers = new ArrayList<Integer>();
-		card = createCardToAdd(jarr, cardNumber, frequencyByNumPlayers);
-		for (Integer numOfFrequencyByNumPlayers : frequencyByNumPlayers) {
-			if (numPlayers >= numOfFrequencyByNumPlayers) {
-				cards.add(card);
+	private void parseCardData(int numPlayers, ArrayList<Card> cards, JSONArray jarr) {
+		for (int i = 0; i < jarr.length(); i++) {
+			ArrayList<Integer> frequencyByNumPlayers = new ArrayList<Integer>();
+			JSONObject cardData = populateFrequencyAndGetCardData(jarr, i, frequencyByNumPlayers);
+
+			Card card = createSingleCard(frequencyByNumPlayers, cardData);
+			for (Integer numOfFrequencyByNumPlayers : frequencyByNumPlayers) {
+				if (numPlayers >= numOfFrequencyByNumPlayers) {
+					cards.add(card);
+				}
 			}
 		}
 	}
 
-	private Card createCardToAdd(JSONArray jarr, int cardNumber, ArrayList<Integer> frequencyByNumPlayers) {
-		Card card;
-		JSONObject cardData = jarr.getJSONObject(cardNumber);
-		String cardName = cardData.getString("cardName");
-		populateFrequency(frequencyByNumPlayers, cardData);
-
-		CardType cardType = CardType.valueOf(cardData.getString("cardType"));
-		card = createSingleCard(frequencyByNumPlayers, cardData, cardName, cardType);
-		return card;
-	}
-
-	private void populateFrequency(ArrayList<Integer> frequencyByNumPlayers, JSONObject cardData) {
+	private JSONObject populateFrequencyAndGetCardData(JSONArray jarr, int i,
+			ArrayList<Integer> frequencyByNumPlayers) {
+		JSONObject cardData = jarr.getJSONObject(i);
 		JSONArray frequencyByNumPlayersJSON = cardData.getJSONArray("frequencyByNumPlayers");
+
 		for (int j = 0; j < frequencyByNumPlayersJSON.length(); j++) {
 			frequencyByNumPlayers.add(frequencyByNumPlayersJSON.getInt(j));
 		}
+		return cardData;
 	}
 
-	private Card createSingleCard(ArrayList<Integer> frequencyByNumPlayers, JSONObject cardData, String cardName,
-			CardType cardType) {
+	private Card createSingleCard(ArrayList<Integer> frequencyByNumPlayers, JSONObject cardData) {
+		CardType cardType = CardType.valueOf(cardData.getString("cardType"));
+		String cardName = cardData.getString("cardName");
 		Cost cost = parseCost(cardData);
 		Effect effect = parseEffect(cardData);
 		String previousStructure = cardData.getString("Previous");
 		String nextStructure = cardData.getString("Next");
+
 		if (cardType.equals(CardType.GUILD)) {
 			return new Card(cardName, cardType, cost, effect);
 		}
@@ -211,7 +208,7 @@ public class SetUpDeckHandler {
 		RawResource costResource = RawResource.valueOf(type);
 		givenCosts.put(costResource, amount);
 	}
-	
+
 	private void getCostAsGood(HashMap<Enum, Integer> givenCosts, JSONObject costValueObj) {
 		String type;
 		type = costValueObj.getString("Good");
@@ -299,7 +296,7 @@ public class SetUpDeckHandler {
 		if (affecting.equals("NONE")) {
 			return new ValueEffect(effectTypeEnum, value, affectingEntities, valueAmount);
 		}
-		
+
 		Direction direction = Direction.valueOf(effectObj.getString("Direction"));
 		return new ValueEffect(effectTypeEnum, value, affectingEntities, direction, valueAmount);
 	}

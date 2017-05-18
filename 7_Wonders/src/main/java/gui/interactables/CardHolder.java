@@ -13,16 +13,17 @@ public class CardHolder extends Interactable {
 	private boolean havePreviousStructure;
 
 	public CardHolder(Point positionPoint, Point boundPoint, String value) {
-		super(positionPoint, boundPoint, value);
+		super(positionPoint, boundPoint, value, Color.BLUE, Color.YELLOW);
 	}
 
 	public void giveCard(Card card) {
+		super.addImage(renderer.getImage(card.getName()));
 		this.card = card;
 	}
 
 	@Override
 	public void draw(Graphics graphics) {
-		super.draw(graphics, Color.BLUE, Color.YELLOW);
+		super.draw(graphics);
 		if (this.havePreviousStructure) {
 			graphics.fillRect((int) this.getPosition().getX(), (int) this.getPosition().getY(), 50, 50);
 		}

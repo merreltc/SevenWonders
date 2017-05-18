@@ -52,24 +52,40 @@ public class PlayerBoard {
 	private void setBoardPosition() {
 		switch (playerPosition) {
 		case 0:
-			this.sizePoint = new Point(Constants.CurrentPlayerBoardWidth, Constants.CurrentPlayerBoardHeight);
-			this.position = new Point(Constants.CurrentPlayerBoardPositionX, Constants.CurrentPlayerBoardPositionY);
+			currentBoardPosition();
 			break;
 		case -1:
-			this.sizePoint = new Point(Constants.LastPlayerBoardWidth, Constants.LastPlayerBoardHeight);
-			this.position = new Point(Constants.LastPlayerBoardPositionX, Constants.LastPlayerBoardPositionY);
+			lastBoadPosition();
 			break;
 		case 1:
-			this.sizePoint = new Point(Constants.NextPlayerBoardWidth, Constants.NextPlayerBoardHeight);
-			this.position = new Point(Constants.NextPlayerBoardPositionX, Constants.NextPlayerBoardPositionY);
+			nextBoardPosition();
 			break;
 		default:
-			this.sizePoint = new Point(Constants.BackPlayerBoardWidth, Constants.BackPlayerBoardHeight);
-			this.position = new Point(
-					backPlayerStartingBoardPositionX + Constants.BackPlayerBoardXOffset * (this.playerPosition - 1),
-					Constants.BackPlayerBoardPositionY);
+			backBoardPosition();
 			break;
 		}
+	}
+
+	private void backBoardPosition() {
+		this.sizePoint = new Point(Constants.BackPlayerBoardWidth, Constants.BackPlayerBoardHeight);
+		this.position = new Point(
+				backPlayerStartingBoardPositionX + Constants.BackPlayerBoardXOffset * (this.playerPosition - 1),
+				Constants.BackPlayerBoardPositionY);
+	}
+
+	private void nextBoardPosition() {
+		this.sizePoint = new Point(Constants.NextPlayerBoardWidth, Constants.NextPlayerBoardHeight);
+		this.position = new Point(Constants.NextPlayerBoardPositionX, Constants.NextPlayerBoardPositionY);
+	}
+
+	private void lastBoadPosition() {
+		this.sizePoint = new Point(Constants.LastPlayerBoardWidth, Constants.LastPlayerBoardHeight);
+		this.position = new Point(Constants.LastPlayerBoardPositionX, Constants.LastPlayerBoardPositionY);
+	}
+
+	private void currentBoardPosition() {
+		this.sizePoint = new Point(Constants.CurrentPlayerBoardWidth, Constants.CurrentPlayerBoardHeight);
+		this.position = new Point(Constants.CurrentPlayerBoardPositionX, Constants.CurrentPlayerBoardPositionY);
 	}
 
 	private Button makeResourceButton() {
@@ -82,7 +98,8 @@ public class PlayerBoard {
 	}
 
 	public void drawBoard(Graphics graphics) {
-		RenderImage.draw(graphics, WonderImage, this.position.x, this.position.y, this.sizePoint.x, this.sizePoint.y);
+		renderer.setImage(WonderImage);
+		renderer.draw(graphics, new int[] {this.position.x, this.position.y, this.sizePoint.x, this.sizePoint.y});
 		graphics.setFont(Constants.ResourceFont);
 		graphics.setColor(Color.RED);
 		graphics.drawString(this.player.getName(), position.x + sizePoint.x / 2 - 20,
@@ -94,20 +111,20 @@ public class PlayerBoard {
 		format.setLocale(Locale.getDefault());
 
 		Image image = renderer.getImage("lumber");
-		RenderImage.draw(graphics, image, position.x, position.y, Constants.RESOURCE_IMAGE_HEIGHT + 10,
-				Constants.RESOURCE_IMAGE_WIDTH + 10);
+		renderer.draw(graphics, new int[] {position.x, position.y, Constants.RESOURCE_IMAGE_HEIGHT + 10,
+				Constants.RESOURCE_IMAGE_WIDTH + 10});
 
 		image = renderer.getImage("ore");
-		RenderImage.draw(graphics, image, position.x, position.y + 45, Constants.RESOURCE_IMAGE_HEIGHT + 10,
-				Constants.RESOURCE_IMAGE_WIDTH + 10);
+		renderer.draw(graphics, new int[] {position.x, position.y + 45, Constants.RESOURCE_IMAGE_HEIGHT + 10,
+				Constants.RESOURCE_IMAGE_WIDTH + 10});
 
 		image = renderer.getImage("stone");
-		RenderImage.draw(graphics, image, position.x, position.y + 85, Constants.RESOURCE_IMAGE_HEIGHT + 10,
-				Constants.RESOURCE_IMAGE_WIDTH + 10);
+		renderer.draw(graphics, new int[] {position.x, position.y + 85, Constants.RESOURCE_IMAGE_HEIGHT + 10,
+				Constants.RESOURCE_IMAGE_WIDTH + 10});
 
 		image = renderer.getImage("clay");
-		RenderImage.draw(graphics, image, position.x, position.y + 125, Constants.RESOURCE_IMAGE_HEIGHT + 10,
-				Constants.RESOURCE_IMAGE_WIDTH + 10);
+		renderer.draw(graphics, new int[]{position.x, position.y + 125, Constants.RESOURCE_IMAGE_HEIGHT + 10,
+				Constants.RESOURCE_IMAGE_WIDTH + 10});
 	}
 
 	public void changePlayer(Player player) {

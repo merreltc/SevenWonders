@@ -52,7 +52,8 @@ public class PlayerTurnHandlerTest {
 		current.setCurrentHand(currentHand);
 
 		PlayerTurnHandler playerTurnHandler = new PlayerTurnHandler();
-		playerTurnHandler.buildStructure(current, current.getCurrentHand().get(0), board);
+		playerTurnHandler.setGameBoard(board);
+		playerTurnHandler.buildStructure(current, current.getCurrentHand().get(0));
 
 		assertEquals(1, current.getStoragePile().size());
 		assertEquals(0, current.getCurrentHand().size());
@@ -73,7 +74,8 @@ public class PlayerTurnHandlerTest {
 		current.setCurrentHand(currentHand);
 
 		PlayerTurnHandler playerTurnHandler = new PlayerTurnHandler();
-		playerTurnHandler.buildStructure(current, current.getCurrentHand().get(0), board);
+		playerTurnHandler.setGameBoard(board);
+		playerTurnHandler.buildStructure(current, current.getCurrentHand().get(0));
 
 		assertEquals(1, current.getStoragePile().size());
 		assertEquals(0, current.getCurrentHand().size());
@@ -97,8 +99,9 @@ public class PlayerTurnHandlerTest {
 		current.setCurrentHand(currentHand);
 
 		PlayerTurnHandler playerTurnHandler = new PlayerTurnHandler();
-		playerTurnHandler.buildStructure(current, current.getCurrentHand().get(0), board);
-		playerTurnHandler.buildStructure(current, current.getCurrentHand().get(0), board);
+		playerTurnHandler.setGameBoard(board);
+		playerTurnHandler.buildStructure(current, current.getCurrentHand().get(0));
+		playerTurnHandler.buildStructure(current, current.getCurrentHand().get(0));
 
 		assertEquals(2, current.getStoragePile().size());
 		assertEquals(0, current.getCurrentHand().size());
@@ -120,8 +123,9 @@ public class PlayerTurnHandlerTest {
 		current.setCurrentHand(currentHand);
 
 		PlayerTurnHandler playerTurnHandler = new PlayerTurnHandler();
-		playerTurnHandler.buildStructure(current, current.getCurrentHand().get(0), board);
-		playerTurnHandler.buildStructure(current, current.getCurrentHand().get(0), board);
+		playerTurnHandler.setGameBoard(board);
+		playerTurnHandler.buildStructure(current, current.getCurrentHand().get(0));
+		playerTurnHandler.buildStructure(current, current.getCurrentHand().get(0));
 		fail();
 	}
 
@@ -139,8 +143,9 @@ public class PlayerTurnHandlerTest {
 		current.setCurrentHand(currentHand);
 
 		PlayerTurnHandler playerTurnHandler = new PlayerTurnHandler();
-		playerTurnHandler.buildStructure(current, current.getCurrentHand().get(0), board);
-		playerTurnHandler.buildStructure(current, current.getCurrentHand().get(0), board);
+		playerTurnHandler.setGameBoard(board);
+		playerTurnHandler.buildStructure(current, current.getCurrentHand().get(0));
+		playerTurnHandler.buildStructure(current, current.getCurrentHand().get(0));
 
 		assertEquals(2, current.getStoragePile().size());
 		assertEquals(0, current.getCurrentHand().size());
@@ -164,8 +169,9 @@ public class PlayerTurnHandlerTest {
 		current.setCurrentHand(currentHand);
 
 		PlayerTurnHandler playerTurnHandler = new PlayerTurnHandler();
-		playerTurnHandler.buildStructure(current, current.getCurrentHand().get(0), board);
-		playerTurnHandler.buildStructure(current, current.getCurrentHand().get(0), board);
+		playerTurnHandler.setGameBoard(board);
+		playerTurnHandler.buildStructure(current, current.getCurrentHand().get(0));
+		playerTurnHandler.buildStructure(current, current.getCurrentHand().get(0));
 		fail();
 	}
 
@@ -184,9 +190,10 @@ public class PlayerTurnHandlerTest {
 		current.setCurrentHand(currentHand);
 
 		PlayerTurnHandler playerTurnHandler = new PlayerTurnHandler();
-		playerTurnHandler.buildStructure(current, current.getCurrentHand().get(0), board);
-		playerTurnHandler.buildStructure(current, current.getCurrentHand().get(0), board);
-		playerTurnHandler.buildStructure(current, current.getCurrentHand().get(0), board);
+		playerTurnHandler.setGameBoard(board);
+		playerTurnHandler.buildStructure(current, current.getCurrentHand().get(0));
+		playerTurnHandler.buildStructure(current, current.getCurrentHand().get(0));
+		playerTurnHandler.buildStructure(current, current.getCurrentHand().get(0));
 
 		assertEquals(3, current.getStoragePile().size());
 		assertEquals(0, current.getCurrentHand().size());
@@ -212,8 +219,9 @@ public class PlayerTurnHandlerTest {
 		current.setCurrentHand(currentHand);
 
 		PlayerTurnHandler playerTurnHandler = new PlayerTurnHandler();
-		playerTurnHandler.buildStructure(current, current.getCurrentHand().get(0), board);
-		playerTurnHandler.buildStructure(current, current.getCurrentHand().get(0), board);
+		playerTurnHandler.setGameBoard(board);
+		playerTurnHandler.buildStructure(current, current.getCurrentHand().get(0));
+		playerTurnHandler.buildStructure(current, current.getCurrentHand().get(0));
 		fail();
 	}
 
@@ -232,9 +240,10 @@ public class PlayerTurnHandlerTest {
 		current.setCurrentHand(currentHand);
 
 		PlayerTurnHandler playerTurnHandler = new PlayerTurnHandler();
-		playerTurnHandler.buildStructure(current, current.getCurrentHand().get(0), board);
-		playerTurnHandler.buildStructure(current, current.getCurrentHand().get(0), board);
-		playerTurnHandler.buildStructure(current, current.getCurrentHand().get(0), board);
+		playerTurnHandler.setGameBoard(board);
+		playerTurnHandler.buildStructure(current, current.getCurrentHand().get(0));
+		playerTurnHandler.buildStructure(current, current.getCurrentHand().get(0));
+		playerTurnHandler.buildStructure(current, current.getCurrentHand().get(0));
 
 		assertEquals(3, current.getStoragePile().size());
 		assertEquals(0, current.getCurrentHand().size());
@@ -261,9 +270,10 @@ public class PlayerTurnHandlerTest {
 		current.setCurrentHand(currentHand);
 
 		PlayerTurnHandler playerTurnHandler = new PlayerTurnHandler();
-		playerTurnHandler.buildStructure(current, current.getCurrentHand().get(0), board);
-		playerTurnHandler.buildStructure(current, current.getCurrentHand().get(0), board);
-		playerTurnHandler.buildStructure(current, current.getCurrentHand().get(0), board);
+		playerTurnHandler.setGameBoard(board);
+		playerTurnHandler.buildStructure(current, current.getCurrentHand().get(0));
+		playerTurnHandler.buildStructure(current, current.getCurrentHand().get(0));
+		playerTurnHandler.buildStructure(current, current.getCurrentHand().get(0));
 		fail();
 	}
 
@@ -283,7 +293,8 @@ public class PlayerTurnHandlerTest {
 		current.setCurrentHand(currentHand);
 
 		PlayerTurnHandler playerTurnHandler = new PlayerTurnHandler();
-		playerTurnHandler.discardSelectedCard(current, discarded, board);
+		playerTurnHandler.setGameBoard(board);
+		playerTurnHandler.discardSelectedCard(current, discarded);
 
 		assertEquals(1, board.getDiscardPile().size());
 		assertEquals(6, current.getCoinTotal());
@@ -309,8 +320,9 @@ public class PlayerTurnHandlerTest {
 		current.setCurrentHand(currentHand);
 
 		PlayerTurnHandler playerTurnHandler = new PlayerTurnHandler();
-		playerTurnHandler.buildStructure(current, lumber, board);
-		playerTurnHandler.buildStructure(current, stockade, board);
+		playerTurnHandler.setGameBoard(board);
+		playerTurnHandler.buildStructure(current, lumber);
+		playerTurnHandler.buildStructure(current, stockade);
 
 		assertEquals(1, current.getNumShields());
 	}
@@ -336,9 +348,10 @@ public class PlayerTurnHandlerTest {
 		current.setCurrentHand(currentHand);
 
 		PlayerTurnHandler playerTurnHandler = new PlayerTurnHandler();
-		playerTurnHandler.buildStructure(current, quarry, board);
-		playerTurnHandler.buildStructure(current, stone, board);
-		playerTurnHandler.buildStructure(current, walls, board);
+		playerTurnHandler.setGameBoard(board);
+		playerTurnHandler.buildStructure(current, quarry);
+		playerTurnHandler.buildStructure(current, stone);
+		playerTurnHandler.buildStructure(current, walls);
 
 		assertEquals(2, current.getNumShields());
 	}
@@ -364,9 +377,10 @@ public class PlayerTurnHandlerTest {
 		current.setCurrentHand(currentHand);
 
 		PlayerTurnHandler playerTurnHandler = new PlayerTurnHandler();
-		playerTurnHandler.buildStructure(current, ore, board);
-		playerTurnHandler.buildStructure(current, forest, board);
-		playerTurnHandler.buildStructure(current, statue, board);
+		playerTurnHandler.setGameBoard(board);
+		playerTurnHandler.buildStructure(current, ore);
+		playerTurnHandler.buildStructure(current, forest);
+		playerTurnHandler.buildStructure(current, statue);
 		fail();
 	}
 
@@ -388,8 +402,9 @@ public class PlayerTurnHandlerTest {
 		current.setCurrentHand(currentHand);
 
 		PlayerTurnHandler playerTurnHandler = new PlayerTurnHandler();
-		playerTurnHandler.buildStructure(current, stone, board);
-		playerTurnHandler.buildStructure(current, baths, board);
+		playerTurnHandler.setGameBoard(board);
+		playerTurnHandler.buildStructure(current, stone);
+		playerTurnHandler.buildStructure(current, baths);
 
 		assertEquals(3, current.getNumVictoryPoints());
 	}
@@ -412,7 +427,8 @@ public class PlayerTurnHandlerTest {
 		current.setCurrentHand(currentHand);
 
 		PlayerTurnHandler playerTurnHandler = new PlayerTurnHandler();
-		playerTurnHandler.buildStructure(current, east, board);
+		playerTurnHandler.setGameBoard(board);
+		playerTurnHandler.buildStructure(current, east);
 
 		assertEquals(0, current.getNumVictoryPoints());
 		assertEquals(0, current.getNumShields());
@@ -435,7 +451,8 @@ public class PlayerTurnHandlerTest {
 		current.setCurrentHand(currentHand);
 
 		PlayerTurnHandler playerTurnHandler = new PlayerTurnHandler();
-		playerTurnHandler.buildStructure(current, tavern, board);
+		playerTurnHandler.setGameBoard(board);
+		playerTurnHandler.buildStructure(current, tavern);
 
 		assertEquals(0, current.getNumVictoryPoints());
 		assertEquals(0, current.getNumShields());
@@ -465,6 +482,7 @@ public class PlayerTurnHandlerTest {
 		EasyMock.expect(cardToBuild.getCostType()).andReturn(CostType.RESOURCE);
 		EasyMock.expect(cardToBuild.getEffectType()).andReturn(EffectType.VALUE);
 		EasyMock.expect(cardToBuild.getCost()).andReturn(cost);
+		EasyMock.expect(cardToBuild.getCost()).andReturn(cost);
 		EasyMock.expect(player.getStoragePile()).andReturn(storage);
 		EasyMock.expect(player.getStoragePile()).andReturn(storage);
 		EntityEffect entityEffect = EasyMock.mock(EntityEffect.class);
@@ -472,8 +490,12 @@ public class PlayerTurnHandlerTest {
 		for (Card sCards : storage) {
 			EasyMock.expect(sCards.getName()).andReturn("Brick Yard");
 			EasyMock.expect(sCards.getEffectType()).andReturn(EffectType.ENTITY);
+			EasyMock.expect(sCards.getEffectType()).andReturn(EffectType.ENTITY);
 
 			EasyMock.expect(sCards.getEffect()).andReturn(entityEffect);
+			EasyMock.expect(sCards.getEffect()).andReturn(entityEffect);
+			EasyMock.expect(entityEffect.getEntities()).andReturn(entities);
+			EasyMock.expect(entityEffect.getEntities()).andReturn(entities);
 			EasyMock.expect(entityEffect.getEntities()).andReturn(entities);
 			EasyMock.expect(entityEffect.getEntities()).andReturn(entities);
 		}
@@ -486,11 +508,13 @@ public class PlayerTurnHandlerTest {
 		player.addNumVictoryPoints(3);
 		player.addToStoragePile(cardToBuild);
 		player.removeFromCurrentHand(cardToBuild);
+		EasyMock.expect(player.getCurrentTrades()).andReturn(new HashMap<Enum, Integer>());
 
 		EasyMock.replay(player, cardToBuild, cardInStorage, entityEffect, effect);
 
 		PlayerTurnHandler playerTurnHandler = new PlayerTurnHandler();
-		playerTurnHandler.buildStructure(player, cardToBuild, this.gameBoard);
+		playerTurnHandler.setGameBoard(this.gameBoard);
+		playerTurnHandler.buildStructure(player, cardToBuild);
 
 		EasyMock.verify(player, cardToBuild, cardInStorage, entityEffect, effect);
 	}
@@ -515,6 +539,7 @@ public class PlayerTurnHandlerTest {
 		EasyMock.expect(cardToBuild.getCostType()).andReturn(CostType.RESOURCE);
 		EasyMock.expect(cardToBuild.getEffectType()).andReturn(EffectType.VALUE);
 		EasyMock.expect(cardToBuild.getCost()).andReturn(cost);
+		EasyMock.expect(cardToBuild.getCost()).andReturn(cost);
 		EasyMock.expect(player.getStoragePile()).andReturn(storage);
 		EasyMock.expect(player.getStoragePile()).andReturn(storage);
 		EntityEffect entityEffect = EasyMock.mock(EntityEffect.class);
@@ -522,8 +547,12 @@ public class PlayerTurnHandlerTest {
 		for (Card sCards : storage) {
 			EasyMock.expect(sCards.getName()).andReturn("Brick Yard");
 			EasyMock.expect(sCards.getEffectType()).andReturn(EffectType.ENTITY);
+			EasyMock.expect(sCards.getEffectType()).andReturn(EffectType.ENTITY);
 
 			EasyMock.expect(sCards.getEffect()).andReturn(entityEffect);
+			EasyMock.expect(sCards.getEffect()).andReturn(entityEffect);
+			EasyMock.expect(entityEffect.getEntities()).andReturn(entities);
+			EasyMock.expect(entityEffect.getEntities()).andReturn(entities);
 			EasyMock.expect(entityEffect.getEntities()).andReturn(entities);
 			EasyMock.expect(entityEffect.getEntities()).andReturn(entities);
 		}
@@ -537,16 +566,18 @@ public class PlayerTurnHandlerTest {
 		player.addNumVictoryPoints(3);
 		player.addToStoragePile(cardToBuild);
 		player.removeFromCurrentHand(cardToBuild);
+		EasyMock.expect(player.getCurrentTrades()).andReturn(new HashMap<Enum, Integer>());
 		EasyMock.expect(player.storagePileContainsCardByName("Baths")).andReturn(true);
 		EasyMock.expect(cardToBuild.getName()).andReturn("Baths");
 
 		EasyMock.replay(player, cardToBuild, cardInStorage, entityEffect, effect);
 
 		PlayerTurnHandler playerTurnHandler = new PlayerTurnHandler();
-		playerTurnHandler.buildStructure(player, cardToBuild, this.gameBoard);
+		playerTurnHandler.setGameBoard(this.gameBoard);
+		playerTurnHandler.buildStructure(player, cardToBuild);
 
 		try {
-			playerTurnHandler.buildStructure(player, cardToBuild, this.gameBoard);
+			playerTurnHandler.buildStructure(player, cardToBuild);
 			fail();
 		} catch (IllegalArgumentException error) {
 			assertEquals("Cannot build Structure: Player already has the same Structure", error.getMessage());
@@ -576,7 +607,8 @@ public class PlayerTurnHandlerTest {
 		EasyMock.replay(player, storaged, cardToBuild);
 
 		PlayerTurnHandler playerTurnHandler = new PlayerTurnHandler();
-		playerTurnHandler.buildStructure(player, cardToBuild, this.gameBoard);
+		playerTurnHandler.setGameBoard(this.gameBoard);
+		playerTurnHandler.buildStructure(player, cardToBuild);
 
 		EasyMock.verify(player, storaged, cardToBuild);
 	}
@@ -610,7 +642,8 @@ public class PlayerTurnHandlerTest {
 		current.setCurrentHand(currentHand);
 
 		PlayerTurnHandler playerTurnHandler = new PlayerTurnHandler();
-		playerTurnHandler.buildStructure(current, current.getCurrentHand().get(0), board);
+		playerTurnHandler.setGameBoard(board);
+		playerTurnHandler.buildStructure(current, current.getCurrentHand().get(0));
 
 		assertEquals(1, current.getStoragePile().size());
 		assertEquals(0, current.getCurrentHand().size());

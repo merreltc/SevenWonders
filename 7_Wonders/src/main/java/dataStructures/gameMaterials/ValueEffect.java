@@ -4,6 +4,7 @@ import java.util.HashMap;
 
 import dataStructures.gameMaterials.Level.Frequency;
 import utils.Translate;
+import utils.TranslateWithTemplate;
 
 public class ValueEffect extends Effect {
 	private static final int NO_VALUE_AMOUNT = -1;
@@ -99,21 +100,21 @@ public class ValueEffect extends Effect {
 		switch (value) {
 		case VICTORYPOINTS:
 			if (valueAmount <= 0 || valueAmount >= 9) {
-				String msg = Translate.prepareStringTemplateWithIntArg(valueAmount, "improperValueAmount",
+				String msg = TranslateWithTemplate.prepareStringTemplateWithIntArg(valueAmount, "improperValueAmount",
 						Translate.getNewResourceBundle());
 				throw new IllegalArgumentException(msg);
 			}
 			break;
 		case COMMERCE:
 			if (valueAmount <= 0) {
-				String msg = Translate.prepareStringTemplateWithIntArg(valueAmount, "improperValueAmount",
+				String msg = TranslateWithTemplate.prepareStringTemplateWithIntArg(valueAmount, "improperValueAmount",
 						Translate.getNewResourceBundle());
 				throw new IllegalArgumentException(msg);
 			}
 			break;
 		default:
 			if (valueAmount <= -2 || valueAmount == 0 || valueAmount >= 4) {
-				String msg = Translate.prepareStringTemplateWithIntArg(valueAmount, "improperValueAmount",
+				String msg = TranslateWithTemplate.prepareStringTemplateWithIntArg(valueAmount, "improperValueAmount",
 						Translate.getNewResourceBundle());
 				throw new IllegalArgumentException(msg);
 			}
