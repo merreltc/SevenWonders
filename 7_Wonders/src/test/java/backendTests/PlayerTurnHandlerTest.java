@@ -27,12 +27,13 @@ import dataStructures.gameMaterials.ValueEffect;
 import dataStructures.gameMaterials.ValueEffect.ValueType;
 import dataStructures.gameMaterials.Wonder;
 import dataStructures.playerData.Player;
+import dataStructures.playerData.Chip.ChipValue;
 import exceptions.InsufficientFundsException;
 
 public class PlayerTurnHandlerTest {
 	private Deck age1Deck, age2Deck;
 	private GameBoard gameBoard;
-	
+
 	@Before
 	public void setUp() {
 		this.gameBoard = EasyMock.partialMockBuilder(GameBoard.class).createMock();
@@ -76,9 +77,9 @@ public class PlayerTurnHandlerTest {
 
 		assertEquals(1, current.getStoragePile().size());
 		assertEquals(0, current.getCurrentHand().size());
+		assertEquals(0, (int) current.getCoins().get(ChipValue.THREE));
 		assertFalse(current.getCurrentHand().contains(this.age1Deck.getCard(4)));
 		assertTrue(current.getStoragePile().contains(this.age1Deck.getCard(4)));
-		assertEquals(0, current.getNumValue3Coins());
 		assertEquals(2, current.getCoinTotal());
 	}
 
@@ -391,6 +392,56 @@ public class PlayerTurnHandlerTest {
 		playerTurnHandler.buildStructure(current, baths, board);
 
 		assertEquals(3, current.getNumVictoryPoints());
+	}
+
+	@Test
+	public void testBuildStructureAddCommerce() {
+		ArrayList<Player> players = setUpArrayWithNumPlayers(3);
+
+		this.age1Deck = createDeck(Age.AGE1, 3);
+
+		GameBoard board = new GameBoard(players, this.age1Deck);
+
+		Player current = board.getCurrentPlayer();
+		ArrayList<Card> currentHand = new ArrayList<Card>();
+
+		Card east = this.age1Deck.getCard(12); // east trading post
+
+		currentHand.add(east);
+
+		current.setCurrentHand(currentHand);
+
+		PlayerTurnHandler playerTurnHandler = new PlayerTurnHandler();
+		playerTurnHandler.buildStructure(current, east, board);
+
+		assertEquals(0, current.getNumVictoryPoints());
+		assertEquals(0, current.getNumShields());
+		assertTrue(current.storagePileContainsCardByName("East Trading Post"));
+	}
+
+	@Test
+	public void testBuildStructureAddCommerceCoinAdd() {
+		ArrayList<Player> players = setUpArrayWithNumPlayers(4);
+		this.age1Deck = createDeck(Age.AGE1, 4);
+		GameBoard board = new GameBoard(players, this.age1Deck);
+
+		Player current = board.getCurrentPlayer();
+		ArrayList<Card> currentHand = new ArrayList<Card>();
+
+		Card tavern = this.age1Deck.getCard(16); // tavern
+
+		currentHand.add(tavern);
+
+		current.setCurrentHand(currentHand);
+
+		PlayerTurnHandler playerTurnHandler = new PlayerTurnHandler();
+		playerTurnHandler.buildStructure(current, tavern, board);
+
+		assertEquals(0, current.getNumVictoryPoints());
+		assertEquals(0, current.getNumShields());
+		assertEquals(8, current.getCoinTotal());
+		assertEquals(1, (int) current.getCoins().get(ChipValue.THREE));
+		assertTrue(current.storagePileContainsCardByName("Tavern"));
 	}
 
 	@Test

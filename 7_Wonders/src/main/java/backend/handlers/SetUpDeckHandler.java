@@ -31,10 +31,25 @@ import dataStructures.gameMaterials.ValueEffect.Value;
 import dataStructures.gameMaterials.ValueEffect.ValueType;
 
 public class SetUpDeckHandler {
+	
+	public static final int NUM_OF_GUILD_CARDS = 10;
 
 	public Deck createDeck(Age age, int numPlayers) {
 		ArrayList<Card> cards = createCards(age, numPlayers);
+		if (age == Age.AGE3){
+			cards = correctNumberOfGuildCards(cards, numPlayers);
+		}
 		return new Deck(age, cards);
+	}
+	
+	public ArrayList<Card> correctNumberOfGuildCards(ArrayList<Card> cards, int numOfPlayers){
+		
+		for (int i = 0; i < NUM_OF_GUILD_CARDS - numOfPlayers - 2; i++){
+			int indexToDelete = (int) (Math.random() * (NUM_OF_GUILD_CARDS - i));
+			cards.remove(indexToDelete);
+		}
+		
+		return cards;
 	}
 
 	public ArrayList<Card> createCards(Age age, int numPlayers) {

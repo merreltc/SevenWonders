@@ -35,7 +35,7 @@ public class PlayerTurnHandler {
 
 		if (card.getCostType() == CostType.COIN) {
 			int coinCost = card.getCost().get(CostType.COIN);
-			current.removeTotalCoins(coinCost);
+			PlayerChipHandler.removeTotalCoins(current, coinCost);
 		} else if (card.getCostType() != CostType.NONE) {
 			validatePlayerHasEntitiesForCard(current, card);
 		}
@@ -83,10 +83,6 @@ public class PlayerTurnHandler {
 						costfound = true;
 						numcost -= effect.getEntities().get(key);
 						usedEntities.add(sCards);
-
-						if (numcost <= 0) {
-							break;
-						}
 					}
 				}
 			}

@@ -178,4 +178,13 @@ public class CostTest {
 		
 		assertFalse(cost.equals(cost2));
 	}
+	
+	@Test
+	public void testInvlidTwoCostsEqualNoneCostType() {
+		Cost cost = new Cost(CostType.NONE, 0);
+		Cost cost2 = new Cost(CostType.COIN, 0);
+
+		assertFalse(cost.equals(cost2));
+	}
+	
 }

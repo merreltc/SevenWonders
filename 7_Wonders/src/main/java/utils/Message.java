@@ -45,11 +45,19 @@ public class Message {
 				messages.getString("wonderSelector"), JOptionPane.PLAIN_MESSAGE, null, wonders, wonders[0]);
 	}
 
+	public String dropDownScienceSelectionMessage() {
+		Object[] objects = { "Protractor", "Wheel", "Tablet" };
+		ResourceBundle messages = Translate.getNewResourceBundle();
+		return (String) JOptionPane.showInputDialog(null, messages.getString("chooseAScience"),
+				messages.getString("chooseAScience"), JOptionPane.PLAIN_MESSAGE, null, objects, objects[0]);
+	}
+
 	public static GameMode selectDifficulty() {
 		ResourceBundle messages = Translate.getNewResourceBundle();
 		Object[] objects = { messages.getString("easy"), messages.getString("normal") };
-		int result = JOptionPane.showOptionDialog(null, messages.getString("selectDifficulty"), messages.getString("difficulty"), JOptionPane.YES_OPTION,
-				JOptionPane.PLAIN_MESSAGE, null, objects, null);
+		int result = JOptionPane.showOptionDialog(null, messages.getString("selectDifficulty"),
+				messages.getString("difficulty"), JOptionPane.YES_OPTION, JOptionPane.PLAIN_MESSAGE, null, objects,
+				null);
 		return (result == JOptionPane.YES_OPTION) ? GameMode.EASY : GameMode.NORMAL;
 	}
 

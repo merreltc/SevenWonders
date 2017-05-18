@@ -1,9 +1,12 @@
+
 package backend;
 
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 import backend.handlers.DeckHandler;
+import backend.handlers.EndGameHandler;
+import backend.handlers.PlayerChipHandler;
 import backend.handlers.PlayerTurnHandler;
 import backend.handlers.RotateHandler;
 import backend.handlers.RotateHandler.Rotation;
@@ -67,6 +70,7 @@ public class GameManager {
 	}
 
 	public void dealInitialTurnCards() {
+		DeckHandler.shuffleDeck(this.board.getDeck());
 		this.turnHandler.dealInitialTurnCards(this.getPlayers(), this.board.getDeck());
 	}
 
@@ -160,7 +164,7 @@ public class GameManager {
 			int turnsTilEnd = this.turnHandler.getNumTurnsTilEndOfAge();
 			if (turnsTilEnd == 0) {
 				message = switchAge();
-			} else {
+			} else  {
 				message = rotateHand(turnsTilEnd);
 			}
 
@@ -187,11 +191,18 @@ public class GameManager {
 		String message;
 		Deck newDeck;
 		Age age = this.board.getAge();
+		if (age == Age.AGE3){
+			this.turnHandler.endAge(this.getPlayers(), Age.AGE3);
+			EndGameHandler end = new EndGameHandler();
+			ArrayList<Integer> scores = end.calculateScores(this.getPlayers());
+			return formatFinalScores(scores);
+		}
+		
 		newDeck = switchDeck(age);
 
 		this.board.setDeck(newDeck);
-		this.turnHandler.dealInitialTurnCards(this.getPlayers(), this.board.getDeck());
 		DeckHandler.shuffleDeck(this.board.getDeck());
+		this.turnHandler.dealInitialTurnCards(this.getPlayers(), this.board.getDeck());
 		message = this.messages.getString("endOfAge");
 		return message;
 	}
@@ -204,6 +215,15 @@ public class GameManager {
 		this.currentDirection = getNextRotation(currentAge);
 		this.turnHandler.endAge(this.getPlayers(), currentAge);
 		return newDeck;
+	}
+	
+	public String formatFinalScores(ArrayList<Integer> scores){
+		StringBuilder formattedString = new StringBuilder();
+		for (int i = 0; i < scores.size(); i++){
+			String playerName = this.getPlayer(i).getName();
+			formattedString.append(playerName + " : " + scores.get(i) + "\n");
+		}
+		return formattedString.toString();
 	}
 
 	private Age getNextAge(Age currentAge) {

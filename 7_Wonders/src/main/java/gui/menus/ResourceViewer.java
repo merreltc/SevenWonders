@@ -19,6 +19,7 @@ import dataStructures.gameMaterials.Effect.EffectType;
 import dataStructures.gameMaterials.EntityEffect;
 import dataStructures.gameMaterials.EntityEffect.EntityType;
 import dataStructures.playerData.Player;
+import dataStructures.playerData.Chip.ChipValue;
 import utils.RenderImage;
 import utils.Translate;
 
@@ -44,7 +45,6 @@ public class ResourceViewer extends Menu {
 			drawShieldBox(graphics);
 			draw3CoinBox(graphics);
 			drawWarTokenBox(graphics);
-			draw5CoinBox(graphics);
 			drawVictoryTokensBox(graphics);
 
 			graphics.setColor(startingColor);
@@ -81,7 +81,7 @@ public class ResourceViewer extends Menu {
 				Constants.RESOURCE_VIEWER_ONE_COIN_X + Constants.RESOURCE_VIEWER_CELL_WIDTH / 3,
 				Constants.RESOURCE_VIEWER_ONE_COIN_Y + 5, Constants.RESOURCE_IMAGE_WIDTH,
 				Constants.RESOURCE_IMAGE_HEIGHT);
-		graphics.drawString(player.getNumValue1Coins() + "",
+		graphics.drawString(player.getCoins().get(ChipValue.ONE) + "",
 				Constants.RESOURCE_VIEWER_ONE_COIN_X + Constants.RESOURCE_VIEWER_TEXT_X_OFFSET,
 				Constants.RESOURCE_VIEWER_ONE_COIN_Y + Constants.RESOURCE_VIEWER_TEXT_Y_OFFSET
 						+ Constants.RESOURCE_VIEWER_ROW_HEIGHT);
@@ -122,7 +122,7 @@ public class ResourceViewer extends Menu {
 				Constants.RESOURCE_VIEWER_VICTORY_POINTS_Y + Constants.RESOURCE_VIEWER_TEXT_Y_OFFSET
 						+ Constants.RESOURCE_VIEWER_ROW_HEIGHT);
 	}
-	
+
 	private void draw3CoinBox(Graphics graphics) {
 		graphics.setColor(new Color(50, 50, 50, 150));
 		graphics.drawRect(Constants.RESOURCE_VIEWER_THREE_COIN_X, Constants.RESOURCE_VIEWER_THREE_COIN_Y,
@@ -135,27 +135,9 @@ public class ResourceViewer extends Menu {
 				Constants.RESOURCE_VIEWER_THREE_COIN_X + Constants.RESOURCE_VIEWER_CELL_WIDTH / 3,
 				Constants.RESOURCE_VIEWER_THREE_COIN_Y + 5, Constants.RESOURCE_IMAGE_WIDTH,
 				Constants.RESOURCE_IMAGE_HEIGHT);
-		graphics.drawString(player.getNumValue3Coins() + "",
+		graphics.drawString(player.getCoins().get(ChipValue.THREE) + "",
 				Constants.RESOURCE_VIEWER_THREE_COIN_X + Constants.RESOURCE_VIEWER_TEXT_X_OFFSET,
 				Constants.RESOURCE_VIEWER_THREE_COIN_Y + Constants.RESOURCE_VIEWER_TEXT_Y_OFFSET
-						+ Constants.RESOURCE_VIEWER_ROW_HEIGHT);
-	}
-	
-	private void draw5CoinBox(Graphics graphics) {
-		graphics.setColor(new Color(50, 50, 50, 150));
-		graphics.drawRect(Constants.RESOURCE_VIEWER_FIVE_COIN_X, Constants.RESOURCE_VIEWER_FIVE_COIN_Y,
-				Constants.RESOURCE_VIEWER_CELL_WIDTH, Constants.RESOURCE_VIEWER_ROW_HEIGHT);
-		graphics.drawRect(Constants.RESOURCE_VIEWER_FIVE_COIN_X,
-				Constants.RESOURCE_VIEWER_FIVE_COIN_Y + Constants.RESOURCE_VIEWER_ROW_HEIGHT,
-				Constants.RESOURCE_VIEWER_CELL_WIDTH, Constants.RESOURCE_VIEWER_ROW_HEIGHT);
-		Image image = this.renderer.getImage("coin5");
-		RenderImage.draw(graphics, image,
-				Constants.RESOURCE_VIEWER_FIVE_COIN_X + Constants.RESOURCE_VIEWER_CELL_WIDTH / 3,
-				Constants.RESOURCE_VIEWER_FIVE_COIN_Y + 5, Constants.RESOURCE_IMAGE_WIDTH,
-				Constants.RESOURCE_IMAGE_HEIGHT);
-		graphics.drawString(player.getNumValue5Coins() + "",
-				Constants.RESOURCE_VIEWER_FIVE_COIN_X + Constants.RESOURCE_VIEWER_TEXT_X_OFFSET,
-				Constants.RESOURCE_VIEWER_FIVE_COIN_Y + Constants.RESOURCE_VIEWER_TEXT_Y_OFFSET
 						+ Constants.RESOURCE_VIEWER_ROW_HEIGHT);
 	}
 
@@ -211,8 +193,8 @@ public class ResourceViewer extends Menu {
 		y += Constants.RESOURCE_VIEWER_TEXT_Y_OFFSET;
 		Card card = cards.get(row - 1);
 		int[] values = getRowValues(card);
-		graphics.drawString(messages.getString(Translate.prepareNoSpaceString(card.getName())), Constants.RESOURCE_VIEWER_ROW_X + Constants.RESOURCE_VIEWER_CELL_WIDTH / 3,
-				y);
+		graphics.drawString(messages.getString(Translate.prepareNoSpaceString(card.getName())),
+				Constants.RESOURCE_VIEWER_ROW_X + Constants.RESOURCE_VIEWER_CELL_WIDTH / 3, y);
 		for (int i = 0; i < values.length; i++) {
 			graphics.drawString(values[i] + "",
 					(Constants.RESOURCE_VIEWER_ROW_X + Constants.RESOURCE_VIEWER_FIRST_CELL_WIDTH
@@ -314,5 +296,4 @@ public class ResourceViewer extends Menu {
 	public boolean isActive() {
 		return this.shouldDraw;
 	}
-
 }
