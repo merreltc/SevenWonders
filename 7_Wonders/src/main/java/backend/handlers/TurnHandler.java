@@ -96,7 +96,7 @@ public class TurnHandler {
 		return message;
 	}
 	
-	private void rotate(Rotation rotation) {
+	public void rotate(Rotation rotation) {
 		if (rotation == Rotation.CLOCKWISE) {
 			this.handlers.getRotateHandler().rotateClockwise();
 		} else {

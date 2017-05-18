@@ -13,6 +13,7 @@ import org.junit.Test;
 
 import backend.GameManager;
 import backend.handlers.PlayerTurnHandler;
+import backend.handlers.RotateHandler;
 import backend.handlers.SetUpDeckHandler;
 import backend.handlers.SetUpPlayerHandler;
 import backend.handlers.TurnHandler;
@@ -585,6 +586,23 @@ public class TurnHandlerTest {
 		assertEquals(Age.AGE3, manager.getGameBoard().getDeck().getAge());
 		assertTrue(manager.getGameBoard().getDeck().getCards().isEmpty());
 
+	}
+	
+	@Test
+	public void testRotateClockWise(){
+		RotateHandler rotate = EasyMock.mock(RotateHandler.class);
+		rotate.rotateClockwise();
+		EasyMock.replay(rotate);
+		
+		Handlers handlers = new Handlers(GameMode.EASY);
+		handlers.setRotateHandler(rotate);
+		
+		TurnHandler turnHandler = new TurnHandler();
+		turnHandler.handlers = handlers;
+		
+		turnHandler.rotate(Rotation.CLOCKWISE);
+		
+		EasyMock.verify(rotate);
 	}
 
 
