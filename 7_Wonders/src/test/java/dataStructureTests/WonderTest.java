@@ -2,16 +2,14 @@ package dataStructureTests;
 
 import static org.junit.Assert.assertEquals;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 
-import org.easymock.EasyMock;
 import org.junit.Test;
 
-import dataStructures.GeneralEnums.Resource;
-import dataStructures.Level;
-import dataStructures.Wonder;
-import dataStructures.Wonder.WonderType;
+import constants.GeneralEnums.Resource;
+import constants.GeneralEnums.Side;
+import dataStructures.gameMaterials.Wonder;
+import dataStructures.gameMaterials.Wonder.WonderType;
 
 public class WonderTest {
 
@@ -27,7 +25,7 @@ public class WonderTest {
 		wonders.put(WonderType.PYRAMIDS, "The Pyramids of Giza");
 
 		for (WonderType type : wonders.keySet()) {
-			Wonder wonder = new Wonder('A', type);
+			Wonder wonder = new Wonder(Side.A, type);
 			Resource resource = Wonder.getResourceByType(type);
 			assertEquals(resource, wonder.getResource());
 		}
@@ -45,13 +43,13 @@ public class WonderTest {
 		wonders.put(WonderType.PYRAMIDS, "The Pyramids of Giza");
 
 		for (WonderType type : wonders.keySet()) {
-			Wonder wonder = new Wonder('A', type);
+			Wonder wonder = new Wonder(Side.A, type);
 			verifyWonderSideA(wonder, type, wonders.get(type));
 		}
 	}
 
 	private void verifyWonderSideA(Wonder wonder, WonderType type, String name) {
-		assertEquals('A', wonder.getSide());
+		assertEquals(Side.A, wonder.getSide());
 		assertEquals(3, wonder.getNumLevels());
 		assertEquals(type, wonder.getType());
 		assertEquals(name, wonder.getName());
@@ -59,27 +57,27 @@ public class WonderTest {
 
 	@Test
 	public void testBasicsSideB2Levels() {
-		Wonder wonder = new Wonder('B', WonderType.COLOSSUS);
+		Wonder wonder = new Wonder(Side.B, WonderType.COLOSSUS);
 
-		assertEquals('B', wonder.getSide());
+		assertEquals(Side.B, wonder.getSide());
 		assertEquals(2, wonder.getNumLevels());
 		assertEquals("The Colossus of Rhodes", wonder.getName());
 	}
 
 	@Test
 	public void testBasicsSideB3Levels() {
-		Wonder wonder = new Wonder('B', WonderType.TEMPLE);
+		Wonder wonder = new Wonder(Side.B, WonderType.TEMPLE);
 
-		assertEquals('B', wonder.getSide());
+		assertEquals(Side.B, wonder.getSide());
 		assertEquals(3, wonder.getNumLevels());
 		assertEquals("The Temple of Artemis in Ephesus", wonder.getName());
 	}
 
 	@Test
 	public void testBasicsSideB4Levels() {
-		Wonder wonder = new Wonder('B', WonderType.PYRAMIDS);
+		Wonder wonder = new Wonder(Side.B, WonderType.PYRAMIDS);
 
-		assertEquals('B', wonder.getSide());
+		assertEquals(Side.B, wonder.getSide());
 		assertEquals(4, wonder.getNumLevels());
 		assertEquals("The Pyramids of Giza", wonder.getName());
 	}
