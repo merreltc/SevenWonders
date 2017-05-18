@@ -85,6 +85,12 @@ public class ChipTest {
 		new ConflictToken(-2);
 		fail();
 	}
+	
+	@Test(expected = IllegalArgumentException.class)
+	public void testInvalidConflictTokenNeg3() {
+		new ConflictToken(-3);
+		fail();
+	}
 
 	@Test(expected = IllegalArgumentException.class)
 	public void testInvalidConflictToken0() {
@@ -107,6 +113,18 @@ public class ChipTest {
 	@Test(expected = IllegalArgumentException.class)
 	public void testInvalidConflictToken6() {
 		new ConflictToken(6);
+		fail();
+	}
+	
+	@Test(expected = IllegalArgumentException.class)
+	public void testInvalidConflictToken7() {
+		new ConflictToken(7);
+		fail();
+	}
+	
+	@Test(expected = IllegalArgumentException.class)
+	public void testInvalidConflictToken9() {
+		new ConflictToken(9);
 		fail();
 	}
 
