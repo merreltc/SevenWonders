@@ -9,6 +9,7 @@ import dataStructures.playerData.Chip.ChipValue;
 import dataStructures.playerData.Player;
 import exceptions.InvalidTradeException;
 import utils.Translate;
+import utils.TranslateWithTemplate;
 
 public class TradeHandler {
 	private GameBoard board;
@@ -71,7 +72,7 @@ public class TradeHandler {
 			}
 			from.addTradedValue(entity);
 		} else {
-			String msg = Translate.prepareStringTemplateWithStringArg(this.messages.getString(entity.toString()),
+			String msg = TranslateWithTemplate.prepareStringTemplateWithStringArg(this.messages.getString(entity.toString()),
 					"noResourceForTradingTemplate", this.messages);
 			throw new InvalidTradeException(msg);
 		}

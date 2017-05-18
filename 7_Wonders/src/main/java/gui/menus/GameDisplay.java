@@ -26,19 +26,17 @@ public class GameDisplay extends Menu {
 	private GameManager gameManager;
 	private HandManager handManager;
 	private RenderImage renderer;
-	private GameMode mode;
 	ResourceBundle messages = Translate.getNewResourceBundle();
 	ResourceViewer resource = new ResourceViewer();
 
 	public GameDisplay(int numOfPlayers, RenderImage renderer, GameMode mode) {
-		initializeGameManager(numOfPlayers);
+		initializeGameManager(numOfPlayers, mode);
 		this.renderer = renderer;
-		this.mode = mode;
 	}
 
-	private void initializeGameManager(int numOfPlayers) {
+	private void initializeGameManager(int numOfPlayers, GameMode mode) {
 		ArrayList<String> playerNames = setUpPlayers(numOfPlayers);
-		this.gameManager = new GameManager(playerNames, this.mode);
+		this.gameManager = new GameManager(playerNames, mode);
 		this.gameManager.dealInitialTurnCards();
 	}
 
@@ -133,7 +131,11 @@ public class GameDisplay extends Menu {
 		if (clicked.getClass().equals(CardHolder.class)) {
 			this.attemptPlayCard((CardHolder) clicked);
 		} else if (clicked.getValue().equals(this.messages.getString("exit"))) {
-			exit();
+			if (this.resource.isActive()) {
+				this.resource.closeMenu();
+			} else {
+				System.exit(0);
+			}
 		} else if (clicked.getValue().codePointAt(0) >= 48 && clicked.getValue().codePointAt(0) <= 57) {
 			displayResources(clicked);
 		} else {
@@ -152,14 +154,6 @@ public class GameDisplay extends Menu {
 		String[] splitValue = clicked.getValue().split("-");
 		TradeHelper tradeHandler = new TradeHelper(this.gameManager);
 		tradeHandler.trade(splitValue);
-	}
-
-	private void exit() {
-		if (this.resource.isActive()) {
-			this.resource.closeMenu();
-		} else {
-			System.exit(0);
-		}
 	}
 
 	private void attemptPlayCard(CardHolder clicked) {

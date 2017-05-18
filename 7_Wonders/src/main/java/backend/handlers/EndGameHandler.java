@@ -19,6 +19,7 @@ import dataStructures.gameMaterials.ValueEffect;
 import dataStructures.playerData.Chip.ChipType;
 import dataStructures.playerData.Chip.ChipValue;
 import dataStructures.playerData.Player;
+import utils.DropDownMessage;
 import utils.Message;
 
 public class EndGameHandler {
@@ -162,7 +163,7 @@ public class EndGameHandler {
 	private String getChosenString(Message message) {
 		String str = "";
 		while (str.equals("")) {
-			str = message.dropDownScienceSelectionMessage();
+			str = DropDownMessage.dropDownScienceSelectionMessage();
 		}
 		return str;
 	}

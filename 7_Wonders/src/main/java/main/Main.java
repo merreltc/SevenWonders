@@ -20,7 +20,7 @@ import gui.menus.GameDisplay;
 import gui.menus.Logistics;
 import gui.menus.MainMenu;
 import gui.menus.Menu;
-import utils.Message;
+import utils.DropDownMessage;
 import utils.RenderImage;
 import utils.Translate;
 
@@ -39,7 +39,7 @@ public class Main extends JPanel implements ActionListener {
 	}
 
 	public Main() {
-		Constants.LOCALE = Message.selectLanguageMessage();
+		Constants.LOCALE = DropDownMessage.selectLanguageMessage();
 		this.messages = Translate.getNewResourceBundle();
 		this.switchMenu(MenuType.MAINMENU);
 		this.frame = new JFrame();
@@ -64,8 +64,8 @@ public class Main extends JPanel implements ActionListener {
 	@Override
 	public void paintComponent(Graphics graphics) {
 		graphics.setColor(Color.RED);
-
-		RenderImage.draw(graphics, image, 0, 0, Constants.FrameWidth, Constants.FrameHeight);
+		renderer.setImage(image);
+		renderer.draw(graphics, new int[] {0, 0, Constants.FrameWidth, Constants.FrameHeight});
 		this.current.draw(graphics);
 	}
 

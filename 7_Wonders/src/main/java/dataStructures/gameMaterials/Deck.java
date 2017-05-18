@@ -3,6 +3,7 @@ package dataStructures.gameMaterials;
 import java.util.ArrayList;
 
 import utils.Translate;
+import utils.TranslateWithTemplate;
 
 public class Deck {
 	private ArrayList<Card> cards = new ArrayList<Card>();
@@ -31,7 +32,7 @@ public class Deck {
 
 	public Card getCard(int index) {
 		if (this.cards.size() <= index) {
-			String msg = Translate.prepareStringTemplateWithIntArg(index, "notEnoughCards",
+			String msg = TranslateWithTemplate.prepareStringTemplateWithIntArg(index, "notEnoughCards",
 					Translate.getNewResourceBundle());
 			throw new IndexOutOfBoundsException(msg);
 		}
