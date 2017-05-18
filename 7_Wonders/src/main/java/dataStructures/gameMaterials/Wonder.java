@@ -36,6 +36,17 @@ public class Wonder {
 		this.side = side;
 	}
 
+	@Override
+	public boolean equals(Object obj) {
+		Wonder temp = (Wonder) obj;
+		boolean equalType = this.type == temp.getType();
+		boolean equalName = this.name == temp.getName();
+		boolean equalResource = this.resource.equals(temp.getResource());
+		boolean equalSide = this.side == temp.getSide();
+		boolean equalLevels = true;
+		return equalType && equalName && equalResource && equalSide && equalLevels;
+	}
+
 	public void buildNextLevel() {
 		this.numBuiltLevels++;
 		if (this.numBuiltLevels > this.getNumLevels()) {

@@ -1,9 +1,10 @@
 package dataStructureTests;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 
 import java.util.HashMap;
 
+import org.easymock.EasyMock;
 import org.junit.Test;
 
 import constants.GeneralEnums.Side;
@@ -13,6 +14,35 @@ import dataStructures.gameMaterials.Wonder;
 import dataStructures.gameMaterials.Wonder.WonderType;
 
 public class WonderTest {
+
+	@Test
+	public void testEqualsTrue() {
+		Wonder wonder1 = new Wonder(Side.A, WonderType.COLOSSUS);
+		assertTrue(wonder1.equals(wonder1));
+
+		Wonder wonder2 = new Wonder(Side.A, WonderType.COLOSSUS);
+		Wonder wonder3 = new Wonder(Side.A, WonderType.COLOSSUS);
+		assertTrue(wonder2.equals(wonder3));
+	}
+
+	@Test
+	public void testEqualsFalse() {
+		Wonder wonder1 = new Wonder(Side.A, WonderType.COLOSSUS);
+		Wonder wonder2 = new Wonder(Side.A, WonderType.STATUE);
+		assertFalse(wonder1.equals(wonder2));
+
+		wonder1 = new Wonder(Side.B, WonderType.COLOSSUS);
+		wonder2 = new Wonder(Side.B, WonderType.STATUE);
+		assertFalse(wonder1.equals(wonder2));
+
+		wonder1 = new Wonder(Side.B, WonderType.COLOSSUS);
+		wonder2 = new Wonder(Side.A, WonderType.COLOSSUS);
+		assertFalse(wonder1.equals(wonder2));
+
+		wonder1 = new Wonder(Side.B, WonderType.COLOSSUS);
+		wonder2 = new Wonder(Side.A, WonderType.COLOSSUS);
+		assertFalse(wonder1.equals(wonder2));
+	}
 
 	@Test
 	public void testResource() {
