@@ -7,6 +7,7 @@ import java.util.HashMap;
 import org.junit.Test;
 
 import constants.GeneralEnums.Side;
+import constants.WonderInfo;
 import dataStructures.gameMaterials.EntityEffect;
 import dataStructures.gameMaterials.Wonder;
 import dataStructures.gameMaterials.Wonder.WonderType;
@@ -15,6 +16,7 @@ public class WonderTest {
 
 	@Test
 	public void testResource() {
+		WonderInfo info = new WonderInfo();
 		HashMap<WonderType, String> wonders = new HashMap<WonderType, String>();
 		wonders.put(WonderType.COLOSSUS, "The Colossus of Rhodes");
 		wonders.put(WonderType.LIGHTHOUSE, "The Lighthouse of Alexandria");
@@ -26,7 +28,7 @@ public class WonderTest {
 
 		for (WonderType type : wonders.keySet()) {
 			Wonder wonder = new Wonder(Side.A, type);
-			EntityEffect resource = Wonder.getResourceByType(type);
+			EntityEffect resource = info.getResourceByType(type);
 			assertEquals(resource, wonder.getResource());
 		}
 	}
@@ -80,41 +82,5 @@ public class WonderTest {
 		assertEquals(Side.B, wonder.getSide());
 		assertEquals(4, wonder.getNumLevels());
 		assertEquals("The Pyramids of Giza", wonder.getName());
-	}
-
-	@Test
-	public void testGetWonderNameByTypeValid() {
-		String name = Wonder.getNameByType(WonderType.COLOSSUS);
-		assertEquals("The Colossus of Rhodes", name);
-		name = Wonder.getNameByType(WonderType.GARDENS);
-		assertEquals("The Hanging Gardens of Babylon", name);
-		name = Wonder.getNameByType(WonderType.LIGHTHOUSE);
-		assertEquals("The Lighthouse of Alexandria", name);
-		name = Wonder.getNameByType(WonderType.MAUSOLEUM);
-		assertEquals("The Mausoleum of Halicarnassus", name);
-		name = Wonder.getNameByType(WonderType.PYRAMIDS);
-		assertEquals("The Pyramids of Giza", name);
-		name = Wonder.getNameByType(WonderType.STATUE);
-		assertEquals("The Statue of Zeus in Olympia", name);
-		name = Wonder.getNameByType(WonderType.TEMPLE);
-		assertEquals("The Temple of Artemis in Ephesus", name);
-	}
-
-	@Test
-	public void testGetShortNameByTypeValid() {
-		String name = Wonder.getShortNameByType(WonderType.COLOSSUS);
-		assertEquals("Colossus", name);
-		name = Wonder.getShortNameByType(WonderType.GARDENS);
-		assertEquals("Hanging Gardens", name);
-		name = Wonder.getShortNameByType(WonderType.LIGHTHOUSE);
-		assertEquals("Lighthouse", name);
-		name = Wonder.getShortNameByType(WonderType.MAUSOLEUM);
-		assertEquals("Mausoleum", name);
-		name = Wonder.getShortNameByType(WonderType.PYRAMIDS);
-		assertEquals("Pyramids", name);
-		name = Wonder.getShortNameByType(WonderType.STATUE);
-		assertEquals("Statue of Zeus", name);
-		name = Wonder.getShortNameByType(WonderType.TEMPLE);
-		assertEquals("Temple of Artemis", name);
 	}
 }
