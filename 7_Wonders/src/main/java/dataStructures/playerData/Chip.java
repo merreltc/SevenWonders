@@ -1,7 +1,5 @@
 package dataStructures.playerData;
 
-import dataStructures.playerData.Chip.ChipValue;
-
 public abstract class Chip {
 	
 	public enum ChipType{

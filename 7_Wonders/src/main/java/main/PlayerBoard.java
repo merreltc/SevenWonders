@@ -27,8 +27,6 @@ public class PlayerBoard {
 
 	private Player player;
 
-	ResourceBundle messages = ResourceBundle.getBundle("message", Locale.getDefault());
-
 	public PlayerBoard(int startingPosition, int totalNumberOfPlayers, Player player, RenderImage renderer) {
 		this.renderer = renderer;
 		backPlayerStartingBoardPositionX = Constants.FrameWidth / 2 - Constants.FrameWidthModifier
