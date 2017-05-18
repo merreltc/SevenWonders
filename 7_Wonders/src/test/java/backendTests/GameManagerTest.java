@@ -296,6 +296,18 @@ public class GameManagerTest {
 
 		EasyMock.verify(playerTurnHandler);
 	}
+	
+	@Test
+	public void testBuildStructureNonMockedForMutationCoverage() {
+		ArrayList<String> playerNames = setUpArrayByNum(5);
+		GameManager manager = new GameManager(playerNames, GameMode.EASY);
+
+		Card card = manager.getDeck().getCard(0);
+		manager.buildStructure(card);
+
+		assertTrue(manager.getCurrentPlayer().getStoragePile().contains(card));
+	}
+
 
 	@Test
 	public void testTradeFromToForResource() {
