@@ -16,8 +16,11 @@ public class StoragePile {
 	private ArrayList<Card> sciencePile = new ArrayList<Card>();
 	private ArrayList<Card> endGamePile = new ArrayList<Card>();
 	private ArrayList<Card> immediateEffectPile = new ArrayList<Card>();
-	private ArrayList<Effect> wonderPile = new ArrayList<Effect>();
 	private ArrayList<Card> allCardStorage = new ArrayList<Card>();
+	
+	private ArrayList<Effect> wonderPile = new ArrayList<Effect>();
+	private ArrayList<Effect> entireEffectStorage = new ArrayList<Effect>();
+	
 
 	public void addCard(Card card) {
 		EffectType effectType = card.getEffectType();
@@ -99,8 +102,17 @@ public class StoragePile {
 		this.immediateEffectPile.add(card);
 		this.allCardStorage.add(card);
 	}
+	
+	public void addToWonderPile(Effect effect) {
+		this.wonderPile.add(effect);
+		this.entireEffectStorage.add(effect);
+	}
 
 	public ArrayList<Card> getAllCardStoragePile() {
 		return this.allCardStorage;
+	}
+	
+	public ArrayList<Effect> getEntireEffectStorage() {
+		return this.entireEffectStorage;
 	}
 }

@@ -8,6 +8,7 @@ import org.easymock.EasyMock;
 import org.junit.Test;
 
 import dataStructures.gameMaterials.Card;
+import dataStructures.gameMaterials.Effect;
 import dataStructures.gameMaterials.Effect.Direction;
 import dataStructures.gameMaterials.Effect.EffectType;
 import dataStructures.gameMaterials.EntityEffect;
@@ -71,6 +72,17 @@ public class StoragePileTest {
 
 		assertTrue(storagePile.getSciencePile().isEmpty());
 		assertEquals(card, storagePile.getImmediateEffectPile().get(0));
+	}
+	
+	@Test
+	public void testAddToWonderPile() {
+		StoragePile storagePile = new StoragePile();
+		Effect effect = EasyMock.createStrictMock(Effect.class);
+
+		storagePile.addToWonderPile(effect);
+
+		assertEquals(effect, storagePile.getWonderPile().get(0));
+		assertEquals(effect, storagePile.getEntireEffectStorage().get(0));
 	}
 
 	@Test
