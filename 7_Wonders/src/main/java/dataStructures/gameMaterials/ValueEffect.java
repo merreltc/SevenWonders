@@ -2,14 +2,17 @@ package dataStructures.gameMaterials;
 
 import java.util.HashMap;
 
+import dataStructures.gameMaterials.Level.Frequency;
 import utils.Translate;
 
 public class ValueEffect extends Effect {
+	private static final int NO_VALUE_AMOUNT = -1;
+	
 	private Value value;
 	private int valueAmount;
 	private AffectingEntity affectingEntity = AffectingEntity.NONE;
 	private HashMap<Enum, Integer> affectingEntities = new HashMap<Enum, Integer>();
-	private static final int NO_VALUE_AMOUNT = -1;
+	private Frequency frequency;
 
 	public enum Value {
 		VICTORYPOINTS, MILITARY, COMMERCE, GUILD
@@ -28,9 +31,17 @@ public class ValueEffect extends Effect {
 		super(effectType);
 		this.value = value;
 		this.affectingEntity = affectingEntity;
-
 		validateValueAmount(value, valueAmount);
 		this.valueAmount = valueAmount;
+	}
+	
+	public ValueEffect(EffectType effectType, Value value, AffectingEntity affectingEntity, int valueAmount, Frequency frequency) {
+		super(effectType);
+		this.value = value;
+		this.affectingEntity = affectingEntity;
+		validateValueAmount(value, valueAmount);
+		this.valueAmount = valueAmount;
+		this.frequency = frequency;
 	}
 
 	public ValueEffect(EffectType effectType, Value value, AffectingEntity affectingEntity, Direction direction) {
@@ -128,5 +139,9 @@ public class ValueEffect extends Effect {
 		}
 
 		return false;
+	}
+	
+	public Frequency getFrequency() {
+		return this.frequency;
 	}
 }
