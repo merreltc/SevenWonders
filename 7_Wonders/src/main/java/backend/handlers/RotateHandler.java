@@ -44,24 +44,30 @@ public class RotateHandler {
 	private void setNextPlayer(Rotation rotateDirection) {
 		int tempNextPlayerIndex = this.board.getNextPlayerIndex();
 		int lastPlayerIndex = this.board.getNumPlayers() - 1;
-		int firstPlayerIndex = 0;
 
 		if (rotateDirection == Rotation.CLOCKWISE) {
-			compareToSetNextPlayer(tempNextPlayerIndex, lastPlayerIndex, firstPlayerIndex, tempNextPlayerIndex + 1);
+			setClockwisePlayers(tempNextPlayerIndex, lastPlayerIndex);
 		} else {
-			compareToSetNextPlayer(tempNextPlayerIndex, firstPlayerIndex, lastPlayerIndex, tempNextPlayerIndex - 1);
+			setCounterClockwisePlayers(tempNextPlayerIndex, lastPlayerIndex);
+		}
+	}
+
+	private void setCounterClockwisePlayers(int tempNextPlayerIndex, int lastPlayerIndex) {
+		if(tempNextPlayerIndex == 0){
+			this.board.setNextPlayer(lastPlayerIndex);
+		}else{
+			this.board.setNextPlayer(tempNextPlayerIndex - 1);
+		}
+	}
+
+	private void setClockwisePlayers(int tempNextPlayerIndex, int lastPlayerIndex) {
+		if(tempNextPlayerIndex == lastPlayerIndex){
+			this.board.setNextPlayer(0);
+		}else{
+			this.board.setNextPlayer(tempNextPlayerIndex + 1);
 		}
 	}
 	
-	private void compareToSetNextPlayer(int tempNextPlayerIndex, int compareIndex, int equalsCompareIndex,
-			int notEqualsCompareIndex) {
-		if (tempNextPlayerIndex == compareIndex) {
-			this.board.setNextPlayer(equalsCompareIndex);
-		} else {
-			this.board.setNextPlayer(notEqualsCompareIndex);
-		}
-	}
-
 	private void setCurrentAndPreviousPlayers() {
 		this.board.setPreviousPlayer(this.board.getCurrentPlayerIndex());
 		this.board.setCurrentPlayer(this.board.getNextPlayerIndex());

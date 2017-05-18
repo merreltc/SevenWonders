@@ -21,35 +21,36 @@ public class StoragePile {
 	public void addCard(Card card) {
 		EffectType effectType = card.getEffectType();
 
-		switch (effectType) {
-		
-		case MULTIVALUE:
+		if(effectType == EffectType.MULTIVALUE){
 			this.addToEndGamePile(card);
-			break;
-			
-		case VALUE:
-			ValueEffect value = (ValueEffect) card.getEffect();
+		}else if (effectType == EffectType.VALUE){
+			determineValueEffectPile(card);
+		}else{
+			determineEntityEffectPile(card);
+		}
+	}
 
-			Value actualValue = value.getValue();
-			Direction direction = value.getDirection();
-			if (actualValue == Value.GUILD || direction == Direction.ALL) {
-				this.addToEndGamePile(card);
-			} else if (direction == Direction.SELF) {
-				this.addToImmediateEffectPile(card);
-			} else {
-				this.addToCommercePile(card);
-			}
-			break;
-			
-		default:
-			EntityEffect entity = (EntityEffect) card.getEffect();
+	private void determineEntityEffectPile(Card card) {
+		EntityEffect entity = (EntityEffect) card.getEffect();
 
-			if (entity.getEntityType() == EntityType.SCIENCE) {
-				this.addToSciencePile(card);
-			} else {
-				this.addToCommercePile(card);
-			}
-			break;
+		if (entity.getEntityType() == EntityType.SCIENCE) {
+			this.addToSciencePile(card);
+		} else {
+			this.addToCommercePile(card);
+		}
+	}
+
+	private void determineValueEffectPile(Card card) {
+		ValueEffect value = (ValueEffect) card.getEffect();
+
+		Value actualValue = value.getValue();
+		Direction direction = value.getDirection();
+		if (actualValue == Value.GUILD || direction == Direction.ALL) {
+			this.addToEndGamePile(card);
+		} else if (direction == Direction.SELF) {
+			this.addToImmediateEffectPile(card);
+		} else {
+			this.addToCommercePile(card);
 		}
 	}
 
