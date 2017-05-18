@@ -503,6 +503,16 @@ public class PlayerChipHandlerTest {
 			assertEquals("Cannot add 16 value 5 chip(s)", e.getMessage());	
 		}
 	}
+	
+	@Test
+	public void testAddInvalidValueNeg1ConflictTokens22Message() {
+		Player player = createMockedPlayer();
+		try{
+		PlayerChipHandler.addValue1(player, 22, Chip.ChipType.CONFLICTTOKEN);
+		}catch(Exception e){
+			assertEquals("Cannot add 22 value -1 chip(s)", e.getMessage());	
+		}
+	}
 
 	private Player createMockedPlayer() {
 		Wonder wonder = EasyMock.createStrictMock(Wonder.class);
