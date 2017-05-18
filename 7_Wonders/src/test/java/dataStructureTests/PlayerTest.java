@@ -126,11 +126,19 @@ public class PlayerTest {
 	}
 
 	@Test
-	public void testGetDefaultStoragePileHand() {
+	public void testGetDefaultCardStoragePileHand() {
 		Player player = createMockedPlayer();
 
-		assertTrue(player.getStoragePile().isEmpty());
-		assertEquals(ArrayList.class, player.getStoragePile().getClass());
+		assertTrue(player.getAllCards().isEmpty());
+		assertEquals(ArrayList.class, player.getAllCards().getClass());
+	}
+
+	@Test
+	public void testGetDefaultEffectStoragePileHand() {
+		Player player = createMockedPlayer();
+
+		assertTrue(player.getAllEffects().isEmpty());
+		assertEquals(ArrayList.class, player.getAllEffects().getClass());
 	}
 
 	@Test
@@ -145,10 +153,10 @@ public class PlayerTest {
 
 		player.setStoragePile(playerCards);
 
-		assertEquals(playerCards, player.getStoragePile());
-		assertEquals(playerCards.get(0), player.getStoragePile().get(0));
-		assertEquals(playerCards.get(1), player.getStoragePile().get(1));
-		assertEquals(playerCards.get(2), player.getStoragePile().get(2));
+		assertEquals(playerCards, player.getAllCards());
+		assertEquals(playerCards.get(0), player.getAllCards().get(0));
+		assertEquals(playerCards.get(1), player.getAllCards().get(1));
+		assertEquals(playerCards.get(2), player.getAllCards().get(2));
 	}
 
 	@Test
@@ -175,6 +183,8 @@ public class PlayerTest {
 		EasyMock.expect(card.getEffectType()).andReturn(EffectType.ENTITY);
 		EasyMock.expect(card.getEffect()).andReturn(effect);
 		EasyMock.expect(effect.getEntityType()).andReturn(EntityType.RESOURCE);
+		EasyMock.expect(card.getEffect()).andReturn(effect);
+
 		EasyMock.replay(card, effect);
 
 		ArrayList<Card> storage = new ArrayList<Card>();
@@ -194,6 +204,8 @@ public class PlayerTest {
 		EasyMock.expect(card.getEffectType()).andReturn(EffectType.ENTITY);
 		EasyMock.expect(card.getEffect()).andReturn(effect);
 		EasyMock.expect(effect.getEntityType()).andReturn(EntityType.RESOURCE);
+		EasyMock.expect(card.getEffect()).andReturn(effect);
+
 		EasyMock.replay(card, effect);
 
 		ArrayList<Card> storage = new ArrayList<Card>();
@@ -284,8 +296,8 @@ public class PlayerTest {
 		player.setStoragePile(playerCards);
 
 		player.addToStoragePile(deckCards.get(3));
-		assertEquals(4, player.getStoragePile().size());
-		assertEquals(deckCards.get(3), player.getStoragePile().get(3));
+		assertEquals(4, player.getAllCards().size());
+		assertEquals(deckCards.get(3), player.getAllCards().get(3));
 	}
 
 	@Test

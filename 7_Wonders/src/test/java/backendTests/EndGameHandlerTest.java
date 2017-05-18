@@ -45,12 +45,12 @@ public class EndGameHandlerTest {
 		ArrayList<Card> cards = new ArrayList<Card>();
 		cards.add(createManufacturedCard());
 		cards.add(createRawMaterialCard());
-		EasyMock.expect(player1.getStoragePile()).andReturn(cards);
-		EasyMock.expect(player1.getStoragePile()).andReturn(cards);
-		EasyMock.expect(player1.getStoragePile()).andReturn(cards);
-		EasyMock.expect(player1.getStoragePile()).andReturn(cards);
-		EasyMock.expect(player1.getStoragePile()).andReturn(cards);
-		EasyMock.expect(player1.getStoragePile()).andReturn(cards);
+		EasyMock.expect(player1.getAllCards()).andReturn(cards);
+		EasyMock.expect(player1.getAllCards()).andReturn(cards);
+		EasyMock.expect(player1.getAllCards()).andReturn(cards);
+		EasyMock.expect(player1.getAllCards()).andReturn(cards);
+		EasyMock.expect(player1.getAllCards()).andReturn(cards);
+		EasyMock.expect(player1.getAllCards()).andReturn(cards);
 
 		Player player2 = EasyMock.mock(Player.class);
 		EasyMock.expect(player2.getConflictTotal()).andReturn(4);
@@ -64,12 +64,12 @@ public class EndGameHandlerTest {
 		cards = new ArrayList<Card>();
 		cards.add(createRawMaterialCard());
 		cards.add(createCivilianCard());
-		EasyMock.expect(player2.getStoragePile()).andReturn(cards);
-		EasyMock.expect(player2.getStoragePile()).andReturn(cards);
-		EasyMock.expect(player2.getStoragePile()).andReturn(cards);
-		EasyMock.expect(player2.getStoragePile()).andReturn(cards);
-		EasyMock.expect(player2.getStoragePile()).andReturn(cards);
-		EasyMock.expect(player2.getStoragePile()).andReturn(cards);
+		EasyMock.expect(player2.getAllCards()).andReturn(cards);
+		EasyMock.expect(player2.getAllCards()).andReturn(cards);
+		EasyMock.expect(player2.getAllCards()).andReturn(cards);
+		EasyMock.expect(player2.getAllCards()).andReturn(cards);
+		EasyMock.expect(player2.getAllCards()).andReturn(cards);
+		EasyMock.expect(player2.getAllCards()).andReturn(cards);
 
 		Player player3 = EasyMock.mock(Player.class);
 		EasyMock.expect(player3.getConflictTotal()).andReturn(7);
@@ -83,12 +83,12 @@ public class EndGameHandlerTest {
 		cards = new ArrayList<Card>();
 		cards.add(createMilitaryCard());
 		cards.add(createCivilianCard());
-		EasyMock.expect(player3.getStoragePile()).andReturn(cards);
-		EasyMock.expect(player3.getStoragePile()).andReturn(cards);
-		EasyMock.expect(player3.getStoragePile()).andReturn(cards);
-		EasyMock.expect(player3.getStoragePile()).andReturn(cards);
-		EasyMock.expect(player3.getStoragePile()).andReturn(cards);
-		EasyMock.expect(player3.getStoragePile()).andReturn(cards);
+		EasyMock.expect(player3.getAllCards()).andReturn(cards);
+		EasyMock.expect(player3.getAllCards()).andReturn(cards);
+		EasyMock.expect(player3.getAllCards()).andReturn(cards);
+		EasyMock.expect(player3.getAllCards()).andReturn(cards);
+		EasyMock.expect(player3.getAllCards()).andReturn(cards);
+		EasyMock.expect(player3.getAllCards()).andReturn(cards);
 
 		Player player4 = EasyMock.mock(Player.class);
 		EasyMock.expect(player4.getConflictTotal()).andReturn(4);
@@ -102,12 +102,12 @@ public class EndGameHandlerTest {
 		cards = new ArrayList<Card>();
 		cards.add(createMilitaryCard());
 		cards.add(createCivilianCard());
-		EasyMock.expect(player4.getStoragePile()).andReturn(cards);
-		EasyMock.expect(player4.getStoragePile()).andReturn(cards);
-		EasyMock.expect(player4.getStoragePile()).andReturn(cards);
-		EasyMock.expect(player4.getStoragePile()).andReturn(cards);
-		EasyMock.expect(player4.getStoragePile()).andReturn(cards);
-		EasyMock.expect(player4.getStoragePile()).andReturn(cards);
+		EasyMock.expect(player4.getAllCards()).andReturn(cards);
+		EasyMock.expect(player4.getAllCards()).andReturn(cards);
+		EasyMock.expect(player4.getAllCards()).andReturn(cards);
+		EasyMock.expect(player4.getAllCards()).andReturn(cards);
+		EasyMock.expect(player4.getAllCards()).andReturn(cards);
+		EasyMock.expect(player4.getAllCards()).andReturn(cards);
 
 		Player player5 = EasyMock.mock(Player.class);
 		EasyMock.expect(player5.getConflictTotal()).andReturn(-3);
@@ -121,12 +121,12 @@ public class EndGameHandlerTest {
 		cards = new ArrayList<Card>();
 		cards.add(createMilitaryCard());
 		cards.add(createCommercialCard());
-		EasyMock.expect(player5.getStoragePile()).andReturn(cards);
-		EasyMock.expect(player5.getStoragePile()).andReturn(cards);
-		EasyMock.expect(player5.getStoragePile()).andReturn(cards);
-		EasyMock.expect(player5.getStoragePile()).andReturn(cards);
-		EasyMock.expect(player5.getStoragePile()).andReturn(cards);
-		EasyMock.expect(player5.getStoragePile()).andReturn(cards);
+		EasyMock.expect(player5.getAllCards()).andReturn(cards);
+		EasyMock.expect(player5.getAllCards()).andReturn(cards);
+		EasyMock.expect(player5.getAllCards()).andReturn(cards);
+		EasyMock.expect(player5.getAllCards()).andReturn(cards);
+		EasyMock.expect(player5.getAllCards()).andReturn(cards);
+		EasyMock.expect(player5.getAllCards()).andReturn(cards);
 
 		Player player6 = EasyMock.mock(Player.class);
 		EasyMock.expect(player6.getConflictTotal()).andReturn(-1);
@@ -140,12 +140,12 @@ public class EndGameHandlerTest {
 		cards = new ArrayList<Card>();
 		cards.add(createWorkshop());
 		cards.add(createCivilianCard());
-		EasyMock.expect(player6.getStoragePile()).andReturn(cards);
-		EasyMock.expect(player6.getStoragePile()).andReturn(cards);
-		EasyMock.expect(player6.getStoragePile()).andReturn(cards);
-		EasyMock.expect(player6.getStoragePile()).andReturn(cards);
-		EasyMock.expect(player6.getStoragePile()).andReturn(cards);
-		EasyMock.expect(player6.getStoragePile()).andReturn(cards);
+		EasyMock.expect(player6.getAllCards()).andReturn(cards);
+		EasyMock.expect(player6.getAllCards()).andReturn(cards);
+		EasyMock.expect(player6.getAllCards()).andReturn(cards);
+		EasyMock.expect(player6.getAllCards()).andReturn(cards);
+		EasyMock.expect(player6.getAllCards()).andReturn(cards);
+		EasyMock.expect(player6.getAllCards()).andReturn(cards);
 
 		Player player7 = EasyMock.mock(Player.class);
 		EasyMock.expect(player7.getConflictTotal()).andReturn(3);
@@ -159,12 +159,12 @@ public class EndGameHandlerTest {
 		cards = new ArrayList<Card>();
 		cards.add(createWorkshop());
 		cards.add(createCommercialCard());
-		EasyMock.expect(player7.getStoragePile()).andReturn(cards);
-		EasyMock.expect(player7.getStoragePile()).andReturn(cards);
-		EasyMock.expect(player7.getStoragePile()).andReturn(cards);
-		EasyMock.expect(player7.getStoragePile()).andReturn(cards);
-		EasyMock.expect(player7.getStoragePile()).andReturn(cards);
-		EasyMock.expect(player7.getStoragePile()).andReturn(cards);
+		EasyMock.expect(player7.getAllCards()).andReturn(cards);
+		EasyMock.expect(player7.getAllCards()).andReturn(cards);
+		EasyMock.expect(player7.getAllCards()).andReturn(cards);
+		EasyMock.expect(player7.getAllCards()).andReturn(cards);
+		EasyMock.expect(player7.getAllCards()).andReturn(cards);
+		EasyMock.expect(player7.getAllCards()).andReturn(cards);
 
 		EasyMock.replay(player1, player2, player3, player4, player5, player6, player7);
 		ArrayList<Player> players = new ArrayList<Player>();
@@ -197,12 +197,12 @@ public class EndGameHandlerTest {
 		ArrayList<Card> cards = new ArrayList<Card>();
 		cards.add(createManufacturedCard());
 		cards.add(createRawMaterialCard());
-		EasyMock.expect(player1.getStoragePile()).andReturn(cards);
-		EasyMock.expect(player1.getStoragePile()).andReturn(cards);
-		EasyMock.expect(player1.getStoragePile()).andReturn(cards);
-		EasyMock.expect(player1.getStoragePile()).andReturn(cards);
-		EasyMock.expect(player1.getStoragePile()).andReturn(cards);
-		EasyMock.expect(player1.getStoragePile()).andReturn(cards);
+		EasyMock.expect(player1.getAllCards()).andReturn(cards);
+		EasyMock.expect(player1.getAllCards()).andReturn(cards);
+		EasyMock.expect(player1.getAllCards()).andReturn(cards);
+		EasyMock.expect(player1.getAllCards()).andReturn(cards);
+		EasyMock.expect(player1.getAllCards()).andReturn(cards);
+		EasyMock.expect(player1.getAllCards()).andReturn(cards);
 
 		Player player2 = EasyMock.mock(Player.class);
 		EasyMock.expect(player2.getConflictTotal()).andReturn(4);
@@ -216,12 +216,12 @@ public class EndGameHandlerTest {
 		cards = new ArrayList<Card>();
 		cards.add(createRawMaterialCard());
 		cards.add(createCivilianCard());
-		EasyMock.expect(player2.getStoragePile()).andReturn(cards);
-		EasyMock.expect(player2.getStoragePile()).andReturn(cards);
-		EasyMock.expect(player2.getStoragePile()).andReturn(cards);
-		EasyMock.expect(player2.getStoragePile()).andReturn(cards);
-		EasyMock.expect(player2.getStoragePile()).andReturn(cards);
-		EasyMock.expect(player2.getStoragePile()).andReturn(cards);
+		EasyMock.expect(player2.getAllCards()).andReturn(cards);
+		EasyMock.expect(player2.getAllCards()).andReturn(cards);
+		EasyMock.expect(player2.getAllCards()).andReturn(cards);
+		EasyMock.expect(player2.getAllCards()).andReturn(cards);
+		EasyMock.expect(player2.getAllCards()).andReturn(cards);
+		EasyMock.expect(player2.getAllCards()).andReturn(cards);
 
 		Player player3 = EasyMock.mock(Player.class);
 		EasyMock.expect(player3.getConflictTotal()).andReturn(7);
@@ -235,12 +235,12 @@ public class EndGameHandlerTest {
 		cards = new ArrayList<Card>();
 		cards.add(createMilitaryCard());
 		cards.add(createCivilianCard());
-		EasyMock.expect(player3.getStoragePile()).andReturn(cards);
-		EasyMock.expect(player3.getStoragePile()).andReturn(cards);
-		EasyMock.expect(player3.getStoragePile()).andReturn(cards);
-		EasyMock.expect(player3.getStoragePile()).andReturn(cards);
-		EasyMock.expect(player3.getStoragePile()).andReturn(cards);
-		EasyMock.expect(player3.getStoragePile()).andReturn(cards);
+		EasyMock.expect(player3.getAllCards()).andReturn(cards);
+		EasyMock.expect(player3.getAllCards()).andReturn(cards);
+		EasyMock.expect(player3.getAllCards()).andReturn(cards);
+		EasyMock.expect(player3.getAllCards()).andReturn(cards);
+		EasyMock.expect(player3.getAllCards()).andReturn(cards);
+		EasyMock.expect(player3.getAllCards()).andReturn(cards);
 
 		EasyMock.replay(player1, player2, player3);
 
@@ -273,8 +273,8 @@ public class EndGameHandlerTest {
 		EasyMock.expect(player2.getCardFromEndGame(1)).andThrow(new IllegalArgumentException(""));
 
 		EndGameHandler end = new EndGameHandler();
-		EasyMock.expect(player1.getStoragePile()).andReturn(cards);
-		EasyMock.expect(player3.getStoragePile()).andReturn(cards);
+		EasyMock.expect(player1.getAllCards()).andReturn(cards);
+		EasyMock.expect(player3.getAllCards()).andReturn(cards);
 
 		EasyMock.replay(player1, player2, player3);
 
@@ -295,8 +295,8 @@ public class EndGameHandlerTest {
 		EasyMock.expect(player2.getCardFromEndGame(1)).andThrow(new IllegalArgumentException(""));
 
 		EndGameHandler end = new EndGameHandler();
-		EasyMock.expect(player1.getStoragePile()).andReturn(cards);
-		EasyMock.expect(player3.getStoragePile()).andReturn(cards);
+		EasyMock.expect(player1.getAllCards()).andReturn(cards);
+		EasyMock.expect(player3.getAllCards()).andReturn(cards);
 
 		EasyMock.replay(player1, player2, player3);
 
@@ -317,8 +317,8 @@ public class EndGameHandlerTest {
 		EasyMock.expect(player2.getCardFromEndGame(1)).andThrow(new IllegalArgumentException(""));
 
 		EndGameHandler end = new EndGameHandler();
-		EasyMock.expect(player1.getStoragePile()).andReturn(cards);
-		EasyMock.expect(player3.getStoragePile()).andReturn(cards);
+		EasyMock.expect(player1.getAllCards()).andReturn(cards);
+		EasyMock.expect(player3.getAllCards()).andReturn(cards);
 
 		EasyMock.replay(player1, player2, player3);
 
@@ -339,8 +339,8 @@ public class EndGameHandlerTest {
 		EasyMock.expect(player2.getCardFromEndGame(1)).andThrow(new IllegalArgumentException(""));
 
 		EndGameHandler end = new EndGameHandler();
-		EasyMock.expect(player1.getStoragePile()).andReturn(cards);
-		EasyMock.expect(player3.getStoragePile()).andReturn(cards);
+		EasyMock.expect(player1.getAllCards()).andReturn(cards);
+		EasyMock.expect(player3.getAllCards()).andReturn(cards);
 
 		EasyMock.replay(player1, player2, player3);
 
@@ -361,8 +361,8 @@ public class EndGameHandlerTest {
 		EasyMock.expect(player2.getCardFromEndGame(1)).andThrow(new IllegalArgumentException(""));
 
 		EndGameHandler end = new EndGameHandler();
-		EasyMock.expect(player1.getStoragePile()).andReturn(cards);
-		EasyMock.expect(player3.getStoragePile()).andReturn(cards);
+		EasyMock.expect(player1.getAllCards()).andReturn(cards);
+		EasyMock.expect(player3.getAllCards()).andReturn(cards);
 
 		EasyMock.replay(player1, player2, player3);
 
@@ -386,8 +386,8 @@ public class EndGameHandlerTest {
 		conflictTokens.put(ChipValue.NEG1, 2);
 
 		EndGameHandler end = new EndGameHandler();
-		EasyMock.expect(player1.getStoragePile()).andReturn(cards);
-		EasyMock.expect(player3.getStoragePile()).andReturn(cards);
+		EasyMock.expect(player1.getAllCards()).andReturn(cards);
+		EasyMock.expect(player3.getAllCards()).andReturn(cards);
 		EasyMock.expect(player1.getConflictTokens()).andReturn(conflictTokens);
 
 		HashMap<ChipValue, Integer> conflictTokens2 = new HashMap<ChipValue, Integer>();
@@ -415,9 +415,9 @@ public class EndGameHandlerTest {
 		EasyMock.expect(player2.getCardFromEndGame(1)).andThrow(new IllegalArgumentException(""));
 
 		EndGameHandler end = new EndGameHandler();
-		EasyMock.expect(player2.getStoragePile()).andReturn(cards);
-		EasyMock.expect(player2.getStoragePile()).andReturn(cards);
-		EasyMock.expect(player2.getStoragePile()).andReturn(cards);
+		EasyMock.expect(player2.getAllCards()).andReturn(cards);
+		EasyMock.expect(player2.getAllCards()).andReturn(cards);
+		EasyMock.expect(player2.getAllCards()).andReturn(cards);
 
 		EasyMock.replay(player1, player2, player3);
 
@@ -495,8 +495,8 @@ public class EndGameHandlerTest {
 		EasyMock.expect(player2.getCardFromEndGame(1)).andThrow(new IllegalArgumentException(""));
 
 		EndGameHandler end = new EndGameHandler();
-		EasyMock.expect(player1.getStoragePile()).andReturn(cards);
-		EasyMock.expect(player3.getStoragePile()).andReturn(cards);
+		EasyMock.expect(player1.getAllCards()).andReturn(cards);
+		EasyMock.expect(player3.getAllCards()).andReturn(cards);
 
 		EasyMock.replay(player1, player2, player3);
 

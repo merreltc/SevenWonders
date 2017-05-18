@@ -38,7 +38,7 @@ public class ResourceViewer extends Menu {
 
 			graphics.setFont(Constants.RESOURCE_VIEWER_FONT);
 
-			int gridRows = this.player.getStoragePile().size() + 1;
+			int gridRows = this.player.getAllCards().size() + 1;
 			drawGrid(gridRows, graphics);
 
 			draw1CoinBox(graphics);
@@ -186,7 +186,7 @@ public class ResourceViewer extends Menu {
 	}
 
 	private void populateResourceRow(int row, int y, Graphics graphics) {
-		ArrayList<Card> cards = player.getStoragePile();
+		ArrayList<Card> cards = player.getAllCards();
 		if (row > cards.size()) {
 			return;
 		}

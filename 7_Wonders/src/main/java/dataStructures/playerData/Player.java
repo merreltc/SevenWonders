@@ -7,6 +7,7 @@ import java.util.ResourceBundle;
 import constants.GeneralEnums.Science;
 import constants.GeneralEnums.Side;
 import dataStructures.gameMaterials.Card;
+import dataStructures.gameMaterials.Effect;
 import dataStructures.gameMaterials.Effect.EffectType;
 import dataStructures.gameMaterials.EntityEffect;
 import dataStructures.gameMaterials.Wonder;
@@ -99,8 +100,12 @@ public class Player {
 		this.currentHand = currentHand;
 	}
 
-	public ArrayList<Card> getStoragePile() {
-		return this.storagePile.getEntireStoragePile();
+	public ArrayList<Card> getAllCards() {
+		return this.storagePile.getAllCardStoragePile();
+	}
+	
+	public ArrayList<Effect> getAllEffects() {
+		return this.storagePile.getEntireEffectStorage();
 	}
 
 	public void setStoragePile(ArrayList<Card> storagePile) {
@@ -122,7 +127,7 @@ public class Player {
 	}
 
 	public boolean storagePileContainsCardByName(String name) {
-		for (Card storage : this.storagePile.getEntireStoragePile()) {
+		for (Card storage : this.storagePile.getAllCardStoragePile()) {
 			if (storage.getName().equals(name)) {
 				return true;
 			}
@@ -134,6 +139,7 @@ public class Player {
 		if (index >= this.storagePile.getEndGamePile().size()) {
 			throw new IllegalArgumentException("End of End Game pile reached");
 		}
+
 		return this.storagePile.getEndGamePile().get(index);
 	}
 

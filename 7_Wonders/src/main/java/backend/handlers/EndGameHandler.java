@@ -150,7 +150,7 @@ public class EndGameHandler {
 			;
 		}
 
-		ArrayList<Card> cards = players.getStoragePile();
+		ArrayList<Card> cards = players.getAllCards();
 		for (Card currentCard : cards) {
 			if (currentType.toString().contains(currentCard.getCardType().toString())) {
 				total += valueToAdd;

@@ -356,8 +356,8 @@ public class TradeHandlerTest {
 		assertEquals(0, (int) current.getCoins().get(ChipValue.THREE));
 		assertEquals(1, (int) current.getCurrentTrades().get(Good.GLASS));
 		assertEquals(5, next.getCoinTotal());
-		assertTrue(next.getStoragePile().contains(deck.getCard(7)));
-		assertTrue(next.getStoragePile().contains(deck.getCard(8)));
+		assertTrue(next.getAllCards().contains(deck.getCard(7)));
+		assertTrue(next.getAllCards().contains(deck.getCard(8)));
 	}
 
 	@Test

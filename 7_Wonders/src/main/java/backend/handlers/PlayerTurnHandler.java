@@ -25,7 +25,7 @@ public class PlayerTurnHandler {
 
 		String previousStructure = card.getPreviousStructureName();
 
-		for (Card storage : current.getStoragePile()) {
+		for (Card storage : current.getAllCards()) {
 			if (storage.getName().contains(previousStructure)) {
 				current.addToStoragePile(card);
 				current.removeFromCurrentHand(card);
@@ -64,7 +64,7 @@ public class PlayerTurnHandler {
 
 	private void validatePlayerHasEntitiesForCard(Player current, Card card) {
 		HashMap<Enum, Integer> cost = card.getCost();
-		ArrayList<Card> storage = current.getStoragePile();
+		ArrayList<Card> storage = current.getAllCards();
 		ArrayList<Card> usedEntities = new ArrayList<Card>();
 
 		for (Enum key : cost.keySet()) {
