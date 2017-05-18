@@ -1,7 +1,10 @@
 package dataStructureTests;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import org.easymock.EasyMock;
@@ -10,6 +13,7 @@ import org.junit.Test;
 import constants.GeneralEnums.Side;
 import constants.WonderInfo;
 import dataStructures.gameMaterials.EntityEffect;
+import dataStructures.gameMaterials.Level;
 import dataStructures.gameMaterials.Wonder;
 import dataStructures.gameMaterials.Wonder.WonderType;
 
@@ -42,6 +46,18 @@ public class WonderTest {
 		wonder1 = new Wonder(Side.B, WonderType.COLOSSUS);
 		wonder2 = new Wonder(Side.A, WonderType.COLOSSUS);
 		assertFalse(wonder1.equals(wonder2));
+	}
+
+	@Test
+	public void getLevels() {
+		Wonder wonder = new Wonder(Side.A, WonderType.COLOSSUS);
+		ArrayList<Level> levels = new ArrayList<Level>();
+		Level level = EasyMock.createStrictMock(Level.class);
+		levels.add(level);
+		levels.add(level);
+		wonder.setLevels(levels);
+		
+		assertEquals(levels, wonder.getLevels());
 	}
 
 	@Test

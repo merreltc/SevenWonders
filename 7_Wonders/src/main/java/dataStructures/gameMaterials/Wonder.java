@@ -25,7 +25,7 @@ public class Wonder {
 	public Wonder(Side side, WonderType type) {
 		this.info = new WonderInfo();
 		initializeData(side, type);
-		this.levels = new ArrayList<Level>();
+		setLevels(new ArrayList<Level>());
 		// TODO: Parse to set up levels
 	}
 
@@ -43,7 +43,7 @@ public class Wonder {
 		boolean equalName = this.name == temp.getName();
 		boolean equalResource = this.resource.equals(temp.getResource());
 		boolean equalSide = this.side == temp.getSide();
-		boolean equalLevels = true;
+		boolean equalLevels = this.levels.equals(temp.getLevels());
 		return equalType && equalName && equalResource && equalSide && equalLevels;
 	}
 
@@ -84,5 +84,13 @@ public class Wonder {
 
 	public Level getLevel(int index) {
 		return this.levels.get(index);
+	}
+
+	public void setLevels(ArrayList<Level> levels) {
+		this.levels = levels;
+	}
+
+	public ArrayList<Level> getLevels() {
+		return this.levels;
 	}
 }
