@@ -26,6 +26,7 @@ public class StoragePileTest {
 		assertTrue(storagePile.getSciencePile().isEmpty());
 		assertTrue(storagePile.getEndGamePile().isEmpty());
 		assertTrue(storagePile.getImmediateEffectPile().isEmpty());
+		assertTrue(storagePile.getWonderPile().isEmpty());
 	}
 
 	@Test
@@ -141,11 +142,11 @@ public class StoragePileTest {
 		assertFalse(storagePile.getEndGamePile().contains(card));
 		assertTrue(storagePile.getCommercePile().contains(card));
 		assertEquals(1, storagePile.getEndGamePile().size());
-		assertEquals(4, storagePile.getEntireStoragePile().size());
-		assertTrue(storagePile.getEntireStoragePile().contains(card));
-		assertTrue(storagePile.getEntireStoragePile().contains(card2));
-		assertTrue(storagePile.getEntireStoragePile().contains(card3));
-		assertTrue(storagePile.getEntireStoragePile().contains(card4));
+		assertEquals(4, storagePile.getAllCardStoragePile().size());
+		assertTrue(storagePile.getAllCardStoragePile().contains(card));
+		assertTrue(storagePile.getAllCardStoragePile().contains(card2));
+		assertTrue(storagePile.getAllCardStoragePile().contains(card3));
+		assertTrue(storagePile.getAllCardStoragePile().contains(card4));
 	}
 
 	@Test
@@ -154,25 +155,25 @@ public class StoragePileTest {
 		for (int i = 0; i < 50; i++) {
 			Card card = EasyMock.mock(Card.class);
 			storagePile.addToCommercePile(card);
-			assertTrue(storagePile.getEntireStoragePile().contains(card));
+			assertTrue(storagePile.getAllCardStoragePile().contains(card));
 		}
 		for (int i = 0; i < 50; i++) {
 			Card card = EasyMock.mock(Card.class);
 			storagePile.addToSciencePile(card);
-			assertTrue(storagePile.getEntireStoragePile().contains(card));
+			assertTrue(storagePile.getAllCardStoragePile().contains(card));
 		}
 		for (int i = 0; i < 50; i++) {
 			Card card = EasyMock.mock(Card.class);
 			storagePile.addToEndGamePile(card);
-			assertTrue(storagePile.getEntireStoragePile().contains(card));
+			assertTrue(storagePile.getAllCardStoragePile().contains(card));
 		}
 		for (int i = 0; i < 50; i++) {
 			Card card = EasyMock.mock(Card.class);
 			storagePile.addToImmediateEffectPile(card);
-			assertTrue(storagePile.getEntireStoragePile().contains(card));
+			assertTrue(storagePile.getAllCardStoragePile().contains(card));
 		}
 
-		assertEquals(200, storagePile.getEntireStoragePile().size());
+		assertEquals(200, storagePile.getAllCardStoragePile().size());
 	}
 
 	@Test
