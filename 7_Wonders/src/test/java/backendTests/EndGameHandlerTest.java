@@ -26,8 +26,11 @@ import dataStructures.gameMaterials.Effect.EffectType;
 import dataStructures.gameMaterials.EntityEffect.EntityType;
 import dataStructures.gameMaterials.ValueEffect.AffectingEntity;
 import dataStructures.gameMaterials.ValueEffect.Value;
+import dataStructures.gameMaterials.Wonder;
+import dataStructures.gameMaterials.Wonder.WonderType;
 import dataStructures.playerData.Player;
 import junit.framework.Assert;
+import utils.Message;
 
 public class EndGameHandlerTest {
 	
@@ -37,6 +40,8 @@ public class EndGameHandlerTest {
 	    EasyMock.expect(player1.getConflictTotal()).andReturn(3);
 	    EasyMock.expect(player1.getCoinTotal()).andReturn(9);
 	    EasyMock.expect(player1.getNumVictoryPoints()).andReturn(4);
+	    EasyMock.expect(player1.getCardFromEndGame(0)).andReturn(this.createCraftsmenGuild());
+	    EasyMock.expect(player1.getCardFromEndGame(1)).andThrow(new IllegalArgumentException(""));
 	    EasyMock.expect(player1.getCardFromEndGame(0)).andReturn(this.createCraftsmenGuild());
 	    EasyMock.expect(player1.getCardFromEndGame(1)).andThrow(new IllegalArgumentException(""));
 	    EasyMock.expect(player1.getNumberOfEachScience()).andReturn(new int[]{1,1,1});
@@ -56,6 +61,8 @@ public class EndGameHandlerTest {
 	    EasyMock.expect(player2.getNumVictoryPoints()).andReturn(2);
 	    EasyMock.expect(player2.getCardFromEndGame(0)).andReturn(this.createMagistratesGuild());
 	    EasyMock.expect(player2.getCardFromEndGame(1)).andThrow(new IllegalArgumentException(""));
+	    EasyMock.expect(player2.getCardFromEndGame(0)).andReturn(this.createMagistratesGuild());
+	    EasyMock.expect(player2.getCardFromEndGame(1)).andThrow(new IllegalArgumentException(""));
 	    EasyMock.expect(player2.getNumberOfEachScience()).andReturn(new int[]{3,1,0});
 	    cards = new ArrayList<Card>();
 		cards.add(createRawMaterialCard());
@@ -71,6 +78,8 @@ public class EndGameHandlerTest {
 	    EasyMock.expect(player3.getConflictTotal()).andReturn(7);
 	    EasyMock.expect(player3.getCoinTotal()).andReturn(2);
 	    EasyMock.expect(player3.getNumVictoryPoints()).andReturn(2);
+	    EasyMock.expect(player3.getCardFromEndGame(0)).andReturn(this.createShipOwnersGuild());
+	    EasyMock.expect(player3.getCardFromEndGame(1)).andThrow(new IllegalArgumentException(""));
 	    EasyMock.expect(player3.getCardFromEndGame(0)).andReturn(this.createShipOwnersGuild());
 	    EasyMock.expect(player3.getCardFromEndGame(1)).andThrow(new IllegalArgumentException(""));
 	    EasyMock.expect(player3.getNumberOfEachScience()).andReturn(new int[]{1,2,2});
@@ -90,6 +99,8 @@ public class EndGameHandlerTest {
 	    EasyMock.expect(player4.getNumVictoryPoints()).andReturn(4);
 	    EasyMock.expect(player4.getCardFromEndGame(0)).andReturn(this.createCraftsmenGuild());
 	    EasyMock.expect(player4.getCardFromEndGame(1)).andThrow(new IllegalArgumentException(""));
+	    EasyMock.expect(player4.getCardFromEndGame(0)).andReturn(this.createCraftsmenGuild());
+	    EasyMock.expect(player4.getCardFromEndGame(1)).andThrow(new IllegalArgumentException(""));
 	    EasyMock.expect(player4.getNumberOfEachScience()).andReturn(new int[]{1,2,4});
 	    cards = new ArrayList<Card>();
 		cards.add(createMilitaryCard());
@@ -105,6 +116,8 @@ public class EndGameHandlerTest {
 	    EasyMock.expect(player5.getConflictTotal()).andReturn(-3);
 	    EasyMock.expect(player5.getCoinTotal()).andReturn(5);
 	    EasyMock.expect(player5.getNumVictoryPoints()).andReturn(6);
+	    EasyMock.expect(player5.getCardFromEndGame(0)).andReturn(this.createSpiesGuild());
+	    EasyMock.expect(player5.getCardFromEndGame(1)).andThrow(new IllegalArgumentException(""));
 	    EasyMock.expect(player5.getCardFromEndGame(0)).andReturn(this.createSpiesGuild());
 	    EasyMock.expect(player5.getCardFromEndGame(1)).andThrow(new IllegalArgumentException(""));
 	    EasyMock.expect(player5.getNumberOfEachScience()).andReturn(new int[]{3,2,4});
@@ -124,6 +137,8 @@ public class EndGameHandlerTest {
 	    EasyMock.expect(player6.getNumVictoryPoints()).andReturn(0);
 	    EasyMock.expect(player6.getCardFromEndGame(0)).andReturn(this.createPhilosophersGuild());
 	    EasyMock.expect(player6.getCardFromEndGame(1)).andThrow(new IllegalArgumentException(""));
+	    EasyMock.expect(player6.getCardFromEndGame(0)).andReturn(this.createPhilosophersGuild());
+	    EasyMock.expect(player6.getCardFromEndGame(1)).andThrow(new IllegalArgumentException(""));
 	    EasyMock.expect(player6.getNumberOfEachScience()).andReturn(new int[]{3,2,3});
 	    cards = new ArrayList<Card>();
 		cards.add(createWorkshop());
@@ -139,6 +154,8 @@ public class EndGameHandlerTest {
 	    EasyMock.expect(player7.getConflictTotal()).andReturn(3);
 	    EasyMock.expect(player7.getCoinTotal()).andReturn(5);
 	    EasyMock.expect(player7.getNumVictoryPoints()).andReturn(3);
+	    EasyMock.expect(player7.getCardFromEndGame(0)).andReturn(this.createTradersGuild());
+	    EasyMock.expect(player7.getCardFromEndGame(1)).andThrow(new IllegalArgumentException(""));
 	    EasyMock.expect(player7.getCardFromEndGame(0)).andReturn(this.createTradersGuild());
 	    EasyMock.expect(player7.getCardFromEndGame(1)).andThrow(new IllegalArgumentException(""));
 	    EasyMock.expect(player7.getNumberOfEachScience()).andReturn(new int[]{1,2,1});
@@ -177,6 +194,8 @@ public class EndGameHandlerTest {
 	    EasyMock.expect(player1.getNumVictoryPoints()).andReturn(4);
 	    EasyMock.expect(player1.getCardFromEndGame(0)).andReturn(this.createCraftsmenGuild());
 	    EasyMock.expect(player1.getCardFromEndGame(1)).andThrow(new IllegalArgumentException(""));
+	    EasyMock.expect(player1.getCardFromEndGame(0)).andReturn(this.createCraftsmenGuild());
+	    EasyMock.expect(player1.getCardFromEndGame(1)).andThrow(new IllegalArgumentException(""));
 	    EasyMock.expect(player1.getNumberOfEachScience()).andReturn(new int[]{1,1,1});
 	    ArrayList<Card> cards = new ArrayList<Card>();
 		cards.add(createManufacturedCard());
@@ -194,6 +213,8 @@ public class EndGameHandlerTest {
 	    EasyMock.expect(player2.getNumVictoryPoints()).andReturn(2);
 	    EasyMock.expect(player2.getCardFromEndGame(0)).andReturn(this.createMagistratesGuild());
 	    EasyMock.expect(player2.getCardFromEndGame(1)).andThrow(new IllegalArgumentException(""));
+	    EasyMock.expect(player2.getCardFromEndGame(0)).andReturn(this.createMagistratesGuild());
+	    EasyMock.expect(player2.getCardFromEndGame(1)).andThrow(new IllegalArgumentException(""));
 	    EasyMock.expect(player2.getNumberOfEachScience()).andReturn(new int[]{3,1,0});
 	    cards = new ArrayList<Card>();
 		cards.add(createRawMaterialCard());
@@ -209,6 +230,8 @@ public class EndGameHandlerTest {
 	    EasyMock.expect(player3.getConflictTotal()).andReturn(7);
 	    EasyMock.expect(player3.getCoinTotal()).andReturn(2);
 	    EasyMock.expect(player3.getNumVictoryPoints()).andReturn(2);
+	    EasyMock.expect(player3.getCardFromEndGame(0)).andReturn(this.createShipOwnersGuild());
+	    EasyMock.expect(player3.getCardFromEndGame(1)).andThrow(new IllegalArgumentException(""));
 	    EasyMock.expect(player3.getCardFromEndGame(0)).andReturn(this.createShipOwnersGuild());
 	    EasyMock.expect(player3.getCardFromEndGame(1)).andThrow(new IllegalArgumentException(""));
 	    EasyMock.expect(player3.getNumberOfEachScience()).andReturn(new int[]{1,2,2});
@@ -397,9 +420,66 @@ public class EndGameHandlerTest {
 		
 		Assert.assertEquals(4, end.getPointsFromGuildCards(player2, player1, player3));
 	}
-	
-	//TODO:  figure this out how to test Scientists guild
 
+	@Test
+	public void testScientistsGuildEffectProtractor(){
+		
+		Message message = EasyMock.mock(Message.class);
+		
+		
+		EasyMock.expect(message.dropDownScienceSelectionMessage()).andReturn("Protractor");
+		Wonder wonder = EasyMock.mock(Wonder.class);
+		
+		EasyMock.replay(message, wonder);
+		
+		Player player1 = new Player("Jane Doe", wonder);
+		player1.addToStoragePile(this.createScientistsGuild());
+		
+		EndGameHandler end = new EndGameHandler();
+		end.handleScientistsGuild(player1, message);
+		
+		Assert.assertEquals(1, end.getSciencePoints(player1));
+	}
+	
+	@Test
+	public void testScientistsGuildEffectWheel(){
+		
+		Message message = EasyMock.mock(Message.class);
+		
+		
+		EasyMock.expect(message.dropDownScienceSelectionMessage()).andReturn("Wheel");
+		Wonder wonder = EasyMock.mock(Wonder.class);
+		
+		EasyMock.replay(message, wonder);
+		
+		Player player1 = new Player("Jane Doe", wonder);
+		player1.addToStoragePile(this.createScientistsGuild());
+		
+		EndGameHandler end = new EndGameHandler();
+		end.handleScientistsGuild(player1, message);
+		
+		Assert.assertEquals(1, end.getSciencePoints(player1));
+	}
+	
+	@Test
+	public void testScientistsGuildEffectTablet(){
+		
+		Message message = EasyMock.mock(Message.class);
+		
+		
+		EasyMock.expect(message.dropDownScienceSelectionMessage()).andReturn("Tablet");
+		Wonder wonder = EasyMock.mock(Wonder.class);
+		
+		EasyMock.replay(message, wonder);
+
+		Player player1 = new Player("Jane Doe", wonder);
+		player1.addToStoragePile(this.createScientistsGuild());
+		
+		EndGameHandler end = new EndGameHandler();
+		end.handleScientistsGuild(player1, message);
+		
+		Assert.assertEquals(1, end.getSciencePoints(player1));
+	}
 	
 	@Test
 	public void testMagistratesGuildEffect(){
@@ -520,7 +600,7 @@ public class EndGameHandlerTest {
 		entitiesAndAmounts.put(Science.PROTRACTOR, 1);
 		entitiesAndAmounts.put(Science.WHEEL, 1);
 		entitiesAndAmounts.put(Science.TABLET, 1);
-		Effect effect = new EntityEffect(EffectType.ENTITY, EntityType.SCIENCE, entitiesAndAmounts);
+		Effect effect = new ValueEffect(EffectType.VALUE, Value.GUILD, entitiesAndAmounts);
 		Card card = new Card("Scientists Guild", CardType.GUILD, cost, effect);
 		return card;
 	}
