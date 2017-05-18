@@ -1334,6 +1334,24 @@ public final class SetUpDeckTestHelper {
 			card = new Card("Observatory", frequency, CardType.SCIENTIFICSTRUCTURE, cost, effect, "Laboratory", "None");
 			cards.add(card);
 		}
+		
+		//Senate
+		frequency = new ArrayList<Integer>();
+		frequency.add(3);
+		frequency.add(5);
+		costs = new HashMap<Enum, Integer>();
+		costs.put(Resource.ORE, 1);
+		costs.put(Resource.STONE, 1);
+		costs.put(Resource.LUMBER, 2);
+		cost = new Cost(CostType.RESOURCE, costs);
+		effect = new ValueEffect(EffectType.VALUE, Value.VICTORYPOINTS, AffectingEntity.NONE, 6);
+		card = new Card("Senate", frequency, CardType.CIVILIANSTRUCTURE, cost, effect, "Library", "None");
+		cards.add(card);
+
+		if (numPlayers >= 5) {
+			card = new Card("Senate", frequency, CardType.CIVILIANSTRUCTURE, cost, effect, "Library", "None");
+			cards.add(card);
+		}
 
 		// university
 		frequency = new ArrayList<Integer>();

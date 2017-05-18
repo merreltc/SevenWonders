@@ -5,6 +5,7 @@ import static org.junit.Assert.assertEquals;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import org.easymock.EasyMock;
 import org.junit.Test;
 
 import backend.handlers.SetUpDeckHandler;
@@ -28,6 +29,8 @@ import dataStructures.gameMaterials.ValueEffect;
 import dataStructures.gameMaterials.ValueEffect.AffectingEntity;
 import dataStructures.gameMaterials.ValueEffect.Value;
 import dataStructures.gameMaterials.ValueEffect.ValueType;
+import dataStructures.playerData.Player;
+import junit.framework.Assert;
 
 public class SetUpDeckHandlerTest {
 
@@ -228,4 +231,17 @@ public class SetUpDeckHandlerTest {
 	public void testCreateDeck() {
 		assertEquals(Deck.class, new SetUpDeckHandler().createDeck(Age.AGE1, 3).getClass());
 	}
+	
+	@Test
+	public void testRemoveGuildCards3Players(){
+		ArrayList<Card> deck = new SetUpDeckHandler().createCards(Age.AGE3, 3);
+		
+		deck = new SetUpDeckHandler().correctNumberOfGuildCards(deck, 3);
+		
+		for (int i = 0; i < 5; i++){
+			Assert.assertEquals(CardType.GUILD, deck.get(i).getCardType());
+		}
+		Assert.assertFalse(CardType.GUILD == deck.get(5).getCardType());
+	}
+
 }

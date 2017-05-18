@@ -16,6 +16,8 @@ import dataStructures.gameMaterials.EntityEffect.EntityType;
 import dataStructures.gameMaterials.EntityEffect;
 import dataStructures.gameMaterials.ValueEffect.AffectingEntity;
 import dataStructures.gameMaterials.ValueEffect;
+import dataStructures.playerData.Chip.ChipType;
+import dataStructures.playerData.Chip.ChipValue;
 import dataStructures.playerData.Player;
 import utils.Message;
 
@@ -56,9 +58,8 @@ public class EndGameHandler {
 		for (;;) {
 			try {
 				Card card = current.getCardFromEndGame(counter);
-				
 				if (card.getName().equals("Strategists Guild")) {
-					return right.getNumValueNeg1ConflictTokens() + left.getNumValueNeg1ConflictTokens();
+					return right.getConflictTokens().get(ChipValue.NEG1) + left.getConflictTokens().get(ChipValue.NEG1);
 				} else if (card.getName().equals("Scientists Guild")) {
 					throw new UnsupportedOperationException("Show Option Dialog");
 				}

@@ -28,6 +28,7 @@ import dataStructures.gameMaterials.ValueEffect.AffectingEntity;
 import dataStructures.gameMaterials.ValueEffect.Value;
 import dataStructures.gameMaterials.Wonder;
 import dataStructures.gameMaterials.Wonder.WonderType;
+import dataStructures.playerData.Chip.ChipValue;
 import dataStructures.playerData.Player;
 import junit.framework.Assert;
 import utils.Message;
@@ -385,11 +386,17 @@ public class EndGameHandlerTest {
 		EasyMock.expect(player2.getCardFromEndGame(0)).andReturn(this.createStrategistsGuild());
 		EasyMock.expect(player2.getCardFromEndGame(1)).andThrow(new IllegalArgumentException(""));
 		
+		HashMap<ChipValue, Integer> conflictTokens = new HashMap<ChipValue, Integer>();
+		conflictTokens.put(ChipValue.NEG1, 2);
+		
 		EndGameHandler end = new EndGameHandler();
 		EasyMock.expect(player1.getStoragePile()).andReturn(cards);
 		EasyMock.expect(player3.getStoragePile()).andReturn(cards);
-		EasyMock.expect(player1.getNumValueNeg1ConflictTokens()).andReturn(2);
-		EasyMock.expect(player3.getNumValueNeg1ConflictTokens()).andReturn(1);
+		EasyMock.expect(player1.getConflictTokens()).andReturn(conflictTokens);
+		
+		HashMap<ChipValue, Integer> conflictTokens2 = new HashMap<ChipValue, Integer>();
+		conflictTokens2.put(ChipValue.NEG1, 1);
+		EasyMock.expect(player3.getConflictTokens()).andReturn(conflictTokens2);
 		
 		EasyMock.replay(player1,player2,player3);
 		

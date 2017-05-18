@@ -725,12 +725,12 @@
 						}]
 			},
 	"frequencyByNumPlayers": [3, 5],
-	"Effect": [{
-					"EffectType": "VALUE",
-					"Value": "VICTORYPOINTS",
-					"AffectingEntities": "NONE",
-					"valueAmount": 6
-	}],
+	"Effect": {
+					    "EffectType": "VALUE",
+					    "Value": "VICTORYPOINTS",
+					    "AffectingEntities": "NONE",
+					    "valueAmount": 6
+	          },
 	"Next": "None",
 	"Previous": "Library"
 },
