@@ -707,6 +707,34 @@
 	"Previous": "Laboratory"
 },
 {
+	"cardName": "Senate",
+	"cardType": "CIVILIANSTRUCTURE",
+	"Cost": {
+				"CostType": "RESOURCE",
+				"cost": [{
+							"Resource": "ORE",
+							"amount": 1
+						},
+						{
+							"Resource": "STONE",
+							"amount": 1
+						},
+						{
+							"Resource": "LUMBER",
+							"amount": 2
+						}]
+			},
+	"frequencyByNumPlayers": [3, 5],
+	"Effect": [{
+					"EffectType": "VALUE",
+					"Value": "VICTORYPOINTS",
+					"AffectingEntities": "NONE",
+					"valueAmount": 6
+	}],
+	"Next": "None",
+	"Previous": "Library"
+},
+{
 	"cardName": "University",
 	"cardType": "SCIENTIFICSTRUCTURE",
 	"Cost": {
