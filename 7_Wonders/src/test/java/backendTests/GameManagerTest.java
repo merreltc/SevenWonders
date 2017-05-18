@@ -918,6 +918,19 @@ public class GameManagerTest {
 		
 		Assert.assertEquals(gameManager.formatFinalScores(scores), "Player1 : 35\nPlayer2 : 26\nPlayer3 : 13\nPlayer1 Wins!");
 	}
+	
+	@Test
+	public void testFormatFinalScoreTie(){
+		ArrayList<String> playerNames = new ArrayList<String>(Arrays.asList("Player1", "Player2", "Player3"));
+		
+		GameManager gameManager = new GameManager(playerNames,GameMode.EASY);
+		PlayerChipHandler.addValue1(gameManager.getPlayer(0), 10, ChipType.COIN);
+		PlayerChipHandler.addValue1(gameManager.getPlayer(1), 5, ChipType.COIN);
+		
+		ArrayList<Integer> scores = new ArrayList<Integer>(Arrays.asList(35, 35, 13));
+		
+		Assert.assertEquals(gameManager.formatFinalScores(scores), "Player1 : 35\nPlayer2 : 35\nPlayer3 : 13\nPlayer1 Wins!");
+	}
 
 	private void mockExpectTurnHandlerCalls(TurnHandler turnHandler) {
 		EasyMock.expect(turnHandler.getNumPlayersUntilPass()).andReturn(2);
