@@ -1,10 +1,11 @@
 package backendTests;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import org.easymock.EasyMock;
 import org.junit.Test;
 
 import backend.handlers.SetUpDeckHandler;
@@ -28,6 +29,7 @@ import dataStructures.gameMaterials.ValueEffect;
 import dataStructures.gameMaterials.ValueEffect.AffectingEntity;
 import dataStructures.gameMaterials.ValueEffect.Value;
 import dataStructures.gameMaterials.ValueEffect.ValueType;
+import dataStructures.playerData.Player;
 
 public class SetUpDeckHandlerTest {
 
@@ -85,34 +87,19 @@ public class SetUpDeckHandlerTest {
 	public void testCreateAge3Cards3Players() {
 		int numPlayers = 3;
 		ArrayList<Card> cards = SetUpDeckTestHelper.createAge3Cards(numPlayers);
-
 		ArrayList<Card> actual = new SetUpDeckHandler().createCards(Age.AGE3, numPlayers);
 
 		for (int i = 0; i < actual.size(); i++) {
 			assertEquals(cards.get(i).toString(), actual.get(i).toString());
 		}
-
-	}
-	
-	@Test
-	public void testCreateAge3Cards7Players() {
-		int numPlayers = 7;
-		ArrayList<Card> cards = SetUpDeckTestHelper.createAge3Cards(numPlayers);
-
-		ArrayList<Card> actual = new SetUpDeckHandler().createCards(Age.AGE3, numPlayers);
-
-		for (int i = 0; i < actual.size(); i++) {
-			assertEquals(cards.get(i).toString(), actual.get(i).toString());
-		}
-
 	}
 
 	@Test
 	public void testAge2Cards3PlayersTempleHasNextAndPrevious() {
 		int numPlayers = 3;
 		ArrayList<Card> cards = SetUpDeckTestHelper.createAge2Cards(numPlayers);
-
 		ArrayList<Card> actual = new SetUpDeckHandler().createCards(Age.AGE2, numPlayers);
+
 		Card temple = actual.get(8);
 		assertEquals("Temple", temple.getName());
 		assertEquals("Pantheon", temple.getNextStructureName());
@@ -243,4 +230,29 @@ public class SetUpDeckHandlerTest {
 	public void testCreateDeck() {
 		assertEquals(Deck.class, new SetUpDeckHandler().createDeck(Age.AGE1, 3).getClass());
 	}
+	
+	@Test
+	public void testRemoveGuildCards3Players(){
+		ArrayList<Card> deck = new SetUpDeckHandler().createCards(Age.AGE3, 3);
+		
+		deck = new SetUpDeckHandler().correctNumberOfGuildCards(deck, 3);
+		
+		for (int i = 0; i < 5; i++){
+			assertEquals(CardType.GUILD, deck.get(i).getCardType());
+		}
+		assertFalse(CardType.GUILD == deck.get(5).getCardType());
+	}
+
+	@Test
+	public void testRemoveGuildCards7Players(){
+		ArrayList<Card> deck = new SetUpDeckHandler().createCards(Age.AGE3, 7);
+		
+		deck = new SetUpDeckHandler().correctNumberOfGuildCards(deck, 7);
+		
+		for (int i = 0; i < 9; i++){
+			assertEquals(CardType.GUILD, deck.get(i).getCardType());
+		}
+		assertFalse(CardType.GUILD == deck.get(9).getCardType());
+	}
+	
 }

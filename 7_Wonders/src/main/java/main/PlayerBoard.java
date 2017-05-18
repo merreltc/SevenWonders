@@ -14,14 +14,6 @@ import gui.interactables.Button;
 import utils.RenderImage;
 
 public class PlayerBoard {
-	int lumber = 0;
-	int ore = 0;
-	int stone = 0;
-	int clay = 0;
-	int loom = 0;
-	int glass = 0;
-	int press = 0;
-
 	private Point position;
 	private Point sizePoint;
 
@@ -84,7 +76,7 @@ public class PlayerBoard {
 		Point buttonPositionPoint = new Point(position.x + sizePoint.x / 2 - 20,
 				position.y + Constants.PlayerNameYOffset - Constants.ResourcerViewerButtonYOffset);
 		Button button = new Button(buttonPositionPoint, Constants.ResourceViewerButtonBounds,
-				((-playerPosition + this.totalNumberOfPlayers) % this.totalNumberOfPlayers) + "");
+				((playerPosition + this.totalNumberOfPlayers) % this.totalNumberOfPlayers) + "");
 		button.hide();
 		return button;
 	}
@@ -98,11 +90,6 @@ public class PlayerBoard {
 	}
 
 	public void drawResources(Graphics graphics) {
-
-		Object[] lumberArgs = { this.lumber };
-		Object[] oreArgs = { this.ore };
-		Object[] stoneArgs = { this.stone };
-		Object[] clayArgs = { this.clay };
 		MessageFormat format = new MessageFormat("");
 		format.setLocale(Locale.getDefault());
 

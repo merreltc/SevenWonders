@@ -2,21 +2,31 @@ package backend.factories;
 
 import java.util.ArrayList;
 
+import constants.GeneralEnums.GameMode;
+import constants.GeneralEnums.Side;
+import dataStructures.gameMaterials.Wonder;
 import dataStructures.gameMaterials.Wonder.WonderType;
+import exceptions.NoMoreWondersException;
 
 public class WonderFactory {
 	private ArrayList<WonderType> remainingWonders;
 	private int numRemainingWonders;
+	private GameMode mode;
 
-	public WonderFactory() {
+	public WonderFactory(GameMode mode) {
 		this.remainingWonders = new ArrayList<WonderType>();
 		buildWonderSet(this.remainingWonders);
 		this.numRemainingWonders = 7;
+		this.mode = mode;
 	}
 
-	public WonderType getWonder() {
+	public Wonder getWonder() {
+		if (isOutOfWonders()) {
+			throw new NoMoreWondersException("There are no more unique wonders left.");
+		}
+
 		int index = getRandomIndex();
-		this.numRemainingWonders--;
+		decrementNumRemainingWonders();
 		return removeAtIndex(index);
 	}
 
@@ -27,8 +37,30 @@ public class WonderFactory {
 		return index;
 	}
 
-	WonderType removeAtIndex(int index) {
-		return (WonderType) this.remainingWonders.remove(index);
+	public void decrementNumRemainingWonders() {
+		this.numRemainingWonders--;
+	}
+
+	public Wonder removeAtIndex(int index) {
+		WonderType type = (WonderType) this.remainingWonders.remove(index);
+		return new Wonder(getSide(), type);
+	}
+
+	public Side getSide() {
+		if (this.mode == GameMode.EASY) {
+			return Side.A;
+		} else {
+			int pickSide = (int) (Math.random() * 2);
+			return generateSide(pickSide);
+		}
+	}
+
+	public Side generateSide(int pickSide) {
+		if (pickSide == 0) {
+			return Side.A;
+		} else {
+			return Side.B;
+		}
 	}
 
 	private void buildWonderSet(ArrayList<WonderType> wonders) {
@@ -41,4 +73,7 @@ public class WonderFactory {
 		wonders.add(WonderType.STATUE);
 	}
 
+	public boolean isOutOfWonders() {
+		return this.numRemainingWonders == 0;
+	}
 }

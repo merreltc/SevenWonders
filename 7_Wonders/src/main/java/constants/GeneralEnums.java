@@ -20,4 +20,12 @@ public class GeneralEnums {
 	public enum Science {
 		PROTRACTOR, WHEEL, TABLET		
 	}
+	
+	public enum GameMode {
+		EASY, NORMAL
+	}
+	
+	public enum Side {
+		A, B
+	}
 }

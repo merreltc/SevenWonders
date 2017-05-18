@@ -38,4 +38,8 @@ public class Deck {
 
 		return this.cards.get(index);
 	}
+	
+	public Card removeAtIndex(int index) {
+		return this.cards.remove(index);
+	}
 }

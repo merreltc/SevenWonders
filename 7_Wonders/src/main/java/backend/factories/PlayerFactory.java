@@ -1,5 +1,6 @@
 package backend.factories;
 
+import constants.GeneralEnums.GameMode;
 import dataStructures.playerData.Player;
 import exceptions.NoMorePlayersException;
 
@@ -7,8 +8,8 @@ public class PlayerFactory {
 	private int currNumPlayers = 0;
 	private WonderFactory wonderFactory;
 
-	public PlayerFactory() {
-		this.wonderFactory = new WonderFactory();
+	public PlayerFactory(GameMode mode) {
+		this.wonderFactory = new WonderFactory(mode);
 	}
 
 	public Player getPlayer(String name) {
@@ -18,7 +19,6 @@ public class PlayerFactory {
 	}
 
 	private void validateNewPlayer() {
-		PlayerFactory factory = new PlayerFactory();
 		if (this.currNumPlayers > 7) {
 			throw new NoMorePlayersException("You've created the maximum number of players");
 		}
