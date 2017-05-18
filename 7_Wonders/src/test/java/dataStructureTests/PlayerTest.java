@@ -17,19 +17,20 @@ import constants.GeneralEnums.CostType;
 import constants.GeneralEnums.Good;
 import constants.GeneralEnums.RawResource;
 import constants.GeneralEnums.Science;
+import constants.GeneralEnums.Side;
 import dataStructures.gameMaterials.Card;
+import dataStructures.gameMaterials.Card.CardType;
 import dataStructures.gameMaterials.Cost;
 import dataStructures.gameMaterials.Deck.Age;
 import dataStructures.gameMaterials.Effect;
 import dataStructures.gameMaterials.Effect.Direction;
 import dataStructures.gameMaterials.Effect.EffectType;
 import dataStructures.gameMaterials.EntityEffect;
-import dataStructures.gameMaterials.ValueEffect;
 import dataStructures.gameMaterials.EntityEffect.EntityType;
+import dataStructures.gameMaterials.ValueEffect;
 import dataStructures.gameMaterials.ValueEffect.AffectingEntity;
 import dataStructures.gameMaterials.ValueEffect.Value;
 import dataStructures.gameMaterials.Wonder;
-import dataStructures.gameMaterials.Card.CardType;
 import dataStructures.gameMaterials.Wonder.WonderType;
 import dataStructures.playerData.Chip;
 import dataStructures.playerData.Chip.ChipType;
@@ -37,6 +38,16 @@ import dataStructures.playerData.Player;
 import exceptions.InsufficientFundsException;
 
 public class PlayerTest {
+	@Test
+	public void testGetWonderSide() {
+		Wonder wonder = EasyMock.partialMockBuilder(Wonder.class).withConstructor(Side.A, WonderType.COLOSSUS).createMock();
+		Player player = EasyMock.partialMockBuilder(Player.class).withConstructor("Jane Doe", wonder).createMock();
+		assertEquals(Side.A, player.getSide());
+		
+		wonder = EasyMock.partialMockBuilder(Wonder.class).withConstructor(Side.B, WonderType.COLOSSUS).createMock();
+		player = EasyMock.partialMockBuilder(Player.class).withConstructor("Jane Doe", wonder).createMock();
+		assertEquals(Side.B, player.getSide());
+	}
 
 	@Test
 	public void testDefaultPlayer() {

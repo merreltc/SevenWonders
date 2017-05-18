@@ -5,6 +5,8 @@ import java.util.HashMap;
 import java.util.ResourceBundle;
 
 import constants.GeneralEnums.Science;
+import constants.GeneralEnums.Side;
+import constants.GeneralEnums.Side;
 import dataStructures.gameMaterials.Card;
 import dataStructures.gameMaterials.Effect.EffectType;
 import dataStructures.gameMaterials.EntityEffect;
@@ -441,5 +443,9 @@ public class Player {
 
 	public int getNumValueNeg1ConflictTokens() {
 		return this.playerChips.numOfValueNeg1ConflictTokens;
+	}
+	
+	public Side getSide() {
+		return this.wonder.getSide();
 	}
 }
