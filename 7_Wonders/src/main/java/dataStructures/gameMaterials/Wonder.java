@@ -1,7 +1,12 @@
 package dataStructures.gameMaterials;
 
+import java.util.ArrayList;
+
+import constants.GeneralEnums.CostType;
 import constants.GeneralEnums.Resource;
 import constants.GeneralEnums.Side;
+import dataStructures.gameMaterials.Effect.EffectType;
+import dataStructures.gameMaterials.Level.Frequency;
 import exceptions.CannotBuiltWonderException;
 
 public class Wonder {
@@ -9,7 +14,8 @@ public class Wonder {
 	private String name;
 	private Resource resource;
 	private Side side;
-	private int numBuilds = 0;
+	private int numBuiltLevels = 0;
+	private ArrayList<Level> levels;
 
 	public enum WonderType {
 		COLOSSUS, LIGHTHOUSE, TEMPLE, GARDENS, STATUE, MAUSOLEUM, PYRAMIDS
@@ -20,12 +26,18 @@ public class Wonder {
 		this.name = getNameByType(type);
 		this.resource = getResourceByType(type);
 		this.side = side;
+		this.levels = new ArrayList<Level>();
+		// TODO: Parse to set up levels
 	}
 
 	public void buildNextLevel() {
-		this.numBuilds++;
-		if (this.numBuilds > this.getNumLevels()) {
+		this.numBuiltLevels++;
+		if (this.numBuiltLevels > this.getNumLevels()) {
 			throw new CannotBuiltWonderException("Player has built max number of levels.");
+		} else {
+			Level temp = new Level(this.numBuiltLevels, new Cost(CostType.NONE, 1), new Effect(EffectType.NONE),
+					Frequency.DEFAULT);
+			this.levels.add(temp);
 		}
 	}
 
@@ -131,5 +143,13 @@ public class Wonder {
 		default:
 			throw new IllegalArgumentException("Bad Wonder Type");
 		}
+	}
+
+	public int getNumBuiltLevels() {
+		return this.levels.size();
+	}
+
+	public Level getLevel(int index) {
+		return this.levels.get(index);
 	}
 }

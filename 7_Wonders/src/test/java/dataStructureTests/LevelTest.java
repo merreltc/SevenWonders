@@ -26,6 +26,36 @@ import dataStructures.gameMaterials.ValueEffect.Value;
 import dataStructures.gameMaterials.ValueEffect.ValueType;
 
 public class LevelTest {
+	private static String MOCK_COST_TO_STRING = "EasyMock for class dataStructures.gameMaterials.Cost";
+	private static String MOCK_EFFECT_TO_STRING = "EasyMock for class dataStructures.gameMaterials.Effect";
+	private static String MOCK_EFFECTS_TO_STRING = "{EasyMock for class dataStructures.gameMaterials.Effect=ONCEIMMEDIATE}";
+
+	@Test
+	public void testToStringSingleEffect() {
+		int priority = 1;
+		Cost cost = EasyMock.createStrictMock(Cost.class);
+		Effect effect = EasyMock.createStrictMock(Effect.class);
+
+		Level level = new Level(priority, cost, effect, Frequency.EVERYTURN);
+
+		assertEquals("Priority: 1, Cost: " + MOCK_COST_TO_STRING + "," + " Effect: " + MOCK_EFFECT_TO_STRING + ","
+				+ " Frequency: EVERYTURN, Effects: null", level.toString());
+	}
+
+	@Test
+	public void testToStringMultiEffect() {
+		int priority = 1;
+		Cost cost = EasyMock.createStrictMock(Cost.class);
+		Effect effect = EasyMock.createStrictMock(Effect.class);
+
+		HashMap<Effect, Frequency> effects = new HashMap<Effect, Frequency>();
+		effects.put(effect, Frequency.ONCEIMMEDIATE);
+
+		Level level = new Level(priority, cost, effects);
+		assertEquals("Priority: 1, Cost: " + MOCK_COST_TO_STRING + ", Effect: null, Frequency: null," + " Effects: "
+				+ MOCK_EFFECTS_TO_STRING, level.toString());
+	}
+
 	@Test
 	public void testEqualsTrueSingleEffect() {
 		int priority = 1;
@@ -50,13 +80,13 @@ public class LevelTest {
 		Level level2 = new Level(priority2, cost2, effect2, Frequency.EVERYTURN);
 		assertFalse(level1.equals(level2));
 	}
-	
+
 	@Test
 	public void testEqualsTrueMultiEffect() {
 		int priority = 1;
 		Cost cost = EasyMock.createStrictMock(Cost.class);
 		Effect effect = EasyMock.createStrictMock(Effect.class);
-		
+
 		HashMap<Effect, Frequency> effects = new HashMap<Effect, Frequency>();
 		effects.put(effect, Frequency.ONCEIMMEDIATE);
 
@@ -73,10 +103,10 @@ public class LevelTest {
 		Effect effect2 = EasyMock.createStrictMock(Effect.class);
 		int priority1 = 1;
 		int priority2 = 2;
-		
+
 		HashMap<Effect, Frequency> effects1 = new HashMap<Effect, Frequency>();
 		effects1.put(effect1, Frequency.ONCEIMMEDIATE);
-		
+
 		HashMap<Effect, Frequency> effects2 = new HashMap<Effect, Frequency>();
 		effects2.put(effect2, Frequency.ONCEIMMEDIATE);
 
@@ -84,7 +114,7 @@ public class LevelTest {
 		Level level2 = new Level(priority2, cost2, effects2);
 		assertFalse(level1.equals(level2));
 	}
-	
+
 	@Test
 	public void testGetEffect() {
 		Cost cost = EasyMock.createStrictMock(Cost.class);
@@ -94,7 +124,7 @@ public class LevelTest {
 		Level level = new Level(priority, cost, effect, Frequency.ONCEIMMEDIATE);
 		assertEquals(effect, level.getEffect());
 	}
-	
+
 	@Test
 	public void testGetCost() {
 		Cost cost = EasyMock.createStrictMock(Cost.class);

@@ -16,7 +16,7 @@ public class Level {
 	private Effect effect;
 	private HashMap<Effect, Frequency> effects;
 	private Frequency frequency;
-	
+
 	public enum Frequency {
 		ENDOFTURN, EVERYTURN, SIXTHTURN, ONCEIMMEDIATE, ONCEAGE, ENDOFGAME, DEFAULT
 	}
@@ -33,7 +33,13 @@ public class Level {
 		this.cost = cost;
 		this.effects = effects;
 	}
-	
+
+	@Override
+	public String toString() {
+		return "Priority: " + this.priority + ", Cost: " + this.cost + ", Effect: " + this.effect + ", Frequency: "
+				+ this.frequency + ", Effects: " + this.effects;
+	}
+
 	@Override
 	public boolean equals(Object obj) {
 		Level temp = (Level) obj;
@@ -48,11 +54,11 @@ public class Level {
 	public int getPriority() {
 		return this.priority;
 	}
-	
+
 	public Cost getCost() {
 		return this.cost;
 	}
-	
+
 	public CostType getCostType() {
 		return this.cost.getType();
 	}
@@ -60,7 +66,7 @@ public class Level {
 	public HashMap<Enum, Integer> getCosts() {
 		return this.cost.getCost();
 	}
-	
+
 	public Effect getEffect() {
 		return this.effect;
 	}
