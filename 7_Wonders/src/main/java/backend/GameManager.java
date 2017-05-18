@@ -75,56 +75,7 @@ public class GameManager {
 	}
 
 	public void tradeForEntity(Player from, Player to, Enum entity) {
-		boolean discountSuccesful = false;
-		if (from.storagePileContainsCardByName("East Trading Post")) {
-			discountSuccesful = tryTradeWithDiscountEast(from, to);
-		} else if (from.storagePileContainsCardByName("West Trading Post")) {
-			discountSuccesful = tryTradeWithDiscountWest(from, to);
-		} else if (from.storagePileContainsCardByName("Marketplace")) {
-			discountSuccesful = true;
-		}
-
-		this.handlers.getTradeHandler().tradeFromToForEntity(from, to, entity, discountSuccesful);
-	}
-
-	private boolean tryTradeWithDiscountEast(Player from, Player to) {
-		int fromPosition = this.getPlayers().indexOf(from);
-		int toPosition = this.getPlayers().indexOf(to);
-		fromPosition = correctFromIndex(CardinalDirection.EAST, fromPosition);
-
-		return (fromPosition == toPosition) ? true : false;
-	}
-	
-	private boolean tryTradeWithDiscountWest(Player from, Player to) {
-		int fromPosition = this.getPlayers().indexOf(from);
-		int toPosition = this.getPlayers().indexOf(to);
-		fromPosition = correctFromIndex(CardinalDirection.WEST, fromPosition);
-
-		return (fromPosition == toPosition) ? true : false;
-	}
-
-	private int correctFromIndex(CardinalDirection direction, int fromPosition) {
-		int indexCorrection = getIndexCorrection(direction, fromPosition);
-		int comparisonIndex = getComparisonIndex(direction);
-		
-		if (indexCorrection == comparisonIndex) {
-			indexCorrection = getNewFromIndex(direction);
-		}
-
-		return indexCorrection;
-	}
-
-	public int getIndexCorrection(CardinalDirection direction, int index) {
-		int correction = (direction == CardinalDirection.EAST) ? 1 : -1;
-		return index + correction;
-	}
-
-	public int getComparisonIndex(CardinalDirection direction) {
-		return (direction == CardinalDirection.EAST) ? this.getNumPlayers() : -1;
-	}
-
-	public int getNewFromIndex(CardinalDirection direction) {
-		return (direction == CardinalDirection.EAST) ? 0 : this.getNumPlayers() - 1;
+		this.handlers.getTradeHandler().tradeForEntity(from, to, entity);
 	}
 
 	public void buildStructure(Card card) {
