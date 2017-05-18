@@ -11,11 +11,13 @@ import dataStructures.gameMaterials.Effect;
 import dataStructures.gameMaterials.Effect.Direction;
 import dataStructures.gameMaterials.Effect.EffectType;
 import dataStructures.gameMaterials.EntityEffect;
+import dataStructures.gameMaterials.MultiValueEffect;
 import dataStructures.gameMaterials.EntityEffect.EntityType;
 import dataStructures.gameMaterials.Level.Frequency;
 import dataStructures.gameMaterials.ValueEffect;
 import dataStructures.gameMaterials.ValueEffect.AffectingEntity;
 import dataStructures.gameMaterials.ValueEffect.Value;
+import dataStructures.gameMaterials.ValueEffect.ValueType;
 
 public class WonderAndAbilityEffectTest {
 
@@ -48,6 +50,17 @@ public class WonderAndAbilityEffectTest {
 		affectingEntities.put(AffectingEntity.GUILD, 1);
 		effect = new ValueEffect(EffectType.VALUE, Value.VICTORYPOINTS, affectingEntities, Frequency.EVERYTURN);
 		assertEquals(Frequency.EVERYTURN, ((ValueEffect) effect).getFrequency());
+	}
+	
+	@Test
+	public void testMultiValueEffectFrequency() {
+		HashMap<Enum, Integer> valuesAndAmounts = new HashMap<Enum, Integer>();
+		valuesAndAmounts.put(ValueType.CONFLICTTOKEN, -1);
+		valuesAndAmounts.put(ValueType.VICTORYPOINT, 1);
+		Effect effect = new MultiValueEffect(EffectType.MULTIVALUE, Value.GUILD, AffectingEntity.NONE,
+				Direction.NEIGHBORS, valuesAndAmounts, Frequency.EVERYTURN);
+
+		assertEquals(Frequency.EVERYTURN, ((MultiValueEffect) effect).getFrequency());
 	}
 
 }

@@ -51,6 +51,15 @@ public class ValueEffect extends Effect {
 		this.affectingEntity = affectingEntity;
 		this.valueAmount = NO_VALUE_AMOUNT;
 	}
+	
+	public ValueEffect(EffectType effectType, Value value, AffectingEntity affectingEntity, Direction direction, Frequency frequency) {
+		super(effectType);
+		this.value = value;
+		this.setDirection(direction);
+		this.affectingEntity = affectingEntity;
+		this.valueAmount = NO_VALUE_AMOUNT;
+		this.frequency = frequency;
+	}
 
 	public ValueEffect(EffectType effectType, Value value, AffectingEntity affectingEntity, Direction direction,
 			int valueAmount) {
@@ -60,12 +69,30 @@ public class ValueEffect extends Effect {
 		this.affectingEntity = affectingEntity;
 		this.valueAmount = valueAmount;
 	}
+	
+	public ValueEffect(EffectType effectType, Value value, AffectingEntity affectingEntity, Direction direction,
+			int valueAmount, Frequency frequency) {
+		super(effectType);
+		this.value = value;
+		this.setDirection(direction);
+		this.affectingEntity = affectingEntity;
+		this.valueAmount = valueAmount;
+		this.frequency = frequency;
+	}
 
 	public ValueEffect(EffectType effectType, Value value, HashMap<Enum, Integer> affectingEntities) {
 		super(effectType);
 		this.value = value;
 		this.affectingEntities = affectingEntities;
 		this.valueAmount = NO_VALUE_AMOUNT;
+	}
+	
+	public ValueEffect(EffectType effectType, Value value, HashMap<Enum, Integer> affectingEntities, Frequency frequency) {
+		super(effectType);
+		this.value = value;
+		this.affectingEntities = affectingEntities;
+		this.valueAmount = NO_VALUE_AMOUNT;
+		this.frequency = frequency;
 	}
 
 	private void validateValueAmount(Value value, int valueAmount) {
