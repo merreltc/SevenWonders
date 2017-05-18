@@ -84,7 +84,7 @@ public class PlayerBoard {
 		Point buttonPositionPoint = new Point(position.x + sizePoint.x / 2 - 20,
 				position.y + Constants.PlayerNameYOffset - Constants.ResourcerViewerButtonYOffset);
 		Button button = new Button(buttonPositionPoint, Constants.ResourceViewerButtonBounds,
-				((-playerPosition + this.totalNumberOfPlayers) % this.totalNumberOfPlayers) + "");
+				((playerPosition + this.totalNumberOfPlayers) % this.totalNumberOfPlayers) + "");
 		button.hide();
 		return button;
 	}

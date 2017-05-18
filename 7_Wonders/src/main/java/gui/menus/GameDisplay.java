@@ -214,7 +214,7 @@ public class GameDisplay extends Menu {
 		int nextPlayerIndex = players.indexOf(nextPlayer);
 		for (int i = 0; i < players.size(); i++) {
 			boards.get(i)
-					.changePlayer(players.get((totalNumberOfPlayers + nextPlayerIndex + i + 1) % totalNumberOfPlayers));
+					.changePlayer(players.get((totalNumberOfPlayers + nextPlayerIndex + i - 2) % totalNumberOfPlayers));
 			// boards.get(i).changePlayer(
 			// players.get((totalNumberOfPlayers + currentPlayerIndex - i + 1) %
 			// totalNumberOfPlayers));
