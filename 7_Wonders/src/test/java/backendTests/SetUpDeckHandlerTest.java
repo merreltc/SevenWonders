@@ -244,4 +244,16 @@ public class SetUpDeckHandlerTest {
 		Assert.assertFalse(CardType.GUILD == deck.get(5).getCardType());
 	}
 
+	@Test
+	public void testRemoveGuildCards7Players(){
+		ArrayList<Card> deck = new SetUpDeckHandler().createCards(Age.AGE3, 7);
+		
+		deck = new SetUpDeckHandler().correctNumberOfGuildCards(deck, 7);
+		
+		for (int i = 0; i < 9; i++){
+			Assert.assertEquals(CardType.GUILD, deck.get(i).getCardType());
+		}
+		Assert.assertFalse(CardType.GUILD == deck.get(9).getCardType());
+	}
+	
 }
