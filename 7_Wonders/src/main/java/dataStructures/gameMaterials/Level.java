@@ -16,9 +16,9 @@ public class Level {
 	private Effect effect;
 	private HashMap<Effect, Frequency> effects;
 	private Frequency frequency;
-	
+
 	public enum Frequency {
-		ENDOFTURN, EVERYTURN, SIXTHTURN, ONCEIMMEDIATE, ONCEAGE, ENDOFGAME
+		ENDOFTURN, EVERYTURN, SIXTHTURN, ONCEIMMEDIATE, ONCEAGE, ENDOFGAME, DEFAULT
 	}
 
 	public Level(int priority, Cost cost, Effect effect, Frequency frequency) {
@@ -34,16 +34,41 @@ public class Level {
 		this.effects = effects;
 	}
 
+	@Override
+	public String toString() {
+		return "Priority: " + this.priority + ", Cost: " + this.cost + ", Effect: " + this.effect + ", Frequency: "
+				+ this.frequency + ", Effects: " + this.effects;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		Level temp = (Level) obj;
+		boolean equalPriority = this.priority == temp.priority;
+		boolean equalCost = this.getCost() == temp.getCost();
+		boolean equalEffect = this.effect == temp.getEffect();
+		boolean equalEffects = this.effects == temp.getEffects();
+		boolean equalFrequency = this.frequency == temp.getFrequency();
+		return equalPriority && equalCost && equalEffect && equalEffects && equalFrequency;
+	}
+
 	public int getPriority() {
 		return this.priority;
 	}
-	
+
+	public Cost getCost() {
+		return this.cost;
+	}
+
 	public CostType getCostType() {
 		return this.cost.getType();
 	}
 
-	public HashMap<Enum, Integer> getCost() {
+	public HashMap<Enum, Integer> getCosts() {
 		return this.cost.getCost();
+	}
+
+	public Effect getEffect() {
+		return this.effect;
 	}
 
 	public EffectType getEffectType() {

@@ -290,7 +290,6 @@ public class ResourceViewer extends Menu {
 		return array;
 	}
 
-
 	@Override
 	public void initialize() {
 	}

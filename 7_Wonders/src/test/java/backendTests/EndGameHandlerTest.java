@@ -1,13 +1,11 @@
 package backendTests;
 
-import static org.junit.Assert.*;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 
 import org.easymock.EasyMock;
-import org.junit.Before;
+import org.junit.Assert;
 import org.junit.Test;
 
 import backend.handlers.EndGameHandler;
@@ -16,21 +14,19 @@ import constants.GeneralEnums.Good;
 import constants.GeneralEnums.RawResource;
 import constants.GeneralEnums.Science;
 import dataStructures.gameMaterials.Card;
+import dataStructures.gameMaterials.Card.CardType;
 import dataStructures.gameMaterials.Cost;
 import dataStructures.gameMaterials.Effect;
-import dataStructures.gameMaterials.EntityEffect;
-import dataStructures.gameMaterials.ValueEffect;
-import dataStructures.gameMaterials.Card.CardType;
 import dataStructures.gameMaterials.Effect.Direction;
 import dataStructures.gameMaterials.Effect.EffectType;
+import dataStructures.gameMaterials.EntityEffect;
 import dataStructures.gameMaterials.EntityEffect.EntityType;
+import dataStructures.gameMaterials.ValueEffect;
 import dataStructures.gameMaterials.ValueEffect.AffectingEntity;
 import dataStructures.gameMaterials.ValueEffect.Value;
 import dataStructures.gameMaterials.Wonder;
-import dataStructures.gameMaterials.Wonder.WonderType;
 import dataStructures.playerData.Chip.ChipValue;
 import dataStructures.playerData.Player;
-import junit.framework.Assert;
 import utils.Message;
 
 public class EndGameHandlerTest {

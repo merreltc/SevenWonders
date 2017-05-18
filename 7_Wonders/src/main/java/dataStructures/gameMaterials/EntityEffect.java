@@ -2,18 +2,27 @@ package dataStructures.gameMaterials;
 
 import java.util.HashMap;
 
+import dataStructures.gameMaterials.Level.Frequency;
+
 public class EntityEffect extends Effect {
 	private EntityType entityType;
 	private HashMap<Enum, Integer> entitiesAndAmounts;
+	private Frequency frequency;
 
 	public enum EntityType {
 		RESOURCE, MANUFACTUREDGOOD, SCIENCE
 	}
 
 	public EntityEffect(EffectType effectType, EntityType entityType, HashMap<Enum, Integer> entitiesAndAmounts) {
+		this(effectType, entityType, entitiesAndAmounts, Frequency.DEFAULT);
+	}
+
+	public EntityEffect(EffectType effectType, EntityType entityType, HashMap<Enum, Integer> entitiesAndAmounts,
+			Frequency frequency) {
 		super(effectType);
 		this.entityType = entityType;
 		this.entitiesAndAmounts = entitiesAndAmounts;
+		this.frequency = frequency;
 	}
 
 	public EntityType getEntityType() {
@@ -39,5 +48,9 @@ public class EntityEffect extends Effect {
 		}
 
 		return false;
+	}
+
+	public Frequency getFrequency() {
+		return this.frequency;
 	}
 }

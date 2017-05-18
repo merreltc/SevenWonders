@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.ResourceBundle;
 
 import constants.GeneralEnums.Science;
+import constants.GeneralEnums.Side;
 import dataStructures.gameMaterials.Card;
 import dataStructures.gameMaterials.Effect.EffectType;
 import dataStructures.gameMaterials.EntityEffect;
@@ -39,7 +40,6 @@ public class Player {
 			conflictTokens.put(ChipValue.FIVE, 0);
 			conflictTokens.put(ChipValue.NEG1, 0);
 		}
-
 	}
 
 	public Player(String playerName, Wonder wonder) {
@@ -76,7 +76,7 @@ public class Player {
 
 	public int getConflictTotal() {
 		int total = 0;
-		
+
 		for (ChipValue value : this.getConflictTokens().keySet()) {
 			if (value == ChipValue.THREE) {
 				total += (3 * this.getConflictTokens().get(value));
@@ -205,5 +205,9 @@ public class Player {
 
 	public HashMap<ChipValue, Integer> getCoins() {
 		return this.playerChips.coins;
+	}
+	
+	public Side getSide() {
+		return this.wonder.getSide();
 	}
 }
