@@ -50,7 +50,7 @@ public class WonderFactory {
 		if (this.mode == GameMode.EASY) {
 			return Side.A;
 		} else {
-			int pickSide = (int) (Math.random() * 2);
+			int pickSide = getRandomNum();
 			return generateSide(pickSide);
 		}
 	}
@@ -61,6 +61,10 @@ public class WonderFactory {
 		} else {
 			return Side.B;
 		}
+	}
+
+	public int getRandomNum() {
+		return (int) (Math.random() * 2);
 	}
 
 	private void buildWonderSet(ArrayList<WonderType> wonders) {
