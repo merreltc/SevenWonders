@@ -15,7 +15,6 @@ public class LevelBuilderTestHelper {
 	WonderEffectsGenerator effectGenerator;
 
 	public LevelBuilderTestHelper() {
-
 	}
 
 	public void setWonder(Wonder wonder) {

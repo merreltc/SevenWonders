@@ -237,11 +237,11 @@
 					"effectType": "ENTITY",
 					"entityType": "MANUFACTUREDGOOD",
 					"entitiesAndAmounts": [{
-						"good": "GLASS",
+						"good": "LOOM",
 						"amount": 1
 					},
 					{
-						"good": "LOOM",
+						"good": "GLASS",
 						"amount": 1
 					},
 					{
@@ -441,11 +441,11 @@
 					"effectType": "ENTITY",
 					"entityType": "SCIENCE",
 					"entitiesAndAmounts": [{
-						"science": "TABLET",
+						"science": "PROTRACTOR",
 						"amount": 1
 					},
 					{
-						"science": "PROTRACTOR",
+						"science": "TABLET",
 						"amount": 1
 					},
 					{

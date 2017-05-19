@@ -40,8 +40,7 @@ public class LevelBuilder {
 	}
 
 	public Level buildLevel(int priority) {
-		Level level = createLevel(priority);
-		return  level;
+		return createLevel(priority);
 	}
 
 	public Level createLevel(int priority) {
@@ -63,7 +62,7 @@ public class LevelBuilder {
 				return getLevel(wonderData, priority);
 			}
 		}
-		
+
 		throw new NoSuchLevelException("This level does not exist");
 	}
 

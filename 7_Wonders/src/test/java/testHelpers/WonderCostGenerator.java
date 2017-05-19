@@ -83,9 +83,9 @@ public class WonderCostGenerator {
 				costs.put(RawResource.CLAY, 3);
 				break;
 			case 3:
-				costs.put(Good.PRESS, 1);
-				costs.put(Good.GLASS, 1);
 				costs.put(Good.LOOM, 1);
+				costs.put(Good.GLASS, 1);
+				costs.put(Good.PRESS, 1);
 				break;
 			default:
 				throw new IllegalArgumentException("Invalid priority");

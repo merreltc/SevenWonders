@@ -187,6 +187,10 @@ public class LevelBuilderTest {
 
 		expected = this.helper.getExpectedLevel(2);
 		actual = builder.buildLevel(2);
+		System.out.println("Gard:A");
+		System.out.println("EX " + expected);
+		System.out.println("AC " + actual);
+		System.out.println("Equal? " + expected.equals(actual));
 		assertTrue(expected.equals(actual));
 
 		expected = this.helper.getExpectedLevel(3);
@@ -210,6 +214,9 @@ public class LevelBuilderTest {
 
 		expected = this.helper.getExpectedLevel(3);
 		actual = builder.buildLevel(3);
+		System.out.println("Gard:B");
+		System.out.println("EX " + expected);
+		System.out.println("AC " + actual);
 		assertTrue(expected.equals(actual));
 	}
 
