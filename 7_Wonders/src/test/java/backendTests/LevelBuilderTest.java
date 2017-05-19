@@ -153,9 +153,6 @@ public class LevelBuilderTest {
 
 		expected = this.helper.getExpectedLevel(3);
 		actual = builder.buildLevel(3);
-		System.out.println("Statue A");
-		System.out.println("EX: " + expected.getCost());
-		System.out.println("AC: " + actual.getCost());
 		assertTrue(expected.equals(actual));
 	}
 
@@ -277,7 +274,7 @@ public class LevelBuilderTest {
 	}
 
 	@Test
-	public void testBuildPyramidsideB() {
+	public void testBuildPyramidsSideB() {
 		setWonder(Side.B, WonderType.PYRAMIDS);
 		LevelBuilder builder = new LevelBuilder(this.wonder);
 		this.helper.setWonder(this.wonder);
@@ -292,6 +289,10 @@ public class LevelBuilderTest {
 
 		expected = this.helper.getExpectedLevel(3);
 		actual = builder.buildLevel(3);
+		assertTrue(expected.equals(actual));
+		
+		expected = this.helper.getExpectedLevel(4);
+		actual = builder.buildLevel(4);
 		assertTrue(expected.equals(actual));
 	}
 

@@ -905,12 +905,12 @@
 				"cost": {
 					"costType": "MULTITYPE",
 					"costs": [{
-						"type":"MANUFACTUREDGOOD",
+						"entityType":"MANUFACTUREDGOOD",
 						"good": "PRESS",
 						"amount": 1
 					},
 					{
-						"type":"RESOURCE",
+						"entityType":"RESOURCE",
 						"resource": "STONE",
 						"amount": 4
 					}]

@@ -32,9 +32,6 @@ public class Level {
 		boolean equalPriority = this.priority == temp.priority;
 		boolean equalCost = this.getCost().equals(temp.getCost());
 		boolean equalEffects = equalEffects(temp.getEffects());
-		System.out.println(
-				"Priority == : " + equalPriority + " Cost == : " + equalCost + " EffectsEquals == :" + equalEffects);
-		System.err.println("Equal? " + (equalPriority && equalCost && equalEffects));
 		return equalPriority && equalCost && equalEffects;
 	}
 

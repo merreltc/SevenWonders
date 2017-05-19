@@ -76,6 +76,7 @@ public class WonderEffectsGenerator {
 			break;
 		case 4:
 			getSideBPriority4Effect(effectsAndFrequency);
+			break;
 		default:
 			throw new IllegalArgumentException("Invalid Priority");
 		}
