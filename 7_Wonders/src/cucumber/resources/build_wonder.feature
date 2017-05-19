@@ -94,7 +94,7 @@ Feature: Build Wonder
     Given A Wonder <wonder> on Side <side>
     And A player with that Wonder
     And The player has the resources for that Wonder
-    When Building the wonder <numLevels> times
+    When The player tries to build the wonder <numLevels> times
     Then The level is built
     And the player receives the effect of that level
 
@@ -147,7 +147,7 @@ Feature: Build Wonder
     Given A Wonder <wonder> on Side <side>
     And A player with that Wonder
     And The player does not have the resources for that Wonder
-    When Building the wonder <numLevels> times
+    When The player tries to build the wonder <numLevels> times
     Then The level cannot be built
     And They do not receive the effect of that level
 

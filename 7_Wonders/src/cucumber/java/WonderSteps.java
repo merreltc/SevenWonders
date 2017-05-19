@@ -200,12 +200,25 @@ public class WonderSteps {
 	public void the_builds_the_wonder(int numLevels) throws Throwable {
 		for (int i = 0; i < numLevels; i++) {
 			try {
+				this.wonder.buildNextLevel();
+			} catch (CannotBuildWonderException e) {
+				this.exception = e;
+			}
+		}
+	}
+	
+	@When("^The player tries to build the wonder (\\d+) times$")
+	public void the_player_tries_to_build_the_wonder_times(int numLevels) throws Throwable {
+		for (int i = 0; i < numLevels; i++) {
+			try {
 				ArrayList<Player> players = new ArrayList<Player>(Arrays.asList(this.player));
 				Deck deck = EasyMock.mock(Deck.class);
 				GameBoard board = new GameBoard(players, deck);
+				EasyMock.replay(deck);
 				PlayerTurnHandler handler = new PlayerTurnHandler();
 				handler.setGameBoard(board);
-				handler.buildWonderLevel(player);
+				handler.buildWonderLevel(this.player);
+				EasyMock.verify(deck);
 			} catch (CannotBuildWonderException e) {
 				this.exception = e;
 			}

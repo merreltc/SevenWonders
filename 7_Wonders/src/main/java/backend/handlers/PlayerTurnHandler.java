@@ -7,17 +7,15 @@ import constants.GeneralEnums.CostType;
 import constants.GeneralEnums.Good;
 import constants.GeneralEnums.RawResource;
 import dataStructures.GameBoard;
-import dataStructures.gameMaterials.AbilityEffect;
 import dataStructures.gameMaterials.Card;
 import dataStructures.gameMaterials.Effect;
 import dataStructures.gameMaterials.Effect.EffectType;
 import dataStructures.gameMaterials.EntityEffect;
 import dataStructures.gameMaterials.Level;
 import dataStructures.gameMaterials.Level.Frequency;
-import dataStructures.gameMaterials.ValueEffect;
-import dataStructures.gameMaterials.ValueEffect.ValueType;
 import dataStructures.gameMaterials.Wonder;
 import dataStructures.playerData.Player;
+import exceptions.CannotBuildWonderException;
 import exceptions.InsufficientFundsException;
 import utils.DropDownMessage;
 import utils.Translate;
@@ -80,7 +78,11 @@ public class PlayerTurnHandler {
 
 	public void buildWonderLevel(Player current) {
 		Wonder wonder = current.getWonder();
-		Level level = wonder.getLevel(wonder.getNumBuiltLevels());
+		int built = wonder.getNumBuiltLevels();
+		if(built == wonder.getNumLevels())
+			throw new CannotBuildWonderException("Player has built max number of levels.");
+		
+		Level level = wonder.getLevelFactory().getNextLevel(built);
 		current.clearTempWonderEffects();
 		HashMap<Enum, Integer> costs = level.getCosts();
 		validateLevelCosts(current, costs);

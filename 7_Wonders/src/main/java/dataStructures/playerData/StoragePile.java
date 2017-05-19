@@ -186,8 +186,11 @@ public class StoragePile {
 	public void clearTemporaryWonderEffects() {
 		HashSet<Effect> onceEffects = this.wonderPile.remove(Frequency.ONCEIMMEDIATE);
 		HashSet<Effect> endTurnEffects = this.wonderPile.remove(Frequency.ENDOFTURN);
-		this.entireEffectStorage.removeAll(onceEffects);
-		this.entireEffectStorage.removeAll(endTurnEffects);
+		if(onceEffects != null)
+			this.entireEffectStorage.removeAll(onceEffects);
+		
+		if(endTurnEffects != null)
+			this.entireEffectStorage.removeAll(endTurnEffects);
 	}
 	
 	public void temporaryDiscard(Effect effect){
