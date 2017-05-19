@@ -146,10 +146,8 @@ public final class PlayerChipHandler {
 			return "1";
 		case THREE:
 			return "3";
-		case FIVE:
-			return "5";
 		}
-		return "";
+		return "5";
 	}
 
 	public static void removeTotalCoins(Player player, int total) {
