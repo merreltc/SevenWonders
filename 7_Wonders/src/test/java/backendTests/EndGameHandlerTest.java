@@ -9,6 +9,7 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import backend.handlers.EndGameHandler;
+import constants.GeneralEnums;
 import constants.GeneralEnums.CostType;
 import constants.GeneralEnums.Good;
 import constants.GeneralEnums.RawResource;
@@ -427,59 +428,62 @@ public class EndGameHandlerTest {
 
 	@Test
 	public void testScientistsGuildEffectProtractor() {
-
-		DropDownMessage message = EasyMock.mock(DropDownMessage.class);
-
-		EasyMock.expect(message.dropDownScienceSelectionMessage()).andReturn("Protractor");
 		Wonder wonder = EasyMock.mock(Wonder.class);
-
-		EasyMock.replay(message, wonder);
+		EndGameHandler end = EasyMock.partialMockBuilder(EndGameHandler.class).addMockedMethod("showMessage").createMock();
+		EasyMock.expect(end.showMessage()).andReturn("Protractor");
+		EasyMock.replay(end, wonder);
 
 		Player player1 = new Player("Jane Doe", wonder);
 		player1.addToStoragePile(this.createScientistsGuild());
 
-		EndGameHandler end = new EndGameHandler();
-		end.handleScientistsGuild(player1, message);
+		end.handleScientistsGuild(player1);
+		
+		EntityEffect effect = ((EntityEffect)player1.getStoragePile().get(1).getEffect());
 
 		Assert.assertEquals(1, end.getSciencePoints(player1));
+		Assert.assertTrue(effect.getEntities().keySet().contains(Science.PROTRACTOR));
+		
+		EasyMock.verify(end, wonder);
 	}
 
 	@Test
 	public void testScientistsGuildEffectWheel() {
-
-		DropDownMessage message = EasyMock.mock(DropDownMessage.class);
-
-		EasyMock.expect(message.dropDownScienceSelectionMessage()).andReturn("Wheel");
 		Wonder wonder = EasyMock.mock(Wonder.class);
-
-		EasyMock.replay(message, wonder);
+		EndGameHandler end = EasyMock.partialMockBuilder(EndGameHandler.class).addMockedMethod("showMessage").createMock();
+		EasyMock.expect(end.showMessage()).andReturn("Wheel");
+		EasyMock.replay(end, wonder);
 
 		Player player1 = new Player("Jane Doe", wonder);
 		player1.addToStoragePile(this.createScientistsGuild());
 
-		EndGameHandler end = new EndGameHandler();
-		end.handleScientistsGuild(player1, message);
+		end.handleScientistsGuild(player1);
+		
+		EntityEffect effect = ((EntityEffect)player1.getStoragePile().get(1).getEffect());
 
 		Assert.assertEquals(1, end.getSciencePoints(player1));
+		Assert.assertTrue(effect.getEntities().keySet().contains(Science.WHEEL));
+		
+		EasyMock.verify(end, wonder);
 	}
 
 	@Test
 	public void testScientistsGuildEffectTablet() {
-
-		DropDownMessage message = EasyMock.mock(DropDownMessage.class);
-
-		EasyMock.expect(message.dropDownScienceSelectionMessage()).andReturn("Tablet");
 		Wonder wonder = EasyMock.mock(Wonder.class);
-
-		EasyMock.replay(message, wonder);
+		EndGameHandler end = EasyMock.partialMockBuilder(EndGameHandler.class).addMockedMethod("showMessage").createMock();
+		EasyMock.expect(end.showMessage()).andReturn("Tablet");
+		EasyMock.replay(end, wonder);
 
 		Player player1 = new Player("Jane Doe", wonder);
 		player1.addToStoragePile(this.createScientistsGuild());
 
-		EndGameHandler end = new EndGameHandler();
-		end.handleScientistsGuild(player1, message);
+		end.calculateScores(new ArrayList<Player>(Arrays.asList(player1)));
+
+		EntityEffect effect = ((EntityEffect)player1.getStoragePile().get(1).getEffect());
 
 		Assert.assertEquals(1, end.getSciencePoints(player1));
+		Assert.assertTrue(effect.getEntities().keySet().contains(Science.TABLET));
+		
+		EasyMock.verify(end, wonder);
 	}
 
 	@Test
@@ -502,6 +506,12 @@ public class EndGameHandlerTest {
 		EasyMock.replay(player1, player2, player3);
 
 		Assert.assertEquals(4, end.getPointsFromGuildCards(player2, player1, player3));
+	}
+	
+	@Test
+	public void testTestCardInvalidChoice(){
+		EndGameHandler end = new EndGameHandler();
+		Assert.assertEquals(EffectType.NONE, end.testCard("Invalid"));
 	}
 
 	// TODO: Write Builders test once wonders are done

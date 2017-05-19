@@ -28,7 +28,6 @@ public class ResourceViewer extends Menu {
 
 	private Player player;
 	private boolean shouldDraw = false;
-	private ResourceBundle messages = Translate.getNewResourceBundle();
 	private Graphics graphics;
 	private ResourceViewerRowRenderer resources = new ResourceViewerRowRenderer();
 
@@ -38,12 +37,13 @@ public class ResourceViewer extends Menu {
 			Font startingFont = graphics.getFont();
 			Color startingColor = graphics.getColor();
 			this.graphics = graphics;
+			resources.setGraphics(graphics);
 			graphics.setFont(Constants.RESOURCE_VIEWER_FONT);
 			
 			int gridRows = this.player.getStoragePile().size() + 1;
 			drawGrid(gridRows);
 			graphics.setColor(new Color(50, 50, 50, 150));
-			resources.draw(graphics);
+			resources.draw();
 			graphics.setColor(startingColor);
 			graphics.setFont(startingFont);
 		}
@@ -86,6 +86,8 @@ public class ResourceViewer extends Menu {
 	}
 
 	private void drawValuesForRow(int[] rowStats, ArrayList<Card> cards) {
+		ResourceBundle messages = Translate.getNewResourceBundle();
+		
 		rowStats[1] += Constants.RESOURCE_VIEWER_TEXT_Y_OFFSET;
 		Card card = cards.get(rowStats[0] - 1);
 		int[] values = getRowValues(card);

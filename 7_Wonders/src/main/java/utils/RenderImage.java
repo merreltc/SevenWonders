@@ -14,7 +14,6 @@ import javax.imageio.ImageIO;
 public class RenderImage {
 
 	private HashMap<String, Image> images = new HashMap<String, Image>();
-	ResourceBundle messages = Translate.getNewResourceBundle();
 	private Image image;
 	
 	public RenderImage(){
@@ -25,6 +24,7 @@ public class RenderImage {
 	}
 
 	public Image getImage(String name) {
+		ResourceBundle messages = Translate.getNewResourceBundle();
 		String translated = TranslateWithTemplate.prepareStringTemplateWithStringArg(name, "loadImageError", messages);
 
 		if (this.images.containsKey(name)) {

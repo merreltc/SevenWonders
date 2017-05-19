@@ -31,13 +31,14 @@ public class EndGameHandler {
 		for (int i = 0; i < players.size(); i++) {
 			this.pointsForGuild = 0;
 			Player player = players.get(i);
-			scores.add(this.getTotalScore(player, players, i));
+			scores.add(this.getTotalScore(player, players));
 		}
 		return scores;
 	}
 
-	private int getTotalScore(Player player, ArrayList<Player> players, int playerLoc) {
-		handleScientistsGuild(player, new DropDownMessage());
+	private int getTotalScore(Player player, ArrayList<Player> players) {
+		int playerLoc = players.indexOf(player);
+		handleScientistsGuild(player);
 		int guildEffects = getPointsFromGuildCards(player,
 				players.get((players.size() + playerLoc - 1) % players.size()),
 				players.get((playerLoc + 1) % players.size()));
@@ -90,7 +91,7 @@ public class EndGameHandler {
 			}
 		}
 	}
-
+	
 	private int checkSelf(Card card, Player player) {
 		if (card.getEffect().getDirection() == Direction.SELF || card.getEffect().getDirection() == Direction.ALL) {
 			return this.useEffect(card, player);
@@ -114,12 +115,12 @@ public class EndGameHandler {
 		return 0;
 	}
 
-	public void handleScientistsGuild(Player player, DropDownMessage message) {
+	public void handleScientistsGuild(Player player) {
 		int count = 0;
 		for (;;) {
 			try {
 				Card card = player.getCardFromEndGame(count++);
-				Enum choice = testCard(card.getName(), message);
+				Enum choice = testCard(card.getName());
 				if (choice != EffectType.NONE) {
 					givePlayerReward(player, choice);
 					break;
@@ -130,26 +131,32 @@ public class EndGameHandler {
 		}
 	}
 
-	private Enum testCard(String cardName, DropDownMessage message) {
+	public Enum testCard(String cardName) {
 		if (cardName.equals("Scientists Guild")) {
-			String str = getChosenString(message);
-			Enum choice = Science.TABLET;
+			String str = getChosenString();
+			Enum choice = EffectType.NONE;
 			if (str.equals("Protractor")) {
 				choice = Science.PROTRACTOR;
 			} else if (str.equals("Wheel")) {
 				choice = Science.WHEEL;
+			}else if (str.equals("Tablet")){
+				choice = Science.TABLET;
 			}
 			return choice;
 		}
 		return EffectType.NONE;
 	}
 
-	private String getChosenString(DropDownMessage message) {
+	private String getChosenString() {
 		String str = "";
 		while (str.equals("")) {
-			str = message.dropDownScienceSelectionMessage();
+			str = showMessage();
 		}
 		return str;
+	}
+
+	public String showMessage() {
+		return new DropDownMessage().dropDownScienceSelectionMessage();
 	}
 
 	private void givePlayerReward(Player player, Enum choice) {

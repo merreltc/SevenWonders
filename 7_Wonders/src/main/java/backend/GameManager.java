@@ -28,7 +28,6 @@ import utils.Translate;
  */
 public class GameManager {
 	private GameBoard board;
-	private Rotation currentDirection = Rotation.CLOCKWISE;
 	private Handlers handlers;
 
 	public enum CardinalDirection {
@@ -57,6 +56,7 @@ public class GameManager {
 		this.handlers.getPlayerTurnHandler().setGameBoard(this.board);
 		this.handlers.setRotateHandler(new RotateHandler(this.board));
 		this.handlers.setTradeHandler(new TradeHandler(this.board));
+		this.handlers.getTurnHandler().setGameBoard(this.board);
 	}
 
 	public GameBoard createGameBoard(ArrayList<String> names) {
@@ -75,56 +75,7 @@ public class GameManager {
 	}
 
 	public void tradeForEntity(Player from, Player to, Enum entity) {
-		boolean discountSuccesful = false;
-		if (from.storagePileContainsCardByName("East Trading Post")) {
-			discountSuccesful = tryTradeWithDiscountEast(from, to);
-		} else if (from.storagePileContainsCardByName("West Trading Post")) {
-			discountSuccesful = tryTradeWithDiscountWest(from, to);
-		} else if (from.storagePileContainsCardByName("Marketplace")) {
-			discountSuccesful = true;
-		}
-
-		this.handlers.getTradeHandler().tradeFromToForEntity(from, to, entity, discountSuccesful);
-	}
-
-	private boolean tryTradeWithDiscountEast(Player from, Player to) {
-		int fromPosition = this.getPlayers().indexOf(from);
-		int toPosition = this.getPlayers().indexOf(to);
-		fromPosition = correctFromIndex(CardinalDirection.EAST, fromPosition);
-
-		return (fromPosition == toPosition) ? true : false;
-	}
-	
-	private boolean tryTradeWithDiscountWest(Player from, Player to) {
-		int fromPosition = this.getPlayers().indexOf(from);
-		int toPosition = this.getPlayers().indexOf(to);
-		fromPosition = correctFromIndex(CardinalDirection.WEST, fromPosition);
-
-		return (fromPosition == toPosition) ? true : false;
-	}
-
-	private int correctFromIndex(CardinalDirection direction, int fromPosition) {
-		int indexCorrection = getIndexCorrection(direction, fromPosition);
-		int comparisonIndex = getComparisonIndex(direction);
-		
-		if (indexCorrection == comparisonIndex) {
-			indexCorrection = getNewFromIndex(direction);
-		}
-
-		return indexCorrection;
-	}
-
-	public int getIndexCorrection(CardinalDirection direction, int index) {
-		int correction = (direction == CardinalDirection.EAST) ? 1 : -1;
-		return index + correction;
-	}
-
-	public int getComparisonIndex(CardinalDirection direction) {
-		return (direction == CardinalDirection.EAST) ? this.getNumPlayers() : -1;
-	}
-
-	public int getNewFromIndex(CardinalDirection direction) {
-		return (direction == CardinalDirection.EAST) ? 0 : this.getNumPlayers() - 1;
+		this.handlers.getTradeHandler().tradeForEntity(from, to, entity);
 	}
 
 	public void buildStructure(Card card) {
@@ -133,23 +84,7 @@ public class GameManager {
 
 	public void changeRotateDirectionAndResetPositions(Rotation direction) {
 		this.handlers.getRotateHandler().changeRotateDirectionAndResetPositions(direction);
-		this.currentDirection = direction;
-	}
-
-	private void rotate(Rotation rotation) {
-		if (rotation == Rotation.CLOCKWISE) {
-			this.rotateClockwise();
-		} else {
-			this.rotateCounterClockwise();
-		}
-	}
-
-	public void rotateClockwise() {
-		this.handlers.getRotateHandler().rotateClockwise();
-	}
-
-	public void rotateCounterClockwise() {
-		this.handlers.getRotateHandler().rotateCounterClockwise();
+		this.handlers.getTurnHandler().setDirection(direction);
 	}
 
 	public boolean makeChangeForValue1Coins(int numCoinsToGet) {
@@ -161,107 +96,7 @@ public class GameManager {
 	}
 
 	public String endCurrentPlayerTurn() {
-		String message = "";
-		int playersUntilPass = this.handlers.getTurnHandler().getNumPlayersUntilPass();
-
-		if (playersUntilPass == 0) {
-			message = checkNeedToSwitchAges();
-			playersUntilPass = this.getNumPlayers();
-		}
-
-		this.handlers.getTurnHandler().setNumPlayersUntilPass(playersUntilPass - 1);
-		this.getCurrentPlayer().removeCurrentTrades();
-		rotate(this.currentDirection);
-		return message;
-	}
-
-	private String checkNeedToSwitchAges() {
-		String message;
-		int turnsTilEnd = this.handlers.getTurnHandler().getNumTurnsTilEndOfAge();
-		if (turnsTilEnd == 0) {
-			message = switchAge();
-		} else  {
-			message = rotateHand(turnsTilEnd);
-		}
-		return message;
-	}
-
-	private String rotateHand(int turnsTilEnd) {
-		String message;
-		this.handlers.getRotateHandler().rotateCurrentHands(getPlayers(), this.currentDirection);
-		this.handlers.getTurnHandler().setNumTurnsTilEndOfAge(turnsTilEnd - 1);
-		message = Translate.getNewResourceBundle().getString("endOfCurrentRotation");
-		return message;
-	}
-	
-	private String switchAge() {
-		Age age = this.board.getAge();
-		if (age == Age.AGE3){
-			return endGame();
-		}
-		
-		return endAge(age);
-	}
-
-	private String endGame() {
-		this.handlers.getTurnHandler().endAge(this.getPlayers(), Age.AGE3);
-		EndGameHandler end = new EndGameHandler();
-		ArrayList<Integer> scores = end.calculateScores(this.getPlayers());
-		return formatFinalScores(scores);
-	}
-	
-	public String endAge(Age age) {
-		String message;
-		Deck newDeck;
-		newDeck = switchDeck(age);
-		this.board.setDeck(newDeck);
-		DeckHandler.shuffleDeck(this.board.getDeck());
-		this.handlers.getTurnHandler().dealInitialTurnCards(this.getPlayers(), this.board.getDeck());
-		message = Translate.getNewResourceBundle().getString("endOfAge");
-		return message;
-	}
-
-	public Deck switchDeck(Age currentAge) {
-		Deck newDeck;
-		Age nextAge = getNextAge(currentAge);
-		newDeck = this.handlers.getSetUpDeckHandler().createDeck(nextAge, getNumPlayers());
-
-		this.currentDirection = getNextRotation(currentAge);
-		this.handlers.getTurnHandler().endAge(this.getPlayers(), currentAge);
-		return newDeck;
-	}
-	
-	public String formatFinalScores(ArrayList<Integer> scores){
-		StringBuilder formattedString = new StringBuilder();
-		for (int i = 0; i < scores.size(); i++){
-			String playerName = this.getPlayer(i).getName();
-			formattedString.append(playerName + " : " + scores.get(i) + "\n");
-		}
-		int indexOfWinner = indexOfMaxScore(scores, this.getPlayers());
-		formattedString.append(this.getPlayers().get(indexOfWinner).getName() + " Wins!");
-		return formattedString.toString();
-	}
-	
-	private int indexOfMaxScore(ArrayList<Integer> scores, ArrayList<Player> players){
-		int max = 0;
-		int maxIndex = 0;
-		for (int i = 0; i < scores.size(); i++){
-			if (scores.get(i) > max){
-				max = scores.get(i);
-				maxIndex = i;
-			}else if (scores.get(i) == max){
-				maxIndex = (players.get(i).getCoinTotal() > players.get(maxIndex).getCoinTotal()) ? i : maxIndex; 
-			}
-		}
-		return maxIndex;
-	}
-
-	private Age getNextAge(Age currentAge) {
-		return (currentAge == Age.AGE1) ? Age.AGE2 : Age.AGE3;
-	}
-
-	private Rotation getNextRotation(Age currentAge) {
-		return (currentAge == Age.AGE1) ? Rotation.COUNTERCLOCKWISE : Rotation.CLOCKWISE;
+		return this.handlers.getTurnHandler().endCurrentPlayerTurn(this.handlers);
 	}
 
 	public Deck getDeck() {
@@ -301,6 +136,6 @@ public class GameManager {
 	}
 
 	public Rotation getDirection() {
-		return this.currentDirection;
+		return this.handlers.getTurnHandler().getDirection();
 	}
 }

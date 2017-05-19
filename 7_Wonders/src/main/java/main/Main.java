@@ -27,12 +27,9 @@ import utils.Translate;
 public class Main extends JPanel implements ActionListener {
 
 	private Menu current;
-	private JFrame frame;
-	private Timer timer;
 	private Integer numOfPlayers;
 	private Image image;
 	private RenderImage renderer = new RenderImage();
-	ResourceBundle messages;
 
 	public enum MenuType {
 		MAINMENU, LOGISTICS, GAMEDISPLAY
@@ -40,20 +37,18 @@ public class Main extends JPanel implements ActionListener {
 
 	public Main() {
 		Constants.LOCALE = DropDownMessage.selectLanguageMessage();
-		this.messages = Translate.getNewResourceBundle();
+		ResourceBundle messages = Translate.getNewResourceBundle();
 		this.switchMenu(MenuType.MAINMENU);
-		this.frame = new JFrame();
-		this.frame.setSize(Constants.FrameWidth, Constants.FrameHeight);
-		this.frame.setVisible(true);
-		this.frame.setTitle(this.messages.getString("sevenWonders"));
-		this.frame.setResizable(false);
-		this.frame.add(this);
-		this.frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		JFrame frame = new JFrame();
+		frame.setSize(Constants.FrameWidth, Constants.FrameHeight);
+		frame.setVisible(true);
+		frame.setTitle(messages.getString("sevenWonders"));
+		frame.setResizable(false);
+		frame.add(this);
+		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		MenuMouseListener menuMouse = new MenuMouseListener(this);
-		this.frame.addMouseListener(menuMouse);
+		frame.addMouseListener(menuMouse);
 		image = renderer.getImage("Background");
-		this.timer = new Timer(20, this);
-		this.timer.start();
 	}
 
 	@Override
@@ -105,14 +100,6 @@ public class Main extends JPanel implements ActionListener {
 
 	public ArrayList<Interactable> getActiveButtons() {
 		return this.current.getInteractables();
-	}
-
-	public JFrame getFrame() {
-		return frame;
-	}
-
-	public Timer getTimer() {
-		return timer;
 	}
 
 	public static void main(String[] args) {

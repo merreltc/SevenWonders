@@ -18,10 +18,9 @@ import dataStructures.gameMaterials.Card;
 import dataStructures.gameMaterials.Deck;
 import dataStructures.gameMaterials.Deck.Age;
 import dataStructures.gameMaterials.Wonder;
-import dataStructures.gameMaterials.Wonder.WonderType;
 import dataStructures.playerData.Chip;
-import dataStructures.playerData.Player;
 import dataStructures.playerData.Chip.ChipValue;
+import dataStructures.playerData.Player;
 import exceptions.InsufficientFundsException;
 import exceptions.InvalidTradeException;
 
@@ -34,10 +33,10 @@ public class TradeHandlerTest {
 	public void setUp() {
 		this.wonder = EasyMock.createStrictMock(Wonder.class);
 		this.player1 = new Player("Jane Doe", this.wonder);
-		this.player2 = new Player("Jane Doe", this.wonder);
+		this.player2 = new Player("John Doe", this.wonder);
 		this.testDeck = EasyMock.partialMockBuilder(Deck.class).createMock();
 	}
-	
+
 	@Test
 	public void testSingleTradeValue1Coins() {
 		TradeHandler.tradeFromToValue1(player1, player2, 1);
@@ -247,7 +246,7 @@ public class TradeHandlerTest {
 		assertEquals(6, (int) player2.getCoins().get(ChipValue.ONE));
 		assertEquals(1, (int) player2.getCoins().get(ChipValue.THREE));
 	}
-	
+
 	@Test
 	public void testTradeToNextPlayer() {
 		ArrayList<Player> players = setUpArrayWithNumPlayers(5);
@@ -334,33 +333,6 @@ public class TradeHandlerTest {
 	}
 
 	@Test
-	public void testValidTrade2CoinsForSingleLoomGood() {
-		ArrayList<Player> players = setUpArrayWithNumPlayers(3);
-		resetPlayer1And2(players);
-		ArrayList<Card> cards = new SetUpDeckHandler().createCards(Age.AGE1, 3);
-		Deck deck = new Deck(Age.AGE1, cards);
-
-		GameBoard board = new GameBoard(players, deck);
-		TradeHandler tradeHandler = new TradeHandler(board);
-
-		Player current = board.getCurrentPlayer();
-		Player next = board.getNextPlayer();
-		ArrayList<Card> storage = new ArrayList<Card>();
-		storage.add(deck.getCard(7));
-		storage.add(deck.getCard(8));
-
-		next.setStoragePile(storage);
-
-		tradeHandler.tradeFromToForEntity(current, next, Good.GLASS, false);
-
-		assertEquals(0, (int) current.getCoins().get(ChipValue.THREE));
-		assertEquals(1, (int) current.getCurrentTrades().get(Good.GLASS));
-		assertEquals(5, next.getCoinTotal());
-		assertTrue(next.getStoragePile().contains(deck.getCard(7)));
-		assertTrue(next.getStoragePile().contains(deck.getCard(8)));
-	}
-
-	@Test
 	public void testValidTrade1CoinHasEastTradingPost() {
 		ArrayList<Player> players = setUpArrayWithNumPlayers(3);
 		resetPlayer1And2(players);
@@ -386,7 +358,7 @@ public class TradeHandlerTest {
 		assertEquals(1, (int) current.getCurrentTrades().get(RawResource.LUMBER));
 		assertEquals(4, right.getCoinTotal());
 	}
-	
+
 	@Test
 	public void testValidTrade2CoinsForSingleLumberExactResource() {
 		ArrayList<Player> players = setUpArrayWithNumPlayers(3);
@@ -410,7 +382,211 @@ public class TradeHandlerTest {
 		assertEquals(1, (int) current.getCurrentTrades().get(RawResource.LUMBER));
 		assertEquals(5, next.getCoinTotal());
 	}
+
+	@Test
+	public void testTradeFromToForResource() {
+		ArrayList<Player> players = new ArrayList<Player>();
+		players.add(this.player1);
+		players.add(this.player2);
+		players.add(new Player("James Doe", this.wonder));
+
+		ArrayList<Card> storage = new ArrayList<Card>();
+		Deck deck = new SetUpDeckHandler().createDeck(Age.AGE1, 3);
+		GameBoard board = new GameBoard(players, deck);
+		storage.add(deck.getCard(0));
+		storage.add(deck.getCard(1));
+
+		player2.setStoragePile(storage);
+
+		TradeHandler tradeHandler = new TradeHandler(board);
+
+		tradeHandler.tradeForEntity(this.player1, this.player2, RawResource.LUMBER);
+
+		assertEquals(1, (int) this.player1.getCurrentTrades().get(RawResource.LUMBER));
+		assertEquals(5, this.player2.getCoinTotal());
+	}
+
+	@Test
+	public void testValidTradeForDiscountEastTradingPost() {
+		ArrayList<Player> players = new ArrayList<Player>();
+		players.add(this.player1);
+		players.add(this.player2);
+		players.add(new Player("James Doe", this.wonder));
+
+		ArrayList<Card> storage = new ArrayList<Card>();
+		Deck deck = new SetUpDeckHandler().createDeck(Age.AGE1, 3);
+		GameBoard board = new GameBoard(players, deck);
+		Player current = this.player1;
+		Player right = this.player2;
+
+		storage.add(deck.getCard(12)); // east trading post
+		current.setStoragePile(storage);
+
+		ArrayList<Card> storage2 = new ArrayList<Card>();
+		storage2.add(deck.getCard(0)); // lumber
+		right.setStoragePile(storage2);
+
+		TradeHandler tradeHandler = new TradeHandler(board);
+		tradeHandler.tradeForEntity(current, right, RawResource.LUMBER);
+		assertTrue(current.getCurrentTrades().containsKey(RawResource.LUMBER));
+		assertEquals(4, right.getCoinTotal());
+	}
 	
+	@Test
+	public void testValidTradeForDiscountEastTradingPostSwitchIndex() {
+		ArrayList<Player> players = new ArrayList<Player>();
+		players.add(this.player1);
+		players.add(this.player2);
+		players.add(new Player("James Doe", this.wonder));
+
+		ArrayList<Card> storage = new ArrayList<Card>();
+		Deck deck = new SetUpDeckHandler().createDeck(Age.AGE1, 3);
+		GameBoard board = new GameBoard(players, deck);
+		Player current = players.get(2);
+		Player right = this.player1;
+		board.setNextPlayer(0);
+		board.setCurrentPlayer(2);
+
+		storage.add(deck.getCard(12)); // east trading post
+		current.setStoragePile(storage);
+
+		ArrayList<Card> storage2 = new ArrayList<Card>();
+		storage2.add(deck.getCard(0)); // lumber
+		right.setStoragePile(storage2);
+
+		TradeHandler tradeHandler = new TradeHandler(board);
+		tradeHandler.tradeForEntity(current, right, RawResource.LUMBER);
+		assertTrue(current.getCurrentTrades().containsKey(RawResource.LUMBER));
+		assertEquals(4, right.getCoinTotal());
+	}
+
+
+	@Test
+	public void testValidTradeForDiscountWestTradingPost() {
+		ArrayList<Player> players = new ArrayList<Player>();
+		players.add(this.player1);
+		players.add(this.player2);
+		players.add(new Player("James Doe", this.wonder));
+
+		ArrayList<Card> storage = new ArrayList<Card>();
+		Deck deck = new SetUpDeckHandler().createDeck(Age.AGE1, 3);
+		GameBoard board = new GameBoard(players, deck);
+		
+		Player current = this.player1;
+		Player left = players.get(2);
+		storage.add(deck.getCard(13)); // west trading post
+		current.setStoragePile(storage);
+
+		ArrayList<Card> storage2 = new ArrayList<Card>();
+		storage2.add(deck.getCard(0)); // lumber
+		left.setStoragePile(storage2);
+
+		TradeHandler tradeHandler = new TradeHandler(board);
+		tradeHandler.tradeForEntity(current, left, RawResource.LUMBER);
+		assertTrue(current.getCurrentTrades().containsKey(RawResource.LUMBER));
+		assertEquals(4, left.getCoinTotal());
+	}
+
+	@Test
+	public void testValidTradeForDiscountMarketPlace() {
+		ArrayList<Player> players = new ArrayList<Player>();
+		players.add(this.player1);
+		players.add(this.player2);
+		players.add(new Player("James Doe", this.wonder));
+
+		ArrayList<Card> storage = new ArrayList<Card>();
+		Deck deck = new SetUpDeckHandler().createDeck(Age.AGE1, 3);
+		GameBoard board = new GameBoard(players, deck);
+		Player current = this.player1;
+		Player right = this.player2;
+		storage.add(deck.getCard(14)); // marketplace
+		current.setStoragePile(storage);
+		ArrayList<Card> storage2 = new ArrayList<Card>();
+		storage2.add(deck.getCard(0)); // lumber
+		right.setStoragePile(storage2);
+		
+		TradeHandler tradeHandler = new TradeHandler(board);
+		tradeHandler.tradeForEntity(current, right, RawResource.LUMBER);
+		assertTrue(current.getCurrentTrades().containsKey(RawResource.LUMBER));
+		assertEquals(4, right.getCoinTotal());
+	}
+
+	@Test
+	public void testValidTradeForDiscountMarketPlaceLeft() {
+		ArrayList<Player> players = new ArrayList<Player>();
+		players.add(this.player1);
+		players.add(this.player2);
+		players.add(new Player("James Doe", this.wonder));
+
+		ArrayList<Card> storage = new ArrayList<Card>();
+		Deck deck = new SetUpDeckHandler().createDeck(Age.AGE1, 3);
+		GameBoard board = new GameBoard(players, deck);
+		Player current = this.player1;
+		Player left = players.get(2);
+		storage.add(deck.getCard(14)); // marketplace
+		current.setStoragePile(storage);
+		ArrayList<Card> storage2 = new ArrayList<Card>();
+		storage2.add(deck.getCard(0)); // lumber
+		left.setStoragePile(storage2);
+		
+		TradeHandler tradeHandler = new TradeHandler(board);
+		tradeHandler.tradeForEntity(current, left, RawResource.LUMBER);
+		assertTrue(current.getCurrentTrades().containsKey(RawResource.LUMBER));
+		assertEquals(4, left.getCoinTotal());
+	}
+
+	@Test
+	public void testNoDiscountEastTradingPostRegularTrade() {
+		ArrayList<Player> players = new ArrayList<Player>();
+		players.add(this.player1);
+		players.add(this.player2);
+		players.add(new Player("James Doe", this.wonder));
+
+		ArrayList<Card> storage = new ArrayList<Card>();
+		Deck deck = new SetUpDeckHandler().createDeck(Age.AGE1, 3);
+		GameBoard board = new GameBoard(players, deck);
+		Player current = this.player1;
+		Player left = players.get(2);
+		
+		storage.add(deck.getCard(12)); // east trading post
+		current.setStoragePile(storage);
+
+		ArrayList<Card> storage2 = new ArrayList<Card>();
+		storage2.add(deck.getCard(0)); // lumber
+		left.setStoragePile(storage2);
+
+		TradeHandler tradeHandler = new TradeHandler(board);
+		tradeHandler.tradeForEntity(current, left, RawResource.LUMBER);
+		assertTrue(current.getCurrentTrades().containsKey(RawResource.LUMBER));
+		assertEquals(5, left.getCoinTotal());
+	}
+
+	@Test
+	public void testNoDiscountWestTradingPostRegularTrade() {
+		ArrayList<Player> players = new ArrayList<Player>();
+		players.add(this.player1);
+		players.add(this.player2);
+		players.add(new Player("James Doe", this.wonder));
+
+		ArrayList<Card> storage = new ArrayList<Card>();
+		Deck deck = new SetUpDeckHandler().createDeck(Age.AGE1, 3);
+		GameBoard board = new GameBoard(players, deck);
+		Player current = this.player1;
+		Player right = this.player2;
+		
+		storage.add(deck.getCard(13)); // west trading post
+		current.setStoragePile(storage);
+		ArrayList<Card> storage2 = new ArrayList<Card>();
+		storage2.add(deck.getCard(0)); // lumber
+		right.setStoragePile(storage2);
+		
+		TradeHandler tradeHandler = new TradeHandler(board);
+		tradeHandler.tradeForEntity(current, right, RawResource.LUMBER);
+
+		assertTrue(current.getCurrentTrades().containsKey(RawResource.LUMBER));
+		assertEquals(5, right.getCoinTotal());
+	}
+
 	private ArrayList<Player> setUpArrayWithNumPlayers(int num) {
 		ArrayList<Player> result = new ArrayList<Player>();
 		for (int i = 0; i < num; i++) {
