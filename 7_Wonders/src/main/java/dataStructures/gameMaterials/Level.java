@@ -28,6 +28,7 @@ public class Level {
 
 	@Override
 	public boolean equals(Object obj) {
+		System.out.println("New Test");
 		Level temp = (Level) obj;
 		boolean equalPriority = this.priority == temp.priority;
 		boolean equalCost = this.getCost().equals(temp.getCost());

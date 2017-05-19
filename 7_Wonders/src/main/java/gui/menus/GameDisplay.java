@@ -26,19 +26,16 @@ public class GameDisplay extends Menu {
 	private GameManager gameManager;
 	private HandManager handManager;
 	private RenderImage renderer;
-	private GameMode mode;
-	ResourceBundle messages = Translate.getNewResourceBundle();
 	ResourceViewer resource = new ResourceViewer();
 
 	public GameDisplay(int numOfPlayers, RenderImage renderer, GameMode mode) {
-		initializeGameManager(numOfPlayers);
+		initializeGameManager(numOfPlayers, mode);
 		this.renderer = renderer;
-		this.mode = mode;
 	}
 
-	private void initializeGameManager(int numOfPlayers) {
+	private void initializeGameManager(int numOfPlayers, GameMode mode) {
 		ArrayList<String> playerNames = setUpPlayers(numOfPlayers);
-		this.gameManager = new GameManager(playerNames, this.mode);
+		this.gameManager = new GameManager(playerNames, mode);
 		this.gameManager.dealInitialTurnCards();
 	}
 
@@ -99,7 +96,7 @@ public class GameDisplay extends Menu {
 
 	private void setUpExitButton() {
 		Button exitButton = new Button(Constants.ExitButtonPosition, Constants.ExitButtonBounds,
-				this.messages.getString("exit"));
+				Translate.getNewResourceBundle().getString("exit"));
 		this.addInteractable(exitButton);
 	}
 
@@ -132,8 +129,12 @@ public class GameDisplay extends Menu {
 	public void onClick(Interactable clicked) {
 		if (clicked.getClass().equals(CardHolder.class)) {
 			this.attemptPlayCard((CardHolder) clicked);
-		} else if (clicked.getValue().equals(this.messages.getString("exit"))) {
-			exit();
+		} else if (clicked.getValue().equals(Translate.getNewResourceBundle().getString("exit"))) {
+			if (this.resource.isActive()) {
+				this.resource.closeMenu();
+			} else {
+				System.exit(0);
+			}
 		} else if (clicked.getValue().codePointAt(0) >= 48 && clicked.getValue().codePointAt(0) <= 57) {
 			displayResources(clicked);
 		} else {
@@ -154,19 +155,12 @@ public class GameDisplay extends Menu {
 		tradeHandler.trade(splitValue);
 	}
 
-	private void exit() {
-		if (this.resource.isActive()) {
-			this.resource.closeMenu();
-		} else {
-			System.exit(0);
-		}
-	}
-
 	private void attemptPlayCard(CardHolder clicked) {
-		String[] buttons = new String[] { this.messages.getString("buildStructure"),
-				this.messages.getString("buildWonder"), this.messages.getString("discard") };
-		int val = JOptionPane.showOptionDialog(null, this.messages.getString("choosePlayType"),
-				this.messages.getString("playCard"), JOptionPane.INFORMATION_MESSAGE, 0, null, buttons, buttons[0]);
+		ResourceBundle messages = Translate.getNewResourceBundle();
+		String[] buttons = new String[] { messages.getString("buildStructure"),
+				messages.getString("buildWonder"), messages.getString("discard") };
+		int val = JOptionPane.showOptionDialog(null, messages.getString("choosePlayType"),
+				messages.getString("playCard"), JOptionPane.INFORMATION_MESSAGE, 0, null, buttons, buttons[0]);
 		try {
 			playOrDiscardCard(clicked, val);
 			endPlayerTurn();
@@ -181,6 +175,8 @@ public class GameDisplay extends Menu {
 			clicked.activate(this.gameManager);
 		} else if (val == 2) {
 			clicked.discard(this.gameManager);
+		} else {
+			throw new RuntimeException("You must choose an action to do.");
 		}
 	}
 
@@ -209,12 +205,12 @@ public class GameDisplay extends Menu {
 
 	public void redrawBoards() {
 		ArrayList<Player> players = this.gameManager.getPlayers();
-		Player nextPlayer = this.gameManager.getNextPlayer();
+		Player currentPlayer = this.gameManager.getCurrentPlayer();
 		int totalNumberOfPlayers = this.gameManager.getNumPlayers();
-		int nextPlayerIndex = players.indexOf(nextPlayer);
+		int currentPlayerIndex = players.indexOf(currentPlayer);
 		for (int i = 0; i < players.size(); i++) {
 			boards.get(i)
-					.changePlayer(players.get((totalNumberOfPlayers + nextPlayerIndex + i - 2) % totalNumberOfPlayers));
+					.changePlayer(players.get((totalNumberOfPlayers + currentPlayerIndex + i - 1) % totalNumberOfPlayers));
 		}
 	}
 }

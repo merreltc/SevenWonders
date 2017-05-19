@@ -32,33 +32,34 @@ public class StoragePile {
 			break;
 
 		case VALUE:
-			ValueEffect value = (ValueEffect) card.getEffect();
-			addValue(card, value);
+			determineValueEffectPile(card);
 			break;
 
 		default:
-			EntityEffect entity = (EntityEffect) card.getEffect();
-			addEntity(card, entity);
+			determineEntityEffectPile(card);
 			break;
 		}
 	}
 
-	private void addValue(Card card, ValueEffect value) {
-		Value actualValue = value.getValue();
-		Direction direction = value.getDirection();
+	private void determineEntityEffectPile(Card card) {
+		EntityEffect entity = (EntityEffect) card.getEffect();
 
-		if (actualValue == Value.GUILD || direction == Direction.ALL) {
-			this.addToEndGamePile(card);
-		} else if (direction == Direction.SELF) {
-			this.addToImmediateEffectPile(card);
+		if (entity.getEntityType() == EntityType.SCIENCE) {
+			this.addToSciencePile(card);
 		} else {
 			this.addToCommercePile(card);
 		}
 	}
 
-	private void addEntity(Card card, EntityEffect entity) {
-		if (entity.getEntityType() == EntityType.SCIENCE) {
-			this.addToSciencePile(card);
+	private void determineValueEffectPile(Card card) {
+		ValueEffect value = (ValueEffect) card.getEffect();
+
+		Value actualValue = value.getValue();
+		Direction direction = value.getDirection();
+		if (actualValue == Value.GUILD || direction == Direction.ALL) {
+			this.addToEndGamePile(card);
+		} else if (direction == Direction.SELF) {
+			this.addToImmediateEffectPile(card);
 		} else {
 			this.addToCommercePile(card);
 		}

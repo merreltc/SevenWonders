@@ -42,8 +42,23 @@ public class ValueEffectTest {
 		assertEquals(AffectingEntity.NONE, ((ValueEffect) effect).getAffectingEntity());
 	}
 
+	@Test
+	public void testValueEffectThirdConstructor() {
+		Effect effect = new ValueEffect(Value.VICTORYPOINTS, AffectingEntity.NONE, Direction.LEFT);
+
+		assertEquals(EffectType.VALUE, effect.getEffectType());
+		assertEquals(Direction.LEFT, effect.getDirection());
+		assertEquals(AffectingEntity.NONE, ((ValueEffect) effect).getAffectingEntity());
+	}
+
 	@Test(expected = IllegalArgumentException.class)
 	public void testInvalidVictoryPointsValue0Effect() {
+		new ValueEffect(Value.VICTORYPOINTS, AffectingEntity.NONE, 0);
+		fail();
+	}
+
+	@Test(expected = IllegalArgumentException.class)
+	public void testInvalidVictoryPointsValue0EffectSecondConstructor() {
 		new ValueEffect(Value.VICTORYPOINTS, AffectingEntity.NONE, 0);
 		fail();
 	}
@@ -99,7 +114,6 @@ public class ValueEffectTest {
 	@Test
 	public void test3MilitaryValueEffect() {
 		Effect effect = new ValueEffect(Value.MILITARY, AffectingEntity.NONE, 3);
-
 		assertEquals(EffectType.VALUE, effect.getEffectType());
 		assertEquals(Direction.SELF, effect.getDirection());
 		assertEquals(3, ((ValueEffect) effect).getValueAmount());
@@ -146,8 +160,7 @@ public class ValueEffectTest {
 
 	@Test
 	public void test1CommerceValueRightEffect() {
-		Effect effect = new ValueEffect(Value.COMMERCE, AffectingEntity.RAWRESOURCES, Direction.RIGHT,
-				1);
+		Effect effect = new ValueEffect(Value.COMMERCE, AffectingEntity.RAWRESOURCES, Direction.RIGHT, 1);
 
 		assertEquals(EffectType.VALUE, effect.getEffectType());
 		assertEquals(Direction.RIGHT, effect.getDirection());
@@ -159,8 +172,7 @@ public class ValueEffectTest {
 
 	@Test
 	public void test1CommerceValueLeftEffect() {
-		Effect effect = new ValueEffect(Value.COMMERCE, AffectingEntity.RAWRESOURCES, Direction.LEFT,
-				1);
+		Effect effect = new ValueEffect(Value.COMMERCE, AffectingEntity.RAWRESOURCES, Direction.LEFT,1);
 
 		assertEquals(EffectType.VALUE, effect.getEffectType());
 		assertEquals(Direction.LEFT, effect.getDirection());
@@ -198,12 +210,14 @@ public class ValueEffectTest {
 	@Test(expected = IllegalArgumentException.class)
 	public void testInvalidCommerceValueNoneEffect0() {
 		new ValueEffect(Value.COMMERCE, AffectingEntity.NONE, 0);
+
 		fail();
 	}
 
 	@Test(expected = IllegalArgumentException.class)
 	public void testInvalidCommerceValueNoneEffectNeg1() {
 		new ValueEffect(Value.COMMERCE, AffectingEntity.NONE, -1);
+
 		fail();
 	}
 
@@ -275,7 +289,6 @@ public class ValueEffectTest {
 	@Test
 	public void test1GuildValueGuildEffect() {
 		Effect effect = new ValueEffect(Value.GUILD, AffectingEntity.GUILD, Direction.SELF, 1);
-
 		assertEquals(EffectType.VALUE, effect.getEffectType());
 		assertEquals(Direction.SELF, effect.getDirection());
 		assertEquals(1, ((ValueEffect) effect).getValueAmount());
@@ -304,7 +317,6 @@ public class ValueEffectTest {
 		affectingEntities.put(AffectingEntity.GUILD, 1);
 
 		Effect effect = new ValueEffect(Value.GUILD, affectingEntities);
-
 		assertEquals(EffectType.VALUE, effect.getEffectType());
 		assertEquals(Direction.SELF, effect.getDirection());
 		assertEquals(Value.GUILD, ((ValueEffect) effect).getValue());
@@ -357,6 +369,7 @@ public class ValueEffectTest {
 
 		assertFalse(effect.equals(effect2));
 	}
+
 
 	@Test
 	public void testInvalidValueEffectEqualsGuild() {

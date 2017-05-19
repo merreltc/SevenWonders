@@ -2,6 +2,7 @@ package backend.handlers;
 
 import java.util.ResourceBundle;
 
+import backend.GameManager.CardinalDirection;
 import dataStructures.GameBoard;
 import dataStructures.playerData.Chip;
 import dataStructures.playerData.Chip.ChipType;
@@ -9,10 +10,10 @@ import dataStructures.playerData.Chip.ChipValue;
 import dataStructures.playerData.Player;
 import exceptions.InvalidTradeException;
 import utils.Translate;
+import utils.TranslateWithTemplate;
 
 public class TradeHandler {
 	private GameBoard board;
-	private ResourceBundle messages = Translate.getNewResourceBundle();
 
 	public TradeHandler(GameBoard board) {
 		this.board = board;
@@ -20,7 +21,7 @@ public class TradeHandler {
 
 	public void tradeCoinsFromTo(Player from, Player to, int valueToTrade) {
 		if (to != this.board.getPreviousPlayer() && to != this.board.getNextPlayer()) {
-			throw new InvalidTradeException(messages.getString("cannotTradeToPlayer"));
+			throw new InvalidTradeException(Translate.getNewResourceBundle().getString("cannotTradeToPlayer"));
 		}
 
 		// player's number of value 3 coins is calculated first because
@@ -61,6 +62,58 @@ public class TradeHandler {
 		PlayerChipHandler.removeValue3(from, numCoinsToTrade, Chip.ChipType.COIN);
 		PlayerChipHandler.addValue3(to, numCoinsToTrade, Chip.ChipType.COIN);
 	}
+	
+	public void tradeForEntity(Player from, Player to, Enum entity) {
+		boolean discountSuccesful = false;
+		if (from.storagePileContainsCardByName("East Trading Post")) {
+			discountSuccesful = tryTradeWithDiscountEast(from, to);
+		} else if (from.storagePileContainsCardByName("West Trading Post")) {
+			discountSuccesful = tryTradeWithDiscountWest(from, to);
+		} else if (from.storagePileContainsCardByName("Marketplace")) {
+			discountSuccesful = true;
+		}
+
+		this.tradeFromToForEntity(from, to, entity, discountSuccesful);
+	}
+	
+	private boolean tryTradeWithDiscountEast(Player from, Player to) {
+		int fromPosition = this.board.getPlayers().indexOf(from);
+		int toPosition = this.board.getPlayers().indexOf(to);
+		fromPosition = correctFromIndex(CardinalDirection.EAST, fromPosition);
+		return (fromPosition == toPosition) ? true : false;
+	}
+	
+	private boolean tryTradeWithDiscountWest(Player from, Player to) {
+		int fromPosition = this.board.getPlayers().indexOf(from);
+		int toPosition = this.board.getPlayers().indexOf(to);
+		fromPosition = correctFromIndex(CardinalDirection.WEST, fromPosition);
+		return (fromPosition == toPosition) ? true : false;
+	}
+	
+	private int correctFromIndex(CardinalDirection direction, int fromPosition) {
+		int indexCorrection = getIndexCorrection(direction, fromPosition);
+		int comparisonIndex = getComparisonIndex(direction);
+		
+		if (indexCorrection == comparisonIndex) {
+			indexCorrection = getNewFromIndex(direction);
+		}
+
+		return indexCorrection;
+	}
+
+	public int getIndexCorrection(CardinalDirection direction, int index) {
+		int correction = (direction == CardinalDirection.EAST) ? 1 : -1;
+		return index + correction;
+	}
+
+	public int getComparisonIndex(CardinalDirection direction) {
+		return (direction == CardinalDirection.EAST) ? this.board.getNumPlayers() : -1;
+	}
+
+	public int getNewFromIndex(CardinalDirection direction) {
+		return (direction == CardinalDirection.EAST) ? 0 : this.board.getNumPlayers() - 1;
+	}
+
 
 	public void tradeFromToForEntity(Player from, Player to, Enum entity, boolean discount) {
 		if (to.storagePileContainsEntity(entity)) {
@@ -71,8 +124,8 @@ public class TradeHandler {
 			}
 			from.addTradedValue(entity);
 		} else {
-			String msg = Translate.prepareStringTemplateWithStringArg(this.messages.getString(entity.toString()),
-					"noResourceForTradingTemplate", this.messages);
+			String msg = TranslateWithTemplate.prepareStringTemplateWithStringArg(Translate.getNewResourceBundle().getString(entity.toString()),
+					"noResourceForTradingTemplate", Translate.getNewResourceBundle());
 			throw new InvalidTradeException(msg);
 		}
 	}

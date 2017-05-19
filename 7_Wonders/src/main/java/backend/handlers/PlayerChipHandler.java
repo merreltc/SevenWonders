@@ -7,7 +7,7 @@ import dataStructures.playerData.Player;
 import exceptions.InsufficientFundsException;
 
 public final class PlayerChipHandler {
-	
+
 	public static void addValue1(Player player, int numChipsToAdd, Chip.ChipType chipType) {
 		validateNumChipsToAdd(numChipsToAdd, Chip.ChipValue.ONE);
 
@@ -35,7 +35,7 @@ public final class PlayerChipHandler {
 	public static void addValue5(Player player, int numChipsToAdd, ChipType chipType) {
 		if (chipType == ChipType.COIN) {
 			throw new IllegalArgumentException("Cannot have a 5 coin value");
-		} 
+		}
 		validateNumChipsToAdd(numChipsToAdd, Chip.ChipValue.FIVE);
 
 		int currentNum = player.getConflictTokens().get(ChipValue.FIVE);
@@ -54,31 +54,40 @@ public final class PlayerChipHandler {
 	}
 
 	private static void validateNumChipsToAdd(int numChips, Chip.ChipValue type) {
-		int max;
-		String chipType;
-
-		if (type == ChipValue.ONE) {
-			max = 46;
-			chipType = "1";
-		} else if (type == ChipValue.THREE) {
-			max = 24;
-			chipType = "3";
-		} else if (type == ChipValue.FIVE) {
-			max = 15;
-			chipType = "5";
-		} else {
-			max = 21;
-			chipType = "-1";
-		}
+		int max = setMaxValue(type);
+		String chipType = getTypeString(type);
 
 		if (numChips <= -1 || numChips > max) {
 			throw new IllegalArgumentException("Cannot add " + numChips + " value " + chipType + " chip(s)");
 		}
 	}
 
+	private static int setMaxValue(ChipValue type) {
+		if (type == ChipValue.ONE) {
+			return 46;
+		} else if (type == ChipValue.THREE) {
+			return 24;
+		} else if (type == ChipValue.FIVE) {
+			return 15;
+		}
+		return 21;
+	}
+
+	private static String getTypeString(ChipValue type) {
+		if (type == ChipValue.ONE) {
+			return "1";
+		} else if (type == ChipValue.THREE) {
+			return "3";
+		} else if (type == ChipValue.FIVE) {
+			return "5";
+		} else {
+			return "-1";
+		}
+	}
+
 	public static void removeValue1(Player player, int numChipsToRemove, ChipType chipType) {
 		validateNumChipsToRemove(player, numChipsToRemove, chipType, Chip.ChipValue.ONE);
-		
+
 		if (chipType == ChipType.COIN) {
 			int currentNum = player.getCoins().get(ChipValue.ONE);
 			player.getCoins().put(ChipValue.ONE, currentNum - numChipsToRemove);
@@ -90,7 +99,7 @@ public final class PlayerChipHandler {
 
 	public static void removeValue3(Player player, int numChipsToRemove, ChipType chipType) {
 		validateNumChipsToRemove(player, numChipsToRemove, chipType, Chip.ChipValue.THREE);
-		
+
 		if (chipType == ChipType.COIN) {
 			int currentNum = player.getCoins().get(ChipValue.THREE);
 			player.getCoins().put(ChipValue.THREE, currentNum - numChipsToRemove);
@@ -103,8 +112,8 @@ public final class PlayerChipHandler {
 	public static void removeValue5(Player player, int numChipsToRemove, ChipType chipType) {
 		if (chipType == ChipType.COIN) {
 			throw new IllegalArgumentException("Cannot have a negative 1 coin value");
-		} 
-		
+		}
+
 		validateNumChipsToRemove(player, numChipsToRemove, chipType, Chip.ChipValue.FIVE);
 
 		int currentNum = player.getConflictTokens().get(ChipValue.FIVE);
@@ -113,22 +122,22 @@ public final class PlayerChipHandler {
 
 	private static void validateNumChipsToRemove(Player player, int numChips, ChipType chipType, Chip.ChipValue value) {
 		if (numChips <= -1) {
-			throw new IllegalArgumentException("Cannot remove " + numChips + " value " + chipValueToString(value) + " chip(s)");
+			throw new IllegalArgumentException(
+					"Cannot remove " + numChips + " value " + chipValueToString(value) + " chip(s)");
 		}
-
-		int numChipsToCheck;
-		
-		if(chipType == ChipType.COIN){
-			numChipsToCheck = player.getCoins().get(value);
-		}else{
-			numChipsToCheck = player.getConflictTokens().get(value);
-		}
-		
+		int numChipsToCheck = setNumChips(player, chipType, value);
 
 		if (numChips > numChipsToCheck) {
 			String msg = "Player does not have " + numChips + " value " + chipValueToString(value) + " chip(s)";
 			throw new InsufficientFundsException(msg);
 		}
+	}
+
+	private static int setNumChips(Player player, ChipType chipType, Chip.ChipValue value) {
+		if (chipType == ChipType.COIN) {
+			return player.getCoins().get(value);
+		} 
+		return player.getConflictTokens().get(value);
 	}
 
 	private static String chipValueToString(Chip.ChipValue type) {
@@ -137,18 +146,15 @@ public final class PlayerChipHandler {
 			return "1";
 		case THREE:
 			return "3";
-		case FIVE:
-			return "5";
-		default:
-			throw new IllegalArgumentException("Bad Coin.CoinValue");
 		}
+		return "5";
 	}
-	
+
 	public static void removeTotalCoins(Player player, int total) {
 		int numValue3CoinsToRemove = total / 3;
 		int numValue1CoinsToRemove = total % 3;
 		int currentNumValue3Coins = player.getCoins().get(ChipValue.THREE);
-		
+
 		if (numValue3CoinsToRemove > currentNumValue3Coins) {
 			numValue1CoinsToRemove += 3 * (numValue3CoinsToRemove - currentNumValue3Coins);
 			numValue3CoinsToRemove = currentNumValue3Coins;

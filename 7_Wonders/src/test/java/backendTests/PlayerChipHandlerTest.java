@@ -374,6 +374,38 @@ public class PlayerChipHandlerTest {
 		assertEquals(0, (int) player.getCoins().get(ChipValue.ONE));
 		assertEquals(0, player.getCoinTotal());
 	}
+	
+	@Test
+	public void testRemoveTotalCoinsEnoughValue1NotEnoughValue3Coins10() {
+		Player player = createMockedPlayer();
+		PlayerChipHandler.addValue1(player, 1, ChipType.COIN);
+		PlayerChipHandler.addValue3(player, 2, ChipType.COIN);
+		PlayerChipHandler.removeTotalCoins(player, 10);
+
+		assertEquals(0, (int) player.getCoins().get(ChipValue.ONE));
+		assertEquals(0, player.getCoinTotal());
+	}
+	
+	@Test
+	public void testRemoveTotalCoinsEnoughValue1NotEnoughValue3Coins15() {
+		Player player = createMockedPlayer();
+		PlayerChipHandler.addValue1(player, 7, ChipType.COIN);
+		PlayerChipHandler.addValue3(player, 2, ChipType.COIN);
+		PlayerChipHandler.removeTotalCoins(player, 15);
+
+		assertEquals(1, (int) player.getCoins().get(ChipValue.ONE));
+		assertEquals(1, player.getCoinTotal());
+	}
+	
+	@Test
+	public void testRemoveTotalCoinsEnoughValueExactlyValue3Coins15() {
+		Player player = createMockedPlayer();
+		PlayerChipHandler.addValue3(player, 5, ChipType.COIN);
+		PlayerChipHandler.removeTotalCoins(player, 15);
+
+		assertEquals(3, (int) player.getCoins().get(ChipValue.ONE));
+		assertEquals(3, player.getCoinTotal());
+	}
 
 	@Test(expected = IllegalArgumentException.class)
 	public void testRemove2Value5Coins() {
@@ -410,6 +442,7 @@ public class PlayerChipHandlerTest {
 		}
 	}
 
+
 	@Test
 	public void testRemoveAllValue5ConflictTokens() {
 		Player player = createMockedPlayer();
@@ -418,6 +451,7 @@ public class PlayerChipHandlerTest {
 		Assert.assertEquals(0, (int) player.getConflictTokens().get(ChipValue.FIVE));
 		Assert.assertEquals(0, player.getConflictTotal());
 	}
+
 	@Test
 	public void testAdd1Value1ConflictTokens() {
 		Player player = createMockedPlayer();
@@ -471,13 +505,66 @@ public class PlayerChipHandlerTest {
 	}
 
 	@Test
-	public void testAddValue5ConflictTokens2(){
+	public void testAddValue5ConflictTokens2() {
 		Player player = createMockedPlayer();
 		PlayerChipHandler.addValue5(player, 5, Chip.ChipType.CONFLICTTOKEN);
 		assertEquals(5, (int) player.getConflictTokens().get(ChipValue.FIVE));
 		assertEquals(25, player.getConflictTotal());
 	}
+
+	@Test
+	public void testAddValue5ConflictTokens15() {
+		Player player = createMockedPlayer();
+		PlayerChipHandler.addValue5(player, 15, Chip.ChipType.CONFLICTTOKEN);
+		assertEquals(15, (int) player.getConflictTokens().get(ChipValue.FIVE));
+		assertEquals(75, player.getConflictTotal());
+	}
+
+	@Test(expected = IllegalArgumentException.class)
+	public void testAddInvalidValue5ConflictTokens16() {
+		Player player = createMockedPlayer();
+		PlayerChipHandler.addValue5(player, 16, Chip.ChipType.CONFLICTTOKEN);
+		fail();
+	}
 	
+	@Test
+	public void testAddInvalidValue5ConflictTokens16Message() {
+		Player player = createMockedPlayer();
+		try{
+		PlayerChipHandler.addValue5(player, 16, Chip.ChipType.CONFLICTTOKEN);
+		}catch(Exception e){
+			assertEquals("Cannot add 16 value 5 chip(s)", e.getMessage());	
+		}
+	}
+	
+	@Test
+	public void testAddValueNeg1ConflictTokens15() {
+		Player player = createMockedPlayer();
+		PlayerChipHandler.addValueNeg1(player, 15, Chip.ChipType.CONFLICTTOKEN);
+		assertEquals(15, (int) player.getConflictTokens().get(ChipValue.NEG1));
+		assertEquals(-15, player.getConflictTotal());
+	}
+	
+	@Test
+	public void testAddValueNeg1ConflictTokens21() {
+		Player player = createMockedPlayer();
+		PlayerChipHandler.addValueNeg1(player, 21, Chip.ChipType.CONFLICTTOKEN);
+		assertEquals(21, (int) player.getConflictTokens().get(ChipValue.NEG1));
+		assertEquals(-21, player.getConflictTotal());
+	}
+	
+	@Test
+	public void testAddInvalidValueNeg1ConflictTokens22Message() {
+		Player player = createMockedPlayer();
+		try{
+		PlayerChipHandler.addValueNeg1(player, 22, Chip.ChipType.CONFLICTTOKEN);
+		}catch(Exception e){
+			assertEquals("Cannot add 22 value -1 chip(s)", e.getMessage());	
+		}
+		
+		assertEquals(0, (int) player.getConflictTokens().get(ChipValue.NEG1));
+	}
+
 	private Player createMockedPlayer() {
 		Wonder wonder = EasyMock.createStrictMock(Wonder.class);
 		return EasyMock.partialMockBuilder(Player.class).withConstructor("Jane Doe", wonder).createMock();

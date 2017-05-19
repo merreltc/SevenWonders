@@ -14,7 +14,6 @@ import dataStructures.playerData.Chip.ChipValue;
 
 public class Player {
 	private String name = "Jane Doe";
-
 	private int numShields = 0;
 	private int numVictoryPoints = 0;
 
@@ -47,7 +46,7 @@ public class Player {
 	}
 
 	public void addWonderResourceToPile() {
-		 this.storagePile.addToWonderPile(this.wonder.getResource());
+		this.storagePile.addToWonderPile(this.wonder.getResource());
 	}
 
 	public String toString() {

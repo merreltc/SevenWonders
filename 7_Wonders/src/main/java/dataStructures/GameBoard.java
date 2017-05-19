@@ -11,6 +11,7 @@ import dataStructures.playerData.Chip.ChipType;
 import dataStructures.playerData.Player;
 import exceptions.InsufficientFundsException;
 import utils.Translate;
+import utils.TranslateWithTemplate;
 
 
 public class GameBoard {
@@ -82,7 +83,7 @@ public class GameBoard {
 
 	private void validatePlayerIndex(int index) {
 		if (index <= -1 || index >= this.numPlayers) {
-			String msg = Translate.prepareStringTemplateWithIntArg(index, "invalidPlayerIndex", messages);
+			String msg = TranslateWithTemplate.prepareStringTemplateWithIntArg(index, "invalidPlayerIndex", messages);
 			throw new IllegalArgumentException(msg);
 		}
 	}
@@ -93,7 +94,7 @@ public class GameBoard {
 		if (this.totalValue3CoinsInBank-- > 0) {
 			PlayerChipHandler.addValue3(active, 1, ChipType.COIN);
 		} else {
-			this.totalValue1CoinsInBank--;
+			this.totalValue1CoinsInBank -= 3;
 			PlayerChipHandler.addValue1(active, 3, ChipType.COIN);
 		}
 	}
