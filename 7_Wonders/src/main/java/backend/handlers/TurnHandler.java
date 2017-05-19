@@ -123,7 +123,7 @@ public class TurnHandler {
 		return message;
 	}
 	
-	private String switchAge() {
+	public String switchAge() {
 		Age age = this.board.getAge();
 		if (age == Age.AGE3){
 			return endGame();
@@ -133,7 +133,6 @@ public class TurnHandler {
 	}
 
 	private String endGame() {
-		this.handlers.getTurnHandler().endAge(this.board.getPlayers(), Age.AGE3);
 		EndGameHandler end = new EndGameHandler();
 		ArrayList<Integer> scores = end.calculateScores(this.board.getPlayers());
 		return formatFinalScores(scores);
@@ -172,7 +171,7 @@ public class TurnHandler {
 		return formattedString.toString();
 	}
 	
-	private int indexOfMaxScore(ArrayList<Integer> scores, ArrayList<Player> players){
+	public int indexOfMaxScore(ArrayList<Integer> scores, ArrayList<Player> players){
 		int max = 0;
 		int maxIndex = 0;
 		for (int i = 0; i < scores.size(); i++){

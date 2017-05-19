@@ -5,6 +5,7 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import org.easymock.EasyMock;
 import org.junit.Assert;
@@ -19,6 +20,7 @@ import backend.handlers.SetUpPlayerHandler;
 import backend.handlers.TurnHandler;
 import backend.handlers.RotateHandler.Rotation;
 import constants.GeneralEnums.GameMode;
+import dataStructures.GameBoard;
 import dataStructures.Handlers;
 import dataStructures.gameMaterials.Card;
 import dataStructures.gameMaterials.Deck;
@@ -621,6 +623,44 @@ public class TurnHandlerTest {
 		
 		EasyMock.verify(rotate);
 	}
+	
+	@Test
+	public void testEndGame(){
+		Wonder wonder = EasyMock.mock(Wonder.class);
+		Deck deck = EasyMock.mock(Deck.class);
+		Player player1 = new Player("Player1", wonder);
+		player1.addNumVictoryPoints(6);
+		
+		Player player2 = new Player("Player2", wonder);
+		player2.addNumVictoryPoints(4);
+		
+		Player player3 = new Player("Player3", wonder);
+		player3.addNumVictoryPoints(2);
+		
+		ArrayList<Player> players = new ArrayList<Player>(Arrays.asList(player1,player2,player3));
+		
+		GameBoard board = EasyMock.mock(GameBoard.class);
+		EasyMock.expect(board.getAge()).andReturn(Age.AGE3);
+		for (int i = 0; i < 7; i++){
+			EasyMock.expect(board.getPlayers()).andReturn(players);
+		}
+		
+		EasyMock.replay(wonder,deck, board);
+		
+		GameBoard board2 = new GameBoard(players,deck);
+		
+		TurnHandler turnHandler = new TurnHandler();
+		turnHandler.setGameBoard(board);
+		String result = turnHandler.switchAge();
+		
+		String expected = "Player1 : 7\nPlayer2 : 5\nPlayer3 : 3\nPlayer1 Wins!";
+		
+		assertEquals(expected, result);
+		
+		EasyMock.verify(board);
+		
+	}
+
 
 	private ArrayList<Player> setUpPlayersByNum(int num) {
 		ArrayList<Player> result = new ArrayList<Player>();
