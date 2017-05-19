@@ -1,7 +1,5 @@
 package backend.handlers;
 
-import java.util.ResourceBundle;
-
 import backend.GameManager.CardinalDirection;
 import constants.GeneralEnums.RawResource;
 import dataStructures.GameBoard;
