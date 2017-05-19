@@ -147,7 +147,7 @@ public class WonderTest {
 	}
 
 	@Test
-	public void testGetNextLevelColossusSideA() {
+	public void testBuildNextLevelColossusSideA() {
 		setWonder(Side.A, WonderType.COLOSSUS);
 		LevelFactory factory = new LevelFactory(this.wonder);
 		this.helper.setWonder(this.wonder);
@@ -166,7 +166,7 @@ public class WonderTest {
 	}
 
 	@Test
-	public void testGetNextLevelColossusSideB() {
+	public void testBuildNextLevelColossusSideB() {
 		setWonder(Side.B, WonderType.COLOSSUS);
 		LevelFactory factory = new LevelFactory(this.wonder);
 		this.helper.setWonder(this.wonder);
@@ -181,7 +181,7 @@ public class WonderTest {
 	}
 
 	@Test
-	public void testGetNextLevelLighthouseSideA() {
+	public void testBuildNextLevelLighthouseSideA() {
 		setWonder(Side.A, WonderType.LIGHTHOUSE);
 		LevelFactory factory = new LevelFactory(this.wonder);
 		this.helper.setWonder(this.wonder);
@@ -200,7 +200,7 @@ public class WonderTest {
 	}
 
 	@Test
-	public void testGetNextLevelLighthouseSideB() {
+	public void testBuildNextLevelLighthouseSideB() {
 		setWonder(Side.B, WonderType.LIGHTHOUSE);
 		LevelFactory factory = new LevelFactory(this.wonder);
 		this.helper.setWonder(this.wonder);
@@ -223,7 +223,7 @@ public class WonderTest {
 	}
 
 	@Test
-	public void testGetNextLevelTempleSideA() {
+	public void testBuildNextLevelTempleSideA() {
 		setWonder(Side.A, WonderType.TEMPLE);
 		LevelFactory factory = new LevelFactory(this.wonder);
 		this.helper.setWonder(this.wonder);
@@ -242,7 +242,7 @@ public class WonderTest {
 	}
 
 	@Test
-	public void testGetNextLevelTempleSideB() {
+	public void testBuildNextLevelTempleSideB() {
 		setWonder(Side.B, WonderType.TEMPLE);
 		LevelFactory factory = new LevelFactory(this.wonder);
 		this.helper.setWonder(this.wonder);
@@ -261,7 +261,7 @@ public class WonderTest {
 	}
 
 	@Test
-	public void testGetNextLevelStatueSideA() {
+	public void testBuildNextLevelStatueSideA() {
 		setWonder(Side.A, WonderType.STATUE);
 		LevelFactory factory = new LevelFactory(this.wonder);
 		this.helper.setWonder(this.wonder);
@@ -280,7 +280,7 @@ public class WonderTest {
 	}
 
 	@Test
-	public void testGetNextLevelStatueSideB() {
+	public void testBuildNextLevelStatueSideB() {
 		setWonder(Side.B, WonderType.STATUE);
 		LevelFactory factory = new LevelFactory(this.wonder);
 		this.helper.setWonder(this.wonder);
@@ -299,7 +299,7 @@ public class WonderTest {
 	}
 
 	@Test
-	public void testGetNextLevelGardensSideA() {
+	public void testBuildNextLevelGardensSideA() {
 		setWonder(Side.A, WonderType.GARDENS);
 		LevelFactory factory = new LevelFactory(this.wonder);
 		this.helper.setWonder(this.wonder);
@@ -322,7 +322,7 @@ public class WonderTest {
 	}
 
 	@Test
-	public void testGetNextLevelGardensSideB() {
+	public void testBuildNextLevelGardensSideB() {
 		setWonder(Side.B, WonderType.GARDENS);
 		LevelFactory factory = new LevelFactory(this.wonder);
 		this.helper.setWonder(this.wonder);
@@ -345,7 +345,7 @@ public class WonderTest {
 	}
 
 	@Test
-	public void testGetNextLevelMausoleumSideA() {
+	public void testBuildNextLevelMausoleumSideA() {
 		setWonder(Side.A, WonderType.MAUSOLEUM);
 		LevelFactory factory = new LevelFactory(this.wonder);
 		this.helper.setWonder(this.wonder);
@@ -364,7 +364,7 @@ public class WonderTest {
 	}
 
 	@Test
-	public void testGetNextLevelMausoleumSideB() {
+	public void testBuildNextLevelMausoleumSideB() {
 		setWonder(Side.B, WonderType.MAUSOLEUM);
 		LevelFactory factory = new LevelFactory(this.wonder);
 		this.helper.setWonder(this.wonder);
@@ -383,7 +383,7 @@ public class WonderTest {
 	}
 
 	@Test
-	public void testGetNextLevelPyramidsSideA() {
+	public void testBuildNextLevelPyramidsSideA() {
 		setWonder(Side.A, WonderType.PYRAMIDS);
 		LevelFactory factory = new LevelFactory(this.wonder);
 		this.helper.setWonder(this.wonder);
@@ -402,7 +402,7 @@ public class WonderTest {
 	}
 
 	@Test
-	public void testGetNextLevelPyramidsideB() {
+	public void testBuildNextLevelPyramidsSideB() {
 		setWonder(Side.B, WonderType.PYRAMIDS);
 		LevelFactory factory = new LevelFactory(this.wonder);
 		this.helper.setWonder(this.wonder);
