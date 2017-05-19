@@ -500,15 +500,17 @@ public class TradeHandlerTest {
 		GameBoard board = new GameBoard(players, deck);
 		Player current = this.player1;
 		Player right = this.player2;
+		
 		storage.add(deck.getCard(14)); // marketplace
 		current.setStoragePile(storage);
+		
 		ArrayList<Card> storage2 = new ArrayList<Card>();
-		storage2.add(deck.getCard(0)); // lumber
+		storage2.add(deck.getCard(8)); // press
 		right.setStoragePile(storage2);
 
 		TradeHandler tradeHandler = new TradeHandler(board);
-		tradeHandler.tradeForEntity(current, right, RawResource.LUMBER);
-		assertTrue(current.getCurrentTrades().containsKey(RawResource.LUMBER));
+		tradeHandler.tradeForEntity(current, right, Good.PRESS);
+		assertTrue(current.getCurrentTrades().containsKey(Good.PRESS));
 		assertEquals(4, right.getCoinTotal());
 	}
 
@@ -524,15 +526,17 @@ public class TradeHandlerTest {
 		GameBoard board = new GameBoard(players, deck);
 		Player current = this.player1;
 		Player left = players.get(2);
+		
 		storage.add(deck.getCard(14)); // marketplace
 		current.setStoragePile(storage);
+		
 		ArrayList<Card> storage2 = new ArrayList<Card>();
-		storage2.add(deck.getCard(0)); // lumber
+		storage2.add(deck.getCard(8)); // press
 		left.setStoragePile(storage2);
 
 		TradeHandler tradeHandler = new TradeHandler(board);
-		tradeHandler.tradeForEntity(current, left, RawResource.LUMBER);
-		assertTrue(current.getCurrentTrades().containsKey(RawResource.LUMBER));
+		tradeHandler.tradeForEntity(current, left, Good.PRESS);
+		assertTrue(current.getCurrentTrades().containsKey(Good.PRESS));
 		assertEquals(4, left.getCoinTotal());
 	}
 
