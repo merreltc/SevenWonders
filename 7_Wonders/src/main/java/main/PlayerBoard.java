@@ -34,7 +34,7 @@ public class PlayerBoard {
 		this.playerPosition = startingPosition;
 		this.player = player;
 		this.totalNumberOfPlayers = totalNumberOfPlayers;
-		this.WonderImage = renderer.getImage(player.getWonder().getName());
+		this.WonderImage = renderer.getImage(player.getWonder().getName() + player.getWonder().getSide());
 		this.setBoardPosition();
 	}
 

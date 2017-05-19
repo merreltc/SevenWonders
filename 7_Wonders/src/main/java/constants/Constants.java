@@ -6,6 +6,7 @@ import java.awt.Point;
 
 public class Constants {
 	public static String LOCALE = "en_US";
+
 	/* For GuiMainMenu Class */
 	public static final int FrameWidth = 1900;
 	public static final int FrameHeight = 1000;
@@ -62,10 +63,10 @@ public class Constants {
 			LastPlayerBoardPositionY + 5);
 	public static final Point TradeRightBaseButtonPoint = new Point(NextPlayerBoardPositionX - 5,
 			NextPlayerBoardPositionY + 5);
-	
+
 	public static final Point TradeLeftBaseButtonPointGood = new Point(LastPlayerBoardPositionX + 500,
 			LastPlayerBoardPositionY + 5);
-	public static final Point TradeRightBaseButtonPointGood = new Point(NextPlayerBoardPositionX +500,
+	public static final Point TradeRightBaseButtonPointGood = new Point(NextPlayerBoardPositionX + 500,
 			NextPlayerBoardPositionY + 5);
 
 	public static final int TradeButtonYOffet = TradeButtonBounds.y + 20;
@@ -85,11 +86,11 @@ public class Constants {
 
 	/* For Game Class */
 	public static final String[] ResourceTypes = new String[] { "Lumber", "Ore", "Stone", "Clay" };
-	public static final String[] GoodTypes = new String[] { "Press", "Glass", "Loom" };
+	public static final String[] GoodTypes = new String[] { "press symbol", "Glass", "loom symbol" };
 
 	/* For ResourceViewer Class */
 	public static final String[] ResourceImages = new String[] { "clay", "lumber", "ore", "stone", "glass",
-			"loom symbol", "papyrus", "manufactured", "resource", "science" };
+			"loom symbol", "press symbol", "manufactured", "resource", "science" };
 	public static final int RESOURCE_IMAGE_HEIGHT = 30;
 	public static final int RESOURCE_IMAGE_WIDTH = 30;
 	public static final Font RESOURCE_VIEWER_FONT = new Font("DengXian Regular", Font.BOLD, 30);
