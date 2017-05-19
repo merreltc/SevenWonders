@@ -49,6 +49,17 @@ Cards are passed left-right-left over the three ages, so you need to keep an eye
 2. In the package explorer, double-click src/main/java
 3. Double-click "GuiMain"
 4. Right-click "GuiMainMenu" and selecte "Run As->Java Application"
+5. 
+
+# How to Play
+1. To player a card, select the card.
+2. A pop up menu will ask you how you wish to play the card.  X'ing out will not cause any change
+3. If you select build structure, if the system requires the use of resources from multi-value cards, it will ask the user which resource they would like to use
+4. To view another players resources, click on that players name.  This will pop up a menu.  To close the menu, hit the exit button
+5. To trade resources with a neighbor, click the symbol of the desired resource located on the top left of that players board
+6. To close the game window, select exit
+7. Everyone's score along with the winner will be displayed at the end of the game
+8. Have Fun!!
 
 # Definition of "Done"
 ## Display
