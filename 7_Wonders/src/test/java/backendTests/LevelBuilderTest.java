@@ -172,9 +172,6 @@ public class LevelBuilderTest {
 
 		expected = this.helper.getExpectedLevel(3);
 		actual = builder.buildLevel(3);
-		System.out.println("Statue B");
-		System.out.println("EX: " + expected.getEffects());
-		System.out.println("AC: " + actual.getEffects());
 		assertTrue(expected.equals(actual));
 	}
 
