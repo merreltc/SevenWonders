@@ -12,6 +12,7 @@ import dataStructures.gameMaterials.AbilityEffect;
 import dataStructures.gameMaterials.Cost;
 import dataStructures.gameMaterials.Effect;
 import dataStructures.gameMaterials.Effect.EffectType;
+import dataStructures.gameMaterials.EntityEffect;
 import dataStructures.gameMaterials.Level;
 import dataStructures.gameMaterials.Level.Frequency;
 import dataStructures.gameMaterials.MultiValueEffect;
@@ -63,39 +64,71 @@ public class LevelTest {
 		for (int priorityToUse = 0; priorityToUse <= 1; priorityToUse++){
 			for (int costToUse = 0; costToUse <= 1; costToUse++){
 				for (int effectToUse = 0; effectToUse <= 1; effectToUse++){
-					for (int frequencyToUse = 0; frequencyToUse <= 1; frequencyToUse++){
-						runEqualsTest(priorityToUse, costToUse, effectToUse, frequencyToUse);
-					}
+					runEqualsTest(priorityToUse, costToUse, effectToUse);
 				}
 			}
 		}
 		
 	}
 	
-	//TODO: fix this test
-	private void runEqualsTest(int priorityToUse, int costToUse, int effectToUse, int frequencyToUse){
+	private void runEqualsTest(int priorityToUse, int costToUse, int effectToUse){
 		int priority = 1;
 		Cost cost = EasyMock.createStrictMock(Cost.class);
-		Effect effect = EasyMock.createStrictMock(Effect.class);
-		Frequency frequency = Frequency.EVERYTURN;
-	//	Level level1 = new Level(priority, cost, effect, frequency);
+		EntityEffect effect = EasyMock.createStrictMock(EntityEffect.class);
+		EasyMock.expect(effect.getEffectType()).andReturn(EffectType.ENTITY);
+		HashMap<Frequency, HashSet<Effect>> effects = new HashMap<Frequency, HashSet<Effect>>();
+		EasyMock.replay(effect, cost);
+		HashSet<Effect> effectSet = new HashSet<Effect>();
+		effectSet.add(effect);
+		effects.put(Frequency.ENDOFTURN, effectSet);
+		Level level1 = new Level(priority, cost, effects);
 
 		priority = priorityToUse;
 		if (costToUse == 0){
-			cost = EasyMock.createStrictMock(Cost.class);;
+			cost = EasyMock.createStrictMock(Cost.class);
+			EasyMock.replay(cost);
 		}
 		if (effectToUse == 0){
-			effect = EasyMock.createStrictMock(Effect.class);
+			EntityEffect effect2 = EasyMock.createStrictMock(EntityEffect.class);
+			EasyMock.expect(effect2.getEffectType()).andReturn(EffectType.ENTITY);
+			effects = new HashMap<Frequency, HashSet<Effect>>();
+			effectSet = new HashSet<Effect>();
+			effectSet.add(effect2);
+			effects.put(Frequency.DEFAULT, effectSet);
+			EasyMock.replay(effect2);
 		}
-		if (frequencyToUse == 0){
-			frequency = Frequency.DEFAULT;
-		}
-		//Level level2 = new Level(priority, cost, effect, frequency);
-		if (priorityToUse == 1 && costToUse == 1 &&  effectToUse == 1 && frequencyToUse == 1){
-			//assertTrue(level1.equals(level2));
+		
+		
+		Level level2 = new Level(priority, cost, effects);
+		if (priorityToUse == 1 && costToUse == 1 &&  effectToUse == 1){
+			assertTrue(level1.equals(level2));
 		}else{
-			//assertFalse(level1.equals(level2));
+			assertFalse(level1.equals(level2));
 		}
+	}
+	
+	@Test
+	public void testEqualsDifferentEffects(){
+		int priority = 1;
+		Cost cost = EasyMock.createStrictMock(Cost.class);
+		Effect effect = EasyMock.createStrictMock(AbilityEffect.class);
+		
+		EasyMock.replay(effect);
+
+		HashMap<Frequency, HashSet<Effect>> effects = new HashMap<Frequency, HashSet<Effect>>();
+		HashSet<Effect> effectSet = new HashSet<Effect>();
+		effectSet.add(effect);
+		effects.put(Frequency.ENDOFTURN, effectSet);
+		
+		HashMap<Frequency, HashSet<Effect>> effects2 = new HashMap<Frequency, HashSet<Effect>>();
+		HashSet<Effect> effectSet2 = new HashSet<Effect>();
+		effectSet2.add(effect);
+		effects.put(Frequency.ENDOFTURN, effectSet2);
+
+		Level level1 = new Level(priority, cost, effects);
+		Level level2 = new Level(priority, cost, effects2);
+		assertFalse(level1.equals(level2));
+		EasyMock.verify(effect);
 	}
 
 	@Test
