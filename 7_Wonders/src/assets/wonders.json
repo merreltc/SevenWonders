@@ -31,7 +31,7 @@
 				},
 				"effects": [{
 					"effectType": "VALUE",
-					"Value": "CONFLICTTOKEN",
+					"Value": "MILITARY",
 					"AffectingEntities": "NONE",
 					"valueAmount": 2,
 					"frequency": "ONCEIMMEDIATE"
@@ -69,7 +69,7 @@
 				},
 				"effects": [{
 					"effectType": "VALUE",
-					"value": "CONFLICTTOKEN",
+					"value": "MILITARY",
 					"affectingEntities": "NONE",
 					"valueAmount": 1,
 					"frequency": "ONCEIMMEDIATE"
@@ -100,7 +100,7 @@
 				},
 				"effects": [{
 					"effectType": "VALUE",
-					"value": "CONFLICTTOKEN",
+					"value": "MILITARY",
 					"affectingEntities": "NONE",
 					"valueAmount": 1,
 					"frequency": "ONCEIMMEDIATE"
