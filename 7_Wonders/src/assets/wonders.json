@@ -539,11 +539,11 @@
 					"effectType": "ENTITY",
 					"entityType": "SCIENCE",
 					"entitiesAndAmounts": [{
-						"science": "TABLET",
+						"science": "PROTRACTOR",
 						"amount": 1
 					},
 					{
-						"science": "PROTRACTOR",
+						"science": "TABLET",
 						"amount": 1
 					},
 					{

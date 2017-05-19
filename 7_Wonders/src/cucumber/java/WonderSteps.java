@@ -19,11 +19,11 @@ import dataStructures.gameMaterials.Level.Frequency;
 import dataStructures.gameMaterials.Wonder;
 import dataStructures.gameMaterials.Wonder.WonderType;
 import dataStructures.playerData.Player;
-import exceptions.CannotBuiltWonderException;
+import exceptions.CannotBuildWonderException;
 
 public class WonderSteps {
 	private Wonder wonder;
-	private CannotBuiltWonderException exception;
+	private CannotBuildWonderException exception;
 	private ArrayList<Level> levels;
 	private Player player;
 
@@ -92,7 +92,7 @@ public class WonderSteps {
 		for (int i = 0; i < numLevels; i++) {
 			try {
 				this.wonder.buildNextLevel();
-			} catch (CannotBuiltWonderException e) {
+			} catch (CannotBuildWonderException e) {
 				this.exception = e;
 			}
 		}
