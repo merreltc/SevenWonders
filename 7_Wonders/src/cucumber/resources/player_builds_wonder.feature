@@ -30,6 +30,7 @@ Feature: Player Builds Wonder
   Scenario Outline: valid resources
     Given A Wonder <wonder> on Side <side>
     And A player with that Wonder
+    And <numLevels> expected Levels
     And The player has the resources for that Wonder
     When The player tries to build the wonder <numLevels> times
     Then The level is built

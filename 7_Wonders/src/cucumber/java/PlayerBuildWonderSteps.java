@@ -11,7 +11,6 @@ import backend.handlers.PlayerTurnHandler;
 import constants.GeneralEnums.CostType;
 import constants.GeneralEnums.Good;
 import constants.GeneralEnums.RawResource;
-import cucumber.api.PendingException;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
@@ -32,7 +31,6 @@ import exceptions.InsufficientFundsException;
 public class PlayerBuildWonderSteps {
 	private BuildWonderSteps wonderSteps;
 	private Player player;
-	private Level level;
 
 	public PlayerBuildWonderSteps(BuildWonderSteps wonderSteps) {
 		this.wonderSteps = wonderSteps;
@@ -62,16 +60,7 @@ public class PlayerBuildWonderSteps {
 	public void the_player_tries_to_build_the_wonder_times(int numLevels) throws Throwable {
 		for (int i = 0; i < numLevels; i++) {
 			try {
-				ArrayList<Player> players = new ArrayList<Player>(Arrays.asList(this.player));
-				Deck deck = EasyMock.mock(Deck.class);
-				GameBoard board = new GameBoard(players, deck);
-				EasyMock.replay(deck);
-
-				PlayerTurnHandler handler = new PlayerTurnHandler();
-				handler.setGameBoard(board);
-				tryBuildThroughHandler(handler);
-
-				EasyMock.verify(deck);
+				tryToBuild();
 			} catch (CannotBuildWonderException e) {
 				this.wonderSteps.wonderException = e;
 				this.wonderSteps.exceptionBehavior = BuildWonderSteps.ExceptionBehavior.NOWONDERS;
@@ -92,7 +81,7 @@ public class PlayerBuildWonderSteps {
 
 	@Then("^The player receives the effect of that level$")
 	public void the_player_receives_the_effect_of_that_level() throws Throwable {
-		HashMap<Frequency, HashSet<Effect>> levelMap = this.level.getEffects();
+		HashMap<Frequency, HashSet<Effect>> levelMap = getLevelEffects();
 		HashSet<Effect> playerEffects = this.player.getAllEffects();
 
 		for (Frequency frequency : levelMap.keySet()) {
@@ -102,12 +91,20 @@ public class PlayerBuildWonderSteps {
 
 	@Then("^The player does not receive the effect of that level$")
 	public void the_player_does_not_receive_the_effect_of_that_level() throws Throwable {
-		HashMap<Frequency, HashSet<Effect>> levelMap = this.level.getEffects();
+		HashMap<Frequency, HashSet<Effect>> levelMap = getLevelEffects();
 		HashSet<Effect> playerEffects = this.player.getAllEffects();
 
 		for (Frequency frequency : levelMap.keySet()) {
 			playerDoesNotHaveEffects(levelMap, playerEffects, frequency);
 		}
+	}
+	
+	public HashMap<Frequency, HashSet<Effect>> getLevelEffects() {
+		HashMap<Frequency, HashSet<Effect>> result = new HashMap<Frequency, HashSet<Effect>>();
+		for(Level level : this.wonderSteps.expectedLevels) {
+			result.putAll(level.getEffects());
+		}
+		return result;
 	}
 
 	private void playerDoesHaveEffects(HashMap<Frequency, HashSet<Effect>> levelMap, HashSet<Effect> playerEffects,
@@ -125,11 +122,23 @@ public class PlayerBuildWonderSteps {
 			assertFalse(playerEffects.contains(effect));
 		}
 	}
+	
+	private void tryToBuild() {
+		ArrayList<Player> players = new ArrayList<Player>(Arrays.asList(this.player));
+		Deck deck = EasyMock.mock(Deck.class);
+		GameBoard board = new GameBoard(players, deck);
+		EasyMock.replay(deck);
+
+		PlayerTurnHandler handler = new PlayerTurnHandler();
+		handler.setGameBoard(board);
+		tryBuildThroughHandler(handler);
+
+		EasyMock.verify(deck);
+	}
 
 	private void tryBuildThroughHandler(PlayerTurnHandler handler) {
 		try {
-			this.level = handler.buildWonderLevel(this.player);
-			System.err.println(this.level);
+			handler.buildWonderLevel(this.player);
 		} catch (InsufficientFundsException e) {
 			this.wonderSteps.fundsException = e;
 			this.wonderSteps.exceptionBehavior = BuildWonderSteps.ExceptionBehavior.NOFUNDS;

@@ -8,6 +8,7 @@ Feature: buildd Wonder
     And <numLevels> expected Levels
     When Building the wonder <numLevels> times
     Then The number of levels built equals <numLevels>
+    And The level is built
 
     Examples: 
       | wonder     | side | numLevels |
