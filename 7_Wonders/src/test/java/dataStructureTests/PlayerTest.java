@@ -7,11 +7,14 @@ import static org.junit.Assert.fail;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 
 import org.easymock.EasyMock;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 
+import backend.factories.LevelFactory;
 import backend.handlers.PlayerChipHandler;
 import backend.handlers.SetUpDeckHandler;
 import constants.GeneralEnums.CostType;
@@ -19,6 +22,7 @@ import constants.GeneralEnums.Good;
 import constants.GeneralEnums.RawResource;
 import constants.GeneralEnums.Science;
 import constants.GeneralEnums.Side;
+import dataStructures.gameMaterials.AbilityEffect;
 import dataStructures.gameMaterials.Card;
 import dataStructures.gameMaterials.Card.CardType;
 import dataStructures.gameMaterials.Cost;
@@ -28,6 +32,7 @@ import dataStructures.gameMaterials.Effect.Direction;
 import dataStructures.gameMaterials.Effect.EffectType;
 import dataStructures.gameMaterials.EntityEffect;
 import dataStructures.gameMaterials.EntityEffect.EntityType;
+import dataStructures.gameMaterials.Level.Frequency;
 import dataStructures.gameMaterials.ValueEffect;
 import dataStructures.gameMaterials.ValueEffect.AffectingEntity;
 import dataStructures.gameMaterials.ValueEffect.Value;
@@ -36,8 +41,16 @@ import dataStructures.gameMaterials.Wonder.WonderType;
 import dataStructures.playerData.Chip;
 import dataStructures.playerData.Chip.ChipValue;
 import dataStructures.playerData.Player;
+import testHelpers.LevelBuilderTestHelper;
 
 public class PlayerTest {
+	Wonder wonder;
+	LevelBuilderTestHelper helper;
+
+	@Before
+	public void setUp() {
+		this.helper = new LevelBuilderTestHelper();
+	}
 
 	@Test
 	public void testDefaultPlayer() {
@@ -138,7 +151,7 @@ public class PlayerTest {
 		Player player = createMockedPlayer();
 
 		assertTrue(player.getAllEffects().isEmpty());
-		assertEquals(ArrayList.class, player.getAllEffects().getClass());
+		assertEquals(HashSet.class, player.getAllEffects().getClass());
 	}
 
 	@Test
@@ -162,19 +175,22 @@ public class PlayerTest {
 	@Test
 	public void testAddWonderEffect() {
 		Player player = createMockedPlayer();
-		ArrayList<Effect> effects = new ArrayList<Effect>();
+		HashSet<Effect> effects = new HashSet<Effect>();
+		HashMap<Frequency, HashSet<Effect>> effectsMap = new HashMap<Frequency, HashSet<Effect>>();
 
 		Effect effect1 = EasyMock.createStrictMock(Effect.class);
-		player.addWonderEffectToStoragePile(effect1);
 		effects.add(effect1);
+		effectsMap.put(Frequency.DEFAULT, effects);
 
 		Effect effect2 = EasyMock.createStrictMock(Effect.class);
-		player.addWonderEffectToStoragePile(effect2);
 		effects.add(effect2);
+		effectsMap.put(Frequency.DEFAULT, effects);
+
+		player.addWonderEffectToStoragePile(effectsMap);
 
 		assertEquals(effects, player.getAllEffects());
-		assertEquals(effect1, player.getAllEffects().get(0));
-		assertEquals(effect2, player.getAllEffects().get(1));
+		assertTrue(player.getAllEffects().contains(effect1));
+		assertTrue(player.getAllEffects().contains(effect2));
 	}
 
 	@Test
@@ -384,12 +400,6 @@ public class PlayerTest {
 		assertEquals(2, player.getNumVictoryPoints());
 	}
 
-	private Player createMockedPlayer() {
-		Wonder wonder = EasyMock.createStrictMock(Wonder.class);
-		return EasyMock.partialMockBuilder(Player.class).addMockedMethod("addWonderResourceToPile")
-				.withConstructor("Jane Doe", wonder).createMock();
-	}
-
 	@Test
 	public void testGetFirstCardFromEndGame() {
 		Player player = createMockedPlayer();
@@ -500,8 +510,7 @@ public class PlayerTest {
 		costs.put(RawResource.ORE, 2);
 		costs.put(RawResource.STONE, 1);
 		Cost cost = new Cost(CostType.RESOURCE, costs);
-		Effect effect = new ValueEffect(Value.GUILD, AffectingEntity.RAWRESOURCES,
-				Direction.NEIGHBORS, 1);
+		Effect effect = new ValueEffect(Value.GUILD, AffectingEntity.RAWRESOURCES, Direction.NEIGHBORS, 1);
 		Card card = new Card("Workers Guild", CardType.GUILD, cost, effect);
 		return card;
 	}
@@ -511,8 +520,7 @@ public class PlayerTest {
 		costs.put(RawResource.ORE, 2);
 		costs.put(RawResource.STONE, 2);
 		Cost cost = new Cost(CostType.RESOURCE, costs);
-		Effect effect = new ValueEffect(Value.GUILD, AffectingEntity.MANUFACTUREDGOODS,
-				Direction.NEIGHBORS, 2);
+		Effect effect = new ValueEffect(Value.GUILD, AffectingEntity.MANUFACTUREDGOODS, Direction.NEIGHBORS, 2);
 		Card card = new Card("Craftsmens Guild", CardType.GUILD, cost, effect);
 		return card;
 	}
@@ -559,4 +567,349 @@ public class PlayerTest {
 		Card card = new Card("Scriptorium", CardType.SCIENTIFICSTRUCTURE, cost, effect);
 		return card;
 	}
+
+	@Test
+	public void testBuildNextLevelColossusSideA() {
+		setWonder(Side.A, WonderType.COLOSSUS);
+		Player player = createPlayerWithWonder();
+		this.helper.setWonder(this.wonder);
+
+		HashMap<Frequency, HashSet<Effect>> expected = this.helper.getExpectedLevel(1).getEffects();
+		HashMap<Frequency, HashSet<Effect>> actual = player.buildNextLevel();
+		assertTrue(equalEffects(expected, actual));
+
+		expected = this.helper.getExpectedLevel(2).getEffects();
+		actual = player.buildNextLevel();
+		assertTrue(equalEffects(expected, actual));
+
+		expected = this.helper.getExpectedLevel(3).getEffects();
+		actual = player.buildNextLevel();
+		assertTrue(equalEffects(expected, actual));
+	}
+
+	@Test
+	public void testBuildNextLevelColossusSideB() {
+		setWonder(Side.B, WonderType.COLOSSUS);
+		Player player = createPlayerWithWonder();
+		this.helper.setWonder(this.wonder);
+
+		HashMap<Frequency, HashSet<Effect>> expected = this.helper.getExpectedLevel(1).getEffects();
+		HashMap<Frequency, HashSet<Effect>> actual = player.buildNextLevel();
+		assertTrue(equalEffects(expected, actual));
+
+		expected = this.helper.getExpectedLevel(2).getEffects();
+		actual = player.buildNextLevel();
+		assertTrue(equalEffects(expected, actual));
+	}
+
+	@Test
+	public void testBuildNextLevelLighthouseSideA() {
+		setWonder(Side.A, WonderType.LIGHTHOUSE);
+		Player player = createPlayerWithWonder();
+		this.helper.setWonder(this.wonder);
+
+		HashMap<Frequency, HashSet<Effect>> expected = this.helper.getExpectedLevel(1).getEffects();
+		HashMap<Frequency, HashSet<Effect>> actual = player.buildNextLevel();
+		assertTrue(equalEffects(expected, actual));
+
+		expected = this.helper.getExpectedLevel(2).getEffects();
+		actual = player.buildNextLevel();
+		assertTrue(equalEffects(expected, actual));
+
+		expected = this.helper.getExpectedLevel(3).getEffects();
+		actual = player.buildNextLevel();
+		assertTrue(equalEffects(expected, actual));
+	}
+
+	@Test
+	public void testBuildNextLevelLighthouseSideB() {
+		setWonder(Side.B, WonderType.LIGHTHOUSE);
+		Player player = createPlayerWithWonder();
+		this.helper.setWonder(this.wonder);
+
+		HashMap<Frequency, HashSet<Effect>> expected = this.helper.getExpectedLevel(1).getEffects();
+		HashMap<Frequency, HashSet<Effect>> actual = player.buildNextLevel();
+		assertTrue(equalEffects(expected, actual));
+
+		expected = this.helper.getExpectedLevel(2).getEffects();
+		actual = player.buildNextLevel();
+		System.out.println("Light:B");
+		System.out.println("EX " + expected);
+		System.out.println("AC " + actual);
+		System.out.println("Equal? " + equalEffects(expected, actual));
+		assertTrue(equalEffects(expected, actual));
+
+		expected = this.helper.getExpectedLevel(3).getEffects();
+		actual = player.buildNextLevel();
+		assertTrue(equalEffects(expected, actual));
+	}
+
+	@Test
+	public void testBuildNextLevelTempleSideA() {
+		setWonder(Side.A, WonderType.TEMPLE);
+		Player player = createPlayerWithWonder();
+		this.helper.setWonder(this.wonder);
+
+		HashMap<Frequency, HashSet<Effect>> expected = this.helper.getExpectedLevel(1).getEffects();
+		HashMap<Frequency, HashSet<Effect>> actual = player.buildNextLevel();
+		assertTrue(equalEffects(expected, actual));
+
+		expected = this.helper.getExpectedLevel(2).getEffects();
+		actual = player.buildNextLevel();
+		assertTrue(equalEffects(expected, actual));
+
+		expected = this.helper.getExpectedLevel(3).getEffects();
+		actual = player.buildNextLevel();
+		assertTrue(equalEffects(expected, actual));
+	}
+
+	@Test
+	public void testBuildNextLevelTempleSideB() {
+		setWonder(Side.B, WonderType.TEMPLE);
+		Player player = createPlayerWithWonder();
+		this.helper.setWonder(this.wonder);
+
+		HashMap<Frequency, HashSet<Effect>> expected = this.helper.getExpectedLevel(1).getEffects();
+		HashMap<Frequency, HashSet<Effect>> actual = player.buildNextLevel();
+		assertTrue(equalEffects(expected, actual));
+
+		expected = this.helper.getExpectedLevel(2).getEffects();
+		actual = player.buildNextLevel();
+		assertTrue(equalEffects(expected, actual));
+
+		expected = this.helper.getExpectedLevel(3).getEffects();
+		actual = player.buildNextLevel();
+		assertTrue(equalEffects(expected, actual));
+	}
+
+	@Test
+	public void testBuildNextLevelStatueSideA() {
+		setWonder(Side.A, WonderType.STATUE);
+		Player player = createPlayerWithWonder();
+		this.helper.setWonder(this.wonder);
+
+		HashMap<Frequency, HashSet<Effect>> expected = this.helper.getExpectedLevel(1).getEffects();
+		HashMap<Frequency, HashSet<Effect>> actual = player.buildNextLevel();
+		assertTrue(equalEffects(expected, actual));
+
+		expected = this.helper.getExpectedLevel(2).getEffects();
+		actual = player.buildNextLevel();
+		assertTrue(equalEffects(expected, actual));
+
+		expected = this.helper.getExpectedLevel(3).getEffects();
+		actual = player.buildNextLevel();
+		assertTrue(equalEffects(expected, actual));
+	}
+
+	@Test
+	public void testBuildNextLevelStatueSideB() {
+		setWonder(Side.B, WonderType.STATUE);
+		Player player = createPlayerWithWonder();
+		this.helper.setWonder(this.wonder);
+
+		HashMap<Frequency, HashSet<Effect>> expected = this.helper.getExpectedLevel(1).getEffects();
+		HashMap<Frequency, HashSet<Effect>> actual = player.buildNextLevel();
+		assertTrue(equalEffects(expected, actual));
+
+		expected = this.helper.getExpectedLevel(2).getEffects();
+		actual = player.buildNextLevel();
+		assertTrue(equalEffects(expected, actual));
+
+		expected = this.helper.getExpectedLevel(3).getEffects();
+		actual = player.buildNextLevel();
+		assertTrue(equalEffects(expected, actual));
+	}
+
+	@Test
+	public void testBuildNextLevelGardensSideA() {
+		setWonder(Side.A, WonderType.GARDENS);
+		Player player = createPlayerWithWonder();
+		this.helper.setWonder(this.wonder);
+
+		HashMap<Frequency, HashSet<Effect>> expected = this.helper.getExpectedLevel(1).getEffects();
+		HashMap<Frequency, HashSet<Effect>> actual = player.buildNextLevel();
+		assertTrue(equalEffects(expected, actual));
+
+		expected = this.helper.getExpectedLevel(2).getEffects();
+		actual = player.buildNextLevel();
+		System.out.println("Gard:A");
+		System.out.println("EX " + expected);
+		System.out.println("AC " + actual);
+		System.out.println("Equal? " + equalEffects(expected, actual));
+		assertTrue(equalEffects(expected, actual));
+
+		expected = this.helper.getExpectedLevel(3).getEffects();
+		actual = player.buildNextLevel();
+		assertTrue(equalEffects(expected, actual));
+	}
+
+	@Test
+	public void testBuildNextLevelGardensSideB() {
+		setWonder(Side.B, WonderType.GARDENS);
+		Player player = createPlayerWithWonder();
+		this.helper.setWonder(this.wonder);
+
+		HashMap<Frequency, HashSet<Effect>> expected = this.helper.getExpectedLevel(1).getEffects();
+		HashMap<Frequency, HashSet<Effect>> actual = player.buildNextLevel();
+		assertTrue(equalEffects(expected, actual));
+
+		expected = this.helper.getExpectedLevel(2).getEffects();
+		actual = player.buildNextLevel();
+		assertTrue(equalEffects(expected, actual));
+
+		expected = this.helper.getExpectedLevel(3).getEffects();
+		actual = player.buildNextLevel();
+		System.out.println("Gard:B");
+		System.out.println("EX " + expected);
+		System.out.println("AC " + actual);
+		System.out.println("Equal? " + equalEffects(expected, actual));
+		assertTrue(equalEffects(expected, actual));
+	}
+
+	@Test
+	public void testBuildNextLevelMausoleumSideA() {
+		setWonder(Side.A, WonderType.MAUSOLEUM);
+		Player player = createPlayerWithWonder();
+		this.helper.setWonder(this.wonder);
+
+		HashMap<Frequency, HashSet<Effect>> expected = this.helper.getExpectedLevel(1).getEffects();
+		HashMap<Frequency, HashSet<Effect>> actual = player.buildNextLevel();
+		assertTrue(equalEffects(expected, actual));
+
+		expected = this.helper.getExpectedLevel(2).getEffects();
+		actual = player.buildNextLevel();
+		assertTrue(equalEffects(expected, actual));
+
+		expected = this.helper.getExpectedLevel(3).getEffects();
+		actual = player.buildNextLevel();
+		assertTrue(equalEffects(expected, actual));
+	}
+
+	@Test
+	public void testBuildNextLevelMausoleumSideB() {
+		setWonder(Side.B, WonderType.MAUSOLEUM);
+		Player player = createPlayerWithWonder();
+		this.helper.setWonder(this.wonder);
+
+		HashMap<Frequency, HashSet<Effect>> expected = this.helper.getExpectedLevel(1).getEffects();
+		HashMap<Frequency, HashSet<Effect>> actual = player.buildNextLevel();
+		assertTrue(equalEffects(expected, actual));
+
+		expected = this.helper.getExpectedLevel(2).getEffects();
+		actual = player.buildNextLevel();
+		assertTrue(equalEffects(expected, actual));
+
+		expected = this.helper.getExpectedLevel(3).getEffects();
+		actual = player.buildNextLevel();
+		assertTrue(equalEffects(expected, actual));
+	}
+
+	@Test
+	public void testBuildNextLevelPyramidsSideA() {
+		setWonder(Side.A, WonderType.PYRAMIDS);
+		Player player = createPlayerWithWonder();
+		this.helper.setWonder(this.wonder);
+
+		HashMap<Frequency, HashSet<Effect>> expected = this.helper.getExpectedLevel(1).getEffects();
+		HashMap<Frequency, HashSet<Effect>> actual = player.buildNextLevel();
+		assertTrue(equalEffects(expected, actual));
+
+		expected = this.helper.getExpectedLevel(2).getEffects();
+		actual = player.buildNextLevel();
+		assertTrue(equalEffects(expected, actual));
+
+		expected = this.helper.getExpectedLevel(3).getEffects();
+		actual = player.buildNextLevel();
+		assertTrue(equalEffects(expected, actual));
+	}
+
+	@Test
+	public void testBuildNextLevelPyramidsSideB() {
+		setWonder(Side.B, WonderType.PYRAMIDS);
+		Player player = createPlayerWithWonder();
+		this.helper.setWonder(this.wonder);
+
+		HashMap<Frequency, HashSet<Effect>> expected = this.helper.getExpectedLevel(1).getEffects();
+		HashMap<Frequency, HashSet<Effect>> actual = player.buildNextLevel();
+		assertTrue(equalEffects(expected, actual));
+
+		expected = this.helper.getExpectedLevel(2).getEffects();
+		actual = player.buildNextLevel();
+		assertTrue(equalEffects(expected, actual));
+
+		expected = this.helper.getExpectedLevel(3).getEffects();
+		actual = player.buildNextLevel();
+		assertTrue(equalEffects(expected, actual));
+
+		expected = this.helper.getExpectedLevel(4).getEffects();
+		actual = player.buildNextLevel();
+		assertTrue(equalEffects(expected, actual));
+	}
+
+	private void setWonder(Side side, WonderType type) {
+		this.wonder = new Wonder(side, type);
+	}
+
+	private boolean equalEffects(HashMap<Frequency, HashSet<Effect>> expected,
+			HashMap<Frequency, HashSet<Effect>> actual) {
+		for (Frequency frequency : expected.keySet()) {
+			if (!actual.containsKey(frequency)) {
+				return false;
+			} else if (!compareEffects(frequency, expected.get(frequency), actual.get(frequency))) {
+				return false;
+			} else {
+				continue;
+			}
+		}
+		return true;
+	}
+
+	private boolean compareEffects(Frequency frequency, HashSet<Effect> expected, HashSet<Effect> actual) {
+		for (Effect effect : expected) {
+			if (otherContainsEffect(actual, effect)) {
+				continue;
+			} else {
+				return false;
+			}
+		}
+		return true;
+	}
+
+	private boolean otherContainsEffect(HashSet<Effect> actual, Effect expectedEffect) {
+		for (Effect otherEffect : actual) {
+			EffectType type = expectedEffect.getEffectType();
+			switch (type) {
+			case ABILITY:
+				if (((AbilityEffect) expectedEffect).equals((AbilityEffect) otherEffect)) {
+					return true;
+				}
+				break;
+			case VALUE:
+				if (((ValueEffect) expectedEffect).equals((ValueEffect) otherEffect)) {
+					return true;
+				}
+				break;
+			case ENTITY:
+				if (((EntityEffect) expectedEffect).equals((EntityEffect) otherEffect)) {
+					return true;
+				}
+				break;
+			default:
+				throw new IllegalArgumentException("Invalid Effect Type");
+			}
+		}
+		return false;
+	}
+	
+	private Player createMockedPlayer() {
+		Wonder wonder = EasyMock.createStrictMock(Wonder.class);
+		return EasyMock.partialMockBuilder(Player.class).addMockedMethod("addWonderResourceToPile")
+				.withConstructor("Jane Doe", wonder).createMock();
+	}
+
+	
+	private Player createPlayerWithWonder() {
+		return new Player("Jane Doe", this.wonder);
+	}
+
 }
