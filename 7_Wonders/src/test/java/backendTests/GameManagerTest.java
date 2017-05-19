@@ -260,6 +260,20 @@ public class GameManagerTest {
 	}
 	
 	@Test
+	public void testEndCurrentPlayerTurnNonMockedForMutationCoverage() {
+		ArrayList<String> playerNames = setUpArrayByNum(3);
+		GameManager manager = new GameManager(playerNames, GameMode.EASY);
+
+		Player expectedNewCurrentPlayer = manager.getNextPlayer();
+		Player expectedNewPreviousPlayer = manager.getCurrentPlayer();
+
+		manager.dealInitialTurnCards();
+		assertEquals("", manager.endCurrentPlayerTurn());
+		assertEquals(expectedNewCurrentPlayer, manager.getCurrentPlayer());
+		assertEquals(expectedNewPreviousPlayer, manager.getPreviousPlayer());
+	}
+	
+	@Test
 	public void testTradeFromToForGoodEmptyTradesAfterTurnEnds() {
 		ArrayList<String> playerNames = setUpArrayByNum(3);
 		

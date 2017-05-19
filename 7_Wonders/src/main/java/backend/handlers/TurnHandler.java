@@ -40,7 +40,7 @@ public class TurnHandler {
 		player.setCurrentHand(currentHand);
 	}
 	
-	public void endAge(ArrayList<Player> players, Age age) {
+	public void performEndAgeBattles(ArrayList<Player> players, Age age) {
 		for (int i = 0; i < players.size(); i++){
 			Player player1 = players.get(i);
 			Player player2 = players.get((i+1)%players.size());
@@ -144,7 +144,7 @@ public class TurnHandler {
 		newDeck = switchDeck(age);
 		this.board.setDeck(newDeck);
 		DeckHandler.shuffleDeck(this.board.getDeck());
-		this.handlers.getTurnHandler().dealInitialTurnCards(this.board.getPlayers(), this.board.getDeck());
+		dealInitialTurnCards(this.board.getPlayers(), this.board.getDeck());
 		message = Translate.getNewResourceBundle().getString("endOfAge");
 		return message;
 	}
@@ -156,7 +156,7 @@ public class TurnHandler {
 		newDeck = this.handlers.getSetUpDeckHandler().createDeck(nextAge, this.board.getPlayers().size());
 
 		this.currentDirection = getNextRotation(currentAge);
-		this.handlers.getTurnHandler().endAge(this.board.getPlayers(), currentAge);
+		performEndAgeBattles(this.board.getPlayers(), currentAge);
 		return newDeck;
 	}
 	

@@ -91,7 +91,7 @@ public class EndGameHandler {
 			}
 		}
 	}
-
+	
 	private int checkSelf(Card card, Player player) {
 		if (card.getEffect().getDirection() == Direction.SELF || card.getEffect().getDirection() == Direction.ALL) {
 			return this.useEffect(card, player);
