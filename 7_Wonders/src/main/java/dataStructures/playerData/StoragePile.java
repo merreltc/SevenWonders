@@ -22,10 +22,10 @@ public class StoragePile {
 	private ArrayList<Card> endGamePile = new ArrayList<Card>();
 	private ArrayList<Card> immediateEffectPile = new ArrayList<Card>();
 	private ArrayList<Card> allCardStorage = new ArrayList<Card>();
-	private HashMap<Enum, Integer> allResources = new HashMap<Enum, Integer>();
 
 	private HashMap<Frequency, HashSet<Effect>> wonderPile = new HashMap<Frequency, HashSet<Effect>>();
 	private HashSet<Effect> entireEffectStorage = new HashSet<Effect>();
+	private HashSet<Effect>  temporaryDiscardPile = new HashSet<Effect>();
 
 	public void addCard(Card card) {
 		EffectType effectType = card.getEffectType();
@@ -34,11 +34,9 @@ public class StoragePile {
 		case MULTIVALUE:
 			this.addToEndGamePile(card);
 			break;
-
 		case VALUE:
 			determineValueEffectPile(card);
 			break;
-
 		default:
 			determineEntityEffectPile(card);
 			break;
@@ -183,5 +181,24 @@ public class StoragePile {
 		default:
 			throw new IllegalArgumentException("Invalid EffectType");
 		}
+	}
+
+	public void clearTemporaryWonderEffects() {
+		HashSet<Effect> onceEffects = this.wonderPile.remove(Frequency.ONCEIMMEDIATE);
+		HashSet<Effect> endTurnEffects = this.wonderPile.remove(Frequency.ENDOFTURN);
+		this.entireEffectStorage.removeAll(onceEffects);
+		this.entireEffectStorage.removeAll(endTurnEffects);
+	}
+	
+	public void temporaryDiscard(Effect effect){
+		this.wonderPile.get(Frequency.ONCEAGE).remove(effect);
+		this.entireEffectStorage.remove(effect);
+		this.temporaryDiscardPile.add(effect);
+	}
+	
+	public void restoreTemporaryDiscards(){
+		this.wonderPile.get(Frequency.ONCEAGE).addAll(this.temporaryDiscardPile);
+		this.entireEffectStorage.addAll(this.temporaryDiscardPile);
+		this.temporaryDiscardPile.clear();
 	}
 }

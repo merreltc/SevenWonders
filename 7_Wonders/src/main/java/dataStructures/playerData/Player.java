@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 
-import constants.GeneralEnums;
 import constants.GeneralEnums.Science;
 import constants.GeneralEnums.Side;
 import dataStructures.gameMaterials.Card;
@@ -77,9 +76,7 @@ public class Player {
 	
 	public HashMap<Frequency, HashSet<Effect>> buildNextLevel() {
 		HashMap<Frequency, HashSet<Effect>> effects = this.wonder.buildNextLevel();
-		
 		addWonderEffectToStoragePile(effects);
-		
 		return effects;
 	}
 
@@ -207,6 +204,18 @@ public class Player {
 
 	public void removeFromCurrentHand(Card card) {
 		this.currentHand.remove(card);
+	}
+	
+	public void clearTempWonderEffects() {
+		this.storagePile.clearTemporaryWonderEffects();
+	}
+	
+	public void discardTemporaryEffect(Effect effect){
+		this.storagePile.temporaryDiscard(effect);
+	}
+	
+	public void restoreTemporaryDiscards(){
+		this.storagePile.restoreTemporaryDiscards();
 	}
 
 	public Wonder getWonder() {
