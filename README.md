@@ -71,20 +71,20 @@ Cards are passed left-right-left over the three ages, so you need to keep an eye
 
 ## Set Up
 - [x] Language is chosen: English or Chinese - Implemented in GUI
-- [x] Game mode is chosen (Easy or Normal) [TestCase](https://ada.csse.rose-hulman.edu/moormaet/Silver_Falcons_Seven_Wonders/blob/master/7_Wonders/src/test/java/backendTests/WonderFactoryTest.java#L48)
+- [x] Game mode is chosen (Easy or Normal) [Test Case](https://ada.csse.rose-hulman.edu/moormaet/Silver_Falcons_Seven_Wonders/blob/master/7_Wonders/src/test/java/backendTests/WonderFactoryTest.java#L48)
     - Easy Mode: all players receive side A
     - Normal Mode: players can receive side A or B of a Wonder
 - [x] Number of players is chosen from valid options 3-7
-    - [x] Can play with 3 players [TestCase](7_Wonders/src/test/java/dataStructuresTests/GameManagerTest.java#L23) 
-    - [x] Can play with 7 players [TestCase](7_Wonders/src/test/java/dataStructuresTests/GameManagerTest.java#L38)
+    - [x] Can play with 3 players [Test Case](7_Wonders/src/test/java/dataStructuresTests/GameManagerTest.java#L23) 
+    - [x] Can play with 7 players [Test Case](7_Wonders/src/test/java/dataStructuresTests/GameManagerTest.java#L38)
 - [x] Players enter their names
 - [ ] Players are assigned random, unique wonders and sides
 - [x] Age I Deck is assembled based on number of players [TestCase](7_Wonders/src/test/java/backendTests/SetUpDeckHandlerTest.java#L36)
-        and shuffled [TestCase](7_Wonders/src/test/java/backendTests/DeckHandlerTest.java#L20)
+        and shuffled [Test Case](7_Wonders/src/test/java/backendTests/DeckHandlerTest.java#L20)
 - [x] Players are dealt equal number of cards
-    - [x] 3 Players [TestCase](7_Wonders/src/test/java/backendTests/TurnHandlerTest.java#L26)
-    - [x] 7 Players [TestCase](7_Wonders/src/test/java/backendTests/TurnHandlerTest.java#L46)
-- [x] Each player begins with 3 value 1 coins [TestCase](7_Wonders/src/test/java/dataStructuresTests/PlayerTest.java#L51)
+    - [x] 3 Players [Test Case](7_Wonders/src/test/java/backendTests/TurnHandlerTest.java#L26)
+    - [x] 7 Players [Test Case](7_Wonders/src/test/java/backendTests/TurnHandlerTest.java#L46)
+- [x] Each player begins with 3 value 1 coins [Test Case](7_Wonders/src/test/java/dataStructuresTests/PlayerTest.java#L51)
 
 ## Decks
 - [x] Each age has a unique set of cards
@@ -98,8 +98,8 @@ Cards are passed left-right-left over the three ages, so you need to keep an eye
         - [TestCase 3 Players](7_Wonders/src/test/java/backendTests/SetUpDeckHandlerTest.java#L85)
         - [TestCase 7 Players](7_Wonders/src/test/java/backendTests/SetUpDeckHandlerTest.java#L98)
 - [x] Deck swaps at the end of round 6 in an age (1->2->3)
-    - [x] Age1 to Age2 [TestCase](7_Wonders/src/test/java/backendTests/GameManagerTest.java#L798)
-    - [x] Age2 to Age3 [TestCase](7_Wonders/src/test/java/backendTests/GameManagerTest.java#L843)
+    - [x] Age1 to Age2 [Test Case](7_Wonders/src/test/java/backendTests/GameManagerTest.java#L798)
+    - [x] Age2 to Age3 [Test Case](7_Wonders/src/test/java/backendTests/GameManagerTest.java#L843)
 - [x] Age III Deck does not have raw material or manufactured goods cards - covered in unique set of cards tests
 - [x] Age I and II decks do not have Guild cards - covered in unique set of cards tests
 
@@ -129,27 +129,27 @@ Cards are passed left-right-left over the three ages, so you need to keep an eye
 ## Commerce and Trading
 - [x] In order to trade or build anything, player must have appropriate resources or coins in their stockpile at the beginning of the turn
     - [x] Trading with a city with the incorrect materials
-        - [x] Invalid Amount of Coins [TestCase](7_Wonders/src/test/java/backendTests/TradeHandlerTest.java#L93)
-        - [x] Invalid Amount of Resources [TestCase](7_Wonders/src/test/java/backendTests/TradeHandlerTest.java#L382)
-    - [x] Trading with a city with just enough materials [TestCase](7_Wonders/src/test/java/backendTests/TradeHandlerTest.java#L468)
-    - [x] Trading with a city with more than enough materials [TestCase](7_Wonders/src/test/java/backendTests/TradeHandlerTest.java#L355)
+        - [x] Invalid Amount of Coins [Test Case](7_Wonders/src/test/java/backendTests/TradeHandlerTest.java#L93)
+        - [x] Invalid Amount of Resources [Test Case](7_Wonders/src/test/java/backendTests/TradeHandlerTest.java#L382)
+    - [x] Trading with a city with just enough materials [Test Case](7_Wonders/src/test/java/backendTests/TradeHandlerTest.java#L468)
+    - [x] Trading with a city with more than enough materials [Test Case](7_Wonders/src/test/java/backendTests/TradeHandlerTest.java#L355)
 - [x] Players can only trade with neighboring cities 
-    - [x] Can Trade to Next Player [TestCase](7_Wonders/src/test/java/backendTests/TradeHandlerTest.java#L293)
-    - [x] Can Trade to Previous Player [TestCase](7_Wonders/src/test/java/backendTests/TradeHandlerTest.java#L314)
-    - [x] Cannot trade to other player [TestCase](7_Wonders/src/test/java/backendTests/TradeHandlerTest.java#L335)
+    - [x] Can Trade to Next Player [Test Case](7_Wonders/src/test/java/backendTests/TradeHandlerTest.java#L293)
+    - [x] Can Trade to Previous Player [Test Case](7_Wonders/src/test/java/backendTests/TradeHandlerTest.java#L314)
+    - [x] Cannot trade to other player [Test Case](7_Wonders/src/test/java/backendTests/TradeHandlerTest.java#L335)
 - [x] Trading a neighboring city is initially 2 coins per resource and only allows players to use that resource, not take it from their neighbors [TestCase](7_Wonders/src/test/java/backendTests/TradeHandlerTest.java#L407)
     - [x] Some Commercial Structure (yellow) cards allow players to trade for certain materials for 1 coin after being built
-        [Main TestCases start at](7_Wonders/src/test/java/backendTests/GameManagerTest.java#L409) Until [L626](7_Wonders/src/test/java/backendTests/GameManagerTest.java#L626)
-        - [x] East Trading Post  [TestCase](7_Wonders/src/test/java/backendTests/TradeHandlerTest.java#L437)
-        - [x] West Trading Post [TestCase](https://ada.csse.rose-hulman.edu/moormaet/Silver_Falcons_Seven_Wonders/blob/master/7_Wonders/src/test/java/backendTests/GameManagerTest.java#L539)
-        - [x] Marketplace [TestCase](https://ada.csse.rose-hulman.edu/moormaet/Silver_Falcons_Seven_Wonders/blob/master/7_Wonders/src/test/java/backendTests/GameManagerTest.java#L425)
+        [Main Test Cases start at](7_Wonders/src/test/java/backendTests/GameManagerTest.java#L409) Until [L626](7_Wonders/src/test/java/backendTests/GameManagerTest.java#L626)
+        - [x] East Trading Post  [Test Case](7_Wonders/src/test/java/backendTests/TradeHandlerTest.java#L437)
+        - [x] West Trading Post [Test Case](https://ada.csse.rose-hulman.edu/moormaet/Silver_Falcons_Seven_Wonders/blob/master/7_Wonders/src/test/java/backendTests/GameManagerTest.java#L539)
+        - [x] Marketplace [Test Case](https://ada.csse.rose-hulman.edu/moormaet/Silver_Falcons_Seven_Wonders/blob/master/7_Wonders/src/test/java/backendTests/GameManagerTest.java#L425)
 - [x] On a single turn, players may trade for multiple resources from both neighboring cities - On GUI
 - [x] Traded resources are only available to the player during the turn they are bought [TestCase](7_Wonders/src/test/java/backendTests/GameManagerTest.java#L630)
 - [x] Only resources produced through the city/Wonder or a neighbors raw resource or manufactured good cards can be traded - [TestCase](https://ada.csse.rose-hulman.edu/moormaet/Silver_Falcons_Seven_Wonders/blob/master/7_Wonders/src/test/java/backendTests/TradeHandlerTest.java#L346)
 - [ ] Players are unable to purchase resources produced by commercial structures (or some Wonders)
 - [x] Trade cannot be refused by neighboring cities - On GUI
 
-## War [TestCase](https://ada.csse.rose-hulman.edu/moormaet/Silver_Falcons_Seven_Wonders/blob/master/7_Wonders/src/test/java/backendTests/TurnHandlerTest.java)
+## War [Test Case](https://ada.csse.rose-hulman.edu/moormaet/Silver_Falcons_Seven_Wonders/blob/master/7_Wonders/src/test/java/backendTests/TurnHandlerTest.java)
 - [x] At the end of an age (following sixth rotation), players go to war with BOTH neighboring cities
 - [x] A player with more shields than their neighbor is successful
 - [x] A player with less shields than their neighbor is defeated
@@ -172,8 +172,8 @@ Cards are passed left-right-left over the three ages, so you need to keep an eye
 1. Choose card from temporary hand
 2. Action
     -  [x] Build the Structure - See [Building Structure](#building-the-structure) but [Tests In](7_Wonders/src/test/java/backendTests/PlayerTurnHandlerTest.java)
-    -  [ ] Build the Next Level of Wonder
-    -  [x] Discard for 3 Coins [TestCase](7_Wonders/src/test/java/backendTests/PlayerTurnHandlerTest.java#L322)
+    -  [x] Build the Next Level of Wonder - See [Building the Wonder]()
+    -  [x] Discard for 3 Coins [Test Case](7_Wonders/src/test/java/backendTests/PlayerTurnHandlerTest.java#L322)
         -  Discarded cards create a Discard Pile
         -  A card can always be chosen for discard, even if the player does not have enough resources to build it
 3. Pass temporary hand to next player
@@ -183,86 +183,87 @@ Cards are passed left-right-left over the three ages, so you need to keep an eye
 
 ## Building the Structure
 - [x] If a structure has a resource/entity cost, the player must have sufficient resources in their stockpile or purchase them from neighbors (see "Commerce and Trading")
-    - [x] Player can build structure [TestCases Begin at](7_Wonders/src/test/java/backendTests/PlayerTurnHandlerTest.java#L90)
-    - [x] Player cannot build structure [TestCase](7_Wonders/src/test/java/backendTests/PlayerTurnHandlerTest.java#L119)
-    - [x] Player had to trade first [TestCase](7_Wonders/src/test/java/backendTests/PlayerTurnHandlerTest.java#L723)
+    - [x] Player can build structure [Test Cases Begin at](7_Wonders/src/test/java/backendTests/PlayerTurnHandlerTest.java#L90)
+    - [x] Player cannot build structure [Test Case](7_Wonders/src/test/java/backendTests/PlayerTurnHandlerTest.java#L119)
+    - [x] Player had to trade first [Test Case](7_Wonders/src/test/java/backendTests/PlayerTurnHandlerTest.java#L723)
     Other tests in same file
-- [x] If a structure has a coin cost, the player must pay that cost to the bank [TestCase](7_Wonders/src/test/java/backendTests/PlayerTurnHandlerTest.java#L61)
-- [x] If player owns a previous structure, they may build their chosen structure for free [TestCase](https://ada.csse.rose-hulman.edu/moormaet/Silver_Falcons_Seven_Wonders/blob/master/7_Wonders/src/test/java/backendTests/PlayerTurnHandlerTest.java#L657)
-- [x] Identical structures cannot be built by the same player [TestCase](7_Wonders/src/test/java/backendTests/PlayerTurnHandlerTest.java#L697)
-- [x] If a structure has no cost, the player can build it [TestCase](7_Wonders/src/test/java/backendTests/PlayerTurnHandlerTest.java#L34)
+- [x] If a structure has a coin cost, the player must pay that cost to the bank [Test Case](7_Wonders/src/test/java/backendTests/PlayerTurnHandlerTest.java#L61)
+- [x] If player owns a previous structure, they may build their chosen structure for free [Test Case](https://ada.csse.rose-hulman.edu/moormaet/Silver_Falcons_Seven_Wonders/blob/master/7_Wonders/src/test/java/backendTests/PlayerTurnHandlerTest.java#L657)
+- [x] Identical structures cannot be built by the same player [Test Case](7_Wonders/src/test/java/backendTests/PlayerTurnHandlerTest.java#L697)
+- [x] If a structure has no cost, the player can build it [Test Case](7_Wonders/src/test/java/backendTests/PlayerTurnHandlerTest.java#L34)
 - [x] At the end of a rotation, all player's built structures are revealed
 
 ## Building the Next Level of Wonder
-- [ ] Player must have the resources required for the next level of the Wonder (not the structure) in order to build
+- [x] Player must have the resources required for the next level of the Wonder in order to build
+- [ ] Player does not need the resources required for the structure used to build
 - [ ] Card used to build Wonder does not provide player its effect in addition to the effect of the Wonder Level and is hidden from other players
-- [ ] Levels of Wonder are built once per game and in sequence (left to right)
-- [ ] Wonder can be built at any time, in any age
-- [x] The wonder does not need to be built in order for a player to win - not included in Scoring
+- [x] Levels of Wonder are built once per game and in sequence (left to right)
+- Wonder can be built at any time, in any age
+- The wonder does not need to be built in order for a player to win - not included in Scoring
 
-### Wonders [TestCase](https://ada.csse.rose-hulman.edu/moormaet/Silver_Falcons_Seven_Wonders/blob/master/7_Wonders/src/test/java/dataStructureTests/WonderTest.java)
+### Wonders [Test Case](https://ada.csse.rose-hulman.edu/moormaet/Silver_Falcons_Seven_Wonders/blob/master/7_Wonders/src/test/java/dataStructureTests/WonderTest.java)
 - [x] Wonders provide players 1 of the resource specified in the top left corner
 - Side A always has 3 levels
-    - [ ] The first level is worth +3 Victory Points
+    - [x] The first level is worth +3 Victory Points
     - The second level is determined by the Wonder
-    - [ ] The third level is worth +7 Victory Points
-- [ ] Number of levels and the effects for each level vary by Wonder on side B
-- [ ] The cost of building each level varies from side A to B and from Wonder to Wonder
+    - [x] The third level is worth +7 Victory Points
+- [x] Number of levels and the effects for each level vary by Wonder on side B
+- [x] The cost of building each level varies from side A to B and from Wonder to Wonder
 - *The Colossus of Rhodes*
     - Resource: Ore
-    - [ ] Side A, Level 2: 2 Shields
+    - [x] Side A, Level 2: 2 Shields
     - Side B:
-        - [ ] Level 1: 1 Shield, 3 Victory Points, 3 Coins (from bank)
-        - [ ] Level 2: 1 Shield, 4 Victory Points, 4 Coins (from bank)
+        - [x] Level 1: 1 Shield, 3 Victory Points, 3 Coins (from bank)
+        - [x] Level 2: 1 Shield, 4 Victory Points, 4 Coins (from bank)
 - *The Lighthouse of Alexandria*
     - Resource: Glass
-    - [ ] Side A, Level 2: Resource of choice from 4 raw materials (lumber, stone, ore, clay) **every turn**
+    - [x] Side A, Level 2: Resource of choice from 4 raw materials (lumber, stone, ore, clay) **every turn**
     - Side B:
-        - [ ] Level 1: (See "Side A, Level 2")
-        - [ ] Level 2: Resource of choice from 3 manufactured goods (loom, glass, press) **every turn**
-        - [ ] Level 3: 7 Victory Points
+        - [x] Level 1: (See "Side A, Level 2")
+        - [x] Level 2: Resource of choice from 3 manufactured goods (loom, glass, press) **every turn**
+        - [x] Level 3: 7 Victory Points
 - *The Temple of Artemis in Ephesus*
     - Resource: Press
-    - [ ] Side A, Level 2: 9 Coins (from bank) **immediately following the building of this level**
+    - [x] Side A, Level 2: 9 Coins (from bank) **immediately following the building of this level**
     - Side B:
-        - [ ] Level 1: 2 Victory Points, 4 Coins (from bank)
-        - [ ] Level 2: 3 Victory Points, 4 Coins (from bank)
-        - [ ] Level 3: 5 Victory Points, 4 Coins (from bank)
+        - [x] Level 1: 2 Victory Points, 4 Coins (from bank)
+        - [x] Level 2: 3 Victory Points, 4 Coins (from bank)
+        - [x] Level 3: 5 Victory Points, 4 Coins (from bank)
 - *The Hanging Gardens of Babylon*
     - Resource: Clay
-    - [ ] Side A, Level 2: Science symbol of choice from 2 types (wheel, protractor, tablet) at the **end of the game**
+    - [x] Side A, Level 2: Science symbol of choice from 2 types (wheel, protractor, tablet) at the **end of the game**
     - Side B:
-        - [ ] Level 1: 3 Victory Points
-        - [ ] Level 2: Optional ability to play seventh card instead of discarding **on sixth turn**
+        - [x] Level 1: 3 Victory Points
+        - [x] Level 2: Optional ability to play seventh card instead of discarding **on sixth turn**
             - This card can be built (See "Building the Structure"), used to build level 3 (See "Building the Next Level of Wonder"), or discarded for 3 coins from the bank
-        - [ ] Level 3: (See "Side A, Level 2")
+        - [x] Level 3: (See "Side A, Level 2")
 - *The Statue of Zeus in Olympia*
     - Resource: Lumber
-    - [ ] Side A, Level 2: Build structure for free **once per age**
+    - [x] Side A, Level 2: Build structure for free **once per age**
     - Side B:
-        - [ ] Level 1: Allows player to purchase raw materials (lumber, stone, ore, clay) from either neighbor for 1 coin
+        - [x] Level 1: Allows player to purchase raw materials (lumber, stone, ore, clay) from either neighbor for 1 coin
             - Same effect as both Eastern and Western Trading Posts (Commercial Structures)
             - Both trading posts can still be built, but the effect is not cumulative
-        - [ ] Level 2: 5 Victory Points
-        - [ ] Level 3: Allows player to "copy" a Guild (purple) card from **one** of their two neighbors at the **end of the game**
+        - [x] Level 2: 5 Victory Points
+        - [x] Level 3: Allows player to "copy" a Guild (purple) card from **one** of their two neighbors at the **end of the game**
             - This ability has no effect on the player who owns the copied Guild
 - *The Mausoleum of Halicarnassus*
     - Resource: Loom
-    - [ ] Side A, Level 2: At the **end of turn when this level is built,** choose one structure from all discarded cards since beginning of game and build for free
+    - [x] Side A, Level 2: At the **end of turn when this level is built,** choose one structure from all discarded cards since beginning of game and build for free
     - Side B:
-        - [ ] Level 1: 2 Victory Points, (See "Side A, Level 2")
-        - [ ] Level 2: 1 Victory Point, (See "Side A, Level 2")
-        - [ ] Level 3: (See "Side A, Level 2")
+        - [x] Level 1: 2 Victory Points, (See "Side A, Level 2")
+        - [x] Level 2: 1 Victory Point, (See "Side A, Level 2")
+        - [x] Level 3: (See "Side A, Level 2")
 - *The Pyramids of Giza*
     - Resource: Stone
-    - [ ] Side A, Level 2: 5 Victory Points
+    - [x] Side A, Level 2: 5 Victory Points
     - Side B:
-        - [ ] Level 1: 3 Victory Points
-        - [ ] Level 2: 5 Victory Points
-        - [ ] Level 3: 5 Victory Points
-        - [ ] Level 4: 7 Victory Points
+        - [x] Level 1: 3 Victory Points
+        - [x] Level 2: 5 Victory Points
+        - [x] Level 3: 5 Victory Points
+        - [x] Level 4: 7 Victory Points
 
-## End Game and Victory [TestCase](https://ada.csse.rose-hulman.edu/moormaet/Silver_Falcons_Seven_Wonders/blob/master/7_Wonders/src/test/java/backendTests/EndGameHandlerTest.java)
+## End Game and Victory [Test Case](https://ada.csse.rose-hulman.edu/moormaet/Silver_Falcons_Seven_Wonders/blob/master/7_Wonders/src/test/java/backendTests/EndGameHandlerTest.java)
 - [x] After the war of Age III, a score card displaying total Victory Points for each player is displayed
 - [x] Total Victory Points is equal to the sum of total value of Conflict Tokens, the floor of total coin value divided by 3, the total value of Victory Points from Wonders and (Civilian/Commercial) Structures, points acquired from Guild effects (see "Cards->Guild"), and points acquired from Science Cards (see "Cards->Science Structure")
 - [ ] Whichever player has the most victory points is the winner
