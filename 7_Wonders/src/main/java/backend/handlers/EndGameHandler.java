@@ -59,7 +59,7 @@ public class EndGameHandler {
 		if (effects[0].getEffectType() == Effect.EffectType.VALUE) {
 			ValueEffect effect = (ValueEffect) effects[0];
 			player.addNumVictoryPoints(effect.getAffectingEntities().get(ValueEffect.Value.VICTORYPOINTS));
-		} else if (effects[1].getEffectType() == Effect.EffectType.ABILITY) {
+		} else if (effects[0].getEffectType() == Effect.EffectType.ABILITY) {
 			int playerLoc = players.indexOf(player);
 			copyGuildCard(playerLoc, players);
 		}
@@ -76,7 +76,7 @@ public class EndGameHandler {
 		if (index >= cardsLeft.size()) {
 			players.get(playerLoc).addCardToStoragePile(cardsLeft.get(index));
 		} else {
-			players.get(playerLoc).addCardToStoragePile(cardsLeft.get(index - cardsLeft.size()));
+			players.get(playerLoc).addCardToStoragePile(cardsLeft.get(index - cardsLeft.size()+1));
 		}
 	}
 
