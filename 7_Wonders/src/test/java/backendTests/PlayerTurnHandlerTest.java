@@ -24,6 +24,7 @@ import dataStructures.gameMaterials.Card;
 import dataStructures.gameMaterials.Deck;
 import dataStructures.gameMaterials.Deck.Age;
 import dataStructures.gameMaterials.Effect;
+import dataStructures.gameMaterials.Effect.Direction;
 import dataStructures.gameMaterials.Effect.EffectType;
 import dataStructures.gameMaterials.EntityEffect;
 import dataStructures.gameMaterials.Level.Frequency;
@@ -608,6 +609,7 @@ public class PlayerTurnHandlerTest {
 		ValueEffect effect = EasyMock.mock(ValueEffect.class);
 		EasyMock.expect(cardToBuild.getEffect()).andReturn(effect);
 
+		EasyMock.expect(effect.getDirection()).andReturn(Direction.SELF);
 		EasyMock.expect(effect.getValueType()).andReturn(ValueType.VICTORYPOINT);
 		EasyMock.expect(effect.getValueAmount()).andReturn(Integer.valueOf(3));
 		
@@ -665,6 +667,7 @@ public class PlayerTurnHandlerTest {
 		ValueEffect effect = EasyMock.mock(ValueEffect.class);
 		EasyMock.expect(cardToBuild.getEffect()).andReturn(effect);
 
+		EasyMock.expect(effect.getDirection()).andReturn(Direction.SELF);
 		EasyMock.expect(effect.getValueType()).andReturn(ValueType.VICTORYPOINT);
 		EasyMock.expect(effect.getValueAmount()).andReturn(Integer.valueOf(3));
 		EasyMock.expect(player.storagePileContainsCardByName("Baths")).andReturn(false);
