@@ -148,9 +148,8 @@ public final class PlayerChipHandler {
 			return "3";
 		case FIVE:
 			return "5";
-		default:
-			throw new IllegalArgumentException("Bad Coin.CoinValue");
 		}
+		return "";
 	}
 
 	public static void removeTotalCoins(Player player, int total) {
