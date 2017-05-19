@@ -148,7 +148,7 @@ public class EndGameHandler {
 		}
 	}
 
-	private void evaluateCardEffect(Player current, Player left, Player right, Card card) {
+	public void evaluateCardEffect(Player current, Player left, Player right, Card card) {
 		if (card.getName().equals("Strategists Guild")) {
 			pointsForGuild += right.getConflictTokens().get(ChipValue.NEG1)
 					+ left.getConflictTokens().get(ChipValue.NEG1);
