@@ -677,6 +677,26 @@ public class TurnHandlerTest {
 		int index = turnHandler.indexOfMaxScore(scores, players);
 		assertEquals(1, index);
 	}
+	
+	@Test
+	public void testIndexOfMaxPlayerTie(){
+		ArrayList<Integer> scores = new ArrayList<Integer>(Arrays.asList(20,35,35));
+		ArrayList<Player> players = new ArrayList<Player>();
+		Player player1 = EasyMock.mock(Player.class);
+		Player player2 = EasyMock.mock(Player.class);
+		EasyMock.expect(player1.getCoinTotal()).andReturn(10);
+		EasyMock.expect(player2.getCoinTotal()).andReturn(13);
+		
+		players.add(player1);
+		players.add(player1);
+		players.add(player2);
+		EasyMock.replay(player1,player2);
+		
+		TurnHandler turnHandler = new TurnHandler();
+		
+		int index = turnHandler.indexOfMaxScore(scores, players);
+		assertEquals(2, index);
+	}
 
 	private ArrayList<Player> setUpPlayersByNum(int num) {
 		ArrayList<Player> result = new ArrayList<Player>();
