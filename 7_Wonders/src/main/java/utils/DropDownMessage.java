@@ -2,6 +2,7 @@ package utils;
 
 import java.util.Locale;
 import java.util.ResourceBundle;
+import java.util.Set;
 
 import javax.swing.JOptionPane;
 
@@ -29,6 +30,18 @@ public class DropDownMessage {
 			language = " -" + Locale.getDefault().toString();
 		}
 		return language.split("-")[1];
+	}
+
+	public String dropDownEntitySelectionMessage(Set<Enum> keySet, String cardName) {
+		Object[] objects = keySet.toArray(new Object[keySet.size()]);
+		Object[] string = new Object[keySet.size()];
+
+		for (int i = 0; i < keySet.size(); i++) {
+			string[i] = objects[i].toString();
+		}
+		ResourceBundle messages = Translate.getNewResourceBundle();
+		return (String) JOptionPane.showInputDialog(null, "Choose which card effect to activiate",
+				cardName, JOptionPane.PLAIN_MESSAGE, null, string, string[0]);
 	}
 
 }
