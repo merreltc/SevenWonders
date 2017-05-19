@@ -108,12 +108,15 @@ public class LevelTest {
 	}
 	
 	@Test
-	public void testEqualsDifferentEffects(){
+	public void testEqualsDifferentEffectsAbility(){
 		int priority = 1;
 		Cost cost = EasyMock.createStrictMock(Cost.class);
 		Effect effect = EasyMock.createStrictMock(AbilityEffect.class);
+		Effect effect2 = EasyMock.createStrictMock(AbilityEffect.class);
+		EasyMock.expect(effect.getEffectType()).andReturn(EffectType.ABILITY);
+		EasyMock.expect(effect2.getEffectType()).andReturn(EffectType.ABILITY);
 		
-		EasyMock.replay(effect);
+		EasyMock.replay(effect, effect2);
 
 		HashMap<Frequency, HashSet<Effect>> effects = new HashMap<Frequency, HashSet<Effect>>();
 		HashSet<Effect> effectSet = new HashSet<Effect>();
@@ -122,8 +125,35 @@ public class LevelTest {
 		
 		HashMap<Frequency, HashSet<Effect>> effects2 = new HashMap<Frequency, HashSet<Effect>>();
 		HashSet<Effect> effectSet2 = new HashSet<Effect>();
-		effectSet2.add(effect);
-		effects.put(Frequency.ENDOFTURN, effectSet2);
+		effectSet2.add(effect2);
+		effects2.put(Frequency.ENDOFTURN, effectSet2);
+
+		Level level1 = new Level(priority, cost, effects);
+		Level level2 = new Level(priority, cost, effects2);
+		assertFalse(level1.equals(level2));
+		EasyMock.verify(effect);
+	}
+	
+	@Test
+	public void testEqualsDifferentEffectsEntity(){
+		int priority = 1;
+		Cost cost = EasyMock.createStrictMock(Cost.class);
+		EntityEffect effect = EasyMock.createStrictMock(EntityEffect.class);
+		EntityEffect effect2 = EasyMock.createStrictMock(EntityEffect.class);
+		EasyMock.expect(effect.getEffectType()).andReturn(EffectType.ENTITY);
+		EasyMock.expect(effect2.getEffectType()).andReturn(EffectType.ENTITY);
+		
+		EasyMock.replay(effect, effect2);
+
+		HashMap<Frequency, HashSet<Effect>> effects = new HashMap<Frequency, HashSet<Effect>>();
+		HashSet<Effect> effectSet = new HashSet<Effect>();
+		effectSet.add(effect);
+		effects.put(Frequency.ENDOFTURN, effectSet);
+		
+		HashMap<Frequency, HashSet<Effect>> effects2 = new HashMap<Frequency, HashSet<Effect>>();
+		HashSet<Effect> effectSet2 = new HashSet<Effect>();
+		effectSet2.add(effect2);
+		effects2.put(Frequency.ENDOFTURN, effectSet2);
 
 		Level level1 = new Level(priority, cost, effects);
 		Level level2 = new Level(priority, cost, effects2);
