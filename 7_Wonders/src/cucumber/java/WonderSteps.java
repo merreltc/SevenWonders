@@ -1,6 +1,9 @@
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
 
 import constants.GeneralEnums.CostType;
 import constants.GeneralEnums.Side;
@@ -10,16 +13,19 @@ import cucumber.api.java.en.When;
 import dataStructures.gameMaterials.Cost;
 import dataStructures.gameMaterials.Effect;
 import dataStructures.gameMaterials.Effect.EffectType;
+import dataStructures.gameMaterials.EntityEffect;
 import dataStructures.gameMaterials.Level;
 import dataStructures.gameMaterials.Level.Frequency;
 import dataStructures.gameMaterials.Wonder;
 import dataStructures.gameMaterials.Wonder.WonderType;
-import exceptions.CannotBuiltWonderException;
+import dataStructures.playerData.Player;
+import exceptions.CannotBuildWonderException;
 
-public class BuildWonder {
+public class WonderSteps {
 	private Wonder wonder;
-	private CannotBuiltWonderException exception;
+	private CannotBuildWonderException exception;
 	private ArrayList<Level> levels;
+	private Player player;
 
 	@Given("^A Wonder (Colossus||Lighthouse||Temple||Statue||Mausoleum||Gardens||Pyramids) on Side (.)$")
 	public void a_player_with_a_Wonder_on_Side(String wonderName, char side) throws Throwable {
@@ -57,6 +63,11 @@ public class BuildWonder {
 		}
 	}
 
+	@Given("^A player with that Wonder$")
+	public void a_player_with_that_Wonder() throws Throwable {
+		this.player = new Player("Jane Doe", this.wonder);
+	}
+
 	@Given("^(\\d+) expected Levels$")
 	public void expected_Levels(int numLevels) throws Throwable {
 		this.levels = createLevels(numLevels);
@@ -65,7 +76,12 @@ public class BuildWonder {
 	private ArrayList<Level> createLevels(int numLevels) {
 		ArrayList<Level> result = new ArrayList<Level>();
 		for (int i = 1; i <= numLevels; i++) {
-			Level temp = new Level(i, new Cost(CostType.NONE, 1), new Effect(EffectType.NONE), Frequency.DEFAULT);
+			HashMap<Frequency, HashSet<Effect>> effects = new HashMap<Frequency, HashSet<Effect>>();
+			HashSet<Effect> effect = new HashSet<Effect>();
+			effect.add(new Effect(EffectType.NONE));
+			effects.put(Frequency.DEFAULT, effect);
+
+			Level temp = new Level(i, new Cost(CostType.NONE, 1), effects);
 			result.add(temp);
 		}
 		return result;
@@ -76,10 +92,15 @@ public class BuildWonder {
 		for (int i = 0; i < numLevels; i++) {
 			try {
 				this.wonder.buildNextLevel();
-			} catch (CannotBuiltWonderException e) {
+			} catch (CannotBuildWonderException e) {
 				this.exception = e;
 			}
 		}
+	}
+
+	@When("^Beginning the game$")
+	public void beginning_the_game() throws Throwable {
+		// does nothing
 	}
 
 	@Then("^The level cannot be built$")
@@ -93,12 +114,14 @@ public class BuildWonder {
 		assertEquals(numLevels, this.wonder.getNumBuiltLevels());
 	}
 
-//	@Then("^The levels in Wonder match$")
-//	public void the_levels_in_Wonder_match() throws Throwable {
-//		for (int i = 0; i < this.levels.size(); i++) {
-//			Level expected = this.levels.get(i);
-//			Level actual = this.wonder.getLevel(i);
-//			assertTrue(expected.equals(actual));
-//		}
-//	}
+	@Then("^The player begins with the appropriate resource$")
+	public void the_player_begins_with_the_appropriate_resource() throws Throwable {
+		EntityEffect effect = this.wonder.getResource();
+		assertTrue(this.player.storageContainsEffect(effect));
+	}
+
+	@Then("^The player does not begin with any other resources$")
+	public void the_player_does_not_begin_with_any_other_resources() throws Throwable {
+		assertTrue(this.player.getAllEffects().size() == 1);
+	}
 }

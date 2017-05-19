@@ -8,12 +8,10 @@ import utils.TranslateWithTemplate;
 
 public class ValueEffect extends Effect {
 	private static final int NO_VALUE_AMOUNT = -1;
-	
 	private Value value;
 	private int valueAmount;
 	private AffectingEntity affectingEntity = AffectingEntity.NONE;
 	private HashMap<Enum, Integer> affectingEntities = new HashMap<Enum, Integer>();
-	private Frequency frequency;
 
 	public enum Value {
 		VICTORYPOINTS, MILITARY, COMMERCE, GUILD
@@ -24,76 +22,38 @@ public class ValueEffect extends Effect {
 	}
 
 	public enum AffectingEntity {
-		NONE, RAWRESOURCES, MANUFACTUREDGOODS, COMMERCIALSTRUCTURES, 
-		SCIENTIFICSTRUCTURES, MILITARYSTRUCTURES, CIVILIANSTRUCTURES, GUILD, WONDERLEVEL
+		NONE, RAWRESOURCES, MANUFACTUREDGOODS, COMMERCIALSTRUCTURES, SCIENTIFICSTRUCTURES, MILITARYSTRUCTURES, CIVILIANSTRUCTURES, GUILD, WONDERLEVEL
 	}
 
-	public ValueEffect(EffectType effectType, Value value, AffectingEntity affectingEntity, int valueAmount) {
-		super(effectType);
+	public ValueEffect(Value value, AffectingEntity affectingEntity, int valueAmount) {
+		super(EffectType.VALUE);
 		this.value = value;
 		this.affectingEntity = affectingEntity;
 		validateValueAmount(value, valueAmount);
 		this.valueAmount = valueAmount;
 	}
-	
-	public ValueEffect(EffectType effectType, Value value, AffectingEntity affectingEntity, int valueAmount, Frequency frequency) {
-		super(effectType);
-		this.value = value;
-		this.affectingEntity = affectingEntity;
-		validateValueAmount(value, valueAmount);
-		this.valueAmount = valueAmount;
-		this.frequency = frequency;
-	}
 
-	public ValueEffect(EffectType effectType, Value value, AffectingEntity affectingEntity, Direction direction) {
-		super(effectType);
+	public ValueEffect(Value value, AffectingEntity affectingEntity, Direction direction) {
+		super(EffectType.VALUE);
 		this.value = value;
 		this.setDirection(direction);
 		this.affectingEntity = affectingEntity;
 		this.valueAmount = NO_VALUE_AMOUNT;
 	}
-	
-	public ValueEffect(EffectType effectType, Value value, AffectingEntity affectingEntity, Direction direction, Frequency frequency) {
-		super(effectType);
-		this.value = value;
-		this.setDirection(direction);
-		this.affectingEntity = affectingEntity;
-		this.valueAmount = NO_VALUE_AMOUNT;
-		this.frequency = frequency;
-	}
 
-	public ValueEffect(EffectType effectType, Value value, AffectingEntity affectingEntity, Direction direction,
-			int valueAmount) {
-		super(effectType);
+	public ValueEffect(Value value, AffectingEntity affectingEntity, Direction direction, int valueAmount) {
+		super(EffectType.VALUE);
 		this.value = value;
 		this.setDirection(direction);
 		this.affectingEntity = affectingEntity;
 		this.valueAmount = valueAmount;
 	}
-	
-	public ValueEffect(EffectType effectType, Value value, AffectingEntity affectingEntity, Direction direction,
-			int valueAmount, Frequency frequency) {
-		super(effectType);
-		this.value = value;
-		this.setDirection(direction);
-		this.affectingEntity = affectingEntity;
-		this.valueAmount = valueAmount;
-		this.frequency = frequency;
-	}
 
-	public ValueEffect(EffectType effectType, Value value, HashMap<Enum, Integer> affectingEntities) {
-		super(effectType);
+	public ValueEffect(Value value, HashMap<Enum, Integer> affectingEntities) {
+		super(EffectType.VALUE);
 		this.value = value;
 		this.affectingEntities = affectingEntities;
 		this.valueAmount = NO_VALUE_AMOUNT;
-	}
-	
-	public ValueEffect(EffectType effectType, Value value, HashMap<Enum, Integer> affectingEntities, Frequency frequency) {
-		super(effectType);
-		this.value = value;
-		this.affectingEntities = affectingEntities;
-		this.valueAmount = NO_VALUE_AMOUNT;
-		this.frequency = frequency;
 	}
 
 	private void validateValueAmount(Value value, int valueAmount) {
@@ -159,7 +119,6 @@ public class ValueEffect extends Effect {
 		}
 
 		ValueEffect value = (ValueEffect) effect;
-
 		if (this.valueAmount == value.getValueAmount() && this.getDirection() == value.getDirection()
 				&& this.affectingEntity == value.affectingEntity && this.value == value.getValue()
 				&& this.affectingEntities.toString().equals(value.affectingEntities.toString())) {
@@ -167,9 +126,5 @@ public class ValueEffect extends Effect {
 		}
 
 		return false;
-	}
-	
-	public Frequency getFrequency() {
-		return this.frequency;
 	}
 }

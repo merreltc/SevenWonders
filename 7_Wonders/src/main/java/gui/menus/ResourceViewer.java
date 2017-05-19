@@ -39,8 +39,7 @@ public class ResourceViewer extends Menu {
 			this.graphics = graphics;
 			resources.setGraphics(graphics);
 			graphics.setFont(Constants.RESOURCE_VIEWER_FONT);
-			
-			int gridRows = this.player.getStoragePile().size() + 1;
+			int gridRows = this.player.getAllCards().size() + 1;
 			drawGrid(gridRows);
 			graphics.setColor(new Color(50, 50, 50, 150));
 			resources.draw();
@@ -78,7 +77,8 @@ public class ResourceViewer extends Menu {
 	}
 
 	private void populateResourceRow(int row, int y) {
-		ArrayList<Card> cards = player.getStoragePile();
+		ArrayList<Card> cards = player.getAllCards();
+
 		if (row > cards.size()) {
 			return;
 		}

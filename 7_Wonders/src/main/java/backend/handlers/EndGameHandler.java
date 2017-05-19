@@ -168,9 +168,9 @@ public class EndGameHandler {
 	private void givePlayerReward(Player player, Enum choice) {
 		HashMap<Enum, Integer> entitiesAndAmounts = new HashMap<Enum, Integer>();
 		entitiesAndAmounts.put(choice, 1);
-		Effect effect = new EntityEffect(EffectType.ENTITY, EntityType.SCIENCE, entitiesAndAmounts);
+		Effect effect = new EntityEffect(EntityType.SCIENCE, entitiesAndAmounts);
 		Card reward = new Card("Scientists Reward", CardType.SCIENTIFICSTRUCTURE, null, effect);
-		player.addToStoragePile(reward);
+		player.addCardToStoragePile(reward);
 	}
 
 	private int useEffect(Card card, Player player) {
@@ -199,7 +199,7 @@ public class EndGameHandler {
 
 	private int runEffectOnAllCards(AffectingEntity currentType, Player players, int valueToAdd) {
 		int total = 0;
-		ArrayList<Card> cards = players.getStoragePile();
+		ArrayList<Card> cards = players.getAllCards();
 		for (Card currentCard : cards) {
 			if (currentType.toString().contains(currentCard.getCardType().toString())) {
 				total += valueToAdd;

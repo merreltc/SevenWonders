@@ -7,28 +7,15 @@ import dataStructures.gameMaterials.Level.Frequency;
 public class MultiValueEffect extends ValueEffect {
 	private HashMap<Enum, Integer> valuesAndAmounts;
 
-	public MultiValueEffect(EffectType effectType, Value value, AffectingEntity affectingEntity, Direction direction,
+	public MultiValueEffect(Value value, AffectingEntity affectingEntity, Direction direction,
 			HashMap<Enum, Integer> entitiesAndAmounts) {
-		this(effectType, value, affectingEntity, direction, entitiesAndAmounts, Frequency.DEFAULT);
-	}
-
-	public MultiValueEffect(EffectType effectType, Value value, AffectingEntity affectingEntity, Direction direction,
-			HashMap<Enum, Integer> entitiesAndAmounts, Frequency frequency) {
-		super(effectType, value, affectingEntity, direction, frequency);
+		super(value, affectingEntity, direction);
 		this.valuesAndAmounts = entitiesAndAmounts;
+		this.setEffectType(EffectType.MULTIVALUE);
 	}
 
 	public HashMap<Enum, Integer> getValues() {
 		return this.valuesAndAmounts;
-	}
-
-	public int getMultiValueAmount() {
-		int amount = 0;
-		for (Enum entity : this.valuesAndAmounts.keySet()) {
-			amount += this.valuesAndAmounts.get(entity);
-		}
-
-		return amount;
 	}
 
 	@Override
@@ -48,4 +35,5 @@ public class MultiValueEffect extends ValueEffect {
 
 		return false;
 	}
+
 }

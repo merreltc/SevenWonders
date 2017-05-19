@@ -231,7 +231,7 @@ public class GameManagerTest {
 		Card card = manager.getDeck().getCard(0);
 		manager.buildStructure(card);
 
-		assertTrue(manager.getCurrentPlayer().getStoragePile().contains(card));
+		assertTrue(manager.getCurrentPlayer().getAllCards().contains(card));
 	}
 
 	@Test

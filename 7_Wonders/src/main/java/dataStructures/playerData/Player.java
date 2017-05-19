@@ -2,16 +2,15 @@ package dataStructures.playerData;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.ResourceBundle;
 
 import constants.GeneralEnums.Science;
 import constants.GeneralEnums.Side;
 import dataStructures.gameMaterials.Card;
+import dataStructures.gameMaterials.Effect;
 import dataStructures.gameMaterials.Effect.EffectType;
 import dataStructures.gameMaterials.EntityEffect;
 import dataStructures.gameMaterials.Wonder;
 import dataStructures.playerData.Chip.ChipValue;
-import utils.Translate;
 
 public class Player {
 	private String name = "Jane Doe";
@@ -43,6 +42,11 @@ public class Player {
 	public Player(String playerName, Wonder wonder) {
 		this.name = playerName;
 		this.wonder = wonder;
+		addWonderResourceToPile();
+	}
+
+	public void addWonderResourceToPile() {
+		this.storagePile.addToWonderPile(this.wonder.getResource());
 	}
 
 	public String toString() {
@@ -97,8 +101,12 @@ public class Player {
 		this.currentHand = currentHand;
 	}
 
-	public ArrayList<Card> getStoragePile() {
-		return this.storagePile.getEntireStoragePile();
+	public ArrayList<Card> getAllCards() {
+		return this.storagePile.getAllCardStoragePile();
+	}
+
+	public ArrayList<Effect> getAllEffects() {
+		return this.storagePile.getEntireEffectStorage();
 	}
 
 	public void setStoragePile(ArrayList<Card> storagePile) {
@@ -120,18 +128,18 @@ public class Player {
 	}
 
 	public boolean storagePileContainsCardByName(String name) {
-		for (Card storage : this.storagePile.getEntireStoragePile()) {
-			if (storage.getName().equals(name)) {
-				return true;
-			}
-		}
-		return false;
+		return this.storagePile.containsCard(name);
+	}
+
+	public boolean storageContainsEffect(Effect effect) {
+		return this.storagePile.containsEffect(effect);
 	}
 
 	public Card getCardFromEndGame(int index) {
 		if (index >= this.storagePile.getEndGamePile().size()) {
 			throw new IllegalArgumentException("End of End Game pile reached");
 		}
+
 		return this.storagePile.getEndGamePile().get(index);
 	}
 
@@ -169,7 +177,11 @@ public class Player {
 		this.currentTrades.clear();
 	}
 
-	public void addToStoragePile(Card card) {
+	public void addWonderEffectToStoragePile(Effect effect) {
+		this.storagePile.addToWonderPile(effect);
+	}
+
+	public void addCardToStoragePile(Card card) {
 		this.storagePile.addCard(card);
 	}
 
@@ -204,7 +216,7 @@ public class Player {
 	public HashMap<ChipValue, Integer> getCoins() {
 		return this.playerChips.coins;
 	}
-	
+
 	public Side getSide() {
 		return this.wonder.getSide();
 	}

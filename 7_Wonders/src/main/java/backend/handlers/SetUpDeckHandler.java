@@ -253,16 +253,16 @@ public class SetUpDeckHandler {
 		if (effectStr.equals("ENTITY")) {
 			String entityStr = effectObj.getString("EntityType");
 			EntityType entityEnum = EntityType.valueOf(entityStr);
-			effect = createEntityEffect(effectObj, EffectType.ENTITY, entityEnum);
+			effect = createEntityEffect(effectObj, entityEnum);
 		} else if (effectStr.equals("VALUE")) {
-			effect = createValueEffect(effectObj, EffectType.VALUE);
+			effect = createValueEffect(effectObj);
 		} else {
-			effect = createMultiValueEffect(effectObj, EffectType.MULTIVALUE);
+			effect = createMultiValueEffect(effectObj);
 		}
 		return effect;
 	}
 
-	private Effect createMultiValueEffect(JSONObject effectObj, EffectType effectTypeEnum) {
+	private Effect createMultiValueEffect(JSONObject effectObj) {
 		String affecting = effectObj.getString("AffectingEntities");
 		Value value = Value.valueOf(effectObj.getString("Value"));
 		AffectingEntity affectingEntities = AffectingEntity.valueOf(affecting);
@@ -274,34 +274,34 @@ public class SetUpDeckHandler {
 			valuesAndAmounts.put(ValueType.valueOf(entity.getString("ValueType")), entity.getInt("entityAmount"));
 		}
 		Direction direction = Direction.valueOf(effectObj.getString("Direction"));
-		return new MultiValueEffect(effectTypeEnum, value, affectingEntities, direction, valuesAndAmounts);
+		return new MultiValueEffect(value, affectingEntities, direction, valuesAndAmounts);
 	}
 
-	private Effect createValueEffect(JSONObject effectObj, EffectType effectTypeEnum) {
+	private Effect createValueEffect(JSONObject effectObj) {
 		Effect effect;
 		try {
-			effect = tryGettingEntitiesAsObject(effectObj, effectTypeEnum);
+			effect = tryGettingEntitiesAsObject(effectObj);
 		} catch (JSONException exception) {
-			effect = tryGettingEntitiesAsArray(effectObj, effectTypeEnum);
+			effect = tryGettingEntitiesAsArray(effectObj);
 		}
 		return effect;
 	}
 
-	private Effect tryGettingEntitiesAsObject(JSONObject effectObj, EffectType effectTypeEnum) {
+	private Effect tryGettingEntitiesAsObject(JSONObject effectObj) {
 		String affecting = effectObj.getString("AffectingEntities");
 		Value value = Value.valueOf(effectObj.getString("Value"));
 		AffectingEntity affectingEntities = AffectingEntity.valueOf(affecting);
 		int valueAmount = effectObj.getInt("valueAmount");
 
 		if (affecting.equals("NONE")) {
-			return new ValueEffect(effectTypeEnum, value, affectingEntities, valueAmount);
+			return new ValueEffect(value, affectingEntities, valueAmount);
 		}
 
 		Direction direction = Direction.valueOf(effectObj.getString("Direction"));
-		return new ValueEffect(effectTypeEnum, value, affectingEntities, direction, valueAmount);
+		return new ValueEffect(value, affectingEntities, direction, valueAmount);
 	}
 
-	private Effect tryGettingEntitiesAsArray(JSONObject effectObj, EffectType effectTypeEnum) {
+	private Effect tryGettingEntitiesAsArray(JSONObject effectObj) {
 		JSONArray affecting = effectObj.getJSONArray("AffectingEntities");
 		Value value = Value.valueOf(effectObj.getString("Value"));
 		HashMap<Enum, Integer> affectingEntities = new HashMap<Enum, Integer>();
@@ -310,10 +310,10 @@ public class SetUpDeckHandler {
 			affectingEntities.put(AffectingEntity.valueOf(affecting.getString(ae)), 1);
 		}
 
-		return new ValueEffect(effectTypeEnum, value, affectingEntities);
+		return new ValueEffect(value, affectingEntities);
 	}
 
-	private Effect createEntityEffect(JSONObject effectObj, EffectType effectTypeEnum, EntityType entityEnum) {
+	private Effect createEntityEffect(JSONObject effectObj, EntityType entityEnum) {
 		HashMap<Enum, Integer> entitiesAndAmounts = new HashMap<Enum, Integer>();
 		JSONArray entitiesJSON = effectObj.getJSONArray("entitiesAndAmounts");
 
@@ -326,7 +326,7 @@ public class SetUpDeckHandler {
 			addEntity(entitiesAndAmounts, entityToAdd, entityType);
 		}
 
-		return new EntityEffect(effectTypeEnum, entityEnum, entitiesAndAmounts);
+		return new EntityEffect(entityEnum, entitiesAndAmounts);
 	}
 
 	private void addEntity(HashMap<Enum, Integer> entitiesAndAmounts, JSONObject entityToAdd, String entityType) {

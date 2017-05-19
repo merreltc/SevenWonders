@@ -32,7 +32,7 @@ public class PlayerTurnHandler {
 
 		validateCost(current, card);
 		enableValueEffect(current, card);
-		current.addToStoragePile(card);
+		current.addCardToStoragePile(card);
 		current.removeFromCurrentHand(card);
 	}
 
@@ -54,9 +54,9 @@ public class PlayerTurnHandler {
 
 	private boolean checkForPreviousStructure(Player current, Card card) {
 		String previousStructure = card.getPreviousStructureName();
-		for (Card storage : current.getStoragePile()) {
+		for (Card storage : current.getAllCards()) {
 			if (storage.getName().contains(previousStructure)) {
-				current.addToStoragePile(card);
+				current.addCardToStoragePile(card);
 				current.removeFromCurrentHand(card);
 				return true;
 			}
@@ -75,7 +75,7 @@ public class PlayerTurnHandler {
 
 	private void validatePlayerHasEntitiesForCard(Player current, Card card) {
 		HashMap<Enum, Integer> costs = new HashMap<Enum, Integer>(card.getCost());
-		for (Card sCards : current.getStoragePile()) {
+		for (Card sCards : current.getAllCards()) {
 			decrementCostsWithStorage(sCards, costs);
 		}
 
@@ -85,14 +85,14 @@ public class PlayerTurnHandler {
 			validateEndCost(costs.get(key));
 		}
 	}
-	
-	private void decrementCostsWithStorage(Card card, HashMap<Enum, Integer> costs){
+
+	private void decrementCostsWithStorage(Card card, HashMap<Enum, Integer> costs) {
 		if (card.getEffectType() != EffectType.ENTITY) {
 			return;
 		}
 		EntityEffect effect = (EntityEffect) card.getEffect();
 		Enum singleEffect = (Enum) effect.getEntities().keySet().toArray()[0];
-	
+
 		if (effect.getEntities().size() > 1) {
 			chooseEntityForBuild(costs, card);
 		} else if (costs.containsKey(singleEffect)) {
@@ -107,7 +107,7 @@ public class PlayerTurnHandler {
 		while (choice == null) {
 			choice = chooseWhichEntity(effect.getEntities(), sCards.getName());
 		}
-		
+
 		Enum entity = translateEntity(choice);
 		if (costs.containsKey(entity)) {
 			int newCost = costs.get(entity) - effect.getEntities().get(entity);

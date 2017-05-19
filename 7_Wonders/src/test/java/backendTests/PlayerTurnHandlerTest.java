@@ -17,6 +17,7 @@ import backend.handlers.SetUpDeckHandler;
 import constants.GeneralEnums.CostType;
 import constants.GeneralEnums.RawResource;
 import constants.GeneralEnums.Resource;
+import constants.GeneralEnums.Side;
 import dataStructures.GameBoard;
 import dataStructures.gameMaterials.Card;
 import dataStructures.gameMaterials.Deck;
@@ -25,10 +26,12 @@ import dataStructures.gameMaterials.Effect.EffectType;
 import dataStructures.gameMaterials.EntityEffect;
 import dataStructures.gameMaterials.ValueEffect;
 import dataStructures.gameMaterials.ValueEffect.ValueType;
+import dataStructures.gameMaterials.Wonder.WonderType;
 import dataStructures.gameMaterials.Wonder;
 import dataStructures.playerData.Player;
 import dataStructures.playerData.Chip.ChipValue;
 import exceptions.InsufficientFundsException;
+import testHelpers.SetUpDeckTestHelper;
 
 public class PlayerTurnHandlerTest {
 	private Deck age1Deck, age2Deck;
@@ -59,10 +62,10 @@ public class PlayerTurnHandlerTest {
 		playerTurnHandler.setGameBoard(board);
 		playerTurnHandler.buildStructure(current, current.getCurrentHand().get(0));
 
-		assertEquals(1, current.getStoragePile().size());
+		assertEquals(1, current.getAllCards().size());
 		assertEquals(0, current.getCurrentHand().size());
 		assertFalse(current.getCurrentHand().contains(this.age1Deck.getCard(0)));
-		assertTrue(current.getStoragePile().contains(this.age1Deck.getCard(0)));
+		assertTrue(current.getAllCards().contains(this.age1Deck.getCard(0)));
 	}
 
 	@Test
@@ -80,11 +83,11 @@ public class PlayerTurnHandlerTest {
 		playerTurnHandler.setGameBoard(board);
 		playerTurnHandler.buildStructure(current, current.getCurrentHand().get(0));
 
-		assertEquals(1, current.getStoragePile().size());
+		assertEquals(1, current.getAllCards().size());
 		assertEquals(0, current.getCurrentHand().size());
 		assertEquals(0, (int) current.getCoins().get(ChipValue.THREE));
 		assertFalse(current.getCurrentHand().contains(this.age1Deck.getCard(4)));
-		assertTrue(current.getStoragePile().contains(this.age1Deck.getCard(4)));
+		assertTrue(current.getAllCards().contains(this.age1Deck.getCard(4)));
 		assertEquals(2, current.getCoinTotal());
 	}
 
@@ -105,10 +108,10 @@ public class PlayerTurnHandlerTest {
 		playerTurnHandler.buildStructure(current, current.getCurrentHand().get(0));
 		playerTurnHandler.buildStructure(current, current.getCurrentHand().get(0));
 
-		assertEquals(2, current.getStoragePile().size());
+		assertEquals(2, current.getAllCards().size());
 		assertEquals(0, current.getCurrentHand().size());
 		assertFalse(current.getCurrentHand().contains(this.age1Deck.getCard(9)));
-		assertTrue(current.getStoragePile().contains(this.age1Deck.getCard(9)));
+		assertTrue(current.getAllCards().contains(this.age1Deck.getCard(9)));
 	}
 
 	@Test(expected = InsufficientFundsException.class)
@@ -147,12 +150,12 @@ public class PlayerTurnHandlerTest {
 		playerTurnHandler.buildStructure(current, current.getCurrentHand().get(0));
 		playerTurnHandler.buildStructure(current, current.getCurrentHand().get(0));
 
-		assertEquals(2, current.getStoragePile().size());
+		assertEquals(2, current.getAllCards().size());
 		assertEquals(0, current.getCurrentHand().size());
 		assertFalse(current.getCurrentHand().contains(this.age1Deck.getCard(6)));
-		assertTrue(current.getStoragePile().contains(this.age1Deck.getCard(6)));
+		assertTrue(current.getAllCards().contains(this.age1Deck.getCard(6)));
 		assertFalse(current.getCurrentHand().contains(this.age1Deck.getCard(18)));
-		assertTrue(current.getStoragePile().contains(this.age1Deck.getCard(18)));
+		assertTrue(current.getAllCards().contains(this.age1Deck.getCard(18)));
 	}
 
 	@Test(expected = InsufficientFundsException.class)
@@ -195,14 +198,14 @@ public class PlayerTurnHandlerTest {
 		playerTurnHandler.buildStructure(current, current.getCurrentHand().get(0));
 		playerTurnHandler.buildStructure(current, current.getCurrentHand().get(0));
 
-		assertEquals(3, current.getStoragePile().size());
+		assertEquals(3, current.getAllCards().size());
 		assertEquals(0, current.getCurrentHand().size());
 		assertFalse(current.getCurrentHand().contains(age2Deck.getCard(0)));
-		assertTrue(current.getStoragePile().contains(age2Deck.getCard(0)));
+		assertTrue(current.getAllCards().contains(age2Deck.getCard(0)));
 		assertFalse(current.getCurrentHand().contains(age2Deck.getCard(3)));
-		assertTrue(current.getStoragePile().contains(age2Deck.getCard(3)));
+		assertTrue(current.getAllCards().contains(age2Deck.getCard(3)));
 		assertFalse(current.getCurrentHand().contains(age2Deck.getCard(9)));
-		assertTrue(current.getStoragePile().contains(age2Deck.getCard(9)));
+		assertTrue(current.getAllCards().contains(age2Deck.getCard(9)));
 	}
 
 	@Test(expected = InsufficientFundsException.class)
@@ -243,14 +246,14 @@ public class PlayerTurnHandlerTest {
 		playerTurnHandler.buildStructure(current, current.getCurrentHand().get(0));
 		playerTurnHandler.buildStructure(current, current.getCurrentHand().get(0));
 
-		assertEquals(3, current.getStoragePile().size());
+		assertEquals(3, current.getAllCards().size());
 		assertEquals(0, current.getCurrentHand().size());
 		assertFalse(current.getCurrentHand().contains(this.age2Deck.getCard(3)));
-		assertTrue(current.getStoragePile().contains(this.age2Deck.getCard(3)));
+		assertTrue(current.getAllCards().contains(this.age2Deck.getCard(3)));
 		assertFalse(current.getCurrentHand().contains(this.age2Deck.getCard(5)));
-		assertTrue(current.getStoragePile().contains(this.age2Deck.getCard(5)));
+		assertTrue(current.getAllCards().contains(this.age2Deck.getCard(5)));
 		assertFalse(current.getCurrentHand().contains(this.age2Deck.getCard(16)));
-		assertTrue(current.getStoragePile().contains(this.age2Deck.getCard(16)));
+		assertTrue(current.getAllCards().contains(this.age2Deck.getCard(16)));
 	}
 
 	@Test(expected = InsufficientFundsException.class)
@@ -584,8 +587,8 @@ public class PlayerTurnHandlerTest {
 		EasyMock.expect(cardToBuild.getCostType()).andReturn(CostType.RESOURCE);
 		EasyMock.expect(cardToBuild.getEffectType()).andReturn(EffectType.VALUE);
 		EasyMock.expect(cardToBuild.getCost()).andReturn(cost);
-		EasyMock.expect(player.getStoragePile()).andReturn(storage);
-		EasyMock.expect(player.getStoragePile()).andReturn(storage);
+		EasyMock.expect(player.getAllCards()).andReturn(storage);
+		EasyMock.expect(player.getAllCards()).andReturn(storage);
 		EntityEffect entityEffect = EasyMock.mock(EntityEffect.class);
 
 		for (Card sCards : storage) {
@@ -604,7 +607,7 @@ public class PlayerTurnHandlerTest {
 		EasyMock.expect(effect.getValueType()).andReturn(ValueType.VICTORYPOINT);
 		EasyMock.expect(effect.getValueAmount()).andReturn(Integer.valueOf(3));
 		player.addNumVictoryPoints(3);
-		player.addToStoragePile(cardToBuild);
+		player.addCardToStoragePile(cardToBuild);
 		player.removeFromCurrentHand(cardToBuild);
 		EasyMock.expect(player.getCurrentTrades()).andReturn(new HashMap<Enum, Integer>());
 
@@ -637,8 +640,8 @@ public class PlayerTurnHandlerTest {
 		EasyMock.expect(cardToBuild.getCostType()).andReturn(CostType.RESOURCE);
 		EasyMock.expect(cardToBuild.getEffectType()).andReturn(EffectType.VALUE);
 		EasyMock.expect(cardToBuild.getCost()).andReturn(cost);
-		EasyMock.expect(player.getStoragePile()).andReturn(storage);
-		EasyMock.expect(player.getStoragePile()).andReturn(storage);
+		EasyMock.expect(player.getAllCards()).andReturn(storage);
+		EasyMock.expect(player.getAllCards()).andReturn(storage);
 		EntityEffect entityEffect = EasyMock.mock(EntityEffect.class);
 
 		for (Card sCards : storage) {
@@ -658,7 +661,7 @@ public class PlayerTurnHandlerTest {
 		EasyMock.expect(effect.getValueAmount()).andReturn(Integer.valueOf(3));
 		EasyMock.expect(player.storagePileContainsCardByName("Baths")).andReturn(false);
 		player.addNumVictoryPoints(3);
-		player.addToStoragePile(cardToBuild);
+		player.addCardToStoragePile(cardToBuild);
 		player.removeFromCurrentHand(cardToBuild);
 		EasyMock.expect(player.getCurrentTrades()).andReturn(new HashMap<Enum, Integer>());
 		EasyMock.expect(player.storagePileContainsCardByName("Baths")).andReturn(true);
@@ -691,10 +694,10 @@ public class PlayerTurnHandlerTest {
 		Card cardToBuild = EasyMock.mock(Card.class);
 		String previousStructureName = "Trading Post";
 		EasyMock.expect(cardToBuild.getPreviousStructureName()).andReturn(previousStructureName);
-		EasyMock.expect(player.getStoragePile()).andReturn(storage);
+		EasyMock.expect(player.getAllCards()).andReturn(storage);
 
 		EasyMock.expect(storaged.getName()).andReturn("East Trading Post");
-		player.addToStoragePile(cardToBuild);
+		player.addCardToStoragePile(cardToBuild);
 		player.removeFromCurrentHand(cardToBuild);
 		EasyMock.expect(player.storagePileContainsCardByName("Trading Post")).andReturn(false);
 		EasyMock.expect(cardToBuild.getName()).andReturn("Trading Post");
@@ -708,7 +711,7 @@ public class PlayerTurnHandlerTest {
 	}
 
 	private ArrayList<Player> setUpArrayWithNumPlayers(int num) {
-		Wonder wonder = EasyMock.createStrictMock(Wonder.class);
+		Wonder wonder = new Wonder(Side.A, WonderType.COLOSSUS);
 		ArrayList<Player> result = new ArrayList<Player>();
 		for (int i = 0; i < num; i++) {
 			Player temp = EasyMock.partialMockBuilder(Player.class).withConstructor("Jane Doe", wonder).createMock();
@@ -739,9 +742,9 @@ public class PlayerTurnHandlerTest {
 		playerTurnHandler.setGameBoard(board);
 		playerTurnHandler.buildStructure(current, current.getCurrentHand().get(0));
 
-		assertEquals(1, current.getStoragePile().size());
+		assertEquals(1, current.getAllCards().size());
 		assertEquals(0, current.getCurrentHand().size());
 		assertFalse(current.getCurrentHand().contains(deck.getCard(9)));
-		assertTrue(current.getStoragePile().contains(deck.getCard(9)));
+		assertTrue(current.getAllCards().contains(deck.getCard(9)));
 	}
 }
