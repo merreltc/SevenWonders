@@ -6,7 +6,7 @@
 			"levels": [{
 				"priority": "1",
 				"cost": {
-					"costType": "RAWRESOURCE",
+					"costType": "RESOURCE",
 					"costs": [{
 						"resource": "LUMBER",
 						"amount": 2
@@ -16,14 +16,14 @@
 					"effectType": "VALUE",
 					"value": "VICTORYPOINTS",
 					"affectingEntities": "NONE",
-					"valueAmount": 3,
+					"amount": 3,
 					"frequency": "ENDOFGAME"
 				}]
 			},
 			{
 				"priority": "2",
 				"cost": {
-					"costType": "RAWRESOURCE",
+					"costType": "RESOURCE",
 					"costs": [{
 						"resource": "CLAY",
 						"amount": 3
@@ -31,16 +31,16 @@
 				},
 				"effects": [{
 					"effectType": "VALUE",
-					"Value": "MILITARY",
-					"AffectingEntities": "NONE",
-					"valueAmount": 2,
+					"value": "MILITARY",
+					"affectingEntities": "NONE",
+					"amount": 2,
 					"frequency": "ONCEIMMEDIATE"
 				}]
 			},
 			{
 				"priority": "3",
 				"cost": {
-					"costType": "RAWRESOURCE",
+					"costType": "RESOURCE",
 					"costs": [{
 						"resource": "ORE",
 						"amount": 4
@@ -48,9 +48,9 @@
 				},
 				"effects": [{
 					"effectType": "VALUE",
-					"Value": "VICTORYPOINTS",
-					"AffectingEntities": "NONE",
-					"valueAmount": 7,
+					"value": "VICTORYPOINTS",
+					"affectingEntities": "NONE",
+					"amount": 7,
 					"frequency": "ENDOFGAME"
 				}]
 			}]
@@ -61,7 +61,7 @@
 			"levels": [{
 				"priority": "1",
 				"cost": {
-					"costType": "RAWRESOURCE",
+					"costType": "RESOURCE",
 					"costs": [{
 						"resource": "STONE",
 						"amount": 3
@@ -71,28 +71,28 @@
 					"effectType": "VALUE",
 					"value": "MILITARY",
 					"affectingEntities": "NONE",
-					"valueAmount": 1,
+					"amount": 1,
 					"frequency": "ONCEIMMEDIATE"
 				},
 				{
 					"effectType": "VALUE",
-					"value": "COIN",
+					"value": "COMMERCE",
 					"affectingEntities": "NONE",
-					"valueAmount": 3,
+					"amount": 3,
 					"frequency": "ONCEIMMEDIATE"
 				},
 				{
 					"effectType": "VALUE",
 					"value": "VICTORYPOINTS",
 					"affectingEntities": "NONE",
-					"valueAmount": 3,
+					"amount": 3,
 					"frequency": "ENDOFGAME"
 				}]
 			},
 			{
 				"priority": "2",
 				"cost": {
-					"costType": "RAWRESOURCE",
+					"costType": "RESOURCE",
 					"costs": [{
 						"resource": "ORE",
 						"amount": 4
@@ -102,21 +102,21 @@
 					"effectType": "VALUE",
 					"value": "MILITARY",
 					"affectingEntities": "NONE",
-					"valueAmount": 1,
+					"amount": 1,
 					"frequency": "ONCEIMMEDIATE"
 				},
 				{
 					"effectType": "VALUE",
-					"value": "COIN",
+					"value": "COMMERCE",
 					"affectingEntities": "NONE",
-					"valueAmount": 4,
+					"amount": 4,
 					"frequency": "ONCEIMMEDIATE"
 				},
 				{
 					"effectType": "VALUE",
 					"value": "VICTORYPOINTS",
 					"affectingEntities": "NONE",
-					"valueAmount": 4,
+					"amount": 4,
 					"frequency": "ENDOFGAME"
 				}]
 			}]
@@ -127,7 +127,7 @@
 			"levels": [{
 				"priority": "1",
 				"cost": {
-					"costType": "RAWRESOURCE",
+					"costType": "RESOURCE",
 					"costs": [{
 						"resource": "STONE",
 						"amount": 2
@@ -137,14 +137,14 @@
 					"effectType": "VALUE",
 					"value": "VICTORYPOINTS",
 					"affectingEntities": "NONE",
-					"valueAmount": 3,
+					"amount": 3,
 					"frequency": "ENDOFGAME"
 				}]
 			},
 			{
 				"priority": "2",
 				"cost": {
-					"costType": "RAWRESOURCE",
+					"costType": "RESOURCE",
 					"costs": [{
 						"resource": "ORE",
 						"amount": 2
@@ -152,22 +152,22 @@
 				},
 				"effects": [{
 					"effectType": "ENTITY",
-					"entityType": "RAWRESOURCE",
+					"entityType": "RESOURCE",
 					"entitiesAndAmounts": [{
 						"resource": "CLAY",
-						"entityAmount": 1
+						"amount": 1
 					},
 					{
 						"resource": "ORE",
-						"entityAmount": 1
+						"amount": 1
 					},
 					{
 						"resource": "LUMBER",
-						"entityAmount": 1
+						"amount": 1
 					},
 					{
 						"resource": "STONE",
-						"entityAmount": 1
+						"amount": 1
 					}],
 					"frequency": "EVERYTURN"
 				}]
@@ -175,7 +175,7 @@
 			{
 				"priority": "3",
 				"cost": {
-					"costType": "MANUFACTUREDGOOD",
+					"costType": "GOOD",
 					"costs": [{
 						"good": "GLASS",
 						"amount": 2
@@ -183,9 +183,9 @@
 				},
 				"effects": [{
 					"effectType": "VALUE",
-					"Value": "VICTORYPOINTS",
-					"AffectingEntities": "NONE",
-					"valueAmount": 7,
+					"value": "VICTORYPOINTS",
+					"affectingEntities": "NONE",
+					"amount": 7,
 					"frequency": "ENDOFGAME"
 				}]
 			}]
@@ -196,7 +196,7 @@
 			"levels": [{
 				"priority": "1",
 				"cost": {
-					"costType": "RAWRESOURCE",
+					"costType": "RESOURCE",
 					"costs": [{
 						"resource": "CLAY",
 						"amount": 2
@@ -204,22 +204,22 @@
 				},
 				"effects": [{
 					"effectType": "ENTITY",
-					"entityType": "RAWRESOURCE",
+					"entityType": "RESOURCE",
 					"entitiesAndAmounts": [{
 						"resource": "CLAY",
-						"entityAmount": 1
+						"amount": 1
 					},
 					{
 						"resource": "ORE",
-						"entityAmount": 1
+						"amount": 1
 					},
 					{
 						"resource": "LUMBER",
-						"entityAmount": 1
+						"amount": 1
 					},
 					{
 						"resource": "STONE",
-						"entityAmount": 1
+						"amount": 1
 					}],
 					"frequency": "EVERYTURN"
 				}]
@@ -227,7 +227,7 @@
 			{
 				"priority": "2",
 				"cost": {
-					"costType": "RAWRESOURCE",
+					"costType": "RESOURCE",
 					"costs": [{
 						"resource": "LUMBER",
 						"amount": 2
@@ -238,15 +238,15 @@
 					"entityType": "MANUFACTUREDGOOD",
 					"entitiesAndAmounts": [{
 						"good": "GLASS",
-						"entityAmount": 1
+						"amount": 1
 					},
 					{
 						"good": "LOOM",
-						"entityAmount": 1
+						"amount": 1
 					},
 					{
 						"good": "PRESS",
-						"entityAmount": 1
+						"amount": 1
 					}],
 					"frequency": "EVERYTURN"
 				}]
@@ -254,7 +254,7 @@
 			{
 				"priority": "3",
 				"cost": {
-					"costType": "RAWRESOURCE",
+					"costType": "RESOURCE",
 					"costs": [{
 						"resource": "STONE",
 						"amount": 3
@@ -262,9 +262,9 @@
 				},
 				"effects": [{
 					"effectType": "VALUE",
-					"Value": "VICTORYPOINTS",
-					"AffectingEntities": "NONE",
-					"valueAmount": 7,
+					"value": "VICTORYPOINTS",
+					"affectingEntities": "NONE",
+					"amount": 7,
 					"frequency": "ENDOFGAME"
 				}]
 			}]
@@ -275,7 +275,7 @@
 			"levels": [{
 				"priority": "1",
 				"cost": {
-					"costType": "RAWRESOURCE",
+					"costType": "RESOURCE",
 					"costs": [{
 						"resource": "STONE",
 						"amount": 2
@@ -285,14 +285,14 @@
 					"effectType": "VALUE",
 					"value": "VICTORYPOINTS",
 					"affectingEntities": "NONE",
-					"valueAmount": 3,
+					"amount": 3,
 					"frequency": "ENDOFGAME"
 				}]
 			},
 			{
 				"priority": "2",
 				"cost": {
-					"costType": "RAWRESOURCE",
+					"costType": "RESOURCE",
 					"costs": [{
 						"resource": "LUMBER",
 						"amount": 2
@@ -300,16 +300,16 @@
 				},
 				"effects": [{
 					"effectType": "VALUE",
-					"Value": "COIN",
-					"AffectingEntities": "NONE",
-					"valueAmount": 9,
+					"value": "COMMERCE",
+					"affectingEntities": "NONE",
+					"amount": 9,
 					"frequency": "ONCEIMMEDIATE"
 				}]
 			},
 			{
 				"priority": "3",
 				"cost": {
-					"costType": "MANUFACTUREDGOOD",
+					"costType": "GOOD",
 					"costs": [{
 						"good": "PRESS",
 						"amount": 2
@@ -317,9 +317,9 @@
 				},
 				"effects": [{
 					"effectType": "VALUE",
-					"Value": "VICTORYPOINTS",
-					"AffectingEntities": "NONE",
-					"valueAmount": 7,
+					"value": "VICTORYPOINTS",
+					"affectingEntities": "NONE",
+					"amount": 7,
 					"frequency": "ENDOFGAME"
 				}]
 			}]
@@ -330,7 +330,7 @@
 			"levels": [{
 				"priority": "1",
 				"cost": {
-					"costType": "RAWRESOURCE",
+					"costType": "RESOURCE",
 					"costs": [{
 						"resource": "STONE",
 						"amount": 2
@@ -338,23 +338,23 @@
 				},
 				"effects": [{
 					"effectType": "VALUE",
-					"value": "COIN",
+					"value": "COMMERCE",
 					"affectingEntities": "NONE",
-					"valueAmount": 4,
+					"amount": 4,
 					"frequency": "ONCEIMMEDIATE"
 				},
 				{
 					"effectType": "VALUE",
 					"value": "VICTORYPOINTS",
 					"affectingEntities": "NONE",
-					"valueAmount": 2,
+					"amount": 2,
 					"frequency": "ENDOFGAME"
 				}]
 			},
 			{
 				"priority": "2",
 				"cost": {
-					"costType": "RAWRESOURCE",
+					"costType": "RESOURCE",
 					"costs": [{
 						"resource": "LUMBER",
 						"amount": 2
@@ -362,23 +362,23 @@
 				},
 				"effects": [{
 					"effectType": "VALUE",
-					"Value": "COIN",
-					"AffectingEntities": "NONE",
-					"valueAmount": 4,
+					"value": "COMMERCE",
+					"affectingEntities": "NONE",
+					"amount": 4,
 					"frequency": "ONCEIMMEDIATE"
 				},
 				{
 					"effectType": "VALUE",
 					"value": "VICTORYPOINTS",
 					"affectingEntities": "NONE",
-					"valueAmount": 3,
+					"amount": 3,
 					"frequency": "ENDOFGAME"
 				}]
 			},
 			{
 				"priority": "3",
 				"cost": {
-					"costType": "MANUFACTUREDGOOD",
+					"costType": "GOOD",
 					"costs": [{
 						"good": "PRESS",
 						"amount": 1
@@ -394,16 +394,16 @@
 				},
 				"effects": [{
 					"effectType": "VALUE",
-					"Value": "COIN",
-					"AffectingEntities": "NONE",
-					"valueAmount": 4,
+					"value": "COMMERCE",
+					"affectingEntities": "NONE",
+					"amount": 4,
 					"frequency": "ONCEIMMEDIATE"
 				},
 				{
 					"effectType": "VALUE",
 					"value": "VICTORYPOINTS",
 					"affectingEntities": "NONE",
-					"valueAmount": 5,
+					"amount": 5,
 					"frequency": "ENDOFGAME"
 				}]
 			}]
@@ -414,7 +414,7 @@
 			"levels": [{
 				"priority": "1",
 				"cost": {
-					"costType": "RAWRESOURCE",
+					"costType": "RESOURCE",
 					"costs": [{
 						"resource": "CLAY",
 						"amount": 2
@@ -424,14 +424,14 @@
 					"effectType": "VALUE",
 					"value": "VICTORYPOINTS",
 					"affectingEntities": "NONE",
-					"valueAmount": 3,
+					"amount": 3,
 					"frequency": "ENDOFGAME"
 				}]
 			},
 			{
 				"priority": "2",
 				"cost": {
-					"costType": "RAWRESOURCE",
+					"costType": "RESOURCE",
 					"costs": [{
 						"resource": "LUMBER",
 						"amount": 3
@@ -442,15 +442,15 @@
 					"entityType": "SCIENCE",
 					"entitiesAndAmounts": [{
 						"science": "TABLET",
-						"entityAmount": 1
+						"amount": 1
 					},
 					{
 						"science": "PROTRACTOR",
-						"entityAmount": 1
+						"amount": 1
 					},
 					{
 						"science": "WHEEL",
-						"entityAmount": 1
+						"amount": 1
 					}],
 					"frequency": "ENDOFGAME"
 				}]
@@ -458,7 +458,7 @@
 			{
 				"priority": "3",
 				"cost": {
-					"costType": "RAWRESOURCE",
+					"costType": "RESOURCE",
 					"costs": [{
 						"resource": "CLAY",
 						"amount": 4
@@ -466,9 +466,9 @@
 				},
 				"effects": [{
 					"effectType": "VALUE",
-					"Value": "VICTORYPOINTS",
-					"AffectingEntities": "NONE",
-					"valueAmount": 7,
+					"value": "VICTORYPOINTS",
+					"affectingEntities": "NONE",
+					"amount": 7,
 					"frequency": "ENDOFGAME"
 				}]
 			}]
@@ -479,14 +479,14 @@
 			"levels": [{
 				"priority": "1",
 				"cost": {
-					"costType": "MULTI",
+					"costType": "MULTITYPE",
 					"costs": [{
 						"entityType": "MANUFACTUREDGOOD",
 						"good": "LOOM",
 						"amount": 1
 					},
 					{
-						"entityType": "RAWRESOURCE",
+						"entityType": "RESOURCE",
 						"resource": "CLAY",
 						"amount": 1
 					}]
@@ -495,21 +495,21 @@
 					"effectType": "VALUE",
 					"value": "VICTORYPOINTS",
 					"affectingEntities": "NONE",
-					"valueAmount": 3,
+					"amount": 3,
 					"frequency": "ENDOFGAME"
 				}]
 			},
 			{
 				"priority": "2",
 				"cost": {
-					"costType": "MULTI",
+					"costType": "MULTITYPE",
 					"costs": [{
 						"entityType": "MANUFACTUREDGOOD",
 						"good": "GLASS",
 						"amount": 1
 					},
 					{
-						"entityType": "RAWRESOURCE",
+						"entityType": "RESOURCE",
 						"resource": "LUMBER",
 						"amount": 2
 					}]
@@ -523,14 +523,14 @@
 			{
 				"priority": "3",
 				"cost": {
-					"costType": "MULTI",
+					"costType": "MULTITYPE",
 					"costs": [{
 						"entityType": "MANUFACTUREDGOOD",
 						"good": "PRESS",
 						"amount": 1
 					},
 					{
-						"entityType": "RAWRESOURCE",
+						"entityType": "RESOURCE",
 						"resource": "CLAY",
 						"amount": 3
 					}]
@@ -540,15 +540,15 @@
 					"entityType": "SCIENCE",
 					"entitiesAndAmounts": [{
 						"science": "TABLET",
-						"entityAmount": 1
+						"amount": 1
 					},
 					{
 						"science": "PROTRACTOR",
-						"entityAmount": 1
+						"amount": 1
 					},
 					{
 						"science": "WHEEL",
-						"entityAmount": 1
+						"amount": 1
 					}],
 					"frequency": "ENDOFGAME"
 				}]
@@ -560,7 +560,7 @@
 			"levels": [{
 				"priority": "1",
 				"cost": {
-					"costType": "RAWRESOURCE",
+					"costType": "RESOURCE",
 					"costs": [{
 						"resource": "LUMBER",
 						"amount": 2
@@ -570,14 +570,14 @@
 					"effectType": "VALUE",
 					"value": "VICTORYPOINTS",
 					"affectingEntities": "NONE",
-					"valueAmount": 3,
+					"amount": 3,
 					"frequency": "ENDOFGAME"
 				}]
 			},
 			{
 				"priority": "2",
 				"cost": {
-					"costType": "RAWRESOURCE",
+					"costType": "RESOURCE",
 					"costs": [{
 						"resource": "STONE",
 						"amount": 2
@@ -592,7 +592,7 @@
 			{
 				"priority": "3",
 				"cost": {
-					"costType": "RAWRESOURCE",
+					"costType": "RESOURCE",
 					"costs": [{
 						"resource": "ORE",
 						"amount": 2
@@ -600,9 +600,9 @@
 				},
 				"effects": [{
 					"effectType": "VALUE",
-					"Value": "VICTORYPOINTS",
-					"AffectingEntities": "NONE",
-					"valueAmount": 7,
+					"value": "VICTORYPOINTS",
+					"affectingEntities": "NONE",
+					"amount": 7,
 					"frequency": "ENDOFGAME"
 				}]
 			}]
@@ -613,7 +613,7 @@
 			"levels": [{
 				"priority": "1",
 				"cost": {
-					"costType": "RAWRESOURCE",
+					"costType": "RESOURCE",
 					"costs": [{
 						"resource": "LUMBER",
 						"amount": 2
@@ -622,15 +622,16 @@
 				"effects": [{
 					"effectType": "VALUE",
 					"value": "COMMERCE",
-					"affectingEntities": "RAWRESOURCE",
-					"valueAmount": 1,
-					"frequency": "EVERYTURN"
+					"affectingEntities": "RAWRESOURCES",
+					"amount": 1,
+					"frequency": "EVERYTURN",
+					"direction": "ALL"
 				}]
 			},
 			{
 				"priority": "2",
 				"cost": {
-					"costType": "RAWRESOURCE",
+					"costType": "RESOURCE",
 					"costs": [{
 						"resource": "STONE",
 						"amount": 2
@@ -638,23 +639,23 @@
 				},
 				"effects": [{
 					"effectType": "VALUE",
-					"Value": "VICTORYPOINTS",
-					"AffectingEntities": "NONE",
-					"valueAmount": 5,
+					"value": "VICTORYPOINTS",
+					"affectingEntities": "NONE",
+					"amount": 5,
 					"frequency": "ENDOFGAME"
 				}]
 			},
 			{
 				"priority": "3",
 				"cost": {
-					"costType": "MULTI",
+					"costType": "MULTITYPE",
 					"costs": [{
 						"entityType":"MANUFACTUREDGOOD",
 						"good": "LOOM",
 						"amount": 1
 					},
 					{
-						"entityType":"RAWRESOURCE",
+						"entityType":"RESOURCE",
 						"resource": "ORE",
 						"amount": 2
 					}]
@@ -672,7 +673,7 @@
 			"levels": [{
 				"priority": "1",
 				"cost": {
-					"costType": "RAWRESOURCE",
+					"costType": "RESOURCE",
 					"costs": [{
 						"resource": "CLAY",
 						"amount": 2
@@ -682,14 +683,14 @@
 					"effectType": "VALUE",
 					"value": "VICTORYPOINTS",
 					"affectingEntities": "NONE",
-					"valueAmount": 3,
+					"amount": 3,
 					"frequency": "ENDOFGAME"
 				}]
 			},
 			{
 				"priority": "2",
 				"cost": {
-					"costType": "RAWRESOURCE",
+					"costType": "RESOURCE",
 					"costs": [{
 						"resource": "ORE",
 						"amount": 3
@@ -704,7 +705,7 @@
 			{
 				"priority": "3",
 				"cost": {
-					"costType": "MANUFACTUREDGOOD",
+					"costType": "GOOD",
 					"costs": [{
 						"good": "LOOM",
 						"amount": 2
@@ -712,9 +713,9 @@
 				},
 				"effects": [{
 					"effectType": "VALUE",
-					"Value": "VICTORYPOINTS",
-					"AffectingEntities": "NONE",
-					"valueAmount": 7,
+					"value": "VICTORYPOINTS",
+					"affectingEntities": "NONE",
+					"amount": 7,
 					"frequency": "ENDOFGAME"
 				}]
 			}]
@@ -725,7 +726,7 @@
 			"levels": [{
 				"priority": "1",
 				"cost": {
-					"costType": "RAWRESOURCE",
+					"costType": "RESOURCE",
 					"costs": [{
 						"resource": "ORE",
 						"amount": 2
@@ -735,7 +736,7 @@
 					"effectType": "VALUE",
 					"value": "VICTORYPOINTS",
 					"affectingEntities": "NONE",
-					"valueAmount": 2,
+					"amount": 2,
 					"frequency": "ENDOFGAME"
 				},
 				{
@@ -747,7 +748,7 @@
 			{
 				"priority": "2",
 				"cost": {
-					"costType": "RAWRESOURCE",
+					"costType": "RESOURCE",
 					"costs": [{
 						"resource": "CLAY",
 						"amount": 3
@@ -757,7 +758,7 @@
 					"effectType": "VALUE",
 					"value": "VICTORYPOINTS",
 					"affectingEntities": "NONE",
-					"valueAmount": 1,
+					"amount": 1,
 					"frequency": "ENDOFGAME"
 				},
 				{
@@ -769,7 +770,7 @@
 			{
 				"priority": "3",
 				"cost": {
-					"costType": "MANUFACTUREDGOOD",
+					"costType": "GOOD",
 					"costs": [{
 						"good": "PRESS",
 						"amount": 1
@@ -796,7 +797,7 @@
 			"levels": [{
 				"priority": "1",
 				"cost": {
-					"costType": "RAWRESOURCE",
+					"costType": "RESOURCE",
 					"costs": [{
 						"resource": "STONE",
 						"amount": 2
@@ -806,14 +807,14 @@
 					"effectType": "VALUE",
 					"value": "VICTORYPOINTS",
 					"affectingEntities": "NONE",
-					"valueAmount": 3,
+					"amount": 3,
 					"frequency": "ENDOFGAME"
 				}]
 			},
 			{
 				"priority": "2",
 				"cost": {
-					"costType": "RAWRESOURCE",
+					"costType": "RESOURCE",
 					"costs": [{
 						"resource": "LUMBER",
 						"amount": 3
@@ -823,14 +824,14 @@
 					"effectType": "VALUE",
 					"value": "VICTORYPOINTS",
 					"affectingEntities": "NONE",
-					"valueAmount": 5,
+					"amount": 5,
 					"frequency": "ENDOFGAME"
 				}]
 			},
 			{
 				"priority": "3",
 				"cost": {
-					"costType": "RAWRESOURCE",
+					"costType": "RESOURCE",
 					"costs": [{
 						"resource": "STONE",
 						"amount": 4
@@ -838,9 +839,9 @@
 				},
 				"effects": [{
 					"effectType": "VALUE",
-					"Value": "VICTORYPOINTS",
-					"AffectingEntities": "NONE",
-					"valueAmount": 7,
+					"value": "VICTORYPOINTS",
+					"affectingEntities": "NONE",
+					"amount": 7,
 					"frequency": "ENDOFGAME"
 				}]
 			}]
@@ -851,7 +852,7 @@
 			"levels": [{
 				"priority": "1",
 				"cost": {
-					"costType": "RAWRESOURCE",
+					"costType": "RESOURCE",
 					"costs": [{
 						"resource": "LUMBER",
 						"amount": 2
@@ -861,14 +862,14 @@
 					"effectType": "VALUE",
 					"value": "VICTORYPOINTS",
 					"affectingEntities": "NONE",
-					"valueAmount": 3,
+					"amount": 3,
 					"frequency": "ENDOFGAME"
 				}]
 			},
 			{
 				"priority": "2",
 				"cost": {
-					"costType": "RAWRESOURCE",
+					"costType": "RESOURCE",
 					"costs": [{
 						"resource": "STONE",
 						"amount": 2
@@ -878,14 +879,14 @@
 					"effectType": "VALUE",
 					"value": "VICTORYPOINTS",
 					"affectingEntities": "NONE",
-					"valueAmount": 5,
+					"amount": 5,
 					"frequency": "ENDOFGAME"
 				}]
 			},
 			{
 				"priority": "3",
 				"cost": {
-					"costType": "RAWRESOURCE",
+					"costType": "RESOURCE",
 					"costs": [{
 						"resource": "CLAY",
 						"amount": 2
@@ -895,30 +896,30 @@
 					"effectType": "VALUE",
 					"value": "VICTORYPOINTS",
 					"affectingEntities": "NONE",
-					"valueAmount": 5,
+					"amount": 5,
 					"frequency": "ENDOFGAME"
 				}]
 			},
 			{
 				"priority": "4",
 				"cost": {
-					"costType": "MULTI",
+					"costType": "MULTITYPE",
 					"costs": [{
 						"type":"MANUFACTUREDGOOD",
 						"good": "PRESS",
 						"amount": 1
 					},
 					{
-						"type":"RAWRESOURCE",
+						"type":"RESOURCE",
 						"resource": "STONE",
 						"amount": 4
 					}]
 				},
 				"effects": [{
 					"effectType": "VALUE",
-					"Value": "VICTORYPOINTS",
-					"AffectingEntities": "NONE",
-					"valueAmount": 7,
+					"value": "VICTORYPOINTS",
+					"affectingEntities": "NONE",
+					"amount": 7,
 					"frequency": "ENDOFGAME"
 				}]
 			}]

@@ -84,9 +84,13 @@ public class WonderCostGenerator {
 				break;
 			case 3:
 				costs.put(Good.PRESS, 1);
+				costs.put(Good.GLASS, 1);
+				costs.put(Good.LOOM, 1);
+				break;
 			default:
 				throw new IllegalArgumentException("Invalid priority");
 			}
+			break;
 		default:
 			throw new IllegalArgumentException("Invalid Side");
 		}
@@ -124,6 +128,7 @@ public class WonderCostGenerator {
 			default:
 				throw new IllegalArgumentException("Invalid priority");
 			}
+			break;
 		default:
 			throw new IllegalArgumentException("Invalid Side");
 		}
@@ -164,6 +169,7 @@ public class WonderCostGenerator {
 			default:
 				throw new IllegalArgumentException("Invalid priority");
 			}
+			break;
 		default:
 			throw new IllegalArgumentException("Invalid Side");
 		}
@@ -199,11 +205,14 @@ public class WonderCostGenerator {
 				costs.put(RawResource.LUMBER, 2);
 				break;
 			case 3:
-				costs.put(Good.PRESS, 2);
+				costs.put(Good.PRESS, 1);
+				costs.put(Good.LOOM, 1);
+				costs.put(Good.GLASS, 1);
 				break;
 			default:
 				throw new IllegalArgumentException("Invalid priority");
 			}
+			break;
 		default:
 			throw new IllegalArgumentException("Invalid Side");
 		}
@@ -247,6 +256,7 @@ public class WonderCostGenerator {
 			default:
 				throw new IllegalArgumentException("Invalid priority");
 			}
+			break;
 		default:
 			throw new IllegalArgumentException("Invalid Side");
 		}
@@ -288,6 +298,7 @@ public class WonderCostGenerator {
 			default:
 				throw new IllegalArgumentException("Invalid priority");
 			}
+			break;
 		default:
 			throw new IllegalArgumentException("Invalid Side");
 		}
@@ -332,6 +343,7 @@ public class WonderCostGenerator {
 			default:
 				throw new IllegalArgumentException("Invalid priority");
 			}
+			break;
 		default:
 			throw new IllegalArgumentException("Invalid Side");
 		}
@@ -408,7 +420,7 @@ public class WonderCostGenerator {
 			case 2:
 				return CostType.RESOURCE;
 			case 3:
-				return CostType.MULTITYPE;
+				return CostType.RESOURCE;
 			default:
 				throw new IllegalArgumentException("Invalid priority");
 			}
@@ -419,7 +431,7 @@ public class WonderCostGenerator {
 			case 2:
 				return CostType.RESOURCE;
 			case 3:
-				return CostType.RESOURCE;
+				return CostType.MULTITYPE;
 			default:
 				throw new IllegalArgumentException("Invalid priority");
 			}

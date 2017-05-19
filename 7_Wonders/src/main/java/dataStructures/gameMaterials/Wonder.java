@@ -52,9 +52,9 @@ public class Wonder {
 		if (this.numBuiltLevels > this.getNumLevels()) {
 			throw new CannotBuiltWonderException("Player has built max number of levels.");
 		} else {
-			Level temp = new Level(this.numBuiltLevels, new Cost(CostType.NONE, 1), new Effect(EffectType.NONE),
-					Frequency.DEFAULT);
-			this.levels.add(temp);
+//			Level temp = new Level(this.numBuiltLevels, new Cost(CostType.NONE, 1), new Effect(EffectType.NONE),
+//					Frequency.DEFAULT);
+//			this.levels.add(temp);
 		}
 	}
 

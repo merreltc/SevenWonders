@@ -2,6 +2,8 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
 
 import constants.GeneralEnums.CostType;
 import constants.GeneralEnums.Side;
@@ -74,7 +76,12 @@ public class WonderSteps {
 	private ArrayList<Level> createLevels(int numLevels) {
 		ArrayList<Level> result = new ArrayList<Level>();
 		for (int i = 1; i <= numLevels; i++) {
-			Level temp = new Level(i, new Cost(CostType.NONE, 1), new Effect(EffectType.NONE), Frequency.DEFAULT);
+			HashMap<Frequency, HashSet<Effect>> effects = new HashMap<Frequency, HashSet<Effect>>();
+			HashSet<Effect> effect = new HashSet<Effect>();
+			effect.add(new Effect(EffectType.NONE));
+			effects.put(Frequency.DEFAULT, effect);
+
+			Level temp = new Level(i, new Cost(CostType.NONE, 1), effects);
 			result.add(temp);
 		}
 		return result;
@@ -93,7 +100,7 @@ public class WonderSteps {
 
 	@When("^Beginning the game$")
 	public void beginning_the_game() throws Throwable {
-	    // does nothing
+		// does nothing
 	}
 
 	@Then("^The level cannot be built$")

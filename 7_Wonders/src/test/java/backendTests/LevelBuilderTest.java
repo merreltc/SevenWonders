@@ -46,6 +46,255 @@ public class LevelBuilderTest {
 		assertTrue(expected.equals(actual));
 	}
 
+	@Test
+	public void testBuildColossusSideB() {
+		setWonder(Side.B, WonderType.COLOSSUS);
+		LevelBuilder builder = new LevelBuilder(this.wonder);
+		this.helper.setWonder(this.wonder);
+
+		Level expected = this.helper.getExpectedLevel(1);
+		Level actual = builder.buildLevel(1);
+		assertTrue(expected.equals(actual));
+
+		expected = this.helper.getExpectedLevel(2);
+		actual = builder.buildLevel(2);
+		assertTrue(expected.equals(actual));
+	}
+
+	@Test
+	public void testBuildLighthouseSideA() {
+		setWonder(Side.A, WonderType.LIGHTHOUSE);
+		LevelBuilder builder = new LevelBuilder(this.wonder);
+		this.helper.setWonder(this.wonder);
+
+		Level expected = this.helper.getExpectedLevel(1);
+		Level actual = builder.buildLevel(1);
+		assertTrue(expected.equals(actual));
+
+		expected = this.helper.getExpectedLevel(2);
+		actual = builder.buildLevel(2);
+		assertTrue(expected.equals(actual));
+
+		expected = this.helper.getExpectedLevel(3);
+		actual = builder.buildLevel(3);
+		assertTrue(expected.equals(actual));
+	}
+
+	@Test
+	public void testBuildLighthouseSideB() {
+		setWonder(Side.B, WonderType.LIGHTHOUSE);
+		LevelBuilder builder = new LevelBuilder(this.wonder);
+		this.helper.setWonder(this.wonder);
+
+		Level expected = this.helper.getExpectedLevel(1);
+		Level actual = builder.buildLevel(1);
+		assertTrue(expected.equals(actual));
+
+		expected = this.helper.getExpectedLevel(2);
+		actual = builder.buildLevel(2);
+		assertTrue(expected.equals(actual));
+
+		expected = this.helper.getExpectedLevel(3);
+		actual = builder.buildLevel(3);
+		assertTrue(expected.equals(actual));
+	}
+
+	@Test
+	public void testBuildTempleSideA() {
+		setWonder(Side.A, WonderType.TEMPLE);
+		LevelBuilder builder = new LevelBuilder(this.wonder);
+		this.helper.setWonder(this.wonder);
+
+		Level expected = this.helper.getExpectedLevel(1);
+		Level actual = builder.buildLevel(1);
+		assertTrue(expected.equals(actual));
+
+		expected = this.helper.getExpectedLevel(2);
+		actual = builder.buildLevel(2);
+		assertTrue(expected.equals(actual));
+
+		expected = this.helper.getExpectedLevel(3);
+		actual = builder.buildLevel(3);
+		assertTrue(expected.equals(actual));
+	}
+
+	@Test
+	public void testBuildTempleSideB() {
+		setWonder(Side.B, WonderType.TEMPLE);
+		LevelBuilder builder = new LevelBuilder(this.wonder);
+		this.helper.setWonder(this.wonder);
+
+		Level expected = this.helper.getExpectedLevel(1);
+		Level actual = builder.buildLevel(1);
+		assertTrue(expected.equals(actual));
+
+		expected = this.helper.getExpectedLevel(2);
+		actual = builder.buildLevel(2);
+		assertTrue(expected.equals(actual));
+
+		expected = this.helper.getExpectedLevel(3);
+		actual = builder.buildLevel(3);
+		assertTrue(expected.equals(actual));
+	}
+
+	@Test
+	public void testBuildStatueSideA() {
+		setWonder(Side.A, WonderType.STATUE);
+		LevelBuilder builder = new LevelBuilder(this.wonder);
+		this.helper.setWonder(this.wonder);
+
+		Level expected = this.helper.getExpectedLevel(1);
+		Level actual = builder.buildLevel(1);
+		assertTrue(expected.equals(actual));
+
+		expected = this.helper.getExpectedLevel(2);
+		actual = builder.buildLevel(2);
+		assertTrue(expected.equals(actual));
+
+		expected = this.helper.getExpectedLevel(3);
+		actual = builder.buildLevel(3);
+		System.out.println("Statue A");
+		System.out.println("EX: " + expected.getCost());
+		System.out.println("AC: " + actual.getCost());
+		assertTrue(expected.equals(actual));
+	}
+
+	@Test
+	public void testBuildStatueSideB() {
+		setWonder(Side.B, WonderType.STATUE);
+		LevelBuilder builder = new LevelBuilder(this.wonder);
+		this.helper.setWonder(this.wonder);
+
+		Level expected = this.helper.getExpectedLevel(1);
+		Level actual = builder.buildLevel(1);
+		assertTrue(expected.equals(actual));
+
+		expected = this.helper.getExpectedLevel(2);
+		actual = builder.buildLevel(2);
+		assertTrue(expected.equals(actual));
+
+		expected = this.helper.getExpectedLevel(3);
+		actual = builder.buildLevel(3);
+		System.out.println("Statue B");
+		System.out.println("EX: " + expected.getEffects());
+		System.out.println("AC: " + actual.getEffects());
+		assertTrue(expected.equals(actual));
+	}
+
+	@Test
+	public void testBuildGardensSideA() {
+		setWonder(Side.A, WonderType.GARDENS);
+		LevelBuilder builder = new LevelBuilder(this.wonder);
+		this.helper.setWonder(this.wonder);
+
+		Level expected = this.helper.getExpectedLevel(1);
+		Level actual = builder.buildLevel(1);
+		assertTrue(expected.equals(actual));
+
+		expected = this.helper.getExpectedLevel(2);
+		actual = builder.buildLevel(2);
+		assertTrue(expected.equals(actual));
+
+		expected = this.helper.getExpectedLevel(3);
+		actual = builder.buildLevel(3);
+		assertTrue(expected.equals(actual));
+	}
+
+	@Test
+	public void testBuildGardensSideB() {
+		setWonder(Side.B, WonderType.GARDENS);
+		LevelBuilder builder = new LevelBuilder(this.wonder);
+		this.helper.setWonder(this.wonder);
+
+		Level expected = this.helper.getExpectedLevel(1);
+		Level actual = builder.buildLevel(1);
+		assertTrue(expected.equals(actual));
+
+		expected = this.helper.getExpectedLevel(2);
+		actual = builder.buildLevel(2);
+		assertTrue(expected.equals(actual));
+
+		expected = this.helper.getExpectedLevel(3);
+		actual = builder.buildLevel(3);
+		assertTrue(expected.equals(actual));
+	}
+
+	@Test
+	public void testBuildMausoleumSideA() {
+		setWonder(Side.A, WonderType.MAUSOLEUM);
+		LevelBuilder builder = new LevelBuilder(this.wonder);
+		this.helper.setWonder(this.wonder);
+
+		Level expected = this.helper.getExpectedLevel(1);
+		Level actual = builder.buildLevel(1);
+		assertTrue(expected.equals(actual));
+
+		expected = this.helper.getExpectedLevel(2);
+		actual = builder.buildLevel(2);
+		assertTrue(expected.equals(actual));
+
+		expected = this.helper.getExpectedLevel(3);
+		actual = builder.buildLevel(3);
+		assertTrue(expected.equals(actual));
+	}
+
+	@Test
+	public void testBuildMausoleumSideB() {
+		setWonder(Side.B, WonderType.MAUSOLEUM);
+		LevelBuilder builder = new LevelBuilder(this.wonder);
+		this.helper.setWonder(this.wonder);
+
+		Level expected = this.helper.getExpectedLevel(1);
+		Level actual = builder.buildLevel(1);
+
+		assertTrue(expected.equals(actual));
+		expected = this.helper.getExpectedLevel(2);
+		actual = builder.buildLevel(2);
+		assertTrue(expected.equals(actual));
+
+		expected = this.helper.getExpectedLevel(3);
+		actual = builder.buildLevel(3);
+		assertTrue(expected.equals(actual));
+	}
+
+	@Test
+	public void testBuildPyramidsSideA() {
+		setWonder(Side.A, WonderType.PYRAMIDS);
+		LevelBuilder builder = new LevelBuilder(this.wonder);
+		this.helper.setWonder(this.wonder);
+
+		Level expected = this.helper.getExpectedLevel(1);
+		Level actual = builder.buildLevel(1);
+		assertTrue(expected.equals(actual));
+
+		expected = this.helper.getExpectedLevel(2);
+		actual = builder.buildLevel(2);
+		assertTrue(expected.equals(actual));
+
+		expected = this.helper.getExpectedLevel(3);
+		actual = builder.buildLevel(3);
+		assertTrue(expected.equals(actual));
+	}
+
+	@Test
+	public void testBuildPyramidsideB() {
+		setWonder(Side.B, WonderType.PYRAMIDS);
+		LevelBuilder builder = new LevelBuilder(this.wonder);
+		this.helper.setWonder(this.wonder);
+
+		Level expected = this.helper.getExpectedLevel(1);
+		Level actual = builder.buildLevel(1);
+		assertTrue(expected.equals(actual));
+
+		expected = this.helper.getExpectedLevel(2);
+		actual = builder.buildLevel(2);
+		assertTrue(expected.equals(actual));
+
+		expected = this.helper.getExpectedLevel(3);
+		actual = builder.buildLevel(3);
+		assertTrue(expected.equals(actual));
+	}
+
 	private void setWonder(Side side, WonderType type) {
 		this.wonder = new Wonder(side, type);
 	}

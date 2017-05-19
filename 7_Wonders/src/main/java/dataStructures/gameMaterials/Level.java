@@ -1,47 +1,24 @@
 package dataStructures.gameMaterials;
 
-import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 
 import constants.GeneralEnums.CostType;
-import dataStructures.gameMaterials.Effect.Direction;
 import dataStructures.gameMaterials.Effect.EffectType;
-import dataStructures.gameMaterials.EntityEffect.EntityType;
-import dataStructures.gameMaterials.ValueEffect.AffectingEntity;
-import dataStructures.gameMaterials.ValueEffect.Value;
-import dataStructures.gameMaterials.ValueEffect.ValueType;
 
 public class Level {
 	private int priority;
 	private Cost cost;
-	private HashMap<Frequency, ArrayList<Effect>> effects;
+	private HashMap<Frequency, HashSet<Effect>> effects;
 
 	public enum Frequency {
 		ENDOFTURN, EVERYTURN, SIXTHTURN, ONCEIMMEDIATE, ONCEAGE, ENDOFGAME, DEFAULT
 	}
 
-	public Level(int priority, Cost cost, Effect effect, Frequency frequency) {
-		this.priority = priority;
-		this.cost = cost;
-		this.effects = new HashMap<Frequency, ArrayList<Effect>>();
-		addEffect(effect, frequency);
-	}
-
-	public Level(int priority, Cost cost, HashMap<Frequency, ArrayList<Effect>> effects) {
+	public Level(int priority, Cost cost, HashMap<Frequency, HashSet<Effect>> effects) {
 		this.priority = priority;
 		this.cost = cost;
 		this.effects = effects;
-	}
-
-	private void addEffect(Effect effect, Frequency frequency) {
-		ArrayList<Effect> toAdd;
-		if (this.effects.containsKey(frequency)) {
-			toAdd = this.effects.get(frequency);
-		} else {
-			toAdd = new ArrayList<Effect>();
-		}
-		toAdd.add(effect);
-		this.effects.put(frequency, toAdd);
 	}
 
 	@Override
@@ -54,8 +31,62 @@ public class Level {
 		Level temp = (Level) obj;
 		boolean equalPriority = this.priority == temp.priority;
 		boolean equalCost = this.getCost().equals(temp.getCost());
-		boolean equalEffects = this.effects.equals(temp.getEffects());
+		boolean equalEffects = equalEffects(temp.getEffects());
+		System.out.println(
+				"Priority == : " + equalPriority + " Cost == : " + equalCost + " EffectsEquals == :" + equalEffects);
+		System.err.println("Equal? " + (equalPriority && equalCost && equalEffects));
 		return equalPriority && equalCost && equalEffects;
+	}
+
+	private boolean equalEffects(HashMap<Frequency, HashSet<Effect>> other) {
+		for (Frequency frequency : this.effects.keySet()) {
+			if (!other.containsKey(frequency)) {
+				return false;
+			} else if (!compareEffects(frequency, other.get(frequency))) {
+				return false;
+			} else {
+				continue;
+			}
+		}
+		return true;
+	}
+
+	private boolean compareEffects(Frequency frequency, HashSet<Effect> other) {
+		HashSet<Effect> thisEffects = this.effects.get(frequency);
+		for (Effect thisEffect : thisEffects) {
+			if (otherContainsEffect(other, thisEffect)) {
+				continue;
+			} else {
+				return false;
+			}
+		}
+		return true;
+	}
+
+	private boolean otherContainsEffect(HashSet<Effect> other, Effect thisEffect) {
+		for (Effect otherEffect : other) {
+			EffectType type = thisEffect.getEffectType();
+			switch (type) {
+			case ABILITY:
+				if (((AbilityEffect) thisEffect).equals((AbilityEffect) otherEffect)) {
+					return true;
+				}
+				break;
+			case VALUE:
+				if (((ValueEffect) thisEffect).equals((ValueEffect) otherEffect)) {
+					return true;
+				}
+				break;
+			case ENTITY:
+				if (((EntityEffect) thisEffect).equals((EntityEffect) otherEffect)) {
+					return true;
+				}
+				break;
+			default:
+				throw new IllegalArgumentException("Invalid Effect Type");
+			}
+		}
+		return false;
 	}
 
 	public int getPriority() {
@@ -74,7 +105,7 @@ public class Level {
 		return this.cost.getCost();
 	}
 
-	public HashMap<Frequency, ArrayList<Effect>> getEffects() {
+	public HashMap<Frequency, HashSet<Effect>> getEffects() {
 		return this.effects;
 	}
 }

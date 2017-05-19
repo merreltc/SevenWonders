@@ -31,7 +31,7 @@ public class ValueEffect extends Effect {
 		validateValueAmount(value, valueAmount);
 		this.valueAmount = valueAmount;
 	}
-	
+
 	public ValueEffect(Value value, AffectingEntity affectingEntity, Direction direction) {
 		super(EffectType.VALUE);
 		this.value = value;
@@ -118,7 +118,6 @@ public class ValueEffect extends Effect {
 		}
 
 		ValueEffect value = (ValueEffect) effect;
-
 		if (this.valueAmount == value.getValueAmount() && this.getDirection() == value.getDirection()
 				&& this.affectingEntity == value.affectingEntity && this.value == value.getValue()
 				&& this.affectingEntities.toString().equals(value.affectingEntities.toString())) {

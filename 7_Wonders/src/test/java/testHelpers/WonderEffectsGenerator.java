@@ -1,7 +1,7 @@
 package testHelpers;
 
-import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 
 import constants.GeneralEnums.Good;
 import constants.GeneralEnums.RawResource;
@@ -9,6 +9,7 @@ import constants.GeneralEnums.Science;
 import dataStructures.gameMaterials.AbilityEffect;
 import dataStructures.gameMaterials.AbilityEffect.Ability;
 import dataStructures.gameMaterials.Effect;
+import dataStructures.gameMaterials.Effect.Direction;
 import dataStructures.gameMaterials.EntityEffect;
 import dataStructures.gameMaterials.EntityEffect.EntityType;
 import dataStructures.gameMaterials.Level.Frequency;
@@ -24,8 +25,8 @@ public class WonderEffectsGenerator {
 		this.wonder = wonder;
 	}
 
-	public HashMap<Frequency, ArrayList<Effect>> getExpectedEffects(int priority) {
-		HashMap<Frequency, ArrayList<Effect>> effects = null;
+	public HashMap<Frequency, HashSet<Effect>> getExpectedEffects(int priority) {
+		HashMap<Frequency, HashSet<Effect>> effects = null;
 
 		switch (this.wonder.getSide()) {
 		case A:
@@ -41,8 +42,8 @@ public class WonderEffectsGenerator {
 		return effects;
 	}
 
-	private HashMap<Frequency, ArrayList<Effect>> getSideAEffects(int priority) {
-		HashMap<Frequency, ArrayList<Effect>> effectsAndFrequency = new HashMap<Frequency, ArrayList<Effect>>();
+	private HashMap<Frequency, HashSet<Effect>> getSideAEffects(int priority) {
+		HashMap<Frequency, HashSet<Effect>> effectsAndFrequency = new HashMap<Frequency, HashSet<Effect>>();
 
 		switch (priority) {
 		case 1:
@@ -60,8 +61,8 @@ public class WonderEffectsGenerator {
 		return effectsAndFrequency;
 	}
 
-	private HashMap<Frequency, ArrayList<Effect>> getSideBEffects(int priority) {
-		HashMap<Frequency, ArrayList<Effect>> effectsAndFrequency = new HashMap<Frequency, ArrayList<Effect>>();
+	private HashMap<Frequency, HashSet<Effect>> getSideBEffects(int priority) {
+		HashMap<Frequency, HashSet<Effect>> effectsAndFrequency = new HashMap<Frequency, HashSet<Effect>>();
 
 		switch (priority) {
 		case 1:
@@ -81,17 +82,17 @@ public class WonderEffectsGenerator {
 		return effectsAndFrequency;
 	}
 
-	private void getSideAPriority1Effect(HashMap<Frequency, ArrayList<Effect>> effectsAndFrequency) {
-		ArrayList<Effect> effects = new ArrayList<Effect>();
+	private void getSideAPriority1Effect(HashMap<Frequency, HashSet<Effect>> effectsAndFrequency) {
+		HashSet<Effect> effects = new HashSet<Effect>();
 		Effect effect;
 		effect = new ValueEffect(Value.VICTORYPOINTS, AffectingEntity.NONE, 3);
 		effects.add(effect);
 		effectsAndFrequency.put(Frequency.ENDOFGAME, effects);
 	}
 
-	private void getSideBPriority1Effect(HashMap<Frequency, ArrayList<Effect>> effectsAndFrequency) {
+	private void getSideBPriority1Effect(HashMap<Frequency, HashSet<Effect>> effectsAndFrequency) {
 		Effect effect;
-		ArrayList<Effect> effects = new ArrayList<Effect>();
+		HashSet<Effect> effects = new HashSet<Effect>();
 
 		switch (this.wonder.getType()) {
 		case COLOSSUS:
@@ -102,7 +103,7 @@ public class WonderEffectsGenerator {
 			effectsAndFrequency.put(Frequency.ONCEIMMEDIATE, effects);
 
 			effect = new ValueEffect(Value.VICTORYPOINTS, AffectingEntity.NONE, 3);
-			effects = new ArrayList<Effect>();
+			effects = new HashSet<Effect>();
 			effects.add(effect);
 			effectsAndFrequency.put(Frequency.ENDOFGAME, effects);
 			break;
@@ -115,7 +116,7 @@ public class WonderEffectsGenerator {
 			effects.add(effect);
 			effectsAndFrequency.put(Frequency.ONCEIMMEDIATE, effects);
 
-			effects = new ArrayList<Effect>();
+			effects = new HashSet<Effect>();
 			effect = new ValueEffect(Value.VICTORYPOINTS, AffectingEntity.NONE, 2);
 			effects.add(effect);
 			effectsAndFrequency.put(Frequency.ENDOFGAME, effects);
@@ -126,7 +127,7 @@ public class WonderEffectsGenerator {
 			effectsAndFrequency.put(Frequency.ENDOFGAME, effects);
 			break;
 		case STATUE:
-			effect = new ValueEffect(Value.COMMERCE, AffectingEntity.RAWRESOURCES, 1);
+			effect = new ValueEffect(Value.COMMERCE, AffectingEntity.RAWRESOURCES, Direction.ALL, 1);
 			effects.add(effect);
 			effectsAndFrequency.put(Frequency.EVERYTURN, effects);
 			break;
@@ -135,7 +136,7 @@ public class WonderEffectsGenerator {
 			effects.add(effect);
 			effectsAndFrequency.put(Frequency.ENDOFTURN, effects);
 
-			effects = new ArrayList<Effect>();
+			effects = new HashSet<Effect>();
 			effect = new ValueEffect(Value.VICTORYPOINTS, AffectingEntity.NONE, 2);
 			effects.add(effect);
 			effectsAndFrequency.put(Frequency.ENDOFGAME, effects);
@@ -150,8 +151,8 @@ public class WonderEffectsGenerator {
 		}
 	}
 
-	private void getSideAPriority2Effect(HashMap<Frequency, ArrayList<Effect>> effectsAndFrequency) {
-		ArrayList<Effect> effects = new ArrayList<Effect>();
+	private void getSideAPriority2Effect(HashMap<Frequency, HashSet<Effect>> effectsAndFrequency) {
+		HashSet<Effect> effects = new HashSet<Effect>();
 		Effect effect;
 
 		switch (this.wonder.getType()) {
@@ -193,9 +194,9 @@ public class WonderEffectsGenerator {
 		}
 	}
 
-	private void getSideBPriority2Effect(HashMap<Frequency, ArrayList<Effect>> effectsAndFrequency) {
+	private void getSideBPriority2Effect(HashMap<Frequency, HashSet<Effect>> effectsAndFrequency) {
 		Effect effect;
-		ArrayList<Effect> effects = new ArrayList<Effect>();
+		HashSet<Effect> effects = new HashSet<Effect>();
 
 		switch (this.wonder.getType()) {
 		case COLOSSUS:
@@ -206,7 +207,7 @@ public class WonderEffectsGenerator {
 			effectsAndFrequency.put(Frequency.ONCEIMMEDIATE, effects);
 
 			effect = new ValueEffect(Value.VICTORYPOINTS, AffectingEntity.NONE, 4);
-			effects = new ArrayList<Effect>();
+			effects = new HashSet<Effect>();
 			effects.add(effect);
 			effectsAndFrequency.put(Frequency.ENDOFGAME, effects);
 			break;
@@ -219,7 +220,7 @@ public class WonderEffectsGenerator {
 			effects.add(effect);
 			effectsAndFrequency.put(Frequency.ONCEIMMEDIATE, effects);
 
-			effects = new ArrayList<Effect>();
+			effects = new HashSet<Effect>();
 			effect = new ValueEffect(Value.VICTORYPOINTS, AffectingEntity.NONE, 3);
 			effects.add(effect);
 			effectsAndFrequency.put(Frequency.ENDOFGAME, effects);
@@ -239,7 +240,7 @@ public class WonderEffectsGenerator {
 			effects.add(effect);
 			effectsAndFrequency.put(Frequency.ENDOFTURN, effects);
 
-			effects = new ArrayList<Effect>();
+			effects = new HashSet<Effect>();
 			effect = new ValueEffect(Value.VICTORYPOINTS, AffectingEntity.NONE, 1);
 			effects.add(effect);
 			effectsAndFrequency.put(Frequency.ENDOFGAME, effects);
@@ -254,17 +255,17 @@ public class WonderEffectsGenerator {
 		}
 	}
 
-	private void getSideAPriority3Effect(HashMap<Frequency, ArrayList<Effect>> effectsAndFrequency) {
-		ArrayList<Effect> effects = new ArrayList<Effect>();
+	private void getSideAPriority3Effect(HashMap<Frequency, HashSet<Effect>> effectsAndFrequency) {
+		HashSet<Effect> effects = new HashSet<Effect>();
 		Effect effect;
 		effect = new ValueEffect(Value.VICTORYPOINTS, AffectingEntity.NONE, 7);
 		effects.add(effect);
 		effectsAndFrequency.put(Frequency.ENDOFGAME, effects);
 	}
 
-	private void getSideBPriority3Effect(HashMap<Frequency, ArrayList<Effect>> effectsAndFrequency) {
+	private void getSideBPriority3Effect(HashMap<Frequency, HashSet<Effect>> effectsAndFrequency) {
 		Effect effect;
-		ArrayList<Effect> effects = new ArrayList<Effect>();
+		HashSet<Effect> effects = new HashSet<Effect>();
 
 		switch (this.wonder.getType()) {
 		case LIGHTHOUSE:
@@ -277,7 +278,7 @@ public class WonderEffectsGenerator {
 			effects.add(effect);
 			effectsAndFrequency.put(Frequency.ONCEIMMEDIATE, effects);
 
-			effects = new ArrayList<Effect>();
+			effects = new HashSet<Effect>();
 			effect = new ValueEffect(Value.VICTORYPOINTS, AffectingEntity.NONE, 5);
 			effects.add(effect);
 			effectsAndFrequency.put(Frequency.ENDOFGAME, effects);
@@ -306,10 +307,10 @@ public class WonderEffectsGenerator {
 		}
 	}
 
-	private void getSideBPriority4Effect(HashMap<Frequency, ArrayList<Effect>> effectsAndFrequency) {
+	private void getSideBPriority4Effect(HashMap<Frequency, HashSet<Effect>> effectsAndFrequency) {
 		Effect effect;
-		ArrayList<Effect> effects = new ArrayList<Effect>();
-		
+		HashSet<Effect> effects = new HashSet<Effect>();
+
 		switch (this.wonder.getType()) {
 		case PYRAMIDS:
 			effect = new ValueEffect(Value.VICTORYPOINTS, AffectingEntity.NONE, 7);
@@ -321,70 +322,42 @@ public class WonderEffectsGenerator {
 		}
 	}
 
-	private void addAllRawResource(ArrayList<Effect> effects, int amount) {
+	private void addAllRawResource(HashSet<Effect> effects, int amount) {
 		Effect effect;
 		HashMap<Enum, Integer> resource = new HashMap<Enum, Integer>();
 		EntityType entityType = EntityType.RESOURCE;
 
 		resource.put(RawResource.CLAY, amount);
-		effect = new EntityEffect(entityType, resource);
-		effects.add(effect);
-
-		resource.clear();
 		resource.put(RawResource.ORE, amount);
-		effect = new EntityEffect(entityType, resource);
-		effects.add(effect);
-
-		resource.clear();
 		resource.put(RawResource.LUMBER, amount);
-		effect = new EntityEffect(entityType, resource);
-		effects.add(effect);
-
-		resource.clear();
 		resource.put(RawResource.STONE, amount);
-		effect = new EntityEffect(entityType, resource);
-		effects.add(effect);
+
+		effects.add(new EntityEffect(EntityType.RESOURCE, resource));
 	}
 
-	private void addAllManufacturedGoods(ArrayList<Effect> effects, int amount) {
+	private void addAllManufacturedGoods(HashSet<Effect> effects, int amount) {
 		Effect effect;
 		EntityType entityType;
 		HashMap<Enum, Integer> good = new HashMap<Enum, Integer>();
 		entityType = EntityType.MANUFACTUREDGOOD;
 
 		good.put(Good.LOOM, amount);
-		effect = new EntityEffect(entityType, good);
-		effects.add(effect);
-
-		good.clear();
 		good.put(Good.GLASS, amount);
-		effect = new EntityEffect(entityType, good);
-		effects.add(effect);
-
-		good.clear();
 		good.put(Good.PRESS, amount);
-		effect = new EntityEffect(entityType, good);
-		effects.add(effect);
+
+		effects.add(new EntityEffect(entityType, good));
 	}
 
-	private void addAllScience(ArrayList<Effect> effects, int amount) {
+	private void addAllScience(HashSet<Effect> effects, int amount) {
 		Effect effect;
 		EntityType entityType;
 		HashMap<Enum, Integer> science = new HashMap<Enum, Integer>();
 		entityType = EntityType.SCIENCE;
 
 		science.put(Science.PROTRACTOR, amount);
-		effect = new EntityEffect(entityType, science);
-		effects.add(effect);
-
-		science.clear();
 		science.put(Science.TABLET, amount);
-		effect = new EntityEffect(entityType, science);
-		effects.add(effect);
-
-		science.clear();
 		science.put(Science.WHEEL, amount);
-		effect = new EntityEffect(entityType, science);
-		effects.add(effect);
+
+		effects.add(new EntityEffect(entityType, science));
 	}
 }

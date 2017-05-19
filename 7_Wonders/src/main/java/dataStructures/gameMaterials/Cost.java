@@ -36,4 +36,9 @@ public class Cost {
 
 		return false;
 	}
+
+	@Override
+	public String toString() {
+		return "CostType: " + this.type + ", Costs: " + this.cost;
+	}
 }
