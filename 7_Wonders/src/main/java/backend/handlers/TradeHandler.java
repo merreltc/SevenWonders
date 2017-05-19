@@ -134,8 +134,9 @@ public class TradeHandler {
 			}
 			from.addTradedValue(entity);
 		} else {
-			String msg = TranslateWithTemplate.prepareStringTemplateWithStringArg(Translate.getNewResourceBundle().getString(entity.toString()),
-					"noResourceForTradingTemplate", Translate.getNewResourceBundle());
+			ResourceBundle messages = Translate.getNewResourceBundle();
+			String msg = TranslateWithTemplate.prepareStringTemplateWithStringArg(messages.getString(entity.toString()),
+					"noResourceForTradingTemplate", messages);
 			throw new InvalidTradeException(msg);
 		}
 	}

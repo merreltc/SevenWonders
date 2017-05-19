@@ -21,11 +21,10 @@ public class TranslateWithTemplate {
 	public static String prepareStringTemplateWithStringArg(String arg, String template, ResourceBundle messages) {
 		String[] region_lang = Constants.LOCALE.split("_");
 		Locale gameLocale = new Locale(region_lang[0], region_lang[1]);
-		Object[] messageArgs = { arg };
+		Object[] messageArgs = { new String(arg) };
 		MessageFormat format = new MessageFormat("");
 		format.setLocale(gameLocale);
 		format.applyPattern(messages.getString(template));
-		System.out.println(format.format(messageArgs));
 		return format.format(messageArgs);
 	}
 
