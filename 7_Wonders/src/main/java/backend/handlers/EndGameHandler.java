@@ -73,10 +73,10 @@ public class EndGameHandler {
 		ArrayList<String> names = getNames(cardsLeft, cardsRight);
 		String selected = showGuildCardMessage(names);
 		int index = names.indexOf(selected);
-		if (index >= cardsLeft.size()) {
+		if (index < cardsLeft.size()) {
 			players.get(playerLoc).addCardToStoragePile(cardsLeft.get(index));
 		} else {
-			players.get(playerLoc).addCardToStoragePile(cardsLeft.get(index - cardsLeft.size()+1));
+			players.get(playerLoc).addCardToStoragePile(cardsRight.get(index - cardsLeft.size()));
 		}
 	}
 
