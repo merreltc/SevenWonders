@@ -25,6 +25,7 @@ public class TranslateWithTemplate {
 		MessageFormat format = new MessageFormat("");
 		format.setLocale(gameLocale);
 		format.applyPattern(messages.getString(template));
+		System.out.println(format.format(messageArgs));
 		return format.format(messageArgs);
 	}
 
