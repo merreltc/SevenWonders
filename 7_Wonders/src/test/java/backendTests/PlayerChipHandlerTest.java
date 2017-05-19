@@ -442,6 +442,7 @@ public class PlayerChipHandlerTest {
 		}
 	}
 
+
 	@Test
 	public void testRemoveAllValue5ConflictTokens() {
 		Player player = createMockedPlayer();
