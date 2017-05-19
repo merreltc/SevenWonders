@@ -1,15 +1,13 @@
 package backend;
 
 import java.util.ArrayList;
-import java.util.ResourceBundle;
 
 import backend.handlers.DeckHandler;
-import backend.handlers.EndGameHandler;
+import backend.handlers.EffectHandler;
 import backend.handlers.PlayerTurnHandler;
 import backend.handlers.RotateHandler;
 import backend.handlers.RotateHandler.Rotation;
 import backend.handlers.SetUpDeckHandler;
-import backend.handlers.SetUpPlayerHandler;
 import backend.handlers.TradeHandler;
 import backend.handlers.TurnHandler;
 import constants.GeneralEnums.GameMode;
@@ -19,7 +17,6 @@ import dataStructures.gameMaterials.Card;
 import dataStructures.gameMaterials.Deck;
 import dataStructures.gameMaterials.Deck.Age;
 import dataStructures.playerData.Player;
-import utils.Translate;
 
 /**
  * Controls the actions of the game and delegates those responsibilities to
@@ -57,6 +54,7 @@ public class GameManager {
 		this.handlers.setRotateHandler(new RotateHandler(this.board));
 		this.handlers.setTradeHandler(new TradeHandler(this.board));
 		this.handlers.getTurnHandler().setGameBoard(this.board);
+		this.handlers.setEffectHandler(new EffectHandler(this.board));
 	}
 
 	public GameBoard createGameBoard(ArrayList<String> names) {

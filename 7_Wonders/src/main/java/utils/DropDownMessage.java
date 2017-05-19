@@ -15,7 +15,7 @@ public class DropDownMessage {
 	}
 
 	public String dropDownScienceSelectionMessage() {
-		Object[] objects = { "Protractor", "Wheel", "Tablet" };
+		Object[] objects = { "PROTRACTOR", "WHEEL", "TABLET" };
 		ResourceBundle messages = Translate.getNewResourceBundle();
 		return (String) JOptionPane.showInputDialog(null, messages.getString("chooseAScience"),
 				messages.getString("chooseAScience"), JOptionPane.PLAIN_MESSAGE, null, objects, objects[0]);
@@ -48,5 +48,26 @@ public class DropDownMessage {
 		ResourceBundle messages = Translate.getNewResourceBundle();
 		return (String) JOptionPane.showInputDialog(null, messages.getString("chooseYourWonder"),
 				messages.getString("wonderSelector"), JOptionPane.PLAIN_MESSAGE, null, wonders, wonders[0]);
+	}
+
+	public String dropDownPlayOrDiscardMessage() {
+		Object[] objects = { "Play", "Discard" };
+		ResourceBundle messages = Translate.getNewResourceBundle();
+		return (String) JOptionPane.showInputDialog(null, "Play Or Discard",
+				"7th Card", JOptionPane.PLAIN_MESSAGE, null, objects, objects[0]);
+	}
+	
+	public String dropDownBuildMessage() {
+		Object[] objects = { "Pay", "Free" };
+		ResourceBundle messages = Translate.getNewResourceBundle();
+		return (String) JOptionPane.showInputDialog(null, "Pay Or Free",
+				"Build Cost", JOptionPane.PLAIN_MESSAGE, null, objects, objects[0]);
+	}
+
+	public String dropDownResourceSelectionMessage() {
+		Object[] objects = { "LUMBER", "ORE", "CLAY", "STONE" };
+		ResourceBundle messages = Translate.getNewResourceBundle();
+		return (String) JOptionPane.showInputDialog(null, messages.getString("chooseAScience"),
+				messages.getString("chooseAScience"), JOptionPane.PLAIN_MESSAGE, null, objects, objects[0]);
 	}
 }

@@ -32,11 +32,50 @@ public class PlayerTurnHandler {
 		} else if (checkForPreviousStructure(current, card)) {
 			return;
 		}
-
+		
+		boolean freeBuild = checkEffects(current, card);
+		if(freeBuild)
+			return;
+		
 		validateCardCost(current, card);
 		new EffectHandler(this.board).enableCardEffect(current, card);
 		current.addCardToStoragePile(card);
 		current.removeFromCurrentHand(card);
+	}
+
+	private boolean checkEffects(Player current, Card card) {
+		HashMap<Frequency, HashSet<Effect>> wonderPile = current.getWonderPile();
+		for (Frequency frequency : wonderPile.keySet()) {
+			if (frequency == Frequency.ONCEAGE) {
+				for(Effect effect: wonderPile.get(frequency)){
+					current.discardTemporaryEffect(effect);
+					break;
+				}
+				
+				String choice = getChosenString();
+				
+				if(choice.equals("Free")){
+					new EffectHandler(this.board).enableAbilityFreeBuildEffect(current, card);
+					return true;
+				}else{
+					return false;
+				}
+			}
+		}
+		
+		return false;
+	}
+
+	private String getChosenString() {
+		String str = "";
+		while (str.equals("")) {
+			showBuildMessage();
+		}
+		return str;
+	}
+
+	public String showBuildMessage() {
+		return new DropDownMessage().dropDownBuildMessage();
 	}
 
 	public void buildWonderLevel(Player current) {
