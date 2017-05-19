@@ -26,28 +26,42 @@ public class RenderImage {
 	public Image getImage(String name) {
 		ResourceBundle messages = Translate.getNewResourceBundle();
 		String translated = TranslateWithTemplate.prepareStringTemplateWithStringArg(name, "loadImageError", messages);
-
 		if (this.images.containsKey(name)) {
 			this.image = this.images.get(name);
 			return this.images.get(name);
 		}
+		
+		if(getKnownImage(name, translated))
+			return this.image;
+
+		if(getXImage(name, translated))
+			return this.image;
+		return new BufferedImage(0, 0, 0);
+	}
+
+	private boolean getKnownImage(String name, String translated) {
 		try {
 			BufferedImage image = ImageIO.read(new File("Images\\" + name + ".png"));
 			this.images.put(name, image);
 			this.image = image;
-			return image;
+			return true;
 		} catch (IOException e) {
 			System.err.println(translated);
 		}
-
+		
+		return false;
+	}
+	
+	private boolean getXImage(String name, String translated) {
 		try {
 			BufferedImage image = ImageIO.read(new File("Images\\x.png"));
 			this.images.put(name, image);
-			return image;
+			return true;
 		} catch (IOException e) {
 			System.err.println(translated);
 		}
-		return new BufferedImage(0, 0, 0);
+		
+		return false;
 	}
 	
 	public void setImage(Image image){

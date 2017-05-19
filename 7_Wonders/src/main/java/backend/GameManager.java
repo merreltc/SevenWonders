@@ -46,7 +46,7 @@ public class GameManager {
 	private static Handlers setUpHandlers(GameMode mode) {
 		Handlers handlers = new Handlers(mode);
 		handlers.setSetUpDeckHandler(new SetUpDeckHandler());
-		handlers.setTurnHandler(new TurnHandler());
+		handlers.setTurnHandler(new TurnHandler(handlers));
 		handlers.setPlayerTurnHandler(new PlayerTurnHandler());
 		return handlers;
 	}
