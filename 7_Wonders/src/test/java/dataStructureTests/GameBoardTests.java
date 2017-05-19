@@ -433,40 +433,6 @@ public class GameBoardTests {
 		assertEquals(this.age2Deck, board.getDeck());
 	}
 	
-	@Test
-	public void testRemoveNumCoins(){
-		Wonder wonder = EasyMock.mock(Wonder.class);
-		Player player = new Player("Player1", wonder);
-		PlayerChipHandler.addValue3(player, 2, ChipType.COIN);
-		
-		GameBoard board = new GameBoard(new ArrayList<Player>(), EasyMock.mock(Deck.class));
-		board.removeNumCoins(player, 4);
-		
-		Assert.assertEquals(5, player.getCoinTotal());
-	}
-	
-	@Test
-	public void testRemoveNumCoinsNotEnoughVal3(){
-		Wonder wonder = EasyMock.mock(Wonder.class);
-		Player player = new Player("Player1", wonder);
-		GameBoard board = new GameBoard(new ArrayList<Player>(), EasyMock.mock(Deck.class));
-		PlayerChipHandler.addValue3(player, 14, ChipType.COIN);
-		PlayerChipHandler.addValue1(player, 4, ChipType.COIN);
-		board.removeNumCoins(player, 34);
-		assertEquals(13, board.getTotalValue3CoinsInBank());
-		PlayerChipHandler.addValue3(player, 14, ChipType.COIN);
-		PlayerChipHandler.addValue1(player, 4, ChipType.COIN);
-		board.removeNumCoins(player, 33);
-		assertEquals(2, board.getTotalValue3CoinsInBank());
-		PlayerChipHandler.addValue3(player, 5, ChipType.COIN);
-		PlayerChipHandler.addValue1(player, 4, ChipType.COIN);
-		board.removeNumCoins(player, 15);
-		assertEquals(0, board.getTotalValue3CoinsInBank());
-		assertEquals(36, board.getTotalValue1CoinsInBank());
-		
-		Assert.assertEquals(32, player.getCoinTotal());
-	}
-	
 	private ArrayList<Player> setUpArrayWithNumPlayers(int num) {
 		Wonder wonder = new Wonder(Side.A, WonderType.COLOSSUS);
 		ArrayList<Player> result = new ArrayList<Player>();
