@@ -1,5 +1,7 @@
 package backendTests;
 
+import static org.junit.Assert.assertEquals;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -547,35 +549,36 @@ public class EndGameHandlerTest {
 		EasyMock.verify(card, player, effect, wonder);
 	}
 	
-//	@Test
-//	public void testAddVictoryPointsWonderEffect(){
-//		ValueEffect effect = EasyMock.mock(ValueEffect.class);
-//		EasyMock.expect(effect.getEffectType()).andReturn(EffectType.VALUE);
-//		HashMap<Enum,Integer> values = new HashMap<Enum, Integer>();
-//		values.put(Value.VICTORYPOINTS, 4);
-//		EasyMock.expect(effect.getAffectingEntities()).andReturn(values);
-//		HashSet<Effect> effects = new HashSet<Effect>();
-//		effects.add(effect);
-//		HashMap<Frequency, HashSet<Effect>> frequencies = new HashMap<Frequency, HashSet<Effect>>();
-//		frequencies.put(Frequency.ENDOFGAME, effects);
-//		
-//		Wonder wonder = EasyMock.mock(Wonder.class);
-//		
-//		EasyMock.replay(effect);
-//		
-//		Player player = new Player("Jane Doe", wonder);
-//		player.addWonderEffectToStoragePile(frequencies);
-//		
-//		EndGameHandler end = new EndGameHandler();
-//		ArrayList<Player> players = new ArrayList<Player>();
-//		players.add(player);
-//		players.add(player);
-//		players.add(player);
-//		
-//		System.out.println(player.getWonderPile().size());
-//		end.runWonderChecks(player, players);
-//	}
-//	
+	@Test
+	public void testAddVictoryPointsWonderEffect(){
+		ValueEffect effect = EasyMock.mock(ValueEffect.class);
+		EasyMock.expect(effect.getEffectType()).andReturn(EffectType.VALUE);
+		HashMap<Enum,Integer> values = new HashMap<Enum, Integer>();
+		values.put(Value.VICTORYPOINTS, 4);
+		EasyMock.expect(effect.getAffectingEntities()).andReturn(values);
+		HashSet<Effect> effects = new HashSet<Effect>();
+		effects.add(effect);
+		HashMap<Frequency, HashSet<Effect>> frequencies = new HashMap<Frequency, HashSet<Effect>>();
+		frequencies.put(Frequency.ENDOFGAME, effects);
+		
+		Wonder wonder = EasyMock.mock(Wonder.class);
+		
+		EasyMock.replay(effect);
+		
+		Player player = new Player("Jane Doe", wonder);
+		player.addWonderEffectToStoragePile(frequencies);
+		
+		EndGameHandler end = new EndGameHandler();
+		ArrayList<Player> players = new ArrayList<Player>();
+		players.add(player);
+		players.add(player);
+		players.add(player);
+	
+		end.runWonderChecks(player, players);
+		
+		assertEquals(4,player.getNumVictoryPoints());
+	}
+	
 	@Test
 	public void testScientistsGuildEffectWheel() {
 		Wonder wonder = new Wonder(Side.A, WonderType.COLOSSUS);
