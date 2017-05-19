@@ -80,6 +80,45 @@ public class LevelTest {
 		Level level2 = new Level(priority2, cost2, effect2, Frequency.EVERYTURN);
 		assertFalse(level1.equals(level2));
 	}
+	
+	@Test
+	public void testEqualsEveryCombinationSingleEffect() {
+		for (int priorityToUse = 0; priorityToUse <= 1; priorityToUse++){
+			for (int costToUse = 0; costToUse <= 1; costToUse++){
+				for (int effectToUse = 0; effectToUse <= 1; effectToUse++){
+					for (int frequencyToUse = 0; frequencyToUse <= 1; frequencyToUse++){
+						runEqualsTest(priorityToUse, costToUse, effectToUse, frequencyToUse);
+					}
+				}
+			}
+		}
+		
+	}
+	
+	private void runEqualsTest(int priorityToUse, int costToUse, int effectToUse, int frequencyToUse){
+		int priority = 1;
+		Cost cost = EasyMock.createStrictMock(Cost.class);
+		Effect effect = EasyMock.createStrictMock(Effect.class);
+		Frequency frequency = Frequency.EVERYTURN;
+		Level level1 = new Level(priority, cost, effect, frequency);
+
+		priority = priorityToUse;
+		if (costToUse == 0){
+			cost = EasyMock.createStrictMock(Cost.class);;
+		}
+		if (effectToUse == 0){
+			effect = EasyMock.createStrictMock(Effect.class);
+		}
+		if (frequencyToUse == 0){
+			frequency = Frequency.DEFAULT;
+		}
+		Level level2 = new Level(priority, cost, effect, frequency);
+		if (priorityToUse == 1 && costToUse == 1 &&  effectToUse == 1 && frequencyToUse == 1){
+			assertTrue(level1.equals(level2));
+		}else{
+			assertFalse(level1.equals(level2));
+		}
+	}
 
 	@Test
 	public void testEqualsTrueMultiEffect() {
