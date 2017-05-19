@@ -59,26 +59,39 @@ public class ValueEffect extends Effect {
 	private void validateValueAmount(Value value, int valueAmount) {
 		switch (value) {
 		case VICTORYPOINTS:
-			if (valueAmount <= 0 || valueAmount >= 9) {
-				String msg = TranslateWithTemplate.prepareStringTemplateWithIntArg(valueAmount, "improperValueAmount",
-						Translate.getNewResourceBundle());
-				throw new IllegalArgumentException(msg);
-			}
+			validateVictoryPoints(valueAmount);
 			break;
 		case COMMERCE:
-			if (valueAmount <= 0) {
-				String msg = TranslateWithTemplate.prepareStringTemplateWithIntArg(valueAmount, "improperValueAmount",
-						Translate.getNewResourceBundle());
-				throw new IllegalArgumentException(msg);
-			}
+			validateCommerce(valueAmount);
 			break;
+			
 		default:
-			if (valueAmount <= -2 || valueAmount == 0 || valueAmount >= 4) {
-				String msg = TranslateWithTemplate.prepareStringTemplateWithIntArg(valueAmount, "improperValueAmount",
-						Translate.getNewResourceBundle());
-				throw new IllegalArgumentException(msg);
-			}
+			validateValue(valueAmount);
 			break;
+		}
+	}
+	
+	private void validateVictoryPoints(int valueAmount) {
+		if (valueAmount <= 0 || valueAmount >= 9) {
+			String msg = TranslateWithTemplate.prepareStringTemplateWithIntArg(valueAmount, "improperValueAmount",
+					Translate.getNewResourceBundle());
+			throw new IllegalArgumentException(msg);
+		}
+	}
+
+	private void validateCommerce(int valueAmount) {
+		if (valueAmount <= 0) {
+			String msg = TranslateWithTemplate.prepareStringTemplateWithIntArg(valueAmount, "improperValueAmount",
+					Translate.getNewResourceBundle());
+			throw new IllegalArgumentException(msg);
+		}
+	}
+	
+	private void validateValue(int valueAmount) {
+		if (valueAmount <= -2 || valueAmount == 0 || valueAmount >= 4) {
+			String msg = TranslateWithTemplate.prepareStringTemplateWithIntArg(valueAmount, "improperValueAmount",
+					Translate.getNewResourceBundle());
+			throw new IllegalArgumentException(msg);
 		}
 	}
 

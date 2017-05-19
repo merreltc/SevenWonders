@@ -62,6 +62,16 @@ public class WonderSteps {
 			throw new IllegalArgumentException("Invalid wonder type");
 		}
 	}
+	
+	@Given("^The player has the resources for that Wonder$")
+	public void the_player_has_the_resources_for_that_Wonder() throws Throwable {
+		giveResourcesToPlayer();
+		
+	}
+	
+	private void giveResourcesToPlayer(){
+		
+	}
 
 	@Given("^A player with that Wonder$")
 	public void a_player_with_that_Wonder() throws Throwable {
@@ -101,6 +111,11 @@ public class WonderSteps {
 	@When("^Beginning the game$")
 	public void beginning_the_game() throws Throwable {
 		// does nothing
+	}
+	
+	@Then("^The level is built$")
+	public void the_level_is_built() throws Throwable {
+		
 	}
 
 	@Then("^The level cannot be built$")

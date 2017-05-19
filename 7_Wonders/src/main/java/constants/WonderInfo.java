@@ -16,20 +16,24 @@ public class WonderInfo {
 		if (side == Side.A) {
 			return 3;
 		} else {
-			switch (type) {
-			case COLOSSUS:
-				return 2;
-			case LIGHTHOUSE:
-			case TEMPLE:
-			case GARDENS:
-			case STATUE:
-			case MAUSOLEUM:
-				return 3;
-			case PYRAMIDS:
-				return 4;
-			default:
-				throw new IllegalArgumentException("Bad Wonder Type");
-			}
+			return getSideBLevels(type);
+		}
+	}
+
+	private int getSideBLevels(WonderType type) {
+		switch (type) {
+		case COLOSSUS:
+			return 2;
+		case LIGHTHOUSE:
+		case TEMPLE:
+		case GARDENS:
+		case STATUE:
+		case MAUSOLEUM:
+			return 3;
+		case PYRAMIDS:
+			return 4;
+		default:
+			throw new IllegalArgumentException("Bad Wonder Type");
 		}
 	}
 

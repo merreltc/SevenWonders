@@ -62,28 +62,24 @@ public class Level {
 
 	private boolean otherContainsEffect(HashSet<Effect> other, Effect thisEffect) {
 		for (Effect otherEffect : other) {
-			EffectType type = thisEffect.getEffectType();
-			switch (type) {
-			case ABILITY:
-				if (((AbilityEffect) thisEffect).equals((AbilityEffect) otherEffect)) {
-					return true;
-				}
-				break;
-			case VALUE:
-				if (((ValueEffect) thisEffect).equals((ValueEffect) otherEffect)) {
-					return true;
-				}
-				break;
-			case ENTITY:
-				if (((EntityEffect) thisEffect).equals((EntityEffect) otherEffect)) {
-					return true;
-				}
-				break;
-			default:
-				throw new IllegalArgumentException("Invalid Effect Type");
+			if(findEffect(thisEffect, otherEffect)){
+				return true;
 			}
 		}
 		return false;
+	}
+
+	private boolean findEffect(Effect thisEffect, Effect otherEffect) {
+		switch (thisEffect.getEffectType()) {
+		case ABILITY:
+			return ((AbilityEffect) thisEffect).equals((AbilityEffect) otherEffect);
+		case VALUE:
+			return ((ValueEffect) thisEffect).equals((ValueEffect) otherEffect);
+		case ENTITY:
+			return ((EntityEffect) thisEffect).equals((EntityEffect) otherEffect);
+		default:
+			throw new IllegalArgumentException("Invalid Effect Type");
+		}
 	}
 
 	public int getPriority() {

@@ -124,21 +124,19 @@ public class LevelBuilder {
 		JSONArray costs = costObj.getJSONArray("costs");
 		String costTypeStr = costObj.getString("costType");
 		CostType costType = CostType.valueOf(costTypeStr);
-		Cost cost;
+		return getCost(costs, costType);
+	}
 
+	private Cost getCost(JSONArray costs, CostType costType) {
 		switch (costType) {
 		case RESOURCE:
 		case GOOD:
-			cost = createSingleEntityCost(costs, costType);
-			break;
+			return createSingleEntityCost(costs, costType);
 		case MULTITYPE:
-			cost = createMultiTypeCost(costs);
-			break;
+			return createMultiTypeCost(costs);
 		default:
 			throw new IllegalArgumentException("Invalid Cost Type");
 		}
-
-		return cost;
 	}
 
 	private Cost createSingleEntityCost(JSONArray costs, CostType costType) {
