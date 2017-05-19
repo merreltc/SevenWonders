@@ -13,6 +13,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import backend.GameManager;
+import backend.handlers.DeckHandler;
 import backend.handlers.PlayerTurnHandler;
 import backend.handlers.RotateHandler;
 import backend.handlers.SetUpDeckHandler;
@@ -698,17 +699,44 @@ public class TurnHandlerTest {
 		int index = turnHandler.indexOfMaxScore(scores, players);
 		assertEquals(1, index);
 	}
+	
+	@Test
+	public void testSwitchDeckToAgeThree(){
+		Wonder wonder = EasyMock.mock(Wonder.class);
+		Player player = new Player("Jane Doe",wonder);
+		Handlers handlers = EasyMock.mock(Handlers.class);
+		SetUpDeckHandler deckHandler = EasyMock.mock(SetUpDeckHandler.class);
+		Deck deck = EasyMock.mock(Deck.class);
+		EasyMock.expect(handlers.getSetUpDeckHandler()).andReturn(deckHandler);
+		EasyMock.expect(deckHandler.createDeck(Age.AGE3, 3)).andReturn(deck);
+		GameBoard gameBoard = new GameBoard(new ArrayList<Player>(Arrays.asList(player,player,player)), deck);
+		
+		EasyMock.replay(wonder, handlers, deckHandler, deck);
+		
+		TurnHandler turnHandler = new TurnHandler();
+		turnHandler.handlers = handlers;
+		turnHandler.setGameBoard(gameBoard);
+
+		assertEquals(deck, turnHandler.switchDeck(Age.AGE2));
+		
+		
+	}
 
 	@Test
 	public void testIndexOfMaxPlayerTie() {
-		ArrayList<Integer> scores = new ArrayList<Integer>(Arrays.asList(20, 35, 35));
+		ArrayList<Integer> scores = new ArrayList<Integer>(Arrays.asList(35, 35, 35));
 		ArrayList<Player> players = new ArrayList<Player>();
 		Player player1 = EasyMock.mock(Player.class);
 		Player player2 = EasyMock.mock(Player.class);
+		Player player3 = EasyMock.mock(Player.class);
 		EasyMock.expect(player1.getCoinTotal()).andReturn(10);
 		EasyMock.expect(player2.getCoinTotal()).andReturn(13);
+		EasyMock.expect(player3.getCoinTotal()).andReturn(11);
+		EasyMock.expect(player1.getCoinTotal()).andReturn(10);
+		EasyMock.expect(player2.getCoinTotal()).andReturn(13);
+		EasyMock.expect(player3.getCoinTotal()).andReturn(11);
 
-		players.add(player1);
+		players.add(player3);
 		players.add(player1);
 		players.add(player2);
 		EasyMock.replay(player1, player2);
