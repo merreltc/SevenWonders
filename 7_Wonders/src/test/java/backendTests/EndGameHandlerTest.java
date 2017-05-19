@@ -497,7 +497,26 @@ public class EndGameHandlerTest {
 		EasyMock.verify(end);
 	}
 	
+	@Test(expected = UnsupportedOperationException.class)
+	public void testChooseScienceWonderEffect(){
+		Card card = EasyMock.mock(Card.class);
+		EasyMock.expect(card.getName()).andReturn("");
+		EasyMock.expect(card.getName()).andReturn("");
+		Player player = EasyMock.mock(Player.class);
+		HashMap<Frequency, HashSet<Effect>> wonderPile = new HashMap<Frequency, HashSet<Effect>>();
+		HashSet<Effect> effects = new HashSet<Effect>();
+		Effect effect = EasyMock.mock(Effect.class);
+		EasyMock.expect(effect.getEffectType()).andReturn(EffectType.ENTITY);
+		effects.add(effect);
+		wonderPile.put(Frequency.ENDOFGAME, effects);
 
+		EasyMock.expect(player.getWonderPile()).andReturn(wonderPile);
+		EasyMock.replay(card, player, effect);
+		
+		EndGameHandler end = new EndGameHandler();
+		end.evaluateCardEffect(player, player, player, card);
+		Assert.fail();
+	}
 	@Test
 	public void testScientistsGuildEffectWheel() {
 		Wonder wonder = new Wonder(Side.A, WonderType.COLOSSUS);

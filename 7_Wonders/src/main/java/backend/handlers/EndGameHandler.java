@@ -164,7 +164,8 @@ public class EndGameHandler {
 	
 	private boolean checkWonders(HashMap<Frequency, HashSet<Effect>> wonderPile) {
 		for (Frequency freq : wonderPile.keySet()){
-			if (wonderPile.get(freq).contains(Effect.EffectType.ENTITY)){
+			Effect[] effects = wonderPile.get(freq).toArray(new Effect[1]);
+			if (effects[0].getEffectType() == Effect.EffectType.ENTITY){
 				return true;
 			}
 		}
