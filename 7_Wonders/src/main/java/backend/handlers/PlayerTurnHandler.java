@@ -76,42 +76,53 @@ public class PlayerTurnHandler {
 	private void validatePlayerHasEntitiesForCard(Player current, Card card) {
 		HashMap<Enum, Integer> costs = new HashMap<Enum, Integer>(card.getCost());
 		for (Card sCards : current.getStoragePile()) {
-			if (sCards.getEffectType() != EffectType.ENTITY) {
-				continue;
-			}
-
-			EntityEffect effect = (EntityEffect) sCards.getEffect();
-			Enum singleEffect = (Enum) effect.getEntities().keySet().toArray()[0];
-			if (effect.getEntities().size() > 1) {
-				String choice = null;
-				while (choice == null) {
-					choice = chooseWhichEntity(effect.getEntities(), sCards.getName());
-				}
-
-				Enum entity;
-				try {
-					entity = RawResource.valueOf(choice);
-				} catch (Exception e) {
-					entity = Good.valueOf(choice);
-				}
-
-				if (costs.containsKey(entity)) {
-					int newCost = costs.get(entity) - effect.getEntities().get(entity);
-					costs.put(entity, newCost);
-				}
-			} else if (costs.containsKey(singleEffect)) {
-				int newCost = costs.get(singleEffect) - effect.getEntities().get(singleEffect);
-				costs.put(singleEffect, newCost);
-			}
+			decrementCostsWithStorage(sCards, costs);
 		}
 
 		for (Enum key : costs.keySet()) {
 			int trades = searchCurrentTradesForCost(current, key);
 			costs.put(key, costs.get(key) - trades);
-		}
-		for (Enum key : costs.keySet()) {
 			validateEndCost(costs.get(key));
 		}
+	}
+	
+	private void decrementCostsWithStorage(Card card, HashMap<Enum, Integer> costs){
+		if (card.getEffectType() != EffectType.ENTITY) {
+			return;
+		}
+		EntityEffect effect = (EntityEffect) card.getEffect();
+		Enum singleEffect = (Enum) effect.getEntities().keySet().toArray()[0];
+	
+		if (effect.getEntities().size() > 1) {
+			chooseEntityForBuild(costs, card);
+		} else if (costs.containsKey(singleEffect)) {
+			int newCost = costs.get(singleEffect) - effect.getEntities().get(singleEffect);
+			costs.put(singleEffect, newCost);
+		}
+	}
+
+	private void chooseEntityForBuild(HashMap<Enum, Integer> costs, Card sCards) {
+		EntityEffect effect = (EntityEffect) sCards.getEffect();
+		String choice = null;
+		while (choice == null) {
+			choice = chooseWhichEntity(effect.getEntities(), sCards.getName());
+		}
+		
+		Enum entity = translateEntity(choice);
+		if (costs.containsKey(entity)) {
+			int newCost = costs.get(entity) - effect.getEntities().get(entity);
+			costs.put(entity, newCost);
+		}
+	}
+
+	private Enum translateEntity(String choice) {
+		Enum entity;
+		try {
+			entity = RawResource.valueOf(choice);
+		} catch (Exception e) {
+			entity = Good.valueOf(choice);
+		}
+		return entity;
 	}
 
 	public String chooseWhichEntity(HashMap<Enum, Integer> entities, String cardName) {
@@ -121,13 +132,6 @@ public class PlayerTurnHandler {
 	private int searchCurrentTradesForCost(Player current, Enum key) {
 		if (current.getCurrentTrades().containsKey(key)) {
 			return current.getCurrentTrades().get(key);
-		}
-		return 0;
-	}
-
-	private int decrementCostFromEntity(Enum key, EntityEffect effect) {
-		if (effect.getEntities().containsKey(key)) {
-			return effect.getEntities().get(key);
 		}
 		return 0;
 	}
