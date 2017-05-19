@@ -3,6 +3,8 @@ package main;
 import java.util.ResourceBundle;
 
 import backend.GameManager;
+import constants.GeneralEnums;
+import constants.GeneralEnums.Good;
 import constants.GeneralEnums.RawResource;
 import constants.GeneralEnums.Resource;
 import dataStructures.playerData.Player;
@@ -50,8 +52,14 @@ public class TradeHelper {
 			return RawResource.STONE;
 		} else if (resource.equals("Ore")) {
 			return RawResource.ORE;
+		} else if (resource.equals("Clay")){
+			return RawResource.CLAY;
+		}else if (resource.equals("Loom")){
+			return GeneralEnums.Good.LOOM;
+		}else if (resource.equals("Press")){
+			return Good.PRESS;
 		}
-		return RawResource.CLAY;
+		return Good.GLASS;
 	}
 
 }

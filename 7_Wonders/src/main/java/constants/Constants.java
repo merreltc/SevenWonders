@@ -63,6 +63,11 @@ public class Constants {
 			LastPlayerBoardPositionY + 5);
 	public static final Point TradeRightBaseButtonPoint = new Point(NextPlayerBoardPositionX - 5,
 			NextPlayerBoardPositionY + 5);
+	
+	public static final Point TradeLeftBaseButtonPointGood = new Point(LastPlayerBoardPositionX + 500,
+			LastPlayerBoardPositionY + 5);
+	public static final Point TradeRightBaseButtonPointGood = new Point(NextPlayerBoardPositionX +500,
+			NextPlayerBoardPositionY + 5);
 
 	public static final int TradeButtonYOffet = TradeButtonBounds.y + 20;
 
@@ -81,6 +86,7 @@ public class Constants {
 
 	/* For Game Class */
 	public static final String[] ResourceTypes = new String[] { "Lumber", "Ore", "Stone", "Clay" };
+	public static final String[] GoodTypes = new String[] { "Press", "Glass", "Loom" };
 
 	/* For ResourceViewer Class */
 	public static final String[] ResourceImages = new String[] { "clay", "lumber", "ore", "stone", "glass",
