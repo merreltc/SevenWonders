@@ -42,12 +42,19 @@ public class Level {
 
 	@Override
 	public boolean equals(Object obj) {
+		System.out.println("New Test");
 		Level temp = (Level) obj;
 		boolean equalPriority = this.priority == temp.priority;
+		System.out.println(equalPriority);
 		boolean equalCost = this.getCost() == temp.getCost();
+		System.out.println(equalCost);
 		boolean equalEffect = this.effect == temp.getEffect();
+		System.out.println(equalEffect);
 		boolean equalEffects = this.effects == temp.getEffects();
+		System.out.println(equalEffects);
 		boolean equalFrequency = this.frequency == temp.getFrequency();
+		System.out.println(equalFrequency);
+		System.out.println("End Test");
 		return equalPriority && equalCost && equalEffect && equalEffects && equalFrequency;
 	}
 
