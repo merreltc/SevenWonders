@@ -40,13 +40,13 @@ public class DropDownMessage {
 			string[i] = objects[i].toString();
 		}
 		ResourceBundle messages = Translate.getNewResourceBundle();
-		return (String) JOptionPane.showInputDialog(null, "Choose which card effect to activiate",
+		return (String) JOptionPane.showInputDialog(null, messages.getString("chooseCardEffect"),
 				cardName, JOptionPane.PLAIN_MESSAGE, null, string, string[0]);
 	}
 
 	public static String dropDownGuildSelectionMessage(Object[] wonders) {
 		ResourceBundle messages = Translate.getNewResourceBundle();
-		return (String) JOptionPane.showInputDialog(null, messages.getString("chooseYourWonder"),
-				messages.getString("wonderSelector"), JOptionPane.PLAIN_MESSAGE, null, wonders, wonders[0]);
+		return (String) JOptionPane.showInputDialog(null, messages.getString("chooseYourGuild"),
+				messages.getString("guildSelector"), JOptionPane.PLAIN_MESSAGE, null, wonders, wonders[0]);
 	}
 }
