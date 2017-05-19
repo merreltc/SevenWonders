@@ -9,8 +9,8 @@ public class AbilityEffect extends Effect {
 		PLAYSEVENTH, FREEBUILD, FREEBUILDFROMDISCARD, COPYONENEIGHBORGUILD
 	}
 	
-	public AbilityEffect(EffectType effectType, Ability ability) {
-		super(effectType);
+	public AbilityEffect(Ability ability) {
+		super(EffectType.ABILITY);
 		this.ability = ability;
 	}
 
