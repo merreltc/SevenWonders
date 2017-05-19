@@ -7,6 +7,7 @@ import static org.junit.Assert.fail;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 
 import org.easymock.EasyMock;
 import org.junit.Before;
@@ -22,14 +23,16 @@ import dataStructures.GameBoard;
 import dataStructures.gameMaterials.Card;
 import dataStructures.gameMaterials.Deck;
 import dataStructures.gameMaterials.Deck.Age;
+import dataStructures.gameMaterials.Effect;
 import dataStructures.gameMaterials.Effect.EffectType;
 import dataStructures.gameMaterials.EntityEffect;
+import dataStructures.gameMaterials.Level.Frequency;
 import dataStructures.gameMaterials.ValueEffect;
 import dataStructures.gameMaterials.ValueEffect.ValueType;
-import dataStructures.gameMaterials.Wonder.WonderType;
 import dataStructures.gameMaterials.Wonder;
-import dataStructures.playerData.Player;
+import dataStructures.gameMaterials.Wonder.WonderType;
 import dataStructures.playerData.Chip.ChipValue;
+import dataStructures.playerData.Player;
 import exceptions.InsufficientFundsException;
 import testHelpers.SetUpDeckTestHelper;
 
@@ -589,6 +592,7 @@ public class PlayerTurnHandlerTest {
 		EasyMock.expect(cardToBuild.getCost()).andReturn(cost);
 		EasyMock.expect(player.getAllCards()).andReturn(storage);
 		EasyMock.expect(player.getAllCards()).andReturn(storage);
+		EasyMock.expect(player.getWonderPile()).andReturn(new HashMap<Frequency, HashSet<Effect>>());
 		EntityEffect entityEffect = EasyMock.mock(EntityEffect.class);
 
 		for (Card sCards : storage) {
@@ -645,6 +649,7 @@ public class PlayerTurnHandlerTest {
 		EasyMock.expect(cardToBuild.getCost()).andReturn(cost);
 		EasyMock.expect(player.getAllCards()).andReturn(storage);
 		EasyMock.expect(player.getAllCards()).andReturn(storage);
+		EasyMock.expect(player.getWonderPile()).andReturn(new HashMap<Frequency, HashSet<Effect>>());
 		EntityEffect entityEffect = EasyMock.mock(EntityEffect.class);
 
 		for (Card sCards : storage) {

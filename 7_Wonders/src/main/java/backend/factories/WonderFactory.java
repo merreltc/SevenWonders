@@ -1,12 +1,14 @@
 package backend.factories;
 
 import java.util.ArrayList;
+import java.util.ResourceBundle;
 
 import constants.GeneralEnums.GameMode;
 import constants.GeneralEnums.Side;
 import dataStructures.gameMaterials.Wonder;
 import dataStructures.gameMaterials.Wonder.WonderType;
 import exceptions.NoMoreWondersException;
+import utils.Translate;
 
 public class WonderFactory {
 	private ArrayList<WonderType> remainingWonders;
@@ -21,8 +23,9 @@ public class WonderFactory {
 	}
 
 	public Wonder getWonder() {
+		ResourceBundle messages = Translate.getNewResourceBundle();
 		if (isOutOfWonders()) {
-			throw new NoMoreWondersException("There are no more unique wonders left.");
+			throw new NoMoreWondersException(messages.getString("noMoreUniqueWonders"));
 		}
 
 		int index = getRandomIndex();
