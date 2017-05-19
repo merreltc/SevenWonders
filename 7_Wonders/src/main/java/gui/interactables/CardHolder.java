@@ -41,4 +41,8 @@ public class CardHolder extends Interactable {
 	public void setHasPreviousStructure() {
 		this.havePreviousStructure = true;
 	}
+
+	public void activateWonder(GameManager gameManager) {
+		gameManager.buildWonder(this.card);
+	}
 }

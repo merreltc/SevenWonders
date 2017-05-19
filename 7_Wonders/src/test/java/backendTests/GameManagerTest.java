@@ -342,45 +342,7 @@ public class GameManagerTest {
 
 		EasyMock.verify(playerTurnHandler);
 	}
-
-	@Test
-	public void testGameManagerBuildWonderCallsPlayerHandler(){
-		ArrayList<String> names = new ArrayList<String>(Arrays.asList("Player1","Player2","Player"));
-		
-		Handlers handlers = EasyMock.mock(Handlers.class);
-		
-		GameManager game = new GameManager(names,handlers);
-		PlayerTurnHandler turns = EasyMock.mock(PlayerTurnHandler.class);
-		turns.buildWonderLevel(game.getCurrentPlayer());
-		EasyMock.expect(handlers.getPlayerTurnHandler()).andReturn(turns);
-		
-	}
 	
-//	@Test
-//	public void testFormatFinalScoreNoTie() {
-//		ArrayList<String> playerNames = new ArrayList<String>(Arrays.asList("Player1", "Player2", "Player3"));
-//
-//		GameManager gameManager = new GameManager(playerNames, GameMode.EASY);
-//
-//		ArrayList<Integer> scores = new ArrayList<Integer>(Arrays.asList(35, 26, 13));
-//
-//		Assert.assertEquals(gameManager.formatFinalScores(scores),
-//				"Player1 : 35\nPlayer2 : 26\nPlayer3 : 13\nPlayer1 Wins!");
-//	}
-//
-//	@Test
-//	public void testFormatFinalScoreTie() {
-//		ArrayList<String> playerNames = new ArrayList<String>(Arrays.asList("Player1", "Player2", "Player3"));
-//
-//		GameManager gameManager = new GameManager(playerNames, GameMode.EASY);
-//		PlayerChipHandler.addValue1(gameManager.getPlayer(0), 10, ChipType.COIN);
-//		PlayerChipHandler.addValue1(gameManager.getPlayer(1), 5, ChipType.COIN);
-//
-//		ArrayList<Integer> scores = new ArrayList<Integer>(Arrays.asList(35, 35, 13));
-//
-//		Assert.assertEquals(gameManager.formatFinalScores(scores),
-//				"Player1 : 35\nPlayer2 : 35\nPlayer3 : 13\nPlayer1 Wins!");
-//	}
 
 	private ArrayList<String> setUpArrayByNum(int num) {
 		ArrayList<String> result = new ArrayList<String>();

@@ -55,7 +55,7 @@ public class EffectHandler {
 			}
 			if (effect.getValueType() == ValueType.COIN) {
 				if (!card.getName().equals("Tavern"))
-					board.removeNumCoins(current, effect.getValueAmount());
+					PlayerChipHandler.removeTotalCoins(current, effect.getValueAmount());
 			}
 
 			enableValueEffect(current, effect);

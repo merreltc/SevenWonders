@@ -197,6 +197,8 @@ public class GameDisplay extends Menu {
 	private void playOrDiscardCard(CardHolder clicked, int val) {
 		if (val == 0) {
 			clicked.activate(this.gameManager);
+		} else if (val == 1) {
+			clicked.activateWonder(this.gameManager);
 		} else if (val == 2) {
 			clicked.discard(this.gameManager);
 		} else {

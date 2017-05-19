@@ -2,6 +2,7 @@ package backend.handlers;
 
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.ResourceBundle;
 
 import constants.GeneralEnums.CostType;
 import constants.GeneralEnums.Good;
@@ -15,7 +16,6 @@ import dataStructures.gameMaterials.Level;
 import dataStructures.gameMaterials.Level.Frequency;
 import dataStructures.gameMaterials.Wonder;
 import dataStructures.playerData.Player;
-import exceptions.CannotBuildWonderException;
 import exceptions.InsufficientFundsException;
 import utils.DropDownMessage;
 import utils.Translate;
@@ -30,11 +30,11 @@ public class PlayerTurnHandler {
 		} else if (checkForPreviousStructure(current, card)) {
 			return;
 		}
-		
+
 		boolean freeBuild = checkEffects(current, card);
-		if(freeBuild)
+		if (freeBuild)
 			return;
-		
+
 		validateCardCost(current, card);
 		new EffectHandler(this.board).enableCardEffect(current, card);
 		current.addCardToStoragePile(card);
@@ -45,22 +45,22 @@ public class PlayerTurnHandler {
 		HashMap<Frequency, HashSet<Effect>> wonderPile = current.getWonderPile();
 		for (Frequency frequency : wonderPile.keySet()) {
 			if (frequency == Frequency.ONCEAGE) {
-				for(Effect effect: wonderPile.get(frequency)){
+				for (Effect effect : wonderPile.get(frequency)) {
 					current.discardTemporaryEffect(effect);
 					break;
 				}
-				
+
 				String choice = getChosenString();
-				
-				if(choice.equals("Free")){
+
+				if (choice.equals("Free")) {
 					new EffectHandler(this.board).enableAbilityFreeBuildEffect(current, card);
 					return true;
-				}else{
+				} else {
 					return false;
 				}
 			}
 		}
-		
+
 		return false;
 	}
 
@@ -76,13 +76,15 @@ public class PlayerTurnHandler {
 		return new DropDownMessage().dropDownBuildMessage();
 	}
 
-	public void buildWonderLevel(Player current) {
+	public Level buildWonderLevel(Player current) {
 		Wonder wonder = current.getWonder();
-		int built = wonder.getNumBuiltLevels();
-		if(built == wonder.getNumLevels())
-			throw new CannotBuildWonderException("Player has built max number of levels.");
-		
+		int built = wonder.getNumBuiltLevels() + 1;
 		Level level = wonder.getLevelFactory().getNextLevel(built);
+		updateEffects(current, level);
+		return level;
+	}
+
+	private void updateEffects(Player current, Level level) {
 		current.clearTempWonderEffects();
 		HashMap<Enum, Integer> costs = level.getCosts();
 		validateLevelCosts(current, costs);
@@ -186,9 +188,10 @@ public class PlayerTurnHandler {
 	}
 
 	private void validateEndCost(int numcost) {
+		ResourceBundle messages = Translate.getNewResourceBundle();
 		if (numcost > 0) {
 			throw new InsufficientFundsException(
-					Translate.getNewResourceBundle().getString("noRequiredItemToBuildStructure"));
+					messages.getString("noRequiredItemToBuildStructure"));
 		}
 	}
 
