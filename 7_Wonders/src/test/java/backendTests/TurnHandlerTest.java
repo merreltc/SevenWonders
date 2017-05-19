@@ -641,7 +641,7 @@ public class TurnHandlerTest {
 		
 		GameBoard board = EasyMock.mock(GameBoard.class);
 		EasyMock.expect(board.getAge()).andReturn(Age.AGE3);
-		for (int i = 0; i < 7; i++){
+		for (int i = 0; i < 6; i++){
 			EasyMock.expect(board.getPlayers()).andReturn(players);
 		}
 		
@@ -661,6 +661,22 @@ public class TurnHandlerTest {
 		
 	}
 
+	
+	@Test
+	public void testIndexOfMaxPlayer(){
+		ArrayList<Integer> scores = new ArrayList<Integer>(Arrays.asList(20,35,16));
+		ArrayList<Player> players = new ArrayList<Player>();
+		Player player1 = EasyMock.mock(Player.class);
+		players.add(player1);
+		players.add(player1);
+		players.add(player1);
+		EasyMock.replay(player1);
+		
+		TurnHandler turnHandler = new TurnHandler();
+		
+		int index = turnHandler.indexOfMaxScore(scores, players);
+		assertEquals(1, index);
+	}
 
 	private ArrayList<Player> setUpPlayersByNum(int num) {
 		ArrayList<Player> result = new ArrayList<Player>();
