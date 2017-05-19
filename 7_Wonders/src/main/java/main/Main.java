@@ -49,6 +49,8 @@ public class Main extends JPanel implements ActionListener {
 		MenuMouseListener menuMouse = new MenuMouseListener(this);
 		frame.addMouseListener(menuMouse);
 		image = renderer.getImage("Background");
+		Timer timer = new Timer(20,this);
+		timer.start();
 	}
 
 	@Override
