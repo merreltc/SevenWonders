@@ -1,20 +1,14 @@
 import static org.junit.Assert.assertEquals;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
 
-import constants.GeneralEnums.CostType;
 import constants.GeneralEnums.Side;
-import cucumber.api.PendingException;
+import cucumber.api.java.Before;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
-import dataStructures.gameMaterials.Cost;
 import dataStructures.gameMaterials.Effect;
-import dataStructures.gameMaterials.Effect.EffectType;
 import dataStructures.gameMaterials.Level;
-import dataStructures.gameMaterials.Level.Frequency;
 import dataStructures.gameMaterials.Wonder;
 import dataStructures.gameMaterials.Wonder.WonderType;
 import exceptions.CannotBuildWonderException;
@@ -23,8 +17,8 @@ import testHelpers.LevelBuilderTestHelper;
 
 public class BuildWonderSteps {
 	LevelBuilderTestHelper helper;
+	ArrayList<Level> expectedLevels;
 	Wonder wonder;
-	ArrayList<Level> levels;
 
 	CannotBuildWonderException wonderException;
 	InsufficientFundsException fundsException;
@@ -34,18 +28,25 @@ public class BuildWonderSteps {
 		NOWONDERS, NOFUNDS
 	}
 
+	@Before
+	public void set_up() {
+		this.helper = new LevelBuilderTestHelper();
+		this.expectedLevels = new ArrayList<Level>();
+	}
+
 	@Given("^A Wonder (Colossus||Lighthouse||Temple||Statue||Mausoleum||Gardens||Pyramids) on Side (.)$")
 	public void a_Wonder_on_Side(String wonderName, char side) throws Throwable {
 		WonderType type = getWonderType(wonderName);
 		Side newSide = getSide(side);
 		this.wonder = new Wonder(newSide, type);
-		
+
 		helper.setWonder(this.wonder);
 	}
 
 	@Given("^(\\d+) expected Levels$")
 	public void expected_Levels(int numLevels) throws Throwable {
-		this.levels = createLevels(numLevels);
+		this.expectedLevels = createLevels(numLevels);
+		System.err.println(this.expectedLevels);
 	}
 
 	@When("^Building the wonder (\\d+) times$")
@@ -61,8 +62,8 @@ public class BuildWonderSteps {
 	}
 
 	@Then("^The level is built$")
-	public void the_level_is_built() throws Throwable {
-		assertEquals(this.levels, this.wonder.getLevels());
+	public void the_wonder_level_is_built() throws Throwable {
+		assertEquals(this.expectedLevels, this.wonder.getLevels());
 	}
 
 	@Then("^The level cannot be built$")
@@ -115,6 +116,7 @@ public class BuildWonderSteps {
 			Level level = this.helper.getExpectedLevel(i);
 			result.add(level);
 		}
+
 		return result;
 	}
 
