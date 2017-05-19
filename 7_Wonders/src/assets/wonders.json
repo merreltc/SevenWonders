@@ -772,15 +772,15 @@
 				"cost": {
 					"costType": "GOOD",
 					"costs": [{
-						"good": "PRESS",
-						"amount": 1
-					},
-					{
 						"good": "LOOM",
 						"amount": 1
 					},
 					{
 						"good": "GLASS",
+						"amount": 1
+					},
+					{
+						"good": "PRESS",
 						"amount": 1
 					}]
 				},
