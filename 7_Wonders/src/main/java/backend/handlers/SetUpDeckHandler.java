@@ -31,24 +31,24 @@ import dataStructures.gameMaterials.ValueEffect.Value;
 import dataStructures.gameMaterials.ValueEffect.ValueType;
 
 public class SetUpDeckHandler {
-	
+
 	public static final int NUM_OF_GUILD_CARDS = 10;
 
 	public Deck createDeck(Age age, int numPlayers) {
 		ArrayList<Card> cards = createCards(age, numPlayers);
-		if (age == Age.AGE3){
+		if (age == Age.AGE3) {
 			cards = correctNumberOfGuildCards(cards, numPlayers);
 		}
 		return new Deck(age, cards);
 	}
-	
-	public ArrayList<Card> correctNumberOfGuildCards(ArrayList<Card> cards, int numOfPlayers){
-		
-		for (int i = 0; i < NUM_OF_GUILD_CARDS - numOfPlayers - 2; i++){
+
+	public ArrayList<Card> correctNumberOfGuildCards(ArrayList<Card> cards, int numOfPlayers) {
+
+		for (int i = 0; i < NUM_OF_GUILD_CARDS - numOfPlayers - 2; i++) {
 			int indexToDelete = (int) (Math.random() * (NUM_OF_GUILD_CARDS - i));
 			cards.remove(indexToDelete);
 		}
-		
+
 		return cards;
 	}
 
@@ -221,7 +221,7 @@ public class SetUpDeckHandler {
 			effectTypeEnum = EffectType.ENTITY;
 			String entityStr = effectObj.getString("EntityType");
 			EntityType entityEnum = EntityType.valueOf(entityStr);
-			effect = createEntityEffect(effectObj, effectTypeEnum, entityEnum);
+			effect = createEntityEffect(effectObj, entityEnum);
 		} else if (effectStr.equals("VALUE")) {
 			effectTypeEnum = EffectType.VALUE;
 			effect = createValueEffect(effectObj, effectTypeEnum);
@@ -245,7 +245,7 @@ public class SetUpDeckHandler {
 			valuesAndAmounts.put(ValueType.valueOf(entity.getString("ValueType")), entity.getInt("entityAmount"));
 		}
 		Direction direction = Direction.valueOf(effectObj.getString("Direction"));
-		effect = new MultiValueEffect(effectTypeEnum, value, affectingEntities, direction, valuesAndAmounts);
+		effect = new MultiValueEffect(value, affectingEntities, direction, valuesAndAmounts);
 		return effect;
 	}
 
@@ -258,10 +258,10 @@ public class SetUpDeckHandler {
 			int valueAmount = effectObj.getInt("valueAmount");
 
 			if (affecting.equals("NONE")) {
-				effect = new ValueEffect(effectTypeEnum, value, affectingEntities, valueAmount);
+				effect = new ValueEffect(value, affectingEntities, valueAmount);
 			} else {
 				Direction direction = Direction.valueOf(effectObj.getString("Direction"));
-				effect = new ValueEffect(effectTypeEnum, value, affectingEntities, direction, valueAmount);
+				effect = new ValueEffect(value, affectingEntities, direction, valueAmount);
 			}
 		} catch (JSONException exception) { // the affecting entities was an
 											// array
@@ -273,12 +273,12 @@ public class SetUpDeckHandler {
 				affectingEntities.put(AffectingEntity.valueOf(affecting.getString(ae)), 1);
 			}
 
-			effect = new ValueEffect(effectTypeEnum, value, affectingEntities);
+			effect = new ValueEffect(value, affectingEntities);
 		}
 		return effect;
 	}
 
-	private Effect createEntityEffect(JSONObject effectObj, EffectType effectTypeEnum, EntityType entityEnum) {
+	private Effect createEntityEffect(JSONObject effectObj, EntityType entityEnum) {
 		Effect effect;
 		HashMap<Enum, Integer> entitiesAndAmounts = new HashMap<Enum, Integer>();
 
@@ -307,7 +307,7 @@ public class SetUpDeckHandler {
 			}
 		}
 
-		effect = new EntityEffect(effectTypeEnum, entityEnum, entitiesAndAmounts);
+		effect = new EntityEffect(entityEnum, entitiesAndAmounts);
 		return effect;
 	}
 }

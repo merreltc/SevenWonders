@@ -31,6 +31,7 @@ import dataStructures.gameMaterials.ValueEffect.Value;
 import dataStructures.gameMaterials.ValueEffect.ValueType;
 import dataStructures.playerData.Player;
 import junit.framework.Assert;
+import testHelpers.SetUpDeckTestHelper;
 
 public class SetUpDeckHandlerTest {
 

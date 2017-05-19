@@ -500,7 +500,7 @@ public class PlayerTest {
 		costs.put(RawResource.ORE, 2);
 		costs.put(RawResource.STONE, 1);
 		Cost cost = new Cost(CostType.RESOURCE, costs);
-		Effect effect = new ValueEffect(EffectType.VALUE, Value.GUILD, AffectingEntity.RAWRESOURCES,
+		Effect effect = new ValueEffect(Value.GUILD, AffectingEntity.RAWRESOURCES,
 				Direction.NEIGHBORS, 1);
 		Card card = new Card("Workers Guild", CardType.GUILD, cost, effect);
 		return card;
@@ -511,7 +511,7 @@ public class PlayerTest {
 		costs.put(RawResource.ORE, 2);
 		costs.put(RawResource.STONE, 2);
 		Cost cost = new Cost(CostType.RESOURCE, costs);
-		Effect effect = new ValueEffect(EffectType.VALUE, Value.GUILD, AffectingEntity.MANUFACTUREDGOODS,
+		Effect effect = new ValueEffect(Value.GUILD, AffectingEntity.MANUFACTUREDGOODS,
 				Direction.NEIGHBORS, 2);
 		Card card = new Card("Craftsmens Guild", CardType.GUILD, cost, effect);
 		return card;
@@ -522,7 +522,7 @@ public class PlayerTest {
 		costs.put(Good.LOOM, 1);
 		costs.put(RawResource.CLAY, 2);
 		Cost cost = new Cost(CostType.MULTITYPE, costs);
-		Effect effect = new ValueEffect(EffectType.VALUE, Value.VICTORYPOINTS, AffectingEntity.NONE, 4);
+		Effect effect = new ValueEffect(Value.VICTORYPOINTS, AffectingEntity.NONE, 4);
 		Card card = new Card("Courthouse", CardType.SCIENTIFICSTRUCTURE, cost, effect);
 		return card;
 	}
@@ -533,7 +533,7 @@ public class PlayerTest {
 		Cost cost = new Cost(CostType.GOOD, costs);
 		HashMap<Enum, Integer> entitiesAndAmounts = new HashMap<Enum, Integer>();
 		entitiesAndAmounts.put(Science.PROTRACTOR, 1);
-		Effect effect = new EntityEffect(EffectType.ENTITY, EntityType.SCIENCE, entitiesAndAmounts);
+		Effect effect = new EntityEffect(EntityType.SCIENCE, entitiesAndAmounts);
 		Card card = new Card("Apothecary", CardType.SCIENTIFICSTRUCTURE, cost, effect);
 		return card;
 	}
@@ -544,7 +544,7 @@ public class PlayerTest {
 		Cost cost = new Cost(CostType.GOOD, costs);
 		HashMap<Enum, Integer> entitiesAndAmounts = new HashMap<Enum, Integer>();
 		entitiesAndAmounts.put(Science.WHEEL, 1);
-		Effect effect = new EntityEffect(EffectType.ENTITY, EntityType.SCIENCE, entitiesAndAmounts);
+		Effect effect = new EntityEffect(EntityType.SCIENCE, entitiesAndAmounts);
 		Card card = new Card("Workshop", CardType.SCIENTIFICSTRUCTURE, cost, effect);
 		return card;
 	}
@@ -555,7 +555,7 @@ public class PlayerTest {
 		Cost cost = new Cost(CostType.GOOD, costs);
 		HashMap<Enum, Integer> entitiesAndAmounts = new HashMap<Enum, Integer>();
 		entitiesAndAmounts.put(Science.TABLET, 1);
-		Effect effect = new EntityEffect(EffectType.ENTITY, EntityType.SCIENCE, entitiesAndAmounts);
+		Effect effect = new EntityEffect(EntityType.SCIENCE, entitiesAndAmounts);
 		Card card = new Card("Scriptorium", CardType.SCIENTIFICSTRUCTURE, cost, effect);
 		return card;
 	}

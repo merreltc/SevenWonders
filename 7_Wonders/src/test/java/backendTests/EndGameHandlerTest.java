@@ -515,7 +515,7 @@ public class EndGameHandlerTest {
 		costs.put(RawResource.ORE, 2);
 		costs.put(RawResource.STONE, 1);
 		Cost cost = new Cost(CostType.RESOURCE, costs);
-		Effect effect = new ValueEffect(EffectType.VALUE, Value.GUILD, AffectingEntity.RAWRESOURCES,
+		Effect effect = new ValueEffect(Value.GUILD, AffectingEntity.RAWRESOURCES,
 				Direction.NEIGHBORS, 1);
 		Card card = new Card("Workers Guild", CardType.GUILD, cost, effect);
 		return card;
@@ -526,7 +526,7 @@ public class EndGameHandlerTest {
 		costs.put(RawResource.ORE, 2);
 		costs.put(RawResource.STONE, 2);
 		Cost cost = new Cost(CostType.RESOURCE, costs);
-		Effect effect = new ValueEffect(EffectType.VALUE, Value.GUILD, AffectingEntity.MANUFACTUREDGOODS,
+		Effect effect = new ValueEffect(Value.GUILD, AffectingEntity.MANUFACTUREDGOODS,
 				Direction.NEIGHBORS, 2);
 		Card card = new Card("Craftsmens Guild", CardType.GUILD, cost, effect);
 		return card;
@@ -538,7 +538,7 @@ public class EndGameHandlerTest {
 		costs.put(Good.PRESS, 1);
 		costs.put(Good.GLASS, 1);
 		Cost cost = new Cost(CostType.GOOD, costs);
-		Effect effect = new ValueEffect(EffectType.VALUE, Value.GUILD, AffectingEntity.COMMERCIALSTRUCTURES,
+		Effect effect = new ValueEffect(Value.GUILD, AffectingEntity.COMMERCIALSTRUCTURES,
 				Direction.NEIGHBORS, 1);
 		Card card = new Card("Traders Guild", CardType.GUILD, cost, effect);
 		return card;
@@ -550,7 +550,7 @@ public class EndGameHandlerTest {
 		costs.put(Good.PRESS, 1);
 		costs.put(RawResource.CLAY, 3);
 		Cost cost = new Cost(CostType.MULTITYPE, costs);
-		Effect effect = new ValueEffect(EffectType.VALUE, Value.GUILD, AffectingEntity.SCIENTIFICSTRUCTURES,
+		Effect effect = new ValueEffect(Value.GUILD, AffectingEntity.SCIENTIFICSTRUCTURES,
 				Direction.NEIGHBORS, 1);
 		Card card = new Card("Philosophers Guild", CardType.GUILD, cost, effect);
 		return card;
@@ -561,7 +561,7 @@ public class EndGameHandlerTest {
 		costs.put(Good.GLASS, 1);
 		costs.put(RawResource.LUMBER, 3);
 		Cost cost = new Cost(CostType.MULTITYPE, costs);
-		Effect effect = new ValueEffect(EffectType.VALUE, Value.GUILD, AffectingEntity.MILITARYSTRUCTURES,
+		Effect effect = new ValueEffect(Value.GUILD, AffectingEntity.MILITARYSTRUCTURES,
 				Direction.NEIGHBORS, 1);
 		Card card = new Card("Spies Guild", CardType.GUILD, cost, effect);
 		return card;
@@ -573,7 +573,7 @@ public class EndGameHandlerTest {
 		costs.put(RawResource.ORE, 2);
 		costs.put(RawResource.STONE, 1);
 		Cost cost = new Cost(CostType.MULTITYPE, costs);
-		Effect effect = new ValueEffect(EffectType.VALUE, Value.GUILD, AffectingEntity.MILITARYSTRUCTURES,
+		Effect effect = new ValueEffect(Value.GUILD, AffectingEntity.MILITARYSTRUCTURES,
 				Direction.NEIGHBORS, 1);
 		Card card = new Card("Strategists Guild", CardType.GUILD, cost, effect);
 		return card;
@@ -589,7 +589,7 @@ public class EndGameHandlerTest {
 		entitiesAndAmounts.put(AffectingEntity.RAWRESOURCES, 1);
 		entitiesAndAmounts.put(AffectingEntity.MANUFACTUREDGOODS, 1);
 		entitiesAndAmounts.put(AffectingEntity.GUILD, 1);
-		Effect effect = new ValueEffect(EffectType.VALUE, Value.GUILD, entitiesAndAmounts);
+		Effect effect = new ValueEffect(Value.GUILD, entitiesAndAmounts);
 		Card card = new Card("Shipowners Guild", CardType.GUILD, cost, effect);
 		return card;
 	}
@@ -604,7 +604,7 @@ public class EndGameHandlerTest {
 		entitiesAndAmounts.put(Science.PROTRACTOR, 1);
 		entitiesAndAmounts.put(Science.WHEEL, 1);
 		entitiesAndAmounts.put(Science.TABLET, 1);
-		Effect effect = new ValueEffect(EffectType.VALUE, Value.GUILD, entitiesAndAmounts);
+		Effect effect = new ValueEffect(Value.GUILD, entitiesAndAmounts);
 		Card card = new Card("Scientists Guild", CardType.GUILD, cost, effect);
 		return card;
 	}
@@ -616,7 +616,7 @@ public class EndGameHandlerTest {
 		costs.put(RawResource.LUMBER, 3);
 		costs.put(RawResource.STONE, 1);
 		Cost cost = new Cost(CostType.MULTITYPE, costs);
-		Effect effect = new ValueEffect(EffectType.VALUE, Value.GUILD, AffectingEntity.CIVILIANSTRUCTURES,
+		Effect effect = new ValueEffect(Value.GUILD, AffectingEntity.CIVILIANSTRUCTURES,
 				Direction.NEIGHBORS, 1);
 		Card card = new Card("Magistrates Guild", CardType.GUILD, cost, effect);
 		return card;
@@ -628,7 +628,7 @@ public class EndGameHandlerTest {
 		costs.put(RawResource.CLAY, 2);
 		costs.put(RawResource.STONE, 2);
 		Cost cost = new Cost(CostType.MULTITYPE, costs);
-		Effect effect = new ValueEffect(EffectType.VALUE, Value.GUILD, AffectingEntity.WONDERLEVEL, Direction.ALL, 1);
+		Effect effect = new ValueEffect(Value.GUILD, AffectingEntity.WONDERLEVEL, Direction.ALL, 1);
 		Card card = new Card("Builders Guild", CardType.GUILD, cost, effect);
 		return card;
 	}
@@ -638,7 +638,7 @@ public class EndGameHandlerTest {
 		costs.put(Good.LOOM, 1);
 		costs.put(RawResource.CLAY, 2);
 		Cost cost = new Cost(CostType.MULTITYPE, costs);
-		Effect effect = new ValueEffect(EffectType.VALUE, Value.VICTORYPOINTS, AffectingEntity.NONE, 4);
+		Effect effect = new ValueEffect(Value.VICTORYPOINTS, AffectingEntity.NONE, 4);
 		Card card = new Card("Altar", CardType.CIVILIANSTRUCTURE, cost, effect);
 		return card;
 	}
@@ -647,7 +647,7 @@ public class EndGameHandlerTest {
 		Cost cost = new Cost(CostType.NONE, 0);
 		HashMap<Enum, Integer> entitiesAndAmounts = new HashMap<Enum, Integer>();
 		entitiesAndAmounts.put(RawResource.LUMBER, 1);
-		Effect effect = new EntityEffect(EffectType.ENTITY, EntityType.RESOURCE, entitiesAndAmounts);
+		Effect effect = new EntityEffect(EntityType.RESOURCE, entitiesAndAmounts);
 
 		Card card = new Card("Lumber Yard", CardType.RAWMATERIAL, cost, effect);
 		return card;
@@ -657,7 +657,7 @@ public class EndGameHandlerTest {
 		HashMap<Enum, Integer> entitiesAndAmounts = new HashMap<Enum, Integer>();
 		Cost cost = new Cost(CostType.NONE, 0);
 		entitiesAndAmounts.put(Good.LOOM, 1);
-		Effect effect = new EntityEffect(EffectType.ENTITY, EntityType.MANUFACTUREDGOOD, entitiesAndAmounts);
+		Effect effect = new EntityEffect(EntityType.MANUFACTUREDGOOD, entitiesAndAmounts);
 
 		Card card = new Card("Loom", CardType.MANUFACTUREDGOOD, cost, effect);
 		return card;
@@ -665,7 +665,7 @@ public class EndGameHandlerTest {
 
 	private Card createCommercialCard() {
 		Cost cost = new Cost(CostType.NONE, 0);
-		Effect effect = new ValueEffect(EffectType.VALUE, Value.COMMERCE, AffectingEntity.NONE, 5);
+		Effect effect = new ValueEffect(Value.COMMERCE, AffectingEntity.NONE, 5);
 		Card card = new Card("Tavern", CardType.COMMERCIALSTRUCTURE, cost, effect);
 		return card;
 	}
@@ -676,7 +676,7 @@ public class EndGameHandlerTest {
 		costs.put(RawResource.ORE, 1);
 		costs.put(RawResource.CLAY, 1);
 		Cost cost = new Cost(CostType.RESOURCE, costs);
-		Effect effect = new ValueEffect(EffectType.VALUE, Value.MILITARY, AffectingEntity.NONE, 2);
+		Effect effect = new ValueEffect(Value.MILITARY, AffectingEntity.NONE, 2);
 		Card card = new Card("Stables", CardType.MILITARYSTRUCTURE, cost, effect);
 		return card;
 	}
@@ -687,7 +687,7 @@ public class EndGameHandlerTest {
 		Cost cost = new Cost(CostType.GOOD, costs);
 		HashMap<Enum, Integer> entitiesAndAmounts = new HashMap<Enum, Integer>();
 		entitiesAndAmounts.put(Science.WHEEL, 1);
-		Effect effect = new EntityEffect(EffectType.ENTITY, EntityType.SCIENCE, entitiesAndAmounts);
+		Effect effect = new EntityEffect(EntityType.SCIENCE, entitiesAndAmounts);
 		Card card = new Card("Workshop", CardType.SCIENTIFICSTRUCTURE, cost, effect);
 		return card;
 	}

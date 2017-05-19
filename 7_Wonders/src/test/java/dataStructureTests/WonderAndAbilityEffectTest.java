@@ -1,114 +1,75 @@
 package dataStructureTests;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import org.junit.Test;
 
-import constants.GeneralEnums.RawResource;
 import dataStructures.gameMaterials.AbilityEffect;
 import dataStructures.gameMaterials.AbilityEffect.Ability;
 import dataStructures.gameMaterials.Effect;
-import dataStructures.gameMaterials.Effect.Direction;
 import dataStructures.gameMaterials.Effect.EffectType;
-import dataStructures.gameMaterials.EntityEffect;
-import dataStructures.gameMaterials.EntityEffect.EntityType;
 import dataStructures.gameMaterials.Level.Frequency;
-import dataStructures.gameMaterials.MultiValueEffect;
 import dataStructures.gameMaterials.ValueEffect;
 import dataStructures.gameMaterials.ValueEffect.AffectingEntity;
 import dataStructures.gameMaterials.ValueEffect.Value;
-import dataStructures.gameMaterials.ValueEffect.ValueType;
 
 public class WonderAndAbilityEffectTest {
-
-	@Test
-	public void testEntityEffectFrequency() {
-		HashMap<Enum, Integer> resourcesAndAmount = new HashMap<Enum, Integer>();
-		resourcesAndAmount.put(RawResource.LUMBER, 1);
-		Effect effect = new EntityEffect(EffectType.ENTITY, EntityType.RESOURCE, resourcesAndAmount,
-				Frequency.EVERYTURN);
-		assertEquals(Frequency.EVERYTURN, ((EntityEffect) effect).getFrequency());
-	}
-
-	@Test
-	public void testValueEffectFrequency() {
-		Effect effect = new ValueEffect(EffectType.VALUE, Value.VICTORYPOINTS, AffectingEntity.NONE, 2,
-				Frequency.EVERYTURN);
-		assertEquals(Frequency.EVERYTURN, ((ValueEffect) effect).getFrequency());
-
-		effect = new ValueEffect(EffectType.VALUE, Value.VICTORYPOINTS, AffectingEntity.NONE, Direction.SELF,
-				Frequency.EVERYTURN);
-		assertEquals(Frequency.EVERYTURN, ((ValueEffect) effect).getFrequency());
-
-		effect = new ValueEffect(EffectType.VALUE, Value.VICTORYPOINTS, AffectingEntity.NONE, Direction.SELF, 2,
-				Frequency.EVERYTURN);
-		assertEquals(Frequency.EVERYTURN, ((ValueEffect) effect).getFrequency());
-
-		HashMap<Enum, Integer> affectingEntities = new HashMap<Enum, Integer>();
-		affectingEntities.put(AffectingEntity.RAWRESOURCES, 1);
-		affectingEntities.put(AffectingEntity.MANUFACTUREDGOODS, 1);
-		affectingEntities.put(AffectingEntity.GUILD, 1);
-		effect = new ValueEffect(EffectType.VALUE, Value.VICTORYPOINTS, affectingEntities, Frequency.EVERYTURN);
-		assertEquals(Frequency.EVERYTURN, ((ValueEffect) effect).getFrequency());
-	}
-
-	@Test
-	public void testMultiValueEffectFrequency() {
-		HashMap<Enum, Integer> valuesAndAmounts = new HashMap<Enum, Integer>();
-		valuesAndAmounts.put(ValueType.CONFLICTTOKEN, -1);
-		valuesAndAmounts.put(ValueType.VICTORYPOINT, 1);
-		Effect effect = new MultiValueEffect(EffectType.MULTIVALUE, Value.GUILD, AffectingEntity.NONE,
-				Direction.NEIGHBORS, valuesAndAmounts, Frequency.EVERYTURN);
-
-		assertEquals(Frequency.EVERYTURN, ((MultiValueEffect) effect).getFrequency());
-	}
-
 	@Test
 	public void testAbilityEffect() {
-		AbilityEffect effect = new AbilityEffect(EffectType.ABILITY, Ability.PLAYSEVENTH, Frequency.SIXTHTURN);
+		AbilityEffect effect = new AbilityEffect(EffectType.ABILITY, Ability.PLAYSEVENTH);
 		assertEquals(EffectType.ABILITY, effect.getEffectType());
 		assertEquals(Ability.PLAYSEVENTH, effect.getAbility());
-		assertEquals(Frequency.SIXTHTURN, effect.getFrequency());
-
-		effect = new AbilityEffect(EffectType.ABILITY, Ability.FREEBUILD, Frequency.ONCEAGE);
+		
+		effect = new AbilityEffect(EffectType.ABILITY, Ability.FREEBUILD);
 		assertEquals(EffectType.ABILITY, effect.getEffectType());
 		assertEquals(Ability.FREEBUILD, effect.getAbility());
-		assertEquals(Frequency.ONCEAGE, effect.getFrequency());
 
-		effect = new AbilityEffect(EffectType.ABILITY, Ability.FREEBUILDFROMDISCARD, Frequency.ONCEAGE);
+		effect = new AbilityEffect(EffectType.ABILITY, Ability.FREEBUILDFROMDISCARD);
 		assertEquals(EffectType.ABILITY, effect.getEffectType());
 		assertEquals(Ability.FREEBUILDFROMDISCARD, effect.getAbility());
-		assertEquals(Frequency.ONCEAGE, effect.getFrequency());
 
-		effect = new AbilityEffect(EffectType.ABILITY, Ability.COPYONENEIGHBORGUILD, Frequency.ONCEAGE);
+		effect = new AbilityEffect(EffectType.ABILITY, Ability.COPYONENEIGHBORGUILD);
 		assertEquals(EffectType.ABILITY, effect.getEffectType());
 		assertEquals(Ability.COPYONENEIGHBORGUILD, effect.getAbility());
-		assertEquals(Frequency.ONCEAGE, effect.getFrequency());
 	}
 
 	@Test
 	public void testAllFrequencies() {
-		Effect effect = new ValueEffect(EffectType.VALUE, Value.VICTORYPOINTS, AffectingEntity.NONE, 2,
-				Frequency.ENDOFTURN);
-		assertEquals(Frequency.ENDOFTURN, ((ValueEffect) effect).getFrequency());
-
-		effect = new ValueEffect(EffectType.VALUE, Value.VICTORYPOINTS, AffectingEntity.NONE, 2, Frequency.EVERYTURN);
-		assertEquals(Frequency.EVERYTURN, ((ValueEffect) effect).getFrequency());
-
-		effect = new ValueEffect(EffectType.VALUE, Value.VICTORYPOINTS, AffectingEntity.NONE, 2, Frequency.SIXTHTURN);
-		assertEquals(Frequency.SIXTHTURN, ((ValueEffect) effect).getFrequency());
-
-		effect = new ValueEffect(EffectType.VALUE, Value.VICTORYPOINTS, AffectingEntity.NONE, 2,
-				Frequency.ONCEIMMEDIATE);
-		assertEquals(Frequency.ONCEIMMEDIATE, ((ValueEffect) effect).getFrequency());
-
-		effect = new ValueEffect(EffectType.VALUE, Value.VICTORYPOINTS, AffectingEntity.NONE, 2, Frequency.ONCEAGE);
-		assertEquals(Frequency.ONCEAGE, ((ValueEffect) effect).getFrequency());
-
-		effect = new ValueEffect(EffectType.VALUE, Value.VICTORYPOINTS, AffectingEntity.NONE, 2, Frequency.ENDOFGAME);
-		assertEquals(Frequency.ENDOFGAME, ((ValueEffect) effect).getFrequency());
+		HashMap<Frequency, ArrayList<Effect>> effects = new HashMap<Frequency, ArrayList<Effect>>();
+		
+		ArrayList<Effect> effect1 = new ArrayList<Effect>();
+		effect1.add(new ValueEffect(Value.VICTORYPOINTS, AffectingEntity.NONE, 2));
+		effects.put(Frequency.ENDOFTURN, effect1);
+		
+		ArrayList<Effect> effect2 = new ArrayList<Effect>();
+		effect1.add(new ValueEffect(Value.VICTORYPOINTS, AffectingEntity.NONE, 2));
+		effects.put(Frequency.EVERYTURN, effect1);
+		
+		ArrayList<Effect> effect3 = new ArrayList<Effect>();
+		effect1.add(new ValueEffect(Value.VICTORYPOINTS, AffectingEntity.NONE, 2));
+		effects.put(Frequency.SIXTHTURN, effect1);
+		
+		ArrayList<Effect> effect4 = new ArrayList<Effect>();
+		effect1.add(new ValueEffect(Value.VICTORYPOINTS, AffectingEntity.NONE, 2));
+		effects.put(Frequency.ONCEIMMEDIATE, effect1);
+		
+		ArrayList<Effect> effect5 = new ArrayList<Effect>();
+		effect1.add(new ValueEffect(Value.VICTORYPOINTS, AffectingEntity.NONE, 2));
+		effects.put(Frequency.ONCEAGE, effect1);
+		
+		ArrayList<Effect> effect6 = new ArrayList<Effect>();
+		effect1.add(new ValueEffect(Value.VICTORYPOINTS, AffectingEntity.NONE, 2));
+		effects.put(Frequency.ENDOFGAME, effect1);
+	
+		assertTrue(effects.containsKey(Frequency.ENDOFTURN));
+		assertTrue(effects.containsKey(Frequency.EVERYTURN));
+		assertTrue(effects.containsKey(Frequency.SIXTHTURN));
+		assertTrue(effects.containsKey(Frequency.ONCEIMMEDIATE));
+		assertTrue(effects.containsKey(Frequency.ONCEAGE));
+		assertTrue(effects.containsKey(Frequency.ENDOFGAME));
 	}
 
 }

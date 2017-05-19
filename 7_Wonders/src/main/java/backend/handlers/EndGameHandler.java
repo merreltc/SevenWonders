@@ -114,7 +114,7 @@ public class EndGameHandler {
 
 					HashMap<Enum, Integer> entitiesAndAmounts = new HashMap<Enum, Integer>();
 					entitiesAndAmounts.put(choice, 1);
-					Effect effect = new EntityEffect(EffectType.ENTITY, EntityType.SCIENCE, entitiesAndAmounts);
+					Effect effect = new EntityEffect(EntityType.SCIENCE, entitiesAndAmounts);
 					Card reward = new Card("Scientists Reward", CardType.SCIENTIFICSTRUCTURE, null, effect);
 					player.addCardToStoragePile(reward);
 					break;

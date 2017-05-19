@@ -123,7 +123,7 @@ public class WonderInfo {
 		HashMap<Enum, Integer> effect = new HashMap<Enum, Integer>();
 		effect.put(specificResource, 1);
 
-		return new EntityEffect(EffectType.ENTITY, entity, effect);
+		return new EntityEffect(entity, effect);
 	}
 
 	private EntityType getEntityType(Resource resource) {

@@ -4,6 +4,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import org.easymock.EasyMock;
@@ -27,9 +28,9 @@ import dataStructures.gameMaterials.ValueEffect.ValueType;
 
 public class LevelTest {
 	private static String MOCK_COST_TO_STRING = "EasyMock for class dataStructures.gameMaterials.Cost";
-	private static String MOCK_EFFECT_TO_STRING = "EasyMock for class dataStructures.gameMaterials.Effect";
-	private static String MOCK_EFFECTS_TO_STRING = "{EasyMock for class dataStructures.gameMaterials.Effect=ONCEIMMEDIATE}";
-
+	private static String MOCK_EFFECTS_TO_STRING_EVERYTURN = "{EVERYTURN=[EasyMock for class dataStructures.gameMaterials.Effect]}";
+	private static String MOCK_EFFECTS_TO_STRING_ONCEIMMEDIATE = "{ONCEIMMEDIATE=[EasyMock for class dataStructures.gameMaterials.Effect]}";
+	
 	@Test
 	public void testToStringSingleEffect() {
 		int priority = 1;
@@ -38,8 +39,8 @@ public class LevelTest {
 
 		Level level = new Level(priority, cost, effect, Frequency.EVERYTURN);
 
-		assertEquals("Priority: 1, Cost: " + MOCK_COST_TO_STRING + "," + " Effect: " + MOCK_EFFECT_TO_STRING + ","
-				+ " Frequency: EVERYTURN, Effects: null", level.toString());
+		assertEquals("Priority: 1, Cost: " + MOCK_COST_TO_STRING + ", Effects: " + MOCK_EFFECTS_TO_STRING_EVERYTURN,
+				level.toString());
 	}
 
 	@Test
@@ -48,12 +49,14 @@ public class LevelTest {
 		Cost cost = EasyMock.createStrictMock(Cost.class);
 		Effect effect = EasyMock.createStrictMock(Effect.class);
 
-		HashMap<Effect, Frequency> effects = new HashMap<Effect, Frequency>();
-		effects.put(effect, Frequency.ONCEIMMEDIATE);
+		HashMap<Frequency, ArrayList<Effect>> effects = new HashMap<Frequency, ArrayList<Effect>>();
+		ArrayList<Effect> effectList = new ArrayList<Effect>();
+		effectList.add(effect);
+		effects.put(Frequency.ONCEIMMEDIATE, effectList);
 
 		Level level = new Level(priority, cost, effects);
-		assertEquals("Priority: 1, Cost: " + MOCK_COST_TO_STRING + ", Effect: null, Frequency: null," + " Effects: "
-				+ MOCK_EFFECTS_TO_STRING, level.toString());
+		assertEquals("Priority: 1, Cost: " + MOCK_COST_TO_STRING + ", Effects: " + MOCK_EFFECTS_TO_STRING_ONCEIMMEDIATE,
+				level.toString());
 	}
 
 	@Test
@@ -87,8 +90,10 @@ public class LevelTest {
 		Cost cost = EasyMock.createStrictMock(Cost.class);
 		Effect effect = EasyMock.createStrictMock(Effect.class);
 
-		HashMap<Effect, Frequency> effects = new HashMap<Effect, Frequency>();
-		effects.put(effect, Frequency.ONCEIMMEDIATE);
+		HashMap<Frequency, ArrayList<Effect>> effects = new HashMap<Frequency, ArrayList<Effect>>();
+		ArrayList<Effect> effectList = new ArrayList<Effect>();
+		effectList.add(effect);
+		effects.put(Frequency.ONCEIMMEDIATE, effectList);
 
 		Level level1 = new Level(priority, cost, effects);
 		Level level2 = new Level(priority, cost, effects);
@@ -104,11 +109,15 @@ public class LevelTest {
 		int priority1 = 1;
 		int priority2 = 2;
 
-		HashMap<Effect, Frequency> effects1 = new HashMap<Effect, Frequency>();
-		effects1.put(effect1, Frequency.ONCEIMMEDIATE);
+		HashMap<Frequency, ArrayList<Effect>> effects1 = new HashMap<Frequency, ArrayList<Effect>>();
+		ArrayList<Effect> effect = new ArrayList<Effect>();
+		effect.add(effect1);
+		effects1.put(Frequency.ONCEIMMEDIATE, effect);
 
-		HashMap<Effect, Frequency> effects2 = new HashMap<Effect, Frequency>();
-		effects2.put(effect2, Frequency.ONCEIMMEDIATE);
+		HashMap<Frequency, ArrayList<Effect>> effects2 = new HashMap<Frequency, ArrayList<Effect>>();
+		effect = new ArrayList<Effect>();
+		effect.add(effect2);
+		effects2.put(Frequency.ONCEIMMEDIATE, effect);
 
 		Level level1 = new Level(priority1, cost1, effects1);
 		Level level2 = new Level(priority2, cost2, effects2);
@@ -122,7 +131,8 @@ public class LevelTest {
 		int priority = 1;
 
 		Level level = new Level(priority, cost, effect, Frequency.ONCEIMMEDIATE);
-		assertEquals(effect, level.getEffect());
+		assertTrue(level.getEffects().containsKey(Frequency.ONCEIMMEDIATE));
+		assertEquals(effect, level.getEffects().get(Frequency.ONCEIMMEDIATE).get(0));
 	}
 
 	@Test
@@ -204,10 +214,13 @@ public class LevelTest {
 		int priority = 1;
 		Level level = new Level(priority, cost, effect, Frequency.ONCEIMMEDIATE);
 
-		EffectType effectType = level.getEffectType();
-		Direction direction = level.getEffectDirection();
-		EntityType entityType = level.getEntityType();
-		HashMap<Enum, Integer> actualEntities = level.getEntities();
+		Effect actual = level.getEffects().get(Frequency.ONCEIMMEDIATE).get(0);
+
+		EffectType effectType = actual.getEffectType();
+		Direction direction = actual.getDirection();
+		EntityType entityType = ((EntityEffect) actual).getEntityType();
+
+		HashMap<Enum, Integer> actualEntities = ((EntityEffect) effect).getEntities();
 
 		EasyMock.verify(effect);
 		assertEquals(EffectType.ENTITY, effectType);
@@ -231,11 +244,13 @@ public class LevelTest {
 		int priority = 1;
 		Level level = new Level(priority, cost, effect, Frequency.ONCEIMMEDIATE);
 
-		EffectType effectType = level.getEffectType();
-		Direction direction = level.getEffectDirection();
-		Value value = level.getEffectValue();
-		ValueType valueType = level.getEffectValueType();
-		AffectingEntity affEntity = level.getAffectingEntity();
+		Effect actual = level.getEffects().get(Frequency.ONCEIMMEDIATE).get(0);
+
+		EffectType effectType = actual.getEffectType();
+		Direction direction = actual.getDirection();
+		Value value = ((ValueEffect) effect).getValue();
+		ValueType valueType = ((ValueEffect) effect).getValueType();
+		AffectingEntity affEntity = ((ValueEffect) effect).getAffectingEntity();
 
 		EasyMock.verify(effect);
 		assertEquals(EffectType.VALUE, effectType);
@@ -266,11 +281,13 @@ public class LevelTest {
 		int priority = 1;
 		Level level = new Level(priority, cost, effect, Frequency.ONCEIMMEDIATE);
 
-		EffectType effectType = level.getEffectType();
-		Direction direction = level.getEffectDirection();
-		Value value = level.getEffectValue();
-		AffectingEntity affEntity = level.getAffectingEntity();
-		HashMap<Enum, Integer> actualValues = level.getValues();
+		Effect actual = level.getEffects().get(Frequency.ONCEIMMEDIATE).get(0);
+
+		EffectType effectType = actual.getEffectType();
+		Direction direction = actual.getDirection();
+		Value value = ((MultiValueEffect) effect).getValue();
+		AffectingEntity affEntity = ((MultiValueEffect) effect).getAffectingEntity();
+		HashMap<Enum, Integer> actualValues = ((MultiValueEffect) effect).getValues();
 
 		EasyMock.verify(effect);
 		assertEquals(EffectType.MULTIVALUE, effectType);
@@ -289,12 +306,17 @@ public class LevelTest {
 
 		int priority = 1;
 		Frequency freq = Frequency.ONCEIMMEDIATE;
-		HashMap<Effect, Frequency> expectedEffects = new HashMap<Effect, Frequency>();
-		expectedEffects.put(effect1, freq);
-		expectedEffects.put(effect2, freq);
+		HashMap<Frequency, ArrayList<Effect>> expectedEffects = new HashMap<Frequency, ArrayList<Effect>>();
+
+		ArrayList<Effect> effect = new ArrayList<Effect>();
+		effect.add(effect1);
+		effect.add(effect2);
+
+		expectedEffects.put(freq, effect);
+
 		Level level = new Level(priority, cost, expectedEffects);
 
-		HashMap<Effect, Frequency> actualEffects = level.getEffects();
+		HashMap<Frequency, ArrayList<Effect>> actualEffects = level.getEffects();
 
 		EasyMock.verify(effect1, effect2);
 		assertEquals(expectedEffects, actualEffects);
@@ -320,12 +342,12 @@ public class LevelTest {
 		Level level5 = new Level(priority, cost, onceAge, Frequency.ONCEAGE);
 		Level level6 = new Level(priority, cost, endOfGame, Frequency.ENDOFGAME);
 
-		assertEquals(Frequency.ENDOFTURN, level1.getFrequency());
-		assertEquals(Frequency.EVERYTURN, level2.getFrequency());
-		assertEquals(Frequency.SIXTHTURN, level3.getFrequency());
-		assertEquals(Frequency.ONCEIMMEDIATE, level4.getFrequency());
-		assertEquals(Frequency.ONCEAGE, level5.getFrequency());
-		assertEquals(Frequency.ENDOFGAME, level6.getFrequency());
+		assertTrue(level1.getEffects().containsKey(Frequency.ENDOFTURN));
+		assertTrue(level2.getEffects().containsKey(Frequency.EVERYTURN));
+		assertTrue(level3.getEffects().containsKey(Frequency.SIXTHTURN));
+		assertTrue(level4.getEffects().containsKey(Frequency.ONCEIMMEDIATE));
+		assertTrue(level5.getEffects().containsKey(Frequency.ONCEAGE));
+		assertTrue(level6.getEffects().containsKey(Frequency.ENDOFGAME));
 
 		EasyMock.verify(cost, endOfTurn, everyTurn, sixthTurn, onceImmediate, onceAge, endOfGame);
 	}
@@ -335,21 +357,20 @@ public class LevelTest {
 		Cost cost = EasyMock.createStrictMock(Cost.class);
 		Effect endOfTurn = EasyMock.createStrictMock(Effect.class);
 		Effect everyTurn = EasyMock.createStrictMock(Effect.class);
-		HashMap<Effect, Frequency> effects = new HashMap<Effect, Frequency>();
-		effects.put(endOfTurn, Frequency.ENDOFTURN);
-		effects.put(everyTurn, Frequency.EVERYTURN);
+		HashMap<Frequency, ArrayList<Effect>> effects = new HashMap<Frequency, ArrayList<Effect>>();
+
+		ArrayList<Effect> effect = new ArrayList<Effect>();
+		effect.add(endOfTurn);
+		effects.put(Frequency.ENDOFTURN, effect);
+
+		effect.add(everyTurn);
+		effects.put(Frequency.EVERYTURN, effect);
 
 		EasyMock.replay(cost, endOfTurn, everyTurn);
 
 		int priority = 1;
 		Level level1 = new Level(priority, cost, effects);
 		assertEquals(effects, level1.getEffects());
-
-		for (Effect effect : effects.keySet()) {
-			Frequency freq = effects.get(effect);
-			boolean validFreq = (freq == Frequency.ENDOFTURN || freq == Frequency.EVERYTURN);
-			assertTrue(validFreq);
-		}
 
 		EasyMock.verify(cost, endOfTurn, everyTurn);
 	}

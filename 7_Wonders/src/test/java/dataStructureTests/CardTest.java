@@ -414,9 +414,9 @@ public class CardTest {
 		frequency2.add(4);
 
 		Cost cost = new Cost(CostType.NONE, 0);
-		Effect effect = new EntityEffect(EffectType.ENTITY, EntityType.RESOURCE, new HashMap<Enum, Integer>());
+		Effect effect = new EntityEffect(EntityType.RESOURCE, new HashMap<Enum, Integer>());
 		Cost cost2 = new Cost(CostType.NONE, 0);
-		Effect effect2 = new EntityEffect(EffectType.ENTITY, EntityType.RESOURCE, new HashMap<Enum, Integer>());
+		Effect effect2 = new EntityEffect(EntityType.RESOURCE, new HashMap<Enum, Integer>());
 
 		Card card = new Card("Lumber Yard", frequency, CardType.RAWMATERIAL, cost, effect, "None", "None");
 		Card card2 = new Card("Lumber Yard", frequency2, CardType.RAWMATERIAL, cost2, effect2, "None", "None");
@@ -434,9 +434,9 @@ public class CardTest {
 		frequency2.add(4);
 
 		Cost cost = new Cost(CostType.NONE, 0);
-		Effect effect = new EntityEffect(EffectType.ENTITY, EntityType.MANUFACTUREDGOOD, new HashMap<Enum, Integer>());
+		Effect effect = new EntityEffect(EntityType.MANUFACTUREDGOOD, new HashMap<Enum, Integer>());
 		Cost cost2 = new Cost(CostType.NONE, 0);
-		Effect effect2 = new EntityEffect(EffectType.ENTITY, EntityType.RESOURCE, new HashMap<Enum, Integer>());
+		Effect effect2 = new EntityEffect(EntityType.RESOURCE, new HashMap<Enum, Integer>());
 
 		Card card = new Card("Lumber Yard", frequency, CardType.RAWMATERIAL, cost, effect, "None", "None");
 		Card card2 = new Card("Lumber Yard", frequency2, CardType.RAWMATERIAL, cost2, effect2, "None", "None");
@@ -454,9 +454,9 @@ public class CardTest {
 		frequency2.add(4);
 
 		Cost cost = new Cost(CostType.NONE, 1);
-		Effect effect = new EntityEffect(EffectType.ENTITY, EntityType.RESOURCE, new HashMap<Enum, Integer>());
+		Effect effect = new EntityEffect(EntityType.RESOURCE, new HashMap<Enum, Integer>());
 		Cost cost2 = new Cost(CostType.NONE, 0);
-		Effect effect2 = new EntityEffect(EffectType.ENTITY, EntityType.RESOURCE, new HashMap<Enum, Integer>());
+		Effect effect2 = new EntityEffect(EntityType.RESOURCE, new HashMap<Enum, Integer>());
 
 		Card card = new Card("Lumber Yard", frequency, CardType.RAWMATERIAL, cost, effect, "None", "None");
 		Card card2 = new Card("Lumber Yard", frequency2, CardType.RAWMATERIAL, cost2, effect2, "None", "None");
@@ -474,9 +474,9 @@ public class CardTest {
 		frequency2.add(7);
 
 		Cost cost = new Cost(CostType.NONE, 0);
-		Effect effect = new EntityEffect(EffectType.ENTITY, EntityType.RESOURCE, new HashMap<Enum, Integer>());
+		Effect effect = new EntityEffect(EntityType.RESOURCE, new HashMap<Enum, Integer>());
 		Cost cost2 = new Cost(CostType.NONE, 0);
-		Effect effect2 = new EntityEffect(EffectType.ENTITY, EntityType.RESOURCE, new HashMap<Enum, Integer>());
+		Effect effect2 = new EntityEffect(EntityType.RESOURCE, new HashMap<Enum, Integer>());
 
 		Card card = new Card("Lumber Yard", frequency, CardType.RAWMATERIAL, cost, effect, "None", "None");
 		Card card2 = new Card("Lumber Yard", frequency2, CardType.RAWMATERIAL, cost2, effect2, "None", "None");
@@ -494,9 +494,9 @@ public class CardTest {
 		frequency2.add(4);
 
 		Cost cost = new Cost(CostType.NONE, 0);
-		Effect effect = new EntityEffect(EffectType.ENTITY, EntityType.RESOURCE, new HashMap<Enum, Integer>());
+		Effect effect = new EntityEffect(EntityType.RESOURCE, new HashMap<Enum, Integer>());
 		Cost cost2 = new Cost(CostType.NONE, 0);
-		Effect effect2 = new ValueEffect(EffectType.VALUE, Value.COMMERCE, AffectingEntity.NONE, 3);
+		Effect effect2 = new ValueEffect(Value.COMMERCE, AffectingEntity.NONE, 3);
 
 		Card card = new Card("Lumber Yard", frequency, CardType.RAWMATERIAL, cost, effect, "None", "None");
 		Card card2 = new Card("Lumber Yard", frequency2, CardType.RAWMATERIAL, cost2, effect2, "None", "None");
@@ -514,9 +514,9 @@ public class CardTest {
 		frequency2.add(4);
 
 		Cost cost = new Cost(CostType.NONE, 0);
-		Effect effect = new EntityEffect(EffectType.ENTITY, EntityType.RESOURCE, new HashMap<Enum, Integer>());
+		Effect effect = new EntityEffect(EntityType.RESOURCE, new HashMap<Enum, Integer>());
 		Cost cost2 = new Cost(CostType.NONE, 0);
-		Effect effect2 = new ValueEffect(EffectType.VALUE, Value.COMMERCE, AffectingEntity.NONE, 3);
+		Effect effect2 = new ValueEffect(Value.COMMERCE, AffectingEntity.NONE, 3);
 
 		Card card = new Card("Lumber Yard", frequency, CardType.RAWMATERIAL, cost, effect, "None", "None");
 		Card card2 = new Card("Lumber Yard", frequency2, CardType.RAWMATERIAL, cost2, effect2, "None", "None");
@@ -534,9 +534,9 @@ public class CardTest {
 		frequency2.add(4);
 
 		Cost cost = new Cost(CostType.NONE, 0);
-		Effect effect = new EntityEffect(EffectType.ENTITY, EntityType.RESOURCE, new HashMap<Enum, Integer>());
+		Effect effect = new EntityEffect(EntityType.RESOURCE, new HashMap<Enum, Integer>());
 		Cost cost2 = new Cost(CostType.NONE, 0);
-		Effect effect2 = new EntityEffect(EffectType.ENTITY, EntityType.RESOURCE, new HashMap<Enum, Integer>());
+		Effect effect2 = new EntityEffect(EntityType.RESOURCE, new HashMap<Enum, Integer>());
 
 		Card card = new Card("Lumber Yard", frequency, CardType.RAWMATERIAL, cost, effect, "None", "None");
 		Card card2 = new Card("Baths", frequency2, CardType.RAWMATERIAL, cost2, effect2, "None", "None");
@@ -554,9 +554,9 @@ public class CardTest {
 		frequency2.add(4);
 
 		Cost cost = new Cost(CostType.NONE, 0);
-		Effect effect = new EntityEffect(EffectType.ENTITY, EntityType.RESOURCE, new HashMap<Enum, Integer>());
+		Effect effect = new EntityEffect(EntityType.RESOURCE, new HashMap<Enum, Integer>());
 		Cost cost2 = new Cost(CostType.NONE, 0);
-		Effect effect2 = new EntityEffect(EffectType.ENTITY, EntityType.RESOURCE, new HashMap<Enum, Integer>());
+		Effect effect2 = new EntityEffect(EntityType.RESOURCE, new HashMap<Enum, Integer>());
 
 		Card card = new Card("Lumber Yard", frequency, CardType.RAWMATERIAL, cost, effect, "None", "None");
 		Card card2 = new Card("Lumber Yard", frequency2, CardType.RAWMATERIAL, cost2, effect2, "Baths", "None");
@@ -574,9 +574,9 @@ public class CardTest {
 		frequency2.add(4);
 
 		Cost cost = new Cost(CostType.NONE, 0);
-		Effect effect = new EntityEffect(EffectType.ENTITY, EntityType.RESOURCE, new HashMap<Enum, Integer>());
+		Effect effect = new EntityEffect(EntityType.RESOURCE, new HashMap<Enum, Integer>());
 		Cost cost2 = new Cost(CostType.NONE, 0);
-		Effect effect2 = new EntityEffect(EffectType.ENTITY, EntityType.RESOURCE, new HashMap<Enum, Integer>());
+		Effect effect2 = new EntityEffect(EntityType.RESOURCE, new HashMap<Enum, Integer>());
 
 		Card card = new Card("Lumber Yard", frequency, CardType.RAWMATERIAL, cost, effect, "None", "None");
 		Card card2 = new Card("Lumber Yard", frequency2, CardType.RAWMATERIAL, cost2, effect2, "None", "Baths");
@@ -594,9 +594,9 @@ public class CardTest {
 		frequency2.add(4);
 
 		Cost cost = new Cost(CostType.NONE, 0);
-		Effect effect = new EntityEffect(EffectType.ENTITY, EntityType.RESOURCE, new HashMap<Enum, Integer>());
+		Effect effect = new EntityEffect(EntityType.RESOURCE, new HashMap<Enum, Integer>());
 		Cost cost2 = new Cost(CostType.NONE, 0);
-		Effect effect2 = new EntityEffect(EffectType.ENTITY, EntityType.RESOURCE, new HashMap<Enum, Integer>());
+		Effect effect2 = new EntityEffect(EntityType.RESOURCE, new HashMap<Enum, Integer>());
 
 		Card card = new Card("Lumber Yard", frequency, CardType.CIVILIANSTRUCTURE, cost, effect, "None", "None");
 		Card card2 = new Card("Lumber Yard", frequency2, CardType.RAWMATERIAL, cost2, effect2, "None", "None");
