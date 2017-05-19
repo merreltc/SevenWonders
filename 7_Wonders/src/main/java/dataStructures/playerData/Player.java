@@ -75,6 +75,8 @@ public class Player {
 	}
 	
 	public HashMap<Frequency, HashSet<Effect>> buildNextLevel() {
+		// TODO refresh ONCEIMMEDIATE and ENDTURN
+		// TODO temporarily discard ONCEAGE after use
 		HashMap<Frequency, HashSet<Effect>> effects = this.wonder.buildNextLevel();
 		addWonderEffectToStoragePile(effects);
 		return effects;
