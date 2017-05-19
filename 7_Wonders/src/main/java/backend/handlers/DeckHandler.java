@@ -5,7 +5,7 @@ import java.util.Collections;
 import dataStructures.gameMaterials.Card;
 import dataStructures.gameMaterials.Deck;
 
-public final class DeckHandler {
+public class DeckHandler {
 	private static final int TOP_OF_DECK = 0;
 	
 	public static void shuffleDeck(Deck deck){

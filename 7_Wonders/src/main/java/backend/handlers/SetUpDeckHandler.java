@@ -23,7 +23,6 @@ import dataStructures.gameMaterials.Deck;
 import dataStructures.gameMaterials.Deck.Age;
 import dataStructures.gameMaterials.Effect;
 import dataStructures.gameMaterials.Effect.Direction;
-import dataStructures.gameMaterials.Effect.EffectType;
 import dataStructures.gameMaterials.EntityEffect;
 import dataStructures.gameMaterials.EntityEffect.EntityType;
 import dataStructures.gameMaterials.MultiValueEffect;
@@ -31,6 +30,7 @@ import dataStructures.gameMaterials.ValueEffect;
 import dataStructures.gameMaterials.ValueEffect.AffectingEntity;
 import dataStructures.gameMaterials.ValueEffect.Value;
 import dataStructures.gameMaterials.ValueEffect.ValueType;
+import exceptions.CannotReadJSONException;
 
 public class SetUpDeckHandler {
 
@@ -141,7 +141,7 @@ public class SetUpDeckHandler {
 			StringBuilder sb = readLines(filename);
 			result = sb.toString();
 		} catch (Exception e) {
-			e.printStackTrace();
+			throw new CannotReadJSONException("No Such JSON file " + filename);
 		}
 
 		return result;
