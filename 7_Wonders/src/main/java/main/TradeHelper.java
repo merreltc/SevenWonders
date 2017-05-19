@@ -20,12 +20,9 @@ public class TradeHelper {
 	public void trade(String[] splitValue) {
 		String resource = splitValue[1];
 		Enum resourceEnum = translateStringToEnum(resource);
-		Player tradeTo;
 		Player tradeFrom = this.gameManager.getCurrentPlayer();
 		int currentIndex = this.gameManager.getPlayers().indexOf(tradeFrom);
-		
-		tradeTo = decodeTradeButton(splitValue, currentIndex);
-
+		Player tradeTo = decodeTradeButton(splitValue, currentIndex);
 		try {
 			this.gameManager.tradeForEntity(tradeFrom, tradeTo, resourceEnum);
 			Message.showMessage(this.messages.getString("tradeSuccess"));
