@@ -177,9 +177,6 @@ public class PlayerTurnHandlerTest {
 	@Test
 	public void testValidBuildStructure2ResourceCost() {
 		ArrayList<Player> players = setUpArrayWithNumPlayers(3);
-
-		ArrayList<Card> cards = new SetUpDeckHandler().createCards(Age.AGE1, 3);
-		Deck age1Deck = new Deck(Age.AGE1, cards);
 		ArrayList<Card> cards2 = new SetUpDeckHandler().createCards(Age.AGE2, 3);
 		Deck age2Deck = new Deck(Age.AGE2, cards2);
 
@@ -428,6 +425,43 @@ public class PlayerTurnHandlerTest {
 		playerTurnHandler.buildStructure(current, toBuild);
 		fail();
 	}
+	
+	@Test(expected = InsufficientFundsException.class)
+	public void testInvalidBuildStructureAddTwoShieldsAlreadyChoseWrongEntity() {
+		ArrayList<Player> players = setUpArrayWithNumPlayers(3);
+		ArrayList<Card> age1Deck = SetUpDeckTestHelper.createAge1Cards(3);
+		ArrayList<Card> age3Deck = SetUpDeckTestHelper.createAge3Cards(3);
+
+		GameBoard board = new GameBoard(players, new Deck(Age.AGE3, age3Deck));
+		Player current = board.getCurrentPlayer();
+		ArrayList<Card> currentHand = new ArrayList<Card>();
+
+		Card claypit = age1Deck.get(4);
+		Card ore = age1Deck.get(3);
+		Card wood = age1Deck.get(5);
+		Card stone = age1Deck.get(1);
+		Card toBuild = age3Deck.get(1); // guild
+		ArrayList<Card> storagePile = new ArrayList<Card>();
+		storagePile.add(claypit);
+		storagePile.add(ore);
+		storagePile.add(wood);
+		storagePile.add(stone);
+		currentHand.add(toBuild);
+
+		current.setCurrentHand(currentHand);
+		current.setStoragePile(storagePile);
+
+		PlayerTurnHandler playerTurnHandler = EasyMock.partialMockBuilder(PlayerTurnHandler.class)
+				.addMockedMethod("chooseWhichEntity").createMock();
+		EasyMock.expect(playerTurnHandler.chooseWhichEntity(EasyMock.isA(HashMap.class), EasyMock.isA(String.class)))
+				.andReturn("CLAY");
+		EasyMock.expect(playerTurnHandler.chooseWhichEntity(EasyMock.isA(HashMap.class), EasyMock.isA(String.class)))
+		.andReturn("LOOM");
+		EasyMock.replay(playerTurnHandler);
+		playerTurnHandler.setGameBoard(board);
+		playerTurnHandler.buildStructure(current, toBuild);
+		fail();
+	}
 
 	@Test(expected = InsufficientFundsException.class)
 	public void testBuildStructureNotEnoughResourcesCanOnlyUseOneOrOther() {
@@ -616,7 +650,7 @@ public class PlayerTurnHandlerTest {
 			EasyMock.expect(entityEffect.getEntities()).andReturn(entities);
 			EasyMock.expect(entityEffect.getEntities()).andReturn(entities);
 		}
-
+		
 		ValueEffect effect = EasyMock.mock(ValueEffect.class);
 		EasyMock.expect(cardToBuild.getEffect()).andReturn(effect);
 
