@@ -1,6 +1,8 @@
 package backend.handlers;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
 
 import backend.handlers.RotateHandler.Rotation;
 import dataStructures.GameBoard;
@@ -8,10 +10,11 @@ import dataStructures.Handlers;
 import dataStructures.gameMaterials.Card;
 import dataStructures.gameMaterials.Deck;
 import dataStructures.gameMaterials.Deck.Age;
-import dataStructures.gameMaterials.Effect.Direction;
+import dataStructures.gameMaterials.Effect;
+import dataStructures.gameMaterials.Level.Frequency;
 import dataStructures.playerData.Chip.ChipType;
-import utils.Translate;
 import dataStructures.playerData.Player;
+import utils.Translate;
 
 public class TurnHandler {
 	private class TurnInfo{
@@ -76,6 +79,9 @@ public class TurnHandler {
 		String message = "";
 		this.turnInfo.handlers = handlers;
 		int playersUntilPass = this.turnInfo.numPlayersUntilPass;
+		if(this.turnInfo.numTurnsTilEndOfAge == 0){
+			applyEffects();
+		}
 
 		if (playersUntilPass == 0) {
 			message = this.checkNeedToSwitchAges();
@@ -86,6 +92,13 @@ public class TurnHandler {
 		this.turnInfo.board.getCurrentPlayer().removeCurrentTrades();
 		rotate(this.turnInfo.currentDirection);
 		return message;
+	}
+	
+	private void applyEffects(){
+		HashMap<Frequency, HashSet<Effect>> wonderPile = this.turnInfo.board.getCurrentPlayer().getWonderPile();
+		for(Frequency frequency: wonderPile.keySet()){
+			
+		}	
 	}
 	
 	public void rotate(Rotation rotation) {

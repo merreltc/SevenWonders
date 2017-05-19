@@ -45,7 +45,7 @@ public class PlayerTurnHandler {
 		current.clearTempWonderEffects();
 		HashMap<Enum, Integer> costs = level.getCosts();
 		validateLevelCosts(current, costs);
-		new EffectHandler(this.board).enableEffects(current, wonder);
+		new EffectHandler(this.board).enableEffects(current);
 	}
 
 	private void validateLevelCosts(Player current, HashMap<Enum, Integer> costs) {

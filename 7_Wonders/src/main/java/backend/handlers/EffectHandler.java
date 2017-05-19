@@ -12,16 +12,17 @@ import dataStructures.gameMaterials.ValueEffect;
 import dataStructures.gameMaterials.ValueEffect.ValueType;
 import dataStructures.gameMaterials.Wonder;
 import dataStructures.playerData.Player;
+import utils.DropDownMessage;
 
 public class EffectHandler {
 	private GameBoard board;
-	
-	public EffectHandler(GameBoard board){
+
+	public EffectHandler(GameBoard board) {
 		this.board = board;
 	}
-	
-	public void enableEffects(Player current, Wonder wonder) {
-		HashMap<Frequency, HashSet<Effect>> effects = wonder.buildNextLevel();
+
+	public void enableEffects(Player current) {
+		HashMap<Frequency, HashSet<Effect>> effects = current.getWonder().buildNextLevel();
 		current.addWonderEffectToStoragePile(effects);
 		for (Frequency frequency : effects.keySet()) {
 			switch (frequency) {
@@ -41,7 +42,7 @@ public class EffectHandler {
 			}
 		}
 	}
-	
+
 	public void enableCardEffect(Player current, Card card) {
 		if (card.getEffectType() == EffectType.VALUE) {
 			ValueEffect effect = (ValueEffect) card.getEffect();
@@ -49,18 +50,51 @@ public class EffectHandler {
 				if (!card.getName().equals("Tavern"))
 					board.removeNumCoins(current, effect.getValueAmount());
 			}
-			
+
 			enableValueEffect(current, effect);
 		}
 	}
 
-	private void enableValueEffect(Player current, ValueEffect effect) {
+	public void enableValueEffect(Player current, ValueEffect effect) {
 		if (effect.getValueType() == ValueType.VICTORYPOINT) {
 			current.addNumVictoryPoints(effect.getValueAmount());
 		} else if (effect.getValueType() == ValueType.COIN) {
-				board.giveNumCoins(current, effect.getValueAmount());
+			board.giveNumCoins(current, effect.getValueAmount());
 		} else {
 			current.addNumShields(effect.getValueAmount());
 		}
+	}
+	
+	public void enableAbilityFreeBuildEffect(Player current, Card card) {
+		current.addCardToStoragePile(card);
+		current.removeFromCurrentHand(card);
+	}
+
+	public void enableAbilityFreeBuildFromDiscard(Player current) {
+		Object[] messages = new String[board.getDiscardPile().size()];
+		for (int i = 0; i < board.getDiscardPile().size(); i++) {
+			messages[i] = board.getDiscardPile().get(i).toString();
+		}
+
+		String card = getChosenString(messages);
+		for (Card cards : board.getDiscardPile()) {
+			if (cards.getName().equals(card)) {
+				current.addCardToStoragePile(cards);
+				board.getDiscardPile().remove(cards);
+				return;
+			}
+		}
+	}
+
+	private String getChosenString(Object[] messages) {
+		String str = "";
+		while (str.equals("")) {
+			str = showMessage(messages);
+		}
+		return str;
+	}
+
+	public String showMessage(Object[] messages) {
+		return DropDownMessage.dropDownWonderSelectionMessage(messages);
 	}
 }
