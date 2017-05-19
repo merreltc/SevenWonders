@@ -452,16 +452,19 @@ public class GameBoardTests {
 		GameBoard board = new GameBoard(new ArrayList<Player>(), EasyMock.mock(Deck.class));
 		PlayerChipHandler.addValue3(player, 14, ChipType.COIN);
 		PlayerChipHandler.addValue1(player, 4, ChipType.COIN);
-		board.removeNumCoins(player, 33);
+		board.removeNumCoins(player, 34);
+		assertEquals(13, board.getTotalValue3CoinsInBank());
 		PlayerChipHandler.addValue3(player, 14, ChipType.COIN);
 		PlayerChipHandler.addValue1(player, 4, ChipType.COIN);
 		board.removeNumCoins(player, 33);
+		assertEquals(2, board.getTotalValue3CoinsInBank());
 		PlayerChipHandler.addValue3(player, 5, ChipType.COIN);
 		PlayerChipHandler.addValue1(player, 4, ChipType.COIN);
 		board.removeNumCoins(player, 15);
+		assertEquals(0, board.getTotalValue3CoinsInBank());
+		assertEquals(36, board.getTotalValue1CoinsInBank());
 		
-		
-		Assert.assertEquals(33, player.getCoinTotal());
+		Assert.assertEquals(32, player.getCoinTotal());
 	}
 	
 	private ArrayList<Player> setUpArrayWithNumPlayers(int num) {

@@ -191,7 +191,6 @@ public class GameBoard {
 	public void removeNumCoins(Player player, int numCoinsToRemove) {
 		int numValue3 = numCoinsToRemove / 3;
 		int numValue1 = numCoinsToRemove % 3;
-		System.out.println(numValue3 + "  " + this.totalValue3CoinsInBank);
 		if (numValue3 > this.totalValue3CoinsInBank) {
 			
 			int numValue3Left = numValue3 - this.totalValue3CoinsInBank;
