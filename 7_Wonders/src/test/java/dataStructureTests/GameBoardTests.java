@@ -22,8 +22,10 @@ import dataStructures.gameMaterials.Wonder.WonderType;
 import dataStructures.gameMaterials.Wonder;
 import dataStructures.playerData.Chip;
 import dataStructures.playerData.Player;
+import dataStructures.playerData.Chip.ChipType;
 import dataStructures.playerData.Chip.ChipValue;
 import exceptions.InsufficientFundsException;
+import junit.framework.Assert;
 
 public class GameBoardTests {
 	private Deck age1Deck, age2Deck;
@@ -430,7 +432,20 @@ public class GameBoardTests {
 		assertNotEquals(this.age1Deck, board.getDeck());
 		assertEquals(this.age2Deck, board.getDeck());
 	}
-
+	
+	@Test
+	public void testRemoveNumCoins(){
+		Wonder wonder = EasyMock.mock(Wonder.class);
+		Player player = new Player("Player1", wonder);
+		PlayerChipHandler.addValue3(player, 2, ChipType.COIN);
+		
+		GameBoard board = new GameBoard(new ArrayList<Player>(), EasyMock.mock(Deck.class));
+		board.removeNumCoins(player, 4);
+		
+		Assert.assertEquals(5, player.getCoinTotal());
+	}
+	
+	
 	private ArrayList<Player> setUpArrayWithNumPlayers(int num) {
 		Wonder wonder = new Wonder(Side.A, WonderType.COLOSSUS);
 		ArrayList<Player> result = new ArrayList<Player>();

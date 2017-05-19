@@ -546,6 +546,8 @@ public class EndGameHandlerTest {
 		EndGameHandler end = new EndGameHandler();
 		end.evaluateCardEffect(player, player, player, card);
 		
+		Assert.assertEquals(4, player.getNumVictoryPoints());
+		
 		EasyMock.verify(card, player, effect, wonder);
 	}
 	
