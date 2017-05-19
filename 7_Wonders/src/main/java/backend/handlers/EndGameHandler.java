@@ -59,7 +59,7 @@ public class EndGameHandler {
 		if (effects[0].getEffectType() == Effect.EffectType.VALUE) {
 			ValueEffect effect = (ValueEffect) effects[0];
 			player.addNumVictoryPoints(effect.getAffectingEntities().get(ValueEffect.Value.VICTORYPOINTS));
-		} else if (effects[0].getEffectType() == Effect.EffectType.ABILITY) {
+		} else {
 			int playerLoc = players.indexOf(player);
 			copyGuildCard(playerLoc, players);
 		}
@@ -174,14 +174,14 @@ public class EndGameHandler {
 	}
 
 	private int checkSelf(Card card, Player player) {
-		if (card.getEffect().getDirection() == Direction.SELF || card.getEffect().getDirection() == Direction.ALL) {
+		if (card.getEffect().getDirection() == Direction.SELF) {
 			return this.useEffect(card, player);
 		}
 		return 0;
 	}
 
 	private int checkRight(Card card, Player player) {
-		if (card.getEffect().getDirection() == Direction.RIGHT || card.getEffect().getDirection() == Direction.ALL
+		if (card.getEffect().getDirection() == Direction.RIGHT
 				|| card.getEffect().getDirection() == Direction.NEIGHBORS) {
 			return this.useEffect(card, player);
 		}
@@ -189,7 +189,7 @@ public class EndGameHandler {
 	}
 
 	private int checkLeft(Card card, Player player) {
-		if (card.getEffect().getDirection() == Direction.LEFT || card.getEffect().getDirection() == Direction.ALL
+		if (card.getEffect().getDirection() == Direction.LEFT
 				|| card.getEffect().getDirection() == Direction.NEIGHBORS) {
 			return this.useEffect(card, player);
 		}

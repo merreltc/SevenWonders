@@ -583,7 +583,6 @@ public class EndGameHandlerTest {
 	public void testCopyGuildCardFromLeft(){
 		ValueEffect effect = EasyMock.mock(ValueEffect.class);
 		EasyMock.expect(effect.getEffectType()).andReturn(EffectType.ABILITY);
-		EasyMock.expect(effect.getEffectType()).andReturn(EffectType.ABILITY);
 		HashMap<Enum,Integer> values = new HashMap<Enum, Integer>();
 		values.put(Value.VICTORYPOINTS, 4);
 	
@@ -621,7 +620,6 @@ public class EndGameHandlerTest {
 	@Test
 	public void testCopyGuildCardFromRight(){
 		ValueEffect effect = EasyMock.mock(ValueEffect.class);
-		EasyMock.expect(effect.getEffectType()).andReturn(EffectType.ABILITY);
 		EasyMock.expect(effect.getEffectType()).andReturn(EffectType.ABILITY);
 		HashMap<Enum,Integer> values = new HashMap<Enum, Integer>();
 		values.put(Value.VICTORYPOINTS, 4);
