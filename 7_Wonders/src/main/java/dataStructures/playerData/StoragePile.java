@@ -1,6 +1,8 @@
 package dataStructures.playerData;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
 
 import dataStructures.gameMaterials.AbilityEffect;
 import dataStructures.gameMaterials.Card;
@@ -9,6 +11,7 @@ import dataStructures.gameMaterials.Effect.Direction;
 import dataStructures.gameMaterials.Effect.EffectType;
 import dataStructures.gameMaterials.EntityEffect;
 import dataStructures.gameMaterials.EntityEffect.EntityType;
+import dataStructures.gameMaterials.Level.Frequency;
 import dataStructures.gameMaterials.MultiValueEffect;
 import dataStructures.gameMaterials.ValueEffect;
 import dataStructures.gameMaterials.ValueEffect.Value;
@@ -20,8 +23,8 @@ public class StoragePile {
 	private ArrayList<Card> immediateEffectPile = new ArrayList<Card>();
 	private ArrayList<Card> allCardStorage = new ArrayList<Card>();
 
-	private ArrayList<Effect> wonderPile = new ArrayList<Effect>();
-	private ArrayList<Effect> entireEffectStorage = new ArrayList<Effect>();
+	private HashMap<Frequency, HashSet<Effect>> wonderPile = new HashMap<Frequency, HashSet<Effect>>();
+	private HashSet<Effect> entireEffectStorage = new HashSet<Effect>();
 
 	public void addCard(Card card) {
 		EffectType effectType = card.getEffectType();
@@ -81,7 +84,7 @@ public class StoragePile {
 		return this.immediateEffectPile;
 	}
 
-	public ArrayList<Effect> getWonderPile() {
+	public HashMap<Frequency, HashSet<Effect>> getWonderPile() {
 		return this.wonderPile;
 	}
 
@@ -109,16 +112,33 @@ public class StoragePile {
 		this.entireEffectStorage.add(card.getEffect());
 	}
 
-	public void addToWonderPile(Effect effect) {
-		this.wonderPile.add(effect);
-		this.entireEffectStorage.add(effect);
+	public void addToWonderPile(HashMap<Frequency, HashSet<Effect>> effects) {
+		HashSet<Effect> curr;
+
+		for (Frequency frequency : effects.keySet()) {
+			 HashSet<Effect> effectSet = effects.get(frequency);
+			curr = getEffectsFromMap(frequency, effectSet);
+			this.wonderPile.put(frequency, curr);
+			this.entireEffectStorage.addAll(effectSet);
+		}
+	}
+
+	private HashSet<Effect> getEffectsFromMap(Frequency frequency, HashSet<Effect> effects) {
+		HashSet<Effect> curr;
+		if (this.wonderPile.containsKey(frequency)) {
+			curr = this.wonderPile.get(frequency);
+			curr.addAll(effects);
+		} else {
+			curr = effects;
+		}
+		return curr;
 	}
 
 	public ArrayList<Card> getAllCardStoragePile() {
 		return this.allCardStorage;
 	}
 
-	public ArrayList<Effect> getEntireEffectStorage() {
+	public HashSet<Effect> getEntireEffectStorage() {
 		return this.entireEffectStorage;
 	}
 
