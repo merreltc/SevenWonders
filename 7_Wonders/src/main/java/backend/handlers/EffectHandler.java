@@ -64,22 +64,29 @@ public class EffectHandler {
 	
 	private void enableCoinCounts(Player current, ValueEffect effect){
 		Player next = this.board.getNextPlayer();
-		Player previous = this.board.getNextPlayer();
+		Player previous = this.board.getPreviousPlayer();
 		int numCoins = 0;
 
 		numCoins += findTypeCards(next.getAllCards(), effect);
 		numCoins += findTypeCards(previous.getAllCards(), effect);
 		numCoins += findTypeCards(current.getAllCards(), effect);
+		
 		this.board.giveNumCoins(current, numCoins);
 	}
 	
 	private int findTypeCards(ArrayList<Card> cards, ValueEffect effect){
 		int value = 0;
 		int amountIncreased = effect.getValueAmount();
-	
-		String affecting = effect.getAffectingEntity().toString();
+		AffectingEntity affecting = effect.getAffectingEntity();
+		String search;
+		if(affecting == AffectingEntity.RAWRESOURCES){
+			search = "RAWMATERIAL";
+		}else{
+			search = affecting.toString();
+		}
+		 
 		for(Card card: cards){
-			if(affecting.contains(card.getCardType().toString())){
+			if(search.contains(card.getCardType().toString())){
 				value += amountIncreased;
 			}
 		}
