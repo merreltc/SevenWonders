@@ -116,7 +116,7 @@ public class GameDisplay extends Menu {
 				Constants.TradeRightBaseButtonPoint.y + Constants.TradeButtonYOffet * i);
 		Button rightTradeButton = new Button(buttonPosition, Constants.TradeButtonBounds,
 				"Right-" + Constants.ResourceTypes[i]);
-		//rightTradeButton.hide();
+		// rightTradeButton.hide();
 		this.addInteractable(rightTradeButton);
 	}
 
@@ -125,7 +125,7 @@ public class GameDisplay extends Menu {
 				Constants.TradeLeftBaseButtonPoint.y + Constants.TradeButtonYOffet * i);
 		Button leftTradeButton = new Button(buttonPosition, Constants.TradeButtonBounds,
 				"Left-" + Constants.ResourceTypes[i]);
-		//leftTradeButton.hide();
+		// leftTradeButton.hide();
 		this.addInteractable(leftTradeButton);
 	}
 
@@ -179,8 +179,8 @@ public class GameDisplay extends Menu {
 
 	private void attemptPlayCard(CardHolder clicked) {
 		ResourceBundle messages = Translate.getNewResourceBundle();
-		String[] buttons = new String[] { messages.getString("buildStructure"),
-				messages.getString("buildWonder"), messages.getString("discard") };
+		String[] buttons = new String[] { messages.getString("buildStructure"), messages.getString("buildWonder"),
+				messages.getString("discard") };
 		int val = JOptionPane.showOptionDialog(null, messages.getString("choosePlayType"),
 				messages.getString("playCard"), JOptionPane.INFORMATION_MESSAGE, 0, null, buttons, buttons[0]);
 		try {
@@ -195,6 +195,8 @@ public class GameDisplay extends Menu {
 	private void playOrDiscardCard(CardHolder clicked, int val) {
 		if (val == 0) {
 			clicked.activate(this.gameManager);
+		} else if (val == 1) {
+			clicked.activateWonder(this.gameManager);
 		} else if (val == 2) {
 			clicked.discard(this.gameManager);
 		} else {
@@ -231,8 +233,8 @@ public class GameDisplay extends Menu {
 		int totalNumberOfPlayers = this.gameManager.getNumPlayers();
 		int currentPlayerIndex = players.indexOf(currentPlayer);
 		for (int i = 0; i < players.size(); i++) {
-			boards.get(i)
-					.changePlayer(players.get((totalNumberOfPlayers + currentPlayerIndex + i - 1) % totalNumberOfPlayers));
+			boards.get(i).changePlayer(
+					players.get((totalNumberOfPlayers + currentPlayerIndex + i - 1) % totalNumberOfPlayers));
 		}
 	}
 }

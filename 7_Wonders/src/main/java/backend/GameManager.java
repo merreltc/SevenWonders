@@ -62,6 +62,10 @@ public class GameManager {
 		Deck deck = this.handlers.getSetUpDeckHandler().createDeck(Age.AGE1, names.size());
 		return new GameBoard(players, deck);
 	}
+	
+	public void buildWonder(Card card) {
+		this.handlers.getPlayerTurnHandler().buildStructure(getCurrentPlayer(), card);
+	}
 
 	public void dealInitialTurnCards() {
 		DeckHandler.shuffleDeck(this.board.getDeck());

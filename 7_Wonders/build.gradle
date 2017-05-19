@@ -1,13 +1,26 @@
+buildscript {
+   repositories {
+       mavenCentral()
+   }
+   configurations.maybeCreate("pitest")
+   dependencies {
+       classpath 'info.solidsoft.gradle.pitest:gradle-pitest-plugin:1.1.10'
+       pitest 'com.github.alexvictoor:pitest-cucumber-plugin:0.4'
+   }
+}
+
 plugins {
     id "com.github.samueltbrown.cucumber" version "0.9"
+    id "info.solidsoft.pitest" version "1.1.11"
 }
 
 apply plugin: 'java'
 apply plugin: 'jacoco'
 apply plugin: 'eclipse'
+apply plugin: "com.github.samueltbrown.cucumber"
+apply plugin: "info.solidsoft.pitest"
 apply plugin: 'checkstyle'
 apply plugin: 'findbugs'
-apply plugin: "com.github.samueltbrown.cucumber"
 
 sourceCompatibility = 1.8
 version = '1.0'
