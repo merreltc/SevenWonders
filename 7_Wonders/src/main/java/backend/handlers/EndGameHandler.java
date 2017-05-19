@@ -25,7 +25,6 @@ import utils.Message;
 public class EndGameHandler {
 
 	private int pointsForGuild = 0;
-	public DropDownMessage message = new DropDownMessage();
 
 	public ArrayList<Integer> calculateScores(ArrayList<Player> players) {
 		ArrayList<Integer> scores = new ArrayList<Integer>();
@@ -151,9 +150,13 @@ public class EndGameHandler {
 	private String getChosenString() {
 		String str = "";
 		while (str.equals("")) {
-			str = message.dropDownScienceSelectionMessage();
+			str = showMessage();
 		}
 		return str;
+	}
+
+	public String showMessage() {
+		return new DropDownMessage().dropDownScienceSelectionMessage();
 	}
 
 	private void givePlayerReward(Player player, Enum choice) {
