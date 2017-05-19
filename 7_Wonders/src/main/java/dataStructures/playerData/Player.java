@@ -73,6 +73,12 @@ public class Player {
 	public String getName() {
 		return this.name;
 	}
+	
+	public HashMap<Frequency, HashSet<Effect>> buildNextLevel() {
+		HashMap<Frequency, HashSet<Effect>> effects = this.wonder.buildNextLevel();
+		addWonderEffectToStoragePile(effects);
+		return effects;
+	}
 
 	public int getCoinTotal() {
 		int total = 0;
