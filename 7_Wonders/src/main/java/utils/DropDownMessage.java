@@ -22,7 +22,7 @@ public class DropDownMessage {
 	}
 
 	public static String selectLanguageMessage() {
-		ResourceBundle messages = ResourceBundle.getBundle("message", Locale.getDefault());
+		ResourceBundle messages = ResourceBundle.getBundle("i18n.message", Locale.getDefault());
 		String[] langs = { messages.getString("en_US"), messages.getString("zh_CN") };
 		String language = (String) JOptionPane.showInputDialog(null, messages.getString("chooseYourLanguage"),
 				messages.getString("languageSelector"), JOptionPane.PLAIN_MESSAGE, null, langs, langs[0]);
@@ -40,7 +40,7 @@ public class DropDownMessage {
 			string[i] = objects[i].toString();
 		}
 		ResourceBundle messages = Translate.getNewResourceBundle();
-		return (String) JOptionPane.showInputDialog(null, "Choose which card effect to activiate",
+		return (String) JOptionPane.showInputDialog(null, "Searching for build Combination. Choose which card effect to activiate",
 				cardName, JOptionPane.PLAIN_MESSAGE, null, string, string[0]);
 	}
 

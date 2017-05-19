@@ -18,3 +18,4 @@ public class Translate {
 		return messages.getString(key);
 	}
 }
+

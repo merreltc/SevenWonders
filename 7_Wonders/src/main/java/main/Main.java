@@ -34,7 +34,7 @@ public class Main extends JPanel implements ActionListener {
 	public enum MenuType {
 		MAINMENU, LOGISTICS, GAMEDISPLAY
 	}
-
+	
 	public Main() {
 		Constants.LOCALE = DropDownMessage.selectLanguageMessage();
 		ResourceBundle messages = Translate.getNewResourceBundle();

@@ -6,7 +6,6 @@ import java.awt.Point;
 
 public class Constants {
 	public static String LOCALE = "en_US";
-
 	/* For GuiMainMenu Class */
 	public static final int FrameWidth = 1900;
 	public static final int FrameHeight = 1000;
