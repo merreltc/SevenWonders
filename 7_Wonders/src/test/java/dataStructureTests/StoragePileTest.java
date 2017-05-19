@@ -4,14 +4,20 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
+import java.util.HashMap;
+import java.util.HashSet;
+
 import org.easymock.EasyMock;
 import org.junit.Test;
 
 import dataStructures.gameMaterials.Card;
+import dataStructures.gameMaterials.Effect;
 import dataStructures.gameMaterials.Effect.Direction;
 import dataStructures.gameMaterials.Effect.EffectType;
 import dataStructures.gameMaterials.EntityEffect;
 import dataStructures.gameMaterials.EntityEffect.EntityType;
+import dataStructures.gameMaterials.Level.Frequency;
+import dataStructures.gameMaterials.MultiValueEffect;
 import dataStructures.gameMaterials.ValueEffect;
 import dataStructures.gameMaterials.ValueEffect.Value;
 import dataStructures.playerData.StoragePile;
@@ -26,50 +32,93 @@ public class StoragePileTest {
 		assertTrue(storagePile.getSciencePile().isEmpty());
 		assertTrue(storagePile.getEndGamePile().isEmpty());
 		assertTrue(storagePile.getImmediateEffectPile().isEmpty());
+		assertTrue(storagePile.getWonderPile().isEmpty());
+		assertTrue(storagePile.getEntireEffectStorage().isEmpty());
 	}
 
 	@Test
 	public void testAddToCommercePile() {
-		StoragePile storagePile = new StoragePile();
 		Card card = EasyMock.mock(Card.class);
+		Effect effect = EasyMock.createStrictMock(Effect.class);
 
+		EasyMock.expect(card.getEffect()).andReturn(effect);
+		EasyMock.replay(card, effect);
+
+		StoragePile storagePile = new StoragePile();
 		storagePile.addToCommercePile(card);
 
 		assertFalse(storagePile.getCommercePile().isEmpty());
 		assertEquals(card, storagePile.getCommercePile().get(0));
+		assertTrue(storagePile.getEntireEffectStorage().contains(effect));
+		EasyMock.verify(card, effect);
 	}
 
 	@Test
 	public void testAddToSciencePile() {
-		StoragePile storagePile = new StoragePile();
 		Card card = EasyMock.mock(Card.class);
+		Effect effect = EasyMock.createStrictMock(Effect.class);
 
+		EasyMock.expect(card.getEffect()).andReturn(effect);
+		EasyMock.replay(card, effect);
+
+		StoragePile storagePile = new StoragePile();
 		storagePile.addToSciencePile(card);
 
 		assertTrue(storagePile.getCommercePile().isEmpty());
 		assertEquals(card, storagePile.getSciencePile().get(0));
+		assertTrue(storagePile.getEntireEffectStorage().contains(effect));
+		EasyMock.verify(card, effect);
 	}
 
 	@Test
 	public void testAddToEndGamePile() {
-		StoragePile storagePile = new StoragePile();
 		Card card = EasyMock.mock(Card.class);
+		Effect effect = EasyMock.createStrictMock(Effect.class);
 
+		EasyMock.expect(card.getEffect()).andReturn(effect);
+		EasyMock.replay(card, effect);
+
+		StoragePile storagePile = new StoragePile();
 		storagePile.addToEndGamePile(card);
 
 		assertTrue(storagePile.getSciencePile().isEmpty());
 		assertEquals(card, storagePile.getEndGamePile().get(0));
+		assertTrue(storagePile.getEntireEffectStorage().contains(effect));
+		EasyMock.verify(card, effect);
 	}
 
 	@Test
 	public void testAddToImmediateEffectPile() {
-		StoragePile storagePile = new StoragePile();
 		Card card = EasyMock.mock(Card.class);
+		Effect effect = EasyMock.createStrictMock(Effect.class);
 
+		EasyMock.expect(card.getEffect()).andReturn(effect);
+		EasyMock.replay(card, effect);
+
+		StoragePile storagePile = new StoragePile();
 		storagePile.addToImmediateEffectPile(card);
 
 		assertTrue(storagePile.getSciencePile().isEmpty());
 		assertEquals(card, storagePile.getImmediateEffectPile().get(0));
+		assertTrue(storagePile.getEntireEffectStorage().contains(effect));
+		EasyMock.verify(card, effect);
+	}
+
+	@Test
+	public void testAddToWonderPile() {
+		StoragePile storagePile = new StoragePile();
+		Effect effect = EasyMock.createStrictMock(Effect.class);
+
+		HashSet<Effect> effects = new HashSet<Effect>();
+		effects.add(effect);
+
+		HashMap<Frequency, HashSet<Effect>> effectsMap = new HashMap<Frequency, HashSet<Effect>>();
+		effectsMap.put(Frequency.DEFAULT, effects);
+
+		storagePile.addToWonderPile(effectsMap);
+
+		assertEquals(effects, storagePile.getWonderPile().get(Frequency.DEFAULT));
+		assertTrue(storagePile.getEntireEffectStorage().contains(effect));
 	}
 
 	@Test
@@ -125,7 +174,7 @@ public class StoragePileTest {
 	}
 
 	@Test
-	public void testGetEntireStoragePile() {
+	public void testGetAllCardStoragePile() {
 		StoragePile storagePile = new StoragePile();
 		Card card = EasyMock.mock(Card.class);
 		Card card2 = EasyMock.mock(Card.class);
@@ -141,11 +190,11 @@ public class StoragePileTest {
 		assertFalse(storagePile.getEndGamePile().contains(card));
 		assertTrue(storagePile.getCommercePile().contains(card));
 		assertEquals(1, storagePile.getEndGamePile().size());
-		assertEquals(4, storagePile.getEntireStoragePile().size());
-		assertTrue(storagePile.getEntireStoragePile().contains(card));
-		assertTrue(storagePile.getEntireStoragePile().contains(card2));
-		assertTrue(storagePile.getEntireStoragePile().contains(card3));
-		assertTrue(storagePile.getEntireStoragePile().contains(card4));
+		assertEquals(4, storagePile.getAllCardStoragePile().size());
+		assertTrue(storagePile.getAllCardStoragePile().contains(card));
+		assertTrue(storagePile.getAllCardStoragePile().contains(card2));
+		assertTrue(storagePile.getAllCardStoragePile().contains(card3));
+		assertTrue(storagePile.getAllCardStoragePile().contains(card4));
 	}
 
 	@Test
@@ -154,25 +203,25 @@ public class StoragePileTest {
 		for (int i = 0; i < 50; i++) {
 			Card card = EasyMock.mock(Card.class);
 			storagePile.addToCommercePile(card);
-			assertTrue(storagePile.getEntireStoragePile().contains(card));
+			assertTrue(storagePile.getAllCardStoragePile().contains(card));
 		}
 		for (int i = 0; i < 50; i++) {
 			Card card = EasyMock.mock(Card.class);
 			storagePile.addToSciencePile(card);
-			assertTrue(storagePile.getEntireStoragePile().contains(card));
+			assertTrue(storagePile.getAllCardStoragePile().contains(card));
 		}
 		for (int i = 0; i < 50; i++) {
 			Card card = EasyMock.mock(Card.class);
 			storagePile.addToEndGamePile(card);
-			assertTrue(storagePile.getEntireStoragePile().contains(card));
+			assertTrue(storagePile.getAllCardStoragePile().contains(card));
 		}
 		for (int i = 0; i < 50; i++) {
 			Card card = EasyMock.mock(Card.class);
 			storagePile.addToImmediateEffectPile(card);
-			assertTrue(storagePile.getEntireStoragePile().contains(card));
+			assertTrue(storagePile.getAllCardStoragePile().contains(card));
 		}
 
-		assertEquals(200, storagePile.getEntireStoragePile().size());
+		assertEquals(200, storagePile.getAllCardStoragePile().size());
 	}
 
 	@Test
@@ -185,6 +234,8 @@ public class StoragePileTest {
 		EasyMock.expect(card.getEffectType()).andReturn(EffectType.ENTITY);
 		EasyMock.expect(card.getEffect()).andReturn(effect);
 		EasyMock.expect(effect.getEntityType()).andReturn(EntityType.RESOURCE);
+		EasyMock.expect(card.getEffect()).andReturn(effect);
+
 		EasyMock.replay(card, effect);
 
 		storagePile.addCard(card);
@@ -202,6 +253,8 @@ public class StoragePileTest {
 		EasyMock.expect(card.getEffectType()).andReturn(EffectType.ENTITY);
 		EasyMock.expect(card.getEffect()).andReturn(effect);
 		EasyMock.expect(effect.getEntityType()).andReturn(EntityType.SCIENCE);
+		EasyMock.expect(card.getEffect()).andReturn(effect);
+
 		EasyMock.replay(card, effect);
 
 		storagePile.addCard(card);
@@ -221,6 +274,8 @@ public class StoragePileTest {
 		EasyMock.expect(card.getEffectType()).andReturn(EffectType.ENTITY);
 		EasyMock.expect(card.getEffect()).andReturn(effect);
 		EasyMock.expect(effect.getEntityType()).andReturn(EntityType.MANUFACTUREDGOOD);
+		EasyMock.expect(card.getEffect()).andReturn(effect);
+
 		EasyMock.replay(card, effect);
 
 		storagePile.addCard(card);
@@ -241,6 +296,8 @@ public class StoragePileTest {
 		EasyMock.expect(card.getEffect()).andReturn(effect);
 		EasyMock.expect(effect.getValue()).andReturn(Value.GUILD);
 		EasyMock.expect(effect.getDirection()).andReturn(Direction.SELF);
+		EasyMock.expect(card.getEffect()).andReturn(effect);
+
 		EasyMock.replay(card, effect);
 
 		storagePile.addCard(card);
@@ -261,6 +318,8 @@ public class StoragePileTest {
 		EasyMock.expect(card.getEffect()).andReturn(effect);
 		EasyMock.expect(effect.getValue()).andReturn(Value.COMMERCE);
 		EasyMock.expect(effect.getDirection()).andReturn(Direction.ALL);
+		EasyMock.expect(card.getEffect()).andReturn(effect);
+
 		EasyMock.replay(card, effect);
 
 		storagePile.addCard(card);
@@ -281,6 +340,8 @@ public class StoragePileTest {
 		EasyMock.expect(card.getEffect()).andReturn(effect);
 		EasyMock.expect(effect.getValue()).andReturn(Value.COMMERCE);
 		EasyMock.expect(effect.getDirection()).andReturn(Direction.LEFT);
+		EasyMock.expect(card.getEffect()).andReturn(effect);
+
 		EasyMock.replay(card, effect);
 
 		storagePile.addCard(card);
@@ -301,6 +362,8 @@ public class StoragePileTest {
 		EasyMock.expect(card.getEffect()).andReturn(effect);
 		EasyMock.expect(effect.getValue()).andReturn(Value.MILITARY);
 		EasyMock.expect(effect.getDirection()).andReturn(Direction.SELF);
+		EasyMock.expect(card.getEffect()).andReturn(effect);
+
 		EasyMock.replay(card, effect);
 
 		storagePile.addCard(card);
@@ -321,6 +384,8 @@ public class StoragePileTest {
 		EasyMock.expect(card.getEffect()).andReturn(effect);
 		EasyMock.expect(effect.getValue()).andReturn(Value.VICTORYPOINTS);
 		EasyMock.expect(effect.getDirection()).andReturn(Direction.SELF);
+		EasyMock.expect(card.getEffect()).andReturn(effect);
+
 		EasyMock.replay(card, effect);
 
 		storagePile.addCard(card);
@@ -335,8 +400,10 @@ public class StoragePileTest {
 		StoragePile storagePile = new StoragePile();
 
 		Card card = EasyMock.mock(Card.class);
+		MultiValueEffect effect = EasyMock.createStrictMock(MultiValueEffect.class);
 
 		EasyMock.expect(card.getEffectType()).andReturn(EffectType.MULTIVALUE);
+		EasyMock.expect(card.getEffect()).andReturn(effect);
 		EasyMock.replay(card);
 
 		storagePile.addCard(card);
@@ -344,5 +411,29 @@ public class StoragePileTest {
 		assertTrue(storagePile.getEndGamePile().contains(card));
 
 		EasyMock.verify(card);
+	}
+
+	@Test
+	public void testContainsEffectParameters() {
+		Effect effect = EasyMock.createStrictMock(EntityEffect.class);
+		EasyMock.expect(effect.getEffectType()).andReturn(EffectType.ENTITY);
+		EasyMock.expect(effect.getEffectType()).andReturn(EffectType.ENTITY);
+		EasyMock.expect(effect.getDirection()).andReturn(Direction.SELF);
+		EasyMock.expect(effect.getDirection()).andReturn(Direction.SELF);
+		EasyMock.expect(effect.getEffectType()).andReturn(EffectType.ENTITY);
+
+		EasyMock.replay(effect);
+
+		HashSet<Effect> effects = new HashSet<Effect>();
+		effects.add(effect);
+
+		HashMap<Frequency, HashSet<Effect>> effectsMap = new HashMap<Frequency, HashSet<Effect>>();
+		effectsMap.put(Frequency.DEFAULT, effects);
+
+		StoragePile storagePile = new StoragePile();
+		storagePile.addToWonderPile(effectsMap);
+
+		assertTrue(storagePile.containsEffect(effect));
+		EasyMock.verify(effect);
 	}
 }

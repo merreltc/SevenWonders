@@ -24,7 +24,7 @@ public class EntityEffectTest {
 		HashMap<Enum, Integer> resourcesAndAmount = new HashMap<Enum, Integer>();
 		resourcesAndAmount.put(RawResource.LUMBER, 1);
 
-		Effect effect = new EntityEffect(EffectType.ENTITY, EntityType.RESOURCE, resourcesAndAmount);
+		Effect effect = new EntityEffect(EntityType.RESOURCE, resourcesAndAmount);
 
 		assertEquals(EffectType.ENTITY, effect.getEffectType());
 		assertEquals(Direction.SELF, effect.getDirection());
@@ -37,7 +37,7 @@ public class EntityEffectTest {
 		HashMap<Enum, Integer> resourcesAndAmount = new HashMap<Enum, Integer>();
 		resourcesAndAmount.put(RawResource.LUMBER, 2);
 
-		Effect effect = new EntityEffect(EffectType.ENTITY, EntityType.RESOURCE, resourcesAndAmount);
+		Effect effect = new EntityEffect(EntityType.RESOURCE, resourcesAndAmount);
 
 		assertEquals(EffectType.ENTITY, effect.getEffectType());
 		assertEquals(Direction.SELF, effect.getDirection());
@@ -50,7 +50,7 @@ public class EntityEffectTest {
 		HashMap<Enum, Integer> resourcesAndAmount = new HashMap<Enum, Integer>();
 		resourcesAndAmount.put(RawResource.CLAY, 1);
 
-		Effect effect = new EntityEffect(EffectType.ENTITY, EntityType.RESOURCE, resourcesAndAmount);
+		Effect effect = new EntityEffect(EntityType.RESOURCE, resourcesAndAmount);
 
 		assertEquals(EffectType.ENTITY, effect.getEffectType());
 		assertEquals(Direction.SELF, effect.getDirection());
@@ -63,7 +63,7 @@ public class EntityEffectTest {
 		HashMap<Enum, Integer> resourcesAndAmount = new HashMap<Enum, Integer>();
 		resourcesAndAmount.put(RawResource.CLAY, 2);
 
-		Effect effect = new EntityEffect(EffectType.ENTITY, EntityType.RESOURCE, resourcesAndAmount);
+		Effect effect = new EntityEffect(EntityType.RESOURCE, resourcesAndAmount);
 
 		assertEquals(EffectType.ENTITY, effect.getEffectType());
 		assertEquals(Direction.SELF, effect.getDirection());
@@ -76,7 +76,7 @@ public class EntityEffectTest {
 		HashMap<Enum, Integer> resourcesAndAmount = new HashMap<Enum, Integer>();
 		resourcesAndAmount.put(RawResource.ORE, 1);
 
-		Effect effect = new EntityEffect(EffectType.ENTITY, EntityType.RESOURCE, resourcesAndAmount);
+		Effect effect = new EntityEffect(EntityType.RESOURCE, resourcesAndAmount);
 
 		assertEquals(EffectType.ENTITY, effect.getEffectType());
 		assertEquals(Direction.SELF, effect.getDirection());
@@ -89,7 +89,7 @@ public class EntityEffectTest {
 		HashMap<Enum, Integer> resourcesAndAmount = new HashMap<Enum, Integer>();
 		resourcesAndAmount.put(RawResource.ORE, 2);
 
-		Effect effect = new EntityEffect(EffectType.ENTITY, EntityType.RESOURCE, resourcesAndAmount);
+		Effect effect = new EntityEffect(EntityType.RESOURCE, resourcesAndAmount);
 
 		assertEquals(EffectType.ENTITY, effect.getEffectType());
 		assertEquals(Direction.SELF, effect.getDirection());
@@ -102,7 +102,7 @@ public class EntityEffectTest {
 		HashMap<Enum, Integer> resourcesAndAmount = new HashMap<Enum, Integer>();
 		resourcesAndAmount.put(RawResource.STONE, 1);
 
-		Effect effect = new EntityEffect(EffectType.ENTITY, EntityType.RESOURCE, resourcesAndAmount);
+		Effect effect = new EntityEffect(EntityType.RESOURCE, resourcesAndAmount);
 
 		assertEquals(EffectType.ENTITY, effect.getEffectType());
 		assertEquals(Direction.SELF, effect.getDirection());
@@ -115,7 +115,7 @@ public class EntityEffectTest {
 		HashMap<Enum, Integer> resourcesAndAmount = new HashMap<Enum, Integer>();
 		resourcesAndAmount.put(RawResource.STONE, 2);
 
-		Effect effect = new EntityEffect(EffectType.ENTITY, EntityType.RESOURCE, resourcesAndAmount);
+		Effect effect = new EntityEffect(EntityType.RESOURCE, resourcesAndAmount);
 
 		assertEquals(EffectType.ENTITY, effect.getEffectType());
 		assertEquals(Direction.SELF, effect.getDirection());
@@ -129,7 +129,7 @@ public class EntityEffectTest {
 		resourcesAndAmount.put(RawResource.LUMBER, 1);
 		resourcesAndAmount.put(RawResource.CLAY, 1);
 
-		Effect effect = new EntityEffect(EffectType.ENTITY, EntityType.RESOURCE, resourcesAndAmount);
+		Effect effect = new EntityEffect(EntityType.RESOURCE, resourcesAndAmount);
 
 		assertEquals(EffectType.ENTITY, effect.getEffectType());
 		assertEquals(Direction.SELF, effect.getDirection());
@@ -143,7 +143,7 @@ public class EntityEffectTest {
 		resourcesAndAmount.put(RawResource.STONE, 1);
 		resourcesAndAmount.put(RawResource.CLAY, 1);
 
-		Effect effect = new EntityEffect(EffectType.ENTITY, EntityType.RESOURCE, resourcesAndAmount);
+		Effect effect = new EntityEffect(EntityType.RESOURCE, resourcesAndAmount);
 
 		assertEquals(EffectType.ENTITY, effect.getEffectType());
 		assertEquals(Direction.SELF, effect.getDirection());
@@ -157,7 +157,7 @@ public class EntityEffectTest {
 		resourcesAndAmount.put(RawResource.CLAY, 1);
 		resourcesAndAmount.put(RawResource.ORE, 1);
 
-		Effect effect = new EntityEffect(EffectType.ENTITY, EntityType.RESOURCE, resourcesAndAmount);
+		Effect effect = new EntityEffect(EntityType.RESOURCE, resourcesAndAmount);
 
 		assertEquals(EffectType.ENTITY, effect.getEffectType());
 		assertEquals(Direction.SELF, effect.getDirection());
@@ -171,7 +171,7 @@ public class EntityEffectTest {
 		resourcesAndAmount.put(RawResource.STONE, 1);
 		resourcesAndAmount.put(RawResource.LUMBER, 1);
 
-		Effect effect = new EntityEffect(EffectType.ENTITY, EntityType.RESOURCE, resourcesAndAmount);
+		Effect effect = new EntityEffect(EntityType.RESOURCE, resourcesAndAmount);
 
 		assertEquals(EffectType.ENTITY, effect.getEffectType());
 		assertEquals(Direction.SELF, effect.getDirection());
@@ -185,7 +185,7 @@ public class EntityEffectTest {
 		resourcesAndAmount.put(RawResource.LUMBER, 1);
 		resourcesAndAmount.put(RawResource.ORE, 1);
 
-		Effect effect = new EntityEffect(EffectType.ENTITY, EntityType.RESOURCE, resourcesAndAmount);
+		Effect effect = new EntityEffect(EntityType.RESOURCE, resourcesAndAmount);
 
 		assertEquals(EffectType.ENTITY, effect.getEffectType());
 		assertEquals(Direction.SELF, effect.getDirection());
@@ -199,7 +199,7 @@ public class EntityEffectTest {
 		resourcesAndAmount.put(RawResource.ORE, 1);
 		resourcesAndAmount.put(RawResource.STONE, 1);
 
-		Effect effect = new EntityEffect(EffectType.ENTITY, EntityType.RESOURCE, resourcesAndAmount);
+		Effect effect = new EntityEffect(EntityType.RESOURCE, resourcesAndAmount);
 
 		assertEquals(EffectType.ENTITY, effect.getEffectType());
 		assertEquals(Direction.SELF, effect.getDirection());
@@ -215,7 +215,7 @@ public class EntityEffectTest {
 		resourcesAndAmount.put(RawResource.ORE, 1);
 		resourcesAndAmount.put(RawResource.STONE, 1);
 
-		Effect effect = new EntityEffect(EffectType.ENTITY, EntityType.RESOURCE, resourcesAndAmount);
+		Effect effect = new EntityEffect(EntityType.RESOURCE, resourcesAndAmount);
 
 		assertEquals(EffectType.ENTITY, effect.getEffectType());
 		assertEquals(Direction.SELF, effect.getDirection());
@@ -228,7 +228,7 @@ public class EntityEffectTest {
 		HashMap<Enum, Integer> goodsAndAmount = new HashMap<Enum, Integer>();
 		goodsAndAmount.put(Good.LOOM, 1);
 
-		Effect effect = new EntityEffect(EffectType.ENTITY, EntityType.MANUFACTUREDGOOD, goodsAndAmount);
+		Effect effect = new EntityEffect(EntityType.MANUFACTUREDGOOD, goodsAndAmount);
 
 		assertEquals(EffectType.ENTITY, effect.getEffectType());
 		assertEquals(Direction.SELF, effect.getDirection());
@@ -241,7 +241,7 @@ public class EntityEffectTest {
 		HashMap<Enum, Integer> goodsAndAmount = new HashMap<Enum, Integer>();
 		goodsAndAmount.put(Good.GLASS, 1);
 
-		Effect effect = new EntityEffect(EffectType.ENTITY, EntityType.MANUFACTUREDGOOD, goodsAndAmount);
+		Effect effect = new EntityEffect(EntityType.MANUFACTUREDGOOD, goodsAndAmount);
 
 		assertEquals(EffectType.ENTITY, effect.getEffectType());
 		assertEquals(Direction.SELF, effect.getDirection());
@@ -254,7 +254,7 @@ public class EntityEffectTest {
 		HashMap<Enum, Integer> goodsAndAmount = new HashMap<Enum, Integer>();
 		goodsAndAmount.put(Good.PRESS, 1);
 
-		Effect effect = new EntityEffect(EffectType.ENTITY, EntityType.MANUFACTUREDGOOD, goodsAndAmount);
+		Effect effect = new EntityEffect(EntityType.MANUFACTUREDGOOD, goodsAndAmount);
 
 		assertEquals(EffectType.ENTITY, effect.getEffectType());
 		assertEquals(Direction.SELF, effect.getDirection());
@@ -269,7 +269,7 @@ public class EntityEffectTest {
 		goodsAndAmount.put(Good.GLASS, 1);
 		goodsAndAmount.put(Good.PRESS, 1);
 
-		Effect effect = new EntityEffect(EffectType.ENTITY, EntityType.MANUFACTUREDGOOD, goodsAndAmount);
+		Effect effect = new EntityEffect(EntityType.MANUFACTUREDGOOD, goodsAndAmount);
 
 		assertEquals(EffectType.ENTITY, effect.getEffectType());
 		assertEquals(Direction.SELF, effect.getDirection());
@@ -282,7 +282,7 @@ public class EntityEffectTest {
 		HashMap<Enum, Integer> sciencesAndAmount = new HashMap<Enum, Integer>();
 		sciencesAndAmount.put(Science.PROTRACTOR, 1);
 
-		Effect effect = new EntityEffect(EffectType.ENTITY, EntityType.SCIENCE, sciencesAndAmount);
+		Effect effect = new EntityEffect(EntityType.SCIENCE, sciencesAndAmount);
 
 		assertEquals(EffectType.ENTITY, effect.getEffectType());
 		assertEquals(Direction.SELF, effect.getDirection());
@@ -295,7 +295,7 @@ public class EntityEffectTest {
 		HashMap<Enum, Integer> sciencesAndAmount = new HashMap<Enum, Integer>();
 		sciencesAndAmount.put(Science.WHEEL, 1);
 
-		Effect effect = new EntityEffect(EffectType.ENTITY, EntityType.SCIENCE, sciencesAndAmount);
+		Effect effect = new EntityEffect(EntityType.SCIENCE, sciencesAndAmount);
 
 		assertEquals(EffectType.ENTITY, effect.getEffectType());
 		assertEquals(Direction.SELF, effect.getDirection());
@@ -308,7 +308,7 @@ public class EntityEffectTest {
 		HashMap<Enum, Integer> sciencesAndAmount = new HashMap<Enum, Integer>();
 		sciencesAndAmount.put(Science.TABLET, 1);
 
-		Effect effect = new EntityEffect(EffectType.ENTITY, EntityType.SCIENCE, sciencesAndAmount);
+		Effect effect = new EntityEffect(EntityType.SCIENCE, sciencesAndAmount);
 
 		assertEquals(EffectType.ENTITY, effect.getEffectType());
 		assertEquals(Direction.SELF, effect.getDirection());
@@ -323,7 +323,7 @@ public class EntityEffectTest {
 		sciencesAndAmount.put(Science.WHEEL, 1);
 		sciencesAndAmount.put(Science.TABLET, 1);
 
-		Effect effect = new EntityEffect(EffectType.ENTITY, EntityType.SCIENCE, sciencesAndAmount);
+		Effect effect = new EntityEffect(EntityType.SCIENCE, sciencesAndAmount);
 
 		assertEquals(EffectType.ENTITY, effect.getEffectType());
 		assertEquals(Direction.SELF, effect.getDirection());
@@ -336,11 +336,11 @@ public class EntityEffectTest {
 		HashMap<Enum, Integer> resourcesAndAmount = new HashMap<Enum, Integer>();
 		resourcesAndAmount.put(RawResource.LUMBER, 1);
 
-		EntityEffect effect = new EntityEffect(EffectType.ENTITY, EntityType.RESOURCE, resourcesAndAmount);
+		EntityEffect effect = new EntityEffect(EntityType.RESOURCE, resourcesAndAmount);
 		HashMap<Enum, Integer> resourcesAndAmount2 = new HashMap<Enum, Integer>();
 		resourcesAndAmount2.put(RawResource.LUMBER, 1);
 
-		EntityEffect effect2 = new EntityEffect(EffectType.ENTITY, EntityType.RESOURCE, resourcesAndAmount2);
+		EntityEffect effect2 = new EntityEffect(EntityType.RESOURCE, resourcesAndAmount2);
 
 		assertTrue(effect.equals(effect2));
 	}
@@ -350,11 +350,11 @@ public class EntityEffectTest {
 		HashMap<Enum, Integer> resourcesAndAmount = new HashMap<Enum, Integer>();
 		resourcesAndAmount.put(RawResource.LUMBER, 3);
 
-		EntityEffect effect = new EntityEffect(EffectType.ENTITY, EntityType.RESOURCE, resourcesAndAmount);
+		EntityEffect effect = new EntityEffect(EntityType.RESOURCE, resourcesAndAmount);
 		HashMap<Enum, Integer> resourcesAndAmount2 = new HashMap<Enum, Integer>();
 		resourcesAndAmount2.put(RawResource.LUMBER, 1);
 
-		EntityEffect effect2 = new EntityEffect(EffectType.ENTITY, EntityType.RESOURCE, resourcesAndAmount2);
+		EntityEffect effect2 = new EntityEffect(EntityType.RESOURCE, resourcesAndAmount2);
 
 		assertFalse(effect.equals(effect2));
 	}
@@ -364,11 +364,11 @@ public class EntityEffectTest {
 		HashMap<Enum, Integer> resourcesAndAmount = new HashMap<Enum, Integer>();
 		resourcesAndAmount.put(RawResource.LUMBER, 1);
 
-		EntityEffect effect = new EntityEffect(EffectType.ENTITY, EntityType.MANUFACTUREDGOOD, resourcesAndAmount);
+		EntityEffect effect = new EntityEffect(EntityType.MANUFACTUREDGOOD, resourcesAndAmount);
 		HashMap<Enum, Integer> resourcesAndAmount2 = new HashMap<Enum, Integer>();
 		resourcesAndAmount2.put(RawResource.LUMBER, 1);
 
-		EntityEffect effect2 = new EntityEffect(EffectType.ENTITY, EntityType.RESOURCE, resourcesAndAmount2);
+		EntityEffect effect2 = new EntityEffect(EntityType.RESOURCE, resourcesAndAmount2);
 
 		assertFalse(effect.equals(effect2));
 	}
@@ -378,11 +378,11 @@ public class EntityEffectTest {
 		HashMap<Enum, Integer> resourcesAndAmount = new HashMap<Enum, Integer>();
 		resourcesAndAmount.put(RawResource.ORE, 1);
 
-		EntityEffect effect = new EntityEffect(EffectType.ENTITY, EntityType.RESOURCE, resourcesAndAmount);
+		EntityEffect effect = new EntityEffect(EntityType.RESOURCE, resourcesAndAmount);
 		HashMap<Enum, Integer> resourcesAndAmount2 = new HashMap<Enum, Integer>();
 		resourcesAndAmount2.put(RawResource.LUMBER, 1);
 
-		EntityEffect effect2 = new EntityEffect(EffectType.ENTITY, EntityType.RESOURCE, resourcesAndAmount2);
+		EntityEffect effect2 = new EntityEffect(EntityType.RESOURCE, resourcesAndAmount2);
 
 		assertFalse(effect.equals(effect2));
 	}

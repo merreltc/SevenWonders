@@ -2,8 +2,6 @@ package gui.menus;
 
 import java.awt.Graphics;
 import java.util.ArrayList;
-import java.util.concurrent.locks.Lock;
-import java.util.concurrent.locks.ReentrantLock;
 
 import gui.interactables.Interactable;
 

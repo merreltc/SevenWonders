@@ -13,10 +13,12 @@ import org.junit.Test;
 
 import backend.handlers.PlayerChipHandler;
 import backend.handlers.SetUpDeckHandler;
+import constants.GeneralEnums.Side;
 import dataStructures.GameBoard;
 import dataStructures.gameMaterials.Card;
 import dataStructures.gameMaterials.Deck;
 import dataStructures.gameMaterials.Deck.Age;
+import dataStructures.gameMaterials.Wonder.WonderType;
 import dataStructures.gameMaterials.Wonder;
 import dataStructures.playerData.Chip;
 import dataStructures.playerData.Player;
@@ -430,7 +432,7 @@ public class GameBoardTests {
 	}
 
 	private ArrayList<Player> setUpArrayWithNumPlayers(int num) {
-		Wonder wonder = EasyMock.createStrictMock(Wonder.class);
+		Wonder wonder = new Wonder(Side.A, WonderType.COLOSSUS);
 		ArrayList<Player> result = new ArrayList<Player>();
 		for (int i = 0; i < num; i++) {
 			Player temp = EasyMock.partialMockBuilder(Player.class).withConstructor("Jane Doe", wonder).createMock();

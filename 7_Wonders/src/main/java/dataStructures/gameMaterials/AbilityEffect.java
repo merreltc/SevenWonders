@@ -4,25 +4,23 @@ import dataStructures.gameMaterials.Level.Frequency;
 
 public class AbilityEffect extends Effect {
 	private Ability ability;
-	private Frequency frequency;
-	
+
 	public enum Ability {
 		PLAYSEVENTH, FREEBUILD, FREEBUILDFROMDISCARD, COPYONENEIGHBORGUILD
 	}
-	
-	public AbilityEffect(EffectType effectType, Ability ability, Frequency frequency) {
-		super(effectType);
+
+	public AbilityEffect(Ability ability) {
+		super(EffectType.ABILITY);
 		this.ability = ability;
-		this.frequency = frequency;
 	}
 
 	public Ability getAbility() {
 		return this.ability;
 	}
 
-	public Frequency getFrequency() {
-		return this.frequency;
+	@Override
+	public boolean equals(Object obj) {
+		AbilityEffect temp = (AbilityEffect) obj;
+		return temp.getAbility() == this.ability;
 	}
-
-	
 }

@@ -43,7 +43,7 @@ public class GameManagerTest {
 	public void setUp() {
 		this.setUpPlayerHandler = EasyMock.partialMockBuilder(SetUpPlayerHandler.class).withConstructor(GameMode.EASY)
 				.createMock();
-		this.turnHandler = EasyMock.partialMockBuilder(TurnHandler.class).withConstructor().createMock();
+		this.turnHandler = EasyMock.partialMockBuilder(TurnHandler.class).withConstructor(EasyMock.mock(Handlers.class)).createMock();
 		this.playerTurnHandler = EasyMock.partialMockBuilder(PlayerTurnHandler.class).withConstructor().createMock();
 		this.setUpDeckHandler = EasyMock.partialMockBuilder(SetUpDeckHandler.class).withConstructor().createMock();
 	}
@@ -231,7 +231,7 @@ public class GameManagerTest {
 		Card card = manager.getDeck().getCard(0);
 		manager.buildStructure(card);
 
-		assertTrue(manager.getCurrentPlayer().getStoragePile().contains(card));
+		assertTrue(manager.getCurrentPlayer().getAllCards().contains(card));
 	}
 
 	@Test
@@ -257,6 +257,20 @@ public class GameManagerTest {
 
 		assertEquals(1, (int) current.getCurrentTrades().get(RawResource.LUMBER));
 		assertEquals(5, next.getCoinTotal());
+	}
+	
+	@Test
+	public void testEndCurrentPlayerTurnNonMockedForMutationCoverage() {
+		ArrayList<String> playerNames = setUpArrayByNum(3);
+		GameManager manager = new GameManager(playerNames, GameMode.EASY);
+
+		Player expectedNewCurrentPlayer = manager.getNextPlayer();
+		Player expectedNewPreviousPlayer = manager.getCurrentPlayer();
+
+		manager.dealInitialTurnCards();
+		assertEquals("", manager.endCurrentPlayerTurn());
+		assertEquals(expectedNewCurrentPlayer, manager.getCurrentPlayer());
+		assertEquals(expectedNewPreviousPlayer, manager.getPreviousPlayer());
 	}
 	
 	@Test
@@ -355,15 +369,6 @@ public class GameManagerTest {
 //		Assert.assertEquals(gameManager.formatFinalScores(scores),
 //				"Player1 : 35\nPlayer2 : 35\nPlayer3 : 13\nPlayer1 Wins!");
 //	}
-
-	private void mockExpectTurnHandlerCalls(TurnHandler turnHandler) {
-		EasyMock.expect(turnHandler.getNumPlayersUntilPass()).andReturn(2);
-		turnHandler.setNumPlayersUntilPass(1);
-		EasyMock.expect(turnHandler.getNumPlayersUntilPass()).andReturn(1);
-		turnHandler.setNumPlayersUntilPass(0);
-		EasyMock.expect(turnHandler.getNumPlayersUntilPass()).andReturn(0);
-		turnHandler.setNumPlayersUntilPass(2);
-	}
 
 	private ArrayList<String> setUpArrayByNum(int num) {
 		ArrayList<String> result = new ArrayList<String>();

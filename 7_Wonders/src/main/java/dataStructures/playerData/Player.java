@@ -2,16 +2,17 @@ package dataStructures.playerData;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.ResourceBundle;
+import java.util.HashSet;
 
 import constants.GeneralEnums.Science;
 import constants.GeneralEnums.Side;
 import dataStructures.gameMaterials.Card;
+import dataStructures.gameMaterials.Effect;
 import dataStructures.gameMaterials.Effect.EffectType;
 import dataStructures.gameMaterials.EntityEffect;
+import dataStructures.gameMaterials.Level.Frequency;
 import dataStructures.gameMaterials.Wonder;
 import dataStructures.playerData.Chip.ChipValue;
-import utils.Translate;
 
 public class Player {
 	private String name = "Jane Doe";
@@ -43,6 +44,20 @@ public class Player {
 	public Player(String playerName, Wonder wonder) {
 		this.name = playerName;
 		this.wonder = wonder;
+		addWonderResourceToPile();
+	}
+
+	public void addWonderResourceToPile() {
+		HashMap<Frequency, HashSet<Effect>> effects = getResourceEffectMap();
+		this.storagePile.addToWonderPile(effects);
+	}
+
+	private HashMap<Frequency, HashSet<Effect>> getResourceEffectMap() {
+		HashMap<Frequency, HashSet<Effect>> effects = new HashMap<Frequency, HashSet<Effect>>();
+		HashSet<Effect> effect = new HashSet<Effect>();
+		effect.add(this.wonder.getResource());
+		effects.put(Frequency.ONCEIMMEDIATE, effect);
+		return effects;
 	}
 
 	public String toString() {
@@ -57,6 +72,12 @@ public class Player {
 
 	public String getName() {
 		return this.name;
+	}
+	
+	public HashMap<Frequency, HashSet<Effect>> buildNextLevel() {
+		HashMap<Frequency, HashSet<Effect>> effects = this.wonder.buildNextLevel();
+		addWonderEffectToStoragePile(effects);
+		return effects;
 	}
 
 	public int getCoinTotal() {
@@ -97,8 +118,12 @@ public class Player {
 		this.currentHand = currentHand;
 	}
 
-	public ArrayList<Card> getStoragePile() {
-		return this.storagePile.getEntireStoragePile();
+	public ArrayList<Card> getAllCards() {
+		return this.storagePile.getAllCardStoragePile();
+	}
+
+	public HashSet<Effect> getAllEffects() {
+		return this.storagePile.getEntireEffectStorage();
 	}
 
 	public void setStoragePile(ArrayList<Card> storagePile) {
@@ -120,18 +145,18 @@ public class Player {
 	}
 
 	public boolean storagePileContainsCardByName(String name) {
-		for (Card storage : this.storagePile.getEntireStoragePile()) {
-			if (storage.getName().equals(name)) {
-				return true;
-			}
-		}
-		return false;
+		return this.storagePile.containsCard(name);
+	}
+
+	public boolean storageContainsEffect(Effect effect) {
+		return this.storagePile.containsEffect(effect);
 	}
 
 	public Card getCardFromEndGame(int index) {
 		if (index >= this.storagePile.getEndGamePile().size()) {
 			throw new IllegalArgumentException("End of End Game pile reached");
 		}
+
 		return this.storagePile.getEndGamePile().get(index);
 	}
 
@@ -169,12 +194,28 @@ public class Player {
 		this.currentTrades.clear();
 	}
 
-	public void addToStoragePile(Card card) {
+	public void addWonderEffectToStoragePile(HashMap<Frequency, HashSet<Effect>> effect) {
+		this.storagePile.addToWonderPile(effect);
+	}
+
+	public void addCardToStoragePile(Card card) {
 		this.storagePile.addCard(card);
 	}
 
 	public void removeFromCurrentHand(Card card) {
 		this.currentHand.remove(card);
+	}
+	
+	public void clearTempWonderEffects() {
+		this.storagePile.clearTemporaryWonderEffects();
+	}
+	
+	public void discardTemporaryEffect(Effect effect){
+		this.storagePile.temporaryDiscard(effect);
+	}
+	
+	public void restoreTemporaryDiscards(){
+		this.storagePile.restoreTemporaryDiscards();
 	}
 
 	public Wonder getWonder() {
@@ -204,8 +245,12 @@ public class Player {
 	public HashMap<ChipValue, Integer> getCoins() {
 		return this.playerChips.coins;
 	}
-	
+
 	public Side getSide() {
 		return this.wonder.getSide();
+	}
+	
+	public HashMap<Frequency,HashSet<Effect>> getWonderPile(){
+		return this.storagePile.getWonderPile();
 	}
 }

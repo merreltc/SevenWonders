@@ -30,6 +30,7 @@ import dataStructures.gameMaterials.ValueEffect.AffectingEntity;
 import dataStructures.gameMaterials.ValueEffect.Value;
 import dataStructures.gameMaterials.ValueEffect.ValueType;
 import dataStructures.playerData.Player;
+import testHelpers.SetUpDeckTestHelper;
 
 public class SetUpDeckHandlerTest {
 
@@ -93,7 +94,7 @@ public class SetUpDeckHandlerTest {
 			assertEquals(cards.get(i).toString(), actual.get(i).toString());
 		}
 	}
-	
+
 	@Test
 	public void testCreateAge3Cards7Players() {
 		int numPlayers = 7;
@@ -241,14 +242,14 @@ public class SetUpDeckHandlerTest {
 	public void testCreateDeck() {
 		assertEquals(Deck.class, new SetUpDeckHandler().createDeck(Age.AGE1, 3).getClass());
 	}
-	
+
 	@Test
-	public void testRemoveGuildCards3Players(){
+	public void testRemoveGuildCards3Players() {
 		ArrayList<Card> deck = new SetUpDeckHandler().createCards(Age.AGE3, 3);
-		
+
 		deck = new SetUpDeckHandler().correctNumberOfGuildCards(deck, 3);
-		
-		for (int i = 0; i < 5; i++){
+
+		for (int i = 0; i < 5; i++) {
 			assertEquals(CardType.GUILD, deck.get(i).getCardType());
 		}
 		assertFalse(CardType.GUILD == deck.get(5).getCardType());
@@ -265,5 +266,4 @@ public class SetUpDeckHandlerTest {
 		}
 		assertFalse(CardType.GUILD == deck.get(9).getCardType());
 	}
-	
 }

@@ -14,15 +14,23 @@ import utils.Translate;
 import dataStructures.playerData.Player;
 
 public class TurnHandler {
-	private int numPlayersUntilPass;
-	private int numTurnsTilEndOfAge = 5;
-	public Handlers handlers;
-	private Rotation currentDirection = Rotation.CLOCKWISE;
-	private GameBoard board;
+	private class TurnInfo{
+		protected int numPlayersUntilPass;
+		protected int numTurnsTilEndOfAge = 5;
+		protected Handlers handlers;
+		protected Rotation currentDirection = Rotation.CLOCKWISE;
+		protected GameBoard board;
+	}
+	
+	private TurnInfo turnInfo = new TurnInfo();
+	
+	public TurnHandler(Handlers handlers){
+		this.turnInfo.handlers = handlers;
+	}
 
 	public void dealInitialTurnCards(ArrayList<Player> players, Deck deck) {
-		this.numPlayersUntilPass = players.size() - 1;
-		this.numTurnsTilEndOfAge = 5;
+		this.turnInfo.numPlayersUntilPass = players.size() - 1;
+		this.turnInfo.numTurnsTilEndOfAge = 5;
 		
 		for (Player player: players) {
 			popluatePlayersHand(deck, player);
@@ -40,7 +48,7 @@ public class TurnHandler {
 		player.setCurrentHand(currentHand);
 	}
 	
-	public void endAge(ArrayList<Player> players, Age age) {
+	public void performEndAgeBattles(ArrayList<Player> players, Age age) {
 		for (int i = 0; i < players.size(); i++){
 			Player player1 = players.get(i);
 			Player player2 = players.get((i+1)%players.size());
@@ -63,50 +71,34 @@ public class TurnHandler {
 			PlayerChipHandler.addValue5(winner, 1, ChipType.CONFLICTTOKEN);
 		}
 	}
-
-	public int getNumPlayersUntilPass() {
-		return this.numPlayersUntilPass;
-	}
-
-	public void setNumPlayersUntilPass(int num) {
-		this.numPlayersUntilPass = num;
-	}
-
-	public int getNumTurnsTilEndOfAge() {
-		return this.numTurnsTilEndOfAge;
-	}
-
-	public void setNumTurnsTilEndOfAge(int num) {
-		this.numTurnsTilEndOfAge = num;
-	}
 	
 	public String endCurrentPlayerTurn(Handlers handlers) {
 		String message = "";
-		this.handlers = handlers;
-		int playersUntilPass = this.handlers.getTurnHandler().getNumPlayersUntilPass();
+		this.turnInfo.handlers = handlers;
+		int playersUntilPass = this.turnInfo.numPlayersUntilPass;
 
 		if (playersUntilPass == 0) {
 			message = this.checkNeedToSwitchAges();
-			playersUntilPass = this.board.getNumPlayers();
+			playersUntilPass = this.turnInfo.board.getNumPlayers();
 		}
 
-		this.handlers.getTurnHandler().setNumPlayersUntilPass(playersUntilPass - 1);
-		this.board.getCurrentPlayer().removeCurrentTrades();
-		rotate(this.currentDirection);
+		this.turnInfo.numPlayersUntilPass = playersUntilPass - 1;
+		this.turnInfo.board.getCurrentPlayer().removeCurrentTrades();
+		rotate(this.turnInfo.currentDirection);
 		return message;
 	}
 	
 	public void rotate(Rotation rotation) {
 		if (rotation == Rotation.CLOCKWISE) {
-			this.handlers.getRotateHandler().rotateClockwise();
+			this.turnInfo.handlers.getRotateHandler().rotateClockwise();
 		} else {
-			this.handlers.getRotateHandler().rotateCounterClockwise();
+			this.turnInfo.handlers.getRotateHandler().rotateCounterClockwise();
 		}
 	}
 	
 	public String checkNeedToSwitchAges() {
 		String message;
-		int turnsTilEnd = this.handlers.getTurnHandler().getNumTurnsTilEndOfAge();
+		int turnsTilEnd = this.turnInfo.numTurnsTilEndOfAge;
 		if (turnsTilEnd == 0) {
 			message = switchAge();
 		} else  {
@@ -117,14 +109,14 @@ public class TurnHandler {
 
 	private String rotateHand(int turnsTilEnd) {
 		String message;
-		this.handlers.getRotateHandler().rotateCurrentHands(this.board.getPlayers(), this.currentDirection);
-		this.handlers.getTurnHandler().setNumTurnsTilEndOfAge(turnsTilEnd - 1);
+		this.turnInfo.handlers.getRotateHandler().rotateCurrentHands(this.turnInfo.board.getPlayers(), this.turnInfo.currentDirection);
+		this.turnInfo.numTurnsTilEndOfAge = turnsTilEnd - 1;
 		message = Translate.getNewResourceBundle().getString("endOfCurrentRotation");
 		return message;
 	}
 	
 	public String switchAge() {
-		Age age = this.board.getAge();
+		Age age = this.turnInfo.board.getAge();
 		if (age == Age.AGE3){
 			return endGame();
 		}
@@ -134,7 +126,7 @@ public class TurnHandler {
 
 	private String endGame() {
 		EndGameHandler end = new EndGameHandler();
-		ArrayList<Integer> scores = end.calculateScores(this.board.getPlayers());
+		ArrayList<Integer> scores = end.calculateScores(this.turnInfo.board.getPlayers());
 		return formatFinalScores(scores);
 	}
 	
@@ -142,9 +134,9 @@ public class TurnHandler {
 		String message;
 		Deck newDeck;
 		newDeck = switchDeck(age);
-		this.board.setDeck(newDeck);
-		DeckHandler.shuffleDeck(this.board.getDeck());
-		this.handlers.getTurnHandler().dealInitialTurnCards(this.board.getPlayers(), this.board.getDeck());
+		this.turnInfo.board.setDeck(newDeck);
+		DeckHandler.shuffleDeck(this.turnInfo.board.getDeck());
+		dealInitialTurnCards(this.turnInfo.board.getPlayers(), this.turnInfo.board.getDeck());
 		message = Translate.getNewResourceBundle().getString("endOfAge");
 		return message;
 	}
@@ -153,21 +145,21 @@ public class TurnHandler {
 		Deck newDeck;
 		Age nextAge = getNextAge(currentAge);
 
-		newDeck = this.handlers.getSetUpDeckHandler().createDeck(nextAge, this.board.getPlayers().size());
+		newDeck = this.turnInfo.handlers.getSetUpDeckHandler().createDeck(nextAge, this.turnInfo.board.getPlayers().size());
 
-		this.currentDirection = getNextRotation(currentAge);
-		this.handlers.getTurnHandler().endAge(this.board.getPlayers(), currentAge);
+		this.turnInfo.currentDirection = getNextRotation(currentAge);
+		performEndAgeBattles(this.turnInfo.board.getPlayers(), currentAge);
 		return newDeck;
 	}
 	
 	public String formatFinalScores(ArrayList<Integer> scores){
 		StringBuilder formattedString = new StringBuilder();
 		for (int i = 0; i < scores.size(); i++){
-			String playerName = this.board.getPlayers().get(i).getName();
+			String playerName = this.turnInfo.board.getPlayers().get(i).getName();
 			formattedString.append(playerName + " : " + scores.get(i) + "\n");
 		}
-		int indexOfWinner = indexOfMaxScore(scores, this.board.getPlayers());
-		formattedString.append(this.board.getPlayers().get(indexOfWinner).getName() + " Wins!");
+		int indexOfWinner = indexOfMaxScore(scores, this.turnInfo.board.getPlayers());
+		formattedString.append(this.turnInfo.board.getPlayers().get(indexOfWinner).getName() + " Wins!");
 		return formattedString.toString();
 	}
 	
@@ -194,14 +186,14 @@ public class TurnHandler {
 	}
 
 	public void setGameBoard(GameBoard board){
-		this.board = board;
+		this.turnInfo.board = board;
 	}
 	
 	public Rotation getDirection(){
-		return this.currentDirection;
+		return this.turnInfo.currentDirection;
 	}
 	
 	public void setDirection(Rotation rotation){
-		this.currentDirection = rotation;
+		this.turnInfo.currentDirection = rotation;
 	}
 }

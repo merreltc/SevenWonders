@@ -188,4 +188,23 @@ public class GameBoard {
 	public Age getAge() {
 		return this.currentDeck.getAge();
 	}
+
+	public void removeNumCoins(Player player, int numCoinsToRemove) {
+		int numValue3 = numCoinsToRemove / 3;
+		int numValue1 = numCoinsToRemove % 3;
+
+		if (numValue3 > this.totalValue3CoinsInBank) {
+			int numValue3Left = numValue3 - this.totalValue3CoinsInBank;
+			numValue3 = this.totalValue3CoinsInBank;
+			this.totalValue3CoinsInBank = 0;
+			numValue1 += numValue3Left * 3;
+		} else {
+			this.totalValue3CoinsInBank -= numValue3;
+		}
+		this.totalValue1CoinsInBank -= numValue1;
+
+
+		PlayerChipHandler.removeValue3(player, numValue3, ChipType.COIN);
+		PlayerChipHandler.removeValue1(player, numValue1, ChipType.COIN);
+	}
 }

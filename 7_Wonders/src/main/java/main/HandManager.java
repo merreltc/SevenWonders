@@ -36,9 +36,8 @@ public class HandManager {
 			Interactable cardHolder = new CardHolder(handPosition, handBounds, i + "");
 			Card card = currentHand.get(i);
 			((CardHolder) cardHolder).giveCard(card);
-			if (player.storagePileContainsCardByName(card.getPreviousStructureName())) {
+			if (player.storagePileContainsCardByName(card.getPreviousStructureName()))
 				((CardHolder) cardHolder).setHasPreviousStructure();
-			}
 			this.playerHand.add(cardHolder);
 		}
 	}
