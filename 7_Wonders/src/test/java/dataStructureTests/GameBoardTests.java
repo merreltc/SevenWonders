@@ -445,6 +445,24 @@ public class GameBoardTests {
 		Assert.assertEquals(5, player.getCoinTotal());
 	}
 	
+	@Test
+	public void testRemoveNumCoinsNotEnoughVal3(){
+		Wonder wonder = EasyMock.mock(Wonder.class);
+		Player player = new Player("Player1", wonder);
+		GameBoard board = new GameBoard(new ArrayList<Player>(), EasyMock.mock(Deck.class));
+		PlayerChipHandler.addValue3(player, 14, ChipType.COIN);
+		PlayerChipHandler.addValue1(player, 4, ChipType.COIN);
+		board.removeNumCoins(player, 33);
+		PlayerChipHandler.addValue3(player, 14, ChipType.COIN);
+		PlayerChipHandler.addValue1(player, 4, ChipType.COIN);
+		board.removeNumCoins(player, 33);
+		PlayerChipHandler.addValue3(player, 5, ChipType.COIN);
+		PlayerChipHandler.addValue1(player, 4, ChipType.COIN);
+		board.removeNumCoins(player, 15);
+		
+		
+		Assert.assertEquals(33, player.getCoinTotal());
+	}
 	
 	private ArrayList<Player> setUpArrayWithNumPlayers(int num) {
 		Wonder wonder = new Wonder(Side.A, WonderType.COLOSSUS);
