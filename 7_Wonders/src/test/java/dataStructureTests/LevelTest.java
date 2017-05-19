@@ -161,6 +161,36 @@ public class LevelTest {
 		assertFalse(level1.equals(level2));
 		EasyMock.verify(effect);
 	}
+	
+	@Test(expected = IllegalArgumentException.class)
+	public void testEqualsDifferentEffectsInvalidEffectType(){
+		int priority = 1;
+		Cost cost = EasyMock.createStrictMock(Cost.class);
+		EntityEffect effect = EasyMock.createStrictMock(EntityEffect.class);
+		EntityEffect effect2 = EasyMock.createStrictMock(EntityEffect.class);
+		EasyMock.expect(effect.getEffectType()).andReturn(EffectType.NONE);
+		EasyMock.expect(effect2.getEffectType()).andReturn(EffectType.NONE);
+		EasyMock.expect(effect.getEffectType()).andReturn(EffectType.NONE);
+		EasyMock.expect(effect2.getEffectType()).andReturn(EffectType.NONE);
+		
+		EasyMock.replay(effect, effect2);
+
+		HashMap<Frequency, HashSet<Effect>> effects = new HashMap<Frequency, HashSet<Effect>>();
+		HashSet<Effect> effectSet = new HashSet<Effect>();
+		effectSet.add(effect);
+		effects.put(Frequency.ENDOFTURN, effectSet);
+		
+		HashMap<Frequency, HashSet<Effect>> effects2 = new HashMap<Frequency, HashSet<Effect>>();
+		HashSet<Effect> effectSet2 = new HashSet<Effect>();
+		effectSet2.add(effect2);
+		effects2.put(Frequency.ENDOFTURN, effectSet2);
+
+		Level level1 = new Level(priority, cost, effects);
+		Level level2 = new Level(priority, cost, effects2);
+		level1.equals(level2);
+		fail();
+	}
+
 
 	@Test
 	public void testEqualsTrueMultiEffect() {

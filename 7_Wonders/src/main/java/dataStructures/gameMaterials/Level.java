@@ -38,7 +38,6 @@ public class Level {
 	private boolean equalEffects(HashMap<Frequency, HashSet<Effect>> other) {
 		for (Frequency frequency : this.effects.keySet()) {
 			if (!other.containsKey(frequency)) {
-				
 				return false;
 			} else if (!compareEffects(frequency, other.get(frequency))) {
 				return false;
@@ -62,7 +61,6 @@ public class Level {
 	}
 
 	private boolean otherContainsEffect(HashSet<Effect> other, Effect thisEffect) {
-		
 		for (Effect otherEffect : other) {
 			EffectType type = thisEffect.getEffectType();
 			switch (type) {
