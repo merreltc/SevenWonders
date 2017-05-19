@@ -115,8 +115,9 @@ public class GameDisplay extends Menu {
 		Point buttonPosition = new Point(Constants.TradeRightBaseButtonPointGood.x,
 				Constants.TradeRightBaseButtonPoint.y + Constants.TradeButtonYOffet * i);
 		Button rightTradeButton = new Button(buttonPosition, Constants.TradeButtonBounds,
-				"Right-" + Constants.ResourceTypes[i]);
-		//rightTradeButton.hide();
+				"Right-" + Constants.GoodTypes[i]);
+		rightTradeButton.hide();
+		rightTradeButton.addImage(renderer.getImage(Constants.GoodTypes[i]));
 		this.addInteractable(rightTradeButton);
 	}
 
@@ -124,8 +125,9 @@ public class GameDisplay extends Menu {
 		Point buttonPosition = new Point(Constants.TradeLeftBaseButtonPointGood.x,
 				Constants.TradeLeftBaseButtonPoint.y + Constants.TradeButtonYOffet * i);
 		Button leftTradeButton = new Button(buttonPosition, Constants.TradeButtonBounds,
-				"Left-" + Constants.ResourceTypes[i]);
-		//leftTradeButton.hide();
+				"Left-" + Constants.GoodTypes[i]);
+		leftTradeButton.hide();
+		leftTradeButton.addImage(renderer.getImage(Constants.GoodTypes[i]));
 		this.addInteractable(leftTradeButton);
 	}
 

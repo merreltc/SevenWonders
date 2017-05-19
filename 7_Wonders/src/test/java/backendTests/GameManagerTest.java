@@ -343,6 +343,18 @@ public class GameManagerTest {
 		EasyMock.verify(playerTurnHandler);
 	}
 
+	@Test
+	public void testGameManagerBuildWonderCallsPlayerHandler(){
+		ArrayList<String> names = new ArrayList<String>(Arrays.asList("Player1","Player2","Player"));
+		
+		Handlers handlers = EasyMock.mock(Handlers.class);
+		
+		GameManager game = new GameManager(names,handlers);
+		PlayerTurnHandler turns = EasyMock.mock(PlayerTurnHandler.class);
+		turns.buildWonderLevel(game.getCurrentPlayer());
+		EasyMock.expect(handlers.getPlayerTurnHandler()).andReturn(turns);
+		
+	}
 	
 //	@Test
 //	public void testFormatFinalScoreNoTie() {

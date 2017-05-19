@@ -86,11 +86,11 @@ public class Constants {
 
 	/* For Game Class */
 	public static final String[] ResourceTypes = new String[] { "Lumber", "Ore", "Stone", "Clay" };
-	public static final String[] GoodTypes = new String[] { "Press", "Glass", "Loom" };
+	public static final String[] GoodTypes = new String[] { "press symbol", "Glass", "loom symbol" };
 
 	/* For ResourceViewer Class */
 	public static final String[] ResourceImages = new String[] { "clay", "lumber", "ore", "stone", "glass",
-			"loom symbol", "papyrus", "manufactured", "resource", "science" };
+			"loom symbol", "press symbol", "manufactured", "resource", "science" };
 	public static final int RESOURCE_IMAGE_HEIGHT = 30;
 	public static final int RESOURCE_IMAGE_WIDTH = 30;
 	public static final Font RESOURCE_VIEWER_FONT = new Font("DengXian Regular", Font.BOLD, 30);
