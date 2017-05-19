@@ -79,16 +79,25 @@ public class EndGameHandler {
 	private void getPoints(Player current, Player left, Player right) {
 		int counter = 0;
 		for (;;) {
-			Card card = current.getCardFromEndGame(counter++);
-			if (card.getName().equals("Strategists Guild")) {
-				pointsForGuild += right.getConflictTokens().get(ChipValue.NEG1)
-						+ left.getConflictTokens().get(ChipValue.NEG1);
-			} else if (card.getName().equals("Scientists Guild")) {
-				throw new UnsupportedOperationException("Show Option Dialog");
-			} else {
-				pointsForGuild += this.checkSelf(card, current) + this.checkLeft(card, left)
-						+ this.checkRight(card, right);
+			Card card;
+			try{
+				card = current.getCardFromEndGame(counter++);
+			}catch (Exception e){
+				return;
 			}
+			evaluateCardEffect(current, left, right, card);
+		}
+	}
+
+	private void evaluateCardEffect(Player current, Player left, Player right, Card card) {
+		if (card.getName().equals("Strategists Guild")) {
+			pointsForGuild += right.getConflictTokens().get(ChipValue.NEG1)
+					+ left.getConflictTokens().get(ChipValue.NEG1);
+		} else if (card.getName().equals("Scientists Guild")) {
+			throw new UnsupportedOperationException("Show Option Dialog");
+		} else {
+			pointsForGuild += this.checkSelf(card, current) + this.checkLeft(card, left)
+					+ this.checkRight(card, right);
 		}
 	}
 	
@@ -134,15 +143,12 @@ public class EndGameHandler {
 	public Enum testCard(String cardName) {
 		if (cardName.equals("Scientists Guild")) {
 			String str = getChosenString();
-			Enum choice = EffectType.NONE;
 			if (str.equals("Protractor")) {
-				choice = Science.PROTRACTOR;
+				return Science.PROTRACTOR;
 			} else if (str.equals("Wheel")) {
-				choice = Science.WHEEL;
-			}else if (str.equals("Tablet")){
-				choice = Science.TABLET;
+				return Science.WHEEL;
 			}
-			return choice;
+			return Science.TABLET;
 		}
 		return EffectType.NONE;
 	}
