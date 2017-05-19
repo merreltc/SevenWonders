@@ -2,6 +2,7 @@ package dataStructures.playerData;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 
 import constants.GeneralEnums.Science;
 import constants.GeneralEnums.Side;
@@ -9,6 +10,7 @@ import dataStructures.gameMaterials.Card;
 import dataStructures.gameMaterials.Effect;
 import dataStructures.gameMaterials.Effect.EffectType;
 import dataStructures.gameMaterials.EntityEffect;
+import dataStructures.gameMaterials.Level.Frequency;
 import dataStructures.gameMaterials.Wonder;
 import dataStructures.playerData.Chip.ChipValue;
 
@@ -46,7 +48,16 @@ public class Player {
 	}
 
 	public void addWonderResourceToPile() {
-		this.storagePile.addToWonderPile(this.wonder.getResource());
+		HashMap<Frequency, HashSet<Effect>> effects = getResourceEffectMap();
+		this.storagePile.addToWonderPile(effects);
+	}
+
+	private HashMap<Frequency, HashSet<Effect>> getResourceEffectMap() {
+		HashMap<Frequency, HashSet<Effect>> effects = new HashMap<Frequency, HashSet<Effect>>();
+		HashSet<Effect> effect = new HashSet<Effect>();
+		effect.add(this.wonder.getResource());
+		effects.put(Frequency.ONCEIMMEDIATE, effect);
+		return effects;
 	}
 
 	public String toString() {
@@ -61,6 +72,12 @@ public class Player {
 
 	public String getName() {
 		return this.name;
+	}
+	
+	public HashMap<Frequency, HashSet<Effect>> buildNextLevel() {
+		HashMap<Frequency, HashSet<Effect>> effects = this.wonder.buildNextLevel();
+		addWonderEffectToStoragePile(effects);
+		return effects;
 	}
 
 	public int getCoinTotal() {
@@ -105,7 +122,7 @@ public class Player {
 		return this.storagePile.getAllCardStoragePile();
 	}
 
-	public ArrayList<Effect> getAllEffects() {
+	public HashSet<Effect> getAllEffects() {
 		return this.storagePile.getEntireEffectStorage();
 	}
 
@@ -177,7 +194,7 @@ public class Player {
 		this.currentTrades.clear();
 	}
 
-	public void addWonderEffectToStoragePile(Effect effect) {
+	public void addWonderEffectToStoragePile(HashMap<Frequency, HashSet<Effect>> effect) {
 		this.storagePile.addToWonderPile(effect);
 	}
 

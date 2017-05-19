@@ -66,7 +66,6 @@ public class Level {
 			switch (type) {
 			case ABILITY:
 				if (((AbilityEffect) thisEffect).equals((AbilityEffect) otherEffect)) {
-					
 					return true;
 				}
 				break;
