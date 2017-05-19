@@ -22,6 +22,7 @@ public class StoragePile {
 	private ArrayList<Card> endGamePile = new ArrayList<Card>();
 	private ArrayList<Card> immediateEffectPile = new ArrayList<Card>();
 	private ArrayList<Card> allCardStorage = new ArrayList<Card>();
+	private HashMap<Enum, Integer> allResources = new HashMap<Enum, Integer>();
 
 	private HashMap<Frequency, HashSet<Effect>> wonderPile = new HashMap<Frequency, HashSet<Effect>>();
 	private HashSet<Effect> entireEffectStorage = new HashSet<Effect>();

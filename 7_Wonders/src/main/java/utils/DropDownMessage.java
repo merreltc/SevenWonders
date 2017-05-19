@@ -44,4 +44,9 @@ public class DropDownMessage {
 				cardName, JOptionPane.PLAIN_MESSAGE, null, string, string[0]);
 	}
 
+	public static String dropDownGuildSelectionMessage(Object[] wonders) {
+		ResourceBundle messages = Translate.getNewResourceBundle();
+		return (String) JOptionPane.showInputDialog(null, messages.getString("chooseYourWonder"),
+				messages.getString("wonderSelector"), JOptionPane.PLAIN_MESSAGE, null, wonders, wonders[0]);
+	}
 }

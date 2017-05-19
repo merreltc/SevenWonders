@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 
+import constants.GeneralEnums;
 import constants.GeneralEnums.Science;
 import constants.GeneralEnums.Side;
 import dataStructures.gameMaterials.Card;
@@ -76,7 +77,9 @@ public class Player {
 	
 	public HashMap<Frequency, HashSet<Effect>> buildNextLevel() {
 		HashMap<Frequency, HashSet<Effect>> effects = this.wonder.buildNextLevel();
+		
 		addWonderEffectToStoragePile(effects);
+		
 		return effects;
 	}
 
@@ -236,5 +239,9 @@ public class Player {
 
 	public Side getSide() {
 		return this.wonder.getSide();
+	}
+	
+	public HashMap<Frequency,HashSet<Effect>> getWonderPile(){
+		return this.storagePile.getWonderPile();
 	}
 }

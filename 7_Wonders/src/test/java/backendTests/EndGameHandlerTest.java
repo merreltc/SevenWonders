@@ -515,9 +515,6 @@ public class EndGameHandlerTest {
 		Assert.assertEquals(EffectType.NONE, end.testCard("Invalid"));
 	}
 
-
-	// TODO: Write Builders test once wonders are done
-
 	private Card createWorkersGuild() {
 		HashMap<Enum, Integer> costs = new HashMap<Enum, Integer>();
 		costs.put(RawResource.LUMBER, 1);
