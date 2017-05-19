@@ -8,6 +8,7 @@ import java.util.HashSet;
 import org.easymock.EasyMock;
 import org.junit.Test;
 
+import constants.GeneralEnums.CostType;
 import dataStructures.gameMaterials.AbilityEffect;
 import dataStructures.gameMaterials.Cost;
 import dataStructures.gameMaterials.Effect;
@@ -335,4 +336,29 @@ public class LevelTest {
 
 		EasyMock.verify(cost, endOfTurn, everyTurn);
 	}
+	
+	@Test
+	public void testGetters(){
+		HashMap<Enum, Integer> costs = new HashMap<Enum, Integer>();
+		
+		Cost cost = EasyMock.createStrictMock(Cost.class);
+		EasyMock.expect(cost.getType()).andReturn(CostType.COIN);
+		EasyMock.expect(cost.getCost()).andReturn(costs);
+		Effect effect = EasyMock.createStrictMock(Effect.class);
+		EasyMock.replay(cost);
+
+		HashMap<Frequency, HashSet<Effect>> effects = new HashMap<Frequency, HashSet<Effect>>();
+		HashSet<Effect> effectSet = new HashSet<Effect>();
+		effectSet.add(effect);
+		effects.put(Frequency.ENDOFTURN, effectSet);
+
+		int priority = 3;
+		Level level = new Level(priority, cost, effects);
+		assertEquals(cost, level.getCost());
+		assertEquals(effects, level.getEffects());
+		assertEquals(CostType.COIN, level.getCostType());
+		assertEquals(costs, level.getCosts());
+	}
+	
+	
 }
