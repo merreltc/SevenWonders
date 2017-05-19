@@ -50,13 +50,14 @@ public class EndGameHandler {
 				+ scienceScore;
 	}
 
-	private void runWonderChecks(Player player, ArrayList<Player> players) {
+	public void runWonderChecks(Player player, ArrayList<Player> players) {
 		HashMap<Frequency, HashSet<Effect>> wonderPile = player.getWonderPile();
 		for (Frequency freq : wonderPile.keySet()){
-			if (wonderPile.get(freq).contains(Effect.EffectType.VALUE)){
-				ValueEffect effect = wonderPile.get(freq).toArray(new ValueEffect[1])[0];
+			Effect[] effects = wonderPile.get(freq).toArray(new Effect[1]);
+			if (effects[0].getEffectType()==Effect.EffectType.VALUE){
+				ValueEffect effect = (ValueEffect) effects[0];
 				player.addNumVictoryPoints(effect.getAffectingEntities().get(ValueEffect.Value.VICTORYPOINTS));
-			}else if (wonderPile.get(freq).contains(Effect.EffectType.ABILITY)){
+			}else if (effects[0].getEffectType()==Effect.EffectType.ABILITY){
 				int playerLoc = players.indexOf(player);
 				copyGuildCard(playerLoc, players);
 			}
@@ -164,7 +165,8 @@ public class EndGameHandler {
 	
 	private boolean checkWonders(HashMap<Frequency, HashSet<Effect>> wonderPile) {
 		for (Frequency freq : wonderPile.keySet()){
-			if (wonderPile.get(freq).contains(Effect.EffectType.ENTITY)){
+			Effect[] effects = wonderPile.get(freq).toArray(new Effect[1]);
+			if (effects[0].getEffectType() == Effect.EffectType.ENTITY){
 				return true;
 			}
 		}
