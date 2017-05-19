@@ -24,6 +24,7 @@ import dataStructures.gameMaterials.Card;
 import dataStructures.gameMaterials.Deck;
 import dataStructures.gameMaterials.Deck.Age;
 import dataStructures.gameMaterials.Effect;
+import dataStructures.gameMaterials.Effect.Direction;
 import dataStructures.gameMaterials.Effect.EffectType;
 import dataStructures.gameMaterials.EntityEffect;
 import dataStructures.gameMaterials.Level.Frequency;
@@ -356,6 +357,73 @@ public class PlayerTurnHandlerTest {
 	}
 
 	@Test
+	public void testBuildStructureCountCoinsForResources() {
+		ArrayList<Player> players = new ArrayList<Player>();
+		players.add(new Player("Jane Doe", EasyMock.mock(Wonder.class)));
+		players.add(new Player("John Doe", EasyMock.mock(Wonder.class)));
+		players.add(new Player("James Doe", EasyMock.mock(Wonder.class)));
+
+		GameBoard board = new GameBoard(players, this.age1Deck);
+		Player current = board.getCurrentPlayer();
+		ArrayList<Card> currentHand = new ArrayList<Card>();
+
+		Card stone = this.age1Deck.getCard(1);
+		Card quarry = this.age2Deck.getCard(1);
+		Card walls = this.age2Deck.getCard(13);
+		Card vineyard = this.age2Deck.getCard(12);
+		Card press = this.age1Deck.getCard(8);
+		
+		current.addCardToStoragePile(quarry);
+		current.addCardToStoragePile(walls);
+		current.addCardToStoragePile(stone);
+		board.getNextPlayer().addCardToStoragePile(stone);
+		board.getPreviousPlayer().addCardToStoragePile(press);
+		currentHand.add(vineyard);
+		current.setCurrentHand(currentHand);
+
+		PlayerTurnHandler playerTurnHandler = new PlayerTurnHandler();
+		playerTurnHandler.setGameBoard(board);
+		playerTurnHandler.buildStructure(current, vineyard);
+
+		assertEquals(6, current.getCoinTotal());
+	}
+	
+	@Test
+	public void testBuildStructureCountCoinsForGood() {
+		ArrayList<Player> players = new ArrayList<Player>();
+		players.add(new Player("Jane Doe", EasyMock.mock(Wonder.class)));
+		players.add(new Player("John Doe", EasyMock.mock(Wonder.class)));
+		players.add(new Player("James Doe", EasyMock.mock(Wonder.class)));
+		players.add(new Player("Jill Doe", EasyMock.mock(Wonder.class)));
+		ArrayList<Card> cards = new SetUpDeckHandler().createCards(Age.AGE1, 4);
+		this.age1Deck = new Deck(Age.AGE1, cards);
+		ArrayList<Card> cards2 = new SetUpDeckHandler().createCards(Age.AGE2, 4);
+		this.age2Deck = new Deck(Age.AGE2, cards2);
+		GameBoard board = new GameBoard(players, this.age1Deck);
+		Player current = board.getCurrentPlayer();
+		ArrayList<Card> currentHand = new ArrayList<Card>();
+
+		Card stone = this.age1Deck.getCard(2);
+		Card quarry = this.age2Deck.getCard(2);
+		Card walls = this.age2Deck.getCard(18);
+		Card bazar = this.age2Deck.getCard(17);
+		Card press = this.age2Deck.getCard(10);
+		current.addCardToStoragePile(quarry);
+		current.addCardToStoragePile(walls);
+		current.addCardToStoragePile(stone);
+		board.getNextPlayer().addCardToStoragePile(stone);
+		board.getPreviousPlayer().addCardToStoragePile(press);
+		currentHand.add(bazar);
+		current.setCurrentHand(currentHand);
+
+		PlayerTurnHandler playerTurnHandler = new PlayerTurnHandler();
+		playerTurnHandler.setGameBoard(board);
+		playerTurnHandler.buildStructure(current, bazar);
+
+		assertEquals(5, current.getCoinTotal());
+	}
+
+	@Test
 	public void testBuildStructureAddTwoShieldsAlreadyUsedEntity() {
 		ArrayList<Player> players = new ArrayList<Player>();
 		players.add(new Player("Jane Doe", EasyMock.mock(Wonder.class)));
@@ -363,7 +431,7 @@ public class PlayerTurnHandlerTest {
 		players.add(new Player("James Doe", EasyMock.mock(Wonder.class)));
 		ArrayList<Card> age1Deck = SetUpDeckTestHelper.createAge1Cards(3);
 		ArrayList<Card> age3Deck = SetUpDeckTestHelper.createAge3Cards(3);
-		
+
 		GameBoard board = new GameBoard(players, EasyMock.createMock(Deck.class));
 		Player current = players.get(0);
 		ArrayList<Card> currentHand = new ArrayList<Card>();
@@ -431,7 +499,7 @@ public class PlayerTurnHandlerTest {
 		playerTurnHandler.buildStructure(current, toBuild);
 		fail();
 	}
-	
+
 	@Test(expected = InsufficientFundsException.class)
 	public void testInvalidBuildStructureAddTwoShieldsAlreadyChoseWrongEntity() {
 		ArrayList<Player> players = setUpArrayWithNumPlayers(3);
@@ -462,7 +530,7 @@ public class PlayerTurnHandlerTest {
 		EasyMock.expect(playerTurnHandler.chooseWhichEntity(EasyMock.isA(HashMap.class), EasyMock.isA(String.class)))
 				.andReturn("CLAY");
 		EasyMock.expect(playerTurnHandler.chooseWhichEntity(EasyMock.isA(HashMap.class), EasyMock.isA(String.class)))
-		.andReturn("LOOM");
+				.andReturn("LOOM");
 		EasyMock.replay(playerTurnHandler);
 		playerTurnHandler.setGameBoard(board);
 		playerTurnHandler.buildStructure(current, toBuild);
@@ -608,11 +676,12 @@ public class PlayerTurnHandlerTest {
 		ValueEffect effect = EasyMock.mock(ValueEffect.class);
 		EasyMock.expect(cardToBuild.getEffect()).andReturn(effect);
 
+		EasyMock.expect(effect.getDirection()).andReturn(Direction.SELF);
 		EasyMock.expect(effect.getValueType()).andReturn(ValueType.VICTORYPOINT);
 		EasyMock.expect(effect.getValueAmount()).andReturn(Integer.valueOf(3));
-		
+
 		EasyMock.expect(effect.getValueType()).andReturn(ValueType.VICTORYPOINT);
-		
+
 		player.addNumVictoryPoints(3);
 		player.addCardToStoragePile(cardToBuild);
 		player.removeFromCurrentHand(cardToBuild);
@@ -661,16 +730,17 @@ public class PlayerTurnHandlerTest {
 			EasyMock.expect(entityEffect.getEntities()).andReturn(entities);
 			EasyMock.expect(entityEffect.getEntities()).andReturn(entities);
 		}
-		
+
 		ValueEffect effect = EasyMock.mock(ValueEffect.class);
 		EasyMock.expect(cardToBuild.getEffect()).andReturn(effect);
 
+		EasyMock.expect(effect.getDirection()).andReturn(Direction.SELF);
 		EasyMock.expect(effect.getValueType()).andReturn(ValueType.VICTORYPOINT);
 		EasyMock.expect(effect.getValueAmount()).andReturn(Integer.valueOf(3));
 		EasyMock.expect(player.storagePileContainsCardByName("Baths")).andReturn(false);
-		
+
 		EasyMock.expect(effect.getValueType()).andReturn(ValueType.VICTORYPOINT);
-		
+
 		player.addNumVictoryPoints(3);
 		player.addCardToStoragePile(cardToBuild);
 		player.removeFromCurrentHand(cardToBuild);
@@ -725,7 +795,8 @@ public class PlayerTurnHandlerTest {
 		Wonder wonder = new Wonder(Side.A, WonderType.COLOSSUS);
 		ArrayList<Player> result = new ArrayList<Player>();
 		for (int i = 0; i < num; i++) {
-			Player temp = EasyMock.partialMockBuilder(Player.class).withConstructor("Jane Doe", wonder).createMock();
+			Player temp = EasyMock.partialMockBuilder(Player.class).withConstructor("Jane Doe" + i, wonder)
+					.createMock();
 			result.add(temp);
 		}
 		return result;

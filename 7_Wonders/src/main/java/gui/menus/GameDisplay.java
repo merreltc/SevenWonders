@@ -105,6 +105,28 @@ public class GameDisplay extends Menu {
 			makeLeftButton(i);
 			makeRightButton(i);
 		}
+		for (int i = 0; i < 3; i++) {
+			makeLeftButtonGood(i);
+			makeRightButtonGood(i);
+		}
+	}
+
+	private void makeRightButtonGood(int i) {
+		Point buttonPosition = new Point(Constants.TradeRightBaseButtonPointGood.x,
+				Constants.TradeRightBaseButtonPoint.y + Constants.TradeButtonYOffet * i);
+		Button rightTradeButton = new Button(buttonPosition, Constants.TradeButtonBounds,
+				"Right-" + Constants.ResourceTypes[i]);
+		//rightTradeButton.hide();
+		this.addInteractable(rightTradeButton);
+	}
+
+	private void makeLeftButtonGood(int i) {
+		Point buttonPosition = new Point(Constants.TradeLeftBaseButtonPointGood.x,
+				Constants.TradeLeftBaseButtonPoint.y + Constants.TradeButtonYOffet * i);
+		Button leftTradeButton = new Button(buttonPosition, Constants.TradeButtonBounds,
+				"Left-" + Constants.ResourceTypes[i]);
+		//leftTradeButton.hide();
+		this.addInteractable(leftTradeButton);
 	}
 
 	private void makeLeftButton(int i) {

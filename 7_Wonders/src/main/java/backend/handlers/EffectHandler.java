@@ -1,16 +1,18 @@
 package backend.handlers;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 
 import dataStructures.GameBoard;
 import dataStructures.gameMaterials.Card;
 import dataStructures.gameMaterials.Effect;
+import dataStructures.gameMaterials.Effect.Direction;
 import dataStructures.gameMaterials.Effect.EffectType;
 import dataStructures.gameMaterials.Level.Frequency;
 import dataStructures.gameMaterials.ValueEffect;
+import dataStructures.gameMaterials.ValueEffect.AffectingEntity;
 import dataStructures.gameMaterials.ValueEffect.ValueType;
-import dataStructures.gameMaterials.Wonder;
 import dataStructures.playerData.Player;
 import utils.DropDownMessage;
 
@@ -46,6 +48,11 @@ public class EffectHandler {
 	public void enableCardEffect(Player current, Card card) {
 		if (card.getEffectType() == EffectType.VALUE) {
 			ValueEffect effect = (ValueEffect) card.getEffect();
+			
+			if(effect.getDirection() == Direction.ALL){
+				enableCoinCounts(current, effect);
+				return;
+			}
 			if (effect.getValueType() == ValueType.COIN) {
 				if (!card.getName().equals("Tavern"))
 					board.removeNumCoins(current, effect.getValueAmount());
@@ -53,6 +60,38 @@ public class EffectHandler {
 
 			enableValueEffect(current, effect);
 		}
+	}
+	
+	private void enableCoinCounts(Player current, ValueEffect effect){
+		Player next = this.board.getNextPlayer();
+		Player previous = this.board.getPreviousPlayer();
+		int numCoins = 0;
+
+		numCoins += findTypeCards(next.getAllCards(), effect);
+		numCoins += findTypeCards(previous.getAllCards(), effect);
+		numCoins += findTypeCards(current.getAllCards(), effect);
+		
+		this.board.giveNumCoins(current, numCoins);
+	}
+	
+	private int findTypeCards(ArrayList<Card> cards, ValueEffect effect){
+		int value = 0;
+		int amountIncreased = effect.getValueAmount();
+		AffectingEntity affecting = effect.getAffectingEntity();
+		String search;
+		if(affecting == AffectingEntity.RAWRESOURCES){
+			search = "RAWMATERIAL";
+		}else{
+			search = affecting.toString();
+		}
+		 
+		for(Card card: cards){
+			if(search.contains(card.getCardType().toString())){
+				value += amountIncreased;
+			}
+		}
+		
+		return value;
 	}
 
 	public void enableValueEffect(Player current, ValueEffect effect) {
