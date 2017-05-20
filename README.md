@@ -27,7 +27,7 @@ Cards are passed left-right-left over the three ages, so you need to keep an eye
 # How to Run in Eclipse:
 ## Importing and running the project:
 1. Import the "7_Wonders" into Eclipse as a Gradle Project
-2. Configure Build Path (see "Configuring the Build Path")
+2. Configure Build Path (See ["Configuring the Build Path"](https://ada.csse.rose-hulman.edu/moormaet/Silver_Falcons_Seven_Wonders/tree/master#configuring-the-build-path))
 3. In the package explorer, double-click src/main/java
 4. Double-click "main"
 5. Right-click "Main" and selecte "Run As->Java Application"
@@ -56,29 +56,29 @@ Cards are passed left-right-left over the three ages, so you need to keep an eye
 ## Display
 ### Player Board
 Implemented in GUI
-- [x] Overview of player statistics (see "Player Stats")
-- [x] Detailed view of player statistics (see "Player Stats")
+- [x] Overview of player statistics (See ["Player Stats"](https://ada.csse.rose-hulman.edu/moormaet/Silver_Falcons_Seven_Wonders/tree/master#player-stats))
+- [x] Detailed view of player statistics (See ["Player Stats"](https://ada.csse.rose-hulman.edu/moormaet/Silver_Falcons_Seven_Wonders/tree/master#player-stats))
 - [x] Details for left/right neighbors
 - [x] Minimal details for non-neighboring players
 
 ## Set Up
 - [x] Language is chosen: English or Chinese - Implemented in GUI
 - [x] Game mode is chosen (Easy or Normal)
-    - Easy Mode: all players receive side A [TestCase](7_Wonders/src/test/java/backendTests/WonderFactoryTest.java#L47)
-    - Normal Mode: players can receive side A or B of a Wonder [TestCase](7_Wonders/src/test/java/backendTests/WonderFactoryTest.java#L57)
+    - Easy Mode: all players receive side A [Test Case](7_Wonders/src/test/java/backendTests/WonderFactoryTest.java#L47)
+    - Normal Mode: players can receive side A or B of a Wonder [Test Case](7_Wonders/src/test/java/backendTests/WonderFactoryTest.java#L57)
 - [x] Number of players is chosen from valid options 3-7
-    - [x] Can play with 3 players [TestCase](7_Wonders/src/test/java/backendTests/GameManagerTest.java#L52) 
-    - [x] Can play with 7 players [TestCase](7_Wonders/src/test/java/backendTests/GameManagerTest.java#L59)
+    - [x] Can play with 3 players [Test Case](7_Wonders/src/test/java/backendTests/GameManagerTest.java#L52) 
+    - [x] Can play with 7 players [Test Case](7_Wonders/src/test/java/backendTests/GameManagerTest.java#L59)
 - [x] Players enter their names - Implemented in GUI
-- [x] Players are assigned random, unique wonders and sides [TestCase](7_Wonders/src/test/java/backendTests/WonderFactoryTest.java#L18)
-- [x] Age I Deck is assembled based on number of players [TestCase](7_Wonders/src/test/java/backendTests/SetUpDeckHandlerTest.java#L38)
-        and shuffled [TestCase](7_Wonders/src/test/java/backendTests/DeckHandlerTest.java#L20)
-- [x] Age II Deck is assembled based on number of players [TestCase](7_Wonders/src/test/java/backendTests/SetUpDeckHandlerTest.java#L60)
-- [x] Age III Deck is assembled based on number of players [TestCase](7_Wonders/src/test/java/backendTests/SetUpDeckHandlerTest.java#L88)
+- [x] Players are assigned random, unique wonders and sides [Test Case](7_Wonders/src/test/java/backendTests/WonderFactoryTest.java#L18)
+- [x] Age I Deck is assembled based on number of players [Test Case](7_Wonders/src/test/java/backendTests/SetUpDeckHandlerTest.java#L38)
+        and shuffled [Test Case](7_Wonders/src/test/java/backendTests/DeckHandlerTest.java#L20)
+- [x] Age II Deck is assembled based on number of players [Test Case](7_Wonders/src/test/java/backendTests/SetUpDeckHandlerTest.java#L60)
+- [x] Age III Deck is assembled based on number of players [Test Case](7_Wonders/src/test/java/backendTests/SetUpDeckHandlerTest.java#L88)
 - [x] Players are dealt equal number of cards
-    - [x] 3 Players [TestCase](7_Wonders/src/test/java/backendTests/TurnHandlerTest.java#L48)
-    - [x] 7 Players [TestCase](7_Wonders/src/test/java/backendTests/TurnHandlerTest.java#L67)
-- [x] Each player begins with 3 value 1 coins and 0 value 3 coins [TestCase](7_Wonders/src/test/java/dataStructureTests/PlayerTest.java#L65)
+    - [x] 3 Players [Test Case](7_Wonders/src/test/java/backendTests/TurnHandlerTest.java#L48)
+    - [x] 7 Players [Test Case](7_Wonders/src/test/java/backendTests/TurnHandlerTest.java#L67)
+- [x] Each player begins with 3 value 1 coins and 0 value 3 coins [Test Case](7_Wonders/src/test/java/dataStructureTests/PlayerTest.java#L65)
 
 ## Decks
 - [x] Each age has a unique set of cards
@@ -92,8 +92,8 @@ Implemented in GUI
         - [Test Case 3 Players](7_Wonders/src/test/java/backendTests/SetUpDeckHandlerTest.java#L88)
         - [Test Case 7 Players](7_Wonders/src/test/java/backendTests/SetUpDeckHandlerTest.java#L101)
 - [x] Deck swaps at the end of round 6 in an age (1->2->3)
-    - [x] Age1 to Age2 [TestCase](7_Wonders/src/test/java/backendTests/GameManagerTest.java#L798)
-    - [x] Age2 to Age3 [TestCase](7_Wonders/src/test/java/backendTests/GameManagerTest.java#L843)
+    - [x] Age1 to Age2 [Test Case](7_Wonders/src/test/java/backendTests/GameManagerTest.java#L798)
+    - [x] Age2 to Age3 [Test Case](7_Wonders/src/test/java/backendTests/GameManagerTest.java#L843)
 - [x] Age III Deck does not have raw material or manufactured goods cards - covered in unique set of cards tests by creating all cards expected in age in [This File](7_Wonders/src/test/java/testHelpers/SetUpDeckTestHelper.java#L914)
 - [x] Age I and II decks do not have Guild cards - covered in unique set of cards tests - covered in unique set of card tests by creating all cards expected in age in:
     - [Age I Creator](7_Wonders/src/test/java/testHelpers/SetUpDeckTestHelper.java#L26)
@@ -101,11 +101,11 @@ Implemented in GUI
 
 ## Cards
 [Card Tests](7_Wonders/src/test/java/dataStructureTests/CardTest.java) For structure related things see [Building Structure](#building-the-structure)
-- [x] Name and type of structure/resource (See "Card Types")
+- [x] Name and type of structure/resource (See ["Card Types"](https://ada.csse.rose-hulman.edu/moormaet/Silver_Falcons_Seven_Wonders/tree/master#card-types))
 - [x] Cost of building the structure [Costs Tests](7_Wonders/src/test/java/dataStructureTests/CostTest.java)
 - [x] The effect caused by building the structure - See below on building structure
-- [x] Previous structures that allow this structure to be built for free [TestCases](7_Wonders/src/test/java/backendTests/PlayerTurnHandlerTest.java#L769)
-- [x] Future structures that can be built free if this card has already been built [TestCases](7_Wonders/src/test/java/backendTests/PlayerTurnHandlerTest.java#L769)
+- [x] Previous structures that allow this structure to be built for free [Test Cases](7_Wonders/src/test/java/backendTests/PlayerTurnHandlerTest.java#L769)
+- [x] Future structures that can be built free if this card has already been built [Test Cases](7_Wonders/src/test/java/backendTests/PlayerTurnHandlerTest.java#L769)
 
 ### Card Types
 [Card Tests](7_Wonders/src/test/java/dataStructureTests/CardTest.java)
@@ -113,15 +113,15 @@ Implemented in GUI
 - Manufacture Good: (Grey) Produce displayed products (loom [Test](7_Wonders/src/test/java/dataStructureTests/CardTest.java#L187), glass [Test](7_Wonders/src/test/java/dataStructureTests/CardTest.java#L163), press [Test](7_Wonders/src/test/java/dataStructureTests/CardTest.java#L138))
 - Science: (Green) Award victory points at end game based on collected symbols (wheel, protractor, tablet)
     - Rules:
-        - [x] End game victory points are equal to number of identical symbols^2 + (7 * number of sets of 3 different symbols) [TestCase](https://ada.csse.rose-hulman.edu/moormaet/Silver_Falcons_Seven_Wonders/blob/master/7_Wonders/src/test/java/backendTests/EndGameHandlerTest.java)
+        - [x] End game victory points are equal to number of identical symbols^2 + (7 * number of sets of 3 different symbols) [Test Case](https://ada.csse.rose-hulman.edu/moormaet/Silver_Falcons_Seven_Wonders/blob/master/7_Wonders/src/test/java/backendTests/EndGameHandlerTest.java)
 
 - Civilian Structure: (Blue) Provide victory points
-- Commercial Structure: (Yellow) Provide advantages during commercial transactions (See "Commerce and Trading")
-- Military Structure: (Red) Builds military strength for wars (See "War")
+- Commercial Structure: (Yellow) Provide advantages during commercial transactions (See ["Commerce and Trading"](https://ada.csse.rose-hulman.edu/moormaet/Silver_Falcons_Seven_Wonders/tree/master#commerce-and-trading))
+- Military Structure: (Red) Builds military strength for wars (See ["War"](https://ada.csse.rose-hulman.edu/moormaet/Silver_Falcons_Seven_Wonders/tree/master#war))
 - Guild: (Purple) Provide end game victory points based on certain criteria
     - Rules:
-        - [x] Number of guild cards in the game is equal to the number of players + 2 and is kept a secret from players [TestCase](7_Wonders/src/test/java/backendTests/SetUpDeckHandlerTest.java#L247)
-        - [x] At the end of the game, players scores are affected by the Guild cards [TestCase](7_Wonders/src/test/java/backendTests/EndGameHandlerTest.java)
+        - [x] Number of guild cards in the game is equal to the number of players + 2 and is kept a secret from players [Test Case](7_Wonders/src/test/java/backendTests/SetUpDeckHandlerTest.java#L247)
+        - [x] At the end of the game, players scores are affected by the Guild cards [Test Case](7_Wonders/src/test/java/backendTests/EndGameHandlerTest.java)
 
 ## Commerce and Trading
 - [x] In order to trade or build anything, player must have appropriate resources or coins in their stockpile at the beginning of the turn
@@ -134,14 +134,14 @@ Implemented in GUI
     - [x] Can Trade to Next Player [Test Case](7_Wonders/src/test/java/backendTests/TradeHandlerTest.java#L258)
     - [x] Can Trade to Previous Player [Test Case](7_Wonders/src/test/java/backendTests/TradeHandlerTest.java#L271)
     - [x] Cannot trade to other player [Test Case](7_Wonders/src/test/java/backendTests/TradeHandlerTest.java#L284)
-- [x] Trading a neighboring city is initially 2 coins per resource and only allows players to use that resource, not take it from their neighbors [TestCase](7_Wonders/src/test/java/backendTests/TradeHandlerTest.java#L296)
+- [x] Trading a neighboring city is initially 2 coins per resource and only allows players to use that resource, not take it from their neighbors [Test Case](7_Wonders/src/test/java/backendTests/TradeHandlerTest.java#L296)
     - [x] Some Commercial Structure (yellow) cards allow players to trade for certain materials for 1 coin after being built
         - [x] East Trading Post  [Test Case](7_Wonders/src/test/java/backendTests/TradeHandlerTest.java#L449)
         - [x] West Trading Post [Test Case](https://ada.csse.rose-hulman.edu/moormaet/Silver_Falcons_Seven_Wonders/blob/master/7_Wonders/src/test/java/backendTests/GameManagerTest.java#L503)
         - [x] Marketplace [Test Case](https://ada.csse.rose-hulman.edu/moormaet/Silver_Falcons_Seven_Wonders/blob/master/7_Wonders/src/test/java/backendTests/GameManagerTest.java#L529)
 - [x] On a single turn, players may trade for multiple resources from both neighboring cities - On GUI
-- [x] Traded resources are only available to the player during the turn they are bought [TestCase](7_Wonders/src/test/java/backendTests/GameManagerTest.java#L277)
-- [x] Only resources produced through the city/Wonder or a neighbors raw resource or manufactured good cards can be traded - [TestCase](https://ada.csse.rose-hulman.edu/moormaet/Silver_Falcons_Seven_Wonders/blob/master/7_Wonders/src/test/java/backendTests/TradeHandlerTest.java#L426)
+- [x] Traded resources are only available to the player during the turn they are bought [Test Case](7_Wonders/src/test/java/backendTests/GameManagerTest.java#L277)
+- [x] Only resources produced through the city/Wonder or a neighbors raw resource or manufactured good cards can be traded - [Test Case](https://ada.csse.rose-hulman.edu/moormaet/Silver_Falcons_Seven_Wonders/blob/master/7_Wonders/src/test/java/backendTests/TradeHandlerTest.java#L426)
 - [x] Players are unable to purchase resources produced by commercial structures (or some Wonders)
 - [x] Trade cannot be refused by neighboring cities - On GUI
 
@@ -168,17 +168,17 @@ Implemented in GUI
 1. Choose card from temporary hand
 2. Action
     -  [x] Build the Structure - See [Building Structure](#building-the-structure) but [Tests In](7_Wonders/src/test/java/backendTests/PlayerTurnHandlerTest.java)
-    -  [x] Build the Next Level of Wonder [Cucumber File](7_Wonders/src/cucumber/resources/build_wonder.feature) and [TestCases](7_Wonders/src/cucumber/java/BuildWonderSteps.java)
-    -  [x] Discard for 3 Coins [TestCase](7_Wonders/src/test/java/backendTests/PlayerTurnHandlerTest.java#L283)
+    -  [x] Build the Next Level of Wonder [Cucumber File](7_Wonders/src/cucumber/resources/build_wonder.feature) and [Test Cases](7_Wonders/src/cucumber/java/BuildWonderSteps.java)
+    -  [x] Discard for 3 Coins [Test Case](7_Wonders/src/test/java/backendTests/PlayerTurnHandlerTest.java#L283)
         -  Discarded cards create a Discard Pile
         -  A card can always be chosen for discard, even if the player does not have enough resources to build it
 3. Pass temporary hand to next player
-    - [x] Temporary hand is passed to next player (excluding chosen card), wait until every player chooses a card to pass [TestCase](7_Wonders/src/test/java/backendTests/TurnHandlerTest.java#L399)
-    - [x] Pass direction is determined by Age (I: left/clockwise [TestCase](7_Wonders/src/test/java/backendTests/TurnHandlerTest.java#L86), II: right/counterclockwise [TestCase](7_Wonders/src/test/java/backendTests/TurnHandlerTest.java#L460) , III: left/clockwise [TestCase](7_Wonders/src/test/java/backendTests/TurnHandlerTest.java#L512))
+    - [x] Temporary hand is passed to next player (excluding chosen card), wait until every player chooses a card to pass [Test Case](7_Wonders/src/test/java/backendTests/TurnHandlerTest.java#L399)
+    - [x] Pass direction is determined by Age (I: left/clockwise [Test Case](7_Wonders/src/test/java/backendTests/TurnHandlerTest.java#L86), II: right/counterclockwise [Test Case](7_Wonders/src/test/java/backendTests/TurnHandlerTest.java#L460) , III: left/clockwise [Test Case](7_Wonders/src/test/java/backendTests/TurnHandlerTest.java#L512))
 4. On the sixth turn, player has 2 cards: one is chosen, second is discarded for NO coins
 
 ## Building the Structure
-- [x] If a structure has a resource/entity cost, the player must have sufficient resources in their stockpile or purchase them from neighbors (see "Commerce and Trading")
+- [x] If a structure has a resource/entity cost, the player must have sufficient resources in their stockpile or purchase them from neighbors ["Commerce and Trading"](https://ada.csse.rose-hulman.edu/moormaet/Silver_Falcons_Seven_Wonders/tree/master#commerce-and-trading)
     - [x] Player can build structure [Test Cases Begin at](7_Wonders/src/test/java/backendTests/PlayerTurnHandlerTest.java#L97)
     - [x] Player cannot build structure [Test Case](7_Wonders/src/test/java/backendTests/PlayerTurnHandlerTest.java#L120)
     - [x] Player had to trade first [Test Case](7_Wonders/src/test/java/backendTests/PlayerTurnHandlerTest.java#L807)
@@ -231,7 +231,7 @@ Implemented in GUI
     - Side B:
         - [x] Level 1: 3 Victory Points
         - [x] Level 2: Optional ability to play seventh card instead of discarding **on sixth turn**
-            - This card can be built (See "Building the Structure"), used to build level 3 (See "Building the Next Level of Wonder"), or discarded for 3 coins from the bank
+            - This card can be built (See ["Building the Structure"](https://ada.csse.rose-hulman.edu/moormaet/Silver_Falcons_Seven_Wonders/tree/master#building-the-structure)), used to build level 3 (See ["Building the Next Level of Wonder"](https://ada.csse.rose-hulman.edu/moormaet/Silver_Falcons_Seven_Wonders/tree/master#building-the-next-level-of-wonder)), or discarded for 3 coins from the bank
         - [x] Level 3: (See "Side A, Level 2")
 - *The Statue of Zeus in Olympia*
     - Resource: Lumber
