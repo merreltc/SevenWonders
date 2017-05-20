@@ -136,13 +136,12 @@ Implemented in GUI
     - [x] Cannot trade to other player [Test Case](7_Wonders/src/test/java/backendTests/TradeHandlerTest.java#L284)
 - [x] Trading a neighboring city is initially 2 coins per resource and only allows players to use that resource, not take it from their neighbors [TestCase](7_Wonders/src/test/java/backendTests/TradeHandlerTest.java#L296)
     - [x] Some Commercial Structure (yellow) cards allow players to trade for certain materials for 1 coin after being built
-        [Main Test Cases start at](7_Wonders/src/test/java/backendTests/GameManagerTest.java#L409) Until [L626](7_Wonders/src/test/java/backendTests/GameManagerTest.java#L626)
         - [x] East Trading Post  [Test Case](7_Wonders/src/test/java/backendTests/TradeHandlerTest.java#L449)
         - [x] West Trading Post [Test Case](https://ada.csse.rose-hulman.edu/moormaet/Silver_Falcons_Seven_Wonders/blob/master/7_Wonders/src/test/java/backendTests/GameManagerTest.java#L503)
         - [x] Marketplace [Test Case](https://ada.csse.rose-hulman.edu/moormaet/Silver_Falcons_Seven_Wonders/blob/master/7_Wonders/src/test/java/backendTests/GameManagerTest.java#L529)
 - [x] On a single turn, players may trade for multiple resources from both neighboring cities - On GUI
-- [x] Traded resources are only available to the player during the turn they are bought [TestCase](7_Wonders/src/test/java/backendTests/GameManagerTest.java#L630)
-- [x] Only resources produced through the city/Wonder or a neighbors raw resource or manufactured good cards can be traded - [TestCase](https://ada.csse.rose-hulman.edu/moormaet/Silver_Falcons_Seven_Wonders/blob/master/7_Wonders/src/test/java/backendTests/TradeHandlerTest.java#L346)
+- [x] Traded resources are only available to the player during the turn they are bought [TestCase](7_Wonders/src/test/java/backendTests/GameManagerTest.java#L277)
+- [x] Only resources produced through the city/Wonder or a neighbors raw resource or manufactured good cards can be traded - [TestCase](https://ada.csse.rose-hulman.edu/moormaet/Silver_Falcons_Seven_Wonders/blob/master/7_Wonders/src/test/java/backendTests/TradeHandlerTest.java#L426)
 - [x] Players are unable to purchase resources produced by commercial structures (or some Wonders)
 - [x] Trade cannot be refused by neighboring cities - On GUI
 
@@ -170,12 +169,12 @@ Implemented in GUI
 2. Action
     -  [x] Build the Structure - See [Building Structure](#building-the-structure) but [Tests In](7_Wonders/src/test/java/backendTests/PlayerTurnHandlerTest.java)
     -  [x] Build the Next Level of Wonder [Cucumber File](7_Wonders/src/cucumber/resources/build_wonder.feature) and [TestCases](7_Wonders/src/cucumber/java/BuildWonderSteps.java)
-    -  [x] Discard for 3 Coins [TestCase](7_Wonders/src/test/java/backendTests/PlayerTurnHandlerTest.java#L292)
+    -  [x] Discard for 3 Coins [TestCase](7_Wonders/src/test/java/backendTests/PlayerTurnHandlerTest.java#L283)
         -  Discarded cards create a Discard Pile
         -  A card can always be chosen for discard, even if the player does not have enough resources to build it
 3. Pass temporary hand to next player
-    - [x] Temporary hand is passed to next player (excluding chosen card), wait until every player chooses a card to pass [TestCase](7_Wonders/src/test/java/backendTests/TurnHandlerTest.java#L733)
-    - [x] Pass direction is determined by Age (I: left/clockwise [TestCase](7_Wonders/src/test/java/backendTests/TurnHandlerTest.java#L102), II: right/counterclockwise [TestCase](7_Wonders/src/test/java/backendTests/TurnHandlerTest.java#L798) but [Exact Line](7_Wonders/src/test/java/backendTests/TurnHandlerTest.java#L835), III: left/clockwise [TestCase](7_Wonders/src/test/java/backendTests/TurnHandlerTest.java#L843) but [Exact Line](7_Wonders/src/test/java/backendTests/TurnHandlerTest.java#L883))
+    - [x] Temporary hand is passed to next player (excluding chosen card), wait until every player chooses a card to pass [TestCase](7_Wonders/src/test/java/backendTests/TurnHandlerTest.java#L399)
+    - [x] Pass direction is determined by Age (I: left/clockwise [TestCase](7_Wonders/src/test/java/backendTests/TurnHandlerTest.java#L86), II: right/counterclockwise [TestCase](7_Wonders/src/test/java/backendTests/TurnHandlerTest.java#L460) , III: left/clockwise [TestCase](7_Wonders/src/test/java/backendTests/TurnHandlerTest.java#L512))
 4. On the sixth turn, player has 2 cards: one is chosen, second is discarded for NO coins
 
 ## Building the Structure
