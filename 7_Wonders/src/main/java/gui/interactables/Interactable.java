@@ -11,27 +11,32 @@ import constants.Constants;
 import utils.RenderImage;
 
 public abstract class Interactable {
-
-	private Point boundPoint;
-	private Point positionPoint;
-	private String value;
-	private boolean drawUnit = true;
-	private Image image = null;
+	
+	private class InteractableData {
+		protected Point boundPoint;
+		protected Point positionPoint;
+		protected String value;
+		protected boolean drawUnit = true;
+		protected Image image = null;
+		protected Color backgroundColor;
+		protected Color textColor;
+	}
+	
 	RenderImage renderer = new RenderImage();
-	private Color backgroundColor;
-	private Color textColor;
+	private InteractableData data = new InteractableData();
+
 
 	public Interactable(Point positionPoint, Point boundPoint, String value, Color backgroundColor, Color textColor) {
-		this.boundPoint = boundPoint;
-		this.positionPoint = positionPoint;
-		this.value = value;
-		this.backgroundColor = backgroundColor;
-		this.textColor = textColor;
+		this.data.boundPoint = boundPoint;
+		this.data.positionPoint = positionPoint;
+		this.data.value = value;
+		this.data.backgroundColor = backgroundColor;
+		this.data.textColor = textColor;
 	}
 
 	public boolean checkButtonClicked(Point point) {
-		if (positionPoint.x <= point.x && positionPoint.x + boundPoint.x >= point.x) {
-			if (positionPoint.y <= point.y && positionPoint.y + boundPoint.y >= point.y) {
+		if (this.data.positionPoint.x <= point.x && this.data.positionPoint.x + this.data.boundPoint.x >= point.x) {
+			if (data.positionPoint.y <= point.y && data.positionPoint.y + data.boundPoint.y >= point.y) {
 				return true;
 			}
 		}
@@ -39,34 +44,34 @@ public abstract class Interactable {
 	}
 
 	public void draw(Graphics graphics) {
-		if (drawUnit) {
-			graphics.setColor(backgroundColor);
-			graphics.fillRect(this.positionPoint.x, this.positionPoint.y, this.boundPoint.x, this.boundPoint.y);
-			graphics.setColor(textColor);
+		if (data.drawUnit) {
+			graphics.setColor(data.backgroundColor);
+			graphics.fillRect(this.data.positionPoint.x, this.data.positionPoint.y, this.data.boundPoint.x, this.data.boundPoint.y);
+			graphics.setColor(data.textColor);
 			graphics.setFont(Constants.ButtonFont);
-			graphics.drawString(value, positionPoint.x + 10, positionPoint.y + this.boundPoint.y - 10);
+			graphics.drawString(data.value, data.positionPoint.x + 10, data.positionPoint.y + this.data.boundPoint.y - 10);
 		} else {
-			renderer.setImage(this.image);
+			renderer.setImage(this.data.image);
 			renderer.draw(graphics,
-					new int[] { this.positionPoint.x, this.positionPoint.y, this.boundPoint.x, this.boundPoint.y });
+					new int[] { this.data.positionPoint.x, this.data.positionPoint.y, this.data.boundPoint.x, this.data.boundPoint.y });
 		}
 	}
 
 	public void hide() {
-		this.drawUnit = false;
+		this.data.drawUnit = false;
 	}
 
 	public Point2D getPosition() {
-		return this.positionPoint;
+		return this.data.positionPoint;
 	}
 
 	public String getValue() {
-		return this.value;
+		return this.data.value;
 	}
 
 	public void addImage(Image image) {
-		this.image = image;
-		this.drawUnit = false;
+		this.data.image = image;
+		this.data.drawUnit = false;
 	}
 
 }

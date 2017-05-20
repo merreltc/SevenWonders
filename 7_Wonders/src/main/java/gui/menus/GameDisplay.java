@@ -22,21 +22,28 @@ import utils.RenderImage;
 import utils.Translate;
 
 public class GameDisplay extends Menu {
+	private class GameDisplayResources {
+
+		protected GameManager gameManager;
+		protected HandManager handManager;
+		protected RenderImage renderer;
+		protected ResourceViewer resource = new ResourceViewer();
+
+	}
+	
 	private ArrayList<PlayerBoard> boards = new ArrayList<>();
-	private GameManager gameManager;
-	private HandManager handManager;
-	private RenderImage renderer;
-	ResourceViewer resource = new ResourceViewer();
+	private GameDisplayResources resources = new GameDisplayResources();
 
 	public GameDisplay(int numOfPlayers, RenderImage renderer, GameMode mode) {
 		initializeGameManager(numOfPlayers, mode);
-		this.renderer = renderer;
+		this.resources.renderer = renderer;
 	}
 
 	private void initializeGameManager(int numOfPlayers, GameMode mode) {
 		ArrayList<String> playerNames = setUpPlayers(numOfPlayers);
-		this.gameManager = new GameManager(playerNames, mode);
-		this.gameManager.dealInitialTurnCards();
+		this.resources.gameManager = new GameManager(playerNames, mode);
+		this.resources.gameManager.dealInitialTurnCards();
+
 	}
 
 	private ArrayList<String> setUpPlayers(int numOfPlayers) {
@@ -73,24 +80,26 @@ public class GameDisplay extends Menu {
 			button.draw(graphics);
 		}
 
-		this.resource.draw(graphics);
+		this.resources.resource.draw(graphics);
 	}
 
 	private void createBoardsForEachPlayer() {
-		int numOfPlayers = this.gameManager.getNumPlayers();
+		int numOfPlayers = this.resources.gameManager.getNumPlayers();
 		for (int i = -1; i < numOfPlayers - 1; i++) {
 			PlayerBoard board = new PlayerBoard(i, numOfPlayers,
-					this.gameManager.getPlayer((2 * numOfPlayers + i) % numOfPlayers), renderer);
+					this.resources.gameManager.getPlayer((2 * numOfPlayers + i) % numOfPlayers), this.resources.renderer);
+
 			this.addInteractable(board.generateResourceButton());
 			boards.add(board);
 		}
 	}
 
 	private void setUpCardSlots() {
-		this.handManager = new HandManager();
-		this.handManager.drawCurrentPlayerCards(this.gameManager.getCurrentPlayer(), renderer);
-		for (int i = 0; i < this.handManager.getPlayerHandSize(); i++) {
-			this.addInteractable(this.handManager.getCardHolder(i));
+		this.resources.handManager = new HandManager();
+		this.resources.handManager.drawCurrentPlayerCards(this.resources.gameManager.getCurrentPlayer(), this.resources.renderer);
+		for (int i = 0; i < this.resources.handManager.getPlayerHandSize(); i++) {
+			this.addInteractable(this.resources.handManager.getCardHolder(i));
+
 		}
 	}
 
@@ -117,7 +126,7 @@ public class GameDisplay extends Menu {
 		Button rightTradeButton = new Button(buttonPosition, Constants.TradeButtonBounds,
 				"Right-" + Constants.GoodTypes[i]);
 		rightTradeButton.hide();
-		rightTradeButton.addImage(renderer.getImage(Constants.GoodTypes[i]));
+		rightTradeButton.addImage(this.resources.renderer.getImage(Constants.GoodTypes[i]));
 		this.addInteractable(rightTradeButton);
 	}
 
@@ -127,7 +136,7 @@ public class GameDisplay extends Menu {
 		Button leftTradeButton = new Button(buttonPosition, Constants.TradeButtonBounds,
 				"Left-" + Constants.GoodTypes[i]);
 		leftTradeButton.hide();
-		leftTradeButton.addImage(renderer.getImage(Constants.GoodTypes[i]));
+		leftTradeButton.addImage(this.resources.renderer.getImage(Constants.GoodTypes[i]));
 		this.addInteractable(leftTradeButton);
 	}
 
@@ -154,8 +163,9 @@ public class GameDisplay extends Menu {
 		if (clicked.getClass().equals(CardHolder.class)) {
 			this.attemptPlayCard((CardHolder) clicked);
 		} else if (clicked.getValue().equals(Translate.getNewResourceBundle().getString("exit"))) {
-			if (this.resource.isActive()) {
-				this.resource.closeMenu();
+			if (this.resources.resource.isActive()) {
+				this.resources.resource.closeMenu();
+
 			} else {
 				System.exit(0);
 			}
@@ -168,14 +178,17 @@ public class GameDisplay extends Menu {
 
 	private void displayResources(Interactable clicked) {
 		int playerNum = codePointToInt(clicked.getValue().codePointAt(0));
-		int locOfCurrentPlayer = this.gameManager.getPlayers().indexOf(this.gameManager.getCurrentPlayer());
-		this.resource.openMenu(
-				this.gameManager.getPlayer((locOfCurrentPlayer + playerNum) % this.gameManager.getNumPlayers()));
+
+		int locOfCurrentPlayer = this.resources.gameManager.getPlayers().indexOf(this.resources.gameManager.getCurrentPlayer());
+		this.resources.resource.openMenu(
+				this.resources.gameManager.getPlayer((locOfCurrentPlayer + playerNum) % this.resources.gameManager.getNumPlayers()));
+
 	}
 
 	private void trade(Interactable clicked) {
 		String[] splitValue = clicked.getValue().split("-");
-		TradeHelper tradeHandler = new TradeHelper(this.gameManager);
+		TradeHelper tradeHandler = new TradeHelper(this.resources.gameManager);
+
 		tradeHandler.trade(splitValue);
 	}
 
@@ -196,32 +209,38 @@ public class GameDisplay extends Menu {
 
 	private void playOrDiscardCard(CardHolder clicked, int val) {
 		if (val == 0) {
-			clicked.activate(this.gameManager);
-		} else if (val == 1) {
-			clicked.activateWonder(this.gameManager);
-		} else if (val == 2) {
-			clicked.discard(this.gameManager);
+			clicked.activate(this.resources.gameManager);
+		} else if (val == 1){
+			clicked.buildWonder(this.resources.gameManager);
+		}else if (val == 2) {
+			clicked.discard(this.resources.gameManager);
 		} else {
 			throw new RuntimeException("You must choose an action to do.");
+
 		}
 	}
 
 	private void updateDisplay() {
 		redrawBoards();
 		/* update the cards after rotation */
-		for (Interactable toRemove : this.handManager.getCurrentPlayerHand()) {
+		for (Interactable toRemove : this.resources.handManager.getCurrentPlayerHand()) {
 			this.removeInteractable(toRemove);
 		}
-		this.handManager.drawCurrentPlayerCards(this.gameManager.getCurrentPlayer(), renderer);
-		for (int i = 0; i < this.handManager.getPlayerHandSize(); i++) {
-			this.addInteractable(this.handManager.getCardHolder(i));
+		this.resources.handManager.drawCurrentPlayerCards(this.resources.gameManager.getCurrentPlayer(), this.resources.renderer);
+		for (int i = 0; i < this.resources.handManager.getPlayerHandSize(); i++) {
+			this.addInteractable(this.resources.handManager.getCardHolder(i));
+
 		}
 	}
 
 	private void endPlayerTurn() {
-		String message = gameManager.endCurrentPlayerTurn();
+		String message = this.resources.gameManager.endCurrentPlayerTurn();
+
 		if (!message.equals("")) {
 			Message.showMessage(message);
+		}
+		if (message.contains("Wins!")){
+			System.exit(0);
 		}
 	}
 
@@ -230,13 +249,17 @@ public class GameDisplay extends Menu {
 	}
 
 	public void redrawBoards() {
-		ArrayList<Player> players = this.gameManager.getPlayers();
-		Player currentPlayer = this.gameManager.getCurrentPlayer();
-		int totalNumberOfPlayers = this.gameManager.getNumPlayers();
+
+		ArrayList<Player> players = this.resources.gameManager.getPlayers();
+		Player currentPlayer = this.resources.gameManager.getCurrentPlayer();
+		int totalNumberOfPlayers = this.resources.gameManager.getNumPlayers();
+
 		int currentPlayerIndex = players.indexOf(currentPlayer);
 		for (int i = 0; i < players.size(); i++) {
 			boards.get(i)
 					.changePlayer(players.get((totalNumberOfPlayers + currentPlayerIndex + i - 1) % totalNumberOfPlayers));
 		}
 	}
+
 }
+

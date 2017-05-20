@@ -83,14 +83,14 @@ Implemented in GUI
 ## Decks
 - [x] Each age has a unique set of cards
     - [x] Age1 Cards 
-        - [TestCase 3 Players](7_Wonders/src/test/java/backendTests/SetUpDeckHandlerTest.java#L35)
-        - [TestCase 7 Players](7_Wonders/src/test/java/backendTests/SetUpDeckHandlerTest.java#L46)
+        - [Test Case 3 Players](7_Wonders/src/test/java/backendTests/SetUpDeckHandlerTest.java#L35)
+        - [Test Case 7 Players](7_Wonders/src/test/java/backendTests/SetUpDeckHandlerTest.java#L46)
     - [x] Age2 Cards 
-        - [TestCase 3 Players](7_Wonders/src/test/java/backendTests/SetUpDeckHandlerTest.java#L57)
-        - [TestCase 7 Players](7_Wonders/src/test/java/backendTests/SetUpDeckHandlerTest.java#L71)
+        - [Test Case 3 Players](7_Wonders/src/test/java/backendTests/SetUpDeckHandlerTest.java#L57)
+        - [Test Case 7 Players](7_Wonders/src/test/java/backendTests/SetUpDeckHandlerTest.java#L71)
     - [x] Age3 Cards 
-        - [TestCase 3 Players](7_Wonders/src/test/java/backendTests/SetUpDeckHandlerTest.java#L85)
-        - [TestCase 7 Players](7_Wonders/src/test/java/backendTests/SetUpDeckHandlerTest.java#L98)
+        - [Test Case 3 Players](7_Wonders/src/test/java/backendTests/SetUpDeckHandlerTest.java#L85)
+        - [Test Case 7 Players](7_Wonders/src/test/java/backendTests/SetUpDeckHandlerTest.java#L98)
 - [x] Deck swaps at the end of round 6 in an age (1->2->3)
     - [x] Age1 to Age2 [TestCase](7_Wonders/src/test/java/backendTests/GameManagerTest.java#L798)
     - [x] Age2 to Age3 [TestCase](7_Wonders/src/test/java/backendTests/GameManagerTest.java#L843)
@@ -126,27 +126,27 @@ Implemented in GUI
 ## Commerce and Trading
 - [x] In order to trade or build anything, player must have appropriate resources or coins in their stockpile at the beginning of the turn
     - [x] Trading with a city with the incorrect materials
-        - [x] Invalid Amount of Coins [TestCase](7_Wonders/src/test/java/backendTests/TradeHandlerTest.java#L93)
-        - [x] Invalid Amount of Resources [TestCase](7_Wonders/src/test/java/backendTests/TradeHandlerTest.java#L382)
-    - [x] Trading with a city with just enough materials [TestCase](7_Wonders/src/test/java/backendTests/TradeHandlerTest.java#L468)
-    - [x] Trading with a city with more than enough materials [TestCase](7_Wonders/src/test/java/backendTests/TradeHandlerTest.java#L355)
+        - [x] Invalid Amount of Coins [Test Case](7_Wonders/src/test/java/backendTests/TradeHandlerTest.java#L93)
+        - [x] Invalid Amount of Resources [Test Case](7_Wonders/src/test/java/backendTests/TradeHandlerTest.java#L382)
+    - [x] Trading with a city with just enough materials [Test Case](7_Wonders/src/test/java/backendTests/TradeHandlerTest.java#L468)
+    - [x] Trading with a city with more than enough materials [Test Case](7_Wonders/src/test/java/backendTests/TradeHandlerTest.java#L355)
 - [x] Players can only trade with neighboring cities 
-    - [x] Can Trade to Next Player [TestCase](7_Wonders/src/test/java/backendTests/TradeHandlerTest.java#L293)
-    - [x] Can Trade to Previous Player [TestCase](7_Wonders/src/test/java/backendTests/TradeHandlerTest.java#L314)
-    - [x] Cannot trade to other player [TestCase](7_Wonders/src/test/java/backendTests/TradeHandlerTest.java#L335)
+    - [x] Can Trade to Next Player [Test Case](7_Wonders/src/test/java/backendTests/TradeHandlerTest.java#L293)
+    - [x] Can Trade to Previous Player [Test Case](7_Wonders/src/test/java/backendTests/TradeHandlerTest.java#L314)
+    - [x] Cannot trade to other player [Test Case](7_Wonders/src/test/java/backendTests/TradeHandlerTest.java#L335)
 - [x] Trading a neighboring city is initially 2 coins per resource and only allows players to use that resource, not take it from their neighbors [TestCase](7_Wonders/src/test/java/backendTests/TradeHandlerTest.java#L407)
     - [x] Some Commercial Structure (yellow) cards allow players to trade for certain materials for 1 coin after being built
-        [Main TestCases start at](7_Wonders/src/test/java/backendTests/GameManagerTest.java#L409) Until [L626](7_Wonders/src/test/java/backendTests/GameManagerTest.java#L626)
-        - [x] East Trading Post  [TestCase](7_Wonders/src/test/java/backendTests/TradeHandlerTest.java#L437)
-        - [x] West Trading Post [TestCase](https://ada.csse.rose-hulman.edu/moormaet/Silver_Falcons_Seven_Wonders/blob/master/7_Wonders/src/test/java/backendTests/GameManagerTest.java#L539)
-        - [x] Marketplace [TestCase](https://ada.csse.rose-hulman.edu/moormaet/Silver_Falcons_Seven_Wonders/blob/master/7_Wonders/src/test/java/backendTests/GameManagerTest.java#L425)
+        [Main Test Cases start at](7_Wonders/src/test/java/backendTests/GameManagerTest.java#L409) Until [L626](7_Wonders/src/test/java/backendTests/GameManagerTest.java#L626)
+        - [x] East Trading Post  [Test Case](7_Wonders/src/test/java/backendTests/TradeHandlerTest.java#L437)
+        - [x] West Trading Post [Test Case](https://ada.csse.rose-hulman.edu/moormaet/Silver_Falcons_Seven_Wonders/blob/master/7_Wonders/src/test/java/backendTests/GameManagerTest.java#L539)
+        - [x] Marketplace [Test Case](https://ada.csse.rose-hulman.edu/moormaet/Silver_Falcons_Seven_Wonders/blob/master/7_Wonders/src/test/java/backendTests/GameManagerTest.java#L425)
 - [x] On a single turn, players may trade for multiple resources from both neighboring cities - On GUI
 - [x] Traded resources are only available to the player during the turn they are bought [TestCase](7_Wonders/src/test/java/backendTests/GameManagerTest.java#L630)
 - [x] Only resources produced through the city/Wonder or a neighbors raw resource or manufactured good cards can be traded - [TestCase](https://ada.csse.rose-hulman.edu/moormaet/Silver_Falcons_Seven_Wonders/blob/master/7_Wonders/src/test/java/backendTests/TradeHandlerTest.java#L346)
 - [x] Players are unable to purchase resources produced by commercial structures (or some Wonders)
 - [x] Trade cannot be refused by neighboring cities - On GUI
 
-## War [TestCase](https://ada.csse.rose-hulman.edu/moormaet/Silver_Falcons_Seven_Wonders/blob/master/7_Wonders/src/test/java/backendTests/TurnHandlerTest.java)
+## War [Test Case](https://ada.csse.rose-hulman.edu/moormaet/Silver_Falcons_Seven_Wonders/blob/master/7_Wonders/src/test/java/backendTests/TurnHandlerTest.java)
 - [x] At the end of an age (following sixth rotation), players go to war with BOTH neighboring cities
 - [x] A player with more shields than their neighbor is successful
 - [x] A player with less shields than their neighbor is defeated
@@ -180,14 +180,14 @@ Implemented in GUI
 
 ## Building the Structure
 - [x] If a structure has a resource/entity cost, the player must have sufficient resources in their stockpile or purchase them from neighbors (see "Commerce and Trading")
-    - [x] Player can build structure [TestCases Begin at](7_Wonders/src/test/java/backendTests/PlayerTurnHandlerTest.java#L90)
-    - [x] Player cannot build structure [TestCase](7_Wonders/src/test/java/backendTests/PlayerTurnHandlerTest.java#L119)
-    - [x] Player had to trade first [TestCase](7_Wonders/src/test/java/backendTests/PlayerTurnHandlerTest.java#L723)
+    - [x] Player can build structure [Test Cases Begin at](7_Wonders/src/test/java/backendTests/PlayerTurnHandlerTest.java#L90)
+    - [x] Player cannot build structure [Test Case](7_Wonders/src/test/java/backendTests/PlayerTurnHandlerTest.java#L119)
+    - [x] Player had to trade first [Test Case](7_Wonders/src/test/java/backendTests/PlayerTurnHandlerTest.java#L723)
     Other tests in same file
-- [x] If a structure has a coin cost, the player must pay that cost to the bank [TestCase](7_Wonders/src/test/java/backendTests/PlayerTurnHandlerTest.java#L61)
-- [x] If player owns a previous structure, they may build their chosen structure for free [TestCase](https://ada.csse.rose-hulman.edu/moormaet/Silver_Falcons_Seven_Wonders/blob/master/7_Wonders/src/test/java/backendTests/PlayerTurnHandlerTest.java#L657)
-- [x] Identical structures cannot be built by the same player [TestCase](7_Wonders/src/test/java/backendTests/PlayerTurnHandlerTest.java#L697)
-- [x] If a structure has no cost, the player can build it [TestCase](7_Wonders/src/test/java/backendTests/PlayerTurnHandlerTest.java#L34)
+- [x] If a structure has a coin cost, the player must pay that cost to the bank [Test Case](7_Wonders/src/test/java/backendTests/PlayerTurnHandlerTest.java#L61)
+- [x] If player owns a previous structure, they may build their chosen structure for free [Test Case](https://ada.csse.rose-hulman.edu/moormaet/Silver_Falcons_Seven_Wonders/blob/master/7_Wonders/src/test/java/backendTests/PlayerTurnHandlerTest.java#L657)
+- [x] Identical structures cannot be built by the same player [Test Case](7_Wonders/src/test/java/backendTests/PlayerTurnHandlerTest.java#L697)
+- [x] If a structure has no cost, the player can build it [Test Case](7_Wonders/src/test/java/backendTests/PlayerTurnHandlerTest.java#L34)
 - [x] At the end of a rotation, all player's built structures are revealed
 
 ## Building the Next Level of Wonder
@@ -198,7 +198,7 @@ Implemented in GUI
 - [x] Wonder can be built at any time, in any age
 - [x] The wonder does not need to be built in order for a player to win - not included in Scoring
 
-### Wonders [TestCase](https://ada.csse.rose-hulman.edu/moormaet/Silver_Falcons_Seven_Wonders/blob/master/7_Wonders/src/test/java/dataStructureTests/WonderTest.java)
+### Wonders [Test Case](https://ada.csse.rose-hulman.edu/moormaet/Silver_Falcons_Seven_Wonders/blob/master/7_Wonders/src/test/java/dataStructureTests/WonderTest.java)
 - [x] Wonders provide players 1 of the resource specified in the top left corner
 - Side A always has 3 levels
     - [x] The first level is worth +3 Victory Points
@@ -260,7 +260,7 @@ Implemented in GUI
         - [x] Level 3: 5 Victory Points
         - [x] Level 4: 7 Victory Points
 
-## End Game and Victory [TestCase](https://ada.csse.rose-hulman.edu/moormaet/Silver_Falcons_Seven_Wonders/blob/master/7_Wonders/src/test/java/backendTests/EndGameHandlerTest.java)
+## End Game and Victory [Test Case](https://ada.csse.rose-hulman.edu/moormaet/Silver_Falcons_Seven_Wonders/blob/master/7_Wonders/src/test/java/backendTests/EndGameHandlerTest.java)
 - [x] After the war of Age III, a score card displaying total Victory Points for each player is displayed
 - [x] Total Victory Points is equal to the sum of total value of Conflict Tokens, the floor of total coin value divided by 3, the total value of Victory Points from Wonders and (Civilian/Commercial) Structures, points acquired from Guild effects (see "Cards->Guild"), and points acquired from Science Cards (see "Cards->Science Structure")
 - [x] Whichever player has the most victory points is the winner
