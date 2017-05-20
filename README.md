@@ -100,17 +100,17 @@ Implemented in GUI
     - [Age II Creator](7_Wonders/src/test/java/testHelpers/SetUpDeckTestHelper.java#L468)
 
 ## Cards
-[Card Tests](7_Wonders/src/test/java/dataStructuresTests/CardTest.java) For structure related things see [Building Structure](#building-the-structure)
+[Card Tests](7_Wonders/src/test/java/dataStructureTests/CardTest.java) For structure related things see [Building Structure](#building-the-structure)
 - [x] Name and type of structure/resource (See "Card Types")
-- [x] Cost of building the structure [Costs Tests](7_Wonders/src/test/java/dataStructuresTests/CostTest.java)
+- [x] Cost of building the structure [Costs Tests](7_Wonders/src/test/java/dataStructureTests/CostTest.java)
 - [x] The effect caused by building the structure - See below on building structure
 - [x] Previous structures that allow this structure to be built for free [TestCases](7_Wonders/src/test/java/backendTests/PlayerTurnHandlerTest.java#L768)
 - [x] Future structures that can be built free if this card has already been built [TestCases](7_Wonders/src/test/java/backendTests/PlayerTurnHandlerTest.java#L768)
 
 ### Card Types
-[Card Tests](7_Wonders/src/test/java/dataStructuresTests/CardTest.java)
-- Raw Resource: (Brown) Produce raw materials (lumber [Test](7_Wonders/src/test/java/dataStructuresTests/CardTest.java#L29), stone[Test](7_Wonders/src/test/java/dataStructuresTests/CardTest.java#L125), ore[Test](7_Wonders/src/test/java/dataStructuresTests/CardTest.java#L93), clay[Test](7_Wonders/src/test/java/dataStructuresTests/CardTest.java#L61))
-- Manufacture Good: (Grey) Produce displayed products (loom [Test](7_Wonders/src/test/java/dataStructuresTests/CardTest.java#L187), glass [Test](7_Wonders/src/test/java/dataStructuresTests/CardTest.java#L163), press [Test](7_Wonders/src/test/java/dataStructuresTests/CardTest.java#L138))
+[Card Tests](7_Wonders/src/test/java/dataStructureTests/CardTest.java)
+- Raw Resource: (Brown) Produce raw materials (lumber [Test](7_Wonders/src/test/java/dataStructureTests/CardTest.java#L29), stone[Test](7_Wonders/src/test/java/dataStructureTests/CardTest.java#L125), ore[Test](7_Wonders/src/test/java/dataStructureTests/CardTest.java#L93), clay[Test](7_Wonders/src/test/java/dataStructureTests/CardTest.java#L61))
+- Manufacture Good: (Grey) Produce displayed products (loom [Test](7_Wonders/src/test/java/dataStructureTests/CardTest.java#L187), glass [Test](7_Wonders/src/test/java/dataStructureTests/CardTest.java#L163), press [Test](7_Wonders/src/test/java/dataStructureTests/CardTest.java#L138))
 - Science: (Green) Award victory points at end game based on collected symbols (wheel, protractor, tablet)
     - Rules:
         - [x] End game victory points are equal to number of identical symbols^2 + (7 * number of sets of 3 different symbols) [TestCase](https://ada.csse.rose-hulman.edu/moormaet/Silver_Falcons_Seven_Wonders/blob/master/7_Wonders/src/test/java/backendTests/EndGameHandlerTest.java)
@@ -156,7 +156,7 @@ Implemented in GUI
 - [x] A tie results in no tokens for either city
 
 ## Player Stats
-[Player Tests](7_Wonders/src/test/java/dataStructuresTests/PlayerTest.java)
+[Player Tests](7_Wonders/src/test/java/dataStructureTests/PlayerTest.java)
 - [x] Name
 - [x] Wonder and build level
 - [x] Value 1 and value 3 coins
