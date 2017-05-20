@@ -1,23 +1,5 @@
 # Seven Wonders - Java-based board game
 
-## Requirements Left to Cover (Delete as completed)
-Key: **\*** - Do not delete. Run/Verify immediately before deadline  
-**Current Grade: D**  
-**For a C**  
-- 100% mutation and basis path coverage of all non-GUI, non-enum code\*
-- All tests pass and capture their stated intent (don’t delete failing tests)\*
-- Locale: **Select** and Support one non-English locale
-    - Full support for non-English locale
-
-**For a B**  
-- Code meets quality standards\*
-- Definition of done in involves appropriate course techniques\*
-- Rules are explicitly linked to done-ness (Issues, Merge Requests, test cases, etc)
-
-**For an A**  
-- Code meets Martin’s quality standards\*
-- Appropriate automation to verify code meets quality standards\*
-
 ## Description of Game
 "You are the leader of one of the 7 great cities of the Ancient World. Gather resources, develop commercial routes, and affirm your military supremacy.
 Build your city and erect an architectural wonder which will transcend future times.
@@ -127,11 +109,11 @@ Implemented in GUI
 
 ### Card Types
 [Card Tests](7_Wonders/src/test/java/dataStructuresTests/CardTest.java)
-- Raw Resource: (Brown) Produce raw materials (lumber, stone, ore, clay)
-- Manufacture Good: (Grey) Produce displayed products (loom, glass, press)
+- Raw Resource: (Brown) Produce raw materials (lumber [Test](7_Wonders/src/test/java/dataStructuresTests/CardTest.java#L29), stone[Test](7_Wonders/src/test/java/dataStructuresTests/CardTest.java#L125), ore[Test](7_Wonders/src/test/java/dataStructuresTests/CardTest.java#L93), clay[Test](7_Wonders/src/test/java/dataStructuresTests/CardTest.java#L61))
+- Manufacture Good: (Grey) Produce displayed products (loom [Test](7_Wonders/src/test/java/dataStructuresTests/CardTest.java#L187), glass [Test](7_Wonders/src/test/java/dataStructuresTests/CardTest.java#L163), press [Test](7_Wonders/src/test/java/dataStructuresTests/CardTest.java#L138))
 - Science: (Green) Award victory points at end game based on collected symbols (wheel, protractor, tablet)
     - Rules:
-        - [x] End game victory points are equal to number of identical symbols^2 + (7 * number of sets of 3 different symbols) [TestCase](https://ada.csse.rose-hulman.edu/moormaet/Silver_Falcons_Seven_Wonders/blob/master/7_Wonders/src/test/java/dataStructureTests/PlayerTest.java)
+        - [x] End game victory points are equal to number of identical symbols^2 + (7 * number of sets of 3 different symbols) [TestCase](https://ada.csse.rose-hulman.edu/moormaet/Silver_Falcons_Seven_Wonders/blob/master/7_Wonders/src/test/java/backendTests/EndGameHandlerTest.java)
 
 - Civilian Structure: (Blue) Provide victory points
 - Commercial Structure: (Yellow) Provide advantages during commercial transactions (See "Commerce and Trading")
@@ -161,7 +143,7 @@ Implemented in GUI
 - [x] On a single turn, players may trade for multiple resources from both neighboring cities - On GUI
 - [x] Traded resources are only available to the player during the turn they are bought [TestCase](7_Wonders/src/test/java/backendTests/GameManagerTest.java#L630)
 - [x] Only resources produced through the city/Wonder or a neighbors raw resource or manufactured good cards can be traded - [TestCase](https://ada.csse.rose-hulman.edu/moormaet/Silver_Falcons_Seven_Wonders/blob/master/7_Wonders/src/test/java/backendTests/TradeHandlerTest.java#L346)
-- [ ] Players are unable to purchase resources produced by commercial structures (or some Wonders)
+- [x] Players are unable to purchase resources produced by commercial structures (or some Wonders)
 - [x] Trade cannot be refused by neighboring cities - On GUI
 
 ## War [TestCase](https://ada.csse.rose-hulman.edu/moormaet/Silver_Falcons_Seven_Wonders/blob/master/7_Wonders/src/test/java/backendTests/TurnHandlerTest.java)
@@ -176,7 +158,7 @@ Implemented in GUI
 ## Player Stats
 [Player Tests](7_Wonders/src/test/java/dataStructuresTests/PlayerTest.java)
 - [x] Name
-- [ ] Wonder and build level
+- [x] Wonder and build level
 - [x] Value 1 and value 3 coins
 - [x] Military Shields
 - [x] Conflict Tokens
@@ -187,13 +169,13 @@ Implemented in GUI
 1. Choose card from temporary hand
 2. Action
     -  [x] Build the Structure - See [Building Structure](#building-the-structure) but [Tests In](7_Wonders/src/test/java/backendTests/PlayerTurnHandlerTest.java)
-    -  [ ] Build the Next Level of Wonder
+    -  [x] Build the Next Level of Wonder [Cucumber File](7_Wonders/src/cucumber/resources/build_wonder.feature) and [TestCases](7_Wonders/src/cucumber/java/BuildWonderSteps.java)
     -  [x] Discard for 3 Coins [TestCase](7_Wonders/src/test/java/backendTests/PlayerTurnHandlerTest.java#L322)
         -  Discarded cards create a Discard Pile
         -  A card can always be chosen for discard, even if the player does not have enough resources to build it
 3. Pass temporary hand to next player
-    - [x] Temporary hand is passed to next player (excluding chosen card), wait until every player chooses a card to pass [TestCase](7_Wonders/src/test/java/backendTests/GameManagerTest.java#L733)
-    - [x] Pass direction is determined by Age (I: left/clockwise [TestCase](7_Wonders/src/test/java/backendTests/GameManagerTest.java#L102), II: right/counterclockwise [TestCase](7_Wonders/src/test/java/backendTests/GameManagerTest.java#L798) but [Exact Line](7_Wonders/src/test/java/backendTests/GameManagerTest.java#L835), III: left/clockwise [TestCase](7_Wonders/src/test/java/backendTests/GameManagerTest.java#L843) but [Exact Line](7_Wonders/src/test/java/backendTests/GameManagerTest.java#L883))
+    - [x] Temporary hand is passed to next player (excluding chosen card), wait until every player chooses a card to pass [TestCase](7_Wonders/src/test/java/backendTests/TurnHandlerTest.java#L733)
+    - [x] Pass direction is determined by Age (I: left/clockwise [TestCase](7_Wonders/src/test/java/backendTests/TurnHandlerTest.java#L102), II: right/counterclockwise [TestCase](7_Wonders/src/test/java/backendTests/TurnHandlerTest.java#L798) but [Exact Line](7_Wonders/src/test/java/backendTests/TurnHandlerTest.java#L835), III: left/clockwise [TestCase](7_Wonders/src/test/java/backendTests/TurnHandlerTest.java#L843) but [Exact Line](7_Wonders/src/test/java/backendTests/TurnHandlerTest.java#L883))
 4. On the sixth turn, player has 2 cards: one is chosen, second is discarded for NO coins
 
 ## Building the Structure
@@ -209,79 +191,80 @@ Implemented in GUI
 - [x] At the end of a rotation, all player's built structures are revealed
 
 ## Building the Next Level of Wonder
-- [ ] Player must have the resources required for the next level of the Wonder (not the structure) in order to build
-- [ ] Card used to build Wonder does not provide player its effect in addition to the effect of the Wonder Level and is hidden from other players
-- [ ] Levels of Wonder are built once per game and in sequence (left to right)
-- [ ] Wonder can be built at any time, in any age
+[Cucumber](7_Wonders/src/cucumber/resources/build_wonder.feature)
+- [x] Player must have the resources required for the next level of the Wonder (not the structure) in order to build
+- [x] Card used to build Wonder does not provide player its effect in addition to the effect of the Wonder Level and is hidden from other players
+- [x] Levels of Wonder are built once per game and in sequence (left to right)
+- [x] Wonder can be built at any time, in any age
 - [x] The wonder does not need to be built in order for a player to win - not included in Scoring
 
 ### Wonders [TestCase](https://ada.csse.rose-hulman.edu/moormaet/Silver_Falcons_Seven_Wonders/blob/master/7_Wonders/src/test/java/dataStructureTests/WonderTest.java)
 - [x] Wonders provide players 1 of the resource specified in the top left corner
 - Side A always has 3 levels
-    - [ ] The first level is worth +3 Victory Points
+    - [x] The first level is worth +3 Victory Points
     - The second level is determined by the Wonder
-    - [ ] The third level is worth +7 Victory Points
-- [ ] Number of levels and the effects for each level vary by Wonder on side B
-- [ ] The cost of building each level varies from side A to B and from Wonder to Wonder
+    - [x] The third level is worth +7 Victory Points
+- [x] Number of levels and the effects for each level vary by Wonder on side B
+- [x] The cost of building each level varies from side A to B and from Wonder to Wonder
 - *The Colossus of Rhodes*
     - Resource: Ore
-    - [ ] Side A, Level 2: 2 Shields
+    - [x] Side A, Level 2: 2 Shields
     - Side B:
-        - [ ] Level 1: 1 Shield, 3 Victory Points, 3 Coins (from bank)
-        - [ ] Level 2: 1 Shield, 4 Victory Points, 4 Coins (from bank)
+        - [x] Level 1: 1 Shield, 3 Victory Points, 3 Coins (from bank)
+        - [x] Level 2: 1 Shield, 4 Victory Points, 4 Coins (from bank)
 - *The Lighthouse of Alexandria*
     - Resource: Glass
-    - [ ] Side A, Level 2: Resource of choice from 4 raw materials (lumber, stone, ore, clay) **every turn**
+    - [x] Side A, Level 2: Resource of choice from 4 raw materials (lumber, stone, ore, clay) **every turn**
     - Side B:
-        - [ ] Level 1: (See "Side A, Level 2")
-        - [ ] Level 2: Resource of choice from 3 manufactured goods (loom, glass, press) **every turn**
-        - [ ] Level 3: 7 Victory Points
+        - [x] Level 1: (See "Side A, Level 2")
+        - [x] Level 2: Resource of choice from 3 manufactured goods (loom, glass, press) **every turn**
+        - [x] Level 3: 7 Victory Points
 - *The Temple of Artemis in Ephesus*
     - Resource: Press
-    - [ ] Side A, Level 2: 9 Coins (from bank) **immediately following the building of this level**
+    - [x] Side A, Level 2: 9 Coins (from bank) **immediately following the building of this level**
     - Side B:
-        - [ ] Level 1: 2 Victory Points, 4 Coins (from bank)
-        - [ ] Level 2: 3 Victory Points, 4 Coins (from bank)
-        - [ ] Level 3: 5 Victory Points, 4 Coins (from bank)
-- *The Hanging Gardens of Babylon*
+        - [x] Level 1: 2 Victory Points, 4 Coins (from bank)
+        - [x] Level 2: 3 Victory Points, 4 Coins (from bank)
+        - [x] Level 3: 5 Victory Points, 4 Coins (from bank)
+- *The Hangxng Gardens of Babylon*
     - Resource: Clay
-    - [ ] Side A, Level 2: Science symbol of choice from 2 types (wheel, protractor, tablet) at the **end of the game**
+    - [x] Side A, Level 2: Science symbol of choice from 2 types (wheel, protractor, tablet) at the **end of the game**
     - Side B:
-        - [ ] Level 1: 3 Victory Points
-        - [ ] Level 2: Optional ability to play seventh card instead of discarding **on sixth turn**
+        - [x] Level 1: 3 Victory Points
+        - [x] Level 2: Optional ability to play seventh card instead of discarding **on sixth turn**
             - This card can be built (See "Building the Structure"), used to build level 3 (See "Building the Next Level of Wonder"), or discarded for 3 coins from the bank
-        - [ ] Level 3: (See "Side A, Level 2")
+        - [x] Level 3: (See "Side A, Level 2")
 - *The Statue of Zeus in Olympia*
     - Resource: Lumber
-    - [ ] Side A, Level 2: Build structure for free **once per age**
+    - [x] Side A, Level 2: Build structure for free **once per age**
     - Side B:
-        - [ ] Level 1: Allows player to purchase raw materials (lumber, stone, ore, clay) from either neighbor for 1 coin
+        - [x] Level 1: Allows player to purchase raw materials (lumber, stone, ore, clay) from either neighbor for 1 coin
             - Same effect as both Eastern and Western Trading Posts (Commercial Structures)
             - Both trading posts can still be built, but the effect is not cumulative
-        - [ ] Level 2: 5 Victory Points
-        - [ ] Level 3: Allows player to "copy" a Guild (purple) card from **one** of their two neighbors at the **end of the game**
+        - [x] Level 2: 5 Victory Points
+        - [x] Level 3: Allows player to "copy" a Guild (purple) card from **one** of their two neighbors at the **end of the game**
             - This ability has no effect on the player who owns the copied Guild
 - *The Mausoleum of Halicarnassus*
     - Resource: Loom
-    - [ ] Side A, Level 2: At the **end of turn when this level is built,** choose one structure from all discarded cards since beginning of game and build for free
+    - [x] Side A, Level 2: At the **end of turn when this level is built,** choose one structure from all discarded cards since beginning of game and build for free
     - Side B:
-        - [ ] Level 1: 2 Victory Points, (See "Side A, Level 2")
-        - [ ] Level 2: 1 Victory Point, (See "Side A, Level 2")
-        - [ ] Level 3: (See "Side A, Level 2")
+        - [x] Level 1: 2 Victory Points, (See "Side A, Level 2")
+        - [x] Level 2: 1 Victory Point, (See "Side A, Level 2")
+        - [x] Level 3: (See "Side A, Level 2")
 - *The Pyramids of Giza*
     - Resource: Stone
-    - [ ] Side A, Level 2: 5 Victory Points
+    - [x] Side A, Level 2: 5 Victory Points
     - Side B:
-        - [ ] Level 1: 3 Victory Points
-        - [ ] Level 2: 5 Victory Points
-        - [ ] Level 3: 5 Victory Points
-        - [ ] Level 4: 7 Victory Points
+        - [x] Level 1: 3 Victory Points
+        - [x] Level 2: 5 Victory Points
+        - [x] Level 3: 5 Victory Points
+        - [x] Level 4: 7 Victory Points
 
 ## End Game and Victory [TestCase](https://ada.csse.rose-hulman.edu/moormaet/Silver_Falcons_Seven_Wonders/blob/master/7_Wonders/src/test/java/backendTests/EndGameHandlerTest.java)
 - [x] After the war of Age III, a score card displaying total Victory Points for each player is displayed
 - [x] Total Victory Points is equal to the sum of total value of Conflict Tokens, the floor of total coin value divided by 3, the total value of Victory Points from Wonders and (Civilian/Commercial) Structures, points acquired from Guild effects (see "Cards->Guild"), and points acquired from Science Cards (see "Cards->Science Structure")
-- [ ] Whichever player has the most victory points is the winner
-- [ ] In the case of a tie, the player with the most coins wins. Ties at this point are not broken further
+- [x] Whichever player has the most victory points is the winner
+- [x] In the case of a tie, the player with the most coins wins. Ties at this point are not broken further
 
 ## Optional features:
 * Leaders
