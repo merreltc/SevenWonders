@@ -43,8 +43,6 @@ public class PlayerTurnHandlerTest {
 
 	@Before
 	public void setUp() {
-		// this.gameBoard =
-		// EasyMock.partialMockBuilder(GameBoard.class).createMock();
 		ArrayList<Card> cards = new SetUpDeckHandler().createCards(Age.AGE1, 3);
 		this.age1Deck = new Deck(Age.AGE1, cards);
 		ArrayList<Card> cards2 = new SetUpDeckHandler().createCards(Age.AGE2, 3);
@@ -372,7 +370,7 @@ public class PlayerTurnHandlerTest {
 		Card walls = this.age2Deck.getCard(13);
 		Card vineyard = this.age2Deck.getCard(12);
 		Card press = this.age1Deck.getCard(8);
-		
+
 		current.addCardToStoragePile(quarry);
 		current.addCardToStoragePile(walls);
 		current.addCardToStoragePile(stone);
@@ -387,7 +385,7 @@ public class PlayerTurnHandlerTest {
 
 		assertEquals(6, current.getCoinTotal());
 	}
-	
+
 	@Test
 	public void testBuildStructureCountCoinsForGood() {
 		ArrayList<Player> players = new ArrayList<Player>();

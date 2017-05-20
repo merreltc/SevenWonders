@@ -2,6 +2,7 @@ buildscript {
    repositories {
        mavenCentral()
    }
+   
    configurations.maybeCreate("pitest")
    dependencies {
        classpath 'info.solidsoft.gradle.pitest:gradle-pitest-plugin:1.1.10'

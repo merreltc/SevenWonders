@@ -54,9 +54,9 @@ public class TradeHelper {
 			return RawResource.ORE;
 		} else if (resource.equals("Clay")){
 			return RawResource.CLAY;
-		}else if (resource.equals("Loom")){
+		}else if (resource.equals("loom symbol")){
 			return GeneralEnums.Good.LOOM;
-		}else if (resource.equals("Press")){
+		}else if (resource.equals("press symbol")){
 			return Good.PRESS;
 		}
 		return Good.GLASS;
