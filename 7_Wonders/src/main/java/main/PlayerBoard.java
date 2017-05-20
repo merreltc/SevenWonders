@@ -127,6 +127,6 @@ public class PlayerBoard {
 
 	public void changePlayer(Player player) {
 		this.player = player;
-		this.WonderImage = renderer.getImage(player.getWonder().getName());
+		this.WonderImage = renderer.getImage(player.getWonder().getName()+ player.getWonder().getSide());
 	}
 }
