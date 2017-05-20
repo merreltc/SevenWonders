@@ -180,14 +180,14 @@ Implemented in GUI
 
 ## Building the Structure
 - [x] If a structure has a resource/entity cost, the player must have sufficient resources in their stockpile or purchase them from neighbors (see "Commerce and Trading")
-    - [x] Player can build structure [Test Cases Begin at](7_Wonders/src/test/java/backendTests/PlayerTurnHandlerTest.java#L90)
-    - [x] Player cannot build structure [Test Case](7_Wonders/src/test/java/backendTests/PlayerTurnHandlerTest.java#L119)
-    - [x] Player had to trade first [Test Case](7_Wonders/src/test/java/backendTests/PlayerTurnHandlerTest.java#L723)
+    - [x] Player can build structure [Test Cases Begin at](7_Wonders/src/test/java/backendTests/PlayerTurnHandlerTest.java#L97)
+    - [x] Player cannot build structure [Test Case](7_Wonders/src/test/java/backendTests/PlayerTurnHandlerTest.java#L120)
+    - [x] Player had to trade first [Test Case](7_Wonders/src/test/java/backendTests/PlayerTurnHandlerTest.java#L807)
     Other tests in same file
-- [x] If a structure has a coin cost, the player must pay that cost to the bank [Test Case](7_Wonders/src/test/java/backendTests/PlayerTurnHandlerTest.java#L61)
-- [x] If player owns a previous structure, they may build their chosen structure for free [Test Case](https://ada.csse.rose-hulman.edu/moormaet/Silver_Falcons_Seven_Wonders/blob/master/7_Wonders/src/test/java/backendTests/PlayerTurnHandlerTest.java#L657)
-- [x] Identical structures cannot be built by the same player [Test Case](7_Wonders/src/test/java/backendTests/PlayerTurnHandlerTest.java#L697)
-- [x] If a structure has no cost, the player can build it [Test Case](7_Wonders/src/test/java/backendTests/PlayerTurnHandlerTest.java#L34)
+- [x] If a structure has a coin cost, the player must pay that cost to the bank [Test Case](7_Wonders/src/test/java/backendTests/PlayerTurnHandlerTest.java#L74)
+- [x] If player owns a previous structure, they may build their chosen structure for free [Test Case](https://ada.csse.rose-hulman.edu/moormaet/Silver_Falcons_Seven_Wonders/blob/master/7_Wonders/src/test/java/backendTests/PlayerTurnHandlerTest.java#L769)
+- [x] Identical structures cannot be built by the same player [Test Case](7_Wonders/src/test/java/backendTests/PlayerTurnHandlerTest.java#L701)
+- [x] If a structure has no cost, the player can build it [Test Case](7_Wonders/src/test/java/backendTests/PlayerTurnHandlerTest.java#L53)
 - [x] At the end of a rotation, all player's built structures are revealed
 
 ## Building the Next Level of Wonder
