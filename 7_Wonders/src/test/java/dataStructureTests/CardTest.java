@@ -88,6 +88,70 @@ public class CardTest {
 
 		EasyMock.verify(cost, effect);
 	}
+	
+	@Test
+	public void testRawMaterialCardOre() {
+		ArrayList<Integer> frequency = new ArrayList<Integer>();
+		frequency.add(3);
+		frequency.add(4);
+
+		Cost cost = EasyMock.createStrictMock(Cost.class);
+		Effect effect = EasyMock.createStrictMock(Effect.class);
+
+		HashMap<Enum, Integer> expected = new HashMap<Enum, Integer>();
+		expected.put(RawResource.ORE, 1);
+
+		EasyMock.expect(cost.getType()).andReturn(CostType.NONE);
+
+		HashMap<Enum, Integer> expectedEntities = new HashMap<Enum, Integer>();
+		expectedEntities.put(RawResource.ORE, 1);
+
+		EasyMock.expect(effect.getEffectType()).andReturn(Effect.EffectType.ENTITY);
+
+		EasyMock.replay(cost, effect);
+
+		Card card = new Card("Ore Vein", frequency, CardType.RAWMATERIAL, cost, effect, "None", "None");
+
+		assertEquals("Ore Vein", card.getName());
+		assertEquals(frequency, card.getFrequencyByNumPlayers());
+		assertEquals(CardType.RAWMATERIAL, card.getCardType());
+		assertEquals(CostType.NONE, card.getCostType());
+		assertEquals(Effect.EffectType.ENTITY, card.getEffectType());
+
+		EasyMock.verify(cost, effect);
+	}
+	
+	@Test
+	public void testRawMaterialCardStone() {
+		ArrayList<Integer> frequency = new ArrayList<Integer>();
+		frequency.add(3);
+		frequency.add(5);
+
+		Cost cost = EasyMock.createStrictMock(Cost.class);
+		Effect effect = EasyMock.createStrictMock(Effect.class);
+
+		HashMap<Enum, Integer> expected = new HashMap<Enum, Integer>();
+		expected.put(RawResource.STONE, 1);
+
+		EasyMock.expect(cost.getType()).andReturn(CostType.NONE);
+
+		HashMap<Enum, Integer> expectedEntities = new HashMap<Enum, Integer>();
+		expectedEntities.put(RawResource.STONE, 1);
+
+		EasyMock.expect(effect.getEffectType()).andReturn(Effect.EffectType.ENTITY);
+
+		EasyMock.replay(cost, effect);
+
+		Card card = new Card("Stone Pit", frequency, CardType.RAWMATERIAL, cost, effect, "None", "None");
+
+		assertEquals("Stone Pit", card.getName());
+		assertEquals(frequency, card.getFrequencyByNumPlayers());
+		assertEquals(CardType.RAWMATERIAL, card.getCardType());
+		assertEquals(CostType.NONE, card.getCostType());
+		assertEquals(Effect.EffectType.ENTITY, card.getEffectType());
+
+		EasyMock.verify(cost, effect);
+	}
 
 	@Test
 	public void testManufacturedGoodCard() {
