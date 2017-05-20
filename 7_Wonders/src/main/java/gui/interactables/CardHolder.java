@@ -25,7 +25,9 @@ public class CardHolder extends Interactable {
 	public void draw(Graphics graphics) {
 		super.draw(graphics);
 		if (this.havePreviousStructure) {
-			graphics.fillRect((int) this.getPosition().getX(), (int) this.getPosition().getY(), 50, 50);
+			this.renderer.getImage("checkmark");
+			this.renderer.draw(graphics, new int[]{(int) this.getPosition().getX(), (int) this.getPosition().getY(), 50, 50});
+			//graphics.fillRect((int) this.getPosition().getX(), (int) this.getPosition().getY(), 50, 50);
 		}
 	}
 
@@ -44,5 +46,9 @@ public class CardHolder extends Interactable {
 
 	public void activateWonder(GameManager gameManager) {
 		gameManager.buildWonder(this.card);
+	}
+	
+	public void buildWonder(GameManager manager){
+		manager.buildWonder(this.card);
 	}
 }

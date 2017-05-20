@@ -210,7 +210,9 @@ public class GameDisplay extends Menu {
 	private void playOrDiscardCard(CardHolder clicked, int val) {
 		if (val == 0) {
 			clicked.activate(this.resources.gameManager);
-		} else if (val == 2) {
+		} else if (val == 1){
+			clicked.buildWonder(this.resources.gameManager);
+		}else if (val == 2) {
 			clicked.discard(this.resources.gameManager);
 		} else {
 			throw new RuntimeException("You must choose an action to do.");
@@ -236,6 +238,9 @@ public class GameDisplay extends Menu {
 
 		if (!message.equals("")) {
 			Message.showMessage(message);
+		}
+		if (message.contains("Wins!")){
+			System.exit(0);
 		}
 	}
 
