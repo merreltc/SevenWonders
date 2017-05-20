@@ -11,6 +11,7 @@ import org.easymock.EasyMock;
 import org.junit.Test;
 
 import constants.GeneralEnums.CostType;
+import constants.GeneralEnums.Good;
 import constants.GeneralEnums.RawResource;
 import dataStructures.gameMaterials.Card;
 import dataStructures.gameMaterials.Card.CardType;
@@ -26,7 +27,7 @@ import dataStructures.gameMaterials.ValueEffect.Value;
 public class CardTest {
 
 	@Test
-	public void testRawMaterialCard() {
+	public void testRawMaterialCardLumber() {
 		ArrayList<Integer> frequency = new ArrayList<Integer>();
 		frequency.add(3);
 		frequency.add(4);
@@ -34,14 +35,7 @@ public class CardTest {
 		Cost cost = EasyMock.createStrictMock(Cost.class);
 		Effect effect = EasyMock.createStrictMock(Effect.class);
 
-		HashMap<Enum, Integer> expected = new HashMap<Enum, Integer>();
-		expected.put(RawResource.LUMBER, 2);
-
 		EasyMock.expect(cost.getType()).andReturn(CostType.NONE);
-
-		HashMap<Enum, Integer> expectedEntities = new HashMap<Enum, Integer>();
-		expectedEntities.put(RawResource.LUMBER, 2);
-
 		EasyMock.expect(effect.getEffectType()).andReturn(Effect.EffectType.ENTITY);
 
 		EasyMock.replay(cost, effect);
@@ -56,9 +50,92 @@ public class CardTest {
 
 		EasyMock.verify(cost, effect);
 	}
+	
+	@Test
+	public void testRawMaterialCardClay() {
+		ArrayList<Integer> frequency = new ArrayList<Integer>();
+		frequency.add(3);
+		frequency.add(5);
+
+		Cost cost = EasyMock.createStrictMock(Cost.class);
+		Effect effect = EasyMock.createStrictMock(Effect.class);
+
+		EasyMock.expect(cost.getType()).andReturn(CostType.NONE);
+		EasyMock.expect(effect.getEffectType()).andReturn(Effect.EffectType.ENTITY);
+
+		EasyMock.replay(cost, effect);
+
+		Card card = new Card("Clay Pool", frequency, CardType.RAWMATERIAL, cost, effect, "None", "None");
+
+		assertEquals("Clay Pool", card.getName());
+		assertEquals(frequency, card.getFrequencyByNumPlayers());
+		assertEquals(CardType.RAWMATERIAL, card.getCardType());
+		assertEquals(CostType.NONE, card.getCostType());
+		assertEquals(Effect.EffectType.ENTITY, card.getEffectType());
+
+		EasyMock.verify(cost, effect);
+	}
+	
+	@Test
+	public void testRawMaterialCardOre() {
+		ArrayList<Integer> frequency = new ArrayList<Integer>();
+		frequency.add(3);
+		frequency.add(4);
+
+		Cost cost = EasyMock.createStrictMock(Cost.class);
+		Effect effect = EasyMock.createStrictMock(Effect.class);
+
+		EasyMock.expect(cost.getType()).andReturn(CostType.NONE);
+
+		EasyMock.expect(effect.getEffectType()).andReturn(Effect.EffectType.ENTITY);
+
+		EasyMock.replay(cost, effect);
+
+		Card card = new Card("Ore Vein", frequency, CardType.RAWMATERIAL, cost, effect, "None", "None");
+
+		assertEquals("Ore Vein", card.getName());
+		assertEquals(frequency, card.getFrequencyByNumPlayers());
+		assertEquals(CardType.RAWMATERIAL, card.getCardType());
+		assertEquals(CostType.NONE, card.getCostType());
+		assertEquals(Effect.EffectType.ENTITY, card.getEffectType());
+
+		EasyMock.verify(cost, effect);
+	}
+	
+	@Test
+	public void testRawMaterialCardStone() {
+		ArrayList<Integer> frequency = new ArrayList<Integer>();
+		frequency.add(3);
+		frequency.add(5);
+
+		Cost cost = EasyMock.createStrictMock(Cost.class);
+		Effect effect = EasyMock.createStrictMock(Effect.class);
+
+		HashMap<Enum, Integer> expected = new HashMap<Enum, Integer>();
+		expected.put(RawResource.STONE, 1);
+
+		EasyMock.expect(cost.getType()).andReturn(CostType.NONE);
+
+		HashMap<Enum, Integer> expectedEntities = new HashMap<Enum, Integer>();
+		expectedEntities.put(RawResource.STONE, 1);
+
+		EasyMock.expect(effect.getEffectType()).andReturn(Effect.EffectType.ENTITY);
+
+		EasyMock.replay(cost, effect);
+
+		Card card = new Card("Stone Pit", frequency, CardType.RAWMATERIAL, cost, effect, "None", "None");
+
+		assertEquals("Stone Pit", card.getName());
+		assertEquals(frequency, card.getFrequencyByNumPlayers());
+		assertEquals(CardType.RAWMATERIAL, card.getCardType());
+		assertEquals(CostType.NONE, card.getCostType());
+		assertEquals(Effect.EffectType.ENTITY, card.getEffectType());
+
+		EasyMock.verify(cost, effect);
+	}
 
 	@Test
-	public void testManufacturedGoodCard() {
+	public void testManufacturedGoodCardPress() {
 		ArrayList<Integer> frequency = new ArrayList<Integer>();
 		frequency.add(3);
 		frequency.add(6);
@@ -66,8 +143,54 @@ public class CardTest {
 		Cost cost = EasyMock.createStrictMock(Cost.class);
 		Effect effect = EasyMock.createStrictMock(Effect.class);
 
-		HashMap<Enum, Integer> expected = new HashMap<Enum, Integer>();
-		expected.put(RawResource.LUMBER, 2);
+
+		EasyMock.expect(cost.getType()).andReturn(CostType.NONE);
+		EasyMock.expect(effect.getEffectType()).andReturn(Effect.EffectType.ENTITY);
+		EasyMock.replay(cost, effect);
+
+		Card card = new Card("Press", frequency, CardType.MANUFACTUREDGOOD, cost, effect, "None", "None");
+
+		assertEquals("Press", card.getName());
+		assertEquals(frequency, card.getFrequencyByNumPlayers());
+		assertEquals(CardType.MANUFACTUREDGOOD, card.getCardType());
+		assertEquals(CostType.NONE, card.getCostType());
+		assertEquals(EffectType.ENTITY, card.getEffectType());
+
+		EasyMock.verify(cost, effect);
+	}
+	
+	@Test
+	public void testManufacturedGoodCardGlass() {
+		ArrayList<Integer> frequency = new ArrayList<Integer>();
+		frequency.add(3);
+		frequency.add(6);
+
+		Cost cost = EasyMock.createStrictMock(Cost.class);
+		Effect effect = EasyMock.createStrictMock(Effect.class);
+
+		EasyMock.expect(cost.getType()).andReturn(CostType.NONE);
+		EasyMock.expect(effect.getEffectType()).andReturn(Effect.EffectType.ENTITY);
+		EasyMock.replay(cost, effect);
+
+		Card card = new Card("Glass", frequency, CardType.MANUFACTUREDGOOD, cost, effect, "None", "None");
+
+		assertEquals("Glass", card.getName());
+		assertEquals(frequency, card.getFrequencyByNumPlayers());
+		assertEquals(CardType.MANUFACTUREDGOOD, card.getCardType());
+		assertEquals(CostType.NONE, card.getCostType());
+		assertEquals(EffectType.ENTITY, card.getEffectType());
+
+		EasyMock.verify(cost, effect);
+	}
+	
+	@Test
+	public void testManufacturedGoodCardLoom() {
+		ArrayList<Integer> frequency = new ArrayList<Integer>();
+		frequency.add(3);
+		frequency.add(6);
+
+		Cost cost = EasyMock.createStrictMock(Cost.class);
+		Effect effect = EasyMock.createStrictMock(Effect.class);
 
 		EasyMock.expect(cost.getType()).andReturn(CostType.NONE);
 		EasyMock.expect(effect.getEffectType()).andReturn(Effect.EffectType.ENTITY);
@@ -84,34 +207,8 @@ public class CardTest {
 
 		EasyMock.verify(cost, effect);
 	}
-
-	@Test
-	public void testCommercialStructureCard() {
-		ArrayList<Integer> frequency = new ArrayList<Integer>();
-		frequency.add(3);
-		frequency.add(4);
-
-		Cost cost = EasyMock.createStrictMock(Cost.class);
-		Effect effect = EasyMock.createStrictMock(Effect.class);
-
-		HashMap<Enum, Integer> expected = new HashMap<Enum, Integer>();
-		expected.put(RawResource.LUMBER, 2);
-
-		EasyMock.expect(cost.getType()).andReturn(CostType.RESOURCE);
-		EasyMock.expect(effect.getEffectType()).andReturn(Effect.EffectType.MULTIVALUE);
-
-		EasyMock.replay(cost, effect);
-		Card card = new Card("Haven", frequency, CardType.COMMERCIALSTRUCTURE, cost, effect, "None", "None");
-
-		assertEquals("Haven", card.getName());
-		assertEquals(frequency, card.getFrequencyByNumPlayers());
-		assertEquals(CardType.COMMERCIALSTRUCTURE, card.getCardType());
-		assertEquals(CostType.RESOURCE, card.getCostType());
-		assertEquals(Effect.EffectType.MULTIVALUE, card.getEffectType());
-
-		EasyMock.verify(cost, effect);
-	}
-
+	
+	
 	@Test
 	public void testCommercialStructureCardCommercialEffect() {
 		ArrayList<Integer> frequency = new ArrayList<Integer>();
