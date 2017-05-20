@@ -30,8 +30,6 @@
 		</module>
 	</module>
 
-	<module name="SuppressionFilter">
-    		<property name="file" value="[\\/]suppressions.xml"/>
-	</module>
+
 
 </module>
