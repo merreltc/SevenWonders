@@ -78,20 +78,20 @@ public class PlayerTurnHandler {
 
 	public Level buildWonderLevel(Player current) {
 		Wonder wonder = current.getWonder();
-		int built = wonder.getNumBuiltLevels() + 1;
-		Level level = wonder.getLevelFactory().getNextLevel(built);
+		int numBuilt = wonder.getNumBuiltLevels() + 1;
+		Level level = wonder.getLevelFactory().getNextLevel(numBuilt);
 		updateEffects(current, level);
 		return level;
 	}
 
 	private void updateEffects(Player current, Level level) {
 		current.clearTempWonderEffects();
-		HashMap<Enum, Integer> costs = level.getCosts();
+		HashMap<Enum, Integer> costs = new HashMap<Enum, Integer>(level.getCosts());
 		validateLevelCosts(current, costs);
 		new EffectHandler(this.board).enableEffects(current);
 	}
 
-	private void validateLevelCosts(Player current, HashMap<Enum, Integer> costs) {
+	public void validateLevelCosts(Player current, HashMap<Enum, Integer> costs) {
 		for (Card sCards : current.getAllCards()) {
 			decrementCostsWithStorage(sCards, costs);
 		}
@@ -190,8 +190,7 @@ public class PlayerTurnHandler {
 	private void validateEndCost(int numcost) {
 		ResourceBundle messages = Translate.getNewResourceBundle();
 		if (numcost > 0) {
-			throw new InsufficientFundsException(
-					messages.getString("noRequiredItemToBuildStructure"));
+			throw new InsufficientFundsException(messages.getString("noRequiredItemToBuildStructure"));
 		}
 	}
 

@@ -1,13 +1,10 @@
 package dataStructures.gameMaterials;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.HashSet;
 
 import backend.factories.LevelFactory;
 import constants.GeneralEnums.Side;
 import constants.WonderInfo;
-import dataStructures.gameMaterials.Level.Frequency;
 import exceptions.CannotBuildWonderException;
 
 public class Wonder {
@@ -16,7 +13,7 @@ public class Wonder {
 	private EntityEffect resource;
 	private Side side;
 	private int numBuiltLevels = 0;
-	private ArrayList<Level> levels;
+	private HashSet<Level> levels;
 	private WonderInfo info;
 	private LevelFactory levelFactory;
 
@@ -27,7 +24,7 @@ public class Wonder {
 	public Wonder(Side side, WonderType type) {
 		this.info = new WonderInfo();
 		initializeData(side, type);
-		setLevels(new ArrayList<Level>());
+		setLevels(new HashSet<Level>());
 		this.levelFactory = new LevelFactory(this);
 	}
 
@@ -49,14 +46,14 @@ public class Wonder {
 		return equalType && equalName && equalResource && equalSide && equalLevels;
 	}
 
-	public HashMap<Frequency, HashSet<Effect>> buildNextLevel() {
+	public Level buildNextLevel() {
 		this.numBuiltLevels++;
 		if (this.numBuiltLevels > this.getNumLevels()) {
 			throw new CannotBuildWonderException("Player has built max number of levels.");
 		} else {
 			Level temp = this.levelFactory.getNextLevel(this.numBuiltLevels);
 			this.levels.add(temp);
-			return temp.getEffects();
+			return temp;
 		}
 	}
 
@@ -84,11 +81,7 @@ public class Wonder {
 		return this.levels.size();
 	}
 
-	public Level getLevel(int index) {
-		return this.levels.get(index);
-	}
-
-	public void setLevels(ArrayList<Level> levels) {
+	public void setLevels(HashSet<Level> levels) {
 		this.levels = levels;
 	}
 	
@@ -96,7 +89,7 @@ public class Wonder {
 		return this.levelFactory;
 	}
 
-	public ArrayList<Level> getLevels() {
+	public HashSet<Level> getLevels() {
 		return this.levels;
 	}
 }

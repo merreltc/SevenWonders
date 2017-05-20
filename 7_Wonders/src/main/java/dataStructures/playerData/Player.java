@@ -75,7 +75,7 @@ public class Player {
 	}
 	
 	public HashMap<Frequency, HashSet<Effect>> buildNextLevel() {
-		HashMap<Frequency, HashSet<Effect>> effects = this.wonder.buildNextLevel();
+		HashMap<Frequency, HashSet<Effect>> effects = this.wonder.buildNextLevel().getEffects();
 		addWonderEffectToStoragePile(effects);
 		return effects;
 	}

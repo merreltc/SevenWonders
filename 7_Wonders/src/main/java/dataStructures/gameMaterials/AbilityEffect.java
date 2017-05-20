@@ -17,9 +17,18 @@ public class AbilityEffect extends Effect {
 	public Ability getAbility() {
 		return this.ability;
 	}
+	
+	@Override
+	public String toString() {
+		return "Ability: " + this.ability;
+	}
 
 	@Override
 	public boolean equals(Object obj) {
+		if(((Effect)obj).getEffectType() != EffectType.ABILITY) {
+			return false;
+		}
+
 		AbilityEffect temp = (AbilityEffect) obj;
 		return temp.getAbility() == this.ability;
 	}

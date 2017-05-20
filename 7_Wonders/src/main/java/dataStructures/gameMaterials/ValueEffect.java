@@ -64,13 +64,13 @@ public class ValueEffect extends Effect {
 		case COMMERCE:
 			validateCommerce(valueAmount);
 			break;
-			
+
 		default:
 			validateValue(valueAmount);
 			break;
 		}
 	}
-	
+
 	private void validateVictoryPoints(int valueAmount) {
 		if (valueAmount <= 0 || valueAmount >= 9) {
 			String msg = TranslateWithTemplate.prepareStringTemplateWithIntArg(valueAmount, "improperValueAmount",
@@ -86,7 +86,7 @@ public class ValueEffect extends Effect {
 			throw new IllegalArgumentException(msg);
 		}
 	}
-	
+
 	private void validateValue(int valueAmount) {
 		if (valueAmount <= -2 || valueAmount == 0 || valueAmount >= 4) {
 			String msg = TranslateWithTemplate.prepareStringTemplateWithIntArg(valueAmount, "improperValueAmount",
@@ -122,6 +122,12 @@ public class ValueEffect extends Effect {
 
 	public HashMap<Enum, Integer> getAffectingEntities() {
 		return this.affectingEntities;
+	}
+
+	@Override
+	public String toString() {
+		return "Value: " + this.value + ", ValueAmount: " + this.valueAmount + ", AffectingEntities: "
+				+ this.affectingEntities + ", Affecting Entity: " + this.affectingEntity;
 	}
 
 	@Override

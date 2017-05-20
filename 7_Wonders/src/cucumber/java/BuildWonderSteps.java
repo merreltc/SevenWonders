@@ -1,13 +1,12 @@
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 
-import java.util.ArrayList;
+import java.util.HashSet;
 
 import constants.GeneralEnums.Side;
 import cucumber.api.java.Before;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
-import dataStructures.gameMaterials.Effect;
 import dataStructures.gameMaterials.Level;
 import dataStructures.gameMaterials.Wonder;
 import dataStructures.gameMaterials.Wonder.WonderType;
@@ -16,28 +15,29 @@ import exceptions.InsufficientFundsException;
 import testHelpers.LevelBuilderTestHelper;
 
 public class BuildWonderSteps {
+	public static final int NO_WONDERS = -1;
+	public static final int NO_FUNDS = -2;
+
 	LevelBuilderTestHelper helper;
-	ArrayList<Level> expectedLevels;
+	HashSet<Level> expectedLevels;
 	Wonder wonder;
+	int index;
 
 	CannotBuildWonderException wonderException;
 	InsufficientFundsException fundsException;
-	ExceptionBehavior exceptionBehavior;
-
-	public enum ExceptionBehavior {
-		NOWONDERS, NOFUNDS
-	}
+	int exceptionBehavior;
 
 	@Before
 	public void set_up() {
 		this.helper = new LevelBuilderTestHelper();
-		this.expectedLevels = new ArrayList<Level>();
 	}
 
 	@Given("^A Wonder (Colossus||Lighthouse||Temple||Statue||Mausoleum||Gardens||Pyramids) on Side (.)$")
 	public void a_Wonder_on_Side(String wonderName, char side) throws Throwable {
 		WonderType type = getWonderType(wonderName);
 		Side newSide = getSide(side);
+		System.err.println(type);
+		System.err.println(side);
 		this.wonder = new Wonder(newSide, type);
 
 		helper.setWonder(this.wonder);
@@ -45,12 +45,13 @@ public class BuildWonderSteps {
 
 	@Given("^(\\d+) expected Levels$")
 	public void expected_Levels(int numLevels) throws Throwable {
+		System.err.println(numLevels);
 		this.expectedLevels = createLevels(numLevels);
-		System.err.println(this.expectedLevels);
 	}
 
 	@When("^Building the wonder (\\d+) times$")
 	public void the_builds_the_wonder(int numLevels) throws Throwable {
+		this.index = numLevels - 1;
 		for (int i = 0; i < numLevels; i++) {
 			tryBuildThroughWonder();
 		}
@@ -63,16 +64,29 @@ public class BuildWonderSteps {
 
 	@Then("^The level is built$")
 	public void the_wonder_level_is_built() throws Throwable {
-		assertEquals(this.expectedLevels, this.wonder.getLevels());
+		System.err.println("EX " + this.expectedLevels);
+		System.err.println("AC " + this.wonder.getLevels());
+
+		for(Level level : this.expectedLevels) {
+			assertTrue(contains(level, this.wonder.getLevels()));
+		}
+	}
+	
+	public boolean contains(Level expected, HashSet<Level> actualLevels) {
+		for(Level actual : actualLevels) {
+			if(actual.equals(expected));
+			return true;
+		}
+		return false;
 	}
 
 	@Then("^The level cannot be built$")
 	public void the_level_cannot_be_built() throws Throwable {
-		switch (exceptionBehavior) {
-		case NOWONDERS:
+		switch (this.exceptionBehavior) {
+		case NO_WONDERS:
 			assertEquals("Player has built max number of levels.", this.wonderException.getMessage());
 			break;
-		case NOFUNDS:
+		case NO_FUNDS:
 			assertEquals("Cannot build Structure: Player doesn't not have the required items",
 					this.fundsException.getMessage());
 			break;
@@ -110,8 +124,8 @@ public class BuildWonderSteps {
 		}
 	}
 
-	private ArrayList<Level> createLevels(int numLevels) {
-		ArrayList<Level> result = new ArrayList<Level>();
+	private HashSet<Level> createLevels(int numLevels) {
+		HashSet<Level> result = new HashSet<Level>();
 		for (int i = 1; i <= numLevels; i++) {
 			Level level = this.helper.getExpectedLevel(i);
 			result.add(level);
@@ -125,7 +139,7 @@ public class BuildWonderSteps {
 			this.wonder.buildNextLevel();
 		} catch (CannotBuildWonderException e) {
 			this.wonderException = e;
-			this.exceptionBehavior = ExceptionBehavior.NOWONDERS;
+			this.exceptionBehavior = NO_WONDERS;
 		}
 	}
 }

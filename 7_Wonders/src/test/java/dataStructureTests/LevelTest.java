@@ -47,6 +47,8 @@ public class LevelTest {
 		Effect effect = EasyMock.createStrictMock(AbilityEffect.class);
 		
 		EasyMock.expect(effect.getEffectType()).andReturn(EffectType.ABILITY);
+		EasyMock.expect(effect.getEffectType()).andReturn(EffectType.ABILITY);
+		EasyMock.expect(effect.getEffectType()).andReturn(EffectType.ABILITY);
 		EasyMock.replay(effect);
 
 		HashMap<Frequency, HashSet<Effect>> effects = new HashMap<Frequency, HashSet<Effect>>();
@@ -76,6 +78,8 @@ public class LevelTest {
 		int priority = 1;
 		Cost cost = EasyMock.createStrictMock(Cost.class);
 		EntityEffect effect = EasyMock.createStrictMock(EntityEffect.class);
+		EasyMock.expect(effect.getEffectType()).andReturn(EffectType.ENTITY);
+		EasyMock.expect(effect.getEffectType()).andReturn(EffectType.ENTITY);
 		EasyMock.expect(effect.getEffectType()).andReturn(EffectType.ENTITY);
 		HashMap<Frequency, HashSet<Effect>> effects = new HashMap<Frequency, HashSet<Effect>>();
 		EasyMock.replay(effect, cost);
@@ -116,6 +120,8 @@ public class LevelTest {
 		Effect effect2 = EasyMock.createStrictMock(AbilityEffect.class);
 		EasyMock.expect(effect.getEffectType()).andReturn(EffectType.ABILITY);
 		EasyMock.expect(effect2.getEffectType()).andReturn(EffectType.ABILITY);
+		EasyMock.expect(effect.getEffectType()).andReturn(EffectType.ABILITY);
+		EasyMock.expect(effect2.getEffectType()).andReturn(EffectType.ABILITY);
 		
 		EasyMock.replay(effect, effect2);
 
@@ -141,6 +147,8 @@ public class LevelTest {
 		Cost cost = EasyMock.createStrictMock(Cost.class);
 		EntityEffect effect = EasyMock.createStrictMock(EntityEffect.class);
 		EntityEffect effect2 = EasyMock.createStrictMock(EntityEffect.class);
+		EasyMock.expect(effect.getEffectType()).andReturn(EffectType.ENTITY);
+		EasyMock.expect(effect2.getEffectType()).andReturn(EffectType.ENTITY);
 		EasyMock.expect(effect.getEffectType()).andReturn(EffectType.ENTITY);
 		EasyMock.expect(effect2.getEffectType()).andReturn(EffectType.ENTITY);
 		
@@ -198,6 +206,8 @@ public class LevelTest {
 		Cost cost = EasyMock.createStrictMock(Cost.class);
 		Effect effect = EasyMock.createStrictMock(AbilityEffect.class);
 		
+		EasyMock.expect(effect.getEffectType()).andReturn(EffectType.ABILITY);
+		EasyMock.expect(effect.getEffectType()).andReturn(EffectType.ABILITY);
 		EasyMock.expect(effect.getEffectType()).andReturn(EffectType.ABILITY);
 		EasyMock.replay(effect);
 

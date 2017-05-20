@@ -89,4 +89,4 @@ Feature: buildd Wonder
       | Pyramids   | A    |         4 |
       | Pyramids   | B    |         5 |
       | Pyramids   | A    |         5 |
-      | Pyramids   | B    |         6 |  
+      | Pyramids   | B    |         6 |

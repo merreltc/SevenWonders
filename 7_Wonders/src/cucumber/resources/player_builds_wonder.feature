@@ -56,8 +56,8 @@ Feature: Player Builds Wonder
       | Temple     | B    |         2 |
       | Temple     | B    |         3 |
       | Statue     | A    |         1 |
+      | Statue     | A    |         2 |
       | Statue     | A    |         3 |
-      | Statue     | A    |         4 |
       | Statue     | B    |         1 |
       | Statue     | B    |         2 |
       | Statue     | B    |         3 |
@@ -84,6 +84,7 @@ Feature: Player Builds Wonder
   Scenario Outline: invalid resources
     Given A Wonder <wonder> on Side <side>
     And A player with that Wonder
+    And <numLevels> expected Levels
     And The player does not have the resources for that Wonder
     When The player tries to build the wonder <numLevels> times
     Then The level cannot be built
@@ -109,8 +110,8 @@ Feature: Player Builds Wonder
       | Temple     | B    |         2 |
       | Temple     | B    |         3 |
       | Statue     | A    |         1 |
+      | Statue     | A    |         2 |
       | Statue     | A    |         3 |
-      | Statue     | A    |         4 |
       | Statue     | B    |         1 |
       | Statue     | B    |         2 |
       | Statue     | B    |         3 |

@@ -24,8 +24,8 @@ public class EffectHandler {
 	}
 
 	public void enableEffects(Player current) {
-		HashMap<Frequency, HashSet<Effect>> effects = current.getWonder().buildNextLevel();
-		current.addWonderEffectToStoragePile(effects);
+		HashMap<Frequency, HashSet<Effect>> effects = current.buildNextLevel();
+
 		for (Frequency frequency : effects.keySet()) {
 			switch (frequency) {
 			case ONCEIMMEDIATE:
@@ -48,8 +48,8 @@ public class EffectHandler {
 	public void enableCardEffect(Player current, Card card) {
 		if (card.getEffectType() == EffectType.VALUE) {
 			ValueEffect effect = (ValueEffect) card.getEffect();
-			
-			if(effect.getDirection() == Direction.ALL){
+
+			if (effect.getDirection() == Direction.ALL) {
 				enableCoinCounts(current, effect);
 				return;
 			}
@@ -61,8 +61,8 @@ public class EffectHandler {
 			enableValueEffect(current, effect);
 		}
 	}
-	
-	private void enableCoinCounts(Player current, ValueEffect effect){
+
+	private void enableCoinCounts(Player current, ValueEffect effect) {
 		Player next = this.board.getNextPlayer();
 		Player previous = this.board.getPreviousPlayer();
 		int numCoins = 0;
@@ -70,27 +70,27 @@ public class EffectHandler {
 		numCoins += findTypeCards(next.getAllCards(), effect);
 		numCoins += findTypeCards(previous.getAllCards(), effect);
 		numCoins += findTypeCards(current.getAllCards(), effect);
-		
+
 		this.board.giveNumCoins(current, numCoins);
 	}
-	
-	private int findTypeCards(ArrayList<Card> cards, ValueEffect effect){
+
+	private int findTypeCards(ArrayList<Card> cards, ValueEffect effect) {
 		int value = 0;
 		int amountIncreased = effect.getValueAmount();
 		AffectingEntity affecting = effect.getAffectingEntity();
 		String search;
-		if(affecting == AffectingEntity.RAWRESOURCES){
+		if (affecting == AffectingEntity.RAWRESOURCES) {
 			search = "RAWMATERIAL";
-		}else{
+		} else {
 			search = affecting.toString();
 		}
-		 
-		for(Card card: cards){
-			if(search.contains(card.getCardType().toString())){
+
+		for (Card card : cards) {
+			if (search.contains(card.getCardType().toString())) {
 				value += amountIncreased;
 			}
 		}
-		
+
 		return value;
 	}
 
@@ -103,7 +103,7 @@ public class EffectHandler {
 			current.addNumShields(effect.getValueAmount());
 		}
 	}
-	
+
 	public void enableAbilityFreeBuildEffect(Player current, Card card) {
 		current.addCardToStoragePile(card);
 		current.removeFromCurrentHand(card);

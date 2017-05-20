@@ -67,7 +67,7 @@ public class WonderTest {
 	@Test
 	public void getLevels() {
 		Wonder wonder = new Wonder(Side.A, WonderType.COLOSSUS);
-		ArrayList<Level> levels = new ArrayList<Level>();
+		HashSet<Level> levels = new HashSet<Level>();
 		Level level = EasyMock.createStrictMock(Level.class);
 		levels.add(level);
 		levels.add(level);
@@ -153,15 +153,15 @@ public class WonderTest {
 		this.helper.setWonder(this.wonder);
 
 		HashMap<Frequency, HashSet<Effect>> expected = this.helper.getExpectedLevel(1).getEffects();
-		HashMap<Frequency, HashSet<Effect>> actual = this.wonder.buildNextLevel();
+		HashMap<Frequency, HashSet<Effect>> actual = this.wonder.buildNextLevel().getEffects();
 		assertTrue(equalEffects(expected, actual));
 
 		expected = this.helper.getExpectedLevel(2).getEffects();
-		actual = this.wonder.buildNextLevel();
+		actual = this.wonder.buildNextLevel().getEffects();
 		assertTrue(equalEffects(expected, actual));
 
 		expected = this.helper.getExpectedLevel(3).getEffects();
-		actual = this.wonder.buildNextLevel();
+		actual = this.wonder.buildNextLevel().getEffects();
 		assertTrue(equalEffects(expected, actual));
 	}
 
@@ -172,11 +172,11 @@ public class WonderTest {
 		this.helper.setWonder(this.wonder);
 
 		HashMap<Frequency, HashSet<Effect>> expected = this.helper.getExpectedLevel(1).getEffects();
-		HashMap<Frequency, HashSet<Effect>> actual = this.wonder.buildNextLevel();
+		HashMap<Frequency, HashSet<Effect>> actual = this.wonder.buildNextLevel().getEffects();
 		assertTrue(equalEffects(expected, actual));
 
 		expected = this.helper.getExpectedLevel(2).getEffects();
-		actual = this.wonder.buildNextLevel();
+		actual = this.wonder.buildNextLevel().getEffects();
 		assertTrue(equalEffects(expected, actual));
 	}
 
@@ -187,15 +187,15 @@ public class WonderTest {
 		this.helper.setWonder(this.wonder);
 
 		HashMap<Frequency, HashSet<Effect>> expected = this.helper.getExpectedLevel(1).getEffects();
-		HashMap<Frequency, HashSet<Effect>> actual = this.wonder.buildNextLevel();
+		HashMap<Frequency, HashSet<Effect>> actual = this.wonder.buildNextLevel().getEffects();
 		assertTrue(equalEffects(expected, actual));
 
 		expected = this.helper.getExpectedLevel(2).getEffects();
-		actual = this.wonder.buildNextLevel();
+		actual = this.wonder.buildNextLevel().getEffects();
 		assertTrue(equalEffects(expected, actual));
 
 		expected = this.helper.getExpectedLevel(3).getEffects();
-		actual = this.wonder.buildNextLevel();
+		actual = this.wonder.buildNextLevel().getEffects();
 		assertTrue(equalEffects(expected, actual));
 	}
 
@@ -206,15 +206,15 @@ public class WonderTest {
 		this.helper.setWonder(this.wonder);
 
 		HashMap<Frequency, HashSet<Effect>> expected = this.helper.getExpectedLevel(1).getEffects();
-		HashMap<Frequency, HashSet<Effect>> actual = this.wonder.buildNextLevel();
+		HashMap<Frequency, HashSet<Effect>> actual = this.wonder.buildNextLevel().getEffects();
 		assertTrue(equalEffects(expected, actual));
 
 		expected = this.helper.getExpectedLevel(2).getEffects();
-		actual = this.wonder.buildNextLevel();
+		actual = this.wonder.buildNextLevel().getEffects();
 		assertTrue(equalEffects(expected, actual));
 
 		expected = this.helper.getExpectedLevel(3).getEffects();
-		actual = this.wonder.buildNextLevel();
+		actual = this.wonder.buildNextLevel().getEffects();
 		assertTrue(equalEffects(expected, actual));
 	}
 
@@ -225,15 +225,15 @@ public class WonderTest {
 		this.helper.setWonder(this.wonder);
 
 		HashMap<Frequency, HashSet<Effect>> expected = this.helper.getExpectedLevel(1).getEffects();
-		HashMap<Frequency, HashSet<Effect>> actual = this.wonder.buildNextLevel();
+		HashMap<Frequency, HashSet<Effect>> actual = this.wonder.buildNextLevel().getEffects();
 		assertTrue(equalEffects(expected, actual));
 
 		expected = this.helper.getExpectedLevel(2).getEffects();
-		actual = this.wonder.buildNextLevel();
+		actual = this.wonder.buildNextLevel().getEffects();
 		assertTrue(equalEffects(expected, actual));
 
 		expected = this.helper.getExpectedLevel(3).getEffects();
-		actual = this.wonder.buildNextLevel();
+		actual = this.wonder.buildNextLevel().getEffects();
 		assertTrue(equalEffects(expected, actual));
 	}
 
@@ -244,15 +244,15 @@ public class WonderTest {
 		this.helper.setWonder(this.wonder);
 
 		HashMap<Frequency, HashSet<Effect>> expected = this.helper.getExpectedLevel(1).getEffects();
-		HashMap<Frequency, HashSet<Effect>> actual = this.wonder.buildNextLevel();
+		HashMap<Frequency, HashSet<Effect>> actual = this.wonder.buildNextLevel().getEffects();
 		assertTrue(equalEffects(expected, actual));
 
 		expected = this.helper.getExpectedLevel(2).getEffects();
-		actual = this.wonder.buildNextLevel();
+		actual = this.wonder.buildNextLevel().getEffects();
 		assertTrue(equalEffects(expected, actual));
 
 		expected = this.helper.getExpectedLevel(3).getEffects();
-		actual = this.wonder.buildNextLevel();
+		actual = this.wonder.buildNextLevel().getEffects();
 		assertTrue(equalEffects(expected, actual));
 	}
 
@@ -263,15 +263,15 @@ public class WonderTest {
 		this.helper.setWonder(this.wonder);
 
 		HashMap<Frequency, HashSet<Effect>> expected = this.helper.getExpectedLevel(1).getEffects();
-		HashMap<Frequency, HashSet<Effect>> actual = this.wonder.buildNextLevel();
+		HashMap<Frequency, HashSet<Effect>> actual = this.wonder.buildNextLevel().getEffects();
 		assertTrue(equalEffects(expected, actual));
 
 		expected = this.helper.getExpectedLevel(2).getEffects();
-		actual = this.wonder.buildNextLevel();
+		actual = this.wonder.buildNextLevel().getEffects();
 		assertTrue(equalEffects(expected, actual));
 
 		expected = this.helper.getExpectedLevel(3).getEffects();
-		actual = this.wonder.buildNextLevel();
+		actual = this.wonder.buildNextLevel().getEffects();
 		assertTrue(equalEffects(expected, actual));
 	}
 
@@ -282,15 +282,15 @@ public class WonderTest {
 		this.helper.setWonder(this.wonder);
 
 		HashMap<Frequency, HashSet<Effect>> expected = this.helper.getExpectedLevel(1).getEffects();
-		HashMap<Frequency, HashSet<Effect>> actual = this.wonder.buildNextLevel();
+		HashMap<Frequency, HashSet<Effect>> actual = this.wonder.buildNextLevel().getEffects();
 		assertTrue(equalEffects(expected, actual));
 
 		expected = this.helper.getExpectedLevel(2).getEffects();
-		actual = this.wonder.buildNextLevel();
+		actual = this.wonder.buildNextLevel().getEffects();
 		assertTrue(equalEffects(expected, actual));
 
 		expected = this.helper.getExpectedLevel(3).getEffects();
-		actual = this.wonder.buildNextLevel();
+		actual = this.wonder.buildNextLevel().getEffects();
 		assertTrue(equalEffects(expected, actual));
 	}
 
@@ -301,15 +301,15 @@ public class WonderTest {
 		this.helper.setWonder(this.wonder);
 
 		HashMap<Frequency, HashSet<Effect>> expected = this.helper.getExpectedLevel(1).getEffects();
-		HashMap<Frequency, HashSet<Effect>> actual = this.wonder.buildNextLevel();
+		HashMap<Frequency, HashSet<Effect>> actual = this.wonder.buildNextLevel().getEffects();
 		assertTrue(equalEffects(expected, actual));
 
 		expected = this.helper.getExpectedLevel(2).getEffects();
-		actual = this.wonder.buildNextLevel();
+		actual = this.wonder.buildNextLevel().getEffects();
 		assertTrue(equalEffects(expected, actual));
 
 		expected = this.helper.getExpectedLevel(3).getEffects();
-		actual = this.wonder.buildNextLevel();
+		actual = this.wonder.buildNextLevel().getEffects();
 		assertTrue(equalEffects(expected, actual));
 	}
 
@@ -320,15 +320,15 @@ public class WonderTest {
 		this.helper.setWonder(this.wonder);
 
 		HashMap<Frequency, HashSet<Effect>> expected = this.helper.getExpectedLevel(1).getEffects();
-		HashMap<Frequency, HashSet<Effect>> actual = this.wonder.buildNextLevel();
+		HashMap<Frequency, HashSet<Effect>> actual = this.wonder.buildNextLevel().getEffects();
 		assertTrue(equalEffects(expected, actual));
 
 		expected = this.helper.getExpectedLevel(2).getEffects();
-		actual = this.wonder.buildNextLevel();
+		actual = this.wonder.buildNextLevel().getEffects();
 		assertTrue(equalEffects(expected, actual));
 
 		expected = this.helper.getExpectedLevel(3).getEffects();
-		actual = this.wonder.buildNextLevel();
+		actual = this.wonder.buildNextLevel().getEffects();
 		assertTrue(equalEffects(expected, actual));
 	}
 
@@ -339,15 +339,15 @@ public class WonderTest {
 		this.helper.setWonder(this.wonder);
 
 		HashMap<Frequency, HashSet<Effect>> expected = this.helper.getExpectedLevel(1).getEffects();
-		HashMap<Frequency, HashSet<Effect>> actual = this.wonder.buildNextLevel();
+		HashMap<Frequency, HashSet<Effect>> actual = this.wonder.buildNextLevel().getEffects();
 		assertTrue(equalEffects(expected, actual));
 
 		expected = this.helper.getExpectedLevel(2).getEffects();
-		actual = this.wonder.buildNextLevel();
+		actual = this.wonder.buildNextLevel().getEffects();
 		assertTrue(equalEffects(expected, actual));
 
 		expected = this.helper.getExpectedLevel(3).getEffects();
-		actual = this.wonder.buildNextLevel();
+		actual = this.wonder.buildNextLevel().getEffects();
 		assertTrue(equalEffects(expected, actual));
 	}
 
@@ -358,15 +358,15 @@ public class WonderTest {
 		this.helper.setWonder(this.wonder);
 
 		HashMap<Frequency, HashSet<Effect>> expected = this.helper.getExpectedLevel(1).getEffects();
-		HashMap<Frequency, HashSet<Effect>> actual = this.wonder.buildNextLevel();
+		HashMap<Frequency, HashSet<Effect>> actual = this.wonder.buildNextLevel().getEffects();
 		assertTrue(equalEffects(expected, actual));
 
 		expected = this.helper.getExpectedLevel(2).getEffects();
-		actual = this.wonder.buildNextLevel();
+		actual = this.wonder.buildNextLevel().getEffects();
 		assertTrue(equalEffects(expected, actual));
 
 		expected = this.helper.getExpectedLevel(3).getEffects();
-		actual = this.wonder.buildNextLevel();
+		actual = this.wonder.buildNextLevel().getEffects();
 		assertTrue(equalEffects(expected, actual));
 	}
 
@@ -377,15 +377,15 @@ public class WonderTest {
 		this.helper.setWonder(this.wonder);
 
 		HashMap<Frequency, HashSet<Effect>> expected = this.helper.getExpectedLevel(1).getEffects();
-		HashMap<Frequency, HashSet<Effect>> actual = this.wonder.buildNextLevel();
+		HashMap<Frequency, HashSet<Effect>> actual = this.wonder.buildNextLevel().getEffects();
 		assertTrue(equalEffects(expected, actual));
 
 		expected = this.helper.getExpectedLevel(2).getEffects();
-		actual = this.wonder.buildNextLevel();
+		actual = this.wonder.buildNextLevel().getEffects();
 		assertTrue(equalEffects(expected, actual));
 
 		expected = this.helper.getExpectedLevel(3).getEffects();
-		actual = this.wonder.buildNextLevel();
+		actual = this.wonder.buildNextLevel().getEffects();
 		assertTrue(equalEffects(expected, actual));
 	}
 
@@ -396,19 +396,19 @@ public class WonderTest {
 		this.helper.setWonder(this.wonder);
 
 		HashMap<Frequency, HashSet<Effect>> expected = this.helper.getExpectedLevel(1).getEffects();
-		HashMap<Frequency, HashSet<Effect>> actual = this.wonder.buildNextLevel();
+		HashMap<Frequency, HashSet<Effect>> actual = this.wonder.buildNextLevel().getEffects();
 		assertTrue(equalEffects(expected, actual));
 
 		expected = this.helper.getExpectedLevel(2).getEffects();
-		actual = this.wonder.buildNextLevel();
+		actual = this.wonder.buildNextLevel().getEffects();
 		assertTrue(equalEffects(expected, actual));
 
 		expected = this.helper.getExpectedLevel(3).getEffects();
-		actual = this.wonder.buildNextLevel();
+		actual = this.wonder.buildNextLevel().getEffects();
 		assertTrue(equalEffects(expected, actual));
 
 		expected = this.helper.getExpectedLevel(4).getEffects();
-		actual = this.wonder.buildNextLevel();
+		actual = this.wonder.buildNextLevel().getEffects();
 		assertTrue(equalEffects(expected, actual));
 	}
 

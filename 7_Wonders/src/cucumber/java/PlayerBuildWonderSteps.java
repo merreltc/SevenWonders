@@ -1,14 +1,8 @@
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.ResourceBundle;
-
-import javax.swing.text.html.parser.Entity;
-
-import org.easymock.EasyMock;
 
 import backend.handlers.PlayerTurnHandler;
 import constants.GeneralEnums.CostType;
@@ -18,16 +12,16 @@ import constants.GeneralEnums.Resource;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
-import dataStructures.GameBoard;
+import dataStructures.gameMaterials.AbilityEffect;
 import dataStructures.gameMaterials.Card;
 import dataStructures.gameMaterials.Card.CardType;
 import dataStructures.gameMaterials.Cost;
-import dataStructures.gameMaterials.Deck;
 import dataStructures.gameMaterials.Effect;
 import dataStructures.gameMaterials.EntityEffect;
 import dataStructures.gameMaterials.EntityEffect.EntityType;
 import dataStructures.gameMaterials.Level;
 import dataStructures.gameMaterials.Level.Frequency;
+import dataStructures.gameMaterials.ValueEffect;
 import dataStructures.playerData.Player;
 import exceptions.CannotBuildWonderException;
 import exceptions.InsufficientFundsException;
@@ -35,14 +29,10 @@ import exceptions.InsufficientFundsException;
 public class PlayerBuildWonderSteps {
 	private BuildWonderSteps wonderSteps;
 	private Player player;
+	private int priority;
 
 	public PlayerBuildWonderSteps(BuildWonderSteps wonderSteps) {
 		this.wonderSteps = wonderSteps;
-	}
-
-	@Given("^The player does not have the resources for that Wonder$")
-	public void the_player_does_not_have_the_resources_for_that_Wonder() throws Throwable {
-		giveResourcesToPlayerInvalid();
 	}
 
 	@Given("^A player with that Wonder$")
@@ -55,6 +45,11 @@ public class PlayerBuildWonderSteps {
 		giveResourcesToPlayer();
 	}
 
+	@Given("^The player does not have the resources for that Wonder$")
+	public void the_player_does_not_have_the_resources_for_that_Wonder() throws Throwable {
+		giveResourcesToPlayerInvalid();
+	}
+
 	@When("^Beginning the game$")
 	public void beginning_the_game() throws Throwable {
 		// does nothing
@@ -62,19 +57,22 @@ public class PlayerBuildWonderSteps {
 
 	@When("^The player tries to build the wonder (\\d+) times$")
 	public void the_player_tries_to_build_the_wonder_times(int numLevels) throws Throwable {
+		this.wonderSteps.index = numLevels - 1;
+		this.priority = numLevels;
+
 		for (int i = 0; i < numLevels; i++) {
 			try {
 				tryToBuild();
 			} catch (CannotBuildWonderException e) {
 				this.wonderSteps.wonderException = e;
-				this.wonderSteps.exceptionBehavior = BuildWonderSteps.ExceptionBehavior.NOWONDERS;
+				this.wonderSteps.exceptionBehavior = this.wonderSteps.NO_WONDERS;
 			}
 		}
 	}
 
 	@Then("^The player begins with the appropriate resource$")
 	public void the_player_begins_with_the_appropriate_resource() throws Throwable {
-		EntityEffect effect = this.wonderSteps.wonder.getResource();
+		EntityEffect effect = this.player.getWonder().getResource();
 		assertTrue(this.player.storageContainsEffect(effect));
 	}
 
@@ -85,159 +83,138 @@ public class PlayerBuildWonderSteps {
 
 	@Then("^The player receives the effect of that level$")
 	public void the_player_receives_the_effect_of_that_level() throws Throwable {
-		HashMap<Frequency, HashSet<Effect>> levelMap = getLevelEffects();
-		HashSet<Effect> playerEffects = this.player.getAllEffects();
+		HashSet<Level> expectedLevels = this.wonderSteps.expectedLevels;
+		HashSet<Effect> actualEffects = this.player.getAllEffects();
 
-		for (Frequency frequency : levelMap.keySet()) {
-			playerDoesHaveEffects(levelMap, playerEffects, frequency);
-		}
+		assertTrue(expectedEqualsActual(expectedLevels, actualEffects));
 	}
 
 	@Then("^The player does not receive the effect of that level$")
 	public void the_player_does_not_receive_the_effect_of_that_level() throws Throwable {
-		HashMap<Frequency, HashSet<Effect>> levelMap = getLevelEffects();
-		HashSet<Effect> playerEffects = this.player.getAllEffects();
+		HashSet<Level> expectedLevels = this.wonderSteps.expectedLevels;
+		HashSet<Effect> actualEffects = this.player.getAllEffects();
 
-		for (Frequency frequency : levelMap.keySet()) {
-			playerDoesNotHaveEffects(levelMap, playerEffects, frequency);
-		}
+		assertFalse(expectedEqualsActual(expectedLevels, actualEffects));
 	}
 
-	public HashMap<Frequency, HashSet<Effect>> getLevelEffects() {
-		HashMap<Frequency, HashSet<Effect>> result = new HashMap<Frequency, HashSet<Effect>>();
-		for (Level level : this.wonderSteps.expectedLevels) {
-			result.putAll(level.getEffects());
+	private boolean expectedEqualsActual(HashSet<Level> expectedLevels, HashSet<Effect> actualEffects) {
+		for (Level expected : expectedLevels) {
+			if (actualContainsExpectedEffect(expected.getEffects(), actualEffects)) {
+				continue;
+			} else {
+				return false;
+			}
 		}
-		return result;
+		return true;
 	}
 
-	private void playerDoesHaveEffects(HashMap<Frequency, HashSet<Effect>> levelMap, HashSet<Effect> playerEffects,
-			Frequency frequency) {
-		HashSet<Effect> levelEffects = levelMap.get(frequency);
-		for (Effect effect : levelEffects) {
-			assertTrue(playerEffects.contains(effect));
+	private boolean actualContainsExpectedEffect(HashMap<Frequency, HashSet<Effect>> expectedMap,
+			HashSet<Effect> actualEffects) {
+		for (Frequency frequency : expectedMap.keySet()) {
+			boolean contains = getActualContainsEffect(expectedMap, actualEffects, frequency);
+			if (contains) {
+				continue;
+			}
+			return false;
 		}
+		return true;
 	}
 
-	private void playerDoesNotHaveEffects(HashMap<Frequency, HashSet<Effect>> levelMap, HashSet<Effect> playerEffects,
-			Frequency frequency) {
-		HashSet<Effect> levelEffects = levelMap.get(frequency);
-		for (Effect effect : levelEffects) {
-			assertFalse(playerEffects.contains(effect));
+	private boolean getActualContainsEffect(HashMap<Frequency, HashSet<Effect>> expectedMap,
+			HashSet<Effect> actualEffects, Frequency frequency) {
+		for (Effect expected : expectedMap.get(frequency)) {
+			if (contains(expected, actualEffects)) {
+				continue;
+			}
+			return false;
 		}
+		return true;
+	}
+
+	public boolean contains(Effect expected, HashSet<Effect> actualLevels) {
+		for (Effect actual : actualLevels) {
+			if (equalEffects(expected, actual)){
+				return true;
+			}
+			continue;
+		}
+		return false;
+	}
+
+	public boolean equalEffects(Effect expected, Effect actual) {
+		if (expected.getEffectType().equals(actual.getEffectType())) {
+			switch (actual.getEffectType()) {
+			case ABILITY:
+				return ((AbilityEffect) expected).equals(((AbilityEffect) actual));
+			case VALUE:
+				return ((ValueEffect) expected).equals(((ValueEffect) actual));
+			case ENTITY:
+				return ((EntityEffect) expected).equals(((EntityEffect) actual));
+			default:
+				throw new IllegalArgumentException("Invalid Effect Type");
+			}
+		}
+		return false;
 	}
 
 	private void tryToBuild() {
-		ArrayList<Player> players = new ArrayList<Player>(Arrays.asList(this.player));
-		Deck deck = EasyMock.mock(Deck.class);
-		GameBoard board = new GameBoard(players, deck);
-		EasyMock.replay(deck);
-
 		PlayerTurnHandler handler = new PlayerTurnHandler();
-		handler.setGameBoard(board);
-		tryBuildThroughHandler(handler);
-
-		EasyMock.verify(deck);
-	}
-
-	private void tryBuildThroughHandler(PlayerTurnHandler handler) {
 		try {
-			handler.buildWonderLevel(this.player);
+			HashMap<Enum, Integer> costs = this.player.getWonder().getLevelFactory().getNextLevel(priority).getCosts();
+			System.out.println("Costs: " + costs);
+			handler.validateLevelCosts(this.player, costs);
+			this.player.buildNextLevel();
 		} catch (InsufficientFundsException e) {
 			this.wonderSteps.fundsException = e;
-			this.wonderSteps.exceptionBehavior = BuildWonderSteps.ExceptionBehavior.NOFUNDS;
+			this.wonderSteps.exceptionBehavior = this.wonderSteps.NO_FUNDS;
 		}
 	}
 
 	private void giveResourcesToPlayerInvalid() {
-		Card[] cards = getCards();
+		Card[] cards = getInvalidCards();
 		addAllToStoragePile(cards);
 	}
 
-	private Card[] getCards() {
-		switch (this.wonderSteps.wonder.getType()) {
-		case COLOSSUS:
-			int[] amountsColossus = { 1, 1, 1 };
-			return getCards(amountsColossus, Resource.LUMBER, Resource.CLAY, Resource.ORE);
-		case LIGHTHOUSE:
-			int[] amountsLighthouse = { 1, 1, 1 };
-			return getCards(amountsLighthouse, Resource.STONE, Resource.CLAY, Resource.GLASS);
-		case TEMPLE:
-			int[] amountsTemple = { 5 };
-			return getCards(amountsTemple, Resource.ORE);
-		case GARDENS:
-			int[] amountsGardens = { 1, 1 };
-			return getCards(amountsGardens, Resource.CLAY, Resource.GLASS);
-		case STATUE:
-			int[] amountsStatue = { 1, 5 };
-			return getCards(amountsStatue, Resource.LUMBER, Resource.GLASS);
-		case MAUSOLEUM:
-			int[] amountsMausoleum = { 1 };
-			return getCards(amountsMausoleum, Resource.CLAY);
-		case PYRAMIDS:
-			int[] amountsPyramids = { 1, 1, 5 };
-			return getCards(amountsPyramids, Resource.STONE, Resource.LUMBER, Resource.GLASS);
-		default:
-			throw new IllegalArgumentException("Invalid wonder type");
-		}
+	private Card[] getInvalidCards() {
+		int[] amountsColossus = { 1, 1, 1, 1 };
+		return getCards(amountsColossus, Resource.LUMBER, Resource.CLAY, Resource.ORE, Resource.STONE);
 	}
 
 	private void giveResourcesToPlayer() {
-		Card[] cards = getSameAmountCards();
+		Card[] cards = getValidAmountCards();
 		addAllToStoragePile(cards);
 	}
 
-	private Card[] getSameAmountCards() {
-		switch (this.wonderSteps.wonder.getType()) {
+	private Card[] getValidAmountCards() {
+		switch (this.player.getWonder().getType()) {
 		case COLOSSUS:
-			return getCards(3, Resource.LUMBER, Resource.CLAY, Resource.ORE);
+			int[] amountsColossus = { 3, 4, 3, 2 };
+			return getCards(amountsColossus, Resource.STONE, Resource.ORE, Resource.CLAY, Resource.LUMBER);
 		case LIGHTHOUSE:
-			return getCards(5, Resource.STONE, Resource.ORE, Resource.LUMBER, Resource.CLAY, Resource.GLASS);
+			int[] amountsLighthouse = { 3, 2, 2, 2, 2 };
+			return getCards(amountsLighthouse, Resource.STONE, Resource.ORE, Resource.CLAY, Resource.LUMBER,
+					Resource.GLASS);
 		case TEMPLE:
-			return getCards(4, Resource.LUMBER, Resource.STONE, Resource.PRESS, Resource.GLASS);
+			int[] amountsTemple = { 2, 2, 2, 1, 1 };
+			return getCards(amountsTemple, Resource.STONE, Resource.LUMBER, Resource.PRESS, Resource.GLASS,
+					Resource.LOOM);
 		case GARDENS:
-			return getCards(5, Resource.LUMBER, Resource.CLAY, Resource.PRESS, Resource.GLASS, Resource.LOOM);
+			int[] amountsGardens = { 4, 3, 1, 1, 1 };
+			return getCards(amountsGardens, Resource.CLAY, Resource.LUMBER, Resource.PRESS, Resource.GLASS,
+					Resource.LOOM);
 		case STATUE:
-			return getCards(4, Resource.LUMBER, Resource.STONE, Resource.ORE, Resource.LOOM);
+			int[] amountsStatue = { 2, 2, 2, 1 };
+			return getCards(amountsStatue, Resource.STONE, Resource.LUMBER, Resource.ORE, Resource.LOOM);
 		case MAUSOLEUM:
-			return getCards(5, Resource.CLAY, Resource.ORE, Resource.LOOM, Resource.GLASS, Resource.PRESS);
+			int[] amountsMausoleum = { 3, 3, 2, 1, 1 };
+			return getCards(amountsMausoleum, Resource.ORE, Resource.CLAY, Resource.LOOM, Resource.GLASS,
+					Resource.PRESS);
 		case PYRAMIDS:
-			return getCards(4, Resource.LUMBER, Resource.CLAY, Resource.PRESS, Resource.STONE);
+			int[] amountsPyramids = { 4, 3, 3, 1 };
+			return getCards(amountsPyramids, Resource.STONE, Resource.CLAY, Resource.LUMBER, Resource.PRESS);
 		default:
 			throw new IllegalArgumentException("Invalid wonder type");
 		}
-	}
-
-	public Card[] getCards(int numCards, Resource... resources) {
-		Card[] cards = new Card[numCards];
-		for (int i = 0; i < numCards; i++) {
-			switch (resources[i]) {
-			case LUMBER:
-				cards[i] = this.buildLumberCard(5);
-				break;
-			case ORE:
-				cards[i] = this.buildOreCard(5);
-				break;
-			case CLAY:
-				cards[i] = this.buildClayCard(5);
-				break;
-			case STONE:
-				cards[i] = this.buildStoneCard(5);
-				break;
-			case GLASS:
-				cards[i] = this.buildGlassCard(5);
-				break;
-			case PRESS:
-				cards[i] = this.buildPressCard(5);
-				break;
-			case LOOM:
-				cards[i] = this.buildLoomCard(5);
-				break;
-			default:
-				throw new IllegalArgumentException();
-			}
-		}
-		return cards;
 	}
 
 	public Card[] getCards(int[] amounts, Resource... resources) {
