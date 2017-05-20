@@ -33,6 +33,7 @@ import dataStructures.playerData.Player;
 import testHelpers.SetUpDeckTestHelper;
 
 public class SetUpDeckHandlerTest {
+	// BEGIN GENERATED CODE
 
 	@Test
 	public void testCreateAge1Cards3Players() {
@@ -256,14 +257,15 @@ public class SetUpDeckHandlerTest {
 	}
 
 	@Test
-	public void testRemoveGuildCards7Players(){
+	public void testRemoveGuildCards7Players() {
 		ArrayList<Card> deck = new SetUpDeckHandler().createCards(Age.AGE3, 7);
-		
+
 		deck = new SetUpDeckHandler().correctNumberOfGuildCards(deck, 7);
-		
-		for (int i = 0; i < 9; i++){
+
+		for (int i = 0; i < 9; i++) {
 			assertEquals(CardType.GUILD, deck.get(i).getCardType());
 		}
 		assertFalse(CardType.GUILD == deck.get(9).getCardType());
 	}
+	// END GENERATED CODE
 }

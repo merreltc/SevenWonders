@@ -20,6 +20,7 @@ import dataStructures.gameMaterials.MultiValueEffect;
 import dataStructures.gameMaterials.ValueEffect;
 
 public class LevelTest {
+	// BEGIN GENERATED CODE
 	private static String MOCK_COST_TO_STRING = "EasyMock for class dataStructures.gameMaterials.Cost";
 	private static String MOCK_EFFECTS_TO_STRING_EVERYTURN = "{EVERYTURN=[EasyMock for class dataStructures.gameMaterials.Effect]}";
 	private static String MOCK_EFFECTS_TO_STRING_ONCEIMMEDIATE = "{ONCEIMMEDIATE=[EasyMock for class dataStructures.gameMaterials.Effect]}";
@@ -45,7 +46,7 @@ public class LevelTest {
 		int priority = 1;
 		Cost cost = EasyMock.createStrictMock(Cost.class);
 		Effect effect = EasyMock.createStrictMock(AbilityEffect.class);
-		
+
 		EasyMock.expect(effect.getEffectType()).andReturn(EffectType.ABILITY);
 		EasyMock.expect(effect.getEffectType()).andReturn(EffectType.ABILITY);
 		EasyMock.expect(effect.getEffectType()).andReturn(EffectType.ABILITY);
@@ -61,20 +62,20 @@ public class LevelTest {
 		assertTrue(level1.equals(level2));
 		EasyMock.verify(effect);
 	}
-	
+
 	@Test
 	public void testEqualsEveryCombinationSingleEffect() {
-		for (int priorityToUse = 0; priorityToUse <= 1; priorityToUse++){
-			for (int costToUse = 0; costToUse <= 1; costToUse++){
-				for (int effectToUse = 0; effectToUse <= 1; effectToUse++){
+		for (int priorityToUse = 0; priorityToUse <= 1; priorityToUse++) {
+			for (int costToUse = 0; costToUse <= 1; costToUse++) {
+				for (int effectToUse = 0; effectToUse <= 1; effectToUse++) {
 					runEqualsTest(priorityToUse, costToUse, effectToUse);
 				}
 			}
 		}
-		
+
 	}
-	
-	private void runEqualsTest(int priorityToUse, int costToUse, int effectToUse){
+
+	private void runEqualsTest(int priorityToUse, int costToUse, int effectToUse) {
 		int priority = 1;
 		Cost cost = EasyMock.createStrictMock(Cost.class);
 		EntityEffect effect = EasyMock.createStrictMock(EntityEffect.class);
@@ -89,11 +90,11 @@ public class LevelTest {
 		Level level1 = new Level(priority, cost, effects);
 
 		priority = priorityToUse;
-		if (costToUse == 0){
+		if (costToUse == 0) {
 			cost = EasyMock.createStrictMock(Cost.class);
 			EasyMock.replay(cost);
 		}
-		if (effectToUse == 0){
+		if (effectToUse == 0) {
 			EntityEffect effect2 = EasyMock.createStrictMock(EntityEffect.class);
 			EasyMock.expect(effect2.getEffectType()).andReturn(EffectType.ENTITY);
 			effects = new HashMap<Frequency, HashSet<Effect>>();
@@ -102,18 +103,17 @@ public class LevelTest {
 			effects.put(Frequency.DEFAULT, effectSet);
 			EasyMock.replay(effect2);
 		}
-		
-		
+
 		Level level2 = new Level(priority, cost, effects);
-		if (priorityToUse == 1 && costToUse == 1 &&  effectToUse == 1){
+		if (priorityToUse == 1 && costToUse == 1 && effectToUse == 1) {
 			assertTrue(level1.equals(level2));
-		}else{
+		} else {
 			assertFalse(level1.equals(level2));
 		}
 	}
-	
+
 	@Test
-	public void testEqualsDifferentEffectsAbility(){
+	public void testEqualsDifferentEffectsAbility() {
 		int priority = 1;
 		Cost cost = EasyMock.createStrictMock(Cost.class);
 		Effect effect = EasyMock.createStrictMock(AbilityEffect.class);
@@ -122,14 +122,14 @@ public class LevelTest {
 		EasyMock.expect(effect2.getEffectType()).andReturn(EffectType.ABILITY);
 		EasyMock.expect(effect.getEffectType()).andReturn(EffectType.ABILITY);
 		EasyMock.expect(effect2.getEffectType()).andReturn(EffectType.ABILITY);
-		
+
 		EasyMock.replay(effect, effect2);
 
 		HashMap<Frequency, HashSet<Effect>> effects = new HashMap<Frequency, HashSet<Effect>>();
 		HashSet<Effect> effectSet = new HashSet<Effect>();
 		effectSet.add(effect);
 		effects.put(Frequency.ENDOFTURN, effectSet);
-		
+
 		HashMap<Frequency, HashSet<Effect>> effects2 = new HashMap<Frequency, HashSet<Effect>>();
 		HashSet<Effect> effectSet2 = new HashSet<Effect>();
 		effectSet2.add(effect2);
@@ -140,9 +140,9 @@ public class LevelTest {
 		assertFalse(level1.equals(level2));
 		EasyMock.verify(effect);
 	}
-	
+
 	@Test
-	public void testEqualsDifferentEffectsEntity(){
+	public void testEqualsDifferentEffectsEntity() {
 		int priority = 1;
 		Cost cost = EasyMock.createStrictMock(Cost.class);
 		EntityEffect effect = EasyMock.createStrictMock(EntityEffect.class);
@@ -151,14 +151,14 @@ public class LevelTest {
 		EasyMock.expect(effect2.getEffectType()).andReturn(EffectType.ENTITY);
 		EasyMock.expect(effect.getEffectType()).andReturn(EffectType.ENTITY);
 		EasyMock.expect(effect2.getEffectType()).andReturn(EffectType.ENTITY);
-		
+
 		EasyMock.replay(effect, effect2);
 
 		HashMap<Frequency, HashSet<Effect>> effects = new HashMap<Frequency, HashSet<Effect>>();
 		HashSet<Effect> effectSet = new HashSet<Effect>();
 		effectSet.add(effect);
 		effects.put(Frequency.ENDOFTURN, effectSet);
-		
+
 		HashMap<Frequency, HashSet<Effect>> effects2 = new HashMap<Frequency, HashSet<Effect>>();
 		HashSet<Effect> effectSet2 = new HashSet<Effect>();
 		effectSet2.add(effect2);
@@ -169,9 +169,9 @@ public class LevelTest {
 		assertFalse(level1.equals(level2));
 		EasyMock.verify(effect);
 	}
-	
+
 	@Test(expected = IllegalArgumentException.class)
-	public void testEqualsDifferentEffectsInvalidEffectType(){
+	public void testEqualsDifferentEffectsInvalidEffectType() {
 		int priority = 1;
 		Cost cost = EasyMock.createStrictMock(Cost.class);
 		EntityEffect effect = EasyMock.createStrictMock(EntityEffect.class);
@@ -180,14 +180,14 @@ public class LevelTest {
 		EasyMock.expect(effect2.getEffectType()).andReturn(EffectType.NONE);
 		EasyMock.expect(effect.getEffectType()).andReturn(EffectType.NONE);
 		EasyMock.expect(effect2.getEffectType()).andReturn(EffectType.NONE);
-		
+
 		EasyMock.replay(effect, effect2);
 
 		HashMap<Frequency, HashSet<Effect>> effects = new HashMap<Frequency, HashSet<Effect>>();
 		HashSet<Effect> effectSet = new HashSet<Effect>();
 		effectSet.add(effect);
 		effects.put(Frequency.ENDOFTURN, effectSet);
-		
+
 		HashMap<Frequency, HashSet<Effect>> effects2 = new HashMap<Frequency, HashSet<Effect>>();
 		HashSet<Effect> effectSet2 = new HashSet<Effect>();
 		effectSet2.add(effect2);
@@ -199,13 +199,12 @@ public class LevelTest {
 		fail();
 	}
 
-
 	@Test
 	public void testEqualsTrueMultiEffect() {
 		int priority = 1;
 		Cost cost = EasyMock.createStrictMock(Cost.class);
 		Effect effect = EasyMock.createStrictMock(AbilityEffect.class);
-		
+
 		EasyMock.expect(effect.getEffectType()).andReturn(EffectType.ABILITY);
 		EasyMock.expect(effect.getEffectType()).andReturn(EffectType.ABILITY);
 		EasyMock.expect(effect.getEffectType()).andReturn(EffectType.ABILITY);
@@ -221,30 +220,6 @@ public class LevelTest {
 		assertTrue(level1.equals(level2));
 		EasyMock.verify(effect);
 	}
-
-//	@Test
-//	public void testEqualsFalseMultiEffect() {
-//		Cost cost1 = EasyMock.createStrictMock(Cost.class);
-//		Cost cost2 = EasyMock.createStrictMock(Cost.class);
-//		Effect effect1 = EasyMock.createStrictMock(Effect.class);
-//		Effect effect2 = EasyMock.createStrictMock(Effect.class);
-//		int priority1 = 1;
-//		int priority2 = 2;
-//
-//		HashMap<Frequency, HashSet<Effect>> effects1 = new HashMap<Frequency, HashSet<Effect>>();
-//		HashSet<Effect> effect = new HashSet<Effect>();
-//		effect.add(effect1);
-//		effects1.put(Frequency.ONCEIMMEDIATE, effect);
-//
-//		HashMap<Frequency, HashSet<Effect>> effects2 = new HashMap<Frequency, HashSet<Effect>>();
-//		effect = new HashSet<Effect>();
-//		effect.add(effect2);
-//		effects2.put(Frequency.ONCEIMMEDIATE, effect);
-//
-//		Level level1 = new Level(priority1, cost1, effects1);
-//		Level level2 = new Level(priority2, cost2, effects2);
-//		assertFalse(level1.equals(level2));
-//	}
 
 	@Test
 	public void testGetCost() {
@@ -376,11 +351,11 @@ public class LevelTest {
 
 		EasyMock.verify(cost, endOfTurn, everyTurn);
 	}
-	
+
 	@Test
-	public void testGetters(){
+	public void testGetters() {
 		HashMap<Enum, Integer> costs = new HashMap<Enum, Integer>();
-		
+
 		Cost cost = EasyMock.createStrictMock(Cost.class);
 		EasyMock.expect(cost.getType()).andReturn(CostType.COIN);
 		EasyMock.expect(cost.getCost()).andReturn(costs);
@@ -399,6 +374,6 @@ public class LevelTest {
 		assertEquals(CostType.COIN, level.getCostType());
 		assertEquals(costs, level.getCosts());
 	}
-	
-	
+	// END GENERATED CODE
+
 }

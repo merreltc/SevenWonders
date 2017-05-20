@@ -25,7 +25,7 @@ public class StoragePile {
 
 	private HashMap<Frequency, HashSet<Effect>> wonderPile = new HashMap<Frequency, HashSet<Effect>>();
 	private HashSet<Effect> entireEffectStorage = new HashSet<Effect>();
-	private HashSet<Effect>  temporaryDiscardPile = new HashSet<Effect>();
+	private HashSet<Effect> temporaryDiscardPile = new HashSet<Effect>();
 
 	public void addCard(Card card) {
 		EffectType effectType = card.getEffectType();
@@ -115,7 +115,7 @@ public class StoragePile {
 		HashSet<Effect> curr;
 
 		for (Frequency frequency : effects.keySet()) {
-			 HashSet<Effect> effectSet = effects.get(frequency);
+			HashSet<Effect> effectSet = effects.get(frequency);
 			curr = getEffectsFromMap(frequency, effectSet);
 			this.wonderPile.put(frequency, curr);
 			this.entireEffectStorage.addAll(effectSet);
@@ -186,20 +186,20 @@ public class StoragePile {
 	public void clearTemporaryWonderEffects() {
 		HashSet<Effect> onceEffects = this.wonderPile.remove(Frequency.ONCEIMMEDIATE);
 		HashSet<Effect> endTurnEffects = this.wonderPile.remove(Frequency.ENDOFTURN);
-		if(onceEffects != null)
+		if (onceEffects != null)
 			this.entireEffectStorage.removeAll(onceEffects);
-		
-		if(endTurnEffects != null)
+
+		if (endTurnEffects != null)
 			this.entireEffectStorage.removeAll(endTurnEffects);
 	}
-	
-	public void temporaryDiscard(Effect effect){
+
+	public void temporaryDiscard(Effect effect) {
 		this.wonderPile.get(Frequency.ONCEAGE).remove(effect);
 		this.entireEffectStorage.remove(effect);
 		this.temporaryDiscardPile.add(effect);
 	}
-	
-	public void restoreTemporaryDiscards(){
+
+	public void restoreTemporaryDiscards() {
 		this.wonderPile.get(Frequency.ONCEAGE).addAll(this.temporaryDiscardPile);
 		this.entireEffectStorage.addAll(this.temporaryDiscardPile);
 		this.temporaryDiscardPile.clear();

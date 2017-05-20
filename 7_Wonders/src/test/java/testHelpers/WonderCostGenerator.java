@@ -9,6 +9,7 @@ import dataStructures.gameMaterials.Cost;
 import dataStructures.gameMaterials.Wonder;
 
 public class WonderCostGenerator {
+	// BEGIN GENERATED CODE
 	Wonder wonder;
 
 	public WonderCostGenerator(Wonder wonder) {
@@ -553,4 +554,5 @@ public class WonderCostGenerator {
 			throw new IllegalArgumentException("Invalid Side");
 		}
 	}
+	// BEGIN GENERATED CODE
 }

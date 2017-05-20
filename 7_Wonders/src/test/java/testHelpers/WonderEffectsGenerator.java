@@ -19,6 +19,7 @@ import dataStructures.gameMaterials.ValueEffect.Value;
 import dataStructures.gameMaterials.Wonder;
 
 public class WonderEffectsGenerator {
+	// BEGIN GENERATED CODE
 	Wonder wonder;
 
 	public WonderEffectsGenerator(Wonder wonder) {
@@ -361,4 +362,5 @@ public class WonderEffectsGenerator {
 
 		effects.add(new EntityEffect(entityType, science));
 	}
+	// END GENERATED CODE
 }

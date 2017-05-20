@@ -32,6 +32,7 @@ import exceptions.InsufficientFundsException;
 import exceptions.InvalidTradeException;
 
 public class TradeHandlerTest {
+	// BEGIN GENERATED CODE
 	private Player player1, player2;
 	private Wonder wonder;
 	private Deck testDeck;
@@ -646,4 +647,6 @@ public class TradeHandlerTest {
 	private void resetTestDeck(int numPlayers) {
 		this.testDeck = new SetUpDeckHandler().createDeck(Age.AGE1, numPlayers);
 	}
+
+	// END GENERATED CODE
 }

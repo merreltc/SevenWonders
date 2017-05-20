@@ -26,8 +26,9 @@ import dataStructures.gameMaterials.Wonder.WonderType;
 import dataStructures.playerData.Player;
 
 public class RotateHandlerTest {
+	// BEGIN GENERATED CODE
 	private Deck testDeck;
-	
+
 	private SetUpPlayerHandler setUpPlayerHandler;
 	private TurnHandler turnHandler;
 	private PlayerTurnHandler playerTurnHandler;
@@ -37,12 +38,13 @@ public class RotateHandlerTest {
 	public void setUp() {
 		this.setUpPlayerHandler = EasyMock.partialMockBuilder(SetUpPlayerHandler.class).withConstructor(GameMode.EASY)
 				.createMock();
-		this.turnHandler = EasyMock.partialMockBuilder(TurnHandler.class).withConstructor(EasyMock.mock(Handlers.class)).createMock();
+		this.turnHandler = EasyMock.partialMockBuilder(TurnHandler.class).withConstructor(EasyMock.mock(Handlers.class))
+				.createMock();
 		this.playerTurnHandler = EasyMock.partialMockBuilder(PlayerTurnHandler.class).withConstructor().createMock();
 		this.setUpDeckHandler = EasyMock.partialMockBuilder(SetUpDeckHandler.class).withConstructor().createMock();
 		this.testDeck = EasyMock.createStrictMock(Deck.class);
 	}
-	
+
 	@Test
 	public void testChangeRotateDirectionAndResetPositionsMin() {
 		ArrayList<Player> players = setUpPlayersWithNumPlayers(3);
@@ -191,9 +193,9 @@ public class RotateHandlerTest {
 
 	@Test
 	public void testRotateCurrentHandsClockwise() {
-		ArrayList<String> playerNames = setUpNamesWithNumPlayers(5);		
+		ArrayList<String> playerNames = setUpNamesWithNumPlayers(5);
 		GameManager manager = new GameManager(playerNames, setUpHandlers());
-		
+
 		manager.dealInitialTurnCards();
 		ArrayList<Player> players = manager.getPlayers();
 		ArrayList<ArrayList<Card>> expectedHands = new ArrayList<ArrayList<Card>>();
@@ -259,7 +261,7 @@ public class RotateHandlerTest {
 		ArrayList<String> playerNames = setUpNamesWithNumPlayers(3);
 		GameManager manager = new GameManager(playerNames, setUpHandlers());
 		manager.dealInitialTurnCards();
-		
+
 		ArrayList<Player> players = manager.getPlayers();
 		ArrayList<ArrayList<Card>> expectedHands = new ArrayList<ArrayList<Card>>();
 
@@ -274,7 +276,7 @@ public class RotateHandlerTest {
 			assertEquals(expectedHands.get(i), players.get(i).getCurrentHand());
 		}
 	}
-	
+
 	private ArrayList<Player> setUpPlayersWithNumPlayers(int num) {
 		ArrayList<Player> result = new ArrayList<Player>();
 		for (int i = 0; i < num; i++) {
@@ -283,7 +285,7 @@ public class RotateHandlerTest {
 		}
 		return result;
 	}
-	
+
 	private ArrayList<String> setUpNamesWithNumPlayers(int num) {
 		ArrayList<String> result = new ArrayList<String>();
 		for (int i = 0; i < num; i++) {
@@ -291,12 +293,13 @@ public class RotateHandlerTest {
 		}
 		return result;
 	}
-	
-	private Handlers setUpHandlers(){
+
+	private Handlers setUpHandlers() {
 		Handlers handlers = new Handlers(this.setUpPlayerHandler);
 		handlers.setSetUpDeckHandler(this.setUpDeckHandler);
 		handlers.setTurnHandler(this.turnHandler);
 		handlers.setPlayerTurnHandler(this.playerTurnHandler);
 		return handlers;
 	}
+	// END GENERATED CODE
 }

@@ -11,6 +11,7 @@ import dataStructures.playerData.Player;
 import exceptions.NoMorePlayersException;
 
 public class PlayerFactoryTest {
+	// BEGIN GENERATED CODE
 
 	@Test
 	public void testGetPlayer() {
@@ -71,4 +72,5 @@ public class PlayerFactoryTest {
 		}
 		EasyMock.verify(player);
 	}
+	// END GENERATED CODE
 }

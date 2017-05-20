@@ -40,10 +40,12 @@ import dataStructures.gameMaterials.Wonder;
 import dataStructures.gameMaterials.Wonder.WonderType;
 import dataStructures.playerData.Chip;
 import dataStructures.playerData.Chip.ChipValue;
+import exceptions.NoSuchLevelException;
 import dataStructures.playerData.Player;
 import testHelpers.LevelBuilderTestHelper;
 
 public class PlayerTest {
+	// BEGIN GENERATED CODE
 	Wonder wonder;
 	LevelBuilderTestHelper helper;
 
@@ -888,16 +890,16 @@ public class PlayerTest {
 		}
 		return false;
 	}
-	
+
 	private Player createMockedPlayer() {
 		Wonder wonder = EasyMock.createStrictMock(Wonder.class);
 		return EasyMock.partialMockBuilder(Player.class).addMockedMethod("addWonderResourceToPile")
 				.withConstructor("Jane Doe", wonder).createMock();
 	}
 
-	
 	private Player createPlayerWithWonder() {
 		return new Player("Jane Doe", this.wonder);
 	}
 
+	// END GENERATED CODE
 }

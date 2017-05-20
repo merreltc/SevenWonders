@@ -27,6 +27,7 @@ import exceptions.CannotBuildWonderException;
 import exceptions.InsufficientFundsException;
 
 public class PlayerBuildWonderSteps {
+	// BEGIN GENERATED CODE
 	private BuildWonderSteps wonderSteps;
 	private Player player;
 	private int priority;
@@ -133,7 +134,7 @@ public class PlayerBuildWonderSteps {
 
 	public boolean contains(Effect expected, HashSet<Effect> actualLevels) {
 		for (Effect actual : actualLevels) {
-			if (equalEffects(expected, actual)){
+			if (equalEffects(expected, actual)) {
 				return true;
 			}
 			continue;
@@ -319,4 +320,6 @@ public class PlayerBuildWonderSteps {
 		Card card = new Card("Lumber Yard", CardType.MANUFACTUREDGOOD, cost, effect);
 		return card;
 	}
+
+	// END GENERATED CODE
 }

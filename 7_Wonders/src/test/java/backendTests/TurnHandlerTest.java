@@ -36,6 +36,7 @@ import dataStructures.GameBoard;
 import dataStructures.Handlers;
 
 public class TurnHandlerTest {
+	// BEGIN GENERATED CODE
 	private SetUpPlayerHandler setUpPlayerHandler;
 
 	@Before
@@ -245,7 +246,6 @@ public class TurnHandlerTest {
 		TurnHandler turnHandler = new TurnHandler(EasyMock.mock(Handlers.class));
 		turnHandler.performEndAgeBattles(players, Age.AGE2);
 
-
 		verifyPlayers(players);
 
 		Assert.assertEquals(2, (int) players.get(0).getConflictTokens().get(ChipValue.NEG1));
@@ -343,8 +343,8 @@ public class TurnHandlerTest {
 				.createMock();
 		Handlers handlers = new Handlers(setUpPlayer);
 		handlers.setSetUpDeckHandler(setUpDeckHandler);
-		TurnHandler turnHandler = EasyMock.partialMockBuilder(TurnHandler.class).withConstructor(handlers).addMockedMethod("switchDeck")
-				.addMockedMethod("dealInitialTurnCards").createMock();
+		TurnHandler turnHandler = EasyMock.partialMockBuilder(TurnHandler.class).withConstructor(handlers)
+				.addMockedMethod("switchDeck").addMockedMethod("dealInitialTurnCards").createMock();
 		handlers.setTurnHandler(turnHandler);
 		handlers.setPlayerTurnHandler(playerTurnHandler);
 
@@ -460,9 +460,11 @@ public class TurnHandlerTest {
 	public void testEndPlayerTurnEndsCurrentAge() {
 		ArrayList<Player> players = new ArrayList<Player>();
 		Player player1 = EasyMock.partialMockBuilder(Player.class)
-				.withConstructor("Jane Doe", new Wonder(Side.A, WonderType.COLOSSUS)).addMockedMethod("getNumShields").createMock();
+				.withConstructor("Jane Doe", new Wonder(Side.A, WonderType.COLOSSUS)).addMockedMethod("getNumShields")
+				.createMock();
 		Player player2 = EasyMock.partialMockBuilder(Player.class)
-				.withConstructor("John Doe",new Wonder(Side.A, WonderType.GARDENS)).addMockedMethod("getNumShields").createMock();
+				.withConstructor("John Doe", new Wonder(Side.A, WonderType.GARDENS)).addMockedMethod("getNumShields")
+				.createMock();
 		Player player3 = EasyMock.partialMockBuilder(Player.class)
 				.withConstructor("James Doe", new Wonder(Side.A, WonderType.MAUSOLEUM)).addMockedMethod("getNumShields")
 				.createMock();
@@ -641,25 +643,25 @@ public class TurnHandlerTest {
 		int index = turnHandler.indexOfMaxScore(scores, players);
 		assertEquals(1, index);
 	}
-	
+
 	@Test
-	public void testSwitchDeckToAgeThree(){
+	public void testSwitchDeckToAgeThree() {
 		Wonder wonder = new Wonder(Side.A, WonderType.COLOSSUS);
-		Player player = new Player("Jane Doe",wonder);
+		Player player = new Player("Jane Doe", wonder);
 		Handlers handlers = EasyMock.mock(Handlers.class);
 		SetUpDeckHandler deckHandler = EasyMock.mock(SetUpDeckHandler.class);
 		Deck deck = EasyMock.mock(Deck.class);
 		EasyMock.expect(handlers.getSetUpDeckHandler()).andReturn(deckHandler);
 		EasyMock.expect(deckHandler.createDeck(Age.AGE2, 3)).andReturn(deck);
-		GameBoard gameBoard = new GameBoard(new ArrayList<Player>(Arrays.asList(player,player,player)), deck);
-		
+		GameBoard gameBoard = new GameBoard(new ArrayList<Player>(Arrays.asList(player, player, player)), deck);
+
 		EasyMock.replay(handlers, deckHandler, deck);
-		
+
 		TurnHandler turnHandler = new TurnHandler(handlers);
 		turnHandler.setGameBoard(gameBoard);
 
 		assertEquals(deck, turnHandler.switchDeck(Age.AGE1));
-		
+
 		EasyMock.verify(handlers, deckHandler, deck);
 	}
 
@@ -745,4 +747,5 @@ public class TurnHandlerTest {
 
 		return result;
 	}
+	// END GENERATED CODE
 }

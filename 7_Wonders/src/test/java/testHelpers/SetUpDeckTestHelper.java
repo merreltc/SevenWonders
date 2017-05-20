@@ -23,6 +23,8 @@ import dataStructures.gameMaterials.ValueEffect.Value;
 import dataStructures.gameMaterials.ValueEffect.ValueType;
 
 public final class SetUpDeckTestHelper {
+	// BEGIN GENERATED CODE
+
 	public static ArrayList<Card> createAge1Cards(int numPlayers) {
 		ArrayList<Card> cards = new ArrayList<Card>();
 		ArrayList<Integer> frequency = new ArrayList<Integer>();
@@ -1119,8 +1121,7 @@ public final class SetUpDeckTestHelper {
 		entitiesAndAmounts = new HashMap<Enum, Integer>();
 		entitiesAndAmounts.put(ValueType.COIN, 1);
 		entitiesAndAmounts.put(ValueType.VICTORYPOINT, 1);
-		effect = new MultiValueEffect(Value.COMMERCE, AffectingEntity.RAWRESOURCES,
-				Direction.SELF, entitiesAndAmounts);
+		effect = new MultiValueEffect(Value.COMMERCE, AffectingEntity.RAWRESOURCES, Direction.SELF, entitiesAndAmounts);
 		card = new Card("Haven", frequency, CardType.COMMERCIALSTRUCTURE, cost, effect, "Forum", "None");
 		cards.add(card);
 
@@ -1140,8 +1141,8 @@ public final class SetUpDeckTestHelper {
 		entitiesAndAmounts = new HashMap<Enum, Integer>();
 		entitiesAndAmounts.put(ValueType.COIN, 1);
 		entitiesAndAmounts.put(ValueType.VICTORYPOINT, 1);
-		effect = new MultiValueEffect(Value.COMMERCE, AffectingEntity.COMMERCIALSTRUCTURES,
-				Direction.SELF, entitiesAndAmounts);
+		effect = new MultiValueEffect(Value.COMMERCE, AffectingEntity.COMMERCIALSTRUCTURES, Direction.SELF,
+				entitiesAndAmounts);
 		card = new Card("Lighthouse", frequency, CardType.COMMERCIALSTRUCTURE, cost, effect, "Caravansery", "None");
 		cards.add(card);
 
@@ -1162,8 +1163,8 @@ public final class SetUpDeckTestHelper {
 			entitiesAndAmounts = new HashMap<Enum, Integer>();
 			entitiesAndAmounts.put(ValueType.COIN, 2);
 			entitiesAndAmounts.put(ValueType.VICTORYPOINT, 2);
-			effect = new MultiValueEffect(Value.COMMERCE, AffectingEntity.MANUFACTUREDGOODS,
-					Direction.SELF, entitiesAndAmounts);
+			effect = new MultiValueEffect(Value.COMMERCE, AffectingEntity.MANUFACTUREDGOODS, Direction.SELF,
+					entitiesAndAmounts);
 			card = new Card("Chamber Of Commerce", frequency, CardType.COMMERCIALSTRUCTURE, cost, effect, "Caravansery",
 					"None");
 			cards.add(card);
@@ -1187,8 +1188,7 @@ public final class SetUpDeckTestHelper {
 		entitiesAndAmounts = new HashMap<Enum, Integer>();
 		entitiesAndAmounts.put(ValueType.COIN, 3);
 		entitiesAndAmounts.put(ValueType.VICTORYPOINT, 1);
-		effect = new MultiValueEffect(Value.COMMERCE, AffectingEntity.WONDERLEVEL,
-				Direction.SELF, entitiesAndAmounts);
+		effect = new MultiValueEffect(Value.COMMERCE, AffectingEntity.WONDERLEVEL, Direction.SELF, entitiesAndAmounts);
 		card = new Card("Arena", frequency, CardType.COMMERCIALSTRUCTURE, cost, effect, "Dispensary", "None");
 		cards.add(card);
 
@@ -1406,4 +1406,6 @@ public final class SetUpDeckTestHelper {
 
 		return cards;
 	}
+
+	// END GENERATED CODE
 }

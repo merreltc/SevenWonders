@@ -14,6 +14,7 @@ import dataStructures.gameMaterials.Wonder.WonderType;
 import testHelpers.LevelBuilderTestHelper;
 
 public class LevelFactoryTest {
+	// BEGIN GENERATED CODE
 	Wonder wonder;
 	LevelBuilderTestHelper helper;
 
@@ -291,5 +292,5 @@ public class LevelFactoryTest {
 	private void setWonder(Side side, WonderType type) {
 		this.wonder = new Wonder(side, type);
 	}
-
+	// END GENERATED CODE
 }

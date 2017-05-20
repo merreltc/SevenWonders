@@ -13,7 +13,6 @@ import exceptions.InsufficientFundsException;
 import utils.Translate;
 import utils.TranslateWithTemplate;
 
-
 public class GameBoard {
 	private ArrayList<Player> players = new ArrayList<Player>();
 	private ArrayList<Card> discardPile = new ArrayList<Card>();
@@ -82,7 +81,8 @@ public class GameBoard {
 
 	private void validatePlayerIndex(int index) {
 		if (index <= -1 || index >= this.numPlayers) {
-			String msg = TranslateWithTemplate.prepareStringTemplateWithIntArg(index, "invalidPlayerIndex", Translate.getNewResourceBundle());
+			String msg = TranslateWithTemplate.prepareStringTemplateWithIntArg(index, "invalidPlayerIndex",
+					Translate.getNewResourceBundle());
 			throw new IllegalArgumentException(msg);
 		}
 	}
@@ -142,7 +142,6 @@ public class GameBoard {
 			this.totalValue3CoinsInBank -= numValue3;
 		}
 		this.totalValue1CoinsInBank -= numValue1;
-
 
 		PlayerChipHandler.addValue3(player, numValue3, ChipType.COIN);
 		PlayerChipHandler.addValue1(player, numValue1, ChipType.COIN);

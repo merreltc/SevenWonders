@@ -27,6 +27,7 @@ import dataStructures.gameMaterials.Wonder.WonderType;
 import testHelpers.LevelBuilderTestHelper;
 
 public class WonderTest {
+	// BEGIN GENERATED CODE
 	Wonder wonder;
 	LevelBuilderTestHelper helper;
 
@@ -415,8 +416,9 @@ public class WonderTest {
 	private void setWonder(Side side, WonderType type) {
 		this.wonder = new Wonder(side, type);
 	}
-	
-	private boolean equalEffects(HashMap<Frequency, HashSet<Effect>> expected, HashMap<Frequency, HashSet<Effect>> actual) {
+
+	private boolean equalEffects(HashMap<Frequency, HashSet<Effect>> expected,
+			HashMap<Frequency, HashSet<Effect>> actual) {
 		for (Frequency frequency : expected.keySet()) {
 			if (!actual.containsKey(frequency)) {
 				return false;
@@ -465,4 +467,5 @@ public class WonderTest {
 		}
 		return false;
 	}
+	// END GENERATED CODE
 }

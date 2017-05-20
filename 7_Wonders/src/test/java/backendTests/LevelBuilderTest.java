@@ -19,6 +19,7 @@ import dataStructures.gameMaterials.Wonder.WonderType;
 import testHelpers.LevelBuilderTestHelper;
 
 public class LevelBuilderTest {
+	// BEGIN GENERATED CODE
 	Wonder wonder;
 	LevelBuilderTestHelper helper;
 
@@ -287,7 +288,7 @@ public class LevelBuilderTest {
 		expected = this.helper.getExpectedLevel(3);
 		actual = builder.buildLevel(3);
 		assertTrue(expected.equals(actual));
-		
+
 		expected = this.helper.getExpectedLevel(4);
 		actual = builder.buildLevel(4);
 		assertTrue(expected.equals(actual));
@@ -296,5 +297,5 @@ public class LevelBuilderTest {
 	private void setWonder(Side side, WonderType type) {
 		this.wonder = new Wonder(side, type);
 	}
-
+	// END GENERATED CODE
 }

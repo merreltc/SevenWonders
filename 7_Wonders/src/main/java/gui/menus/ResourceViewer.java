@@ -82,12 +82,12 @@ public class ResourceViewer extends Menu {
 		if (row > cards.size()) {
 			return;
 		}
-		drawValuesForRow(new int[]{row, y}, cards);
+		drawValuesForRow(new int[] { row, y }, cards);
 	}
 
 	private void drawValuesForRow(int[] rowStats, ArrayList<Card> cards) {
 		ResourceBundle messages = Translate.getNewResourceBundle();
-		
+
 		rowStats[1] += Constants.RESOURCE_VIEWER_TEXT_Y_OFFSET;
 		Card card = cards.get(rowStats[0] - 1);
 		int[] values = getRowValues(card);
@@ -96,7 +96,8 @@ public class ResourceViewer extends Menu {
 		for (int i = 0; i < values.length; i++) {
 			graphics.drawString(values[i] + "",
 					(Constants.RESOURCE_VIEWER_ROW_X + Constants.RESOURCE_VIEWER_FIRST_CELL_WIDTH
-							+ Constants.RESOURCE_VIEWER_CELL_WIDTH / 2) + i * Constants.RESOURCE_VIEWER_CELL_WIDTH, rowStats[1]);
+							+ Constants.RESOURCE_VIEWER_CELL_WIDTH / 2) + i * Constants.RESOURCE_VIEWER_CELL_WIDTH,
+					rowStats[1]);
 		}
 	}
 

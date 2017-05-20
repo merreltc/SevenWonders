@@ -15,6 +15,7 @@ import exceptions.InsufficientFundsException;
 import testHelpers.LevelBuilderTestHelper;
 
 public class BuildWonderSteps {
+	// BEGIN GENERATED CODE
 	public static final int NO_WONDERS = -1;
 	public static final int NO_FUNDS = -2;
 
@@ -67,14 +68,15 @@ public class BuildWonderSteps {
 		System.err.println("EX " + this.expectedLevels);
 		System.err.println("AC " + this.wonder.getLevels());
 
-		for(Level level : this.expectedLevels) {
+		for (Level level : this.expectedLevels) {
 			assertTrue(contains(level, this.wonder.getLevels()));
 		}
 	}
-	
+
 	public boolean contains(Level expected, HashSet<Level> actualLevels) {
-		for(Level actual : actualLevels) {
-			if(actual.equals(expected));
+		for (Level actual : actualLevels) {
+			if (actual.equals(expected))
+				;
 			return true;
 		}
 		return false;
@@ -142,4 +144,5 @@ public class BuildWonderSteps {
 			this.exceptionBehavior = NO_WONDERS;
 		}
 	}
+	// END GENERATED CODE
 }

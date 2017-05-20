@@ -47,13 +47,19 @@ public class LevelBuilder {
 		JSONObject jsonObj;
 		JSONArray jarr;
 
+		initializeJSONData();
+		jsonObj = new JSONObject(jsonData);
+		jarr = new JSONArray(jsonObj.getJSONArray("wonders").toString());
+		return parseLevel(priority, jarr);
+	}
+
+	private void initializeJSONData() {
 		if (this.jsonData == NOT_INITIALIZED) {
 			this.jsonData = readFile("src/assets/wonders.json");
 		}
+	}
 
-		jsonObj = new JSONObject(jsonData);
-		jarr = new JSONArray(jsonObj.getJSONArray("wonders").toString());
-
+	private Level parseLevel(int priority, JSONArray jarr) {
 		for (int i = 0; i < jarr.length(); i++) {
 			JSONObject wonderData = jarr.getJSONObject(i);
 			if (!compareWonder(wonderData)) {
@@ -62,7 +68,6 @@ public class LevelBuilder {
 				return getLevel(wonderData, priority);
 			}
 		}
-
 		throw new NoSuchLevelException("This level does not exist");
 	}
 

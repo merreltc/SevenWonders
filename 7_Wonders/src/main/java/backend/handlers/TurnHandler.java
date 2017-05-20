@@ -124,24 +124,32 @@ public class TurnHandler {
 				for (Effect effect : wonderPile.get(frequency)) {
 					EntityEffect entity = (EntityEffect) effect;
 					EntityType type = entity.getEntityType();
-					String choice;
-					if (type == EntityType.RESOURCE) {
-						choice = getChosenString("Resource");
-					}else{
-						choice = getChosenString("Science");
-					}
-
-					Enum toAdd;					
-					try{
-						toAdd = RawResource.valueOf(choice);
-					}catch(Exception e){
-						toAdd = Good.valueOf(choice);
-					}
-					
+					String choice = parseEntityString(type);
+					Enum toAdd = parseResourceEnum(choice);
 					next.addTradedValue(toAdd);
 				}
 			}
 		}
+	}
+
+	private String parseEntityString(EntityType type) {
+		String choice;
+		if (type == EntityType.RESOURCE) {
+			choice = getChosenString("Resource");
+		} else {
+			choice = getChosenString("Science");
+		}
+		return choice;
+	}
+
+	private Enum parseResourceEnum(String choice) {
+		Enum toAdd;
+		try {
+			toAdd = RawResource.valueOf(choice);
+		} catch (Exception e) {
+			toAdd = Good.valueOf(choice);
+		}
+		return toAdd;
 	}
 
 	private String getChosenString(String which) {
@@ -149,9 +157,9 @@ public class TurnHandler {
 		while (str.equals("")) {
 			if (which.equals("playordiscard")) {
 				str = showPlayMessage();
-			}else if (which.equals("resource")){
+			} else if (which.equals("resource")) {
 				str = showResourceMessage();
-			}else{
+			} else {
 				showScienceMessage();
 			}
 		}
@@ -161,10 +169,11 @@ public class TurnHandler {
 	public String showPlayMessage() {
 		return new DropDownMessage().dropDownPlayOrDiscardMessage();
 	}
-	
+
 	public String showScienceMessage() {
 		return new DropDownMessage().dropDownScienceSelectionMessage();
 	}
+
 	public String showResourceMessage() {
 		return new DropDownMessage().dropDownResourceSelectionMessage();
 	}

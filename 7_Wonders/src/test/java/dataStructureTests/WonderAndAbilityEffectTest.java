@@ -17,6 +17,8 @@ import dataStructures.gameMaterials.ValueEffect.AffectingEntity;
 import dataStructures.gameMaterials.ValueEffect.Value;
 
 public class WonderAndAbilityEffectTest {
+	// BEGIN GENERATED CODE
+
 	@Test
 	public void testAbilityEffect() {
 		AbilityEffect effect = new AbilityEffect(Ability.PLAYSEVENTH);
@@ -72,4 +74,5 @@ public class WonderAndAbilityEffectTest {
 		assertTrue(effects.containsKey(Frequency.ENDOFGAME));
 	}
 
+	// END GENERATED CODE
 }

@@ -38,6 +38,7 @@ import exceptions.InsufficientFundsException;
 import testHelpers.SetUpDeckTestHelper;
 
 public class PlayerTurnHandlerTest {
+	// BEGIN GENERATED CODE
 	private Deck age1Deck, age2Deck;
 	private GameBoard gameBoard;
 
@@ -802,7 +803,7 @@ public class PlayerTurnHandlerTest {
 		}
 		return result;
 	}
-	
+
 	@Test
 	public void testValidBuildStructureResourceInTradesCost() {
 		ArrayList<Player> players = setUpArrayWithNumPlayers(3);
@@ -826,4 +827,5 @@ public class PlayerTurnHandlerTest {
 		assertFalse(current.getCurrentHand().contains(deck.getCard(9)));
 		assertTrue(current.getAllCards().contains(deck.getCard(9)));
 	}
+	// END GENERATED CODE
 }

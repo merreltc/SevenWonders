@@ -11,7 +11,7 @@ import constants.Constants;
 import utils.RenderImage;
 
 public abstract class Interactable {
-	
+
 	private class InteractableData {
 		protected Point boundPoint;
 		protected Point positionPoint;
@@ -21,10 +21,9 @@ public abstract class Interactable {
 		protected Color backgroundColor;
 		protected Color textColor;
 	}
-	
+
 	RenderImage renderer = new RenderImage();
 	private InteractableData data = new InteractableData();
-
 
 	public Interactable(Point positionPoint, Point boundPoint, String value, Color backgroundColor, Color textColor) {
 		this.data.boundPoint = boundPoint;
@@ -46,14 +45,16 @@ public abstract class Interactable {
 	public void draw(Graphics graphics) {
 		if (data.drawUnit) {
 			graphics.setColor(data.backgroundColor);
-			graphics.fillRect(this.data.positionPoint.x, this.data.positionPoint.y, this.data.boundPoint.x, this.data.boundPoint.y);
+			graphics.fillRect(this.data.positionPoint.x, this.data.positionPoint.y, this.data.boundPoint.x,
+					this.data.boundPoint.y);
 			graphics.setColor(data.textColor);
 			graphics.setFont(Constants.ButtonFont);
-			graphics.drawString(data.value, data.positionPoint.x + 10, data.positionPoint.y + this.data.boundPoint.y - 10);
+			graphics.drawString(data.value, data.positionPoint.x + 10,
+					data.positionPoint.y + this.data.boundPoint.y - 10);
 		} else {
 			renderer.setImage(this.data.image);
-			renderer.draw(graphics,
-					new int[] { this.data.positionPoint.x, this.data.positionPoint.y, this.data.boundPoint.x, this.data.boundPoint.y });
+			renderer.draw(graphics, new int[] { this.data.positionPoint.x, this.data.positionPoint.y,
+					this.data.boundPoint.x, this.data.boundPoint.y });
 		}
 	}
 

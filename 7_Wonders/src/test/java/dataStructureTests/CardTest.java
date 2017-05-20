@@ -25,6 +25,7 @@ import dataStructures.gameMaterials.ValueEffect.AffectingEntity;
 import dataStructures.gameMaterials.ValueEffect.Value;
 
 public class CardTest {
+	// BEGIN GENERATED CODE
 
 	@Test
 	public void testRawMaterialCardLumber() {
@@ -50,7 +51,7 @@ public class CardTest {
 
 		EasyMock.verify(cost, effect);
 	}
-	
+
 	@Test
 	public void testRawMaterialCardClay() {
 		ArrayList<Integer> frequency = new ArrayList<Integer>();
@@ -75,7 +76,7 @@ public class CardTest {
 
 		EasyMock.verify(cost, effect);
 	}
-	
+
 	@Test
 	public void testRawMaterialCardOre() {
 		ArrayList<Integer> frequency = new ArrayList<Integer>();
@@ -101,7 +102,7 @@ public class CardTest {
 
 		EasyMock.verify(cost, effect);
 	}
-	
+
 	@Test
 	public void testRawMaterialCardStone() {
 		ArrayList<Integer> frequency = new ArrayList<Integer>();
@@ -143,7 +144,6 @@ public class CardTest {
 		Cost cost = EasyMock.createStrictMock(Cost.class);
 		Effect effect = EasyMock.createStrictMock(Effect.class);
 
-
 		EasyMock.expect(cost.getType()).andReturn(CostType.NONE);
 		EasyMock.expect(effect.getEffectType()).andReturn(Effect.EffectType.ENTITY);
 		EasyMock.replay(cost, effect);
@@ -158,7 +158,7 @@ public class CardTest {
 
 		EasyMock.verify(cost, effect);
 	}
-	
+
 	@Test
 	public void testManufacturedGoodCardGlass() {
 		ArrayList<Integer> frequency = new ArrayList<Integer>();
@@ -182,7 +182,7 @@ public class CardTest {
 
 		EasyMock.verify(cost, effect);
 	}
-	
+
 	@Test
 	public void testManufacturedGoodCardLoom() {
 		ArrayList<Integer> frequency = new ArrayList<Integer>();
@@ -207,8 +207,7 @@ public class CardTest {
 
 		EasyMock.verify(cost, effect);
 	}
-	
-	
+
 	@Test
 	public void testCommercialStructureCardCommercialEffect() {
 		ArrayList<Integer> frequency = new ArrayList<Integer>();
@@ -700,4 +699,6 @@ public class CardTest {
 
 		assertFalse(card.equals(card2));
 	}
+
+	// END GENERATED CODE
 }

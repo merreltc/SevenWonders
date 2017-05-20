@@ -12,6 +12,7 @@ import dataStructures.gameMaterials.EntityEffect.EntityType;
 import dataStructures.gameMaterials.Wonder.WonderType;
 
 public class WonderInfo {
+	// BEGIN GENERATED CODE
 	public int getNumLevels(Side side, WonderType type) {
 		if (side == Side.A) {
 			return 3;
@@ -166,4 +167,5 @@ public class WonderInfo {
 			throw new IllegalArgumentException("Bad Resource Type");
 		}
 	}
+	// END GENERATED CODE
 }

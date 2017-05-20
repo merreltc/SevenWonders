@@ -23,6 +23,7 @@ import dataStructures.gameMaterials.ValueEffect.Value;
 import dataStructures.playerData.StoragePile;
 
 public class StoragePileTest {
+	// BEGIN GENERATED CODE
 
 	@Test
 	public void testDefaultStoragePile() {
@@ -436,4 +437,5 @@ public class StoragePileTest {
 		assertTrue(storagePile.containsEffect(effect));
 		EasyMock.verify(effect);
 	}
+	// END GENERATED CODE
 }

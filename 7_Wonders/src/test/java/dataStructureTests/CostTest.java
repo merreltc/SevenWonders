@@ -14,7 +14,7 @@ import constants.GeneralEnums.RawResource;
 import dataStructures.gameMaterials.Cost;
 
 public class CostTest {
-
+	// BEGIN GENERATED CODE
 	@Test
 	public void testValueCost() {
 		Cost cost = new Cost(CostType.COIN, 1);
@@ -164,21 +164,21 @@ public class CostTest {
 	}
 
 	@Test
-	public void testInvalidTwoCostsEqual(){
+	public void testInvalidTwoCostsEqual() {
 		HashMap<Enum, Integer> cost1 = new HashMap<Enum, Integer>();
 		cost1.put(RawResource.STONE, 9);
 		cost1.put(Good.GLASS, 1);
-		
+
 		HashMap<Enum, Integer> cost2Info = new HashMap<Enum, Integer>();
 		cost2Info.put(RawResource.LUMBER, 3);
 		cost2Info.put(Good.LOOM, 1);
-		
+
 		Cost cost = new Cost(CostType.COIN, cost1);
 		Cost cost2 = new Cost(CostType.COIN, cost2Info);
-		
+
 		assertFalse(cost.equals(cost2));
 	}
-	
+
 	@Test
 	public void testInvlidTwoCostsEqualNoneCostType() {
 		Cost cost = new Cost(CostType.NONE, 0);
@@ -186,5 +186,5 @@ public class CostTest {
 
 		assertFalse(cost.equals(cost2));
 	}
-	
+	// END GENERATED CODE
 }

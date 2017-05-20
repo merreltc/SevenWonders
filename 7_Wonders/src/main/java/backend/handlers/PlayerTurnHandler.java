@@ -51,17 +51,20 @@ public class PlayerTurnHandler {
 				}
 
 				String choice = getChosenString();
-
-				if (choice.equals("Free")) {
-					new EffectHandler(this.board).enableAbilityFreeBuildEffect(current, card);
-					return true;
-				} else {
-					return false;
-				}
+				return getBuildFree(current, card, choice);
 			}
 		}
 
 		return false;
+	}
+
+	private boolean getBuildFree(Player current, Card card, String choice) {
+		if (choice.equals("Free")) {
+			new EffectHandler(this.board).enableAbilityFreeBuildEffect(current, card);
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 	private String getChosenString() {

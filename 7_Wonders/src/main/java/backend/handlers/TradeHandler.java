@@ -63,18 +63,17 @@ public class TradeHandler {
 		PlayerChipHandler.removeValue3(from, numCoinsToTrade, Chip.ChipType.COIN);
 		PlayerChipHandler.addValue3(to, numCoinsToTrade, Chip.ChipType.COIN);
 	}
-	
+
 	public void tradeForEntity(Player from, Player to, Enum entity) {
 		boolean discountSuccesful = false;
 		boolean resource = false;
-		
-		try{
+
+		try {
 			RawResource.valueOf(entity.toString());
 			resource = true;
-		}catch(Exception e){
-			//it was a good
+		} catch (Exception e) {
 		}
-		
+
 		if (from.storagePileContainsCardByName("East Trading Post") && resource) {
 			discountSuccesful = tryTradeWithDiscountEast(from, to);
 		} else if (from.storagePileContainsCardByName("West Trading Post") && resource) {
@@ -85,25 +84,25 @@ public class TradeHandler {
 
 		this.tradeFromToForEntity(from, to, entity, discountSuccesful);
 	}
-	
+
 	private boolean tryTradeWithDiscountEast(Player from, Player to) {
 		int fromPosition = this.board.getPlayers().indexOf(from);
 		int toPosition = this.board.getPlayers().indexOf(to);
 		fromPosition = correctFromIndex(CardinalDirection.EAST, fromPosition);
 		return (fromPosition == toPosition) ? true : false;
 	}
-	
+
 	private boolean tryTradeWithDiscountWest(Player from, Player to) {
 		int fromPosition = this.board.getPlayers().indexOf(from);
 		int toPosition = this.board.getPlayers().indexOf(to);
 		fromPosition = correctFromIndex(CardinalDirection.WEST, fromPosition);
 		return (fromPosition == toPosition) ? true : false;
 	}
-	
+
 	private int correctFromIndex(CardinalDirection direction, int fromPosition) {
 		int indexCorrection = getIndexCorrection(direction, fromPosition);
 		int comparisonIndex = getComparisonIndex(direction);
-		
+
 		if (indexCorrection == comparisonIndex) {
 			indexCorrection = getNewFromIndex(direction);
 		}
@@ -123,7 +122,6 @@ public class TradeHandler {
 	public int getNewFromIndex(CardinalDirection direction) {
 		return (direction == CardinalDirection.EAST) ? 0 : this.board.getNumPlayers() - 1;
 	}
-
 
 	public void tradeFromToForEntity(Player from, Player to, Enum entity, boolean discount) {
 		if (to.storagePileContainsEntity(entity)) {

@@ -34,6 +34,7 @@ import dataStructures.playerData.Chip.ChipType;
 import dataStructures.playerData.Chip.ChipValue;
 
 public class GameManagerTest {
+	// BEGIN GENERATED CODE
 	private SetUpPlayerHandler setUpPlayerHandler;
 	private TurnHandler turnHandler;
 	private PlayerTurnHandler playerTurnHandler;
@@ -43,7 +44,8 @@ public class GameManagerTest {
 	public void setUp() {
 		this.setUpPlayerHandler = EasyMock.partialMockBuilder(SetUpPlayerHandler.class).withConstructor(GameMode.EASY)
 				.createMock();
-		this.turnHandler = EasyMock.partialMockBuilder(TurnHandler.class).withConstructor(EasyMock.mock(Handlers.class)).createMock();
+		this.turnHandler = EasyMock.partialMockBuilder(TurnHandler.class).withConstructor(EasyMock.mock(Handlers.class))
+				.createMock();
 		this.playerTurnHandler = EasyMock.partialMockBuilder(PlayerTurnHandler.class).withConstructor().createMock();
 		this.setUpDeckHandler = EasyMock.partialMockBuilder(SetUpDeckHandler.class).withConstructor().createMock();
 	}
@@ -196,7 +198,7 @@ public class GameManagerTest {
 		manager.dealInitialTurnCards();
 
 		assertFalse(cards.toString().equals(manager.getDeck().getCards().toString()));
-		
+
 	}
 
 	@Test
@@ -241,7 +243,7 @@ public class GameManagerTest {
 		handlers.setSetUpDeckHandler(this.setUpDeckHandler);
 		handlers.setTurnHandler(this.turnHandler);
 		handlers.setPlayerTurnHandler(this.playerTurnHandler);
-		
+
 		GameManager manager = new GameManager(playerNames, handlers);
 
 		ArrayList<Card> storage = new ArrayList<Card>();
@@ -258,7 +260,7 @@ public class GameManagerTest {
 		assertEquals(1, (int) current.getCurrentTrades().get(RawResource.LUMBER));
 		assertEquals(5, next.getCoinTotal());
 	}
-	
+
 	@Test
 	public void testEndCurrentPlayerTurnNonMockedForMutationCoverage() {
 		ArrayList<String> playerNames = setUpArrayByNum(3);
@@ -272,11 +274,11 @@ public class GameManagerTest {
 		assertEquals(expectedNewCurrentPlayer, manager.getCurrentPlayer());
 		assertEquals(expectedNewPreviousPlayer, manager.getPreviousPlayer());
 	}
-	
+
 	@Test
 	public void testTradeFromToForGoodEmptyTradesAfterTurnEnds() {
 		ArrayList<String> playerNames = setUpArrayByNum(3);
-		
+
 		GameManager manager = new GameManager(playerNames, setUpHandlers());
 
 		ArrayList<Card> storage = new ArrayList<Card>();
@@ -291,7 +293,6 @@ public class GameManagerTest {
 
 		assertTrue(previous.getCurrentTrades().isEmpty());
 	}
-
 
 	@Test
 	public void testMakeChangeForValue1Coins() {
@@ -342,7 +343,6 @@ public class GameManagerTest {
 
 		EasyMock.verify(playerTurnHandler);
 	}
-	
 
 	private ArrayList<String> setUpArrayByNum(int num) {
 		ArrayList<String> result = new ArrayList<String>();
@@ -360,4 +360,5 @@ public class GameManagerTest {
 		handlers.setPlayerTurnHandler(this.playerTurnHandler);
 		return handlers;
 	}
+	// END GENERATED CODE
 }
