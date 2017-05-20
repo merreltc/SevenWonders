@@ -16,14 +16,16 @@ public class DropDownMessage {
 
 	public String dropDownScienceSelectionMessage() {
 		ResourceBundle messages = Translate.getNewResourceBundle();
-		Object[] objects = { messages.getString("PROTRACTOR"), messages.getString("WHEEL"), messages.getString("TABLET") };
-		String str =  (String) JOptionPane.showInputDialog(null, messages.getString("chooseAScience"),
+		Object[] objects = { messages.getString("PROTRACTOR"), messages.getString("WHEEL"),
+				messages.getString("TABLET") };
+		String str = (String) JOptionPane.showInputDialog(null, messages.getString("chooseAScience"),
 				messages.getString("chooseAScience"), JOptionPane.PLAIN_MESSAGE, null, objects, objects[0]);
 		if (str.equals(objects[0])) {
 			return "PROTRACTOR";
 		} else if (str.equals(objects[1])) {
 			return "WHEEL";
-		} return "TABLET";
+		}
+		return "TABLET";
 	}
 
 	public static String selectLanguageMessage() {
@@ -45,9 +47,9 @@ public class DropDownMessage {
 		for (int i = 0; i < keySet.size(); i++) {
 			string[i] = messages.getString(objects[i].toString());
 		}
-		String str = (String) JOptionPane.showInputDialog(null, messages.getString("searchBuild"),
-				cardName, JOptionPane.PLAIN_MESSAGE, null, string, string[0]);
-		for(int k = 0; k < keySet.size(); k++) {
+		String str = (String) JOptionPane.showInputDialog(null, messages.getString("searchBuild"), cardName,
+				JOptionPane.PLAIN_MESSAGE, null, string, string[0]);
+		for (int k = 0; k < keySet.size(); k++) {
 			if (str.equals(string[k])) {
 				return objects[k].toString();
 			}
@@ -68,10 +70,10 @@ public class DropDownMessage {
 				messages.getString("7thCard"), JOptionPane.PLAIN_MESSAGE, null, objects, objects[0]);
 		if (str.equals(objects[0])) {
 			return "Play";
-		} 
+		}
 		return "Discard";
 	}
-	
+
 	public String dropDownBuildMessage() {
 		ResourceBundle messages = Translate.getNewResourceBundle();
 		Object[] objects = { messages.getString("pay"), messages.getString("free") };
@@ -79,13 +81,14 @@ public class DropDownMessage {
 				messages.getString("buildCost"), JOptionPane.PLAIN_MESSAGE, null, objects, objects[0]);
 		if (str.equals(objects[0])) {
 			return "Pay";
-		} 
+		}
 		return "Free";
 	}
 
 	public String dropDownResourceSelectionMessage() {
 		ResourceBundle messages = Translate.getNewResourceBundle();
-		Object[] objects = { messages.getString("LUMBER"), messages.getString("ORE"), messages.getString("CLAY"), messages.getString("STONE") };
+		Object[] objects = { messages.getString("LUMBER"), messages.getString("ORE"), messages.getString("CLAY"),
+				messages.getString("STONE") };
 		String str = (String) JOptionPane.showInputDialog(null, messages.getString("chooseAResource"),
 				messages.getString("chooseAResource"), JOptionPane.PLAIN_MESSAGE, null, objects, objects[0]);
 		if (str.equals(objects[0])) {
