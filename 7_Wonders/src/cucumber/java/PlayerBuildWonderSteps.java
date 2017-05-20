@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.ResourceBundle;
+
+import javax.swing.text.html.parser.Entity;
 
 import org.easymock.EasyMock;
 
@@ -11,6 +14,7 @@ import backend.handlers.PlayerTurnHandler;
 import constants.GeneralEnums.CostType;
 import constants.GeneralEnums.Good;
 import constants.GeneralEnums.RawResource;
+import constants.GeneralEnums.Resource;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
@@ -98,10 +102,10 @@ public class PlayerBuildWonderSteps {
 			playerDoesNotHaveEffects(levelMap, playerEffects, frequency);
 		}
 	}
-	
+
 	public HashMap<Frequency, HashSet<Effect>> getLevelEffects() {
 		HashMap<Frequency, HashSet<Effect>> result = new HashMap<Frequency, HashSet<Effect>>();
-		for(Level level : this.wonderSteps.expectedLevels) {
+		for (Level level : this.wonderSteps.expectedLevels) {
 			result.putAll(level.getEffects());
 		}
 		return result;
@@ -122,7 +126,7 @@ public class PlayerBuildWonderSteps {
 			assertFalse(playerEffects.contains(effect));
 		}
 	}
-	
+
 	private void tryToBuild() {
 		ArrayList<Player> players = new ArrayList<Player>(Arrays.asList(this.player));
 		Deck deck = EasyMock.mock(Deck.class);
@@ -146,90 +150,133 @@ public class PlayerBuildWonderSteps {
 	}
 
 	private void giveResourcesToPlayerInvalid() {
+		Card[] cards = getCards();
+		addAllToStoragePile(cards);
+	}
+
+	private Card[] getCards() {
 		switch (this.wonderSteps.wonder.getType()) {
 		case COLOSSUS:
-			this.player.addCardToStoragePile(this.buildLumberCard(1));
-			this.player.addCardToStoragePile(this.buildClayCard(1));
-			this.player.addCardToStoragePile(this.buildOreCard(1));
-			break;
+			int[] amountsColossus = { 1, 1, 1 };
+			return getCards(amountsColossus, Resource.LUMBER, Resource.CLAY, Resource.ORE);
 		case LIGHTHOUSE:
-			this.player.addCardToStoragePile(this.buildStoneCard(1));
-			this.player.addCardToStoragePile(this.buildGlassCard(1));
-			this.player.addCardToStoragePile(this.buildClayCard(1));
-			break;
+			int[] amountsLighthouse = { 1, 1, 1 };
+			return getCards(amountsLighthouse, Resource.STONE, Resource.CLAY, Resource.GLASS);
 		case TEMPLE:
-			this.player.addCardToStoragePile(this.buildOreCard(5));
-			break;
+			int[] amountsTemple = { 5 };
+			return getCards(amountsTemple, Resource.ORE);
 		case GARDENS:
-			this.player.addCardToStoragePile(this.buildClayCard(1));
-			this.player.addCardToStoragePile(this.buildGlassCard(1));
-			break;
+			int[] amountsGardens = { 1, 1 };
+			return getCards(amountsGardens, Resource.CLAY, Resource.GLASS);
 		case STATUE:
-			this.player.addCardToStoragePile(this.buildLumberCard(1));
-			this.player.addCardToStoragePile(this.buildGlassCard(5));
-			break;
+			int[] amountsStatue = { 1, 5 };
+			return getCards(amountsStatue, Resource.LUMBER, Resource.GLASS);
 		case MAUSOLEUM:
-			this.player.addCardToStoragePile(this.buildClayCard(1));
-			break;
+			int[] amountsMausoleum = { 1 };
+			return getCards(amountsMausoleum, Resource.CLAY);
 		case PYRAMIDS:
-			this.player.addCardToStoragePile(this.buildStoneCard(1));
-			this.player.addCardToStoragePile(this.buildLumberCard(1));
-			this.player.addCardToStoragePile(this.buildGlassCard(5));
-			break;
+			int[] amountsPyramids = { 1, 1, 5 };
+			return getCards(amountsPyramids, Resource.STONE, Resource.LUMBER, Resource.GLASS);
 		default:
 			throw new IllegalArgumentException("Invalid wonder type");
 		}
 	}
 
 	private void giveResourcesToPlayer() {
+		Card[] cards = getSameAmountCards();
+		addAllToStoragePile(cards);
+	}
+
+	private Card[] getSameAmountCards() {
 		switch (this.wonderSteps.wonder.getType()) {
 		case COLOSSUS:
-			this.player.addCardToStoragePile(this.buildLumberCard(5));
-			this.player.addCardToStoragePile(this.buildClayCard(5));
-			this.player.addCardToStoragePile(this.buildOreCard(5));
-			break;
+			return getCards(3, Resource.LUMBER, Resource.CLAY, Resource.ORE);
 		case LIGHTHOUSE:
-			this.player.addCardToStoragePile(this.buildStoneCard(5));
-			this.player.addCardToStoragePile(this.buildOreCard(5));
-			this.player.addCardToStoragePile(this.buildGlassCard(5));
-			this.player.addCardToStoragePile(this.buildLumberCard(5));
-			this.player.addCardToStoragePile(this.buildClayCard(5));
-			break;
+			return getCards(5, Resource.STONE, Resource.ORE, Resource.LUMBER, Resource.CLAY, Resource.GLASS);
 		case TEMPLE:
-			this.player.addCardToStoragePile(this.buildStoneCard(5));
-			this.player.addCardToStoragePile(this.buildLumberCard(5));
-			this.player.addCardToStoragePile(this.buildPressCard(5));
-			this.player.addCardToStoragePile(this.buildGlassCard(5));
-			break;
+			return getCards(4, Resource.LUMBER, Resource.STONE, Resource.PRESS, Resource.GLASS);
 		case GARDENS:
-			this.player.addCardToStoragePile(this.buildClayCard(5));
-			this.player.addCardToStoragePile(this.buildLumberCard(5));
-			this.player.addCardToStoragePile(this.buildClayCard(5));
-			this.player.addCardToStoragePile(this.buildPressCard(5));
-			this.player.addCardToStoragePile(this.buildGlassCard(5));
-			this.player.addCardToStoragePile(this.buildLoomCard(5));
-			break;
+			return getCards(5, Resource.LUMBER, Resource.CLAY, Resource.PRESS, Resource.GLASS, Resource.LOOM);
 		case STATUE:
-			this.player.addCardToStoragePile(this.buildLumberCard(5));
-			this.player.addCardToStoragePile(this.buildStoneCard(5));
-			this.player.addCardToStoragePile(this.buildOreCard(5));
-			this.player.addCardToStoragePile(this.buildLoomCard(5));
-			break;
+			return getCards(4, Resource.LUMBER, Resource.STONE, Resource.ORE, Resource.LOOM);
 		case MAUSOLEUM:
-			this.player.addCardToStoragePile(this.buildClayCard(5));
-			this.player.addCardToStoragePile(this.buildOreCard(5));
-			this.player.addCardToStoragePile(this.buildLoomCard(5));
-			this.player.addCardToStoragePile(this.buildGlassCard(5));
-			this.player.addCardToStoragePile(this.buildPressCard(5));
-			break;
+			return getCards(5, Resource.CLAY, Resource.ORE, Resource.LOOM, Resource.GLASS, Resource.PRESS);
 		case PYRAMIDS:
-			this.player.addCardToStoragePile(this.buildStoneCard(5));
-			this.player.addCardToStoragePile(this.buildLumberCard(5));
-			this.player.addCardToStoragePile(this.buildClayCard(5));
-			this.player.addCardToStoragePile(this.buildPressCard(5));
-			break;
+			return getCards(4, Resource.LUMBER, Resource.CLAY, Resource.PRESS, Resource.STONE);
 		default:
 			throw new IllegalArgumentException("Invalid wonder type");
+		}
+	}
+
+	public Card[] getCards(int numCards, Resource... resources) {
+		Card[] cards = new Card[numCards];
+		for (int i = 0; i < numCards; i++) {
+			switch (resources[i]) {
+			case LUMBER:
+				cards[i] = this.buildLumberCard(5);
+				break;
+			case ORE:
+				cards[i] = this.buildOreCard(5);
+				break;
+			case CLAY:
+				cards[i] = this.buildClayCard(5);
+				break;
+			case STONE:
+				cards[i] = this.buildStoneCard(5);
+				break;
+			case GLASS:
+				cards[i] = this.buildGlassCard(5);
+				break;
+			case PRESS:
+				cards[i] = this.buildPressCard(5);
+				break;
+			case LOOM:
+				cards[i] = this.buildLoomCard(5);
+				break;
+			default:
+				throw new IllegalArgumentException();
+			}
+		}
+		return cards;
+	}
+
+	public Card[] getCards(int[] amounts, Resource... resources) {
+		int numCards = resources.length;
+		Card[] cards = new Card[numCards];
+		for (int i = 0; i < numCards; i++) {
+			switch (resources[i]) {
+			case LUMBER:
+				cards[i] = this.buildLumberCard(amounts[i]);
+				break;
+			case ORE:
+				cards[i] = this.buildOreCard(amounts[i]);
+				break;
+			case CLAY:
+				cards[i] = this.buildClayCard(amounts[i]);
+				break;
+			case STONE:
+				cards[i] = this.buildStoneCard(amounts[i]);
+				break;
+			case GLASS:
+				cards[i] = this.buildGlassCard(amounts[i]);
+				break;
+			case PRESS:
+				cards[i] = this.buildPressCard(amounts[i]);
+				break;
+			case LOOM:
+				cards[i] = this.buildLoomCard(amounts[i]);
+				break;
+			default:
+				throw new IllegalArgumentException();
+			}
+		}
+		return cards;
+	}
+
+	private void addAllToStoragePile(Card... cards) {
+		for (int i = 0; i < cards.length; i++) {
+			Card toAdd = cards[i];
+			this.player.addCardToStoragePile(toAdd);
 		}
 	}
 

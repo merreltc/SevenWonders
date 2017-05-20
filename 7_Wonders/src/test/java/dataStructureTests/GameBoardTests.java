@@ -18,14 +18,12 @@ import dataStructures.GameBoard;
 import dataStructures.gameMaterials.Card;
 import dataStructures.gameMaterials.Deck;
 import dataStructures.gameMaterials.Deck.Age;
-import dataStructures.gameMaterials.Wonder.WonderType;
 import dataStructures.gameMaterials.Wonder;
+import dataStructures.gameMaterials.Wonder.WonderType;
 import dataStructures.playerData.Chip;
-import dataStructures.playerData.Player;
-import dataStructures.playerData.Chip.ChipType;
 import dataStructures.playerData.Chip.ChipValue;
+import dataStructures.playerData.Player;
 import exceptions.InsufficientFundsException;
-import junit.framework.Assert;
 
 public class GameBoardTests {
 	private Deck age1Deck, age2Deck;
@@ -291,7 +289,7 @@ public class GameBoardTests {
 			assertEquals("Not enough value 1 coins left in bank", e.getMessage());
 		}
 	}
-	
+
 	@Test
 	public void testMakeChangeForValue1CoinsExactlyEnoughInBank() {
 		ArrayList<Player> players = setUpArrayWithNumPlayers(3);
@@ -302,7 +300,7 @@ public class GameBoardTests {
 		board.giveNumCoins(players.get(1), 73);
 		board.makeChangeForValue1Coins(active, 36);
 		assertEquals(39, (int) active.getCoins().get(ChipValue.ONE));
-		
+
 	}
 
 	@Test
@@ -377,7 +375,7 @@ public class GameBoardTests {
 		assertEquals(0, board.getTotalValue3CoinsInBank());
 		assertEquals(27, board.getTotalValue1CoinsInBank());
 	}
-	
+
 	@Test
 	public void testGiveNumCoins20NotEnoughValue3Coins() {
 		ArrayList<Player> players = setUpArrayWithNumPlayers(3);
@@ -392,7 +390,7 @@ public class GameBoardTests {
 		assertEquals(0, board.getTotalValue3CoinsInBank());
 		assertEquals(30, board.getTotalValue1CoinsInBank());
 	}
-	
+
 	@Test
 	public void testGiveNumCoinsExactlyEnoughValue3Coins() {
 		ArrayList<Player> players = setUpArrayWithNumPlayers(3);
@@ -432,7 +430,7 @@ public class GameBoardTests {
 		assertNotEquals(this.age1Deck, board.getDeck());
 		assertEquals(this.age2Deck, board.getDeck());
 	}
-	
+
 	private ArrayList<Player> setUpArrayWithNumPlayers(int num) {
 		Wonder wonder = new Wonder(Side.A, WonderType.COLOSSUS);
 		ArrayList<Player> result = new ArrayList<Player>();

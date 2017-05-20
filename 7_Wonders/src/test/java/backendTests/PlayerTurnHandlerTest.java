@@ -421,6 +421,7 @@ public class PlayerTurnHandlerTest {
 		assertEquals(5, current.getCoinTotal());
 	}
 
+	@SuppressWarnings("unchecked")
 	@Test
 	public void testBuildStructureAddTwoShieldsAlreadyUsedEntity() {
 		ArrayList<Player> players = new ArrayList<Player>();
@@ -463,6 +464,7 @@ public class PlayerTurnHandlerTest {
 		EasyMock.verify(playerTurnHandler);
 	}
 
+	@SuppressWarnings("unchecked")
 	@Test(expected = InsufficientFundsException.class)
 	public void testInvalidBuildStructureAddTwoShieldsAlreadyUsedEntity() {
 		ArrayList<Player> players = setUpArrayWithNumPlayers(3);
@@ -498,6 +500,7 @@ public class PlayerTurnHandlerTest {
 		fail();
 	}
 
+	@SuppressWarnings("unchecked")
 	@Test(expected = InsufficientFundsException.class)
 	public void testInvalidBuildStructureAddTwoShieldsAlreadyChoseWrongEntity() {
 		ArrayList<Player> players = setUpArrayWithNumPlayers(3);
@@ -799,11 +802,7 @@ public class PlayerTurnHandlerTest {
 		}
 		return result;
 	}
-
-	private Deck createDeck(Age age, int numPlayers) {
-		return new SetUpDeckHandler().createDeck(age, numPlayers);
-	}
-
+	
 	@Test
 	public void testValidBuildStructureResourceInTradesCost() {
 		ArrayList<Player> players = setUpArrayWithNumPlayers(3);
