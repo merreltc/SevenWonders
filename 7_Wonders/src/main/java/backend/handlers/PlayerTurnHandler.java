@@ -2,20 +2,18 @@ package backend.handlers;
 
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.ResourceBundle;
 
 import constants.GeneralEnums.CostType;
 import constants.GeneralEnums.Good;
 import constants.GeneralEnums.RawResource;
 import dataStructures.GameBoard;
-import dataStructures.gameMaterials.AbilityEffect;
 import dataStructures.gameMaterials.Card;
 import dataStructures.gameMaterials.Effect;
 import dataStructures.gameMaterials.Effect.EffectType;
 import dataStructures.gameMaterials.EntityEffect;
 import dataStructures.gameMaterials.Level;
 import dataStructures.gameMaterials.Level.Frequency;
-import dataStructures.gameMaterials.ValueEffect;
-import dataStructures.gameMaterials.ValueEffect.ValueType;
 import dataStructures.gameMaterials.Wonder;
 import dataStructures.playerData.Player;
 import exceptions.InsufficientFundsException;
@@ -33,19 +31,64 @@ public class PlayerTurnHandler {
 			return;
 		}
 
+		boolean freeBuild = checkEffects(current, card);
+		if (freeBuild)
+			return;
+
 		validateCardCost(current, card);
 		new EffectHandler(this.board).enableCardEffect(current, card);
 		current.addCardToStoragePile(card);
 		current.removeFromCurrentHand(card);
 	}
 
-	public void buildWonderLevel(Player current) {
+	private boolean checkEffects(Player current, Card card) {
+		HashMap<Frequency, HashSet<Effect>> wonderPile = current.getWonderPile();
+		for (Frequency frequency : wonderPile.keySet()) {
+			if (frequency == Frequency.ONCEAGE) {
+				for (Effect effect : wonderPile.get(frequency)) {
+					current.discardTemporaryEffect(effect);
+					break;
+				}
+
+				String choice = getChosenString();
+
+				if (choice.equals("Free")) {
+					new EffectHandler(this.board).enableAbilityFreeBuildEffect(current, card);
+					return true;
+				} else {
+					return false;
+				}
+			}
+		}
+
+		return false;
+	}
+
+	private String getChosenString() {
+		String str = "";
+		while (str.equals("")) {
+			showBuildMessage();
+		}
+		return str;
+	}
+
+	public String showBuildMessage() {
+		return new DropDownMessage().dropDownBuildMessage();
+	}
+
+	public Level buildWonderLevel(Player current) {
 		Wonder wonder = current.getWonder();
-		Level level = wonder.getLevel(wonder.getNumBuiltLevels());
+		int built = wonder.getNumBuiltLevels() + 1;
+		Level level = wonder.getLevelFactory().getNextLevel(built);
+		updateEffects(current, level);
+		return level;
+	}
+
+	private void updateEffects(Player current, Level level) {
 		current.clearTempWonderEffects();
 		HashMap<Enum, Integer> costs = level.getCosts();
 		validateLevelCosts(current, costs);
-		new EffectHandler(this.board).enableEffects(current, wonder);
+		new EffectHandler(this.board).enableEffects(current);
 	}
 
 	private void validateLevelCosts(Player current, HashMap<Enum, Integer> costs) {
@@ -145,9 +188,10 @@ public class PlayerTurnHandler {
 	}
 
 	private void validateEndCost(int numcost) {
+		ResourceBundle messages = Translate.getNewResourceBundle();
 		if (numcost > 0) {
 			throw new InsufficientFundsException(
-					Translate.getNewResourceBundle().getString("noRequiredItemToBuildStructure"));
+					messages.getString("noRequiredItemToBuildStructure"));
 		}
 	}
 

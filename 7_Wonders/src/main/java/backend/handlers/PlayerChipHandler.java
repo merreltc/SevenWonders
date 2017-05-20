@@ -6,7 +6,7 @@ import dataStructures.playerData.Chip.ChipValue;
 import dataStructures.playerData.Player;
 import exceptions.InsufficientFundsException;
 
-public final class PlayerChipHandler {
+public class PlayerChipHandler {
 
 	public static void addValue1(Player player, int numChipsToAdd, Chip.ChipType chipType) {
 		validateNumChipsToAdd(numChipsToAdd, Chip.ChipValue.ONE);

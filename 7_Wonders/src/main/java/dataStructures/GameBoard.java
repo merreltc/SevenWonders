@@ -26,7 +26,6 @@ public class GameBoard {
 	private int currentPlayerIndex;
 	private int nextPlayerIndex;
 	private int previousPlayerIndex;
-	ResourceBundle messages = Translate.getNewResourceBundle();
 
 	public GameBoard(ArrayList<Player> players, Deck deck) {
 		this.numPlayers = players.size();
@@ -83,7 +82,7 @@ public class GameBoard {
 
 	private void validatePlayerIndex(int index) {
 		if (index <= -1 || index >= this.numPlayers) {
-			String msg = TranslateWithTemplate.prepareStringTemplateWithIntArg(index, "invalidPlayerIndex", messages);
+			String msg = TranslateWithTemplate.prepareStringTemplateWithIntArg(index, "invalidPlayerIndex", Translate.getNewResourceBundle());
 			throw new IllegalArgumentException(msg);
 		}
 	}
@@ -101,7 +100,7 @@ public class GameBoard {
 
 	public boolean makeChangeForValue1Coins(Player active, int numCoinsWanted) {
 		if (numCoinsWanted > this.totalValue1CoinsInBank) {
-			String msg = Translate.prepareStringWithNoArgs("notEnough1Coins", messages);
+			String msg = Translate.prepareStringWithNoArgs("notEnough1Coins", Translate.getNewResourceBundle());
 			throw new InsufficientFundsException(msg);
 		}
 
@@ -117,7 +116,7 @@ public class GameBoard {
 
 	public boolean makeChangeForValue3Coins(Player active, int numCoinsWanted) {
 		if (numCoinsWanted > this.totalValue3CoinsInBank) {
-			String msg = Translate.prepareStringWithNoArgs("notEnough3Coins", messages);
+			String msg = Translate.prepareStringWithNoArgs("notEnough3Coins", Translate.getNewResourceBundle());
 			throw new InsufficientFundsException(msg);
 		}
 
@@ -187,24 +186,5 @@ public class GameBoard {
 
 	public Age getAge() {
 		return this.currentDeck.getAge();
-	}
-
-	public void removeNumCoins(Player player, int numCoinsToRemove) {
-		int numValue3 = numCoinsToRemove / 3;
-		int numValue1 = numCoinsToRemove % 3;
-
-		if (numValue3 > this.totalValue3CoinsInBank) {
-			int numValue3Left = numValue3 - this.totalValue3CoinsInBank;
-			numValue3 = this.totalValue3CoinsInBank;
-			this.totalValue3CoinsInBank = 0;
-			numValue1 += numValue3Left * 3;
-		} else {
-			this.totalValue3CoinsInBank -= numValue3;
-		}
-		this.totalValue1CoinsInBank -= numValue1;
-
-
-		PlayerChipHandler.removeValue3(player, numValue3, ChipType.COIN);
-		PlayerChipHandler.removeValue1(player, numValue1, ChipType.COIN);
 	}
 }

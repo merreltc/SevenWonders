@@ -1,8 +1,11 @@
 package backendTests;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import org.easymock.EasyMock;
 import org.junit.Before;
@@ -11,15 +14,17 @@ import org.junit.Test;
 import backend.handlers.PlayerChipHandler;
 import backend.handlers.SetUpDeckHandler;
 import backend.handlers.TradeHandler;
+import constants.GeneralEnums.GameMode;
 import constants.GeneralEnums.Good;
 import constants.GeneralEnums.RawResource;
 import constants.GeneralEnums.Side;
 import dataStructures.GameBoard;
+import dataStructures.Handlers;
 import dataStructures.gameMaterials.Card;
 import dataStructures.gameMaterials.Deck;
 import dataStructures.gameMaterials.Deck.Age;
-import dataStructures.gameMaterials.Wonder.WonderType;
 import dataStructures.gameMaterials.Wonder;
+import dataStructures.gameMaterials.Wonder.WonderType;
 import dataStructures.playerData.Chip;
 import dataStructures.playerData.Chip.ChipValue;
 import dataStructures.playerData.Player;
@@ -386,6 +391,38 @@ public class TradeHandlerTest {
 	}
 
 	@Test
+	public void testTradeFromToForGood() {
+		ArrayList<Player> players = new ArrayList<Player>();
+		players.add(this.player1);
+		players.add(this.player2);
+		players.add(new Player("James Doe", this.wonder));
+
+		ArrayList<Card> storagePile = new ArrayList<Card>();
+		SetUpDeckHandler setUp = new SetUpDeckHandler();
+		Deck deck = setUp.createDeck(Age.AGE1, 3);
+		GameBoard board = new GameBoard(players, deck);
+		Handlers handlers = new Handlers(GameMode.EASY);
+		handlers.setSetUpDeckHandler(setUp);
+
+		TradeHandler tradeHandler = new TradeHandler(board);
+		ArrayList<String> names = new ArrayList<String>(Arrays.asList("Jane Doe", "James Doe", "James doe"));
+		handlers.setTradeHandler(tradeHandler);
+
+		ArrayList<Card> storage = new ArrayList<Card>();
+		storage.add(deck.getCard(7));
+		storage.add(deck.getCard(8));
+
+		board.getNextPlayer().setStoragePile(storage);
+		tradeHandler.tradeForEntity(board.getCurrentPlayer(), board.getNextPlayer(), Good.GLASS);
+
+		Player current = board.getCurrentPlayer();
+		Player next = board.getNextPlayer();
+
+		assertEquals(1, (int) current.getCurrentTrades().get(Good.GLASS));
+		assertEquals(5, next.getCoinTotal());
+	}
+
+	@Test
 	public void testTradeFromToForResource() {
 		ArrayList<Player> players = new ArrayList<Player>();
 		players.add(this.player1);
@@ -500,15 +537,17 @@ public class TradeHandlerTest {
 		GameBoard board = new GameBoard(players, deck);
 		Player current = this.player1;
 		Player right = this.player2;
+
 		storage.add(deck.getCard(14)); // marketplace
 		current.setStoragePile(storage);
+
 		ArrayList<Card> storage2 = new ArrayList<Card>();
-		storage2.add(deck.getCard(0)); // lumber
+		storage2.add(deck.getCard(8)); // press
 		right.setStoragePile(storage2);
 
 		TradeHandler tradeHandler = new TradeHandler(board);
-		tradeHandler.tradeForEntity(current, right, RawResource.LUMBER);
-		assertTrue(current.getCurrentTrades().containsKey(RawResource.LUMBER));
+		tradeHandler.tradeForEntity(current, right, Good.PRESS);
+		assertTrue(current.getCurrentTrades().containsKey(Good.PRESS));
 		assertEquals(4, right.getCoinTotal());
 	}
 
@@ -524,15 +563,17 @@ public class TradeHandlerTest {
 		GameBoard board = new GameBoard(players, deck);
 		Player current = this.player1;
 		Player left = players.get(2);
+
 		storage.add(deck.getCard(14)); // marketplace
 		current.setStoragePile(storage);
+
 		ArrayList<Card> storage2 = new ArrayList<Card>();
-		storage2.add(deck.getCard(0)); // lumber
+		storage2.add(deck.getCard(8)); // press
 		left.setStoragePile(storage2);
 
 		TradeHandler tradeHandler = new TradeHandler(board);
-		tradeHandler.tradeForEntity(current, left, RawResource.LUMBER);
-		assertTrue(current.getCurrentTrades().containsKey(RawResource.LUMBER));
+		tradeHandler.tradeForEntity(current, left, Good.PRESS);
+		assertTrue(current.getCurrentTrades().containsKey(Good.PRESS));
 		assertEquals(4, left.getCoinTotal());
 	}
 

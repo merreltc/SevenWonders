@@ -1,5 +1,6 @@
 package dataStructures;
 
+import backend.handlers.EffectHandler;
 import backend.handlers.PlayerTurnHandler;
 import backend.handlers.RotateHandler;
 import backend.handlers.SetUpDeckHandler;
@@ -15,6 +16,7 @@ public class Handlers{
 	private RotateHandler rotateHandler;
 	private TradeHandler tradeHandler;
 	private PlayerTurnHandler playerTurnHandler;
+	private EffectHandler effectHandler;
 	
 	public Handlers(SetUpPlayerHandler setUpPlayerHandler){
 		this.setUpPlayerHandler = setUpPlayerHandler;
@@ -65,5 +67,13 @@ public class Handlers{
 	
 	public void setPlayerTurnHandler(PlayerTurnHandler playerTurnHandler) {
 		this.playerTurnHandler = playerTurnHandler;
+	}
+
+	public EffectHandler getEffectHandler() {
+		return effectHandler;
+	}
+
+	public void setEffectHandler(EffectHandler effectHandler) {
+		this.effectHandler = effectHandler;
 	}
 }

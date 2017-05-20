@@ -3,6 +3,7 @@ package backend.handlers;
 import java.util.ResourceBundle;
 
 import backend.GameManager.CardinalDirection;
+import constants.GeneralEnums.RawResource;
 import dataStructures.GameBoard;
 import dataStructures.playerData.Chip;
 import dataStructures.playerData.Chip.ChipType;
@@ -65,11 +66,20 @@ public class TradeHandler {
 	
 	public void tradeForEntity(Player from, Player to, Enum entity) {
 		boolean discountSuccesful = false;
-		if (from.storagePileContainsCardByName("East Trading Post")) {
+		boolean resource = false;
+		
+		try{
+			RawResource.valueOf(entity.toString());
+			resource = true;
+		}catch(Exception e){
+			//it was a good
+		}
+		
+		if (from.storagePileContainsCardByName("East Trading Post") && resource) {
 			discountSuccesful = tryTradeWithDiscountEast(from, to);
-		} else if (from.storagePileContainsCardByName("West Trading Post")) {
+		} else if (from.storagePileContainsCardByName("West Trading Post") && resource) {
 			discountSuccesful = tryTradeWithDiscountWest(from, to);
-		} else if (from.storagePileContainsCardByName("Marketplace")) {
+		} else if (from.storagePileContainsCardByName("Marketplace") && !resource) {
 			discountSuccesful = true;
 		}
 
@@ -124,8 +134,9 @@ public class TradeHandler {
 			}
 			from.addTradedValue(entity);
 		} else {
-			String msg = TranslateWithTemplate.prepareStringTemplateWithStringArg(Translate.getNewResourceBundle().getString(entity.toString()),
-					"noResourceForTradingTemplate", Translate.getNewResourceBundle());
+			ResourceBundle messages = Translate.getNewResourceBundle();
+			String msg = TranslateWithTemplate.prepareStringTemplateWithStringArg(messages.getString(entity.toString()),
+					"noResourceForTradingTemplate", messages);
 			throw new InvalidTradeException(msg);
 		}
 	}

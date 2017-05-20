@@ -91,6 +91,10 @@ public class Wonder {
 	public void setLevels(ArrayList<Level> levels) {
 		this.levels = levels;
 	}
+	
+	public LevelFactory getLevelFactory(){
+		return this.levelFactory;
+	}
 
 	public ArrayList<Level> getLevels() {
 		return this.levels;

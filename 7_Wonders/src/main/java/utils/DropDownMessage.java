@@ -15,14 +15,14 @@ public class DropDownMessage {
 	}
 
 	public String dropDownScienceSelectionMessage() {
-		Object[] objects = { "Protractor", "Wheel", "Tablet" };
+		Object[] objects = { "PROTRACTOR", "WHEEL", "TABLET" };
 		ResourceBundle messages = Translate.getNewResourceBundle();
 		return (String) JOptionPane.showInputDialog(null, messages.getString("chooseAScience"),
 				messages.getString("chooseAScience"), JOptionPane.PLAIN_MESSAGE, null, objects, objects[0]);
 	}
 
 	public static String selectLanguageMessage() {
-		ResourceBundle messages = ResourceBundle.getBundle("message", Locale.getDefault());
+		ResourceBundle messages = ResourceBundle.getBundle("i18n.message", Locale.getDefault());
 		String[] langs = { messages.getString("en_US"), messages.getString("zh_CN") };
 		String language = (String) JOptionPane.showInputDialog(null, messages.getString("chooseYourLanguage"),
 				messages.getString("languageSelector"), JOptionPane.PLAIN_MESSAGE, null, langs, langs[0]);
@@ -40,13 +40,34 @@ public class DropDownMessage {
 			string[i] = objects[i].toString();
 		}
 		ResourceBundle messages = Translate.getNewResourceBundle();
-		return (String) JOptionPane.showInputDialog(null, messages.getString("chooseCardEffect"),
+		return (String) JOptionPane.showInputDialog(null, "Searching for build Combination. Choose which card effect to activiate",
 				cardName, JOptionPane.PLAIN_MESSAGE, null, string, string[0]);
 	}
 
 	public static String dropDownGuildSelectionMessage(Object[] wonders) {
 		ResourceBundle messages = Translate.getNewResourceBundle();
-		return (String) JOptionPane.showInputDialog(null, messages.getString("chooseYourGuild"),
-				messages.getString("guildSelector"), JOptionPane.PLAIN_MESSAGE, null, wonders, wonders[0]);
+		return (String) JOptionPane.showInputDialog(null, messages.getString("chooseYourWonder"),
+				messages.getString("wonderSelector"), JOptionPane.PLAIN_MESSAGE, null, wonders, wonders[0]);
+	}
+
+	public String dropDownPlayOrDiscardMessage() {
+		Object[] objects = { "Play", "Discard" };
+		ResourceBundle messages = Translate.getNewResourceBundle();
+		return (String) JOptionPane.showInputDialog(null, "Play Or Discard",
+				"7th Card", JOptionPane.PLAIN_MESSAGE, null, objects, objects[0]);
+	}
+	
+	public String dropDownBuildMessage() {
+		Object[] objects = { "Pay", "Free" };
+		ResourceBundle messages = Translate.getNewResourceBundle();
+		return (String) JOptionPane.showInputDialog(null, "Pay Or Free",
+				"Build Cost", JOptionPane.PLAIN_MESSAGE, null, objects, objects[0]);
+	}
+
+	public String dropDownResourceSelectionMessage() {
+		Object[] objects = { "LUMBER", "ORE", "CLAY", "STONE" };
+		ResourceBundle messages = Translate.getNewResourceBundle();
+		return (String) JOptionPane.showInputDialog(null, messages.getString("chooseAScience"),
+				messages.getString("chooseAScience"), JOptionPane.PLAIN_MESSAGE, null, objects, objects[0]);
 	}
 }

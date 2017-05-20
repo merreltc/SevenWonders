@@ -21,7 +21,6 @@ import utils.Message;
 import utils.RenderImage;
 import utils.Translate;
 
-
 public class GameDisplay extends Menu {
 	private class GameDisplayResources {
 
@@ -44,6 +43,7 @@ public class GameDisplay extends Menu {
 		ArrayList<String> playerNames = setUpPlayers(numOfPlayers);
 		this.resources.gameManager = new GameManager(playerNames, mode);
 		this.resources.gameManager.dealInitialTurnCards();
+
 	}
 
 	private ArrayList<String> setUpPlayers(int numOfPlayers) {
@@ -88,6 +88,7 @@ public class GameDisplay extends Menu {
 		for (int i = -1; i < numOfPlayers - 1; i++) {
 			PlayerBoard board = new PlayerBoard(i, numOfPlayers,
 					this.resources.gameManager.getPlayer((2 * numOfPlayers + i) % numOfPlayers), this.resources.renderer);
+
 			this.addInteractable(board.generateResourceButton());
 			boards.add(board);
 		}
@@ -98,6 +99,7 @@ public class GameDisplay extends Menu {
 		this.resources.handManager.drawCurrentPlayerCards(this.resources.gameManager.getCurrentPlayer(), this.resources.renderer);
 		for (int i = 0; i < this.resources.handManager.getPlayerHandSize(); i++) {
 			this.addInteractable(this.resources.handManager.getCardHolder(i));
+
 		}
 	}
 
@@ -112,6 +114,30 @@ public class GameDisplay extends Menu {
 			makeLeftButton(i);
 			makeRightButton(i);
 		}
+		for (int i = 0; i < 3; i++) {
+			makeLeftButtonGood(i);
+			makeRightButtonGood(i);
+		}
+	}
+
+	private void makeRightButtonGood(int i) {
+		Point buttonPosition = new Point(Constants.TradeRightBaseButtonPointGood.x,
+				Constants.TradeRightBaseButtonPoint.y + Constants.TradeButtonYOffet * i);
+		Button rightTradeButton = new Button(buttonPosition, Constants.TradeButtonBounds,
+				"Right-" + Constants.GoodTypes[i]);
+		rightTradeButton.hide();
+		rightTradeButton.addImage(this.resources.renderer.getImage(Constants.GoodTypes[i]));
+		this.addInteractable(rightTradeButton);
+	}
+
+	private void makeLeftButtonGood(int i) {
+		Point buttonPosition = new Point(Constants.TradeLeftBaseButtonPointGood.x,
+				Constants.TradeLeftBaseButtonPoint.y + Constants.TradeButtonYOffet * i);
+		Button leftTradeButton = new Button(buttonPosition, Constants.TradeButtonBounds,
+				"Left-" + Constants.GoodTypes[i]);
+		leftTradeButton.hide();
+		leftTradeButton.addImage(this.resources.renderer.getImage(Constants.GoodTypes[i]));
+		this.addInteractable(leftTradeButton);
 	}
 
 	private void makeLeftButton(int i) {
@@ -139,6 +165,7 @@ public class GameDisplay extends Menu {
 		} else if (clicked.getValue().equals(Translate.getNewResourceBundle().getString("exit"))) {
 			if (this.resources.resource.isActive()) {
 				this.resources.resource.closeMenu();
+
 			} else {
 				System.exit(0);
 			}
@@ -151,14 +178,17 @@ public class GameDisplay extends Menu {
 
 	private void displayResources(Interactable clicked) {
 		int playerNum = codePointToInt(clicked.getValue().codePointAt(0));
+
 		int locOfCurrentPlayer = this.resources.gameManager.getPlayers().indexOf(this.resources.gameManager.getCurrentPlayer());
 		this.resources.resource.openMenu(
 				this.resources.gameManager.getPlayer((locOfCurrentPlayer + playerNum) % this.resources.gameManager.getNumPlayers()));
+
 	}
 
 	private void trade(Interactable clicked) {
 		String[] splitValue = clicked.getValue().split("-");
 		TradeHelper tradeHandler = new TradeHelper(this.resources.gameManager);
+
 		tradeHandler.trade(splitValue);
 	}
 
@@ -184,6 +214,7 @@ public class GameDisplay extends Menu {
 			clicked.discard(this.resources.gameManager);
 		} else {
 			throw new RuntimeException("You must choose an action to do.");
+
 		}
 	}
 
@@ -196,11 +227,13 @@ public class GameDisplay extends Menu {
 		this.resources.handManager.drawCurrentPlayerCards(this.resources.gameManager.getCurrentPlayer(), this.resources.renderer);
 		for (int i = 0; i < this.resources.handManager.getPlayerHandSize(); i++) {
 			this.addInteractable(this.resources.handManager.getCardHolder(i));
+
 		}
 	}
 
 	private void endPlayerTurn() {
 		String message = this.resources.gameManager.endCurrentPlayerTurn();
+
 		if (!message.equals("")) {
 			Message.showMessage(message);
 		}
@@ -211,14 +244,17 @@ public class GameDisplay extends Menu {
 	}
 
 	public void redrawBoards() {
+
 		ArrayList<Player> players = this.resources.gameManager.getPlayers();
 		Player currentPlayer = this.resources.gameManager.getCurrentPlayer();
 		int totalNumberOfPlayers = this.resources.gameManager.getNumPlayers();
+
 		int currentPlayerIndex = players.indexOf(currentPlayer);
 		for (int i = 0; i < players.size(); i++) {
 			boards.get(i)
 					.changePlayer(players.get((totalNumberOfPlayers + currentPlayerIndex + i - 1) % totalNumberOfPlayers));
 		}
 	}
+
 }
 

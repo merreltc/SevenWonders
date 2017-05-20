@@ -633,10 +633,6 @@ public class PlayerTest {
 
 		expected = this.helper.getExpectedLevel(2).getEffects();
 		actual = player.buildNextLevel();
-		System.out.println("Light:B");
-		System.out.println("EX " + expected);
-		System.out.println("AC " + actual);
-		System.out.println("Equal? " + equalEffects(expected, actual));
 		assertTrue(equalEffects(expected, actual));
 
 		expected = this.helper.getExpectedLevel(3).getEffects();
@@ -732,10 +728,6 @@ public class PlayerTest {
 
 		expected = this.helper.getExpectedLevel(2).getEffects();
 		actual = player.buildNextLevel();
-		System.out.println("Gard:A");
-		System.out.println("EX " + expected);
-		System.out.println("AC " + actual);
-		System.out.println("Equal? " + equalEffects(expected, actual));
 		assertTrue(equalEffects(expected, actual));
 
 		expected = this.helper.getExpectedLevel(3).getEffects();
@@ -759,10 +751,6 @@ public class PlayerTest {
 
 		expected = this.helper.getExpectedLevel(3).getEffects();
 		actual = player.buildNextLevel();
-		System.out.println("Gard:B");
-		System.out.println("EX " + expected);
-		System.out.println("AC " + actual);
-		System.out.println("Equal? " + equalEffects(expected, actual));
 		assertTrue(equalEffects(expected, actual));
 	}
 

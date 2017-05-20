@@ -119,7 +119,32 @@ public class WonderFactoryTest {
 			i++;
 		}
 	}
-	
+
+	@Test
+	public void testGetSideEasy() {
+		WonderFactory factory = new WonderFactory(GameMode.EASY);
+		assertEquals(Side.A, factory.getSide());
+	}
+
+	@Test
+	public void testGetSideNormal() {
+		WonderFactory factory1 = EasyMock.partialMockBuilder(WonderFactory.class).withConstructor(GameMode.NORMAL)
+				.addMockedMethod("getRandomNum").createMock();
+		WonderFactory factory2 = EasyMock.partialMockBuilder(WonderFactory.class).withConstructor(GameMode.NORMAL)
+				.addMockedMethod("getRandomNum").createMock();
+
+		EasyMock.expect(factory1.getRandomNum()).andReturn(0);
+		EasyMock.expect(factory2.getRandomNum()).andReturn(1);
+		EasyMock.replay(factory1, factory2);
+
+		assertEquals(Side.A, factory1.generateSide(0));
+		assertEquals(Side.B, factory2.generateSide(1));
+
+		assertEquals(Side.A, factory1.getSide());
+		assertEquals(Side.B, factory2.getSide());
+		EasyMock.verify(factory1, factory2);
+	}
+
 	@Test
 	public void testGenerateSide() {
 		WonderFactory factory = new WonderFactory(GameMode.NORMAL);

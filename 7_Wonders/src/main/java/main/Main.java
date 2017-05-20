@@ -1,3 +1,4 @@
+
 package main;
 
 import java.awt.Color;
@@ -34,7 +35,7 @@ public class Main extends JPanel implements ActionListener {
 	public enum MenuType {
 		MAINMENU, LOGISTICS, GAMEDISPLAY
 	}
-
+	
 	public Main() {
 		Constants.LOCALE = DropDownMessage.selectLanguageMessage();
 		ResourceBundle messages = Translate.getNewResourceBundle();
@@ -49,7 +50,7 @@ public class Main extends JPanel implements ActionListener {
 		MenuMouseListener menuMouse = new MenuMouseListener(this);
 		frame.addMouseListener(menuMouse);
 		image = renderer.getImage("Background");
-		Timer timer = new Timer(20,this);
+		Timer timer = new Timer(20, this);
 		timer.start();
 	}
 

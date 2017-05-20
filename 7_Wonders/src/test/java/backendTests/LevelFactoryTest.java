@@ -87,10 +87,6 @@ public class LevelFactoryTest {
 
 		expected = this.helper.getExpectedLevel(2);
 		actual = factory.getNextLevel(2);
-		System.out.println("Light:B");
-		System.out.println("EX " + expected);
-		System.out.println("AC " + actual);
-		System.out.println("Equal? " + expected.equals(actual));
 		assertTrue(expected.equals(actual));
 
 		expected = this.helper.getExpectedLevel(3);
@@ -186,10 +182,6 @@ public class LevelFactoryTest {
 
 		expected = this.helper.getExpectedLevel(2);
 		actual = factory.getNextLevel(2);
-		System.out.println("Gard:A");
-		System.out.println("EX " + expected);
-		System.out.println("AC " + actual);
-		System.out.println("Equal? " + expected.equals(actual));
 		assertTrue(expected.equals(actual));
 
 		expected = this.helper.getExpectedLevel(3);
@@ -209,10 +201,6 @@ public class LevelFactoryTest {
 
 		expected = this.helper.getExpectedLevel(2);
 		actual = factory.getNextLevel(2);
-		System.out.println("Gard:B");
-		System.out.println("EX " + expected);
-		System.out.println("AC " + actual);
-		System.out.println("Equal? " + expected.equals(actual));
 		assertTrue(expected.equals(actual));
 
 		expected = this.helper.getExpectedLevel(3);

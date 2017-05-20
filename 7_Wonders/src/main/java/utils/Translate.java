@@ -7,7 +7,7 @@ import constants.Constants;
 public class Translate {
 
 	public static ResourceBundle getNewResourceBundle() {
-		return ResourceBundle.getBundle("message_" + Constants.LOCALE);
+		return ResourceBundle.getBundle("i18n.message_" + Constants.LOCALE);
 	}
 
 	public static String prepareNoSpaceString(String str) {
@@ -18,3 +18,4 @@ public class Translate {
 		return messages.getString(key);
 	}
 }
+

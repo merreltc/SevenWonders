@@ -22,8 +22,10 @@ import dataStructures.gameMaterials.Wonder.WonderType;
 import dataStructures.gameMaterials.Wonder;
 import dataStructures.playerData.Chip;
 import dataStructures.playerData.Player;
+import dataStructures.playerData.Chip.ChipType;
 import dataStructures.playerData.Chip.ChipValue;
 import exceptions.InsufficientFundsException;
+import junit.framework.Assert;
 
 public class GameBoardTests {
 	private Deck age1Deck, age2Deck;
@@ -430,7 +432,7 @@ public class GameBoardTests {
 		assertNotEquals(this.age1Deck, board.getDeck());
 		assertEquals(this.age2Deck, board.getDeck());
 	}
-
+	
 	private ArrayList<Player> setUpArrayWithNumPlayers(int num) {
 		Wonder wonder = new Wonder(Side.A, WonderType.COLOSSUS);
 		ArrayList<Player> result = new ArrayList<Player>();

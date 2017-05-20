@@ -1,8 +1,12 @@
 package backendTests;
 
+import static org.junit.Assert.assertEquals;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Set;
 
 import org.easymock.EasyMock;
 import org.junit.Assert;
@@ -22,6 +26,7 @@ import dataStructures.gameMaterials.Effect.Direction;
 import dataStructures.gameMaterials.Effect.EffectType;
 import dataStructures.gameMaterials.EntityEffect;
 import dataStructures.gameMaterials.EntityEffect.EntityType;
+import dataStructures.gameMaterials.Level.Frequency;
 import dataStructures.gameMaterials.ValueEffect;
 import dataStructures.gameMaterials.ValueEffect.AffectingEntity;
 import dataStructures.gameMaterials.ValueEffect.Value;
@@ -168,6 +173,17 @@ public class EndGameHandlerTest {
 		EasyMock.expect(player7.getAllCards()).andReturn(cards);
 		EasyMock.expect(player7.getAllCards()).andReturn(cards);
 
+		HashMap<Frequency, HashSet<Effect>> wonderPile = new HashMap<Frequency, HashSet<Effect>>();
+		for (int i = 0; i < 8; i++) {
+			EasyMock.expect(player1.getWonderPile()).andReturn(wonderPile);
+			EasyMock.expect(player2.getWonderPile()).andReturn(wonderPile);
+			EasyMock.expect(player3.getWonderPile()).andReturn(wonderPile);
+			EasyMock.expect(player4.getWonderPile()).andReturn(wonderPile);
+			EasyMock.expect(player5.getWonderPile()).andReturn(wonderPile);
+			EasyMock.expect(player6.getWonderPile()).andReturn(wonderPile);
+			EasyMock.expect(player7.getWonderPile()).andReturn(wonderPile);
+		}
+
 		EasyMock.replay(player1, player2, player3, player4, player5, player6, player7);
 		ArrayList<Player> players = new ArrayList<Player>();
 		players.add(player1);
@@ -243,6 +259,13 @@ public class EndGameHandlerTest {
 		EasyMock.expect(player3.getAllCards()).andReturn(cards);
 		EasyMock.expect(player3.getAllCards()).andReturn(cards);
 		EasyMock.expect(player3.getAllCards()).andReturn(cards);
+		
+		HashMap<Frequency, HashSet<Effect>> wonderPile = new HashMap<Frequency, HashSet<Effect>>();
+		for (int i = 0; i < 3; i++) {
+			EasyMock.expect(player1.getWonderPile()).andReturn(wonderPile);
+			EasyMock.expect(player2.getWonderPile()).andReturn(wonderPile);
+			EasyMock.expect(player3.getWonderPile()).andReturn(wonderPile);
+		}
 
 		EasyMock.replay(player1, player2, player3);
 
@@ -271,6 +294,11 @@ public class EndGameHandlerTest {
 		Player player2 = EasyMock.mock(Player.class);
 		Player player3 = EasyMock.mock(Player.class);
 
+		HashMap<Frequency, HashSet<Effect>> wonderPile = new HashMap<Frequency, HashSet<Effect>>();
+		EasyMock.expect(player1.getWonderPile()).andReturn(wonderPile);
+		EasyMock.expect(player2.getWonderPile()).andReturn(wonderPile);
+		EasyMock.expect(player3.getWonderPile()).andReturn(wonderPile);
+
 		EasyMock.expect(player2.getCardFromEndGame(0)).andReturn(this.createWorkersGuild());
 		EasyMock.expect(player2.getCardFromEndGame(1)).andThrow(new IllegalArgumentException(""));
 
@@ -292,6 +320,11 @@ public class EndGameHandlerTest {
 		Player player1 = EasyMock.mock(Player.class);
 		Player player2 = EasyMock.mock(Player.class);
 		Player player3 = EasyMock.mock(Player.class);
+
+		HashMap<Frequency, HashSet<Effect>> wonderPile = new HashMap<Frequency, HashSet<Effect>>();
+		EasyMock.expect(player1.getWonderPile()).andReturn(wonderPile);
+		EasyMock.expect(player2.getWonderPile()).andReturn(wonderPile);
+		EasyMock.expect(player3.getWonderPile()).andReturn(wonderPile);
 
 		EasyMock.expect(player2.getCardFromEndGame(0)).andReturn(this.createCraftsmenGuild());
 		EasyMock.expect(player2.getCardFromEndGame(1)).andThrow(new IllegalArgumentException(""));
@@ -315,6 +348,11 @@ public class EndGameHandlerTest {
 		Player player2 = EasyMock.mock(Player.class);
 		Player player3 = EasyMock.mock(Player.class);
 
+		HashMap<Frequency, HashSet<Effect>> wonderPile = new HashMap<Frequency, HashSet<Effect>>();
+		EasyMock.expect(player1.getWonderPile()).andReturn(wonderPile);
+		EasyMock.expect(player2.getWonderPile()).andReturn(wonderPile);
+		EasyMock.expect(player3.getWonderPile()).andReturn(wonderPile);
+
 		EasyMock.expect(player2.getCardFromEndGame(0)).andReturn(this.createTradersGuild());
 		EasyMock.expect(player2.getCardFromEndGame(1)).andThrow(new IllegalArgumentException(""));
 
@@ -337,6 +375,11 @@ public class EndGameHandlerTest {
 		Player player2 = EasyMock.mock(Player.class);
 		Player player3 = EasyMock.mock(Player.class);
 
+		HashMap<Frequency, HashSet<Effect>> wonderPile = new HashMap<Frequency, HashSet<Effect>>();
+		EasyMock.expect(player1.getWonderPile()).andReturn(wonderPile);
+		EasyMock.expect(player2.getWonderPile()).andReturn(wonderPile);
+		EasyMock.expect(player3.getWonderPile()).andReturn(wonderPile);
+
 		EasyMock.expect(player2.getCardFromEndGame(0)).andReturn(this.createPhilosophersGuild());
 		EasyMock.expect(player2.getCardFromEndGame(1)).andThrow(new IllegalArgumentException(""));
 
@@ -358,6 +401,11 @@ public class EndGameHandlerTest {
 		Player player1 = EasyMock.mock(Player.class);
 		Player player2 = EasyMock.mock(Player.class);
 		Player player3 = EasyMock.mock(Player.class);
+
+		HashMap<Frequency, HashSet<Effect>> wonderPile = new HashMap<Frequency, HashSet<Effect>>();
+		EasyMock.expect(player1.getWonderPile()).andReturn(wonderPile);
+		EasyMock.expect(player2.getWonderPile()).andReturn(wonderPile);
+		EasyMock.expect(player3.getWonderPile()).andReturn(wonderPile);
 
 		EasyMock.expect(player2.getCardFromEndGame(0)).andReturn(this.createSpiesGuild());
 		EasyMock.expect(player2.getCardFromEndGame(1)).andThrow(new IllegalArgumentException(""));
@@ -413,6 +461,11 @@ public class EndGameHandlerTest {
 		Player player2 = EasyMock.mock(Player.class);
 		Player player3 = EasyMock.mock(Player.class);
 
+		HashMap<Frequency, HashSet<Effect>> wonderPile = new HashMap<Frequency, HashSet<Effect>>();
+		EasyMock.expect(player1.getWonderPile()).andReturn(wonderPile);
+		EasyMock.expect(player2.getWonderPile()).andReturn(wonderPile);
+		EasyMock.expect(player3.getWonderPile()).andReturn(wonderPile);
+
 		EasyMock.expect(player2.getCardFromEndGame(0)).andReturn(this.createShipOwnersGuild());
 		EasyMock.expect(player2.getCardFromEndGame(1)).andThrow(new IllegalArgumentException(""));
 
@@ -429,7 +482,8 @@ public class EndGameHandlerTest {
 	@Test
 	public void testScientistsGuildEffectProtractor() {
 		Wonder wonder = new Wonder(Side.A, WonderType.COLOSSUS);
-		EndGameHandler end = EasyMock.partialMockBuilder(EndGameHandler.class).addMockedMethod("showMessage").createMock();
+		EndGameHandler end = EasyMock.partialMockBuilder(EndGameHandler.class).addMockedMethod("showMessage")
+				.createMock();
 		EasyMock.expect(end.showMessage()).andReturn("Protractor");
 		EasyMock.replay(end);
 
@@ -437,19 +491,175 @@ public class EndGameHandlerTest {
 		player1.addCardToStoragePile(this.createScientistsGuild());
 
 		end.handleScientistsGuild(player1);
-		
-		EntityEffect effect = ((EntityEffect)player1.getAllCards().get(1).getEffect());
+
+		EntityEffect effect = ((EntityEffect) player1.getAllCards().get(1).getEffect());
 
 		Assert.assertEquals(1, end.getSciencePoints(player1));
 		Assert.assertTrue(effect.getEntities().keySet().contains(Science.PROTRACTOR));
-		
+
 		EasyMock.verify(end);
 	}
+	
+	@Test(expected = UnsupportedOperationException.class)
+	public void testChooseScienceWonderEffect(){
+		Card card = EasyMock.mock(Card.class);
+		EasyMock.expect(card.getName()).andReturn("");
+		EasyMock.expect(card.getName()).andReturn("");
+		Player player = EasyMock.mock(Player.class);
+		HashMap<Frequency, HashSet<Effect>> wonderPile = new HashMap<Frequency, HashSet<Effect>>();
+		HashSet<Effect> effects = new HashSet<Effect>();
+		Effect effect = EasyMock.mock(Effect.class);
+		EasyMock.expect(effect.getEffectType()).andReturn(EffectType.ENTITY);
+		effects.add(effect);
+		wonderPile.put(Frequency.ENDOFGAME, effects);
 
+		EasyMock.expect(player.getWonderPile()).andReturn(wonderPile);
+		EasyMock.replay(card, player, effect);
+		
+		EndGameHandler end = new EndGameHandler();
+		end.evaluateCardEffect(player, player, player, card);
+		Assert.fail();
+	}
+	
+	
+	@Test
+	public void testBuilderGuildEffect(){
+		Wonder wonder = EasyMock.mock(Wonder.class);
+		EasyMock.expect(wonder.getNumBuiltLevels()).andReturn(2);
+		Card card = EasyMock.mock(Card.class);
+		EasyMock.expect(card.getName()).andReturn("Builder Guild");
+		EasyMock.expect(card.getName()).andReturn("Builder Guild");
+		EasyMock.expect(card.getName()).andReturn("Builder Guild");
+
+		Player player = EasyMock.mock(Player.class);
+		EasyMock.expect(player.getWonder()).andReturn(wonder);
+		HashMap<Frequency, HashSet<Effect>> wonderPile = new HashMap<Frequency, HashSet<Effect>>();
+		HashSet<Effect> effects = new HashSet<Effect>();
+		Effect effect = EasyMock.mock(Effect.class);
+		EasyMock.expect(effect.getEffectType()).andReturn(EffectType.VALUE);
+		effects.add(effect);
+		wonderPile.put(Frequency.ENDOFGAME, effects);
+
+		EasyMock.expect(player.getWonderPile()).andReturn(wonderPile);
+		EasyMock.replay(card, player, effect, wonder);
+		
+		EndGameHandler end = new EndGameHandler();
+		end.evaluateCardEffect(player, player, player, card);
+		
+		EasyMock.verify(card, player, effect, wonder);
+	}
+	
+	@Test
+	public void testAddVictoryPointsWonderEffect(){
+		ValueEffect effect = EasyMock.mock(ValueEffect.class);
+		EasyMock.expect(effect.getEffectType()).andReturn(EffectType.VALUE);
+		HashMap<Enum,Integer> values = new HashMap<Enum, Integer>();
+		values.put(Value.VICTORYPOINTS, 4);
+		EasyMock.expect(effect.getAffectingEntities()).andReturn(values);
+		HashSet<Effect> effects = new HashSet<Effect>();
+		effects.add(effect);
+		HashMap<Frequency, HashSet<Effect>> frequencies = new HashMap<Frequency, HashSet<Effect>>();
+		frequencies.put(Frequency.ENDOFGAME, effects);
+		
+		Wonder wonder = EasyMock.mock(Wonder.class);
+		
+		EasyMock.replay(effect);
+		
+		Player player = new Player("Jane Doe", wonder);
+		player.addWonderEffectToStoragePile(frequencies);
+		
+		EndGameHandler end = new EndGameHandler();
+		ArrayList<Player> players = new ArrayList<Player>();
+		players.add(player);
+		players.add(player);
+		players.add(player);
+	
+		end.runWonderChecks(player, players);
+		
+		assertEquals(4,player.getNumVictoryPoints());
+	}
+	
+	@Test
+	public void testCopyGuildCardFromLeft(){
+		ValueEffect effect = EasyMock.mock(ValueEffect.class);
+		EasyMock.expect(effect.getEffectType()).andReturn(EffectType.ABILITY);
+		HashMap<Enum,Integer> values = new HashMap<Enum, Integer>();
+		values.put(Value.VICTORYPOINTS, 4);
+	
+		HashSet<Effect> effects = new HashSet<Effect>();
+		effects.add(effect);
+		HashMap<Frequency, HashSet<Effect>> frequencies = new HashMap<Frequency, HashSet<Effect>>();
+		frequencies.put(Frequency.ENDOFGAME, effects);
+		
+		Wonder wonder = EasyMock.mock(Wonder.class);
+		
+		ArrayList<Player> players = new ArrayList<Player>();
+		Player player1 = EasyMock.mock(Player.class);
+		Player player2 = EasyMock.mock(Player.class);
+		Player player3 = EasyMock.mock(Player.class);
+		EasyMock.expect(player2.getWonderPile()).andReturn(frequencies);
+		EasyMock.expect(player1.getCardFromEndGame(0)).andReturn(this.createPhilosophersGuild());
+		EasyMock.expect(player3.getCardFromEndGame(0)).andReturn(this.createMagistratesGuild());
+		EasyMock.expect(player1.getCardFromEndGame(1)).andThrow(new IllegalArgumentException(""));
+		EasyMock.expect(player3.getCardFromEndGame(1)).andThrow(new IllegalArgumentException(""));
+		player2.addCardToStoragePile(this.createPhilosophersGuild());
+		
+		players.add(player1);
+		players.add(player2);
+		players.add(player3);
+		
+		EndGameHandler end = EasyMock.partialMockBuilder(EndGameHandler.class).addMockedMethod("showGuildCardMessage").createMock();
+		EasyMock.expect(end.showGuildCardMessage(new ArrayList<String>(Arrays.asList("Philosophers Guild", "Magistrates Guild")))).andReturn("Philosophers Guild");
+		EasyMock.replay(effect, player1, player2, player3, end);
+		
+		end.runWonderChecks(player2, players);
+		
+		EasyMock.verify(effect, player1, player2, player3);
+	}
+	
+	@Test
+	public void testCopyGuildCardFromRight(){
+		ValueEffect effect = EasyMock.mock(ValueEffect.class);
+		EasyMock.expect(effect.getEffectType()).andReturn(EffectType.ABILITY);
+		HashMap<Enum,Integer> values = new HashMap<Enum, Integer>();
+		values.put(Value.VICTORYPOINTS, 4);
+	
+		HashSet<Effect> effects = new HashSet<Effect>();
+		effects.add(effect);
+		HashMap<Frequency, HashSet<Effect>> frequencies = new HashMap<Frequency, HashSet<Effect>>();
+		frequencies.put(Frequency.ENDOFGAME, effects);
+		
+		Wonder wonder = EasyMock.mock(Wonder.class);
+		
+		ArrayList<Player> players = new ArrayList<Player>();
+		Player player1 = EasyMock.mock(Player.class);
+		Player player2 = EasyMock.mock(Player.class);
+		Player player3 = EasyMock.mock(Player.class);
+		EasyMock.expect(player2.getWonderPile()).andReturn(frequencies);
+		EasyMock.expect(player1.getCardFromEndGame(0)).andReturn(this.createPhilosophersGuild());
+		EasyMock.expect(player3.getCardFromEndGame(0)).andReturn(this.createMagistratesGuild());
+		EasyMock.expect(player1.getCardFromEndGame(1)).andThrow(new IllegalArgumentException(""));
+		EasyMock.expect(player3.getCardFromEndGame(1)).andThrow(new IllegalArgumentException(""));
+		player2.addCardToStoragePile(this.createMagistratesGuild());
+		
+		players.add(player1);
+		players.add(player2);
+		players.add(player3);
+		
+		EndGameHandler end = EasyMock.partialMockBuilder(EndGameHandler.class).addMockedMethod("showGuildCardMessage").createMock();
+		EasyMock.expect(end.showGuildCardMessage(new ArrayList<String>(Arrays.asList("Philosophers Guild", "Magistrates Guild")))).andReturn("Magistrates Guild");
+		EasyMock.replay(effect, player1, player2, player3, end);
+		
+		end.runWonderChecks(player2, players);
+		
+		EasyMock.verify(effect, player1, player2, player3);
+	}
+	
 	@Test
 	public void testScientistsGuildEffectWheel() {
 		Wonder wonder = new Wonder(Side.A, WonderType.COLOSSUS);
-		EndGameHandler end = EasyMock.partialMockBuilder(EndGameHandler.class).addMockedMethod("showMessage").createMock();
+		EndGameHandler end = EasyMock.partialMockBuilder(EndGameHandler.class).addMockedMethod("showMessage")
+				.createMock();
 		EasyMock.expect(end.showMessage()).andReturn("Wheel");
 		EasyMock.replay(end);
 
@@ -457,19 +667,20 @@ public class EndGameHandlerTest {
 		player1.addCardToStoragePile(this.createScientistsGuild());
 
 		end.handleScientistsGuild(player1);
-		
-		EntityEffect effect = ((EntityEffect)player1.getAllCards().get(1).getEffect());
+
+		EntityEffect effect = ((EntityEffect) player1.getAllCards().get(1).getEffect());
 
 		Assert.assertEquals(1, end.getSciencePoints(player1));
 		Assert.assertTrue(effect.getEntities().keySet().contains(Science.WHEEL));
-		
+
 		EasyMock.verify(end);
 	}
 
 	@Test
 	public void testScientistsGuildEffectTablet() {
 		Wonder wonder = new Wonder(Side.A, WonderType.COLOSSUS);
-		EndGameHandler end = EasyMock.partialMockBuilder(EndGameHandler.class).addMockedMethod("showMessage").createMock();
+		EndGameHandler end = EasyMock.partialMockBuilder(EndGameHandler.class).addMockedMethod("showMessage")
+				.createMock();
 		EasyMock.expect(end.showMessage()).andReturn("Tablet");
 		EasyMock.replay(end);
 
@@ -478,14 +689,13 @@ public class EndGameHandlerTest {
 
 		end.calculateScores(new ArrayList<Player>(Arrays.asList(player1)));
 
-		EntityEffect effect = ((EntityEffect)player1.getAllCards().get(1).getEffect());
+		EntityEffect effect = ((EntityEffect) player1.getAllCards().get(1).getEffect());
 
 		Assert.assertEquals(1, end.getSciencePoints(player1));
 		Assert.assertTrue(effect.getEntities().keySet().contains(Science.TABLET));
-		
+
 		EasyMock.verify(end);
 	}
-
 
 	@Test
 	public void testMagistratesGuildEffect() {
@@ -496,6 +706,10 @@ public class EndGameHandlerTest {
 		Player player1 = EasyMock.mock(Player.class);
 		Player player2 = EasyMock.mock(Player.class);
 		Player player3 = EasyMock.mock(Player.class);
+		HashMap<Frequency, HashSet<Effect>> wonderPile = new HashMap<Frequency, HashSet<Effect>>();
+		EasyMock.expect(player1.getWonderPile()).andReturn(wonderPile);
+		EasyMock.expect(player2.getWonderPile()).andReturn(wonderPile);
+		EasyMock.expect(player3.getWonderPile()).andReturn(wonderPile);
 
 		EasyMock.expect(player2.getCardFromEndGame(0)).andReturn(this.createMagistratesGuild());
 		EasyMock.expect(player2.getCardFromEndGame(1)).andThrow(new IllegalArgumentException(""));
@@ -508,9 +722,9 @@ public class EndGameHandlerTest {
 
 		Assert.assertEquals(4, end.getPointsFromGuildCards(player2, player1, player3));
 	}
-	
+
 	@Test
-	public void testTestCardInvalidChoice(){
+	public void testTestCardInvalidChoice() {
 		EndGameHandler end = new EndGameHandler();
 		Assert.assertEquals(EffectType.NONE, end.testCard("Invalid"));
 	}
@@ -522,8 +736,7 @@ public class EndGameHandlerTest {
 		costs.put(RawResource.ORE, 2);
 		costs.put(RawResource.STONE, 1);
 		Cost cost = new Cost(CostType.RESOURCE, costs);
-		Effect effect = new ValueEffect(Value.GUILD, AffectingEntity.RAWRESOURCES,
-				Direction.NEIGHBORS, 1);
+		Effect effect = new ValueEffect(Value.GUILD, AffectingEntity.RAWRESOURCES, Direction.NEIGHBORS, 1);
 		Card card = new Card("Workers Guild", CardType.GUILD, cost, effect);
 		return card;
 	}
@@ -533,8 +746,7 @@ public class EndGameHandlerTest {
 		costs.put(RawResource.ORE, 2);
 		costs.put(RawResource.STONE, 2);
 		Cost cost = new Cost(CostType.RESOURCE, costs);
-		Effect effect = new ValueEffect(Value.GUILD, AffectingEntity.MANUFACTUREDGOODS,
-				Direction.NEIGHBORS, 2);
+		Effect effect = new ValueEffect(Value.GUILD, AffectingEntity.MANUFACTUREDGOODS, Direction.NEIGHBORS, 2);
 		Card card = new Card("Craftsmens Guild", CardType.GUILD, cost, effect);
 		return card;
 	}
@@ -545,8 +757,7 @@ public class EndGameHandlerTest {
 		costs.put(Good.PRESS, 1);
 		costs.put(Good.GLASS, 1);
 		Cost cost = new Cost(CostType.GOOD, costs);
-		Effect effect = new ValueEffect(Value.GUILD, AffectingEntity.COMMERCIALSTRUCTURES,
-				Direction.NEIGHBORS, 1);
+		Effect effect = new ValueEffect(Value.GUILD, AffectingEntity.COMMERCIALSTRUCTURES, Direction.NEIGHBORS, 1);
 		Card card = new Card("Traders Guild", CardType.GUILD, cost, effect);
 		return card;
 	}
@@ -557,8 +768,7 @@ public class EndGameHandlerTest {
 		costs.put(Good.PRESS, 1);
 		costs.put(RawResource.CLAY, 3);
 		Cost cost = new Cost(CostType.MULTITYPE, costs);
-		Effect effect = new ValueEffect(Value.GUILD, AffectingEntity.SCIENTIFICSTRUCTURES,
-				Direction.NEIGHBORS, 1);
+		Effect effect = new ValueEffect(Value.GUILD, AffectingEntity.SCIENTIFICSTRUCTURES, Direction.NEIGHBORS, 1);
 		Card card = new Card("Philosophers Guild", CardType.GUILD, cost, effect);
 		return card;
 	}
@@ -568,8 +778,7 @@ public class EndGameHandlerTest {
 		costs.put(Good.GLASS, 1);
 		costs.put(RawResource.LUMBER, 3);
 		Cost cost = new Cost(CostType.MULTITYPE, costs);
-		Effect effect = new ValueEffect(Value.GUILD, AffectingEntity.MILITARYSTRUCTURES,
-				Direction.NEIGHBORS, 1);
+		Effect effect = new ValueEffect(Value.GUILD, AffectingEntity.MILITARYSTRUCTURES, Direction.NEIGHBORS, 1);
 		Card card = new Card("Spies Guild", CardType.GUILD, cost, effect);
 		return card;
 	}
@@ -580,8 +789,7 @@ public class EndGameHandlerTest {
 		costs.put(RawResource.ORE, 2);
 		costs.put(RawResource.STONE, 1);
 		Cost cost = new Cost(CostType.MULTITYPE, costs);
-		Effect effect = new ValueEffect(Value.GUILD, AffectingEntity.MILITARYSTRUCTURES,
-				Direction.NEIGHBORS, 1);
+		Effect effect = new ValueEffect(Value.GUILD, AffectingEntity.MILITARYSTRUCTURES, Direction.NEIGHBORS, 1);
 		Card card = new Card("Strategists Guild", CardType.GUILD, cost, effect);
 		return card;
 	}
@@ -623,8 +831,7 @@ public class EndGameHandlerTest {
 		costs.put(RawResource.LUMBER, 3);
 		costs.put(RawResource.STONE, 1);
 		Cost cost = new Cost(CostType.MULTITYPE, costs);
-		Effect effect = new ValueEffect(Value.GUILD, AffectingEntity.CIVILIANSTRUCTURES,
-				Direction.NEIGHBORS, 1);
+		Effect effect = new ValueEffect(Value.GUILD, AffectingEntity.CIVILIANSTRUCTURES, Direction.NEIGHBORS, 1);
 		Card card = new Card("Magistrates Guild", CardType.GUILD, cost, effect);
 		return card;
 	}
