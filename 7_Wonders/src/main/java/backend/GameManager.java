@@ -63,8 +63,8 @@ public class GameManager {
 		return new GameBoard(players, deck);
 	}
 	
-	public void buildWonder(Card card) {
-		this.handlers.getPlayerTurnHandler().buildStructure(getCurrentPlayer(), card);
+	public void buildWonder() {
+		this.handlers.getPlayerTurnHandler().buildWonderLevel(getCurrentPlayer());
 	}
 
 	public void dealInitialTurnCards() {

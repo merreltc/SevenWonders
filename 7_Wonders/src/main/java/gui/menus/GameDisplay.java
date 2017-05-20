@@ -215,7 +215,8 @@ public class GameDisplay extends Menu {
 		}else if (val == 2) {
 			clicked.discard(this.resources.gameManager);
 		} else {
-			throw new RuntimeException("You must choose an action to do.");
+			ResourceBundle messages = Translate.getNewResourceBundle();
+			throw new RuntimeException(messages.getString("chooseAnAction"));
 
 		}
 	}

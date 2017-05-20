@@ -21,7 +21,6 @@ apply plugin: 'eclipse'
 apply plugin: "com.github.samueltbrown.cucumber"
 apply plugin: "info.solidsoft.pitest"
 apply plugin: 'checkstyle'
-apply plugin: 'findbugs'
 
 sourceCompatibility = 1.8
 version = '1.0'
