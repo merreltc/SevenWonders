@@ -29,8 +29,8 @@ Cards are passed left-right-left over the three ages, so you need to keep an eye
 1. Import the "7_Wonders" into Eclipse as a Gradle Project
 2. Configure Build Path (see "Configuring the Build Path")
 3. In the package explorer, double-click src/main/java
-4. Double-click "GuiMain"
-5. Right-click "GuiMainMenu" and selecte "Run As->Java Application"
+4. Double-click "main"
+5. Right-click "Main" and selecte "Run As->Java Application"
 
 ## Configuring the Build Path
 1. Right click on 7_Wonders in Eclipse
