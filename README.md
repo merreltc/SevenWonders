@@ -104,12 +104,12 @@ Implemented in GUI
 - [x] Name and type of structure/resource (See "Card Types")
 - [x] Cost of building the structure [Costs Tests](7_Wonders/src/test/java/dataStructureTests/CostTest.java)
 - [x] The effect caused by building the structure - See below on building structure
-- [x] Previous structures that allow this structure to be built for free [TestCases](7_Wonders/src/test/java/backendTests/PlayerTurnHandlerTest.java#L768)
-- [x] Future structures that can be built free if this card has already been built [TestCases](7_Wonders/src/test/java/backendTests/PlayerTurnHandlerTest.java#L768)
+- [x] Previous structures that allow this structure to be built for free [TestCases](7_Wonders/src/test/java/backendTests/PlayerTurnHandlerTest.java#L769)
+- [x] Future structures that can be built free if this card has already been built [TestCases](7_Wonders/src/test/java/backendTests/PlayerTurnHandlerTest.java#L769)
 
 ### Card Types
 [Card Tests](7_Wonders/src/test/java/dataStructureTests/CardTest.java)
-- Raw Resource: (Brown) Produce raw materials (lumber [Test](7_Wonders/src/test/java/dataStructureTests/CardTest.java#L29), stone[Test](7_Wonders/src/test/java/dataStructureTests/CardTest.java#L125), ore[Test](7_Wonders/src/test/java/dataStructureTests/CardTest.java#L93), clay[Test](7_Wonders/src/test/java/dataStructureTests/CardTest.java#L61))
+- Raw Resource: (Brown) Produce raw materials (lumber [Test](7_Wonders/src/test/java/dataStructureTests/CardTest.java#L30), stone [Test](7_Wonders/src/test/java/dataStructureTests/CardTest.java#L106), ore [Test](7_Wonders/src/test/java/dataStructureTests/CardTest.java#L80), clay [Test](7_Wonders/src/test/java/dataStructureTests/CardTest.java#L55))
 - Manufacture Good: (Grey) Produce displayed products (loom [Test](7_Wonders/src/test/java/dataStructureTests/CardTest.java#L187), glass [Test](7_Wonders/src/test/java/dataStructureTests/CardTest.java#L163), press [Test](7_Wonders/src/test/java/dataStructureTests/CardTest.java#L138))
 - Science: (Green) Award victory points at end game based on collected symbols (wheel, protractor, tablet)
     - Rules:
@@ -126,20 +126,20 @@ Implemented in GUI
 ## Commerce and Trading
 - [x] In order to trade or build anything, player must have appropriate resources or coins in their stockpile at the beginning of the turn
     - [x] Trading with a city with the incorrect materials
-        - [x] Invalid Amount of Coins [Test Case](7_Wonders/src/test/java/backendTests/TradeHandlerTest.java#L93)
-        - [x] Invalid Amount of Resources [Test Case](7_Wonders/src/test/java/backendTests/TradeHandlerTest.java#L382)
-    - [x] Trading with a city with just enough materials [Test Case](7_Wonders/src/test/java/backendTests/TradeHandlerTest.java#L468)
-    - [x] Trading with a city with more than enough materials [Test Case](7_Wonders/src/test/java/backendTests/TradeHandlerTest.java#L355)
+        - [x] Invalid Amount of Coins [Test Case](7_Wonders/src/test/java/backendTests/TradeHandlerTest.java#L99)
+        - [x] Invalid Amount of Resources [Test Case](7_Wonders/src/test/java/backendTests/TradeHandlerTest.java#L321)
+    - [x] Trading with a city with just enough materials [Test Case](7_Wonders/src/test/java/backendTests/TradeHandlerTest.java#L370)
+    - [x] Trading with a city with more than enough materials [Test Case](7_Wonders/src/test/java/backendTests/TradeHandlerTest.java#L394)
 - [x] Players can only trade with neighboring cities 
-    - [x] Can Trade to Next Player [Test Case](7_Wonders/src/test/java/backendTests/TradeHandlerTest.java#L293)
-    - [x] Can Trade to Previous Player [Test Case](7_Wonders/src/test/java/backendTests/TradeHandlerTest.java#L314)
-    - [x] Cannot trade to other player [Test Case](7_Wonders/src/test/java/backendTests/TradeHandlerTest.java#L335)
-- [x] Trading a neighboring city is initially 2 coins per resource and only allows players to use that resource, not take it from their neighbors [TestCase](7_Wonders/src/test/java/backendTests/TradeHandlerTest.java#L407)
+    - [x] Can Trade to Next Player [Test Case](7_Wonders/src/test/java/backendTests/TradeHandlerTest.java#L258)
+    - [x] Can Trade to Previous Player [Test Case](7_Wonders/src/test/java/backendTests/TradeHandlerTest.java#L271)
+    - [x] Cannot trade to other player [Test Case](7_Wonders/src/test/java/backendTests/TradeHandlerTest.java#L284)
+- [x] Trading a neighboring city is initially 2 coins per resource and only allows players to use that resource, not take it from their neighbors [TestCase](7_Wonders/src/test/java/backendTests/TradeHandlerTest.java#L296)
     - [x] Some Commercial Structure (yellow) cards allow players to trade for certain materials for 1 coin after being built
         [Main Test Cases start at](7_Wonders/src/test/java/backendTests/GameManagerTest.java#L409) Until [L626](7_Wonders/src/test/java/backendTests/GameManagerTest.java#L626)
-        - [x] East Trading Post  [Test Case](7_Wonders/src/test/java/backendTests/TradeHandlerTest.java#L437)
-        - [x] West Trading Post [Test Case](https://ada.csse.rose-hulman.edu/moormaet/Silver_Falcons_Seven_Wonders/blob/master/7_Wonders/src/test/java/backendTests/GameManagerTest.java#L539)
-        - [x] Marketplace [Test Case](https://ada.csse.rose-hulman.edu/moormaet/Silver_Falcons_Seven_Wonders/blob/master/7_Wonders/src/test/java/backendTests/GameManagerTest.java#L425)
+        - [x] East Trading Post  [Test Case](7_Wonders/src/test/java/backendTests/TradeHandlerTest.java#L449)
+        - [x] West Trading Post [Test Case](https://ada.csse.rose-hulman.edu/moormaet/Silver_Falcons_Seven_Wonders/blob/master/7_Wonders/src/test/java/backendTests/GameManagerTest.java#L503)
+        - [x] Marketplace [Test Case](https://ada.csse.rose-hulman.edu/moormaet/Silver_Falcons_Seven_Wonders/blob/master/7_Wonders/src/test/java/backendTests/GameManagerTest.java#L529)
 - [x] On a single turn, players may trade for multiple resources from both neighboring cities - On GUI
 - [x] Traded resources are only available to the player during the turn they are bought [TestCase](7_Wonders/src/test/java/backendTests/GameManagerTest.java#L630)
 - [x] Only resources produced through the city/Wonder or a neighbors raw resource or manufactured good cards can be traded - [TestCase](https://ada.csse.rose-hulman.edu/moormaet/Silver_Falcons_Seven_Wonders/blob/master/7_Wonders/src/test/java/backendTests/TradeHandlerTest.java#L346)
@@ -170,7 +170,7 @@ Implemented in GUI
 2. Action
     -  [x] Build the Structure - See [Building Structure](#building-the-structure) but [Tests In](7_Wonders/src/test/java/backendTests/PlayerTurnHandlerTest.java)
     -  [x] Build the Next Level of Wonder [Cucumber File](7_Wonders/src/cucumber/resources/build_wonder.feature) and [TestCases](7_Wonders/src/cucumber/java/BuildWonderSteps.java)
-    -  [x] Discard for 3 Coins [TestCase](7_Wonders/src/test/java/backendTests/PlayerTurnHandlerTest.java#L322)
+    -  [x] Discard for 3 Coins [TestCase](7_Wonders/src/test/java/backendTests/PlayerTurnHandlerTest.java#L292)
         -  Discarded cards create a Discard Pile
         -  A card can always be chosen for discard, even if the player does not have enough resources to build it
 3. Pass temporary hand to next player
