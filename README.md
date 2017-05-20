@@ -27,7 +27,7 @@ Cards are passed left-right-left over the three ages, so you need to keep an eye
 # How to Run in Eclipse:
 ## Importing and running the project:
 1. Import the "7_Wonders" into Eclipse as a Gradle Project
-2. Configure Build Path (See ["Configuring the Build Path"](https://ada.csse.rose-hulman.edu/moormaet/Silver_Falcons_Seven_Wonders/tree/master#configuring-the-build-path))
+2. Configure Build Path (See ["Configuring the Build Path"](#configuring-the-build-path))
 3. In the package explorer, double-click src/main/java
 4. Double-click "main"
 5. Right-click "Main" and selecte "Run As->Java Application"
@@ -56,8 +56,8 @@ Cards are passed left-right-left over the three ages, so you need to keep an eye
 ## Display
 ### Player Board
 Implemented in GUI
-- [x] Overview of player statistics (See ["Player Stats"](https://ada.csse.rose-hulman.edu/moormaet/Silver_Falcons_Seven_Wonders/tree/master#player-stats))
-- [x] Detailed view of player statistics (See ["Player Stats"](https://ada.csse.rose-hulman.edu/moormaet/Silver_Falcons_Seven_Wonders/tree/master#player-stats))
+- [x] Overview of player statistics (See ["Player Stats"](#player-stats))
+- [x] Detailed view of player statistics (See ["Player Stats"](#player-stats))
 - [x] Details for left/right neighbors
 - [x] Minimal details for non-neighboring players
 
@@ -100,15 +100,15 @@ Implemented in GUI
     - [Age II Creator](7_Wonders/src/test/java/testHelpers/SetUpDeckTestHelper.java#L468)
 
 ## Cards
-[Card Tests](7_Wonders/src/test/java/dataStructureTests/CardTest.java) For structure related things see [Building Structure](#building-the-structure)
-- [x] Name and type of structure/resource (See ["Card Types"](https://ada.csse.rose-hulman.edu/moormaet/Silver_Falcons_Seven_Wonders/tree/master#card-types))
+[Card Test Case](7_Wonders/src/test/java/dataStructureTests/CardTest.java) For structure related things see ["Building the Structure"](#building-the-structure)
+- [x] Name and type of structure/resource (See ["Card Types"](#card-types))
 - [x] Cost of building the structure [Costs Tests](7_Wonders/src/test/java/dataStructureTests/CostTest.java)
 - [x] The effect caused by building the structure - See below on building structure
 - [x] Previous structures that allow this structure to be built for free [Test Cases](7_Wonders/src/test/java/backendTests/PlayerTurnHandlerTest.java#L769)
 - [x] Future structures that can be built free if this card has already been built [Test Cases](7_Wonders/src/test/java/backendTests/PlayerTurnHandlerTest.java#L769)
 
 ### Card Types
-[Card Tests](7_Wonders/src/test/java/dataStructureTests/CardTest.java)
+[Card Test Case](7_Wonders/src/test/java/dataStructureTests/CardTest.java)
 - Raw Resource: (Brown) Produce raw materials (lumber [Test](7_Wonders/src/test/java/dataStructureTests/CardTest.java#L30), stone [Test](7_Wonders/src/test/java/dataStructureTests/CardTest.java#L106), ore [Test](7_Wonders/src/test/java/dataStructureTests/CardTest.java#L80), clay [Test](7_Wonders/src/test/java/dataStructureTests/CardTest.java#L55))
 - Manufacture Good: (Grey) Produce displayed products (loom [Test](7_Wonders/src/test/java/dataStructureTests/CardTest.java#L187), glass [Test](7_Wonders/src/test/java/dataStructureTests/CardTest.java#L163), press [Test](7_Wonders/src/test/java/dataStructureTests/CardTest.java#L138))
 - Science: (Green) Award victory points at end game based on collected symbols (wheel, protractor, tablet)
@@ -116,8 +116,8 @@ Implemented in GUI
         - [x] End game victory points are equal to number of identical symbols^2 + (7 * number of sets of 3 different symbols) [Test Case](https://ada.csse.rose-hulman.edu/moormaet/Silver_Falcons_Seven_Wonders/blob/master/7_Wonders/src/test/java/backendTests/EndGameHandlerTest.java)
 
 - Civilian Structure: (Blue) Provide victory points
-- Commercial Structure: (Yellow) Provide advantages during commercial transactions (See ["Commerce and Trading"](https://ada.csse.rose-hulman.edu/moormaet/Silver_Falcons_Seven_Wonders/tree/master#commerce-and-trading))
-- Military Structure: (Red) Builds military strength for wars (See ["War"](https://ada.csse.rose-hulman.edu/moormaet/Silver_Falcons_Seven_Wonders/tree/master#war))
+- Commercial Structure: (Yellow) Provide advantages during commercial transactions (See ["Commerce and Trading"](#commerce-and-trading))
+- Military Structure: (Red) Builds military strength for wars (See ["War"](#war))
 - Guild: (Purple) Provide end game victory points based on certain criteria
     - Rules:
         - [x] Number of guild cards in the game is equal to the number of players + 2 and is kept a secret from players [Test Case](7_Wonders/src/test/java/backendTests/SetUpDeckHandlerTest.java#L247)
@@ -145,7 +145,8 @@ Implemented in GUI
 - [x] Players are unable to purchase resources produced by commercial structures (or some Wonders)
 - [x] Trade cannot be refused by neighboring cities - On GUI
 
-## War [Test Case](https://ada.csse.rose-hulman.edu/moormaet/Silver_Falcons_Seven_Wonders/blob/master/7_Wonders/src/test/java/backendTests/TurnHandlerTest.java)
+## War
+[War Test Case](https://ada.csse.rose-hulman.edu/moormaet/Silver_Falcons_Seven_Wonders/blob/master/7_Wonders/src/test/java/backendTests/TurnHandlerTest.java)
 - [x] At the end of an age (following sixth rotation), players go to war with BOTH neighboring cities
 - [x] A player with more shields than their neighbor is successful
 - [x] A player with less shields than their neighbor is defeated
@@ -155,7 +156,7 @@ Implemented in GUI
 - [x] A tie results in no tokens for either city
 
 ## Player Stats
-[Player Tests](7_Wonders/src/test/java/dataStructureTests/PlayerTest.java)
+[Player Test Case](7_Wonders/src/test/java/dataStructureTests/PlayerTest.java)
 - [x] Name
 - [x] Wonder and build level
 - [x] Value 1 and value 3 coins
@@ -178,7 +179,7 @@ Implemented in GUI
 4. On the sixth turn, player has 2 cards: one is chosen, second is discarded for NO coins
 
 ## Building the Structure
-- [x] If a structure has a resource/entity cost, the player must have sufficient resources in their stockpile or purchase them from neighbors ["Commerce and Trading"](https://ada.csse.rose-hulman.edu/moormaet/Silver_Falcons_Seven_Wonders/tree/master#commerce-and-trading)
+- [x] If a structure has a resource/entity cost, the player must have sufficient resources in their stockpile or purchase them from neighbors ["Commerce and Trading"](#commerce-and-trading)
     - [x] Player can build structure [Test Cases Begin at](7_Wonders/src/test/java/backendTests/PlayerTurnHandlerTest.java#L97)
     - [x] Player cannot build structure [Test Case](7_Wonders/src/test/java/backendTests/PlayerTurnHandlerTest.java#L120)
     - [x] Player had to trade first [Test Case](7_Wonders/src/test/java/backendTests/PlayerTurnHandlerTest.java#L807)
@@ -197,7 +198,8 @@ Implemented in GUI
 - [x] Wonder can be built at any time, in any age
 - [x] The wonder does not need to be built in order for a player to win - not included in Scoring
 
-### Wonders [Test Case](https://ada.csse.rose-hulman.edu/moormaet/Silver_Falcons_Seven_Wonders/blob/master/7_Wonders/src/test/java/dataStructureTests/WonderTest.java)
+### Wonders
+[Wonders Test Case](https://ada.csse.rose-hulman.edu/moormaet/Silver_Falcons_Seven_Wonders/blob/master/7_Wonders/src/test/java/dataStructureTests/WonderTest.java)
 - [x] Wonders provide players 1 of the resource specified in the top left corner
 - Side A always has 3 levels
     - [x] The first level is worth +3 Victory Points
@@ -231,7 +233,7 @@ Implemented in GUI
     - Side B:
         - [x] Level 1: 3 Victory Points
         - [x] Level 2: Optional ability to play seventh card instead of discarding **on sixth turn**
-            - This card can be built (See ["Building the Structure"](https://ada.csse.rose-hulman.edu/moormaet/Silver_Falcons_Seven_Wonders/tree/master#building-the-structure)), used to build level 3 (See ["Building the Next Level of Wonder"](https://ada.csse.rose-hulman.edu/moormaet/Silver_Falcons_Seven_Wonders/tree/master#building-the-next-level-of-wonder)), or discarded for 3 coins from the bank
+            - This card can be built (See ["Building the Structure"](#building-the-structure)), used to build level 3 (See ["Building the Next Level of Wonder"](#building-the-next-level-of-wonder)), or discarded for 3 coins from the bank
         - [x] Level 3: (See "Side A, Level 2")
 - *The Statue of Zeus in Olympia*
     - Resource: Lumber
@@ -259,9 +261,10 @@ Implemented in GUI
         - [x] Level 3: 5 Victory Points
         - [x] Level 4: 7 Victory Points
 
-## End Game and Victory [Test Case](https://ada.csse.rose-hulman.edu/moormaet/Silver_Falcons_Seven_Wonders/blob/master/7_Wonders/src/test/java/backendTests/EndGameHandlerTest.java)
+## End Game and Victory
+[End Game Test Case](https://ada.csse.rose-hulman.edu/moormaet/Silver_Falcons_Seven_Wonders/blob/master/7_Wonders/src/test/java/backendTests/EndGameHandlerTest.java)
 - [x] After the war of Age III, a score card displaying total Victory Points for each player is displayed
-- [x] Total Victory Points is equal to the sum of total value of Conflict Tokens, the floor of total coin value divided by 3, the total value of Victory Points from Wonders and (Civilian/Commercial) Structures, points acquired from Guild effects (see "Cards->Guild"), and points acquired from Science Cards (see "Cards->Science Structure")
+- [x] Total Victory Points is equal to the sum of total value of Conflict Tokens, the floor of total coin value divided by 3, the total value of Victory Points from Wonders and (Civilian/Commercial) Structures, points acquired from Guild effects (see  ["Card Types](#card-types)->Guild"), and points acquired from Science Cards (see  ["Card Types](#card-types)->Science Structure")
 - [x] Whichever player has the most victory points is the winner
 - [x] In the case of a tie, the player with the most coins wins. Ties at this point are not broken further
 
