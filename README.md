@@ -83,14 +83,14 @@ Implemented in GUI
 ## Decks
 - [x] Each age has a unique set of cards
     - [x] Age1 Cards 
-        - [Test Case 3 Players](7_Wonders/src/test/java/backendTests/SetUpDeckHandlerTest.java#L35)
-        - [Test Case 7 Players](7_Wonders/src/test/java/backendTests/SetUpDeckHandlerTest.java#L46)
+        - [Test Case 3 Players](7_Wonders/src/test/java/backendTests/SetUpDeckHandlerTest.java#L38)
+        - [Test Case 7 Players](7_Wonders/src/test/java/backendTests/SetUpDeckHandlerTest.java#L49)
     - [x] Age2 Cards 
-        - [Test Case 3 Players](7_Wonders/src/test/java/backendTests/SetUpDeckHandlerTest.java#L57)
-        - [Test Case 7 Players](7_Wonders/src/test/java/backendTests/SetUpDeckHandlerTest.java#L71)
+        - [Test Case 3 Players](7_Wonders/src/test/java/backendTests/SetUpDeckHandlerTest.java#L60)
+        - [Test Case 7 Players](7_Wonders/src/test/java/backendTests/SetUpDeckHandlerTest.java#L74)
     - [x] Age3 Cards 
-        - [Test Case 3 Players](7_Wonders/src/test/java/backendTests/SetUpDeckHandlerTest.java#L85)
-        - [Test Case 7 Players](7_Wonders/src/test/java/backendTests/SetUpDeckHandlerTest.java#L98)
+        - [Test Case 3 Players](7_Wonders/src/test/java/backendTests/SetUpDeckHandlerTest.java#L88)
+        - [Test Case 7 Players](7_Wonders/src/test/java/backendTests/SetUpDeckHandlerTest.java#L101)
 - [x] Deck swaps at the end of round 6 in an age (1->2->3)
     - [x] Age1 to Age2 [TestCase](7_Wonders/src/test/java/backendTests/GameManagerTest.java#L798)
     - [x] Age2 to Age3 [TestCase](7_Wonders/src/test/java/backendTests/GameManagerTest.java#L843)
