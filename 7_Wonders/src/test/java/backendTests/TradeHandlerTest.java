@@ -13,10 +13,12 @@ import backend.handlers.SetUpDeckHandler;
 import backend.handlers.TradeHandler;
 import constants.GeneralEnums.Good;
 import constants.GeneralEnums.RawResource;
+import constants.GeneralEnums.Side;
 import dataStructures.GameBoard;
 import dataStructures.gameMaterials.Card;
 import dataStructures.gameMaterials.Deck;
 import dataStructures.gameMaterials.Deck.Age;
+import dataStructures.gameMaterials.Wonder.WonderType;
 import dataStructures.gameMaterials.Wonder;
 import dataStructures.playerData.Chip;
 import dataStructures.playerData.Chip.ChipValue;
@@ -31,7 +33,7 @@ public class TradeHandlerTest {
 
 	@Before
 	public void setUp() {
-		this.wonder = EasyMock.createStrictMock(Wonder.class);
+		this.wonder = new Wonder(Side.A, WonderType.COLOSSUS);
 		this.player1 = new Player("Jane Doe", this.wonder);
 		this.player2 = new Player("John Doe", this.wonder);
 		this.testDeck = EasyMock.partialMockBuilder(Deck.class).createMock();
@@ -431,7 +433,7 @@ public class TradeHandlerTest {
 		assertTrue(current.getCurrentTrades().containsKey(RawResource.LUMBER));
 		assertEquals(4, right.getCoinTotal());
 	}
-	
+
 	@Test
 	public void testValidTradeForDiscountEastTradingPostSwitchIndex() {
 		ArrayList<Player> players = new ArrayList<Player>();
@@ -460,7 +462,6 @@ public class TradeHandlerTest {
 		assertEquals(4, right.getCoinTotal());
 	}
 
-
 	@Test
 	public void testValidTradeForDiscountWestTradingPost() {
 		ArrayList<Player> players = new ArrayList<Player>();
@@ -471,7 +472,7 @@ public class TradeHandlerTest {
 		ArrayList<Card> storage = new ArrayList<Card>();
 		Deck deck = new SetUpDeckHandler().createDeck(Age.AGE1, 3);
 		GameBoard board = new GameBoard(players, deck);
-		
+
 		Player current = this.player1;
 		Player left = players.get(2);
 		storage.add(deck.getCard(13)); // west trading post
@@ -504,7 +505,7 @@ public class TradeHandlerTest {
 		ArrayList<Card> storage2 = new ArrayList<Card>();
 		storage2.add(deck.getCard(0)); // lumber
 		right.setStoragePile(storage2);
-		
+
 		TradeHandler tradeHandler = new TradeHandler(board);
 		tradeHandler.tradeForEntity(current, right, RawResource.LUMBER);
 		assertTrue(current.getCurrentTrades().containsKey(RawResource.LUMBER));
@@ -528,7 +529,7 @@ public class TradeHandlerTest {
 		ArrayList<Card> storage2 = new ArrayList<Card>();
 		storage2.add(deck.getCard(0)); // lumber
 		left.setStoragePile(storage2);
-		
+
 		TradeHandler tradeHandler = new TradeHandler(board);
 		tradeHandler.tradeForEntity(current, left, RawResource.LUMBER);
 		assertTrue(current.getCurrentTrades().containsKey(RawResource.LUMBER));
@@ -547,7 +548,7 @@ public class TradeHandlerTest {
 		GameBoard board = new GameBoard(players, deck);
 		Player current = this.player1;
 		Player left = players.get(2);
-		
+
 		storage.add(deck.getCard(12)); // east trading post
 		current.setStoragePile(storage);
 
@@ -573,13 +574,13 @@ public class TradeHandlerTest {
 		GameBoard board = new GameBoard(players, deck);
 		Player current = this.player1;
 		Player right = this.player2;
-		
+
 		storage.add(deck.getCard(13)); // west trading post
 		current.setStoragePile(storage);
 		ArrayList<Card> storage2 = new ArrayList<Card>();
 		storage2.add(deck.getCard(0)); // lumber
 		right.setStoragePile(storage2);
-		
+
 		TradeHandler tradeHandler = new TradeHandler(board);
 		tradeHandler.tradeForEntity(current, right, RawResource.LUMBER);
 

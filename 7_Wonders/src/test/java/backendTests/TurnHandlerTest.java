@@ -1,6 +1,7 @@
 package backendTests;
 
 import static org.junit.Assert.assertEquals;
+
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
@@ -13,22 +14,26 @@ import org.junit.Before;
 import org.junit.Test;
 
 import backend.GameManager;
-import backend.handlers.DeckHandler;
 import backend.handlers.PlayerTurnHandler;
-import backend.handlers.RotateHandler;
 import backend.handlers.SetUpDeckHandler;
 import backend.handlers.SetUpPlayerHandler;
 import backend.handlers.TurnHandler;
-import backend.handlers.RotateHandler.Rotation;
 import constants.GeneralEnums.GameMode;
-import dataStructures.GameBoard;
-import dataStructures.Handlers;
+import constants.GeneralEnums.Side;
 import dataStructures.gameMaterials.Card;
 import dataStructures.gameMaterials.Deck;
 import dataStructures.gameMaterials.Deck.Age;
+import dataStructures.gameMaterials.Wonder.WonderType;
+import dataStructures.gameMaterials.Effect;
+import dataStructures.gameMaterials.EntityEffect;
 import dataStructures.gameMaterials.Wonder;
-import dataStructures.playerData.Player;
 import dataStructures.playerData.Chip.ChipValue;
+import dataStructures.playerData.Player;
+import backend.handlers.DeckHandler;
+import backend.handlers.RotateHandler;
+import backend.handlers.RotateHandler.Rotation;
+import dataStructures.GameBoard;
+import dataStructures.Handlers;
 
 public class TurnHandlerTest {
 	private SetUpPlayerHandler setUpPlayerHandler;
@@ -49,7 +54,7 @@ public class TurnHandlerTest {
 		int expectedDeckSize = deck.getNumCards() - (7 * numPlayers);
 
 		ArrayList<Player> players = manager.getPlayers();
-		new TurnHandler().dealInitialTurnCards(players, deck);
+		new TurnHandler(EasyMock.mock(Handlers.class)).dealInitialTurnCards(players, deck);
 
 		for (Player player : players) {
 			assertEquals(7, player.getCurrentHand().size());
@@ -68,7 +73,7 @@ public class TurnHandlerTest {
 		int expectedDeckSize = deck.getNumCards() - (7 * numPlayers);
 
 		ArrayList<Player> players = manager.getPlayers();
-		new TurnHandler().dealInitialTurnCards(players, deck);
+		new TurnHandler(EasyMock.mock(Handlers.class)).dealInitialTurnCards(players, deck);
 
 		for (Player player : players) {
 			assertEquals(7, player.getCurrentHand().size());
@@ -86,7 +91,7 @@ public class TurnHandlerTest {
 
 		int expectedDeckSize = deck.getNumCards() - 35;
 		ArrayList<Player> players = manager.getPlayers();
-		new TurnHandler().dealInitialTurnCards(players, deck);
+		new TurnHandler(EasyMock.mock(Handlers.class)).dealInitialTurnCards(players, deck);
 
 		for (Player player : players) {
 			assertEquals(7, player.getCurrentHand().size());
@@ -107,78 +112,15 @@ public class TurnHandlerTest {
 	}
 
 	@Test
-	public void testGetNumPlayersUntilPass3Players() {
-		ArrayList<String> playerNames = setUpNamesByNum(3);
-		GameManager manager = new GameManager(playerNames, setUpHandlers());
-
-		Deck deck = manager.getGameBoard().getDeck();
-		ArrayList<Player> players = manager.getPlayers();
-		TurnHandler turnHandler = new TurnHandler();
-		turnHandler.dealInitialTurnCards(players, deck);
-
-		assertEquals(2, turnHandler.getNumPlayersUntilPass());
-	}
-
-	@Test
-	public void testSetNumPlayersUntilPass() {
-		TurnHandler turnHandler = new TurnHandler();
-		turnHandler.setNumPlayersUntilPass(2);
-
-		assertEquals(2, turnHandler.getNumPlayersUntilPass());
-	}
-
-	@Test
-	public void testDefaultGetNumTurnsTilEndOfAge() {
-		ArrayList<String> playerNames = setUpNamesByNum(3);
-		GameManager manager = new GameManager(playerNames, setUpHandlers());
-
-		Deck deck = manager.getGameBoard().getDeck();
-		ArrayList<Player> players = manager.getPlayers();
-		TurnHandler turnHandler = new TurnHandler();
-
-		turnHandler.dealInitialTurnCards(players, deck);
-
-		assertEquals(5, turnHandler.getNumTurnsTilEndOfAge());
-	}
-
-	@SuppressWarnings("unchecked")
-	@Test
-	public void testGetNumPlayersUntilPass6Players() {
-		ArrayList<Player> players = setUpPlayersByNum(5);
-		Deck deck = EasyMock.mock(Deck.class);
-		expectAndReplayDeckCalls(deck);
-
-		TurnHandler turnHandler = new TurnHandler();
-		turnHandler.dealInitialTurnCards(players, deck);
-
-		EasyMock.verify(deck);
-		assertEquals(5, turnHandler.getNumTurnsTilEndOfAge());
-	}
-
-	private void expectAndReplayDeckCalls(Deck deck) {
-		Card card = EasyMock.createStrictMock(Card.class);
-		for (int i = 0; i < 35; i++) {
-			EasyMock.expect(deck.removeAtIndex(0)).andReturn(card);
-		}
-		EasyMock.replay(deck);
-	}
-
-	@Test
-	public void testSetNumTurnsTilEndOfAge() {
-		TurnHandler turnHandler = new TurnHandler();
-		turnHandler.setNumTurnsTilEndOfAge(5);
-		assertEquals(5, turnHandler.getNumTurnsTilEndOfAge());
-	}
-
-	@Test
 	public void endAge1ThreePlayersMiddleWithMostWarTokens() {
 		ArrayList<Player> players = setUpPlayersByNum(3);
 		// array order: middle, left, right player
 		int[] playerShields = { 5, 2, 2 };
 		int[] numCalls = { 3, 3, 4 };
+
 		expectAndReplayAddNumShields(players, playerShields, numCalls);
 
-		TurnHandler turnHandler = new TurnHandler();
+		TurnHandler turnHandler = new TurnHandler(EasyMock.mock(Handlers.class));
 		turnHandler.performEndAgeBattles(players, Age.AGE1);
 
 		verifyPlayers(players);
@@ -200,7 +142,7 @@ public class TurnHandlerTest {
 		int[] numCalls = { 3, 4, 3 };
 		expectAndReplayAddNumShields(players, playerShields, numCalls);
 
-		TurnHandler turnHandler = new TurnHandler();
+		TurnHandler turnHandler = new TurnHandler(EasyMock.mock(Handlers.class));
 		turnHandler.performEndAgeBattles(players, Age.AGE1);
 
 		verifyPlayers(players);
@@ -223,9 +165,10 @@ public class TurnHandlerTest {
 		ArrayList<Player> players = setUpPlayersByNum(7);
 		int[] playerShields = { 2, 3, 5, 5, 7, 6, 3 };
 		int[] numCalls = { 3, 4, 4, 4, 3, 2, 2 };
+
 		expectAndReplayAddNumShields(players, playerShields, numCalls);
 
-		TurnHandler turnHandler = new TurnHandler();
+		TurnHandler turnHandler = new TurnHandler(EasyMock.mock(Handlers.class));
 		turnHandler.performEndAgeBattles(players, Age.AGE1);
 
 		verifyPlayers(players);
@@ -251,9 +194,8 @@ public class TurnHandlerTest {
 		int[] numCalls = { 3, 3, 4 };
 		expectAndReplayAddNumShields(players, playerShields, numCalls);
 
-		TurnHandler turnHandler = new TurnHandler();
+		TurnHandler turnHandler = new TurnHandler(EasyMock.mock(Handlers.class));
 		turnHandler.performEndAgeBattles(players, Age.AGE2);
-
 		verifyPlayers(players);
 
 		Player middle = players.get(0);
@@ -274,7 +216,7 @@ public class TurnHandlerTest {
 		int[] numCalls = { 3, 4, 3 };
 		expectAndReplayAddNumShields(players, playerShields, numCalls);
 
-		TurnHandler turnHandler = new TurnHandler();
+		TurnHandler turnHandler = new TurnHandler(EasyMock.mock(Handlers.class));
 		turnHandler.performEndAgeBattles(players, Age.AGE2);
 
 		verifyPlayers(players);
@@ -297,10 +239,12 @@ public class TurnHandlerTest {
 		ArrayList<Player> players = setUpPlayersByNum(7);
 		int[] playerShields = { 2, 3, 5, 5, 7, 6, 3 };
 		int[] numCalls = { 3, 4, 4, 4, 3, 2, 2 };
+
 		expectAndReplayAddNumShields(players, playerShields, numCalls);
 
-		TurnHandler turnHandler = new TurnHandler();
+		TurnHandler turnHandler = new TurnHandler(EasyMock.mock(Handlers.class));
 		turnHandler.performEndAgeBattles(players, Age.AGE2);
+
 
 		verifyPlayers(players);
 
@@ -325,9 +269,8 @@ public class TurnHandlerTest {
 		int[] numCalls = { 3, 3, 4 };
 		expectAndReplayAddNumShields(players, playerShields, numCalls);
 
-		TurnHandler turnHandler = new TurnHandler();
+		TurnHandler turnHandler = new TurnHandler(EasyMock.mock(Handlers.class));
 		turnHandler.performEndAgeBattles(players, Age.AGE3);
-
 		verifyPlayers(players);
 
 		Player middle = players.get(0);
@@ -347,7 +290,7 @@ public class TurnHandlerTest {
 		int[] numCalls = { 4, 5, 3 };
 		expectAndReplayAddNumShields(players, playerShields, numCalls);
 
-		TurnHandler turnHandler = new TurnHandler();
+		TurnHandler turnHandler = new TurnHandler(EasyMock.mock(Handlers.class));
 		turnHandler.performEndAgeBattles(players, Age.AGE3);
 
 		Player middle = players.get(0);
@@ -368,9 +311,10 @@ public class TurnHandlerTest {
 		ArrayList<Player> players = setUpPlayersByNum(7);
 		int[] playerShields = { 2, 3, 5, 5, 7, 6, 3 };
 		int[] numCalls = { 3, 4, 4, 4, 3, 2, 2 };
+
 		expectAndReplayAddNumShields(players, playerShields, numCalls);
 
-		TurnHandler turnHandler = new TurnHandler();
+		TurnHandler turnHandler = new TurnHandler(EasyMock.mock(Handlers.class));
 		turnHandler.performEndAgeBattles(players, Age.AGE3);
 
 		verifyPlayers(players);
@@ -391,8 +335,6 @@ public class TurnHandlerTest {
 	@Test
 	public void testEndAgeShufflesDeck() {
 		ArrayList<String> playerNames = setUpArrayByNum(3);
-		TurnHandler turnHandler = EasyMock.partialMockBuilder(TurnHandler.class).addMockedMethod("switchDeck")
-				.addMockedMethod("dealInitialTurnCards").createMock();
 		SetUpPlayerHandler setUpPlayer = EasyMock.partialMockBuilder(SetUpPlayerHandler.class)
 				.withConstructor(GameMode.EASY).createMock();
 		PlayerTurnHandler playerTurnHandler = EasyMock.partialMockBuilder(PlayerTurnHandler.class).withConstructor()
@@ -401,6 +343,8 @@ public class TurnHandlerTest {
 				.createMock();
 		Handlers handlers = new Handlers(setUpPlayer);
 		handlers.setSetUpDeckHandler(setUpDeckHandler);
+		TurnHandler turnHandler = EasyMock.partialMockBuilder(TurnHandler.class).withConstructor(handlers).addMockedMethod("switchDeck")
+				.addMockedMethod("dealInitialTurnCards").createMock();
 		handlers.setTurnHandler(turnHandler);
 		handlers.setPlayerTurnHandler(playerTurnHandler);
 
@@ -415,7 +359,6 @@ public class TurnHandlerTest {
 
 		EasyMock.replay(turnHandler);
 
-		turnHandler.handlers = handlers;
 		turnHandler.endAge(Age.AGE2);
 
 		assertFalse(cardsBefore.toString().equals(manager.getDeck().getCards().toString()));
@@ -433,9 +376,9 @@ public class TurnHandlerTest {
 		SetUpDeckHandler setUpDeckHandler = EasyMock.partialMockBuilder(SetUpDeckHandler.class).withConstructor()
 				.createMock();
 
-		TurnHandler turnHandler = new TurnHandler();
 		Handlers handlers = new Handlers(this.setUpPlayerHandler);
 		handlers.setSetUpDeckHandler(setUpDeckHandler);
+		TurnHandler turnHandler = new TurnHandler(EasyMock.mock(Handlers.class));
 		handlers.setTurnHandler(turnHandler);
 		handlers.setPlayerTurnHandler(playerTurnHandler);
 
@@ -463,9 +406,10 @@ public class TurnHandlerTest {
 		SetUpDeckHandler setUpDeckHandler = EasyMock.partialMockBuilder(SetUpDeckHandler.class).withConstructor()
 				.createMock();
 
-		TurnHandler turnHandler = new TurnHandler();
 		Handlers handlers = new Handlers(this.setUpPlayerHandler);
 		handlers.setSetUpDeckHandler(setUpDeckHandler);
+
+		TurnHandler turnHandler = new TurnHandler(EasyMock.mock(Handlers.class));
 		handlers.setTurnHandler(turnHandler);
 		handlers.setPlayerTurnHandler(playerTurnHandler);
 
@@ -485,7 +429,7 @@ public class TurnHandlerTest {
 
 	@Test
 	public void testEndCurrentPlayersTurn3TimesAndTradeHands5Players() {
-		ArrayList<String> playerNames = setUpArrayByNum(3);
+		ArrayList<String> playerNames = setUpArrayByNum(5);
 		setUpPlayerHandler = EasyMock.partialMockBuilder(SetUpPlayerHandler.class).withConstructor(GameMode.EASY)
 				.createMock();
 
@@ -494,16 +438,16 @@ public class TurnHandlerTest {
 		SetUpDeckHandler setUpDeckHandler = EasyMock.partialMockBuilder(SetUpDeckHandler.class).withConstructor()
 				.createMock();
 
-		TurnHandler turnHandler = new TurnHandler();
 		Handlers handlers = new Handlers(this.setUpPlayerHandler);
 		handlers.setSetUpDeckHandler(setUpDeckHandler);
+
+		TurnHandler turnHandler = new TurnHandler(EasyMock.mock(Handlers.class));
 		handlers.setTurnHandler(turnHandler);
 		handlers.setPlayerTurnHandler(playerTurnHandler);
 
 		GameManager manager = new GameManager(playerNames, handlers);
 		manager.dealInitialTurnCards();
 		turnHandler.setGameBoard(manager.getGameBoard());
-		turnHandler.setNumPlayersUntilPass(4);
 
 		assertEquals("", turnHandler.endCurrentPlayerTurn(handlers));
 		assertEquals("", turnHandler.endCurrentPlayerTurn(handlers));
@@ -516,11 +460,11 @@ public class TurnHandlerTest {
 	public void testEndPlayerTurnEndsCurrentAge() {
 		ArrayList<Player> players = new ArrayList<Player>();
 		Player player1 = EasyMock.partialMockBuilder(Player.class)
-				.withConstructor("Jane Doe", EasyMock.mock(Wonder.class)).addMockedMethod("getNumShields").createMock();
+				.withConstructor("Jane Doe", new Wonder(Side.A, WonderType.COLOSSUS)).addMockedMethod("getNumShields").createMock();
 		Player player2 = EasyMock.partialMockBuilder(Player.class)
-				.withConstructor("John Doe", EasyMock.mock(Wonder.class)).addMockedMethod("getNumShields").createMock();
+				.withConstructor("John Doe",new Wonder(Side.A, WonderType.GARDENS)).addMockedMethod("getNumShields").createMock();
 		Player player3 = EasyMock.partialMockBuilder(Player.class)
-				.withConstructor("James Doe", EasyMock.mock(Wonder.class)).addMockedMethod("getNumShields")
+				.withConstructor("James Doe", new Wonder(Side.A, WonderType.MAUSOLEUM)).addMockedMethod("getNumShields")
 				.createMock();
 		players.add(player1);
 		players.add(player2);
@@ -529,10 +473,10 @@ public class TurnHandlerTest {
 		ArrayList<Card> cards2 = new SetUpDeckHandler().createCards(Age.AGE2, 3);
 		Deck deck2 = new Deck(Age.AGE2, cards2);
 		GameBoard board = new GameBoard(players, deck2);
-		TurnHandler turnHandler = new TurnHandler();
+		Handlers handlers = setUpHandlers();
+		TurnHandler turnHandler = new TurnHandler(handlers);
 		turnHandler.setGameBoard(board);
 		turnHandler.dealInitialTurnCards(players, deck2);
-		Handlers handlers = setUpHandlers();
 		handlers.setTurnHandler(turnHandler);
 		handlers.setRotateHandler(new RotateHandler(board));
 
@@ -575,7 +519,6 @@ public class TurnHandlerTest {
 				.createMock();
 
 		ArrayList<String> playerNames = setUpArrayByNum(3);
-		TurnHandler turnHandler = new TurnHandler();
 
 		ArrayList<Card> cards2 = setUpDeckHandler.createCards(Age.AGE2, 3);
 		Deck deck2 = new Deck(Age.AGE2, cards2);
@@ -584,6 +527,7 @@ public class TurnHandlerTest {
 
 		Handlers handlers = new Handlers(this.setUpPlayerHandler);
 		handlers.setSetUpDeckHandler(setUpDeckHandler);
+		TurnHandler turnHandler = new TurnHandler(handlers);
 		handlers.setTurnHandler(turnHandler);
 		handlers.setPlayerTurnHandler(playerTurnHandler);
 
@@ -622,8 +566,7 @@ public class TurnHandlerTest {
 		Handlers handlers = new Handlers(GameMode.EASY);
 		handlers.setRotateHandler(rotate);
 
-		TurnHandler turnHandler = new TurnHandler();
-		turnHandler.handlers = handlers;
+		TurnHandler turnHandler = new TurnHandler(handlers);
 
 		turnHandler.rotate(Rotation.CLOCKWISE);
 
@@ -639,8 +582,7 @@ public class TurnHandlerTest {
 		Handlers handlers = new Handlers(GameMode.EASY);
 		handlers.setRotateHandler(rotate);
 
-		TurnHandler turnHandler = new TurnHandler();
-		turnHandler.handlers = handlers;
+		TurnHandler turnHandler = new TurnHandler(handlers);
 
 		turnHandler.rotate(Rotation.COUNTERCLOCKWISE);
 
@@ -649,7 +591,7 @@ public class TurnHandlerTest {
 
 	@Test
 	public void testEndGame() {
-		Wonder wonder = EasyMock.mock(Wonder.class);
+		Wonder wonder = new Wonder(Side.A, WonderType.COLOSSUS);
 		Deck deck = EasyMock.mock(Deck.class);
 		Player player1 = new Player("Player1", wonder);
 		player1.addNumVictoryPoints(6);
@@ -668,11 +610,11 @@ public class TurnHandlerTest {
 			EasyMock.expect(board.getPlayers()).andReturn(players);
 		}
 
-		EasyMock.replay(wonder, deck, board);
+		EasyMock.replay(deck, board);
 
 		GameBoard board2 = new GameBoard(players, deck);
 
-		TurnHandler turnHandler = new TurnHandler();
+		TurnHandler turnHandler = new TurnHandler(EasyMock.mock(Handlers.class));
 		turnHandler.setGameBoard(board);
 		String result = turnHandler.switchAge();
 
@@ -694,7 +636,7 @@ public class TurnHandlerTest {
 		players.add(player1);
 		EasyMock.replay(player1);
 
-		TurnHandler turnHandler = new TurnHandler();
+		TurnHandler turnHandler = new TurnHandler(EasyMock.mock(Handlers.class));
 
 		int index = turnHandler.indexOfMaxScore(scores, players);
 		assertEquals(1, index);
@@ -702,7 +644,7 @@ public class TurnHandlerTest {
 	
 	@Test
 	public void testSwitchDeckToAgeThree(){
-		Wonder wonder = EasyMock.mock(Wonder.class);
+		Wonder wonder = new Wonder(Side.A, WonderType.COLOSSUS);
 		Player player = new Player("Jane Doe",wonder);
 		Handlers handlers = EasyMock.mock(Handlers.class);
 		SetUpDeckHandler deckHandler = EasyMock.mock(SetUpDeckHandler.class);
@@ -711,15 +653,14 @@ public class TurnHandlerTest {
 		EasyMock.expect(deckHandler.createDeck(Age.AGE2, 3)).andReturn(deck);
 		GameBoard gameBoard = new GameBoard(new ArrayList<Player>(Arrays.asList(player,player,player)), deck);
 		
-		EasyMock.replay(wonder, handlers, deckHandler, deck);
+		EasyMock.replay(handlers, deckHandler, deck);
 		
-		TurnHandler turnHandler = new TurnHandler();
-		turnHandler.handlers = handlers;
+		TurnHandler turnHandler = new TurnHandler(handlers);
 		turnHandler.setGameBoard(gameBoard);
 
 		assertEquals(deck, turnHandler.switchDeck(Age.AGE1));
 		
-		
+		EasyMock.verify(handlers, deckHandler, deck);
 	}
 
 	@Test
@@ -741,7 +682,7 @@ public class TurnHandlerTest {
 		players.add(player2);
 		EasyMock.replay(player1, player2);
 
-		TurnHandler turnHandler = new TurnHandler();
+		TurnHandler turnHandler = new TurnHandler(EasyMock.mock(Handlers.class));
 
 		int index = turnHandler.indexOfMaxScore(scores, players);
 		assertEquals(2, index);
@@ -749,7 +690,7 @@ public class TurnHandlerTest {
 
 	private ArrayList<Player> setUpPlayersByNum(int num) {
 		ArrayList<Player> result = new ArrayList<Player>();
-		Wonder wonder = EasyMock.createStrictMock(Wonder.class);
+		Wonder wonder = new Wonder(Side.A, WonderType.COLOSSUS);
 		for (int i = 0; i < num; i++) {
 			Player temp = EasyMock.partialMockBuilder(Player.class).withConstructor("Jane Doe", wonder)
 					.addMockedMethod("getNumShields").createMock();
@@ -769,13 +710,14 @@ public class TurnHandlerTest {
 	private void expectAndReplayAddNumShields(ArrayList<Player> mockedPlayers, int[] playerShields, int[] numCalls) {
 		int i = 0;
 		for (Player player : mockedPlayers) {
-			callExpected(player, playerShields[i], numCalls[i]);
+			callExpectedNumShields(player, playerShields[i], numCalls[i]);
 			EasyMock.replay(player);
 			i++;
 		}
 	}
 
-	private void callExpected(Player player, int playerShields, int numCalls) {
+	private void callExpectedNumShields(Player player, int playerShields, int numCalls) {
+
 		for (int i = 0; i < numCalls; i++) {
 			EasyMock.expect(player.getNumShields()).andReturn(playerShields);
 		}
@@ -790,7 +732,7 @@ public class TurnHandlerTest {
 	private Handlers setUpHandlers() {
 		Handlers handlers = new Handlers(this.setUpPlayerHandler);
 		handlers.setSetUpDeckHandler(new SetUpDeckHandler());
-		handlers.setTurnHandler(new TurnHandler());
+		handlers.setTurnHandler(new TurnHandler(handlers));
 		handlers.setPlayerTurnHandler(new PlayerTurnHandler());
 		return handlers;
 	}

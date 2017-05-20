@@ -1,5 +1,7 @@
 package dataStructures.gameMaterials;
 
+import dataStructures.gameMaterials.Level.Frequency;
+
 public class Effect {
 	private EffectType effectType = EffectType.NONE;
 	private Direction direction = Direction.SELF;
@@ -28,4 +30,7 @@ public class Effect {
 		this.direction = direction;
 	}
 
+	public void setEffectType(EffectType type) {
+		this.effectType = type;
+	}
 }

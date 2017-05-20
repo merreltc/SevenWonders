@@ -37,7 +37,7 @@ public class RotateHandlerTest {
 	public void setUp() {
 		this.setUpPlayerHandler = EasyMock.partialMockBuilder(SetUpPlayerHandler.class).withConstructor(GameMode.EASY)
 				.createMock();
-		this.turnHandler = EasyMock.partialMockBuilder(TurnHandler.class).withConstructor().createMock();
+		this.turnHandler = EasyMock.partialMockBuilder(TurnHandler.class).withConstructor(EasyMock.mock(Handlers.class)).createMock();
 		this.playerTurnHandler = EasyMock.partialMockBuilder(PlayerTurnHandler.class).withConstructor().createMock();
 		this.setUpDeckHandler = EasyMock.partialMockBuilder(SetUpDeckHandler.class).withConstructor().createMock();
 		this.testDeck = EasyMock.createStrictMock(Deck.class);

@@ -2,6 +2,7 @@ package backend.handlers;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 
 import javax.swing.JOptionPane;
 
@@ -13,6 +14,7 @@ import dataStructures.gameMaterials.Effect;
 import dataStructures.gameMaterials.Effect.Direction;
 import dataStructures.gameMaterials.Effect.EffectType;
 import dataStructures.gameMaterials.EntityEffect.EntityType;
+import dataStructures.gameMaterials.Level.Frequency;
 import dataStructures.gameMaterials.EntityEffect;
 import dataStructures.gameMaterials.ValueEffect.AffectingEntity;
 import dataStructures.gameMaterials.ValueEffect;
@@ -38,6 +40,7 @@ public class EndGameHandler {
 
 	private int getTotalScore(Player player, ArrayList<Player> players) {
 		int playerLoc = players.indexOf(player);
+		runWonderChecks(player, players);
 		handleScientistsGuild(player);
 		int guildEffects = getPointsFromGuildCards(player,
 				players.get((players.size() + playerLoc - 1) % players.size()),
@@ -45,6 +48,62 @@ public class EndGameHandler {
 		int scienceScore = getSciencePoints(player);
 		return player.getNumVictoryPoints() + player.getCoinTotal() / 3 + player.getConflictTotal() + guildEffects
 				+ scienceScore;
+	}
+
+	private void runWonderChecks(Player player, ArrayList<Player> players) {
+		HashMap<Frequency, HashSet<Effect>> wonderPile = player.getWonderPile();
+		for (Frequency freq : wonderPile.keySet()){
+			if (wonderPile.get(freq).contains(Effect.EffectType.VALUE)){
+				ValueEffect effect = wonderPile.get(freq).toArray(new ValueEffect[1])[0];
+				player.addNumVictoryPoints(effect.getAffectingEntities().get(ValueEffect.Value.VICTORYPOINTS));
+			}else if (wonderPile.get(freq).contains(Effect.EffectType.ABILITY)){
+				int playerLoc = players.indexOf(player);
+				copyGuildCard(playerLoc, players);
+			}
+		}
+	}
+
+	private void copyGuildCard(int playerLoc, ArrayList<Player> players) {
+		Player left = players.get((players.size() + playerLoc - 1)%players.size());
+		Player right = players.get((playerLoc + 1)%players.size());
+		ArrayList<Card> cardsLeft = iterateThroughPile(left);
+		ArrayList<Card> cardsRight = iterateThroughPile(right);
+		ArrayList<String> names = getNames(cardsLeft, cardsRight);
+		String selected = showGuildCardMessage(names);
+		int index = names.indexOf(selected);
+		if (index >= cardsLeft.size()){
+			players.get(playerLoc).addCardToStoragePile(cardsLeft.get(index));
+		}else {
+			players.get(playerLoc).addCardToStoragePile(cardsLeft.get(index - cardsLeft.size()));
+		}
+	}
+
+	private ArrayList<String> getNames(ArrayList<Card> cardsLeft, ArrayList<Card> cardsRight) {
+		ArrayList<String> names = new ArrayList<String>();
+		for (int i = 0; i < cardsLeft.size(); i++){
+			names.add(cardsLeft.get(i).getName());
+		}
+		for (int i = 0; i < cardsRight.size(); i++){
+			names.add(cardsRight.get(i).getName());
+		}
+		return names;
+	}
+	
+	public String showGuildCardMessage(ArrayList<String> guilds) {
+		return new DropDownMessage().dropDownGuildSelectionMessage(guilds.toArray());
+	}
+
+	private ArrayList<Card> iterateThroughPile(Player left) {
+		ArrayList<Card> cards = new ArrayList<Card>();
+		for (int i = 0; i > -1; i++){
+			try{
+				Card card = left.getCardFromEndGame(i);
+				cards.add(card);
+			}catch(Exception e){
+				break;
+			}
+		}
+		return cards;
 	}
 
 	public int getSciencePoints(Player player) {
@@ -93,19 +152,30 @@ public class EndGameHandler {
 		if (card.getName().equals("Strategists Guild")) {
 			pointsForGuild += right.getConflictTokens().get(ChipValue.NEG1)
 					+ left.getConflictTokens().get(ChipValue.NEG1);
-		} else if (card.getName().equals("Scientists Guild")) {
+		} else if (card.getName().equals("Scientists Guild") || checkWonders(current.getWonderPile())) {
 			throw new UnsupportedOperationException("Show Option Dialog");
-		} else {
+		} else if (card.getName().equals("Builder Guild")){
+			pointsForGuild += current.getWonder().getNumBuiltLevels();
+		}else {
 			pointsForGuild += this.checkSelf(card, current) + this.checkLeft(card, left)
 					+ this.checkRight(card, right);
 		}
 	}
 	
+	private boolean checkWonders(HashMap<Frequency, HashSet<Effect>> wonderPile) {
+		for (Frequency freq : wonderPile.keySet()){
+			if (wonderPile.get(freq).contains(Effect.EffectType.ENTITY)){
+				return true;
+			}
+		}
+		return false;
+	}
+
 	private int checkSelf(Card card, Player player) {
 		if (card.getEffect().getDirection() == Direction.SELF || card.getEffect().getDirection() == Direction.ALL) {
 			return this.useEffect(card, player);
 		}
-		return 0;
+		return 0; 
 	}
 
 	private int checkRight(Card card, Player player) {
@@ -168,9 +238,9 @@ public class EndGameHandler {
 	private void givePlayerReward(Player player, Enum choice) {
 		HashMap<Enum, Integer> entitiesAndAmounts = new HashMap<Enum, Integer>();
 		entitiesAndAmounts.put(choice, 1);
-		Effect effect = new EntityEffect(EffectType.ENTITY, EntityType.SCIENCE, entitiesAndAmounts);
+		Effect effect = new EntityEffect(EntityType.SCIENCE, entitiesAndAmounts);
 		Card reward = new Card("Scientists Reward", CardType.SCIENTIFICSTRUCTURE, null, effect);
-		player.addToStoragePile(reward);
+		player.addCardToStoragePile(reward);
 	}
 
 	private int useEffect(Card card, Player player) {
@@ -199,7 +269,7 @@ public class EndGameHandler {
 
 	private int runEffectOnAllCards(AffectingEntity currentType, Player players, int valueToAdd) {
 		int total = 0;
-		ArrayList<Card> cards = players.getStoragePile();
+		ArrayList<Card> cards = players.getAllCards();
 		for (Card currentCard : cards) {
 			if (currentType.toString().contains(currentCard.getCardType().toString())) {
 				total += valueToAdd;
