@@ -1,19 +1,22 @@
 package backend.handlers;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.ResourceBundle;
-import java.util.Set;
+import java.util.HashSet;
 
 import constants.GeneralEnums.CostType;
 import constants.GeneralEnums.Good;
 import constants.GeneralEnums.RawResource;
 import dataStructures.GameBoard;
+import dataStructures.gameMaterials.AbilityEffect;
 import dataStructures.gameMaterials.Card;
+import dataStructures.gameMaterials.Effect;
 import dataStructures.gameMaterials.Effect.EffectType;
-import dataStructures.gameMaterials.ValueEffect.ValueType;
 import dataStructures.gameMaterials.EntityEffect;
+import dataStructures.gameMaterials.Level;
+import dataStructures.gameMaterials.Level.Frequency;
 import dataStructures.gameMaterials.ValueEffect;
+import dataStructures.gameMaterials.ValueEffect.ValueType;
+import dataStructures.gameMaterials.Wonder;
 import dataStructures.playerData.Player;
 import exceptions.InsufficientFundsException;
 import utils.DropDownMessage;
@@ -30,25 +33,30 @@ public class PlayerTurnHandler {
 			return;
 		}
 
-		validateCost(current, card);
-		enableValueEffect(current, card);
+		validateCardCost(current, card);
+		new EffectHandler(this.board).enableCardEffect(current, card);
 		current.addCardToStoragePile(card);
 		current.removeFromCurrentHand(card);
 	}
 
-	private void enableValueEffect(Player current, Card card) {
-		if (card.getEffectType() == EffectType.VALUE) {
-			ValueEffect effect = (ValueEffect) card.getEffect();
+	public void buildWonderLevel(Player current) {
+		Wonder wonder = current.getWonder();
+		Level level = wonder.getLevel(wonder.getNumBuiltLevels());
+		current.clearTempWonderEffects();
+		HashMap<Enum, Integer> costs = level.getCosts();
+		validateLevelCosts(current, costs);
+		new EffectHandler(this.board).enableEffects(current, wonder);
+	}
 
-			if (effect.getValueType() == ValueType.VICTORYPOINT) {
-				current.addNumVictoryPoints(effect.getValueAmount());
-			} else if (effect.getValueType() == ValueType.COIN) {
-				if (card.getName().equals("Tavern")) {
-					board.giveNumCoins(current, effect.getValueAmount());
-				}
-			} else {
-				current.addNumShields(effect.getValueAmount());
-			}
+	private void validateLevelCosts(Player current, HashMap<Enum, Integer> costs) {
+		for (Card sCards : current.getAllCards()) {
+			decrementCostsWithStorage(sCards, costs);
+		}
+
+		for (Enum key : costs.keySet()) {
+			int trades = searchCurrentTradesForCost(current, key);
+			costs.put(key, costs.get(key) - trades);
+			validateEndCost(costs.get(key));
 		}
 	}
 
@@ -64,7 +72,7 @@ public class PlayerTurnHandler {
 		return false;
 	}
 
-	private void validateCost(Player current, Card card) {
+	private void validateCardCost(Player current, Card card) {
 		if (card.getCostType() == CostType.COIN) {
 			int coinCost = card.getCost().get(CostType.COIN);
 			PlayerChipHandler.removeTotalCoins(current, coinCost);

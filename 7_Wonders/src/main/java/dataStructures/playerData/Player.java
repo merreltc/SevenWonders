@@ -205,6 +205,18 @@ public class Player {
 	public void removeFromCurrentHand(Card card) {
 		this.currentHand.remove(card);
 	}
+	
+	public void clearTempWonderEffects() {
+		this.storagePile.clearTemporaryWonderEffects();
+	}
+	
+	public void discardTemporaryEffect(Effect effect){
+		this.storagePile.temporaryDiscard(effect);
+	}
+	
+	public void restoreTemporaryDiscards(){
+		this.storagePile.restoreTemporaryDiscards();
+	}
 
 	public Wonder getWonder() {
 		return wonder;
@@ -236,5 +248,9 @@ public class Player {
 
 	public Side getSide() {
 		return this.wonder.getSide();
+	}
+	
+	public HashMap<Frequency,HashSet<Effect>> getWonderPile(){
+		return this.storagePile.getWonderPile();
 	}
 }
