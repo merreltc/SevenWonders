@@ -7,10 +7,6 @@
 	<property name="charset" value="UTF-8"/>
 
 	<property name="severity" value="error"/>
-
-	<module name="SuppressionFilter">
-    		<property name="file" value="${samedir}suppressions.xml"/>
-	</module>
 	
 	<module name="TreeWalker">
 	
@@ -32,7 +28,10 @@
     		<property name="message" value="Indent must use tab characters"/>
     		<property name="ignoreComments" value="true"/>
 		</module>
-	
+	</module>
+
+	<module name="SuppressionFilter">
+    		<property name="file" value="[\\/]suppressions.xml"/>
 	</module>
 
 </module>
