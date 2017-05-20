@@ -78,7 +78,7 @@ Implemented in GUI
 - [x] Players are dealt equal number of cards
     - [x] 3 Players [TestCase](7_Wonders/src/test/java/backendTests/TurnHandlerTest.java#L48)
     - [x] 7 Players [TestCase](7_Wonders/src/test/java/backendTests/TurnHandlerTest.java#L67)
-- [x] Each player begins with 3 value 1 coins and 0 value 3 coins [TestCase](7_Wonders/src/test/java/dataStructuresTests/PlayerTest.java#L65)
+- [x] Each player begins with 3 value 1 coins and 0 value 3 coins [TestCase](7_Wonders/src/test/java/dataStructureTests/PlayerTest.java#L65)
 
 ## Decks
 - [x] Each age has a unique set of cards
