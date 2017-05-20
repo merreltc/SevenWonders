@@ -100,7 +100,8 @@ Implemented in GUI
     - [Age II Creator](7_Wonders/src/test/java/testHelpers/SetUpDeckTestHelper.java#L468)
 
 ## Cards
-[Card Test Case](7_Wonders/src/test/java/dataStructureTests/CardTest.java) For structure related things see ["Building the Structure"](#building-the-structure)
+[Card Test Case](7_Wonders/src/test/java/dataStructureTests/CardTest.java)
+For structure related things see ["Building the Structure"](#building-the-structure)
 - [x] Name and type of structure/resource (See ["Card Types"](#card-types))
 - [x] Cost of building the structure [Costs Tests](7_Wonders/src/test/java/dataStructureTests/CostTest.java)
 - [x] The effect caused by building the structure - See below on building structure
@@ -168,7 +169,7 @@ Implemented in GUI
 ## Process of Turn
 1. Choose card from temporary hand
 2. Action
-    -  [x] Build the Structure - See [Building Structure](#building-the-structure) but [Tests In](7_Wonders/src/test/java/backendTests/PlayerTurnHandlerTest.java)
+    -  [x] Build the Structure - (See ["Building the Structure"](#building-the-structure)) also [Tests In](7_Wonders/src/test/java/backendTests/PlayerTurnHandlerTest.java)
     -  [x] Build the Next Level of Wonder [Cucumber File](7_Wonders/src/cucumber/resources/build_wonder.feature) and [Test Cases](7_Wonders/src/cucumber/java/BuildWonderSteps.java)
     -  [x] Discard for 3 Coins [Test Case](7_Wonders/src/test/java/backendTests/PlayerTurnHandlerTest.java#L283)
         -  Discarded cards create a Discard Pile
