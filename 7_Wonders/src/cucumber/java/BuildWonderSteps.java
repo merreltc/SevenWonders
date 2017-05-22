@@ -22,7 +22,6 @@ public class BuildWonderSteps {
 	LevelBuilderTestHelper helper;
 	HashSet<Level> expectedLevels;
 	Wonder wonder;
-	int index;
 
 	CannotBuildWonderException wonderException;
 	InsufficientFundsException fundsException;
@@ -52,7 +51,6 @@ public class BuildWonderSteps {
 
 	@When("^Building the wonder (\\d+) times$")
 	public void the_builds_the_wonder(int numLevels) throws Throwable {
-		this.index = numLevels - 1;
 		for (int i = 0; i < numLevels; i++) {
 			tryBuildThroughWonder();
 		}
@@ -75,9 +73,11 @@ public class BuildWonderSteps {
 
 	public boolean contains(Level expected, HashSet<Level> actualLevels) {
 		for (Level actual : actualLevels) {
-			if (actual.equals(expected))
-				;
-			return true;
+			if (actual.equals(expected)) {
+				return true;
+			} else {
+				continue;
+			}
 		}
 		return false;
 	}

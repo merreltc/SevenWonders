@@ -58,7 +58,6 @@ public class PlayerBuildWonderSteps {
 
 	@When("^The player tries to build the wonder (\\d+) times$")
 	public void the_player_tries_to_build_the_wonder_times(int numLevels) throws Throwable {
-		this.wonderSteps.index = numLevels - 1;
 		this.priority = numLevels;
 
 		for (int i = 0; i < numLevels; i++) {
@@ -136,9 +135,11 @@ public class PlayerBuildWonderSteps {
 		for (Effect actual : actualLevels) {
 			if (equalEffects(expected, actual)) {
 				return true;
+			} else {
+				continue;
 			}
-			continue;
 		}
+
 		return false;
 	}
 
